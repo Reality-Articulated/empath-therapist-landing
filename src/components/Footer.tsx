@@ -1,6 +1,6 @@
 import React from 'react';
 import { Brain } from 'lucide-react';
-import logo from '../../dist/assets/empath-logo.png';
+import logo from '../../public/empath-logo.png';
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 py-12 mt-auto">

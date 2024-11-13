@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import howitworks from '../../dist/assets/howitworks.png';
+import howitworks from '../../public/howitworks.png';
+
 import { 
   Brain, 
   Clock, 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../dist/assets/empath-logo.png';
+import logo from '../../public/empath-logo.png';
 import { Brain } from 'lucide-react';
 
 export default function Navbar() {
