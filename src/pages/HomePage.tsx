@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import howitworks from '../../public/howitworks.png';
 
@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
+  const [showCalendar, setShowCalendar] = useState(false);
+
   const features = [
     {
       icon: Clock,
@@ -53,9 +55,12 @@ export default function HomePage() {
               with our innovative platform combining mobile tracking and therapist dashboard.
             </p>
             <div className="flex justify-center space-x-4">
-              <a href="#demo" className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                Request Demo
-              </a>
+              <button 
+                onClick={() => setShowCalendar(true)}
+                className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Book a Demo Call
+              </button>
               <Link to="/advisory" className="px-8 py-4 bg-white text-blue-600 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-colors">
                 Join Advisory Board
               </Link>
@@ -63,6 +68,30 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Calendar Modal */}
+      {showCalendar && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg p-4 w-full max-w-4xl">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold">Schedule a Demo</h2>
+              <button 
+                onClick={() => setShowCalendar(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            <iframe 
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true" 
+              style={{ border: 0 }} 
+              width="100%" 
+              height="600" 
+              frameBorder="0"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Features Grid */}
       <section className="py-20">
@@ -142,13 +171,13 @@ export default function HomePage() {
             Join innovative therapists using Empath to provide better care through data-driven insights.
           </p>
           <div className="flex justify-center space-x-4">
-            <a 
-              href="#demo" 
+            <button 
+              onClick={() => setShowCalendar(true)}
               className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center"
             >
               Schedule a Demo
               <ChevronRight className="ml-2 w-5 h-5" />
-            </a>
+            </button>
             <Link 
               to="/advisory" 
               className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
