@@ -1,6 +1,8 @@
 import React from 'react';
 import { Brain } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 py-12 mt-auto">
@@ -28,7 +30,14 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><a href="/advisory" className="hover:text-white transition-colors">Advisory Program</a></li>
+              <li>
+                <Link 
+                  to="/advisory" 
+                  className="hover:text-white transition-colors"
+                >
+                  Advisory Program
+                </Link>
+              </li>
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>

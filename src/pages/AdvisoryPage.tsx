@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { ApplicationForm } from '../components/ApplicationForm';
 
 export default function AdvisoryPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const faqs = [
     {
@@ -49,13 +54,22 @@ export default function AdvisoryPage() {
               You're the expert in mental health care. Let's build technology that actually serves your practice, <br />
               while earning ownership in what you help create.
             </p>
-            <button
-              onClick={() => setIsFormOpen(true)}
-              className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center"
-            >
-              Apply Now
-              <ChevronRight className="ml-2 w-5 h-5" />
-            </button>
+            <div className="flex justify-center gap-4 mb-12">
+              <button
+                onClick={() => setIsFormOpen(true)}
+                className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center"
+              >
+                Apply Now
+                <ChevronRight className="ml-2 w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setIsCalendarOpen(true)}
+                className="px-8 py-4 bg-white border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center"
+              >
+                Book Call for More Info
+                <ChevronRight className="ml-2 w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -136,6 +150,29 @@ export default function AdvisoryPage() {
 
       {/* Application Form Modal */}
       <ApplicationForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+
+      {isCalendarOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold">Schedule a Call</h2>
+              <button 
+                onClick={() => setIsCalendarOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            <iframe 
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3jqhaaMqcvGyZWjcvhS35k27J8TRGjMafnr_-jG1EVWFdYYnR-kiLCfunh6SHBV6jzBijIU1ij?gv=true" 
+              style={{ border: 0 }} 
+              width="100%" 
+              height="600" 
+              frameBorder="0"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
