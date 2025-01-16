@@ -51,7 +51,7 @@ export default function AdvisoryPage() {
               Shape the future of <span className="text-blue-600">Menthal Health</span> 
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              You're the expert in mental health care. Let's build technology that actually serves your practice, <br />
+              You're the expert. Let's build technology that actually serves your practice, <br />
               while earning ownership in what you help create.
             </p>
             <div className="flex justify-center gap-4 mb-12">
