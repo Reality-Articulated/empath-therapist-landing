@@ -51,8 +51,8 @@ export default function HomePage() {
               <span className="text-blue-600">They are Your Only Client</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Get a complete understanding of your clients' well-being between sessions
-              with our innovative platform combining mobile tracking and therapist dashboard.
+              Get a deeper understanding of your clients' life experiences between sessions
+              with Empath, combining mobile tracking and therapist dashboard.
             </p>
             <div className="flex justify-center space-x-4">
               <button 

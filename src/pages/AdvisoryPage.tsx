@@ -34,9 +34,9 @@ export default function AdvisoryPage() {
   ];
 
   const benefits = [
-    "Direct influence over mental health technology",
-    "Build tools that enhance your practice, not replace it",
     "Earn ownership through equity (0.5% to 5%)",
+    "Build tools that enhance your practice, not replace it",
+    "Direct influence over mental health technology",
     "Join a community of forward-thinking therapists"
   ];
 
@@ -59,7 +59,7 @@ export default function AdvisoryPage() {
                 onClick={() => setIsFormOpen(true)}
                 className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center"
               >
-                Apply Now
+                Submit Interest
                 <ChevronRight className="ml-2 w-5 h-5" />
               </button>
               <button
