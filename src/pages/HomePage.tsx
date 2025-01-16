@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import howitworks from '../../public/howitworks.png';
+import whyitworks from '../../public/whyitworks.png';
 
 import { 
   Brain, 
@@ -93,8 +94,131 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Features Grid */}
+      {/* Why Empath Works */}
       <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16">Why Empath Works</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img 
+                src={whyitworks} 
+                alt="Empath System Diagram"
+                className="rounded-lg shadow-xl"
+              />
+            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-600">The Perfect Balance of Technology and Human Connection</h3>
+                <p className="text-gray-600 mb-8">
+                  Empath enhances therapy through a three-part system that maintains the essential human connection while leveraging technology:
+                </p>
+                <div className="space-y-6">
+                  <div>
+                    <p className="mb-2">
+                      <span className="text-blue-600 font-bold text-lg">Perception: </span>
+                      <span className="text-gray-600 ml-2">
+                        Through our client mobile app, we capture the clients' experiences, moods, and behaviors.
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className="mb-2">
+                      <span className="text-blue-600 font-bold text-lg">Cognition: </span>
+                      <span className="text-gray-600 ml-2">
+                        Our therapist dashboard transforms raw data into meaningful insights, helping you understand deeper patterns and trends.
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className="mb-2">
+                      <span className="text-blue-600 font-bold text-lg">Action: </span>
+                      <span className="text-gray-600 ml-2">
+                        The actual therapy session remains purely human, where you use these insights to provide more informed and effective care.
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Challenge Analogy */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-600">
+                If Understanding Your Client Was Like<br/>Understanding a TV Show...
+              </h2>
+              <div className="relative py-12 my-8">
+                <div className="absolute inset-0 bg-blue-100 transform -skew-y-2 w-screen left-1/2 -translate-x-1/2"></div>
+                <div className="relative max-w-3xl mx-auto">
+                  <p className="text-3xl font-bold text-gray-800 mb-6">
+                    Imagine watching "Game of Thrones"<br/>
+                    based on just the 1st episode of every season.
+                  </p>
+                  <p className="text-xl text-gray-600">
+                    Just like seeing your client for 1 hour every week or two.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white p-8 rounded-2xl shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-700">
+                  <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-gray-500">👥</span>
+                  </span>
+                  Existing Solutions:
+                </h3>
+                <ul className="space-y-4 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                      <span className="text-gray-500 text-sm">1</span>
+                    </span>
+                    <p>Will find a streaming platform for you to watch it</p>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                      <span className="text-gray-500 text-sm">2</span>
+                    </span>
+                    <p>Will schedule the best time for you to watch those episodes</p>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                      <span className="text-gray-500 text-sm">3</span>
+                    </span>
+                    <p>Closest competitors will also give you summaries of the same episodes</p>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-8 rounded-2xl shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <h3 className="text-xl font-semibold mb-6 flex items-center text-white">
+                  <span className="w-10 h-10 bg-blue-500 bg-opacity-30 rounded-full flex items-center justify-center mr-3">
+                    <span>✨</span>
+                  </span>
+                  The Empath Difference:
+                </h3>
+                <p className="text-xl text-white leading-relaxed">
+                  We give you recaps of the other 9 episodes that were missed
+                </p>
+                <div className="mt-6 pt-6 border-t border-blue-400 border-opacity-30">
+                  <p className="text-blue-100 text-sm italic">
+                    Because understanding the full story matters
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Why Therapists Choose Empath</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
