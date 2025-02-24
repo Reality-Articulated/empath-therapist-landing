@@ -178,7 +178,7 @@ export default function HomePage() {
           <div className="w-96 h-96 bg-purple-400/10 rounded-full absolute top-40 -right-20 blur-3xl"></div>
           {/* Add animated particles with mindfulness breathing effect */}
           <motion.div 
-            className="w-8 h-8 bg-teal-400/20 rounded-full absolute top-1/4 left-1/4"
+            className="w-8 h-8 bg-blue-400/20 rounded-full absolute top-1/4 left-1/4"
             animate={{ 
               scale: [1, 1.1, 1], 
               opacity: [0.3, 0.7, 0.3] 
@@ -280,7 +280,7 @@ export default function HomePage() {
                 transition={{ delay: 1, duration: 0.5 }}
               >
                 <motion.div 
-                  className="flex items-center px-4 py-2 bg-teal-50 rounded-full border border-teal-100"
+                  className="flex items-center px-4 py-2 bg-blue-50 rounded-full border border-blue-100"
                   whileHover={{ scale: 1.05 }}
                 >
                   <motion.div 
@@ -408,125 +408,457 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* The Challenge Analogy */}
+      {/* The Data Visualization Comparison */}
       <AnimatedSection className="py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 transform -skew-y-6"></div>
+        {/* Simple, clean background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div 
               variants={fadeIn}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-600">
-                If Understanding Your Client Was Like<br/>Understanding a TV Show...
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 leading-tight">
+                Complete Understanding Requires Complete Data
               </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Fragmented sessions only provide glimpses into a client's life requiring a lot of catch-up every session.
+              </p>
+            </motion.div>
+            
+            {/* Main visualization comparison */}
+            <div className="grid md:grid-cols-2 gap-6 md:gap-16 mt-8">
+              {/* Traditional therapy side */}
               <motion.div 
-                className="relative py-16 my-10"
+                className="flex flex-col"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-md mb-6 flex items-center justify-between">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-800">Weekly Sessions</h3>
+                  <span className="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm font-medium">4 sessions per month</span>
+                </div>
+                
+                <div className="relative flex-grow">
+                  {/* Session data visualization with improved alignment */}
+                  <div className="bg-white rounded-2xl border-2 border-gray-200 h-full relative overflow-hidden">
+                    {/* Fixed structure for precise alignment */}
+                    <div className="grid grid-cols-[120px_1fr] h-full">
+                      {/* Week labels column */}
+                      <div className="flex flex-col justify-between py-8 px-4 border-r border-gray-100">
+                        <div className="flex items-center h-16">
+                          <span className="text-sm font-medium text-gray-500">Week 1</span>
+                        </div>
+                        <div className="flex items-center h-16">
+                          <span className="text-sm font-medium text-gray-500">Week 2</span>
+                        </div>
+                        <div className="flex items-center h-16">
+                          <span className="text-sm font-medium text-gray-500">Week 3</span>
+                        </div>
+                        <div className="flex items-center h-16">
+                          <span className="text-sm font-medium text-gray-500">Week 4</span>
+                        </div>
+                      </div>
+                      
+                      {/* Session dots visualization */}
+                      <div className="p-4 relative">
+                        {/* Background dots grid */}
+                        <div className="grid grid-cols-7 grid-rows-4 gap-3 h-full opacity-10">
+                          {Array.from({ length: 28 }, (_, i) => (
+                            <div key={`bg-dot-${i}`} className="aspect-square bg-gray-300 rounded-full"></div>
+                          ))}
+                        </div>
+                        
+                        {/* Session dots - perfectly aligned with week labels */}
+                        <div className="absolute inset-0 p-4">
+                          <div className="grid grid-rows-4 h-full gap-3">
+                            {/* Week 1 Session */}
+                            <div className="flex items-center">
+                              <div className="flex items-center justify-center h-12 w-12 bg-gray-200 rounded-full">
+                                <div className="h-8 w-8 bg-blue-600 rounded-full"></div>
+                              </div>
+                              <div className="ml-3 bg-gray-100 px-3 py-1 rounded-lg whitespace-nowrap">
+                                <span className="text-sm font-medium text-gray-600">50-min session</span>
+                              </div>
+                            </div>
+                            
+                            {/* Week 2 Session */}
+                            <div className="flex items-center">
+                              <div className="flex items-center justify-center h-12 w-12 bg-gray-200 rounded-full">
+                                <div className="h-8 w-8 bg-blue-600 rounded-full"></div>
+                              </div>
+                              <div className="ml-3 bg-gray-100 px-3 py-1 rounded-lg whitespace-nowrap">
+                                <span className="text-sm font-medium text-gray-600">50-min session</span>
+                              </div>
+                            </div>
+                            
+                            {/* Week 3 Session */}
+                            <div className="flex items-center">
+                              <div className="flex items-center justify-center h-12 w-12 bg-gray-200 rounded-full">
+                                <div className="h-8 w-8 bg-blue-600 rounded-full"></div>
+                              </div>
+                              <div className="ml-3 bg-gray-100 px-3 py-1 rounded-lg whitespace-nowrap">
+                                <span className="text-sm font-medium text-gray-600">50-min session</span>
+                              </div>
+                            </div>
+                            
+                            {/* Week 4 Session */}
+                            <div className="flex items-center">
+                              <div className="flex items-center justify-center h-12 w-12 bg-gray-200 rounded-full">
+                                <div className="h-8 w-8 bg-blue-600 rounded-full"></div>
+                              </div>
+                              <div className="ml-3 bg-gray-100 px-3 py-1 rounded-lg whitespace-nowrap">
+                                <span className="text-sm font-medium text-gray-600">50-min session</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Missing data indicator */}
+                    <motion.div 
+                      className="absolute bottom-4 right-4 text-sm text-red-500/70 font-medium flex items-center"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 1.5, duration: 0.5 }}
+                      viewport={{ once: true }}
+                    >
+                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <span>~90% of client data missed</span>
+                    </motion.div>
+                  </div>
+                </div>
+                
+                {/* Gap in understanding indicator */}
+                <motion.div 
+                  className="mt-8 bg-red-50 border border-red-100 rounded-xl p-5"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.8, duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-medium text-red-800 mb-2 flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    The Gap in Understanding
+                  </h4>
+                  <p className="text-red-700/80 text-sm">
+                    With limited data points, therapists miss critical context, hidden patterns, and real-world triggers that occur between sessions.
+                  </p>
+                </motion.div>
+              </motion.div>
+              
+              {/* Empath approach */}
+              <motion.div 
+                className="flex flex-col"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl p-6 border border-blue-400 shadow-md mb-6 flex items-center justify-between">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">Empath Approach</h3>
+                  <span className="bg-blue-400/30 text-white px-3 py-1 rounded-full text-sm font-medium border border-blue-400/40">Continuous context</span>
+                </div>
+                
+                <div className="relative flex-grow">
+                  {/* Experience flow visualization */}
+                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl border-2 border-blue-200 p-6 h-full relative overflow-hidden">
+                    
+                    {/* Data collection grid */}
+                    <div className="grid grid-cols-7 gap-3 mb-12">
+                      {Array.from({ length: 28 }, (_, i) => {
+                        // Create a more organic wave-like animation pattern
+                        const col = i % 7;
+                        const row = Math.floor(i / 7);
+                        // Calculate distance from center for radial animation effect
+                        const centerCol = 3;
+                        const centerRow = 2;
+                        const distFromCenter = Math.sqrt(Math.pow(col - centerCol, 2) + Math.pow(row - centerRow, 2));
+                        
+                        return (
+                          <motion.div 
+                            key={`data-${i}`}
+                            className="relative"
+                            initial={{ scale: 0, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ 
+                              delay: 0.05 * distFromCenter, // Radial wave effect
+                              duration: 0.5,
+                              type: "spring",
+                              stiffness: 100,
+                              damping: 12
+                            }}
+                            viewport={{ once: true, margin: "-50px" }}
+                          >
+                            <div className="aspect-square bg-blue-700 rounded-full shadow-md flex items-center justify-center relative z-10">
+                              <motion.div
+                                className="absolute inset-0 bg-blue-700 rounded-full"
+                                animate={{ 
+                                  scale: [1, 1.15, 1],
+                                  opacity: [1, 0.8, 1],
+                                  boxShadow: [
+                                    '0 0 0 0 rgba(0,0,0,0)', 
+                                    '0 0 0 4px rgba(59,130,246,0.06)', 
+                                    '0 0 0 0 rgba(0,0,0,0)'
+                                  ] 
+                                }}
+                                transition={{ 
+                                  duration: 3, 
+                                  repeat: Infinity, 
+                                  ease: "easeInOut", 
+                                  delay: 0.1 * distFromCenter % 2 // Create wave-like pulse patterns
+                                }}
+                              />
+                            </div>
+                            
+                            {/* Data type indicators with subtle animations */}
+                            {i % 5 === 0 && (
+                              <motion.div 
+                                className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full border border-white z-20"
+                                title="Mood data"
+                                animate={{ scale: [1, 1.1, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.05 }}
+                              />
+                            )}
+                            {i % 7 === 3 && (
+                              <motion.div 
+                                className="absolute -top-2 -right-2 w-4 h-4 bg-purple-400 rounded-full border-2 border-white z-20"
+                                title="Sleep data"
+                                animate={{ scale: [1, 1.15, 1] }}
+                                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.07 }}
+                              />
+                            )}
+                            {i % 6 === 2 && (
+                              <motion.div 
+                                className="absolute -top-2 -right-2 w-4 h-4 bg-blue-400 rounded-full border-2 border-white z-20"
+                                title="Activity data"
+                                animate={{ scale: [1, 1.12, 1] }}
+                                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.06 }}
+                              />
+                            )}
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Data flow to insights visualization with smoother animations */}
+                    <div className="relative h-48 mt-8">
+                      {/* Animated connections to insights */}
+                      <div className="absolute top-0 left-0 w-full">
+                        <svg className="w-full h-40" viewBox="0 0 400 100" preserveAspectRatio="none">
+                          {/* Generate a series of flowing curves from data to insights */}
+                          {Array.from({ length: 12 }, (_, i) => {
+                            const startX = 20 + (i * 30);
+                            const curveX = 200 + (Math.random() * 40 - 20);
+                            const controlY1 = 20 + (Math.random() * 20);
+                            const controlY2 = 40 + (Math.random() * 30);
+                            
+                            return (
+                              <motion.path 
+                                key={`path-${i}`}
+                                d={`M ${startX},10 C ${startX + 40},${controlY1} ${curveX},${controlY2} 320,90`}
+                                stroke="#3B82F6"
+                                strokeWidth="1.5"
+                                fill="none"
+                                strokeDasharray="200"
+                                strokeDashoffset="200"
+                                initial={{ strokeDashoffset: 200 }}
+                                whileInView={{ strokeDashoffset: 0 }}
+                                transition={{ 
+                                  duration: 1.5,
+                                  delay: 0.8 + (i * 0.12),
+                                  ease: "easeOut"
+                                }}
+                                viewport={{ once: true }}
+                                strokeOpacity="0.4"
+                              />
+                            );
+                          })}
+                          
+                          {/* Add animated particles flowing along the paths */}
+                          {Array.from({ length: 8 }, (_, i) => {
+                            const startX = 40 + (i * 40);
+                            const pathId = i % 4;
+                            
+                            return (
+                              <motion.circle
+                                key={`particle-${i}`}
+                                r="3"
+                                fill="#3B82F6"
+                                opacity="0.6"
+                                initial={{ cx: startX, cy: 10 }}
+                                animate={{
+                                  cx: [startX, startX + 80, 250, 320],
+                                  cy: [10, 30, 50, 90],
+                                }}
+                                transition={{
+                                  duration: 3,
+                                  ease: "easeInOut",
+                                  repeat: Infinity,
+                                  delay: i * 0.5,
+                                  repeatDelay: 1
+                                }}
+                              />
+                            );
+                          })}
+                        </svg>
+                      </div>
+                      
+                      {/* AI Insights visualization */}
+                      <motion.div 
+                        className="absolute right-6 bottom-0 flex flex-col items-end gap-3"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 1.5, duration: 0.8 }}
+                        viewport={{ once: true }}
+                      >
+                        {/* Repositioned and enhanced "Processing" label */}
+                        <motion.div
+                          className="text-xs font-medium mb-3 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow-sm border border-blue-100 flex items-center relative z-20"
+                          animate={{ opacity: [0.9, 1, 0.9] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          style={{ marginRight: "20px" }}
+                        >
+                          <motion.div 
+                            className="w-2 h-2 bg-blue-500 rounded-full mr-2"
+                            animate={{ scale: [1, 1.3, 1] }}
+                            transition={{ duration: 0.8, repeat: Infinity }}
+                          />
+                          <span className="text-blue-600 font-medium">Synthesizing client data points into insights</span>
+                        </motion.div>
+                      
+                        <motion.div 
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 shadow-lg max-w-xs relative"
+                          whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                        >
+                          {/* Visual data dot indicators showing where data comes from */}
+                          <div className="absolute -left-1 -top-1">
+                            <motion.div 
+                              className="w-3 h-3 bg-yellow-400 rounded-full border border-white"
+                              animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
+                              transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                            />
+                          </div>
+                          <div className="absolute -left-3 top-3">
+                            <motion.div 
+                              className="w-3 h-3 bg-purple-400 rounded-full border border-white"
+                              animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
+                              transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
+                            />
+                          </div>
+                          <div className="absolute -left-2 top-8">
+                            <motion.div 
+                              className="w-3 h-3 bg-blue-400 rounded-full border border-white"
+                              animate={{ scale: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
+                              transition={{ duration: 1, repeat: Infinity, delay: 0.8 }}
+                            />
+                          </div>
+                          
+                          <div className="flex items-center mb-2">
+                            <svg className="w-5 h-5 text-blue-100 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <h5 className="font-medium text-white flex items-center">
+                              3-Minute Catch-up
+                              <span className="text-xs text-blue-200 ml-1">(28 data points)</span>
+                            </h5>
+                          </div>
+                          <p className="text-blue-50 text-sm">
+                            Client slept better after reducing caffeine intake. Also had a fight with their partner and expressed a lot of detachment toward family after the incident.
+                          </p>
+                        </motion.div>
+                      </motion.div>
+                  
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Benefit indicator */}
+                <motion.div 
+                  className="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-5"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.0, duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-medium text-blue-800 mb-2 flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    The Complete Picture
+                  </h4>
+                  <p className="text-blue-700/80 text-sm">
+                    Continuous data collection reveals patterns, triggers, and progress that would otherwise remain hidden, enabling more targeted and effective interventions.
+                  </p>
+                </motion.div>
+              </motion.div>
+            </div>
+            
+            {/* Key benefits section */}
+            <div className="mt-24 max-w-5xl mx-auto">
+              <motion.div 
+                className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 md:p-10 shadow-sm border border-gray-200"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-indigo-100 transform -skew-y-2 w-screen left-1/2 -translate-x-1/2 rounded-3xl shadow-xl"></div>
-                <div className="relative max-w-3xl mx-auto">
-                  <p className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                    Imagine watching "Game of Thrones"<br/>
-                    based on just the 1st episode of every season.
-                  </p>
-                  <p className="text-xl text-gray-600">
-                    Just like seeing your client for 1 hour every week or two.
+                <div className="text-center mb-10">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-teal-100 text-teal-600 rounded-full mb-4">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">Preserving the Human Element of Therapy</h3>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    As AI chatbots increasingly position themselves as therapy alternatives, Empath empowers human therapists to maintain the irreplaceable value of a human while also accessing the computational capabilities of AI.
                   </p>
                 </div>
-              </motion.div>
-            </motion.div>
-            
-            <div className="grid md:grid-cols-2 gap-10">
-              <motion.div 
-                className="bg-white p-10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:border-gray-200 border-2 border-transparent relative overflow-hidden"
-                variants={scaleIn}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              >
-                {/* Add decorative element */}
-                <div className="absolute -right-8 -top-8 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full opacity-70 group-hover:scale-150 transition-transform duration-500"></div>
                 
-                <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-700 relative z-10">
-                  <span className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4 shadow-inner">
-                    <span className="text-gray-500">👥</span>
-                  </span>
-                  Traditional Approaches:
-                </h3>
-                <ul className="space-y-6 text-gray-600 relative z-10">
-                  <motion.li 
-                    className="flex items-start"
-                    variants={fadeIn}
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                  >
-                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-4 mt-1 shadow-sm">
-                      <span className="text-gray-500 text-sm">1</span>
-                    </span>
-                    <p className="text-lg">Will find a streaming platform for you to watch it</p>
-                  </motion.li>
-                  <motion.li 
-                    className="flex items-start"
-                    variants={fadeIn}
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                  >
-                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-4 mt-1 shadow-sm">
-                      <span className="text-gray-500 text-sm">2</span>
-                    </span>
-                    <p className="text-lg">Will schedule the best time for you to watch those episodes</p>
-                  </motion.li>
-                  <motion.li 
-                    className="flex items-start"
-                    variants={fadeIn}
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                  >
-                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-4 mt-1 shadow-sm">
-                      <span className="text-gray-500 text-sm">3</span>
-                    </span>
-                    <p className="text-lg">Other methods often provide only limited overviews of your client's ongoing journey</p>
-                  </motion.li>
-                </ul>
-              </motion.div>
-
-              <motion.div 
-                className="bg-gradient-to-br from-blue-600 to-indigo-700 p-10 rounded-2xl shadow-xl relative overflow-hidden"
-                variants={scaleIn}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              >
-                {/* Add animated elements */}
-                <motion.div 
-                  className="absolute top-10 right-10 w-24 h-24 bg-white/10 rounded-full"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1]
-                  }}
-                  transition={{ 
-                    duration: 8, 
-                    repeat: Infinity,
-                    ease: "easeInOut" 
-                  }}
-                />
-                
-                <h3 className="text-xl font-semibold mb-6 flex items-center text-white relative z-10">
-                  <span className="w-12 h-12 bg-blue-500 bg-opacity-30 rounded-full flex items-center justify-center mr-4 shadow-inner">
-                    <span className="text-2xl">✨</span>
-                  </span>
-                  The Empath Approach:
-                </h3>
-                <p className="text-2xl text-white leading-relaxed relative z-10">
-                  We provide a comprehensive overview, capturing the full narrative of your client's experience.
-                </p>
-                <div className="mt-8 pt-6 border-t border-blue-400 border-opacity-30 relative z-10">
-                  <motion.p 
-                    className="text-blue-100 text-lg italic"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    Because every detail contributes to a richer understanding.
-                  </motion.p>
+                <div className="grid md:grid-cols-3 gap-6 text-left">
+                  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-gray-800 mb-3">From Missed Signals to Clear Patterns</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      Current therapy misses critical information between sessions. Empath captures the full story, revealing patterns that would otherwise remain hidden.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-4">
+                      <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-gray-800 mb-3">From Preparation to Precision</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      Spend less time catching up and more time on targeted interventions. Empath's AI analyzes client data, providing you with actionable insights in just 5 minutes.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-gray-800 mb-3">From Anecdotes to Evidence</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      Replace subjective recollections with deep understanding. Track progress with confidence and make treatment decisions based on complete information.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -890,9 +1222,10 @@ export default function HomePage() {
               opacity: [0.1, 0.2, 0.1]
             }}
             transition={{
-              duration: 8,
+              duration: 12,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
+              delay: 1
             }}
           />
           <motion.div 
