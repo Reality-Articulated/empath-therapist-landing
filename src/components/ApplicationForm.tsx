@@ -139,7 +139,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     exit: { 
       opacity: 0, 
       scale: 0.95,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.3 }
     }
   };
 
@@ -148,12 +148,25 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.5 }
     },
     exit: { 
       opacity: 0, 
       x: -50,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.5 }
+    }
+  };
+
+  // Add breathing animation for mindfulness effect
+  const breathingAnimation = {
+    animate: {
+      scale: [1, 1.05, 1],
+      opacity: [0.9, 1, 0.9],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
     }
   };
 
@@ -168,14 +181,41 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         >
           <Toaster position="top-center" />
           <motion.div 
-            className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl"
+            className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl relative"
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="p-6 border-b relative bg-gradient-to-r from-blue-50 to-indigo-50">
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700">
+            {/* Add animated background elements */}
+            <motion.div 
+              className="absolute top-0 right-0 w-40 h-40 rounded-full bg-teal-50 opacity-50 -z-0"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div 
+              className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-purple-50 opacity-50 -z-0"
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+            
+            <div className="p-6 border-b relative bg-gradient-to-r from-teal-50 to-purple-50 z-10">
+              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-700">
                 Join Empath's Advisory Initiative
               </h2>
               <p className="text-gray-600 mt-1">
@@ -183,29 +223,29 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
               </p>
               <motion.button
                 onClick={onClose}
-                className="absolute right-6 top-6 text-gray-400 hover:text-gray-600 bg-white rounded-full p-1 hover:bg-gray-100 transition-colors"
+                className="absolute right-6 top-6 text-gray-400 hover:text-gray-600 bg-white rounded-full p-1.5 hover:bg-gray-100 transition-colors shadow-sm"
                 disabled={isSubmitting}
-                whileHover={{ rotate: 180 }}
+                whileHover={{ rotate: 180, scale: 1.1 }}
                 transition={{ duration: 0.3 }}
               >
                 <X className="w-5 h-5" />
               </motion.button>
               
               {/* Progress indicator */}
-              <div className="mt-6 flex items-center">
-                <div className={`h-1 rounded-full flex-grow ${currentStep >= 1 ? 'bg-blue-500' : 'bg-gray-200'}`}></div>
-                <div className={`h-6 w-6 rounded-full flex items-center justify-center mx-2 ${currentStep >= 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+              <div className="mt-8 flex items-center">
+                <div className={`h-1 rounded-full flex-grow ${currentStep >= 1 ? 'bg-gradient-to-r from-teal-400 to-teal-500' : 'bg-gray-200'}`}></div>
+                <div className={`h-7 w-7 rounded-full flex items-center justify-center mx-2 ${currentStep >= 1 ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-md shadow-teal-100' : 'bg-gray-200 text-gray-500'}`}>
                   1
                 </div>
-                <div className={`h-1 rounded-full flex-grow ${currentStep >= 2 ? 'bg-blue-500' : 'bg-gray-200'}`}></div>
-                <div className={`h-6 w-6 rounded-full flex items-center justify-center mx-2 ${currentStep >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                <div className={`h-1 rounded-full flex-grow ${currentStep >= 2 ? 'bg-gradient-to-r from-teal-500 to-purple-500' : 'bg-gray-200'}`}></div>
+                <div className={`h-7 w-7 rounded-full flex items-center justify-center mx-2 ${currentStep >= 2 ? 'bg-gradient-to-r from-teal-500 to-purple-600 text-white shadow-md shadow-purple-100' : 'bg-gray-200 text-gray-500'}`}>
                   2
                 </div>
-                <div className={`h-1 rounded-full flex-grow ${currentStep >= 3 ? 'bg-blue-500' : 'bg-gray-200'}`}></div>
+                <div className={`h-1 rounded-full flex-grow ${currentStep >= 3 ? 'bg-gradient-to-r from-purple-500 to-purple-600' : 'bg-gray-200'}`}></div>
               </div>
             </div>
 
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-150px)]">
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-150px)] relative z-10">
               <AnimatePresence mode="wait">
                 {currentStep === 1 && (
                   <motion.div 
@@ -214,7 +254,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="space-y-4"
+                    className="space-y-5"
                   >
                     <h3 className="text-lg font-medium text-gray-800">Personal Information</h3>
                     
@@ -227,13 +267,13 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         id="name"
                         name="name"
                         placeholder="Dr. Jane Smith"
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.name}
                         onChange={handleChange}
                         disabled={isSubmitting}
                       />
                       {errors.name && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.name}
                         </p>
                       )}
@@ -248,13 +288,13 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         id="email"
                         name="email"
                         placeholder="jane.smith@practice.com"
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.email}
                         onChange={handleChange}
                         disabled={isSubmitting}
                       />
                       {errors.email && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.email}
                         </p>
                       )}
@@ -269,13 +309,13 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         id="practice"
                         name="practice"
                         placeholder="Wellness Therapy Center, San Francisco"
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.practice ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.practice ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.practice}
                         onChange={handleChange}
                         disabled={isSubmitting}
                       />
                       {errors.practice && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.practice}
                         </p>
                       )}
@@ -290,7 +330,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="space-y-4"
+                    className="space-y-5"
                   >
                     <h3 className="text-lg font-medium text-gray-800">Professional Details</h3>
                     
@@ -301,7 +341,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                       <select
                         id="experience"
                         name="experience"
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.experience ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.experience ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.experience}
                         onChange={handleChange}
                         disabled={isSubmitting}
@@ -313,7 +353,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         <option value="10+">10+ years</option>
                       </select>
                       {errors.experience && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.experience}
                         </p>
                       )}
@@ -329,13 +369,13 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         name="clients"
                         min="1"
                         placeholder="15"
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.clients ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.clients ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.clients}
                         onChange={handleChange}
                         disabled={isSubmitting}
                       />
                       {errors.clients && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.clients}
                         </p>
                       )}
@@ -350,13 +390,13 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                         name="motivation"
                         rows={4}
                         placeholder="I'm interested in joining because..."
-                        className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.motivation ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all ${errors.motivation ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                         value={formData.motivation}
                         onChange={handleChange}
                         disabled={isSubmitting}
                       />
                       {errors.motivation && (
-                        <p className="mt-1 text-sm text-red-600 flex items-center">
+                        <p className="mt-1.5 text-sm text-red-600 flex items-center">
                           <AlertCircle size={14} className="mr-1" /> {errors.motivation}
                         </p>
                       )}
@@ -374,14 +414,29 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                     className="space-y-6"
                   >
                     <div className="text-center py-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <CheckCircle className="w-8 h-8 text-green-600" />
-                      </div>
+                      <motion.div 
+                        className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-teal-100 to-green-100 rounded-full mb-5 shadow-md shadow-teal-100/50"
+                        animate={{
+                          scale: [1, 1.05, 1],
+                          boxShadow: [
+                            "0 4px 6px -1px rgba(20, 184, 166, 0.1), 0 2px 4px -1px rgba(20, 184, 166, 0.06)",
+                            "0 10px 15px -3px rgba(20, 184, 166, 0.2), 0 4px 6px -2px rgba(20, 184, 166, 0.1)",
+                            "0 4px 6px -1px rgba(20, 184, 166, 0.1), 0 2px 4px -1px rgba(20, 184, 166, 0.06)"
+                          ]
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <CheckCircle className="w-8 h-8 text-teal-600" />
+                      </motion.div>
                       <h3 className="text-xl font-semibold text-gray-800 mb-2">Review Your Application</h3>
                       <p className="text-gray-600">Please review your information before submitting</p>
                     </div>
                     
-                    <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+                    <div className="bg-gradient-to-br from-teal-50/50 to-purple-50/50 p-5 rounded-2xl space-y-3 shadow-sm">
                       <div className="grid grid-cols-2 gap-2">
                         <div className="text-sm text-gray-500">Full Name:</div>
                         <div className="text-sm font-medium">{formData.name}</div>
@@ -404,7 +459,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                       </div>
                       <div className="pt-2">
                         <div className="text-sm text-gray-500 mb-1">Motivation:</div>
-                        <div className="text-sm bg-white p-3 rounded border border-gray-200">{formData.motivation}</div>
+                        <div className="text-sm bg-white p-4 rounded-xl border border-gray-200 shadow-sm">{formData.motivation}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -412,14 +467,14 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
               </AnimatePresence>
             </div>
 
-            <div className="p-6 border-t bg-gray-50 flex items-center justify-between">
+            <div className="p-6 border-t bg-gray-50/80 flex items-center justify-between relative z-10">
               {currentStep > 1 ? (
                 <motion.button
                   type="button"
                   onClick={prevStep}
-                  className="px-5 py-2.5 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
+                  className="px-5 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors flex items-center shadow-sm hover:border-teal-200"
                   disabled={isSubmitting}
-                  whileHover={{ x: -3 }}
+                  whileHover={{ x: -3, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Back
@@ -432,9 +487,9 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                 <motion.button
                   type="button"
                   onClick={nextStep}
-                  className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all flex items-center"
+                  className="px-6 py-3 bg-gradient-to-r from-teal-500 to-purple-600 text-white rounded-xl hover:shadow-md hover:shadow-teal-200/50 transition-all flex items-center"
                   disabled={isSubmitting}
-                  whileHover={{ x: 3 }}
+                  whileHover={{ x: 3, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Continue
@@ -443,9 +498,9 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                 <motion.button
                   type="button"
                   onClick={handleSubmit}
-                  className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all flex items-center"
+                  className="px-6 py-3 bg-gradient-to-r from-teal-500 to-purple-600 text-white rounded-xl hover:shadow-md hover:shadow-teal-200/50 transition-all flex items-center"
                   disabled={isSubmitting}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   {isSubmitting ? (
