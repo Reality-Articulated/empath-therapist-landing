@@ -22,7 +22,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4 pt-2">
               <motion.a 
-                href="https://twitter.com/empathdash" 
+                href="https://x.com/my_empath" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -31,7 +31,7 @@ export default function Footer() {
                 <Twitter size={20} />
               </motion.a>
               <motion.a 
-                href="https://linkedin.com/company/empathdash" 
+                href="https://www.linkedin.com/company/reality-articulated/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
@@ -40,7 +40,7 @@ export default function Footer() {
                 <Linkedin size={20} />
               </motion.a>
               <motion.a 
-                href="mailto:info@empathdash.com" 
+                href="mailto:karan@myempath.co" 
                 className="text-gray-400 hover:text-blue-400 transition-colors"
                 whileHover={{ y: -3, scale: 1.1 }}
               >
@@ -83,7 +83,7 @@ export default function Footer() {
               Have questions or want to learn more about Empath?
             </p>
             <motion.a 
-              href="mailto:info@empathdash.com"
+              href="mailto:karan@myempath.co"
               className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:shadow-lg hover:shadow-blue-900/20 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
