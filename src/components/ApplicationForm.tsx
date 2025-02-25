@@ -3,6 +3,7 @@ import { X, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { analytics } from '../services/analytics';
 
 interface ApplicationFormProps {
   isOpen: boolean;
@@ -21,6 +22,16 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     motivation: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  
+  // Track when form is opened
+  useEffect(() => {
+    if (isOpen) {
+      analytics.track('Form Opened', {
+        form_name: 'application',
+        entry_point: window.location.pathname
+      });
+    }
+  }, [isOpen]);
 
   // Reset form when closed
   useEffect(() => {
@@ -53,17 +64,45 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     }
     
     setErrors(newErrors);
+    
+    // Track validation errors if they occur
+    if (Object.keys(newErrors).length > 0) {
+      analytics.track('Form Validation Error', {
+        form_name: 'application',
+        form_step: step,
+        error_fields: Object.keys(newErrors),
+        error_count: Object.keys(newErrors).length
+      });
+    }
+    
     return Object.keys(newErrors).length === 0;
   };
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(currentStep + 1);
+      const nextStepNum = currentStep + 1;
+      setCurrentStep(nextStepNum);
+      
+      // Track successful step completion
+      analytics.track('Form Step Completed', {
+        form_name: 'application',
+        current_step: currentStep,
+        next_step: nextStepNum,
+        completion_time_ms: performance.now() // Tracks time spent on form
+      });
     }
   };
 
   const prevStep = () => {
-    setCurrentStep(currentStep - 1);
+    const prevStepNum = currentStep - 1;
+    setCurrentStep(prevStepNum);
+    
+    // Track step navigation
+    analytics.track('Form Step Back', {
+      form_name: 'application',
+      from_step: currentStep,
+      to_step: prevStepNum
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -72,6 +111,11 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     if (!validateStep(currentStep)) return;
     
     setIsSubmitting(true);
+    
+    // Track form submission attempt
+    analytics.track('Form Submission Attempt', {
+      form_name: 'application'
+    });
 
     try {
       await emailjs.send(
@@ -88,7 +132,24 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         },
         'RkdQiScnBEMQIBtNL' // Replace with your EmailJS public key
       );
-
+      
+      // Track successful form submission
+      analytics.track('Form Submission Success', {
+        form_name: 'application',
+        user_email_domain: formData.email.split('@')[1], // Track only the domain for privacy
+        experience_level: formData.experience,
+        client_count_range: getClientCountRange(formData.clients)
+      });
+      
+      // Once we have the email, identify the user for future tracking
+      // This connects anonymous pre-signup activity with post-signup activity
+      analytics.identifyUser(formData.email, {
+        name: formData.name,
+        email: formData.email,
+        experience_level: formData.experience,
+        client_count: formData.clients
+      });
+      
       toast.success('Application submitted successfully!');
       onClose();
       setFormData({
@@ -100,27 +161,62 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         motivation: '',
       });
     } catch (error) {
+      // Track form submission failure
+      analytics.track('Form Submission Error', {
+        form_name: 'application',
+        error_message: error instanceof Error ? error.message : 'Unknown error'
+      });
+      
       toast.error('Failed to submit application. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
+  
+  // Helper function to categorize client count into ranges for analytics
+  const getClientCountRange = (clientCount: string): string => {
+    const count = parseInt(clientCount);
+    if (count <= 5) return '1-5';
+    if (count <= 10) return '6-10';
+    if (count <= 20) return '11-20';
+    if (count <= 50) return '21-50';
+    return '50+';
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user types
+    // Clear error when field is edited
     if (errors[name]) {
       setErrors(prev => {
-        const newErrors = {...prev};
+        const newErrors = { ...prev };
         delete newErrors[name];
         return newErrors;
       });
     }
+  };
+  
+  // Track form abandonment
+  const handleClose = () => {
+    if (formData.name || formData.email || formData.practice) {
+      analytics.track('Form Abandoned', {
+        form_name: 'application',
+        current_step: currentStep,
+        fields_filled: Object.entries(formData)
+          .filter(([_, value]) => value.trim() !== '')
+          .map(([key, _]) => key),
+        completion_percentage: calculateFormCompletion()
+      });
+    }
+    onClose();
+  };
+  
+  // Calculate approximate form completion percentage
+  const calculateFormCompletion = (): number => {
+    const totalFields = Object.keys(formData).length;
+    const filledFields = Object.values(formData).filter(value => value.trim() !== '').length;
+    return Math.round((filledFields / totalFields) * 100);
   };
 
   if (!isOpen) return null;
@@ -222,7 +318,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                 Help shape the future of therapy tools
               </p>
               <motion.button
-                onClick={onClose}
+                onClick={handleClose}
                 className="absolute right-6 top-6 text-gray-400 hover:text-gray-600 bg-white rounded-full p-1.5 hover:bg-gray-100 transition-colors shadow-sm"
                 disabled={isSubmitting}
                 whileHover={{ rotate: 180, scale: 1.1 }}

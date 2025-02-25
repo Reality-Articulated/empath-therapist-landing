@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../public/empath-logo.png';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { analytics } from '../services/analytics';
 
 export default function Navbar() {
   const location = useLocation();
@@ -27,6 +28,23 @@ export default function Navbar() {
     isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-3' : 'bg-transparent py-5'
   }`;
   
+  // Add tracking to your navigation items 
+  const handleNavItemClick = (itemName: string) => {
+    analytics.track('Navigation Click', {
+      item_name: itemName,
+      current_page: window.location.pathname
+    });
+  };
+
+  // Track CTA clicks
+  const handleCtaClick = (ctaName: string, ctaLocation: string) => {
+    analytics.track('CTA Click', {
+      cta_name: ctaName,
+      cta_location: ctaLocation,
+      current_page: window.location.pathname
+    });
+  };
+
   return (
     <nav className={navbarClasses}>
       <div className="container mx-auto px-4">
@@ -51,6 +69,7 @@ export default function Navbar() {
                   ? 'text-blue-600' 
                   : 'text-gray-600 hover:text-blue-600'
               }`}
+              onClick={() => handleNavItemClick('Home')}
             >
               <span>Home</span>
               {location.pathname === '/' && (
@@ -67,6 +86,7 @@ export default function Navbar() {
                   ? 'text-blue-600' 
                   : 'text-gray-600 hover:text-blue-600'
               }`}
+              onClick={() => handleNavItemClick('Advisory Program')}
             >
               <span>Advisory Program</span>
               {location.pathname === '/advisory' && (
@@ -83,6 +103,7 @@ export default function Navbar() {
               className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => handleCtaClick('Sign In', 'navbar')}
             >
               Sign In
             </motion.a>
@@ -113,7 +134,10 @@ export default function Navbar() {
                 className={`text-sm font-medium py-2 ${
                   location.pathname === '/' ? 'text-blue-600' : 'text-gray-600'
                 }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleNavItemClick('Home');
+                }}
               >
                 Home
               </Link>
@@ -122,7 +146,10 @@ export default function Navbar() {
                 className={`text-sm font-medium py-2 ${
                   location.pathname === '/advisory' ? 'text-blue-600' : 'text-gray-600'
                 }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleNavItemClick('Advisory Program');
+                }}
               >
                 Advisory Program
               </Link>
@@ -131,7 +158,10 @@ export default function Navbar() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-sm font-medium py-2 px-4 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleCtaClick('Sign In', 'navbar');
+                }}
               >
                 Sign In
               </a>

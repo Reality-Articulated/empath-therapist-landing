@@ -4,9 +4,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { init } from '@emailjs/browser';
 import App from './App';
 import './index.css';
+import { analytics } from './services/analytics';
 
 // Initialize EmailJS with your public key
 init("your_public_key"); // Replace with your EmailJS public key
+
+// Initialize Mixpanel
+analytics.init();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
