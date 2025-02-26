@@ -9,7 +9,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-400 py-16 mt-auto">
+    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-300 py-16 mt-auto">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo and Description */}
@@ -21,7 +21,7 @@ export default function Footer() {
               </picture>
               <span className="text-2xl font-bold text-white">Empath</span>
             </div>
-            <p className="text-gray-400 max-w-xs">
+            <p className="text-gray-300 max-w-xs">
               Empowering therapists with tools that enhance the therapeutic relationship through data-driven insights.
             </p>
             <div className="flex space-x-4 pt-2">
@@ -29,8 +29,9 @@ export default function Footer() {
                 href="https://x.com/my_empath" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-gray-300 hover:text-blue-400 transition-colors"
                 whileHover={{ y: -3, scale: 1.1 }}
+                aria-label="Follow us on Twitter"
               >
                 <Twitter size={20} />
               </motion.a>
@@ -38,15 +39,17 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/reality-articulated/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-gray-300 hover:text-blue-400 transition-colors"
                 whileHover={{ y: -3, scale: 1.1 }}
+                aria-label="Connect with us on LinkedIn"
               >
                 <Linkedin size={20} />
               </motion.a>
               <motion.a 
                 href="mailto:karan@myempath.co" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-gray-300 hover:text-blue-400 transition-colors"
                 whileHover={{ y: -3, scale: 1.1 }}
+                aria-label="Contact us via Email"
               >
                 <Mail size={20} />
               </motion.a>
@@ -55,15 +58,15 @@ export default function Footer() {
           
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-6 text-lg">Quick Links</h3>
+            <h2 className="text-white font-semibold mb-6 text-lg">Quick Links</h2>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors inline-flex items-center">
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/advisory" className="text-gray-400 hover:text-white transition-colors inline-flex items-center">
+                <Link to="/advisory" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
                   Advisory Program
                 </Link>
               </li>
@@ -72,9 +75,10 @@ export default function Footer() {
                   href="https://app.empathdash.com/login" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center"
+                  className="text-gray-300 hover:text-white transition-colors inline-flex items-center"
+                  aria-label="Sign in to Empath Dashboard"
                 >
-                  Sign In <ArrowUpRight size={14} className="ml-1" />
+                  Sign In <ArrowUpRight size={14} className="ml-1" aria-hidden="true" />
                 </a>
               </li>
             </ul>

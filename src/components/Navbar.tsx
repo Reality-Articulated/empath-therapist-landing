@@ -31,7 +31,7 @@ export default function Navbar() {
     <nav className={navbarClasses}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 group">
+          <Link to="/" className="flex items-center space-x-2 group" aria-label="Empath Home">
             <motion.img 
               src={logo} 
               alt="Empath Logo" 
@@ -48,9 +48,10 @@ export default function Navbar() {
               to="/" 
               className={`text-sm font-medium transition-all duration-300 relative ${
                 location.pathname === '/' 
-                  ? 'text-blue-600' 
-                  : 'text-gray-600 hover:text-blue-600'
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
               }`}
+              aria-current={location.pathname === '/' ? 'page' : undefined}
             >
               <span>Home</span>
               {location.pathname === '/' && (
@@ -64,9 +65,10 @@ export default function Navbar() {
               to="/advisory" 
               className={`text-sm font-medium transition-all duration-300 relative ${
                 location.pathname === '/advisory' 
-                  ? 'text-blue-600' 
-                  : 'text-gray-600 hover:text-blue-600'
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
               }`}
+              aria-current={location.pathname === '/advisory' ? 'page' : undefined}
             >
               <span>Advisory Program</span>
               {location.pathname === '/advisory' && (
@@ -80,9 +82,10 @@ export default function Navbar() {
               href="https://app.empathdash.com/login" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all"
+              className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-700 to-indigo-700 rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              aria-label="Sign In to Empath Dashboard"
             >
               Sign In
             </motion.a>
@@ -92,7 +95,9 @@ export default function Navbar() {
           <div className="md:hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-gray-600 hover:text-blue-600 focus:outline-none"
+              className="p-2 text-gray-700 hover:text-blue-700 focus:outline-none"
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

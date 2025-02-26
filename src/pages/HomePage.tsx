@@ -227,14 +227,14 @@ export default function HomePage() {
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-14 leading-tight">
                 <div className="relative">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 leading-tight">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700 leading-tight">
                     Make Every Client Feel Like
                   </span>
                   <div className="absolute left-0 bottom-0 h-[2px] w-0 bg-gradient-to-r from-teal-500/40 to-blue-500/40"></div>
                 </div>
                 
                 <div className="mt-3 md:mt-4 relative inline-flex flex-col">
-                  <span className="text-purple-700 font-bold relative z-10 tracking-tight">
+                  <span className="text-purple-800 font-bold relative z-10 tracking-tight">
                     They Are Your Only Client
                   </span>
                   <motion.div 
@@ -251,27 +251,28 @@ export default function HomePage() {
                   />
                 </div>
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
                 Empath helps therapists gain deeper insights into clients' experiences between sessions,
                 enabling more meaningful connections and effective treatment outcomes.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button 
                   onClick={() => setShowCalendar(true)}
-                  className="px-8 py-4 bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-2xl hover:shadow-lg hover:shadow-teal-200 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group cursor-pointer"
+                  className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-2xl hover:shadow-lg hover:shadow-teal-200 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
+                  aria-label="Book a demo call with our team"
                 >
                   Book a Demo Call
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </motion.button>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Link to="/advisory" className="px-8 py-4 bg-white text-teal-600 rounded-2xl border-2 border-teal-100 hover:border-teal-200 hover:bg-teal-50 transition-all duration-300 flex items-center justify-center group cursor-pointer">
+                  <Link to="/advisory" className="px-8 py-4 bg-white text-teal-700 rounded-2xl border-2 border-teal-100 hover:border-teal-200 hover:bg-teal-50 transition-all duration-300 flex items-center justify-center group cursor-pointer" aria-label="Learn about joining our advisory board">
                     Join Advisory Board
-                    <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
                 </motion.div>
               </div>
@@ -305,6 +306,9 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="calendar-modal-title"
         >
           <motion.div 
             className="bg-white rounded-3xl p-6 w-full max-w-4xl shadow-2xl"
@@ -313,14 +317,15 @@ export default function HomePage() {
             transition={{ type: "spring", damping: 25 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Schedule a Demo</h2>
+              <h2 id="calendar-modal-title" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">Schedule a Demo</h2>
               <motion.button 
                 onClick={() => setShowCalendar(false)}
                 className="text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors cursor-pointer"
                 whileHover={{ rotate: 180 }}
                 transition={{ duration: 0.3 }}
+                aria-label="Close calendar"
               >
-                <X size={20} />
+                <X size={20} aria-hidden="true" />
               </motion.button>
             </div>
             <iframe 
@@ -342,7 +347,7 @@ export default function HomePage() {
             variants={fadeIn}
             className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Why Empath Transforms Therapy</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">Why Empath Transforms Therapy</span>
             <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
           </motion.h2>
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -369,7 +374,7 @@ export default function HomePage() {
             >
               <motion.div variants={fadeIn}>
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800">Bridging the Gap Between Sessions</h3>
-                <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                <p className="text-gray-700 mb-8 text-lg leading-relaxed">
                   Empath creates a continuous therapeutic experience by connecting what happens in sessions with what happens in real life:
                 </p>
                 <div className="space-y-8">
@@ -380,7 +385,7 @@ export default function HomePage() {
                   >
                     <p className="flex items-start">
                       <span className="flex-shrink-0 text-green-600 font-bold text-lg bg-green-100 px-3 py-1 rounded-lg">Perception</span>
-                      <span className="text-gray-600 ml-4 leading-relaxed">
+                      <span className="text-gray-700 ml-4 leading-relaxed">
                         Our client app captures real-world experiences as they happen, providing authentic data rather than retrospective recollections.
                       </span>
                     </p>
@@ -392,7 +397,7 @@ export default function HomePage() {
                   >
                     <p className="flex items-start">
                       <span className="flex-shrink-0 text-blue-600 font-bold text-lg bg-blue-100 px-3 py-1 rounded-lg">Cognition</span>
-                      <span className="text-gray-600 ml-4 leading-relaxed">
+                      <span className="text-gray-700 ml-4 leading-relaxed">
                         Our AI transforms complex client data into actionable clinical insights, revealing patterns invisible to traditional methods.
                       </span>
                     </p>
@@ -404,7 +409,7 @@ export default function HomePage() {
                   >
                     <p className="flex items-start">
                       <span className="flex-shrink-0 text-red-600 font-bold text-lg bg-red-100 px-3 py-1 rounded-lg">Action</span>
-                      <span className="text-gray-600 ml-4 leading-relaxed">
+                      <span className="text-gray-700 ml-4 leading-relaxed">
                         You maintain complete therapeutic control, using enhanced insights to deliver more personalized and effective interventions.
                       </span>
                     </p>
@@ -427,10 +432,10 @@ export default function HomePage() {
               variants={fadeIn}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700 leading-tight">
                 Complete Understanding Requires Complete Data
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
                 Fragmented sessions only provide glimpses into a client's life requiring a lot of catch-up every session.
               </p>
             </motion.div>
@@ -826,7 +831,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">Preserving the Human Element of Therapy</h3>
-                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  <p className="text-lg text-gray-700 max-w-3xl mx-auto">
                     As AI chatbots increasingly position themselves as therapy alternatives, Empath empowers human therapists to maintain the irreplaceable value of a human while also accessing the computational capabilities of AI.
                   </p>
                 </div>
@@ -839,7 +844,7 @@ export default function HomePage() {
                       </svg>
                     </div>
                     <h4 className="font-bold text-gray-800 mb-3">From Missed Signals to Clear Patterns</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed">
                       Current therapy misses critical information between sessions. Empath captures the full story, revealing patterns that would otherwise remain hidden.
                     </p>
                   </div>
@@ -851,7 +856,7 @@ export default function HomePage() {
                       </svg>
                     </div>
                     <h4 className="font-bold text-gray-800 mb-3">From Preparation to Precision</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed">
                       Spend less time catching up and more time on targeted interventions. Empath's AI analyzes client data, providing you with actionable insights in just 5 minutes.
                     </p>
                   </div>
@@ -863,7 +868,7 @@ export default function HomePage() {
                       </svg>
                     </div>
                     <h4 className="font-bold text-gray-800 mb-3">From Anecdotes to Evidence</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed">
                       Replace subjective recollections with deep understanding. Track progress with confidence and make treatment decisions based on complete information.
                     </p>
                   </div>
@@ -882,10 +887,10 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 relative inline-block">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Designed for Therapists, by Therapists</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">Designed for Therapists, by Therapists</span>
               <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
             </h2>
-            <p className="text-center text-gray-600 mt-8 text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-center text-gray-700 mt-8 text-xl max-w-3xl mx-auto leading-relaxed">
               We've collaborated with practicing therapists to create tools that enhance your clinical work without disrupting your workflow.
             </p>
           </motion.div>
@@ -907,7 +912,7 @@ export default function HomePage() {
                   <feature.icon className="w-10 h-10 text-teal-600 group-hover:text-purple-600 transition-colors duration-300" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-teal-700 transition-colors duration-300 relative z-10">{feature.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300 relative z-10">{feature.description}</p>
+                <p className="text-gray-700 group-hover:text-gray-800 transition-colors duration-300 relative z-10">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -921,7 +926,7 @@ export default function HomePage() {
             variants={fadeIn}
             className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">What Therapists Are Saying</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">What Therapists Are Saying</span>
             <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
           </motion.h2>
           
@@ -993,7 +998,7 @@ export default function HomePage() {
             variants={fadeIn}
             className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">How Empath Works</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">How Empath Works</span>
             <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
           </motion.h2>
           <motion.div 
@@ -1050,7 +1055,7 @@ export default function HomePage() {
                     {/* Content card */}
                     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1">
                       <h3 className="text-xl font-semibold mb-3 group-hover:text-green-700 transition-colors">Client Data Collection</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-700 leading-relaxed">
                         Clients use our mobile app to log daily experiences, moods, and activities.
                         Wearable integration provides additional health insights.
                       </p>
@@ -1067,7 +1072,7 @@ export default function HomePage() {
                     </div>
                     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1">
                       <h3 className="text-xl font-semibold mb-3 group-hover:text-teal-700 transition-colors">AI-Powered Analysis</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-700 leading-relaxed">
                         Our system analyzes patterns and trends, generating meaningful insights
                         about client well-being and progress.
                       </p>
@@ -1084,7 +1089,7 @@ export default function HomePage() {
                     </div>
                     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1">
                       <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-700 transition-colors">Therapist Dashboard</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-700 leading-relaxed">
                         Access organized summaries and visualizations of client data,
                         enabling more informed and effective therapy sessions.
                       </p>
@@ -1104,7 +1109,7 @@ export default function HomePage() {
             variants={fadeIn}
             className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Common Questions</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">Common Questions</span>
             <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
           </motion.h2>
           
@@ -1153,7 +1158,7 @@ export default function HomePage() {
                     </span>
                     How does Empath protect client privacy?
                   </h3>
-                  <p className="text-gray-600 leading-relaxed pl-11">
+                  <p className="text-gray-700 leading-relaxed pl-11">
                     We take privacy seriously. All data is encrypted, HIPAA-compliant, and only accessible to the therapist and client. Clients have full control over what they share.
                   </p>
                 </div>
@@ -1172,7 +1177,7 @@ export default function HomePage() {
                     </span>
                     Will this add to my workload?
                   </h3>
-                  <p className="text-gray-600 leading-relaxed pl-11">
+                  <p className="text-gray-700 leading-relaxed pl-11">
                     No—Empath is designed to save you time. Our dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.
                   </p>
                 </div>
@@ -1191,7 +1196,7 @@ export default function HomePage() {
                     </span>
                     How do clients respond to using the app?
                   </h3>
-                  <p className="text-gray-600 leading-relaxed pl-11">
+                  <p className="text-gray-700 leading-relaxed pl-11">
                     Early feedback suggests clients appreciate the opportunity to reflect between sessions and feel more engaged in their therapy journey.
                   </p>
                 </div>
@@ -1210,7 +1215,7 @@ export default function HomePage() {
                     </span>
                     What makes Empath different from other therapy tools?
                   </h3>
-                  <p className="text-gray-600 leading-relaxed pl-11">
+                  <p className="text-gray-700 leading-relaxed pl-11">
                     Empath is designed specifically to enhance therapeutic relationships, not replace them. Our focus is on providing meaningful insights from real-world data while maintaining the human connection at the core of therapy.
                   </p>
                 </div>
