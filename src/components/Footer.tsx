@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import logo from '../../public/empath-logo.png';
+import logoPng from '../../public/empath-logo.png';
+import logoWebp from '../../public/optimized/empath-logo.webp';
 import { Twitter, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
@@ -14,7 +15,10 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2 mb-4">
-              <img src={logo} alt="Empath Logo" className="w-10 h-10" />
+              <picture>
+                <source srcSet={logoWebp} type="image/webp" />
+                <img src={logoPng} alt="Empath Logo" className="w-10 h-10" width="40" height="40" loading="lazy" />
+              </picture>
               <span className="text-2xl font-bold text-white">Empath</span>
             </div>
             <p className="text-gray-400 max-w-xs">

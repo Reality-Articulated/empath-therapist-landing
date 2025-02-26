@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import howitworks from '../../public/howitworks.png';
-import whyitworks from '../../public/whyitworks.png';
+import howitworksPng from '../../public/howitworks.png';
+import whyitworksPng from '../../public/whyitworks.png';
+import howitworksWebp from '../../public/optimized/howitworks.webp';
+import whyitworksWebp from '../../public/optimized/whyitworks.webp';
 
 import { 
   Brain, 
@@ -349,11 +351,17 @@ export default function HomePage() {
               className="relative order-2 md:order-1"
             >
               <div className="absolute -inset-4 bg-gradient-to-r from-teal-100 to-purple-100 rounded-3xl blur-xl opacity-60"></div>
-              <img 
-                src={whyitworks} 
-                alt="Empath System Diagram"
-                className="rounded-3xl shadow-2xl relative z-10 hover:shadow-teal-200 transition-shadow duration-500"
-              />
+              <picture>
+                <source srcSet={whyitworksWebp} type="image/webp" />
+                <img 
+                  src={whyitworksPng} 
+                  alt="Empath System Diagram"
+                  className="rounded-3xl shadow-2xl relative z-10 hover:shadow-teal-200 transition-shadow duration-500"
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                />
+              </picture>
             </motion.div>
             <motion.div 
               variants={staggerContainer}
@@ -1004,11 +1012,17 @@ export default function HomePage() {
                 transition={{ duration: 0.5 }}
                 {...breathingAnimation}
               >
-                <img 
-                  src={howitworks} 
-                  alt="Empath Dashboard Flow Diagram"
-                  className="rounded-2xl shadow-2xl relative z-10 hover:shadow-teal-200 transition-shadow duration-500"
-                />
+                <picture>
+                  <source srcSet={howitworksWebp} type="image/webp" />
+                  <img 
+                    src={howitworksPng} 
+                    alt="Empath Dashboard Flow Diagram"
+                    className="rounded-2xl shadow-2xl relative z-10 hover:shadow-teal-200 transition-shadow duration-500"
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                  />
+                </picture>
               </motion.div>
             </motion.div>
             <motion.div 

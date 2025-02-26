@@ -1,0 +1,6 @@
+# robots.txt for Empath
+User-agent: *
+Allow: /
+
+# Sitemap location (when one becomes available)
+# Sitemap: https://yoursite.com/sitemap.xml 
