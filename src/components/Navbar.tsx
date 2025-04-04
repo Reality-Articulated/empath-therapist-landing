@@ -78,6 +78,23 @@ export default function Navbar() {
                 />
               )}
             </Link>
+            {/* <Link 
+              to="/blogs" 
+              className={`text-sm font-medium transition-all duration-300 relative ${
+                location.pathname === '/blogs' 
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
+              }`}
+              aria-current={location.pathname === '/blogs' ? 'page' : undefined}
+            >
+              <span>Blogs</span>
+              {location.pathname === '/blogs' && (
+                <motion.div 
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+                  layoutId="navIndicator"
+                />
+              )}
+            </Link> */}
             <motion.a 
               href="https://app.empathdash.com/login" 
               target="_blank" 
@@ -131,6 +148,15 @@ export default function Navbar() {
               >
                 Advisory Program
               </Link>
+              {/* <Link 
+                to="/blogs" 
+                className={`text-sm font-medium py-2 ${
+                  location.pathname === '/blogs' ? 'text-blue-600' : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blogs
+              </Link> */}
               <a 
                 href="https://app.empathdash.com/login" 
                 target="_blank" 

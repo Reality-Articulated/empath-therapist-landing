@@ -252,8 +252,9 @@ export default function HomePage() {
                 </div>
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
-                Empath helps therapists gain deeper insights into clients' experiences between sessions,
-                enabling more meaningful connections and effective treatment outcomes.
+              Empath gives therapists a 3-minute catch-up on what their client has been feeling, thinking, 
+              and going through since the last session.
+
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button 
@@ -339,6 +340,191 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
       )}
+
+      {/* 30-Day Implementation Timeline */}
+      <AnimatedSection className="py-0 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <motion.div
+              variants={fadeIn}
+              className="mb-4"
+            >
+              <p className="text-xl text-gray-600">Therapeutic relationships shouldn't take months to develop</p>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">
+                  Here's what you can achieve with Empath in just 30 days
+                </span>
+              </h2>
+            </motion.div>
+            
+            {/* Timeline slider visual */}
+            <div className="relative mt-12 mb-16">
+              <div className="flex justify-between mb-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="px-6 py-2 border border-teal-200 rounded-full bg-white text-teal-700 font-medium shadow-sm"
+                >
+                  Today
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="px-6 py-2 border border-teal-200 rounded-full bg-white text-teal-700 font-medium shadow-sm"
+                >
+                  Day 15
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="px-6 py-2 border border-teal-200 rounded-full bg-white text-teal-700 font-medium shadow-sm"
+                >
+                  Day 30
+                </motion.div>
+              </div>
+              
+              {/* Progress bar */}
+              <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                <motion.div 
+                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-teal-400 to-purple-500 rounded-full"
+                  initial={{ width: '0%' }}
+                  whileInView={{ width: '100%' }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                />
+                
+                {/* Progress dots */}
+                <motion.div 
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 bg-teal-500 rounded-full border-4 border-white shadow-md"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.5 }}
+                  viewport={{ once: true }}
+                />
+                <motion.div 
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-md"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                  viewport={{ once: true }}
+                />
+                <motion.div 
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 bg-purple-500 rounded-full border-4 border-white shadow-md"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 1.1 }}
+                  viewport={{ once: true }}
+                />
+              </div>
+            </div>
+            
+            {/* Timeline cards */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Day 1 Card */}
+              <motion.div 
+                className="bg-white rounded-xl shadow-lg p-8 border border-teal-100 text-left"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              >
+                <h3 className="text-xl font-semibold mb-6">Instant value today</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-teal-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>Boost your brand:</strong> Send clients your own custom-branded therapy app</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-teal-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>Differentiate your practice:</strong> Offer technology most therapists can't provide</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-teal-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>5-minute setup:</strong> Start enhancing client experience immediately</span>
+                  </li>
+                </ul>
+              </motion.div>
+              
+              {/* Day 15 Card */}
+              <motion.div 
+                className="bg-white rounded-xl shadow-lg p-8 border border-blue-100 text-left"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              >
+                <h3 className="text-xl font-semibold mb-6">10x client insights</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>Beyond sessions:</strong> 2 weeks of continuous data vs. just 2 hour-long meetings</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>Complete picture:</strong> Track sleep, activity, and emotion patterns automatically</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>3-minute reviews:</strong> Get a complete client update before each session</span>
+                  </li>
+                </ul>
+              </motion.div>
+              
+              {/* Day 30 Card */}
+              <motion.div 
+                className="bg-white rounded-xl shadow-lg p-8 border border-purple-100 text-left"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              >
+                <h3 className="text-xl font-semibold mb-6">Practice-changing results</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-purple-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>50% lower drop-offs:</strong> Keep clients engaged when they feel truly understood</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-purple-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>More productive sessions:</strong> Skip the catch-up, dive into what matters</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-purple-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span className="text-gray-700"><strong>Higher client satisfaction:</strong> Provide care that feels personalized and insightful</span>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* Why Empath Works */}
       <AnimatedSection className="py-28 bg-gradient-to-b from-white to-teal-50/30">
