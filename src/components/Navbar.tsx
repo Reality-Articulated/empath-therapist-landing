@@ -70,8 +70,25 @@ export default function Navbar() {
               }`}
               aria-current={location.pathname === '/advisory' ? 'page' : undefined}
             >
-              <span>Advisory Program</span>
+              <span>Advisory</span>
               {location.pathname === '/advisory' && (
+                <motion.div 
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+                  layoutId="navIndicator"
+                />
+              )}
+            </Link>
+            <Link 
+              to="/atman" 
+              className={`text-sm font-medium transition-all duration-300 relative ${
+                location.pathname === '/atman' 
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
+              }`}
+              aria-current={location.pathname === '/atman' ? 'page' : undefined}
+            >
+              <span>Atman</span>
+              {location.pathname === '/atman' && (
                 <motion.div 
                   className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
                   layoutId="navIndicator"
@@ -147,6 +164,15 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Advisory Program
+              </Link>
+              <Link 
+                to="/atman" 
+                className={`text-sm font-medium py-2 ${
+                  location.pathname === '/atman' ? 'text-blue-600' : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Atman
               </Link>
               {/* <Link 
                 to="/blogs" 
