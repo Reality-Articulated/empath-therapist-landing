@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import AdvisoryPage from './pages/AdvisoryPage';
 import AtmanPage from './pages/AtmanPage';
 // import BlogsPage from './pages/BlogsPage';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function App() {
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
       {!isAtmanPage && <Footer />}
+      <Analytics />
     </div>
   );
 }
