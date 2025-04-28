@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info } from 'lucide-react';
+import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 
 const fadeIn = {
@@ -113,24 +113,24 @@ export default function ClientInfoPage() {
           >
             <a
               href="https://apps.apple.com/us/app/myempath/id6472873287"
-              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg"
+              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center"
             >
-              Download the Empath App
+              <Smartphone className="w-5 h-5 mr-2" /> Download the Empath App
             </a>
             <a
               href="tel:+18776528626"
-              className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg"
+              className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
             >
-              Just Call to Journal
+              <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
             </a>
           </motion.div>
           
           {/* Privacy Banner */}
           <motion.div
             variants={fadeIn}
-            className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm border border-teal-100 p-3 flex items-center"
+            className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm border border-blue-100 p-3 flex items-center"
           >
-            <Shield className="text-teal-600 w-5 h-5 mr-2 flex-shrink-0" />
+            <Shield className="text-[#1281dd] w-5 h-5 mr-2 flex-shrink-0" />
             <p className="text-sm text-gray-600">
               <span className="font-medium">HIPAA-grade privacy:</span> Your therapist sees your entries only before your appointment—not in real-time.
             </p>
@@ -439,8 +439,10 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
           >
-            <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-6 shadow-md border border-teal-100">
-              <h3 className="text-2xl font-bold text-teal-700 mb-6 text-center">Download the App</h3>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100">
+              <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
+                <Smartphone className="w-6 h-6 mr-2" /> Download the App
+              </h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
@@ -458,7 +460,9 @@ export default function ClientInfoPage() {
             </div>
             
             <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100">
-              <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center">Call to Journal</h3>
+              <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
+                <Phone className="w-6 h-6 mr-2" /> Call to Journal
+              </h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
@@ -620,15 +624,15 @@ export default function ClientInfoPage() {
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
         <a
           href="https://apps.apple.com/us/app/myempath/id6472873287"
-          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center"
+          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
         >
-          Download App
+          <Smartphone className="w-4 h-4 mr-1" /> Download App
         </a>
         <a
           href="tel:+18776528626"
-          className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center"
+          className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
         >
-          Call to Journal
+          <Phone className="w-4 h-4 mr-1" /> Call to Journal
         </a>
       </div>
     </div>
