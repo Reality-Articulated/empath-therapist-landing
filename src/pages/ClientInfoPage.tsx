@@ -68,8 +68,8 @@ export default function ClientInfoPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 animate-gradient-x">
             Make 70 minutes of therapy progress <br /> in a 50-minute session
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, without paying a penny more.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+             Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, <span className="font-semibold">without paying a penny more.</span>
             </p>
           </motion.div>
 
