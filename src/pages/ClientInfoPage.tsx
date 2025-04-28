@@ -66,7 +66,7 @@ export default function ClientInfoPage() {
             className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700">
-            Make 75 minutes of therapy progress <br /> in a 60-minute session
+            Make 70 minutes of therapy progress <br /> in a 50-minute session
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, without paying a penny more.
