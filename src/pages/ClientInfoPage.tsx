@@ -112,7 +112,7 @@ export default function ClientInfoPage() {
           >
             <a
               href="#download"
-              className="px-6 py-4 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg"
+              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg"
             >
               Download the Empath App
             </a>
@@ -157,50 +157,50 @@ export default function ClientInfoPage() {
             {/* Session comparison visualization */}
             <div className="bg-gray-50 p-6 rounded-xl mb-8">
               <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div className="flex flex-col items-center max-w-xs">
+                <div className="flex flex-col items-center w-full md:w-80">
                   <div className="text-gray-700 mb-2 font-medium">Without Empath</div>
                   <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-2/3 bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
-                      20-30 min: "So how was your week?"
+                    <div className="w-[45%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
+                      20 min of "how was your week?"
                     </div>
-                    <div className="w-1/3 bg-blue-400 flex items-center justify-center text-xs text-white font-medium">
-                      ~20 min: Real progress
+                    <div className="w-[55%] bg-teal-400 flex items-center justify-center text-xs text-white font-medium">
+                      ~30 min: Real progress
                     </div>
                   </div>
                 </div>
                 
                 <div className="text-xl font-bold text-gray-400">vs</div>
                 
-                <div className="flex flex-col items-center max-w-xs">
-                  <div className="text-teal-700 mb-2 font-medium">With Empath</div>
+                <div className="flex flex-col items-center w-full md:w-80">
+                  <div className="text-[#1281dd] mb-2 font-medium">With Empath</div>
                   <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-1/6 bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
-                      5 min
+                    <div className="w-[15%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
+                      5 min catch-up
                     </div>
-                    <div className="w-5/6 bg-teal-400 flex items-center justify-center text-xs text-white font-medium">
+                    <div className="w-[85%] bg-[#1281dd] flex items-center justify-center text-xs text-white font-medium">
                       ~45 min: Real breakthroughs
                     </div>
                   </div>
                 </div>
               </div>
               <p className="text-center mt-6 text-gray-700 font-medium">
-                That's <span className="text-teal-600 font-bold">125% more productive therapy time</span> from the same session.
+                That's <span className="text-[#1281dd] font-bold">125% more productive therapy time</span> from the same session.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-teal-700 mb-2">+$2,000</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2">+$2,000</div>
                 <p className="text-gray-600">Value of therapy time reclaimed over 10 sessions</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-teal-700 mb-2">3x Faster</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2">3x Faster</div>
                 <p className="text-gray-600">Progress through therapy goals and breakthroughs</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-teal-700 mb-2">Zero Prep</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2">Zero Prep</div>
                 <p className="text-gray-600">Just speak or text as thoughts occur</p>
               </div>
             </div>
