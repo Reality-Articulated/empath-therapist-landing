@@ -100,7 +100,8 @@ export default function ClientInfoPage() {
             className="max-w-3xl mx-auto bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg p-4 mb-8 border border-teal-100 shadow-sm"
           >
             <div className="text-center">              <p className="text-gray-700 mt-1">
-                Reclaim the <span className="font-bold">~20 minutes</span> spent recapping in every session. <br />More therapy value, same therapy bill.
+                Reclaim the <span className="font-bold">~20 minutes</span> spent recapping in every session. <br />
+                <span className="font-semibold text-[#1281dd]">More therapy value, same therapy bill.</span>
               </p>
             </div>
           </motion.div>
