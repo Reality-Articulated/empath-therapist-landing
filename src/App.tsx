@@ -5,23 +5,27 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AdvisoryPage from './pages/AdvisoryPage';
 import AtmanPage from './pages/AtmanPage';
+import ClientInfoPage from './pages/ClientInfoPage';
 // import BlogsPage from './pages/BlogsPage';
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
   const isAtmanPage = location.pathname === '/atman';
+  const isClientInfoPage = location.pathname === '/client-info';
+  const hideNavbar = isAtmanPage || isClientInfoPage;
 
   return (
     <div className="min-h-screen flex flex-col">
-      {!isAtmanPage && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
         <Route path="/atman" element={<AtmanPage />} />
+        <Route path="/client-info" element={<ClientInfoPage />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
-      {!isAtmanPage && <Footer />}
+      {!hideNavbar && <Footer />}
       <Analytics />
     </div>
   );
