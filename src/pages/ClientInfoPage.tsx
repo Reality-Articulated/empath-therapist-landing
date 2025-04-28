@@ -111,14 +111,14 @@ export default function ClientInfoPage() {
             className="flex flex-col sm:flex-row justify-center gap-4 mb-6"
           >
             <a
-              href="#download"
+              href="https://apps.apple.com/us/app/myempath/id6472873287"
               className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg"
             >
               Download the Empath App
             </a>
             <a
-              href="#call"
-              className="px-6 py-4 bg-white text-teal-600 rounded-full shadow-md hover:shadow-lg border border-teal-200 transition-all duration-300 font-semibold text-center text-lg"
+              href="tel:+18776528626"
+              className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg"
             >
               Just Call to Journal
             </a>
@@ -460,7 +460,7 @@ export default function ClientInfoPage() {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Dial +1 555-555-0123 anytime</span>
+                  <span>Dial +1 877 652 8626 anytime</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
@@ -601,14 +601,18 @@ export default function ClientInfoPage() {
       {/* Fixed bottom CTA on mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
         <a
-          href="#download"
-          className="flex-1 px-3 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full text-sm font-medium text-center"
+          href="https://apps.apple.com/us/app/myempath/id6472873287"
+          onClick={(e) => {
+            e.preventDefault();
+            window.open('https://apps.apple.com/us/app/myempath/id6472873287', '_blank');
+          }}
+          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center"
         >
           Download App
         </a>
         <a
-          href="#call"
-          className="flex-1 px-3 py-2 bg-white text-teal-600 rounded-full border border-teal-200 text-sm font-medium text-center"
+          href="tel:+18776528626"
+          className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center"
         >
           Call to Journal
         </a>
