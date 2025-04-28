@@ -66,10 +66,10 @@ export default function ClientInfoPage() {
             className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700">
-            Squeeze 75 minutes of therapy into <br /> a 60-minute session
+            Make 75 minutes of therapy progress <br /> in a 60-minute session
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Empath gives you 15-20 extra minutes of productive therapy in every session, without paying a penny more.
+            Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, without paying a penny more.
             </p>
           </motion.div>
 
@@ -160,10 +160,10 @@ export default function ClientInfoPage() {
                 <div className="flex flex-col items-center w-full md:w-80">
                   <div className="text-gray-700 mb-2 font-medium">Without Empath</div>
                   <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-[45%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
+                    <div className="w-[50%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
                       20 min of "how was your week?"
                     </div>
-                    <div className="w-[55%] bg-teal-400 flex items-center justify-center text-xs text-white font-medium">
+                    <div className="w-[50%] bg-teal-900 flex items-center justify-center text-xs text-white font-medium">
                       ~30 min: Real progress
                     </div>
                   </div>
@@ -174,10 +174,10 @@ export default function ClientInfoPage() {
                 <div className="flex flex-col items-center w-full md:w-80">
                   <div className="text-[#1281dd] mb-2 font-medium">With Empath</div>
                   <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-[15%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
-                      5 min catch-up
+                    <div className="w-[11%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
+                      5 min catch -up
                     </div>
-                    <div className="w-[85%] bg-[#1281dd] flex items-center justify-center text-xs text-white font-medium">
+                    <div className="w-[89%] bg-[#1281dd] flex items-center justify-center text-xs text-white font-medium">
                       ~45 min: Real breakthroughs
                     </div>
                   </div>
