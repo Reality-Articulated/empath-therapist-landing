@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban } from 'lucide-react';
+import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 
 const fadeIn = {
@@ -21,16 +21,16 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 last:border-b-0">
       <button
-        className="w-full py-4 flex justify-between items-center text-left text-lg font-medium text-gray-700 hover:text-teal-600 transition"
+        className="w-full py-4 flex justify-between items-center text-left text-lg font-medium text-gray-700 hover:text-[#1281dd] transition"
         onClick={() => setIsOpen(!isOpen)}
       >
         {question}
-        <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-[#1281dd] transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
       </button>
       {isOpen && (
-        <div className="pb-4 text-gray-600">
+        <div className="pb-6 pt-2 text-gray-600 pr-6">
           {answer}
         </div>
       )}
@@ -190,24 +190,29 @@ export default function ClientInfoPage() {
 
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2">+$2,000</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2 flex items-center justify-center">
+                  Save +$600
+                  <div className="relative group ml-2">
+                    <Info className="w-4 h-4 text-gray-400" />
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-2 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
+                      Based on saving 15-20 min per session at the U.S. average $175/50-min private-pay rate. Your exact value scales with your therapist's fee.
+                    </div>
+                  </div>
+                </div>
                 <p className="text-gray-600">Value of therapy time reclaimed over 10 sessions</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2">3x Faster</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2 text-center">3x Faster</div>
                 <p className="text-gray-600">Progress through therapy goals and breakthroughs</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2">Zero Prep</div>
+                <div className="text-2xl font-bold text-[#1281dd] mb-2 text-center">Zero Prep</div>
                 <p className="text-gray-600">Just speak or text as thoughts occur</p>
               </div>
             </div>
 
-            <p className="text-xl text-gray-700 font-medium">
-              Imagine getting <span className="font-bold text-teal-600">$200 of free therapy</span> in every $150 session.
-            </p>
           </motion.div>
         </div>
       </motion.section>
@@ -542,27 +547,39 @@ export default function ClientInfoPage() {
           
           <motion.div 
             variants={fadeIn}
-            className="max-w-3xl mx-auto bg-white rounded-2xl p-6 shadow-md"
+            className="max-w-3xl mx-auto bg-white rounded-2xl p-6 shadow-md divide-y divide-gray-100"
           >
             <FAQItem 
               question="Do I have to download an app?" 
-              answer="No. You can journal by phone call or text instead."
+              answer="No. You can journal by phone call or text instead. Just dial +1 877 652 8626 anytime to share your thoughts, and we'll make sure they get to your therapist before your next session."
             />
             <FAQItem 
               question="Will my therapist see everything I log?" 
-              answer="Only what you share—drafts stay private until you hit 'Send.'"
+              answer="No. On the app you will have the option to share/un-share entries with your therapist. Your therapist will only see the entries you share."
+            />
+            <FAQItem 
+              question="When does my therapist see my entries?" 
+              answer="Your therapist receives a digest of your entries just before your scheduled session. This timing ensures they have the most up-to-date information without creating expectations of mid-week responses."
             />
             <FAQItem 
               question="Will my therapist message me mid-week?" 
-              answer="No. Empath is preparation for your sessions, not a live chat platform."
+              answer="No. Empath is preparation for your sessions, not a live chat platform. This boundary ensures your therapist maintains their professional capacity and prevents burnout."
             />
             <FAQItem 
               question="Does Empath replace therapy?" 
-              answer="No. It simply makes the therapy you already value more efficient."
+              answer="No. It simply makes the therapy you already value more efficient. Empath helps you capture your experiences more accurately and helps your therapist understand your week better, but it's not a substitute for the therapeutic relationship."
+            />
+            <FAQItem 
+              question="How is this different from other mental health apps?" 
+              answer="Unlike general wellness apps, Empath is designed specifically to enhance your existing therapy relationship. We don't provide therapy ourselves—we enhance the therapy you're already getting by improving the information flow between sessions."
             />
             <FAQItem 
               question="Is it really secure?" 
-              answer="Yes. We meet or exceed HIPAA requirements and work under a signed BAA with your therapist."
+              answer="Yes. We meet or exceed HIPAA requirements and work under a signed BAA with your therapist. Your data is encrypted end-to-end, and we never sell or share your information with third parties."
+            />
+            <FAQItem 
+              question="How much does it cost?" 
+              answer="Empath is free to clients through their therapists."
             />
           </motion.div>
 
@@ -602,10 +619,6 @@ export default function ClientInfoPage() {
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
         <a
           href="https://apps.apple.com/us/app/myempath/id6472873287"
-          onClick={(e) => {
-            e.preventDefault();
-            window.open('https://apps.apple.com/us/app/myempath/id6472873287', '_blank');
-          }}
           className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center"
         >
           Download App
