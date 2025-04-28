@@ -65,7 +65,7 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700">
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 animate-gradient-x">
             Make 70 minutes of therapy progress <br /> in a 50-minute session
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
