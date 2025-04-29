@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
+
+// Declare YouTube API types
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -39,6 +46,45 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 };
 
 export default function ClientInfoPage() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  // Handle YouTube API events
+  useEffect(() => {
+    // Load YouTube API if not already loaded
+    if (!document.getElementById('youtube-api')) {
+      const tag = document.createElement('script');
+      tag.id = 'youtube-api';
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      if (firstScriptTag.parentNode) {
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+    }
+    
+    // Create YouTube API callback
+    if (!window.onYouTubeIframeAPIReady) {
+      window.onYouTubeIframeAPIReady = () => {
+        // API is ready
+      };
+
+      // Add message listener for YouTube player events
+      const handleMessage = (event: MessageEvent) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.event === 'onStateChange') {
+            // 1 = playing, 2 = paused, 0 = ended
+            setIsPlaying(data.info === 1);
+          }
+        } catch (e) {
+          // Not a JSON message or not from YouTube
+        }
+      };
+
+      window.addEventListener('message', handleMessage);
+      return () => window.removeEventListener('message', handleMessage);
+    }
+  }, []);
+
   return (
     <div className="flex-grow overflow-hidden">
       {/* Logo in top left corner */}
@@ -73,24 +119,72 @@ export default function ClientInfoPage() {
             </p>
           </motion.div>
 
+          {/* Video prompt */}
+          <motion.div
+            variants={fadeIn}
+            className="text-center mb-4"
+          >
+            <p className="text-lg text-[#1281dd] font-medium flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+              </svg>
+              Watch this 2-minute video to see how Empath improves therapy sessions
+            </p>
+          </motion.div>
+
           {/* Video Section */}
           <motion.div
             variants={fadeIn}
-            className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg mb-10 aspect-video bg-gray-100"
+            className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg mb-10 aspect-video bg-gray-100 relative"
           >
-            {/* Replace with your actual video embed */}
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              <p>Empath Explainer Video</p>
-              {/* Actual video embed would go here */}
-              {/* <iframe 
+            <div className="relative w-full h-full">
+              <iframe 
                 width="100%" 
                 height="100%" 
-                src="your-video-url-here" 
+                src="https://www.youtube.com/embed/0G0DuRcD9ts?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
                 title="Empath Explainer Video" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
-              ></iframe> */}
+                className="absolute top-0 left-0 w-full h-full"
+                id="explainerVideo"
+              ></iframe>
+              
+              {/* Play button overlay - visible when video is paused */}
+              <div 
+                className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-300 z-10 bg-black bg-opacity-30 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                onClick={() => {
+                  const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
+                  if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    setIsPlaying(true);
+                  }
+                }}
+              >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#1281dd]" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Pause button - only visible on hover when playing */}
+              <div 
+                className={`absolute inset-0 flex items-center justify-center cursor-pointer z-10 opacity-0 hover:opacity-100 transition-opacity duration-300 ${!isPlaying ? 'pointer-events-none' : ''}`}
+                onClick={() => {
+                  const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
+                  if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                    setIsPlaying(false);
+                  }
+                }}
+              >
+                <div className="w-12 h-12 bg-white bg-opacity-80 rounded-full flex items-center justify-center shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#1281dd]" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -327,7 +421,7 @@ export default function ClientInfoPage() {
                 We distill the noise
               </div>
               <p className="text-gray-600">
-              Our encrypted AI turns raw entries into a 3-minute digest only your therapist sees before you meet.
+              Our secure and encrypted system turns raw entries into a 3-minute digest only your therapist sees before you meet.
               </p>
               <div className="text-xs text-gray-500 mt-3 italic">
                 Not a live feed—your therapist reviews just before your session
