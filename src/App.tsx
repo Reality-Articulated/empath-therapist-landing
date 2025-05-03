@@ -12,7 +12,7 @@ import { Analytics } from '@vercel/analytics/react';
 function App() {
   const location = useLocation();
   const isAtmanPage = location.pathname === '/atman';
-  const isClientInfoPage = location.pathname === '/client-info';
+  const isClientInfoPage = location.pathname === '/whyempath';
   const hideNavbar = isAtmanPage || isClientInfoPage;
 
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
         <Route path="/atman" element={<AtmanPage />} />
-        <Route path="/client-info" element={<ClientInfoPage />} />
+        <Route path="/whyempath" element={<ClientInfoPage />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
       {!hideNavbar && <Footer />}
