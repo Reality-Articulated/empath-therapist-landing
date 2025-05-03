@@ -141,7 +141,7 @@ export default function ClientInfoPage() {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/0G0DuRcD9ts?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
+                src="https://www.youtube.com/embed/qkCoQ4t7HsQ?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
                 title="Empath Explainer Video" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
