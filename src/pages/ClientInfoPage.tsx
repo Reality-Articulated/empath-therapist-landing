@@ -59,6 +59,7 @@ export default function ClientInfoPage() {
   
   // Parse signUpToken and token from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
+  const [inviteCode, setInviteCode] = useState<string | null>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -66,8 +67,10 @@ export default function ClientInfoPage() {
       const token = params.get('token');
       if (signUpToken && token) {
         setSignUpUrl(`https://empath-793bdf3d3ee1.herokuapp.com/sign-up-client/${signUpToken}/${token}`);
+        setInviteCode(token.slice(-6));
       } else {
         setSignUpUrl(null);
+        setInviteCode(null);
       }
     }
   }, []);
@@ -148,6 +151,8 @@ export default function ClientInfoPage() {
 
   // Add new state for flow modal
   const [showFlowModal, setShowFlowModal] = useState(false);
+  // Add state for call-to-journal modal
+  const [showCallModal, setShowCallModal] = useState(false);
 
   return (
     <div className="flex-grow overflow-hidden">
@@ -250,6 +255,55 @@ export default function ClientInfoPage() {
             >
               Continue to Sign Up
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Call to Journal Modal */}
+      {showCallModal && inviteCode && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              onClick={() => setShowCallModal(false)}
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="text-xl font-bold mb-2 text-[#1281dd] text-center">Call to Journal</h3>
+            <p className="mb-2 text-gray-700 text-center">You'll be asked for your invite code when you call. Please have it ready.</p>
+            <p className="mb-4 text-gray-500 text-center text-sm">This code connects you to your therapist who sent the invite.</p>
+            <div className="flex flex-col items-center mb-4">
+              <span className="text-lg text-gray-800 font-medium mb-2">Your invite code:</span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-mono bg-gray-100 px-3 py-2 rounded text-xl select-all tracking-widest">{inviteCode}</span>
+                <button
+                  className="ml-1 p-1 rounded hover:bg-gray-200"
+                  onClick={() => {
+                    navigator.clipboard.writeText(inviteCode);
+                    toast.success('Invite code copied!');
+                  }}
+                  title="Copy invite code"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="9" y="9" width="13" height="13" rx="2" strokeWidth="2" /><rect x="3" y="3" width="13" height="13" rx="2" strokeWidth="2" /></svg>
+                </button>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-4">
+              <a
+                href="tel:+18776528626"
+                className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center hover:bg-[#0e6bb8] transition"
+                onClick={() => setShowCallModal(false)}
+              >
+                Call now
+              </a>
+              <button
+                className="flex-1 bg-gray-200 text-gray-700 rounded-full py-2 font-semibold text-center hover:bg-gray-300 transition"
+                onClick={() => setShowCallModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -384,12 +438,14 @@ export default function ClientInfoPage() {
             >
               <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
             </button>
-            <a
-              href="tel:+18776528626"
-              className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
-            >
-              <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
-            </a>
+            <div className="flex flex-col items-center">
+              <button
+                className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
+                onClick={() => setShowCallModal(true)}
+              >
+                <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
+              </button>
+            </div>
           </motion.div>
           
           {/* Privacy Banner */}
@@ -913,12 +969,14 @@ export default function ClientInfoPage() {
         >
           <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
         </button>
-        <a
-          href="tel:+18776528626"
-          className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
-        >
-          <Phone className="w-4 h-4 mr-1" /> Call to Journal
-        </a>
+        <div className="flex flex-col items-center flex-1">
+          <button
+            className="w-full px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
+            onClick={() => setShowCallModal(true)}
+          >
+            <Phone className="w-4 h-4 mr-1" /> Call to Journal
+          </button>
+        </div>
       </div>
     </div>
   );
