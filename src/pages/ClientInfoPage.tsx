@@ -55,6 +55,7 @@ export default function ClientInfoPage() {
   const [therapistEmail, setTherapistEmail] = useState('');
   const [inviteSubmitted, setInviteSubmitted] = useState(false);
   const [inviteError, setInviteError] = useState('');
+  const [noTherapist, setNoTherapist] = useState(false);
   
   // Parse signUpToken and token from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
@@ -114,8 +115,12 @@ export default function ClientInfoPage() {
     setInviteError('');
     setInviteSubmitted(false);
     // TODO: Replace with real API endpoint or dedicated EmailJS template
-    if (!userEmail || !therapistEmail) {
-      setInviteError('Please enter both emails.');
+    if (!userEmail) {
+      setInviteError('Please enter your email.');
+      return;
+    }
+    if (!noTherapist && !therapistEmail) {
+      setInviteError('Please enter your therapist\'s email or check the box if you don\'t have a therapist.');
       return;
     }
     try {
@@ -125,7 +130,8 @@ export default function ClientInfoPage() {
         {
           to_email: 'karan@myempath.co',
           user_email: userEmail,
-          therapist_email: therapistEmail,
+          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
+          no_therapist: noTherapist ? 'Yes' : 'No',
         },
         'RkdQiScnBEMQIBtNL' // Same as ApplicationForm
       );
@@ -133,6 +139,7 @@ export default function ClientInfoPage() {
       setInviteSubmitted(true);
       setUserEmail('');
       setTherapistEmail('');
+      setNoTherapist(false);
     } catch (err) {
       toast.error('Failed to submit. Please try again.');
       setInviteError('Something went wrong. Please try again.');
@@ -180,8 +187,20 @@ export default function ClientInfoPage() {
                     className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
                     value={therapistEmail}
                     onChange={e => setTherapistEmail(e.target.value)}
-                    required
+                    required={!noTherapist}
+                    disabled={noTherapist}
+                    placeholder={noTherapist ? 'Not required' : ''}
                   />
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    id="no-therapist"
+                    type="checkbox"
+                    checked={noTherapist}
+                    onChange={e => setNoTherapist(e.target.checked)}
+                    className="h-4 w-4 text-[#1281dd] border-gray-300 rounded focus:ring-[#1281dd]"
+                  />
+                  <label htmlFor="no-therapist" className="text-sm text-gray-700 select-none">I don't currently have a therapist</label>
                 </div>
                 {inviteError && <div className="text-red-600 text-sm">{inviteError}</div>}
                 <button
