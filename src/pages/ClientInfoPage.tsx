@@ -48,6 +48,21 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 export default function ClientInfoPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   
+  // Parse signUpToken and token from URL
+  const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const signUpToken = params.get('signUpToken');
+      const token = params.get('token');
+      if (signUpToken && token) {
+        setSignUpUrl(`https://empath-793bdf3d3ee1.herokuapp.com/sign-up-client/${signUpToken}/${token}`);
+      } else {
+        setSignUpUrl(null);
+      }
+    }
+  }, []);
+
   // Handle YouTube API events
   useEffect(() => {
     // Load YouTube API if not already loaded
@@ -209,7 +224,7 @@ export default function ClientInfoPage() {
               href="https://apps.apple.com/us/app/myempath/id6472873287"
               className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center"
             >
-              <Smartphone className="w-5 h-5 mr-2" /> Download the Empath App
+              <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
             </a>
             <a
               href="tel:+18776528626"
@@ -535,8 +550,18 @@ export default function ClientInfoPage() {
           >
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100">
               <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
-                <Smartphone className="w-6 h-6 mr-2" /> Download the App
+                <Smartphone className="w-6 h-6 mr-2" /> Start on Mobile App
               </h3>
+              {signUpUrl ? (
+                <a
+                  href={signUpUrl}
+                  className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+                </a>
+              ) : null}
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
@@ -716,12 +741,16 @@ export default function ClientInfoPage() {
 
       {/* Fixed bottom CTA on mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
-        <a
-          href="https://apps.apple.com/us/app/myempath/id6472873287"
-          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
-        >
-          <Smartphone className="w-4 h-4 mr-1" /> Download App
-        </a>
+        {signUpUrl ? (
+          <a
+            href={signUpUrl}
+            className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+          </a>
+        ) : null}
         <a
           href="tel:+18776528626"
           className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
