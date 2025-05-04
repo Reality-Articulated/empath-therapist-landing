@@ -146,6 +146,9 @@ export default function ClientInfoPage() {
     }
   };
 
+  // Add new state for flow modal
+  const [showFlowModal, setShowFlowModal] = useState(false);
+
   return (
     <div className="flex-grow overflow-hidden">
       {/* Invite Modal */}
@@ -214,6 +217,43 @@ export default function ClientInfoPage() {
           </div>
         </div>
       )}
+
+      {/* What happens next? Modal */}
+      {showFlowModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              onClick={() => setShowFlowModal(false)}
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">What happens next?</h3>
+            <ol className="mb-4 text-gray-700 text-base list-decimal list-inside space-y-2">
+              <li>Complete a quick sign-up form to securely connect you to your therapist.</li>
+              <li>Download the Empath app (iOS only).</li>
+              <li>Start your Journey on Empath!</li>
+            </ol>
+            <div className="mt-4 p-3 bg-blue-50 rounded text-blue-900 text-sm border border-blue-200">
+              <strong>Don't have an iPhone?</strong><br />
+              You can still use Empath by calling <a href="tel:+18776528626" className="underline text-[#1281dd]">+1 877 652 8626</a> to journal by phone—no app needed!
+            </div>
+            <button
+              className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
+              onClick={() => {
+                setShowFlowModal(false);
+                if (signUpUrl) {
+                  window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                }
+              }}
+            >
+              Continue to Sign Up
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Logo in top left corner */}
       <div className="absolute top-4 left-4 z-10">
         <motion.img 
@@ -336,7 +376,7 @@ export default function ClientInfoPage() {
               className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
               onClick={() => {
                 if (signUpUrl) {
-                  window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                  setShowFlowModal(true);
                 } else {
                   setShowInviteModal(true);
                 }
@@ -674,7 +714,7 @@ export default function ClientInfoPage() {
                 className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none"
                 onClick={() => {
                   if (signUpUrl) {
-                    window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                    setShowFlowModal(true);
                   } else {
                     setShowInviteModal(true);
                   }
@@ -865,7 +905,7 @@ export default function ClientInfoPage() {
           className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
           onClick={() => {
             if (signUpUrl) {
-              window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+              setShowFlowModal(true);
             } else {
               setShowInviteModal(true);
             }
