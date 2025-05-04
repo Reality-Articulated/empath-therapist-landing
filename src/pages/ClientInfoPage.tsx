@@ -220,12 +220,16 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="flex flex-col sm:flex-row justify-center gap-4 mb-6"
           >
-            <a
-              href="https://apps.apple.com/us/app/myempath/id6472873287"
-              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center"
-            >
-              <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
-            </a>
+            {signUpUrl ? (
+              <a
+                href={signUpUrl}
+                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
+              </a>
+            ) : null}
             <a
               href="tel:+18776528626"
               className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
