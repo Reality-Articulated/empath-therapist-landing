@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
+import emailjs from '@emailjs/browser';
+import toast, { Toaster } from 'react-hot-toast';
 
 // Declare YouTube API types
 declare global {
@@ -47,6 +49,12 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 export default function ClientInfoPage() {
   const [isPlaying, setIsPlaying] = useState(false);
+  // Modal state for invite request
+  const [showInviteModal, setShowInviteModal] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [therapistEmail, setTherapistEmail] = useState('');
+  const [inviteSubmitted, setInviteSubmitted] = useState(false);
+  const [inviteError, setInviteError] = useState('');
   
   // Parse signUpToken and token from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
@@ -100,8 +108,93 @@ export default function ClientInfoPage() {
     }
   }, []);
 
+  // Invite form submit handler
+  const handleInviteSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setInviteError('');
+    setInviteSubmitted(false);
+    // TODO: Replace with real API endpoint or dedicated EmailJS template
+    if (!userEmail || !therapistEmail) {
+      setInviteError('Please enter both emails.');
+      return;
+    }
+    try {
+      await emailjs.send(
+        'service_vxj3w0n', // Same as ApplicationForm
+        'template_7kwdlh8', // TODO: Replace with a dedicated template for invites
+        {
+          to_email: 'karan@myempath.co',
+          user_email: userEmail,
+          therapist_email: therapistEmail,
+        },
+        'RkdQiScnBEMQIBtNL' // Same as ApplicationForm
+      );
+      toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
+      setInviteSubmitted(true);
+      setUserEmail('');
+      setTherapistEmail('');
+    } catch (err) {
+      toast.error('Failed to submit. Please try again.');
+      setInviteError('Something went wrong. Please try again.');
+    }
+  };
+
   return (
     <div className="flex-grow overflow-hidden">
+      {/* Invite Modal */}
+      {showInviteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
+            <Toaster position="top-center" />
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              onClick={() => {
+                setShowInviteModal(false);
+                setInviteSubmitted(false);
+                setInviteError('');
+              }}
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">You need an invite from your therapist</h3>
+            <p className="mb-4 text-gray-600 text-sm">To use Empath, your therapist needs to invite you. If you haven't received an invite, enter your email and your therapist's email below. We'll reach out to get you connected!</p>
+            {inviteSubmitted ? (
+              <div className="text-green-600 font-medium text-center py-4">Thank you! We'll reach out to your therapist and let you know when you're connected.</div>
+            ) : (
+              <form onSubmit={handleInviteSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                  <input
+                    type="email"
+                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                    value={userEmail}
+                    onChange={e => setUserEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
+                  <input
+                    type="email"
+                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                    value={therapistEmail}
+                    onChange={e => setTherapistEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                {inviteError && <div className="text-red-600 text-sm">{inviteError}</div>}
+                <button
+                  type="submit"
+                  className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
       {/* Logo in top left corner */}
       <div className="absolute top-4 left-4 z-10">
         <motion.img 
@@ -220,16 +313,18 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="flex flex-col sm:flex-row justify-center gap-4 mb-6"
           >
-            {signUpUrl ? (
-              <a
-                href={signUpUrl}
-                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
-              </a>
-            ) : null}
+            <button
+              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
+              onClick={() => {
+                if (signUpUrl) {
+                  window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                } else {
+                  setShowInviteModal(true);
+                }
+              }}
+            >
+              <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
+            </button>
             <a
               href="tel:+18776528626"
               className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
@@ -556,16 +651,18 @@ export default function ClientInfoPage() {
               <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
                 <Smartphone className="w-6 h-6 mr-2" /> Start on Mobile App
               </h3>
-              {signUpUrl ? (
-                <a
-                  href={signUpUrl}
-                  className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
-                </a>
-              ) : null}
+              <button
+                className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none"
+                onClick={() => {
+                  if (signUpUrl) {
+                    window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                  } else {
+                    setShowInviteModal(true);
+                  }
+                }}
+              >
+                <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+              </button>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
@@ -745,16 +842,18 @@ export default function ClientInfoPage() {
 
       {/* Fixed bottom CTA on mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
-        {signUpUrl ? (
-          <a
-            href={signUpUrl}
-            className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
-          </a>
-        ) : null}
+        <button
+          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
+          onClick={() => {
+            if (signUpUrl) {
+              window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+            } else {
+              setShowInviteModal(true);
+            }
+          }}
+        >
+          <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+        </button>
         <a
           href="tel:+18776528626"
           className="flex-1 px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
