@@ -59,7 +59,6 @@ export default function ClientInfoPage() {
   
   // Parse signUpToken and token from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
-  const [inviteCode, setInviteCode] = useState<string | null>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -67,10 +66,8 @@ export default function ClientInfoPage() {
       const token = params.get('token');
       if (signUpToken && token) {
         setSignUpUrl(`https://empath-793bdf3d3ee1.herokuapp.com/sign-up-client/${signUpToken}/${token}`);
-        setInviteCode(token.slice(-6));
       } else {
         setSignUpUrl(null);
-        setInviteCode(null);
       }
     }
   }, []);
@@ -154,6 +151,9 @@ export default function ClientInfoPage() {
   // Add state for call-to-journal modal
   const [showCallModal, setShowCallModal] = useState(false);
 
+  // Helper: is user invited (has signUpUrl)?
+  const isInvited = !!signUpUrl;
+
   return (
     <div className="flex-grow overflow-hidden">
       {/* Invite Modal */}
@@ -223,8 +223,44 @@ export default function ClientInfoPage() {
         </div>
       )}
 
-      {/* What happens next? Modal */}
-      {showFlowModal && (
+      {/* What happens next? Modal (for invited users) */}
+      {showFlowModal && isInvited && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              onClick={() => setShowFlowModal(false)}
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">Connect to your Therapist</h3>
+            <ol className="mb-4 text-gray-700 text-base list-decimal list-inside space-y-2">
+              <li>You'll create your Empath account (name, phone number, password).</li>
+              <li>We'll securely link you to your therapist using your invite.</li>
+              <li>After sign-up, you'll get options to download the app or call to journal.</li>
+            </ol>
+            <div className="mt-4 p-3 bg-blue-50 rounded text-blue-900 text-sm border border-blue-200">
+              <strong>Why your phone number?</strong><br />
+              It's needed for secure login and to enable journaling by phone if you prefer.
+            </div>
+            <button
+              className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition mt-4"
+              onClick={() => {
+                setShowFlowModal(false);
+                if (signUpUrl) {
+                  window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                }
+              }}
+            >
+              Continue to Sign Up
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* What happens next? Modal (for non-invited users) */}
+      {showFlowModal && !isInvited && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
             <button
@@ -260,7 +296,7 @@ export default function ClientInfoPage() {
       )}
 
       {/* Call to Journal Modal */}
-      {showCallModal && inviteCode && (
+      {showCallModal && !isInvited && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
             <button
@@ -270,39 +306,33 @@ export default function ClientInfoPage() {
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd] text-center">Call to Journal</h3>
-            <p className="mb-2 text-gray-700 text-center">You'll be asked for your invite code when you call. Please have it ready.</p>
-            <p className="mb-4 text-gray-500 text-center text-sm">This code connects you to your therapist who sent the invite.</p>
-            <div className="flex flex-col items-center mb-4">
-              <span className="text-lg text-gray-800 font-medium mb-2">Your invite code:</span>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-mono bg-gray-100 px-3 py-2 rounded text-xl select-all tracking-widest">{inviteCode}</span>
-                <button
-                  className="ml-1 p-1 rounded hover:bg-gray-200"
-                  onClick={() => {
-                    navigator.clipboard.writeText(inviteCode);
-                    toast.success('Invite code copied!');
-                  }}
-                  title="Copy invite code"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="9" y="9" width="13" height="13" rx="2" strokeWidth="2" /><rect x="3" y="3" width="13" height="13" rx="2" strokeWidth="2" /></svg>
-                </button>
-              </div>
-            </div>
-            <div className="flex gap-3 mt-4">
+            <h3 className="text-xl font-bold mb-4 text-[#1281dd] text-center">Journal Instantly—No App Needed</h3>
+            <p className="mb-6 text-gray-700 text-center text-base">
+              Prefer not to download the app? You can journal by phone or text anytime.
+            </p>
+            <div className="flex gap-4 mb-6">
               <a
                 href="tel:+18776528626"
-                className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center hover:bg-[#0e6bb8] transition"
+                className="flex-1 bg-[#1281dd] text-white rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-[#0e6bb8] transition"
                 onClick={() => setShowCallModal(false)}
               >
-                Call now
+                Call to Journal
               </a>
-              <button
-                className="flex-1 bg-gray-200 text-gray-700 rounded-full py-2 font-semibold text-center hover:bg-gray-300 transition"
+              <a
+                href="sms:+18776528626"
+                className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-blue-50 transition"
                 onClick={() => setShowCallModal(false)}
               >
-                Cancel
-              </button>
+                Text to Journal
+              </a>
+            </div>
+            <div className="mt-2 p-4 bg-blue-50 border border-blue-100 rounded-lg text-blue-900 text-sm">
+              <div className="font-semibold mb-1">What happens next?</div>
+              <ul className="list-disc list-inside space-y-1">
+                <li>If you already have an Empath account, your secure call or text will converted into a journal entry and added to your account automatically.</li>
+                <li>If you don't have an account, we'll create one for you using your phone number—no extra steps required.</li>
+                <li>This is the easiest way to capture your thoughts on the go, even without the app.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -426,26 +456,33 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="flex flex-col sm:flex-row justify-center gap-4 mb-6"
           >
-            <button
-              className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
-              onClick={() => {
-                if (signUpUrl) {
-                  setShowFlowModal(true);
-                } else {
-                  setShowInviteModal(true);
-                }
-              }}
-            >
-              <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
-            </button>
-            <div className="flex flex-col items-center">
+            {isInvited ? (
               <button
-                className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
-                onClick={() => setShowCallModal(true)}
+                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
+                onClick={() => setShowFlowModal(true)}
               >
-                <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
+                <Smartphone className="w-5 h-5 mr-2" /> Connect to your Therapist
               </button>
-            </div>
+            ) : (
+              <>
+                <button
+                  className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
+                  onClick={() => {
+                    setShowFlowModal(true);
+                  }}
+                >
+                  <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
+                </button>
+                <div className="flex flex-col items-center">
+                  <button
+                    className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
+                    onClick={() => setShowCallModal(true)}
+                  >
+                    <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
+                  </button>
+                </div>
+              </>
+            )}
           </motion.div>
           
           {/* Privacy Banner */}
@@ -956,28 +993,26 @@ export default function ClientInfoPage() {
       </motion.section>
 
       {/* Fixed bottom CTA on mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
-        <button
-          className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
-          onClick={() => {
-            if (signUpUrl) {
-              setShowFlowModal(true);
-            } else {
-              setShowInviteModal(true);
-            }
-          }}
-        >
-          <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
-        </button>
-        <div className="flex flex-col items-center flex-1">
+      {!signUpUrl && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
           <button
-            className="w-full px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
-            onClick={() => setShowCallModal(true)}
+            className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
+            onClick={() => {
+              setShowFlowModal(true);
+            }}
           >
-            <Phone className="w-4 h-4 mr-1" /> Call to Journal
+            <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
           </button>
+          <div className="flex flex-col items-center flex-1">
+            <button
+              className="w-full px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
+              onClick={() => setShowCallModal(true)}
+            >
+              <Phone className="w-4 h-4 mr-1" /> Call to Journal
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 } 
