@@ -173,7 +173,7 @@ export default function ClientInfoPage() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <h3 className="text-xl font-bold mb-2 text-[#1281dd]">You need an invite from your therapist</h3>
-            <p className="mb-4 text-gray-600 text-sm">To use Empath, your therapist needs to invite you. If you haven't received an invite, enter your email and your therapist's email below. We'll reach out to get you connected!</p>
+            <p className="mb-4 text-gray-600 text-sm">To use Empath, your therapist needs to invite you. Enter your email and your therapist's email below. We'll reach out to get you connected!</p>
             {inviteSubmitted ? (
               <div className="text-green-600 font-medium text-center py-4">Thank you! We'll reach out to your therapist and let you know when you're connected.</div>
             ) : (
@@ -468,7 +468,7 @@ export default function ClientInfoPage() {
                 <button
                   className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
                   onClick={() => {
-                    setShowFlowModal(true);
+                    setShowInviteModal(true);
                   }}
                 >
                   <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
@@ -998,7 +998,7 @@ export default function ClientInfoPage() {
           <button
             className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
             onClick={() => {
-              setShowFlowModal(true);
+              setShowInviteModal(true);
             }}
           >
             <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
