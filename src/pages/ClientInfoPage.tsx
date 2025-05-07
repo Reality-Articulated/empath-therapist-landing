@@ -4,6 +4,7 @@ import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Bra
 import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import posthog from 'posthog-js';
 
 // Declare YouTube API types
 declare global {
@@ -109,11 +110,16 @@ export default function ClientInfoPage() {
     }
   }, []);
 
+  useEffect(() => {
+    posthog.capture('client_info_page_viewed');
+  }, []);
+
   // Invite form submit handler
   const handleInviteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInviteError('');
     setInviteSubmitted(false);
+    posthog.capture('invite_form_submitted', { user_email: userEmail, therapist_email: therapistEmail, no_therapist: noTherapist });
     // TODO: Replace with real API endpoint or dedicated EmailJS template
     if (!userEmail) {
       setInviteError('Please enter your email.');
@@ -167,6 +173,7 @@ export default function ClientInfoPage() {
                 setShowInviteModal(false);
                 setInviteSubmitted(false);
                 setInviteError('');
+                posthog.capture('invite_modal_closed');
               }}
               aria-label="Close"
             >
@@ -409,6 +416,7 @@ export default function ClientInfoPage() {
                   if (iframe && iframe.contentWindow) {
                     iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
                     setIsPlaying(true);
+                    posthog.capture('explainer_video_played');
                   }
                 }}
               >
@@ -427,6 +435,7 @@ export default function ClientInfoPage() {
                   if (iframe && iframe.contentWindow) {
                     iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     setIsPlaying(false);
+                    posthog.capture('explainer_video_paused');
                   }
                 }}
               >
@@ -469,6 +478,7 @@ export default function ClientInfoPage() {
                   className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
                   onClick={() => {
                     setShowInviteModal(true);
+                    posthog.capture('invite_modal_opened');
                   }}
                 >
                   <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
