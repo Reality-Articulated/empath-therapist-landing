@@ -69,6 +69,10 @@ const variantContent = {
   timesave_a: {
     heading: '70 Minutes of Therapy Progress <br /> in 50 Minutes',
     subheading: 'Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, <span class="font-semibold">without paying a penny more.</span>'
+  },
+  control: {
+    heading: 'Feel Truly Understood by Your Therapist',
+    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
   }
 };
 
@@ -78,7 +82,8 @@ const valuePropBanner = {
   unheard_b: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>",
   rushed_a: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
   rushed_b: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
-  timesave_a: "Reclaim the ~20 minutes spent recapping in every session.<br /><span class='font-semibold text-[#1281dd]'>More therapy value, same therapy bill.</span>"
+  timesave_a: "Reclaim the ~20 minutes spent recapping in every session.<br /><span class='font-semibold text-[#1281dd]'>More therapy value, same therapy bill.</span>",
+  control: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>"
 };
 
 export default function ClientInfoPage() {
@@ -186,6 +191,7 @@ export default function ClientInfoPage() {
     'rushed_a',
     'rushed_b',
     'timesave_a',
+    'control',
   ] as const;
   type VariantKey = typeof validVariants[number];
   const selectedVariant: VariantKey = validVariants.includes(variant as VariantKey) ? (variant as VariantKey) : 'unheard_a';
