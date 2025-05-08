@@ -5,6 +5,7 @@ import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
+import { useFeatureFlagVariantKey } from 'posthog-js/react';
 
 // Declare YouTube API types
 declare global {
@@ -48,6 +49,38 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
+const variantContent = {
+  unheard_a: {
+    heading: 'Stop Sharing Weekly Puzzle Pieces <br /> Give Your Therapist The Complete Picture',
+    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
+  },
+  unheard_b: {
+    heading: 'If No One Gets You, <br /> Ensure Your Therapist Truly Does',
+    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
+  },
+  rushed_a: {
+    heading: 'Never Feel Rushed in Therapy Again',
+    subheading: 'Empath maximizes every minute, so breakthroughs aren\'t cut short by the clock.'
+  },
+  rushed_b: {
+    heading: 'Avoid Throwing a Time-Wrench <br /> in Your Therapy Wheel',
+    subheading: 'Empath maximizes every minute, so breakthroughs aren\'t cut short by the clock.'
+  },
+  timesave_a: {
+    heading: '70 Minutes of Therapy Progress <br /> in 50 Minutes',
+    subheading: 'Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, <span class="font-semibold">without paying a penny more.</span>'
+  }
+};
+
+// Value Proposition Banner copy by variant
+const valuePropBanner = {
+  unheard_a: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>",
+  unheard_b: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>",
+  rushed_a: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
+  rushed_b: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
+  timesave_a: "Reclaim the ~20 minutes spent recapping in every session.<br /><span class='font-semibold text-[#1281dd]'>More therapy value, same therapy bill.</span>"
+};
+
 export default function ClientInfoPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   // Modal state for invite request
@@ -57,25 +90,25 @@ export default function ClientInfoPage() {
   const [inviteSubmitted, setInviteSubmitted] = useState(false);
   const [inviteError, setInviteError] = useState('');
   const [noTherapist, setNoTherapist] = useState(false);
-  
-  // Parse signUpToken and token from URL
+  // Parse signUpToken, token, and therapistName from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
+  const [therapistName, setTherapistName] = useState<string | null>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const signUpToken = params.get('signUpToken');
       const token = params.get('token');
+      const therapistNameParam = params.get('therapistName');
       if (signUpToken && token) {
         setSignUpUrl(`https://empath-793bdf3d3ee1.herokuapp.com/sign-up-client/${signUpToken}/${token}`);
       } else {
         setSignUpUrl(null);
       }
+      setTherapistName(therapistNameParam ? decodeURIComponent(therapistNameParam) : null);
     }
   }, []);
-
   // Handle YouTube API events
   useEffect(() => {
-    // Load YouTube API if not already loaded
     if (!document.getElementById('youtube-api')) {
       const tag = document.createElement('script');
       tag.id = 'youtube-api';
@@ -85,42 +118,29 @@ export default function ClientInfoPage() {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       }
     }
-    
-    // Create YouTube API callback
     if (!window.onYouTubeIframeAPIReady) {
-      window.onYouTubeIframeAPIReady = () => {
-        // API is ready
-      };
-
-      // Add message listener for YouTube player events
+      window.onYouTubeIframeAPIReady = () => {};
       const handleMessage = (event: MessageEvent) => {
         try {
           const data = JSON.parse(event.data);
           if (data.event === 'onStateChange') {
-            // 1 = playing, 2 = paused, 0 = ended
             setIsPlaying(data.info === 1);
           }
-        } catch (e) {
-          // Not a JSON message or not from YouTube
-        }
+        } catch (e) {}
       };
-
       window.addEventListener('message', handleMessage);
       return () => window.removeEventListener('message', handleMessage);
     }
   }, []);
-
   useEffect(() => {
     posthog.capture('client_info_page_viewed');
   }, []);
-
   // Invite form submit handler
   const handleInviteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInviteError('');
     setInviteSubmitted(false);
     posthog.capture('invite_form_submitted', { user_email: userEmail, therapist_email: therapistEmail, no_therapist: noTherapist });
-    // TODO: Replace with real API endpoint or dedicated EmailJS template
     if (!userEmail) {
       setInviteError('Please enter your email.');
       return;
@@ -131,15 +151,15 @@ export default function ClientInfoPage() {
     }
     try {
       await emailjs.send(
-        'service_vxj3w0n', // Same as ApplicationForm
-        'template_7kwdlh8', // TODO: Replace with a dedicated template for invites
+        'service_vxj3w0n',
+        'template_7kwdlh8',
         {
           to_email: 'karan@myempath.co',
           user_email: userEmail,
           therapist_email: noTherapist ? 'No therapist' : therapistEmail,
           no_therapist: noTherapist ? 'Yes' : 'No',
         },
-        'RkdQiScnBEMQIBtNL' // Same as ApplicationForm
+        'RkdQiScnBEMQIBtNL'
       );
       toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
       setInviteSubmitted(true);
@@ -151,14 +171,31 @@ export default function ClientInfoPage() {
       setInviteError('Something went wrong. Please try again.');
     }
   };
-
   // Add new state for flow modal
   const [showFlowModal, setShowFlowModal] = useState(false);
   // Add state for call-to-journal modal
   const [showCallModal, setShowCallModal] = useState(false);
-
   // Helper: is user invited (has signUpUrl)?
   const isInvited = !!signUpUrl;
+  // --- PostHog variant logic (moved inside component) ---
+  const variantRaw = useFeatureFlagVariantKey('client-info-copy-experiment');
+  const variant = typeof variantRaw === 'string' ? variantRaw : '';
+  const validVariants = [
+    'unheard_a',
+    'unheard_b',
+    'rushed_a',
+    'rushed_b',
+    'timesave_a',
+  ] as const;
+  type VariantKey = typeof validVariants[number];
+  const selectedVariant: VariantKey = validVariants.includes(variant as VariantKey) ? (variant as VariantKey) : 'unheard_a';
+  const { heading, subheading } = variantContent[selectedVariant];
+
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      posthog.featureFlags.override({ 'client-info-copy-experiment': 'rushed_a' });
+    }
+  }, []);
 
   return (
     <div className="flex-grow overflow-hidden">
@@ -369,12 +406,10 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 animate-gradient-x">
-            Make 70 minutes of therapy progress <br /> in a 50-minute session
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-             Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, <span className="font-semibold">without paying a penny more.</span>
-            </p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 animate-gradient-x"
+                dangerouslySetInnerHTML={{ __html: heading }} />
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed"
+               dangerouslySetInnerHTML={{ __html: subheading }} />
           </motion.div>
 
           {/* Video prompt */}
@@ -453,10 +488,8 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="max-w-3xl mx-auto bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg p-4 mb-8 border border-teal-100 shadow-sm"
           >
-            <div className="text-center">              <p className="text-gray-700 mt-1">
-                Reclaim the <span className="font-bold">~20 minutes</span> spent recapping in every session. <br />
-                <span className="font-semibold text-[#1281dd]">More therapy value, same therapy bill.</span>
-              </p>
+            <div className="text-center">
+              <p className="text-gray-700 mt-1" dangerouslySetInnerHTML={{ __html: valuePropBanner[selectedVariant] }} />
             </div>
           </motion.div>
 
@@ -470,7 +503,7 @@ export default function ClientInfoPage() {
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
                 onClick={() => setShowFlowModal(true)}
               >
-                <Smartphone className="w-5 h-5 mr-2" /> Connect to your Therapist
+                <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
               </button>
             ) : (
               <>
@@ -810,7 +843,7 @@ export default function ClientInfoPage() {
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none mb-6 mx-auto w-full md:w-1/2"
                 onClick={() => setShowFlowModal(true)}
               >
-                <Smartphone className="w-5 h-5 mr-2" /> Connect to your Therapist
+                <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
               </button>
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Mobile App Card */}
