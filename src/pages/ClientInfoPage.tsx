@@ -804,63 +804,121 @@ export default function ClientInfoPage() {
           >
             Choose Your Lane
           </motion.h2>
-          
-          <motion.div 
-            variants={fadeIn}
-            className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
-          >
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100">
-              <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
-                <Smartphone className="w-6 h-6 mr-2" /> Start on Mobile App
-              </h3>
+          {isInvited ? (
+            <motion.div variants={fadeIn} className="max-w-4xl mx-auto flex flex-col gap-8">
               <button
-                className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none"
-                onClick={() => {
-                  if (signUpUrl) {
-                    setShowFlowModal(true);
-                  } else {
-                    setShowInviteModal(true);
-                  }
-                }}
+                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none mb-6 mx-auto w-full md:w-1/2"
+                onClick={() => setShowFlowModal(true)}
               >
-                <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+                <Smartphone className="w-5 h-5 mr-2" /> Connect to your Therapist
               </button>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Mood check-ins & journals</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Health-data sync</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Insight dashboards</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100">
-              <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
-                <Phone className="w-6 h-6 mr-2" /> Call to Journal
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>No downloads</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Dial +1 877 652 8626 anytime</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                  <span>Perfect for walks & commutes</span>
-                </li>
-              </ul>
-            </div>
-          </motion.div>
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Mobile App Card */}
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100 flex flex-col">
+                  <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
+                    <Smartphone className="w-6 h-6 mr-2" /> Mobile App
+                  </h3>
+                  {/* No download button for invited users */}
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>Mood check-ins & journals</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>Health-data sync</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>Insight dashboards</span>
+                    </li>
+                  </ul>
+                </div>
+                {/* Call to Journal Card */}
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100 flex flex-col">
+                  <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
+                    <Phone className="w-6 h-6 mr-2" /> Call to Journal
+                  </h3>
+                  {/* No call button for invited users */}
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>No app download needed</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>Call or Text to record thoughts in the moment</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                      <span>Perfect for journling on a walk or commute</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div 
+              variants={fadeIn}
+              className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
+            >
+              {/* Mobile App Card */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100 flex flex-col">
+                <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
+                  <Smartphone className="w-6 h-6 mr-2" /> Start on Mobile App
+                </h3>
+                <button
+                  className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-[#0e6bb8] transition"
+                  onClick={() => {
+                    setShowInviteModal(true);
+                    posthog.capture('invite_modal_opened');
+                  }}
+                >
+                  <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
+                </button>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>Mood check-ins & journals</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>Health-data sync</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>Insight dashboards</span>
+                  </li>
+                </ul>
+              </div>
+              {/* Call to Journal Card */}
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100 flex flex-col">
+                <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
+                  <Phone className="w-6 h-6 mr-2" /> Call to Journal
+                </h3>
+                <button
+                  className="flex-1 px-3 py-2 bg-purple-600 text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-purple-700 transition"
+                  onClick={() => setShowCallModal(true)}
+                >
+                  <Phone className="w-4 h-4 mr-1" /> Call to Journal
+                </button>
+                <ul className="space-y-4">
+                  <li className="flex items-start">
+                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>No app download needed</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>Call or Text to record thoughts in the moment</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
+                    <span>Perfect for journling on a walk or commute</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+          )}
         </div>
       </motion.section>
 
