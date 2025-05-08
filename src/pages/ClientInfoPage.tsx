@@ -140,7 +140,7 @@ export default function ClientInfoPage() {
     e.preventDefault();
     setInviteError('');
     setInviteSubmitted(false);
-    posthog.capture('invite_form_submitted', { user_email: userEmail, therapist_email: therapistEmail, no_therapist: noTherapist });
+    posthog.capture('invite_form_submitted', { user_email: userEmail, therapist_email: therapistEmail, no_therapist: noTherapist, variant: selectedVariant });
     if (!userEmail) {
       setInviteError('Please enter your email.');
       return;
@@ -501,7 +501,10 @@ export default function ClientInfoPage() {
             {isInvited ? (
               <button
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
-                onClick={() => setShowFlowModal(true)}
+                onClick={() => {
+                  setShowFlowModal(true);
+                  posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
+                }}
               >
                 <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
               </button>
@@ -511,7 +514,7 @@ export default function ClientInfoPage() {
                   className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
                   onClick={() => {
                     setShowInviteModal(true);
-                    posthog.capture('invite_modal_opened');
+                    posthog.capture('start_on_mobile_clicked', { variant: selectedVariant });
                   }}
                 >
                   <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
@@ -519,7 +522,10 @@ export default function ClientInfoPage() {
                 <div className="flex flex-col items-center">
                   <button
                     className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
-                    onClick={() => setShowCallModal(true)}
+                    onClick={() => {
+                      setShowCallModal(true);
+                      posthog.capture('call_to_journal_clicked', { variant: selectedVariant });
+                    }}
                   >
                     <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
                   </button>
@@ -841,7 +847,10 @@ export default function ClientInfoPage() {
             <motion.div variants={fadeIn} className="max-w-4xl mx-auto flex flex-col gap-8">
               <button
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none mb-6 mx-auto w-full md:w-1/2"
-                onClick={() => setShowFlowModal(true)}
+                onClick={() => {
+                  setShowFlowModal(true);
+                  posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
+                }}
               >
                 <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
               </button>
@@ -904,7 +913,7 @@ export default function ClientInfoPage() {
                   className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-[#0e6bb8] transition"
                   onClick={() => {
                     setShowInviteModal(true);
-                    posthog.capture('invite_modal_opened');
+                    posthog.capture('start_on_mobile_clicked', { variant: selectedVariant });
                   }}
                 >
                   <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
@@ -931,7 +940,10 @@ export default function ClientInfoPage() {
                 </h3>
                 <button
                   className="flex-1 px-3 py-2 bg-purple-600 text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-purple-700 transition"
-                  onClick={() => setShowCallModal(true)}
+                  onClick={() => {
+                    setShowCallModal(true);
+                    posthog.capture('call_to_journal_clicked', { variant: selectedVariant });
+                  }}
                 >
                   <Phone className="w-4 h-4 mr-1" /> Call to Journal
                 </button>
