@@ -300,6 +300,7 @@ export default function ClientInfoPage() {
                 setShowFlowModal(false);
                 if (signUpUrl) {
                   window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                  posthog.capture('connect_to_therapist_signup_initiated', { variant: selectedVariant });
                 }
               }}
             >
@@ -336,6 +337,7 @@ export default function ClientInfoPage() {
                 setShowFlowModal(false);
                 if (signUpUrl) {
                   window.open(signUpUrl, '_blank', 'noopener,noreferrer');
+                  posthog.capture('connect_to_therapist_signup_initiated', { variant: selectedVariant });
                 }
               }}
             >
@@ -364,14 +366,20 @@ export default function ClientInfoPage() {
               <a
                 href="tel:+18776528626"
                 className="flex-1 bg-[#1281dd] text-white rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-[#0e6bb8] transition"
-                onClick={() => setShowCallModal(false)}
+                onClick={() => {
+                  setShowCallModal(false);
+                  posthog.capture('call_to_journal_call_initiated', { variant: selectedVariant });
+                }}
               >
                 Call to Journal
               </a>
               <a
                 href="sms:+18776528626"
                 className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-blue-50 transition"
-                onClick={() => setShowCallModal(false)}
+                onClick={() => {
+                  setShowCallModal(false);
+                  posthog.capture('text_to_journal_initiated', { variant: selectedVariant });
+                }}
               >
                 Text to Journal
               </a>
@@ -509,7 +517,7 @@ export default function ClientInfoPage() {
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
                 onClick={() => {
                   setShowFlowModal(true);
-                  posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
+                  posthog.capture('connect_to_therapist_modal_opened', { variant: selectedVariant });
                 }}
               >
                 <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
@@ -530,7 +538,7 @@ export default function ClientInfoPage() {
                     className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
                     onClick={() => {
                       setShowCallModal(true);
-                      posthog.capture('call_to_journal_clicked', { variant: selectedVariant });
+                      posthog.capture('call_to_journal_modal_opened', { variant: selectedVariant });
                     }}
                   >
                     <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
@@ -855,7 +863,7 @@ export default function ClientInfoPage() {
                 className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none mb-6 mx-auto w-full md:w-1/2"
                 onClick={() => {
                   setShowFlowModal(true);
-                  posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
+                  posthog.capture('connect_to_therapist_modal_opened', { variant: selectedVariant });
                 }}
               >
                 <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
@@ -948,7 +956,7 @@ export default function ClientInfoPage() {
                   className="flex-1 px-3 py-2 bg-purple-600 text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-purple-700 transition"
                   onClick={() => {
                     setShowCallModal(true);
-                    posthog.capture('call_to_journal_clicked', { variant: selectedVariant });
+                    posthog.capture('call_to_journal_modal_opened', { variant: selectedVariant });
                   }}
                 >
                   <Phone className="w-4 h-4 mr-1" /> Call to Journal
