@@ -11,6 +11,7 @@ import { useFeatureFlagVariantKey } from 'posthog-js/react';
 declare global {
   interface Window {
     onYouTubeIframeAPIReady?: () => void;
+    twq?: (...args: any[]) => void;
   }
 }
 
@@ -168,6 +169,14 @@ export default function ClientInfoPage() {
         'RkdQiScnBEMQIBtNL'
       );
       toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
+      if (window.twq) {
+        window.twq('event', 'tw-onbx0-onbx0', {
+          user_email: userEmail,
+          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
+          no_therapist: noTherapist ? 'Yes' : 'No',
+          variant: selectedVariant
+        });
+      }
       setInviteSubmitted(true);
       setUserEmail('');
       setTherapistEmail('');
@@ -370,6 +379,12 @@ export default function ClientInfoPage() {
                 onClick={() => {
                   setShowCallModal(false);
                   posthog.capture('call_to_journal_call_initiated', { variant: selectedVariant });
+                  if (window.twq) {
+                    window.twq('event', 'tw-onbx0-onbx0', {
+                      event_type: 'call_to_journal',
+                      variant: selectedVariant
+                    });
+                  }
                 }}
               >
                 Call to Journal
@@ -380,6 +395,12 @@ export default function ClientInfoPage() {
                 onClick={() => {
                   setShowCallModal(false);
                   posthog.capture('text_to_journal_initiated', { variant: selectedVariant });
+                  if (window.twq) {
+                    window.twq('event', 'tw-onbx0-onbx0', {
+                      event_type: 'text_to_journal',
+                      variant: selectedVariant
+                    });
+                  }
                 }}
               >
                 Text to Journal
