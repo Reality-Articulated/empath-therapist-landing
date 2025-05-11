@@ -157,12 +157,13 @@ export default function ClientInfoPage() {
     try {
       await emailjs.send(
         'service_vxj3w0n',
-        'template_7kwdlh8',
+        'template_k7xemzd',
         {
           to_email: 'karan@myempath.co',
           user_email: userEmail,
           therapist_email: noTherapist ? 'No therapist' : therapistEmail,
           no_therapist: noTherapist ? 'Yes' : 'No',
+          time: new Date().toLocaleString(),
         },
         'RkdQiScnBEMQIBtNL'
       );
