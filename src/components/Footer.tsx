@@ -71,6 +71,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/pledge" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
                 <a 
                   href="https://app.empathdash.com/login" 
                   target="_blank" 

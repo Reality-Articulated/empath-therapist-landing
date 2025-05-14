@@ -6,6 +6,9 @@ import HomePage from './pages/HomePage';
 import AdvisoryPage from './pages/AdvisoryPage';
 import AtmanPage from './pages/AtmanPage';
 import ClientInfoPage from './pages/ClientInfoPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
+import PledgePage from './pages/PledgePage';
 // import BlogsPage from './pages/BlogsPage';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -23,6 +26,9 @@ function App() {
         <Route path="/advisory" element={<AdvisoryPage />} />
         <Route path="/atman" element={<AtmanPage />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/pledge" element={<PledgePage />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
       {!hideNavbar && <Footer />}

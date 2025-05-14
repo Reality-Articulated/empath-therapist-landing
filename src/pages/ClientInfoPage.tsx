@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download } from 'lucide-react';
+import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download, FileText } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
+import { Link } from 'react-router-dom';
 
 // Declare YouTube API types
 declare global {
@@ -1050,6 +1051,14 @@ export default function ClientInfoPage() {
                 <CheckCircle className="text-[#00B9B0] w-6 h-6 mr-3 flex-shrink-0 mt-1" />
                 <p className="text-gray-700">You can delete your entries at any time</p>
               </li>
+              <li className="flex items-start">
+                <FileText className="text-[#00B9B0] w-6 h-6 mr-3 flex-shrink-0 mt-1" />
+                <p className="text-gray-700">
+                  Read our <Link to="/pledge" className="text-[#1281dd] hover:underline font-medium">Privacy Pledge</Link>, 
+                  <Link to="/privacy" className="text-[#1281dd] hover:underline font-medium"> Privacy Policy</Link>, and 
+                  <Link to="/terms" className="text-[#1281dd] hover:underline font-medium"> Terms & Conditions</Link> for complete details
+                </p>
+              </li>
             </ul>
           </motion.div>
         </div>
@@ -1137,6 +1146,34 @@ export default function ClientInfoPage() {
               <li>• Physicians spend ~16-20% of work time on admin (Int. J. Health Services study, Psychiatry Advisor).</li>
               <li>• Journaling interventions linked to improved mental-health outcomes (Systematic review, PMC 2022).</li>
             </ul>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Legal Links Footer */}
+      <motion.section
+        className="py-6 bg-gray-900 text-gray-400"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-center md:text-left">
+            <p className="text-sm">© {new Date().getFullYear()} Reality Articulated Inc.</p>
+            <div className="flex items-center gap-4 text-sm">
+              <Link to="/pledge" className="hover:text-[#1281dd] transition-colors">
+                Privacy Pledge
+              </Link>
+              <span className="hidden md:inline">•</span>
+              <Link to="/privacy" className="hover:text-[#1281dd] transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="hidden md:inline">•</span>
+              <Link to="/terms" className="hover:text-[#1281dd] transition-colors">
+                Terms & Conditions
+              </Link>
+            </div>
           </div>
         </div>
       </motion.section>
