@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import posthog from 'posthog-js';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -32,6 +33,11 @@ export default function TherapyValueCalculator() {
   const monthlyDollarsSaved = dollarsSavedPerSession * freqNum;
   const yearlyDollarsSaved = monthlyDollarsSaved * 12;
   const extraBreakthroughHoursPerYear = (minutesSaved * freqNum * 12) / 60;
+
+  // Analytics: page view
+  useEffect(() => {
+    posthog.capture('therapy_calculator_page_viewed');
+  }, []);
 
   // Invite form submit handler
   const handleInviteSubmit = async (e: React.FormEvent) => {
@@ -68,6 +74,12 @@ export default function TherapyValueCalculator() {
       toast.error('Failed to submit. Please try again.');
       setInviteError('Something went wrong. Please try again.');
     }
+  };
+
+  // Handler for opening invite modal (with analytics)
+  const handleOpenInviteModal = () => {
+    setShowInviteModal(true);
+    posthog.capture('calculator_invite_modal_opened');
   };
 
   return (
@@ -201,7 +213,7 @@ export default function TherapyValueCalculator() {
           <p className="text-gray-500 text-sm mb-2">Ready to get more from therapy?</p>
           <button
             type="button"
-            onClick={() => setShowInviteModal(true)}
+            onClick={handleOpenInviteModal}
             className="inline-block bg-[#1281dd] text-white rounded-full px-6 py-3 font-semibold shadow hover:bg-[#0e6bb8] transition"
           >
             Try Empath Now
