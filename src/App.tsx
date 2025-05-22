@@ -9,6 +9,7 @@ import ClientInfoPage from './pages/ClientInfoPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import PledgePage from './pages/PledgePage';
+import TherapyValueCalculator from './pages/TherapyValueCalculator';
 // import BlogsPage from './pages/BlogsPage';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/pledge" element={<PledgePage />} />
+        <Route path="/calculator" element={<TherapyValueCalculator />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
       {!hideNavbar && <Footer />}

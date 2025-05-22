@@ -53,25 +53,8 @@ export default function Navbar() {
               }`}
               aria-current={location.pathname === '/' ? 'page' : undefined}
             >
-              <span>Home</span>
+              <span>For Therapists</span>
               {location.pathname === '/' && (
-                <motion.div 
-                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
-                  layoutId="navIndicator"
-                />
-              )}
-            </Link>
-            <Link 
-              to="/advisory" 
-              className={`text-sm font-medium transition-all duration-300 relative ${
-                location.pathname === '/advisory' 
-                  ? 'text-blue-700' 
-                  : 'text-gray-700 hover:text-blue-700'
-              }`}
-              aria-current={location.pathname === '/advisory' ? 'page' : undefined}
-            >
-              <span>Advisory</span>
-              {location.pathname === '/advisory' && (
                 <motion.div 
                   className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
                   layoutId="navIndicator"
@@ -89,6 +72,23 @@ export default function Navbar() {
             >
               <span>For Therapy Clients</span>
               {location.pathname === '/whyempath' && (
+                <motion.div 
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+                  layoutId="navIndicator"
+                />
+              )}
+            </Link>
+            <Link 
+              to="/advisory" 
+              className={`text-sm font-medium transition-all duration-300 relative ${
+                location.pathname === '/advisory' 
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
+              }`}
+              aria-current={location.pathname === '/advisory' ? 'page' : undefined}
+            >
+              <span>Advisory</span>
+              {location.pathname === '/advisory' && (
                 <motion.div 
                   className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
                   layoutId="navIndicator"
@@ -137,16 +137,7 @@ export default function Navbar() {
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Home
-              </Link>
-              <Link 
-                to="/advisory" 
-                className={`text-sm font-medium py-2 ${
-                  location.pathname === '/advisory' ? 'text-blue-600' : 'text-gray-600'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Advisory Program
+                For Therapists
               </Link>
               <Link 
                 to="/whyempath" 
@@ -156,6 +147,15 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 For Therapy Clients
+              </Link>
+              <Link 
+                to="/advisory" 
+                className={`text-sm font-medium py-2 ${
+                  location.pathname === '/advisory' ? 'text-blue-600' : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Advisory Program
               </Link>
               <a 
                 href="https://app.empathdash.com/login" 
