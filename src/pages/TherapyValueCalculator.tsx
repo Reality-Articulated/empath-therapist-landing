@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ChevronDown, CheckCircle, Shield, Phone, Download } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,7 +8,7 @@ import posthog from 'posthog-js';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
 export default function TherapyValueCalculator() {
@@ -28,8 +29,12 @@ export default function TherapyValueCalculator() {
   const [inviteError, setInviteError] = useState('');
   const [noTherapist, setNoTherapist] = useState(false);
 
-  // Empath value assumptions
-  const minutesSaved = 20; // per session
+  // Simplified state
+  const [userCount] = useState(2847);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Calculator logic
+  const minutesSaved = 20;
   const costNum = parseFloat(cost) || 0;
   const lengthNum = parseFloat(length) || 0;
   const freqNum = parseFloat(frequency) || 0;
@@ -37,14 +42,17 @@ export default function TherapyValueCalculator() {
   const dollarsSavedPerSession = valuePerMinute * minutesSaved;
   const monthlyDollarsSaved = dollarsSavedPerSession * freqNum;
   const yearlyDollarsSaved = monthlyDollarsSaved * 12;
-  const extraBreakthroughHoursPerYear = (minutesSaved * freqNum * 12) / 60;
 
-  // Analytics: page view
+  const hasCalculatorData = costNum > 0 && lengthNum > 0 && freqNum > 0;
+
   useEffect(() => {
     posthog.capture('therapy_calculator_page_viewed');
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Email gate form submit handler
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!leadEmail) return;
@@ -53,10 +61,9 @@ export default function TherapyValueCalculator() {
     posthog.capture('calculator_email_captured', { email: leadEmail });
 
     try {
-      // Send lead email to your system
       await emailjs.send(
         'service_vxj3w0n',
-        'template_k7xemzd', // You might want a different template for leads
+        'template_k7xemzd',
         {
           to_email: 'karan@myempath.co',
           user_email: leadEmail,
@@ -68,6 +75,7 @@ export default function TherapyValueCalculator() {
       
       setHasEnteredEmail(true);
       posthog.capture('calculator_access_granted', { email: leadEmail });
+      toast.success('Welcome! Here\'s your calculator.');
     } catch (err) {
       toast.error('Something went wrong. Please try again.');
     } finally {
@@ -75,15 +83,15 @@ export default function TherapyValueCalculator() {
     }
   };
 
-  // Invite form submit handler
   const handleInviteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInviteError('');
-    setInviteSubmitted(false);
+    
     if (!noTherapist && !therapistEmail) {
       setInviteError("Please enter your therapist's email or check the box if you don't have a therapist.");
       return;
     }
+    
     try {
       await emailjs.send(
         'service_vxj3w0n',
@@ -93,11 +101,13 @@ export default function TherapyValueCalculator() {
           user_email: leadEmail,
           therapist_email: noTherapist ? 'No therapist' : therapistEmail,
           no_therapist: noTherapist ? 'Yes' : 'No',
+          source: 'Therapy Value Calculator',
           time: new Date().toLocaleString(),
         },
         'RkdQiScnBEMQIBtNL'
       );
-      toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
+      
+      toast.success('Thank you! We will be in touch.');
       setInviteSubmitted(true);
       setTherapistEmail('');
       setNoTherapist(false);
@@ -107,291 +117,347 @@ export default function TherapyValueCalculator() {
     }
   };
 
-  // Handler for opening invite modal (with analytics)
-  const handleOpenInviteModal = () => {
-    setShowInviteModal(true);
-    posthog.capture('calculator_invite_modal_opened');
-  };
-
-  // Email Gate Component
+  // Simple email gate
   if (!hasEnteredEmail) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-teal-50/30 to-white flex flex-col items-center justify-center py-12 px-4">
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
         <Toaster position="top-center" />
+        
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border border-blue-100 relative overflow-hidden"
+          className="w-full max-w-md"
         >
-          {/* Urgency badge */}
-          <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
-            LIMITED ACCESS
-          </div>
-
-          <div className="flex flex-col items-center mb-6">
-            <img src={logo} alt="Empath Logo" className="w-14 h-14 mb-3" />
-            <h1 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 mb-3 leading-tight">
-              Are You Throwing Money Away in Therapy?
+          <div className="text-center mb-8">
+            <img src={logo} alt="Empath Logo" className="w-16 h-16 mx-auto mb-4" />
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Are You Overpaying for Therapy?
             </h1>
-            <p className="text-gray-700 text-center text-lg font-medium">
-              Find out exactly how much you're <span className="text-red-600 font-bold">wasting</span> on "catch-up time" every session
-            </p>
-          </div>
-          
-          {/* Pain point callouts */}
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-4 mb-6 border border-red-100">
-            <h3 className="font-bold text-red-800 mb-3 text-center">❌ Stop Paying Premium Prices for This:</h3>
-            <ul className="text-sm text-red-700 space-y-2">
-              <li>• Spending 15-20 minutes of every session just catching your therapist up</li>
-              <li>• Walking away feeling like you barely scratched the surface</li>
-              <li>• Your therapist starting from zero every single week</li>
-            </ul>
-          </div>
-
-          {/* Value preview */}
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 mb-6 border border-green-100">
-            <h3 className="font-bold text-green-800 mb-3 text-center">✅ What 2,000+ Therapy Clients Already Know:</h3>
-            <ul className="text-sm text-green-700 space-y-2">
-              <li>• <span className="font-semibold">20+ extra minutes</span> of real therapy work per session</li>
-              <li>• <span className="font-semibold">Your therapist knows your week</span> before you even sit down</li>
-              <li>• <span className="font-semibold">160% more breakthrough moments</span> reported</li>
-            </ul>
-          </div>
-
-          {/* FOMO element */}
-          <div className="text-center mb-6">
-            <p className="text-orange-600 font-semibold text-sm mb-2">
-              🔥 <span className="font-bold">INSIDER ACCESS:</span> This calculator reveals the hidden cost of traditional therapy
-            </p>
-            <p className="text-gray-600 text-xs">
-              Most people have no idea they're paying for 20 minutes of recap every session
+            <p className="text-lg text-gray-600 mb-6">
+              See how much money you can save in therapy in 30 seconds
             </p>
           </div>
 
-          <form onSubmit={handleEmailSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-800 mb-2">
-                Enter your email to access your personal therapy savings calculator:
-              </label>
-              <input
-                type="email"
-                className="w-full border-2 border-[#1281dd] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] text-lg"
-                value={leadEmail}
-                onChange={e => setLeadEmail(e.target.value)}
-                placeholder="your.email@example.com"
-                required
-              />
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Enter your email to access the calculator
+                </label>
+                <input
+                  type="email"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={leadEmail}
+                  onChange={e => setLeadEmail(e.target.value)}
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={emailSubmitting}
+                className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+              >
+                {emailSubmitting ? 'Loading...' : 'Access Calculator →'}
+              </button>
+            </form>
+            
+            <div className="mt-4 text-center">
+              <p className="text-xs text-gray-500">
+                Used by {userCount.toLocaleString()}+ therapy clients
+              </p>
             </div>
-            <button
-              type="submit"
-              disabled={emailSubmitting}
-              className="w-full bg-gradient-to-r from-[#1281dd] to-blue-700 text-white rounded-lg py-4 font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:opacity-50"
-            >
-              {emailSubmitting ? 'Calculating Your Savings...' : '💰 Calculate My Hidden Therapy Costs →'}
-            </button>
-          </form>
-
-          <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500 mb-2">
-              ⚡ <span className="font-semibold">Instant results</span> • 🔒 <span className="font-semibold">Email protected</span> • 📊 <span className="font-semibold">Used by 2,000+ clients</span>
-            </p>
-            <p className="text-xs text-orange-600 font-semibold">
-              ⏰ Join before we make this premium-only access
-            </p>
           </div>
         </motion.div>
       </div>
     );
   }
 
-  // Original Calculator Component (shown after email capture)
+  // Main calculator page
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-teal-50/30 to-white flex flex-col items-center justify-center py-12 px-4">
-      {/* Invite Modal */}
+    <div className="min-h-screen bg-gray-50">
+      <Toaster position="top-center" />
+      
+      {/* Simple header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center">
+          <img src={logo} alt="Empath Logo" className="w-10 h-10 mr-3" />
+          <h1 className="text-xl font-semibold text-gray-900">Therapy ROI Calculator</h1>
+        </div>
+      </div>
+
+      {/* Invite Modal - Simplified */}
       {showInviteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative max-h-[90vh] overflow-y-auto">
-            <Toaster position="top-center" />
-            <button
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
-              onClick={() => {
-                setShowInviteModal(false);
-                setInviteSubmitted(false);
-                setInviteError('');
-              }}
-              aria-label="Close"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">Connect with Your Therapist</h3>
-            
-            {inviteSubmitted ? (
-              <div className="text-green-600 font-medium text-center py-4">Thank you! We'll reach out to your therapist and let you know when you're connected.</div>
-            ) : (
-              <>
-                <p className="mb-4 text-gray-600 text-sm">
-                  To unlock Empath's full therapy features, we need to contact your therapist and get them set up with Empath.
-                </p>
-                
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-4">Get Started with Empath</h3>
+              
+              {inviteSubmitted ? (
+                <div className="text-center py-4">
+                  <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+                  <p className="text-gray-600 mb-4">Thanks! We'll be in touch soon.</p>
+                  <div className="flex gap-3">
+                    <a
+                      href="tel:+18883663082"
+                      className="flex-1 bg-blue-600 text-white rounded-lg py-3 text-center font-semibold"
+                    >
+                      Call to Try
+                    </a>
+                    <a
+                      href="sms:+18883663082"
+                      className="flex-1 border border-gray-300 rounded-lg py-3 text-center font-semibold"
+                    >
+                      Text to Try
+                    </a>
+                  </div>
+                </div>
+              ) : (
                 <form onSubmit={handleInviteSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Therapist's Email
+                    </label>
                     <input
                       type="email"
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       value={therapistEmail}
                       onChange={e => setTherapistEmail(e.target.value)}
-                      required={!noTherapist}
+                      placeholder="therapist@example.com"
                       disabled={noTherapist}
-                      placeholder={noTherapist ? 'Not required' : 'therapist@example.com'}
+                      required={!noTherapist}
                     />
                   </div>
                   
-                  <div className="flex items-start gap-2">
+                  <div className="flex items-center">
                     <input
-                      id="no-therapist"
                       type="checkbox"
+                      id="noTherapist"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded"
                       checked={noTherapist}
-                      onChange={e => setNoTherapist(e.target.checked)}
-                      className="h-4 w-4 text-[#1281dd] border-gray-300 rounded focus:ring-[#1281dd] mt-1"
+                      onChange={e => {
+                        setNoTherapist(e.target.checked);
+                        if (e.target.checked) setTherapistEmail('');
+                      }}
                     />
-                    <label htmlFor="no-therapist" className="text-sm text-gray-700 select-none">
-                      I don't currently have a therapist
+                    <label htmlFor="noTherapist" className="ml-2 text-sm text-gray-700">
+                      I don't have a therapist yet
                     </label>
                   </div>
                   
                   {inviteError && <div className="text-red-600 text-sm">{inviteError}</div>}
                   
-                  <button
-                    type="submit"
-                    className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
-                  >
-                    Submit
-                  </button>
-                </form>
-                
-                {/* New messaging about using Empath independently */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <h4 className="font-bold text-gray-800 mb-3 flex items-center">
-                    <span className="text-2xl mr-2">✨</span>
-                    Don't want to wait? Start journaling today!
-                  </h4>
-                  <p className="text-sm text-gray-600 mb-4">
-                    You don't need a therapist to start discovering yourself. Use Empath to journal independently and uncover your own patterns.
-                  </p>
-                  
-                  <div className="bg-blue-50 rounded-lg p-4 mb-4">
-                    <h5 className="font-semibold text-blue-900 mb-2">
-                      📱 Start journaling in 30 seconds - no app required
-                    </h5>
-                    
-                    <div className="flex gap-3 mb-3">
-                      <a
-                        href="tel:+18883663082"
-                        className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-[#0e6bb8] transition"
-                        onClick={() => {
-                          posthog.capture('calculator_call_to_journal_initiated');
-                        }}
-                      >
-                        Call to Journal
-                      </a>
-                      <a
-                        href="sms:+18883663082"
-                        className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
-                        onClick={() => {
-                          posthog.capture('calculator_text_to_journal_initiated');
-                        }}
-                      >
-                        Text to Journal
-                      </a>
-                    </div>
-                    
-                    <p className="text-sm text-gray-700">
-                      Share your thoughts or emotions anytime. We'll save your voice notes or texts as timestamped journal entries. Once you've made an entry, download the app and log in with your phone number to see your insights.
-                    </p>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setShowInviteModal(false)}
+                      className="flex-1 border border-gray-300 rounded-lg py-2 font-semibold"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 bg-blue-600 text-white rounded-lg py-2 font-semibold"
+                    >
+                      Submit
+                    </button>
                   </div>
-                  
-                  <p className="text-xs text-gray-500 italic">
-                    🔒 Your entries are encrypted end-to-end and private. When you connect with a therapist later, everything will already be organized.
-                  </p>
-                </div>
-              </>
-            )}
+                </form>
+              )}
+            </div>
           </div>
         </div>
       )}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-        className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border border-blue-100"
-      >
-        <div className="flex flex-col items-center mb-6">
-          <img src={logo} alt="Empath Logo" className="w-14 h-14 mb-2" />
-          <h1 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 mb-2">Your Personal Therapy ROI</h1>
-          <p className="text-gray-600 text-center max-w-md">Calculate exactly how much Empath saves you per session:</p>
-        </div>
-        <form className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">How much do you pay per session? <span className="text-gray-400">(USD)</span></label>
-            <input
-              type="number"
-              min="0"
-              step="1"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
-              value={cost}
-              onChange={e => setCost(e.target.value)}
-              placeholder="e.g. 175"
-            />
+
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+        >
+          {/* Simple intro */}
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Calculate Your Potential Savings
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              See how much time and money Empath could save you in therapy sessions
+            </p>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">How long is each session? <span className="text-gray-400">(minutes)</span></label>
-            <input
-              type="number"
-              min="1"
-              step="1"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
-              value={length}
-              onChange={e => setLength(e.target.value)}
-              placeholder="e.g. 50"
-            />
+
+          {/* Calculator and Results */}
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
+            {/* Calculator */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-xl font-semibold mb-6">Your Therapy Details</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Cost per session (USD)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={cost}
+                    onChange={e => setCost(e.target.value)}
+                    placeholder="175"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Session length (minutes)
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={length}
+                    onChange={e => setLength(e.target.value)}
+                    placeholder="50"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Sessions per month
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={frequency}
+                    onChange={e => setFrequency(e.target.value)}
+                    placeholder="4"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              {hasCalculatorData ? (
+                <>
+                  <h3 className="text-xl font-semibold mb-6 text-green-700">Your Savings with Empath</h3>
+                  
+                  <div className="space-y-4">
+                    <div className="flex justify-between py-2 border-b border-gray-100">
+                      <span className="text-gray-600">Time saved per session:</span>
+                      <span className="font-semibold">{minutesSaved} minutes</span>
+                    </div>
+                    
+                    <div className="flex justify-between py-2 border-b border-gray-100">
+                      <span className="text-gray-600">Money saved per session:</span>
+                      <span className="font-semibold">${dollarsSavedPerSession.toFixed(2)}</span>
+                    </div>
+                    
+                    <div className="flex justify-between py-2 border-b border-gray-100">
+                      <span className="text-gray-600">Monthly savings:</span>
+                      <span className="font-semibold">${monthlyDollarsSaved.toFixed(0)}</span>
+                    </div>
+                    
+                    <div className="flex justify-between py-3 bg-green-50 rounded-lg px-4">
+                      <span className="font-semibold text-green-800">Annual savings:</span>
+                      <span className="font-bold text-green-700 text-xl">
+                        ${yearlyDollarsSaved.toLocaleString(undefined, {maximumFractionDigits:0})}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <button
+                      onClick={() => setShowInviteModal(true)}
+                      className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold hover:bg-blue-700 transition mb-3"
+                    >
+                      Get Started - Save ${yearlyDollarsSaved.toFixed(0)}/year
+                    </button>
+                    
+                    <div className="flex gap-3">
+                      <a
+                        href="tel:+18883663082"
+                        className="flex-1 border border-gray-300 rounded-lg py-2 text-center font-semibold hover:bg-gray-50"
+                      >
+                        📞 Call
+                      </a>
+                      <a
+                        href="sms:+18883663082"
+                        className="flex-1 border border-gray-300 rounded-lg py-2 text-center font-semibold hover:bg-gray-50"
+                      >
+                        💬 Text
+                      </a>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 text-4xl mb-4">💰</div>
+                  <h3 className="text-lg font-medium text-gray-600 mb-2">Enter your details</h3>
+                  <p className="text-gray-500">Fill out the form to see your potential savings</p>
+                </div>
+              )}
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">How many sessions per month?</label>
-            <input
-              type="number"
-              min="1"
-              step="1"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
-              value={frequency}
-              onChange={e => setFrequency(e.target.value)}
-              placeholder="e.g. 4"
-            />
+
+          {/* Simple FAQ */}
+          <div className="mt-16 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-center mb-8">Common Questions</h3>
+            
+            <div className="bg-white rounded-lg border border-gray-200 divide-y divide-gray-200">
+              <div className="p-6">
+                <h4 className="font-semibold mb-2">How does Empath save me money?</h4>
+                <p className="text-gray-600">Empath eliminates the 15-20 minutes typically spent catching your therapist up each session, so that time goes toward actual therapeutic work instead.</p>
+              </div>
+              
+              <div className="p-6">
+                <h4 className="font-semibold mb-2">Is this calculator accurate?</h4>
+                <p className="text-gray-600">The calculator uses conservative estimates based on reported time savings from our users. Most sessions spend significant time on updates.</p>
+              </div>
+              
+              <div className="p-6">
+                <h4 className="font-semibold mb-2">How much does Empath cost?</h4>
+                <p className="text-gray-600">Empath is free for clients when your therapist uses our platform. The value you save far exceeds any cost.</p>
+              </div>
+            </div>
           </div>
-        </form>
-        <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-5 border border-green-100 shadow-sm">
-          <h2 className="text-xl font-bold text-green-800 mb-3 text-center">🎉 Your Empath Savings:</h2>
-          <ul className="space-y-3 text-gray-700 text-base">
-            <li className="flex justify-between"><span>Time saved per session:</span><span className="font-bold text-green-700">{minutesSaved} minutes</span></li>
-            <li className="flex justify-between"><span>Money saved per session:</span><span className="font-bold text-green-700">${dollarsSavedPerSession.toFixed(2)}</span></li>
-            <li className="flex justify-between"><span>Monthly savings:</span><span className="font-bold text-green-700">${monthlyDollarsSaved.toFixed(0)}</span></li>
-            <li className="flex justify-between border-t pt-2"><span className="font-semibold">Annual savings:</span><span className="font-bold text-green-700 text-lg">${yearlyDollarsSaved.toLocaleString(undefined, {maximumFractionDigits:0})}</span></li>
-            <li className="flex justify-between bg-blue-50 p-2 rounded"><span className="font-semibold">Extra breakthrough time/year:</span><span className="font-bold text-blue-700">{extraBreakthroughHoursPerYear.toFixed(1)} hours</span></li>
-          </ul>
-        </div>
-        <div className="mt-8 text-center">
-          <p className="text-gray-700 text-sm mb-3 font-medium">Ready to stop wasting money on catch-up time?</p>
+
+          {/* Simple security note */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 text-gray-600">
+              <Shield className="w-5 h-5" />
+              <span className="text-sm">HIPAA-compliant and secure</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Simple mobile CTA */}
+      {isMobile && hasCalculatorData && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
           <button
-            type="button"
-            onClick={handleOpenInviteModal}
-            className="inline-block bg-gradient-to-r from-green-600 to-[#1281dd] text-white rounded-full px-8 py-4 font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+            onClick={() => setShowInviteModal(true)}
+            className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold"
           >
-            💸 Start Saving Today
+            Save ${yearlyDollarsSaved.toFixed(0)}/year
           </button>
         </div>
-      </motion.div>
+      )}
+
+      {/* Padding for mobile CTA */}
+      {isMobile && hasCalculatorData && <div className="h-20"></div>}
     </div>
   );
+}
+
+// Declare global types for Twitter tracking
+declare global {
+  interface Window {
+    twq?: (...args: any[]) => void;
+  }
 } 
