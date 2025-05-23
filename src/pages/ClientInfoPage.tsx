@@ -219,7 +219,7 @@ export default function ClientInfoPage() {
       {/* Invite Modal */}
       {showInviteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative max-h-[90vh] overflow-y-auto">
             <Toaster position="top-center" />
             <button
               className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
@@ -233,52 +233,110 @@ export default function ClientInfoPage() {
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">You need an invite from your therapist</h3>
-            <p className="mb-4 text-gray-600 text-sm">To use Empath, your therapist needs to invite you. Enter your email and your therapist's email below. We'll reach out to get you connected!</p>
+            
+            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">Connect with Your Therapist</h3>
+            
             {inviteSubmitted ? (
               <div className="text-green-600 font-medium text-center py-4">Thank you! We'll reach out to your therapist and let you know when you're connected.</div>
             ) : (
-              <form onSubmit={handleInviteSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
-                  <input
-                    type="email"
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
-                    value={userEmail}
-                    onChange={e => setUserEmail(e.target.value)}
-                    required
-                  />
+              <>
+                <p className="mb-4 text-gray-600 text-sm">
+                  To unlock Empath's full therapy features, we need to contact your therapist and get them set up with Empath.
+                </p>
+                
+                <form onSubmit={handleInviteSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                    <input
+                      type="email"
+                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      value={userEmail}
+                      onChange={e => setUserEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
+                    <input
+                      type="email"
+                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      value={therapistEmail}
+                      onChange={e => setTherapistEmail(e.target.value)}
+                      required={!noTherapist}
+                      disabled={noTherapist}
+                      placeholder={noTherapist ? 'Not required' : 'therapist@example.com'}
+                    />
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <input
+                      id="no-therapist"
+                      type="checkbox"
+                      checked={noTherapist}
+                      onChange={e => setNoTherapist(e.target.checked)}
+                      className="h-4 w-4 text-[#1281dd] border-gray-300 rounded focus:ring-[#1281dd] mt-1"
+                    />
+                    <label htmlFor="no-therapist" className="text-sm text-gray-700 select-none">
+                      I don't currently have a therapist
+                    </label>
+                  </div>
+                  
+                  {inviteError && <div className="text-red-600 text-sm">{inviteError}</div>}
+                  
+                  <button
+                    type="submit"
+                    className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
+                  >
+                    Submit
+                  </button>
+                </form>
+                
+                {/* New messaging about using Empath independently */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <h4 className="font-bold text-gray-800 mb-3 flex items-center">
+                    <span className="text-2xl mr-2">✨</span>
+                    Don't want to wait? Start journaling today!
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    You don't need a therapist to start discovering yourself. Use Empath to journal independently and uncover your own patterns.
+                  </p>
+                  
+                  <div className="bg-blue-50 rounded-lg p-4 mb-4">
+                    <h5 className="font-semibold text-blue-900 mb-2">
+                      📱 Start journaling in 30 seconds - no app required
+                    </h5>
+                    
+                    <div className="flex gap-3 mb-3">
+                      <a
+                        href="tel:+18883663082"
+                        className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-[#0e6bb8] transition"
+                        onClick={() => {
+                          posthog.capture('client_info_call_to_journal_initiated', { variant: selectedVariant });
+                        }}
+                      >
+                        Call to Journal
+                      </a>
+                      <a
+                        href="sms:+18883663082"
+                        className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
+                        onClick={() => {
+                          posthog.capture('client_info_text_to_journal_initiated', { variant: selectedVariant });
+                        }}
+                      >
+                        Text to Journal
+                      </a>
+                    </div>
+                    
+                    <p className="text-sm text-gray-700">
+                      Share your thoughts or emotions anytime. We'll save your voice notes or texts as timestamped journal entries. Once you've made an entry, download the app and log in with your phone number to see your insights.
+                    </p>
+                  </div>
+                  
+                  <p className="text-xs text-gray-500 italic">
+                    🔒 Your entries are encrypted end-to-end and private. When you connect with a therapist later, everything will already be organized.
+                  </p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
-                  <input
-                    type="email"
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
-                    value={therapistEmail}
-                    onChange={e => setTherapistEmail(e.target.value)}
-                    required={!noTherapist}
-                    disabled={noTherapist}
-                    placeholder={noTherapist ? 'Not required' : ''}
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <input
-                    id="no-therapist"
-                    type="checkbox"
-                    checked={noTherapist}
-                    onChange={e => setNoTherapist(e.target.checked)}
-                    className="h-4 w-4 text-[#1281dd] border-gray-300 rounded focus:ring-[#1281dd]"
-                  />
-                  <label htmlFor="no-therapist" className="text-sm text-gray-700 select-none">I don't currently have a therapist</label>
-                </div>
-                {inviteError && <div className="text-red-600 text-sm">{inviteError}</div>}
-                <button
-                  type="submit"
-                  className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
-                >
-                  Submit
-                </button>
-              </form>
+              </>
             )}
           </div>
         </div>

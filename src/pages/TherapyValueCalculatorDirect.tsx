@@ -10,12 +10,7 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
 };
 
-export default function TherapyValueCalculator() {
-  // Email gate state
-  const [hasEnteredEmail, setHasEnteredEmail] = useState(false);
-  const [leadEmail, setLeadEmail] = useState('');
-  const [emailSubmitting, setEmailSubmitting] = useState(false);
-
+export default function TherapyValueCalculatorDirect() {
   // Calculator state
   const [cost, setCost] = useState('175');
   const [length, setLength] = useState('50');
@@ -23,6 +18,7 @@ export default function TherapyValueCalculator() {
 
   // Invite modal state
   const [showInviteModal, setShowInviteModal] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
   const [therapistEmail, setTherapistEmail] = useState('');
   const [inviteSubmitted, setInviteSubmitted] = useState(false);
   const [inviteError, setInviteError] = useState('');
@@ -39,47 +35,20 @@ export default function TherapyValueCalculator() {
   const yearlyDollarsSaved = monthlyDollarsSaved * 12;
   const extraBreakthroughHoursPerYear = (minutesSaved * freqNum * 12) / 60;
 
-  // Analytics: page view
+  // Analytics: page view for direct variant
   useEffect(() => {
-    posthog.capture('therapy_calculator_page_viewed');
+    posthog.capture('therapy_calculator_direct_page_viewed');
   }, []);
-
-  // Email gate form submit handler
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!leadEmail) return;
-    
-    setEmailSubmitting(true);
-    posthog.capture('calculator_email_captured', { email: leadEmail });
-
-    try {
-      // Send lead email to your system
-      await emailjs.send(
-        'service_vxj3w0n',
-        'template_k7xemzd', // You might want a different template for leads
-        {
-          to_email: 'karan@myempath.co',
-          user_email: leadEmail,
-          source: 'Therapy Value Calculator',
-          time: new Date().toLocaleString(),
-        },
-        'RkdQiScnBEMQIBtNL'
-      );
-      
-      setHasEnteredEmail(true);
-      posthog.capture('calculator_access_granted', { email: leadEmail });
-    } catch (err) {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setEmailSubmitting(false);
-    }
-  };
 
   // Invite form submit handler
   const handleInviteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInviteError('');
     setInviteSubmitted(false);
+    if (!userEmail) {
+      setInviteError('Please enter your email.');
+      return;
+    }
     if (!noTherapist && !therapistEmail) {
       setInviteError("Please enter your therapist's email or check the box if you don't have a therapist.");
       return;
@@ -90,15 +59,17 @@ export default function TherapyValueCalculator() {
         'template_k7xemzd',
         {
           to_email: 'karan@myempath.co',
-          user_email: leadEmail,
+          user_email: userEmail,
           therapist_email: noTherapist ? 'No therapist' : therapistEmail,
           no_therapist: noTherapist ? 'Yes' : 'No',
+          source: 'Therapy Calculator Direct',
           time: new Date().toLocaleString(),
         },
         'RkdQiScnBEMQIBtNL'
       );
       toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
       setInviteSubmitted(true);
+      setUserEmail('');
       setTherapistEmail('');
       setNoTherapist(false);
     } catch (err) {
@@ -107,105 +78,12 @@ export default function TherapyValueCalculator() {
     }
   };
 
-  // Handler for opening invite modal (with analytics)
+  // Handler for opening invite modal (with analytics for direct variant)
   const handleOpenInviteModal = () => {
     setShowInviteModal(true);
-    posthog.capture('calculator_invite_modal_opened');
+    posthog.capture('calculator_direct_invite_modal_opened');
   };
 
-  // Email Gate Component
-  if (!hasEnteredEmail) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-teal-50/30 to-white flex flex-col items-center justify-center py-12 px-4">
-        <Toaster position="top-center" />
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border border-blue-100 relative overflow-hidden"
-        >
-          {/* Urgency badge */}
-          <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
-            LIMITED ACCESS
-          </div>
-
-          <div className="flex flex-col items-center mb-6">
-            <img src={logo} alt="Empath Logo" className="w-14 h-14 mb-3" />
-            <h1 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 mb-3 leading-tight">
-              Are You Throwing Money Away in Therapy?
-            </h1>
-            <p className="text-gray-700 text-center text-lg font-medium">
-              Find out exactly how much you're <span className="text-red-600 font-bold">wasting</span> on "catch-up time" every session
-            </p>
-          </div>
-          
-          {/* Pain point callouts */}
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-4 mb-6 border border-red-100">
-            <h3 className="font-bold text-red-800 mb-3 text-center">❌ Stop Paying Premium Prices for This:</h3>
-            <ul className="text-sm text-red-700 space-y-2">
-              <li>• Spending 15-20 minutes of every session just catching your therapist up</li>
-              <li>• Walking away feeling like you barely scratched the surface</li>
-              <li>• Your therapist starting from zero every single week</li>
-            </ul>
-          </div>
-
-          {/* Value preview */}
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 mb-6 border border-green-100">
-            <h3 className="font-bold text-green-800 mb-3 text-center">✅ What 2,000+ Therapy Clients Already Know:</h3>
-            <ul className="text-sm text-green-700 space-y-2">
-              <li>• <span className="font-semibold">20+ extra minutes</span> of real therapy work per session</li>
-              <li>• <span className="font-semibold">Your therapist knows your week</span> before you even sit down</li>
-              <li>• <span className="font-semibold">160% more breakthrough moments</span> reported</li>
-            </ul>
-          </div>
-
-          {/* FOMO element */}
-          <div className="text-center mb-6">
-            <p className="text-orange-600 font-semibold text-sm mb-2">
-              🔥 <span className="font-bold">INSIDER ACCESS:</span> This calculator reveals the hidden cost of traditional therapy
-            </p>
-            <p className="text-gray-600 text-xs">
-              Most people have no idea they're paying for 20 minutes of recap every session
-            </p>
-          </div>
-
-          <form onSubmit={handleEmailSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-800 mb-2">
-                Enter your email to access your personal therapy savings calculator:
-              </label>
-              <input
-                type="email"
-                className="w-full border-2 border-[#1281dd] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] text-lg"
-                value={leadEmail}
-                onChange={e => setLeadEmail(e.target.value)}
-                placeholder="your.email@example.com"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={emailSubmitting}
-              className="w-full bg-gradient-to-r from-[#1281dd] to-blue-700 text-white rounded-lg py-4 font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:opacity-50"
-            >
-              {emailSubmitting ? 'Calculating Your Savings...' : '💰 Calculate My Hidden Therapy Costs →'}
-            </button>
-          </form>
-
-          <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500 mb-2">
-              ⚡ <span className="font-semibold">Instant results</span> • 🔒 <span className="font-semibold">Email protected</span> • 📊 <span className="font-semibold">Used by 2,000+ clients</span>
-            </p>
-            <p className="text-xs text-orange-600 font-semibold">
-              ⏰ Join before we make this premium-only access
-            </p>
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  // Original Calculator Component (shown after email capture)
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-teal-50/30 to-white flex flex-col items-center justify-center py-12 px-4">
       {/* Invite Modal */}
@@ -236,6 +114,16 @@ export default function TherapyValueCalculator() {
                 </p>
                 
                 <form onSubmit={handleInviteSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                    <input
+                      type="email"
+                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      value={userEmail}
+                      onChange={e => setUserEmail(e.target.value)}
+                      required
+                    />
+                  </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
                     <input
@@ -292,7 +180,7 @@ export default function TherapyValueCalculator() {
                         href="tel:+18883663082"
                         className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-[#0e6bb8] transition"
                         onClick={() => {
-                          posthog.capture('calculator_call_to_journal_initiated');
+                          posthog.capture('calculator_direct_call_to_journal_initiated');
                         }}
                       >
                         Call to Journal
@@ -301,7 +189,7 @@ export default function TherapyValueCalculator() {
                         href="sms:+18883663082"
                         className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
                         onClick={() => {
-                          posthog.capture('calculator_text_to_journal_initiated');
+                          posthog.capture('calculator_direct_text_to_journal_initiated');
                         }}
                       >
                         Text to Journal
@@ -322,6 +210,7 @@ export default function TherapyValueCalculator() {
           </div>
         </div>
       )}
+      
       <motion.div
         initial="hidden"
         animate="visible"
