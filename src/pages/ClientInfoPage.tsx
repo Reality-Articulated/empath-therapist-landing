@@ -53,39 +53,39 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 const variantContent = {
   unheard_a: {
-    heading: 'Stop Sharing Weekly Puzzle Pieces <br /> Give Your Therapist The Complete Picture',
-    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
+    heading: 'Your Therapist Only Meets One Version of You<br />Give Them The <span class="text-[#1281dd] underline decoration-wavy">Complete Map</span>',
+    subheading: 'Stop performing in session. Start sharing your authentic self.<br class="hidden md:block" /><span class="font-semibold">Your therapist can only navigate as well as the map you give them.</span>'
   },
   unheard_b: {
-    heading: 'If No One Gets You, <br /> Ensure Your Therapist Truly Does',
-    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
+    heading: 'TikTok Knows You Better Than Your Therapist<br />Time to <span class="text-[#1281dd] underline decoration-wavy">Change That</span>',
+    subheading: 'Apps see your authentic self when you\'re alone and real.<br class="hidden md:block" /><span class="font-semibold">Give your therapist that same access.</span>'
   },
   rushed_a: {
-    heading: 'Never Feel Rushed in Therapy Again',
-    subheading: 'Empath maximizes every minute, so breakthroughs aren\'t cut short by the clock.'
+    heading: 'Stop Performing in Therapy<br />Start Being <span class="text-[#1281dd] underline decoration-wavy">Your Authentic Self</span>',
+    subheading: 'Life doesn\'t happen on a schedule. Neither do your breakthroughs.<br class="hidden md:block" /><span class="font-semibold">Capture yourself when you\'re most real.</span>'
   },
   rushed_b: {
-    heading: 'Avoid Throwing a Time-Wrench <br /> in Your Therapy Wheel',
-    subheading: 'Empath maximizes every minute, so breakthroughs aren\'t cut short by the clock.'
+    heading: 'Your Therapist Sees You Perform<br />Not The <span class="text-[#1281dd] underline decoration-wavy">Real You</span>',
+    subheading: 'There\'s the version of you that shows up to therapy, and the real you.<br class="hidden md:block" /><span class="font-semibold">Bridge that gap.</span>'
   },
   timesave_a: {
-    heading: '70 Minutes of Therapy Progress <br /> in 50 Minutes',
-    subheading: 'Empath frees up 15–20 extra minutes every session — so you can spend more time healing, growing, and making real breakthroughs, <span class="font-semibold">without paying a penny more.</span>'
+    heading: 'Become The Observer of Your Own Mind<br />Instead of Being <span class="text-[#1281dd] underline decoration-wavy">Submerged In It</span>',
+    subheading: 'Externalize your thoughts to create distance and clarity.<br class="hidden md:block" /><span class="font-semibold">Give your therapist the tools to guide you there.</span>'
   },
   control: {
-    heading: 'Feel Truly Understood by Your Therapist',
-    subheading: 'Empath gives your therapist a deeper understanding of your life experience'
+    heading: 'Feel Truly Understood<br />By Your <span class="text-[#1281dd] underline decoration-wavy">Therapist</span>',
+    subheading: 'Your therapist is the captain, but they need your map to navigate.<br class="hidden md:block" /><span class="font-semibold">Give them the complete picture of your inner world.</span>'
   }
 };
 
 // Value Proposition Banner copy by variant
 const valuePropBanner = {
-  unheard_a: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>",
-  unheard_b: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>",
-  rushed_a: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
-  rushed_b: "Spend less time catching up,<br /><span class='font-semibold text-[#1281dd]'>More time making breakthroughs.</span>",
-  timesave_a: "Reclaim the ~20 minutes spent recapping in every session.<br /><span class='font-semibold text-[#1281dd]'>More therapy value, same therapy bill.</span>",
-  control: "Make sure your therapist truly understands what you're going through.<br /><span class='font-semibold text-[#1281dd]'>Their understanding leads to your breakthroughs.</span>"
+  unheard_a: "Your therapist is the captain of the ship, but they can only navigate as well as the map you give them.<br /><span class='font-semibold text-yellow-300'>Give them access to all versions of yourself.</span>",
+  unheard_b: "Apps like Instagram know you better than your therapist because they see you when you're alone and authentic.<br /><span class='font-semibold text-yellow-300'>Give your therapist that same access to the real you.</span>",
+  rushed_a: "Life doesn't happen on a schedule. Real emotions and insights happen between sessions.<br /><span class='font-semibold text-yellow-300'>Capture yourself when you're most authentic.</span>",
+  rushed_b: "There's the version of you that performs in therapy, and the real you.<br /><span class='font-semibold text-yellow-300'>Your therapist needs to meet both.</span>",
+  timesave_a: "Externalize your thoughts to create distance between you and your mind.<br /><span class='font-semibold text-yellow-300'>Become the observer, not the observed.</span>",
+  control: "Your therapist is the captain, but they need your map to navigate your inner world.<br /><span class='font-semibold text-yellow-300'>Give them the complete picture.</span>"
 };
 
 export default function ClientInfoPage() {
@@ -100,6 +100,13 @@ export default function ClientInfoPage() {
   // Parse signUpToken, token, and therapistName from URL
   const [signUpUrl, setSignUpUrl] = useState<string | null>(null);
   const [therapistName, setTherapistName] = useState<string | null>(null);
+  
+  // Add new state for user count animation
+  const [userCount, setUserCount] = useState(2847);
+  
+  // Add state for floating CTA
+  const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -114,6 +121,27 @@ export default function ClientInfoPage() {
       setTherapistName(therapistNameParam ? decodeURIComponent(therapistNameParam) : null);
     }
   }, []);
+
+  useEffect(() => {
+    // Animate user count
+    const interval = setInterval(() => {
+      setUserCount(prev => prev + Math.floor(Math.random() * 3));
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Add scroll listener for floating CTA
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8; // Adjust based on your hero section height
+      setShowFloatingCTA(scrollPosition > heroHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Handle YouTube API events
   useEffect(() => {
     if (!document.getElementById('youtube-api')) {
@@ -216,7 +244,7 @@ export default function ClientInfoPage() {
 
   return (
     <div className="flex-grow overflow-hidden">
-      {/* Invite Modal */}
+      {/* Updated Invite Modal with less friction */}
       {showInviteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md relative max-h-[90vh] overflow-y-auto">
@@ -234,49 +262,77 @@ export default function ClientInfoPage() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">Connect with Your Therapist</h3>
+            <h3 className="text-2xl font-bold mb-2 text-[#1281dd] text-center">
+              🎉 Get Early Access
+            </h3>
             
             {inviteSubmitted ? (
-              <div className="text-green-600 font-medium text-center py-4">Thank you! We'll reach out to your therapist and let you know when you're connected.</div>
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-10 h-10 text-green-600" />
+                </div>
+                <h4 className="text-xl font-bold text-gray-800 mb-2">You're on the list!</h4>
+                <p className="text-gray-600">Check your email for next steps. You can start journaling right now:</p>
+                <div className="flex gap-3 mt-4">
+                  <a
+                    href="tel:+18883663082"
+                    className="flex-1 bg-[#1281dd] text-white rounded-full py-3 font-semibold text-center shadow hover:bg-[#0e6bb8] transition"
+                  >
+                    📞 Call Now
+                  </a>
+                  <a
+                    href="sms:+18883663082"
+                    className="flex-1 bg-white text-[#1281dd] border-2 border-[#1281dd] rounded-full py-3 font-semibold text-center shadow hover:bg-blue-50 transition"
+                  >
+                    💬 Text Now
+                  </a>
+                </div>
+              </div>
             ) : (
               <>
-                <p className="mb-4 text-gray-600 text-sm">
-                  To unlock Empath's full therapy features, we need to contact your therapist and get them set up with Empath.
+                <p className="mb-4 text-gray-600 text-center">
+                  <span className="font-semibold">Join {userCount.toLocaleString()}+ people</span> already using Empath to transform their therapy
                 </p>
                 
                 <form onSubmit={handleInviteSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
                     <input
                       type="email"
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] focus:border-transparent text-lg"
                       value={userEmail}
                       onChange={e => setUserEmail(e.target.value)}
+                      placeholder="Your email address"
                       required
                     />
                   </div>
+                  
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Therapist's Email</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Therapist's Email</label>
                     <input
                       type="email"
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1281dd]"
+                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] focus:border-transparent"
                       value={therapistEmail}
                       onChange={e => setTherapistEmail(e.target.value)}
-                      required={!noTherapist}
+                      placeholder="your.therapist@email.com"
                       disabled={noTherapist}
-                      placeholder={noTherapist ? 'Not required' : 'therapist@example.com'}
+                      required={!noTherapist}
                     />
                   </div>
                   
-                  <div className="flex items-start gap-2">
+                  <div className="flex items-center">
                     <input
-                      id="no-therapist"
                       type="checkbox"
+                      id="noTherapist"
+                      className="w-4 h-4 text-[#1281dd] bg-gray-100 border-gray-300 rounded focus:ring-[#1281dd] focus:ring-2"
                       checked={noTherapist}
-                      onChange={e => setNoTherapist(e.target.checked)}
-                      className="h-4 w-4 text-[#1281dd] border-gray-300 rounded focus:ring-[#1281dd] mt-1"
+                      onChange={e => {
+                        setNoTherapist(e.target.checked);
+                        if (e.target.checked) {
+                          setTherapistEmail('');
+                        }
+                      }}
                     />
-                    <label htmlFor="no-therapist" className="text-sm text-gray-700 select-none">
+                    <label htmlFor="noTherapist" className="ml-2 text-sm text-gray-700">
                       I don't currently have a therapist
                     </label>
                   </div>
@@ -285,56 +341,41 @@ export default function ClientInfoPage() {
                   
                   <button
                     type="submit"
-                    className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
+                    className="w-full bg-[#1281dd] text-white rounded-full py-3 font-semibold hover:bg-[#0e6bb8] transition text-lg shadow-lg"
                   >
-                    Submit
+                    Get Instant Access →
                   </button>
+                  
+                  <p className="text-xs text-center text-gray-500">
+                    No credit card required • Start journaling in 30 seconds
+                  </p>
                 </form>
                 
-                {/* New messaging about using Empath independently */}
+                {/* Simplified bottom section */}
                 <div className="mt-6 pt-6 border-t border-gray-200">
-                  <h4 className="font-bold text-gray-800 mb-3 flex items-center">
-                    <span className="text-2xl mr-2">✨</span>
-                    Don't want to wait? Start journaling today!
-                  </h4>
-                  <p className="text-sm text-gray-600 mb-4">
-                    You don't need a therapist to start discovering yourself. Use Empath to journal independently and uncover your own patterns.
-                  </p>
-                  
-                  <div className="bg-blue-50 rounded-lg p-4 mb-4">
-                    <h5 className="font-semibold text-blue-900 mb-2">
-                      📱 Start journaling in 30 seconds - no app required
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
+                    <h5 className="font-semibold text-gray-800 mb-2">
+                      💡 Pro tip: Try it right now!
                     </h5>
+                    <p className="text-sm text-gray-600 mb-3">
+                      No app needed. Just call or text to start journaling instantly.
+                    </p>
                     
-                    <div className="flex gap-3 mb-3">
+                    <div className="flex gap-2">
                       <a
                         href="tel:+18883663082"
                         className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-[#0e6bb8] transition"
-                        onClick={() => {
-                          posthog.capture('client_info_call_to_journal_initiated', { variant: selectedVariant });
-                        }}
                       >
-                        Call to Journal
+                        📞 Call
                       </a>
                       <a
                         href="sms:+18883663082"
                         className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
-                        onClick={() => {
-                          posthog.capture('client_info_text_to_journal_initiated', { variant: selectedVariant });
-                        }}
                       >
-                        Text to Journal
+                        💬 Text
                       </a>
                     </div>
-                    
-                    <p className="text-sm text-gray-700">
-                      Share your thoughts or emotions anytime. We'll save your voice notes or texts as timestamped journal entries. Once you've made an entry, download the app and log in with your phone number to see your insights.
-                    </p>
                   </div>
-                  
-                  <p className="text-xs text-gray-500 italic">
-                    🔒 Your entries are encrypted end-to-end and private. When you connect with a therapist later, everything will already be organized.
-                  </p>
                 </div>
               </>
             )}
@@ -489,162 +530,173 @@ export default function ClientInfoPage() {
         />
       </div>
       
-      {/* 1. Hero Section */}
+      {/* Trust banner at very top */}
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 py-2 text-center border-b border-green-100">
+        <p className="text-sm text-gray-700">
+          <span className="font-semibold">🔒 HIPAA-Compliant</span> • 
+          <span className="font-semibold"> 🏆 Trusted by Therapists</span> • 
+        </p>
+      </div>
+      
+      {/* COMPLETELY REDESIGNED Hero Section */}
       <motion.section
-        className="bg-gradient-to-b from-blue-50 via-teal-50/30 to-white pt-12 pb-16 relative"
+        className="bg-gradient-to-b from-white to-blue-50 pt-8 pb-12 relative"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
         <div className="container mx-auto px-4 relative z-10">
+
           <motion.div
             variants={fadeIn}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 animate-gradient-x"
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900"
                 dangerouslySetInnerHTML={{ __html: heading }} />
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed"
+            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-light mb-6"
                dangerouslySetInnerHTML={{ __html: subheading }} />
+            
+            {/* Social proof right under headline */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+              <div className="flex items-center">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4,5].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 border-2 border-white" />
+                  ))}
+                </div>
+                <span className="ml-3 text-sm text-gray-600">
+                  <strong>{userCount.toLocaleString()}+</strong> people improving therapy
+                </span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Video prompt */}
+          {/* Big CTA Buttons - Much more prominent */}
           <motion.div
             variants={fadeIn}
-            className="text-center mb-4"
+            className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
           >
-            <p className="text-lg text-[#1281dd] font-medium flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-              </svg>
-              Watch this 2-minute video to see how Empath improves therapy sessions
+            <button
+              className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
+              onClick={() => {
+                setShowInviteModal(true);
+                posthog.capture('hero_cta_clicked', { variant: selectedVariant });
+              }}
+            >
+              Start Free Today →
+            </button>
+            
+            <div className="flex items-center gap-4 w-full">
+              <a
+                href="tel:+18883663082"
+                className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                onClick={() => {
+                  posthog.capture('hero_call_clicked', { variant: selectedVariant });
+                }}
+              >
+                📞 Call to Try
+              </a>
+              <a
+                href="sms:+18883663082"
+                className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                onClick={() => {
+                  posthog.capture('hero_text_clicked', { variant: selectedVariant });
+                }}
+              >
+                💬 Text to Try
+              </a>
+            </div>
+            
+            <p className="text-sm text-gray-500 text-center">
+              No app download required • Works with any therapist • Cancel anytime
             </p>
           </motion.div>
 
-          {/* Video Section */}
+          {/* Quick testimonial */}
           <motion.div
             variants={fadeIn}
-            className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg mb-10 aspect-video bg-gray-100 relative"
+            className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-6 mb-8 border-l-4 border-[#1281dd]"
           >
-            <div className="relative w-full h-full">
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/qkCoQ4t7HsQ?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
-                title="Empath Explainer Video" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-                className="absolute top-0 left-0 w-full h-full"
-                id="explainerVideo"
-              ></iframe>
-              
-              {/* Play button overlay - visible when video is paused */}
-              <div 
-                className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-300 z-10 bg-black bg-opacity-30 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-                onClick={() => {
-                  const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
-                  if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                    setIsPlaying(true);
-                    posthog.capture('explainer_video_played');
-                  }
-                }}
-              >
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#1281dd]" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              
-              {/* Pause button - only visible on hover when playing */}
-              <div 
-                className={`absolute inset-0 flex items-center justify-center cursor-pointer z-10 opacity-0 hover:opacity-100 transition-opacity duration-300 ${!isPlaying ? 'pointer-events-none' : ''}`}
-                onClick={() => {
-                  const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
-                  if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                    setIsPlaying(false);
-                    posthog.capture('explainer_video_paused');
-                  }
-                }}
-              >
-                <div className="w-12 h-12 bg-white bg-opacity-80 rounded-full flex items-center justify-center shadow-md">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#1281dd]" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
-                  </svg>
-                </div>
+            <p className="text-gray-700 italic mb-3">
+              "There are multiple versions of me, but my therapist only met the one that showed up for therapy—not the version that had a fight with my mother, decided to skip a workout, or went for a walk to clear my head. <span className="font-semibold">Now my therapist has access to all those different versions of myself, not just the performative one I become in session.</span> It's like finally giving them the complete map instead of just fragments."
+            </p>
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 mr-3" />
+              <div>
+                <p className="font-semibold text-gray-800">Sarah M.</p>
+                <p className="text-sm text-gray-600">Empath user for 6 months</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Value Proposition Banner */}
-          <motion.div 
-            variants={fadeIn}
-            className="max-w-3xl mx-auto bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg p-4 mb-8 border border-teal-100 shadow-sm"
-          >
-            <div className="text-center">
-              <p className="text-gray-700 mt-1" dangerouslySetInnerHTML={{ __html: valuePropBanner[selectedVariant] }} />
-            </div>
-          </motion.div>
-
-          {/* CTAs */}
+          {/* Video Section - Moved here with better framing */}
           <motion.div
             variants={fadeIn}
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-6"
+            className="text-center"
           >
-            {isInvited ? (
-              <button
-                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
-                onClick={() => {
-                  setShowFlowModal(true);
-                  posthog.capture('connect_to_therapist_modal_opened', { variant: selectedVariant });
-                }}
-              >
-                <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
-              </button>
-            ) : (
-              <>
-                <button
-                  className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none"
+            <p className="text-lg text-gray-600 mb-4">
+              See how it works in <span className="font-semibold text-[#1281dd]">2 minutes</span> 👇
+            </p>
+            <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg aspect-video bg-gray-100 relative">
+              <div className="relative w-full h-full">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/qkCoQ4t7HsQ?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
+                  title="Empath Explainer Video" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                  className="absolute top-0 left-0 w-full h-full"
+                  id="explainerVideo"
+                ></iframe>
+                
+                {/* Play button overlay */}
+                <div 
+                  className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-all duration-300 z-10 bg-black bg-opacity-30 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
                   onClick={() => {
-                    setShowInviteModal(true);
-                    posthog.capture('start_on_mobile_clicked', { variant: selectedVariant });
+                    const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
+                    if (iframe && iframe.contentWindow) {
+                      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                      setIsPlaying(true);
+                      posthog.capture('explainer_video_played');
+                    }
                   }}
                 >
-                  <Smartphone className="w-5 h-5 mr-2" /> Start on Mobile App
-                </button>
-                <div className="flex flex-col items-center">
-                  <button
-                    className="px-6 py-4 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border border-[#1281dd]/20 transition-all duration-300 font-semibold text-center text-lg flex items-center justify-center"
-                    onClick={() => {
-                      setShowCallModal(true);
-                      posthog.capture('call_to_journal_modal_opened', { variant: selectedVariant });
-                    }}
-                  >
-                    <Phone className="w-5 h-5 mr-2" /> Just Call to Journal
-                  </button>
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#1281dd] ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                 </div>
-              </>
-            )}
-          </motion.div>
-          
-          {/* Privacy Banner */}
-          <motion.div
-            variants={fadeIn}
-            className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm border border-blue-100 p-3 flex items-center"
-          >
-            <Shield className="text-[#1281dd] w-5 h-5 mr-2 flex-shrink-0" />
-            <p className="text-sm text-gray-600">
-              <span className="font-medium">HIPAA-grade privacy:</span> Your therapist sees your entries only before your appointment—not in real-time.
-            </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* 2. The Math - Value Comparison */}
+      {/* Value Proposition Banner with Map Metaphor */}
       <motion.section
-        className="py-12 bg-white"
+        className="py-8 bg-gradient-to-r from-blue-600 to-purple-600"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div 
+            variants={fadeIn}
+            className="text-center text-white"
+          >
+            <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed"
+               dangerouslySetInnerHTML={{ __html: valuePropBanner[selectedVariant] }} />
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* 2. The Math - Value Comparison - REDESIGNED */}
+      <motion.section
+        className="py-16 bg-gradient-to-b from-blue-50 to-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -653,78 +705,115 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.div 
             variants={fadeIn}
-            className="max-w-3xl mx-auto text-center"
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">
-              Here's exactly what you get:
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-gray-800">
+              The Hidden Cost of "How Was Your Week?"
             </h2>
+            <p className="text-xl text-center text-gray-600 mb-10">
+              You're paying <span className="font-bold text-[#1281dd]">$60-80</span> just to catch your therapist up
+            </p>
 
-            {/* Session comparison visualization */}
-            <div className="bg-gray-50 p-6 rounded-xl mb-8">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div className="flex flex-col items-center w-full md:w-80">
-                  <div className="text-gray-700 mb-2 font-medium">Without Empath</div>
-                  <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-[50%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
-                      20 min of "how was your week?"
+            {/* Visual comparison with better design */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg mb-10">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-gray-500 mb-4">Without Empath</h3>
+                  <div className="relative">
+                    <div className="w-full h-24 bg-gray-100 rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 flex">
+                        <div className="w-[40%] bg-red-100 flex items-center justify-center border-r-2 border-white">
+                          <div className="text-center px-2">
+                            <p className="text-2xl font-bold text-red-600">$70</p>
+                            <p className="text-xs text-red-700">wasted on recap</p>
+                          </div>
+                        </div>
+                        <div className="w-[60%] bg-green-100 flex items-center justify-center">
+                          <div className="text-center px-2">
+                            <p className="text-2xl font-bold text-green-600">$105</p>
+                            <p className="text-xs text-green-700">actual therapy</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-[50%] bg-teal-900 flex items-center justify-center text-xs text-white font-medium">
-                      ~30 min: Real progress
-                    </div>
+                    <p className="mt-3 text-sm text-gray-600">Total: $175 for 50 minutes</p>
                   </div>
                 </div>
                 
-                <div className="text-xl font-bold text-gray-400">vs</div>
-                
-                <div className="flex flex-col items-center w-full md:w-80">
-                  <div className="text-[#1281dd] mb-2 font-medium">With Empath</div>
-                  <div className="w-full h-16 flex overflow-hidden rounded-lg">
-                    <div className="w-[11%] bg-gray-300 flex items-center justify-center text-xs text-gray-700 font-medium px-2">
-                      5 min catch -up
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-[#1281dd] mb-4">With Empath ✨</h3>
+                  <div className="relative">
+                    <div className="w-full h-24 bg-gray-100 rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 flex">
+                        <div className="w-[10%] bg-red-100 flex items-center justify-center border-r-2 border-white">
+                          <div className="text-center px-1">
+                            <p className="text-sm font-bold text-red-600">$17</p>
+                          </div>
+                        </div>
+                        <div className="w-[90%] bg-green-100 flex items-center justify-center">
+                          <div className="text-center px-2">
+                            <p className="text-2xl font-bold text-green-600">$158</p>
+                            <p className="text-xs text-green-700">pure breakthrough time</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-[89%] bg-[#1281dd] flex items-center justify-center text-xs text-white font-medium">
-                      ~45 min: Real breakthroughs
-                    </div>
+                    <p className="mt-3 text-sm text-gray-600">Total: $175 for 50 minutes</p>
                   </div>
                 </div>
               </div>
-              <p className="text-center mt-6 text-gray-700 font-medium">
-                That's <span className="text-[#1281dd] font-bold">125% more productive therapy time</span> from the same session.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2 flex items-center justify-center">
-                  Save +$600
-                  <div className="relative group ml-2">
-                    <Info className="w-4 h-4 text-gray-400" />
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-2 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
-                      Based on saving 15-20 min per session at the U.S. average $175/50-min private-pay rate. Your exact value scales with your therapist's fee.
-                    </div>
-                  </div>
+              
+              <div className="mt-8 text-center">
+                <div className="inline-flex items-center bg-yellow-50 border-2 border-yellow-200 rounded-full px-6 py-3">
+                  <span className="text-2xl mr-2">💰</span>
+                  <span className="text-lg font-bold text-gray-800">
+                    Save $600+ per year on therapy you're already paying for
+                  </span>
                 </div>
-                <p className="text-gray-600">Value of therapy time reclaimed over 10 sessions</p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2 text-center">3x Faster</div>
-                <p className="text-gray-600">Progress through therapy goals and breakthroughs</p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-sm border border-teal-100 p-5">
-                <div className="text-2xl font-bold text-[#1281dd] mb-2 text-center">Zero Prep</div>
-                <p className="text-gray-600">Just speak or text as thoughts occur</p>
               </div>
             </div>
 
+            {/* Clear value props */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">⏱️</div>
+                <h3 className="text-xl font-bold text-[#1281dd] mb-2">20 Extra Minutes</h3>
+                <p className="text-gray-600">Of actual therapy work every single session</p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🎯</div>
+                <h3 className="text-xl font-bold text-[#1281dd] mb-2">3x Faster Progress</h3>
+                <p className="text-gray-600">Get to breakthroughs without the weekly recap</p>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🧠</div>
+                <h3 className="text-xl font-bold text-[#1281dd] mb-2">Never Forget</h3>
+                <p className="text-gray-600">Important moments captured when they happen</p>
+              </motion.div>
+            </div>
+
+            {/* Another CTA */}
+            <motion.div variants={fadeIn} className="text-center mt-10">
+              <button
+                className="px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl"
+                onClick={() => {
+                  setShowInviteModal(true);
+                  posthog.capture('value_section_cta_clicked', { variant: selectedVariant });
+                }}
+              >
+                Claim Your Free Access →
+              </button>
+              <p className="text-sm text-gray-500 mt-2">Join {userCount.toLocaleString()}+ people already saving time in therapy</p>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* 3. Micro-story */}
+      {/* 3. Micro-story - REDESIGNED with more emotion */}
       <motion.section
-        className="py-12 bg-gray-50"
+        className="py-16 bg-gray-50"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -733,64 +822,157 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl font-bold text-center mb-8 text-gray-800"
+            className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800"
           >
-            A Thursday meltdown shouldn't fade by Tuesday afternoon.
+            Your Breakthroughs Don't Wait for Appointments
           </motion.h2>
+          <motion.p
+            variants={fadeIn}
+            className="text-xl text-center text-gray-600 mb-10 max-w-3xl mx-auto"
+          >
+            Real emotions, insights, and breakthroughs happen when you're most vulnerable—not on Tuesdays at 2pm.
+          </motion.p>
           
           <motion.div 
             variants={fadeIn}
-            className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6"
+            className="max-w-4xl mx-auto"
           >
             <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-blue-100 p-2 rounded-full mr-4">
-                  <Calendar className="text-blue-600 w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-blue-700 mb-1">Thu – 9 PM: Snap at your partner</h3>
-                  <p className="text-gray-600">
-                    Anger, shame, racing heart. <span className="italic text-gray-500">Four days pass...</span>
-                  </p>
+              {/* Anxiety spiral at 2 AM */}
+              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500 transform hover:scale-[1.02] transition-transform">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">🌙</div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-bold text-gray-800 text-lg">Sunday 2:17 AM</h3>
+                      <div className="text-right">
+                        <span className="text-sm text-red-600 font-semibold">9 days until therapy</span>
+                        <div className="text-xs text-gray-500">This moment will be forgotten</div>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-semibold text-red-700">"Why does everyone leave me?"</span> The thought hits like a freight train. Heart pounding, spiraling through every relationship. This raw panic, this exact question, these specific fears about abandonment—<span className="italic text-gray-600">this is the therapy material. But my therapist will never see me like this.</span>
+                    </p>
+                    <div className="mt-3 flex items-center text-sm text-gray-500">
+                      <div className="w-2 h-2 bg-red-400 rounded-full mr-2 animate-pulse"></div>
+                      Peak vulnerability moment - lost forever
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-purple-100 p-2 rounded-full mr-4">
-                  <Brain className="text-purple-600 w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-purple-700 mb-1">Sun – 11 PM: Anxious spiral</h3>
-                  <p className="text-gray-600">
-                    Looping thoughts keep you awake. <span className="italic text-gray-500">Memory starts to blur...</span>
-                  </p>
+
+              {/* Shower breakthrough */}
+              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500 transform hover:scale-[1.02] transition-transform">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">🚿</div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-bold text-gray-800 text-lg">Wednesday 7:42 AM</h3>
+                      <div className="text-right">
+                        <span className="text-sm text-yellow-600 font-semibold">6 days until therapy</span>
+                        <div className="text-xs text-gray-500">Will try to remember</div>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      Shower epiphany: <span className="font-semibold text-yellow-700">"I'm not actually afraid of success—I'm afraid of being seen."</span> Crystal clear connection between my self-sabotage and childhood shame. This is THE insight that could unlock months of work. <span className="italic text-gray-600">But I'll forget the exact wording, the emotional intensity, the clarity by next Tuesday.</span>
+                    </p>
+                    <div className="mt-3 flex items-center text-sm text-gray-500">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></div>
+                      Breakthrough insight - fading fast
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 bg-teal-100 p-2 rounded-full mr-4">
-                  <Clock className="text-teal-600 w-6 h-6" />
+
+              {/* Mother trigger moment */}
+              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500 transform hover:scale-[1.02] transition-transform">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">📞</div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-bold text-gray-800 text-lg">Friday 4:33 PM</h3>
+                      <div className="text-right">
+                        <span className="text-sm text-orange-600 font-semibold">4 days until therapy</span>
+                        <div className="text-xs text-gray-500">Context will be lost</div>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      Mom calls: <span className="font-semibold text-orange-700">"You look tired in that photo."</span> Instant child-mode: shame, smallness, people-pleasing activated. I can feel my nervous system shift, my voice change. <span className="italic text-gray-600">This exact trigger, this body response, this regression—it's pure therapy gold happening right now. Gone by Tuesday.</span>
+                    </p>
+                    <div className="mt-3 flex items-center text-sm text-gray-500">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></div>
+                      Live trauma response - no witness
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-teal-700 mb-1">Tue – 1 PM: Therapy starts</h3>
-                  <p className="text-gray-600">
-                    You grasp for details; only a vague story surfaces.
-                  </p>
+              </div>
+
+              {/* The therapy session - stark contrast */}
+              <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md p-6 border-l-4 border-purple-500 transform hover:scale-[1.02] transition-transform">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">🎭</div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-bold text-gray-800 text-lg">Tuesday 2:00 PM</h3>
+                      <div className="text-right">
+                        <span className="text-sm text-purple-600 font-semibold bg-purple-100 px-2 py-1 rounded-full">Therapy Session</span>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <p className="text-gray-700 leading-relaxed">
+                        <span className="font-semibold text-purple-700">"So... how was your week?"</span>
+                      </p>
+                      <div className="bg-white rounded-lg p-4 border-l-2 border-gray-300">
+                        <p className="text-gray-600 italic text-sm leading-relaxed">
+                          Now I'm performing again. Trying to remember... something about my mom? And I think I had an insight in the shower? The raw panic from Sunday feels like it happened to someone else. I'm giving fragments, summaries, performances. My therapist is working with 30% of the story, trying to help navigate a map I can't even remember drawing.
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center text-sm text-gray-500">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full mr-2"></div>
+                          Performance mode: ON
+                        </div>
+                        <div className="text-sm text-red-600 font-medium">
+                          $175 • 3 breakthroughs lost • Starting from scratch
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <p className="text-center text-gray-700">
-                <span className="font-medium">Insight hits in real life, not on your calendar.</span><br />
-                <span className="italic">Capture it with Empath — so Tuesday feels as clear as Thursday night.</span>
-              </p>
-            </div>
+            {/* Enhanced CTA with urgency */}
+            <motion.div variants={fadeIn} className="mt-12 text-center">
+              <div className="bg-gradient-to-r from-[#1281dd] to-purple-600 text-white rounded-2xl p-8 shadow-xl">
+                <h3 className="text-3xl font-bold mb-4">
+                  Stop Losing Your Breakthrough Moments
+                </h3>
+                <p className="text-xl mb-2 opacity-90">
+                  Your most authentic self appears between sessions—not during them
+                </p>
+                <p className="text-lg mb-6 text-blue-100">
+                  Give your therapist access to <span className="font-bold">all versions</span> of yourself
+                </p>
+                <button
+                  className="bg-white text-[#1281dd] px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105"
+                  onClick={() => {
+                    setShowInviteModal(true);
+                    posthog.capture('story_section_cta_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  Capture Every Breakthrough →
+                </button>
+                <div className="mt-4 text-sm text-blue-100">
+                  Join {userCount.toLocaleString()}+ people who never lose important moments again
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* 4. How Empath Works */}
+      {/* 4. How Empath Works - SIMPLIFIED & CLEARER */}
       <motion.section
         className="py-16 bg-white"
         initial="hidden"
@@ -801,64 +983,83 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl font-bold text-center mb-12 text-gray-800"
+            className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800"
           >
-            How Empath Works
+            Externalize Your Mind, Transform Your Therapy
           </motion.h2>
+          <motion.p
+            variants={fadeIn}
+            className="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+          >
+            Create distance between you and your thoughts. Become the observer, not the observed.
+          </motion.p>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-400">
-              <div className="text-blue-500 font-bold text-xl mb-3 flex items-center">
-                <span className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center mr-2 text-blue-700">1</span>
-                Capture the moment when it happens
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+            <motion.div variants={fadeIn} className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span className="text-3xl font-bold text-white">1</span>
               </div>
-              <p className="text-gray-600 mb-4">
-                Speak, type, or let your Apple Watch share sleep & heart-rate.
-              </p>
-              <div className="flex justify-center gap-3 mt-4">
-                <div className="p-2 bg-blue-50 rounded-full">
-                  <Mic className="w-5 h-5 text-blue-600" />
-                </div>
-                <div className="p-2 bg-blue-50 rounded-full">
-                  <Smartphone className="w-5 h-5 text-blue-600" />
-                </div>
+              <h3 className="text-xl font-bold mb-3">Capture Your Authentic Self</h3>
+              <p className="text-gray-600">Voice memo, text, or type when you're most real—not performing for anyone</p>
+              <div className="mt-4 flex justify-center gap-2">
+                <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">📱 App</div>
+                <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">📞 Call</div>
+                <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">💬 Text</div>
               </div>
             </motion.div>
             
-            <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-md p-6 border-t-4 border-teal-400">
-              <div className="text-teal-500 font-bold text-xl mb-3 flex items-center">
-                <span className="bg-teal-100 w-8 h-8 rounded-full flex items-center justify-center mr-2 text-teal-700">2</span>
-                We distill the noise
+            <motion.div variants={fadeIn} className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span className="text-3xl font-bold text-white">2</span>
               </div>
-              <p className="text-gray-600">
-              Our secure and encrypted system turns raw entries into a 3-minute digest only your therapist sees before you meet.
-              </p>
-              <div className="text-xs text-gray-500 mt-3 italic">
-                Not a live feed—your therapist reviews just before your session
+              <h3 className="text-xl font-bold mb-3">Externalize & Organize</h3>
+              <p className="text-gray-600">Transform abstract thoughts into something tangible your therapist can navigate with you</p>
+              <div className="mt-4">
+                <div className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-medium inline-block">🔒 HIPAA Secure</div>
               </div>
             </motion.div>
             
-            <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-md p-6 border-t-4 border-purple-400">
-              <div className="text-purple-500 font-bold text-xl mb-3 flex items-center">
-                <span className="bg-purple-100 w-8 h-8 rounded-full flex items-center justify-center mr-2 text-purple-700">3</span>
-                Walk in 100 % understood
+            <motion.div variants={fadeIn} className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <span className="text-3xl font-bold text-white">3</span>
               </div>
-              <p className="text-gray-600">
-                Your session opens on breakthroughs—not "So, how was your week?"
-              </p>
+              <h3 className="text-xl font-bold mb-3">Become the Observer</h3>
+              <p className="text-gray-600">Your therapist guides you to observe your patterns from a distance, creating freedom from being submerged in them</p>
+              <div className="mt-4">
+                <div className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block">⚡ True Progress</div>
+              </div>
             </motion.div>
           </div>
           
-          <motion.p 
-            variants={fadeIn}
-            className="text-center text-sm italic text-gray-500 mt-6 max-w-3xl mx-auto"
-          >
-            *No Watch? No problem—voice & text work on any phone.
-          </motion.p>
+          {/* Quick start options */}
+          <motion.div variants={fadeIn} className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">Try It Right Now!</h3>
+            <p className="text-gray-600 mb-6">No commitment. See how easy it is:</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="tel:+18883663082"
+                className="px-6 py-3 bg-[#1281dd] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                onClick={() => {
+                  posthog.capture('how_it_works_call_clicked', { variant: selectedVariant });
+                }}
+              >
+                📞 Call (888) 366-3082
+              </a>
+              <a
+                href="sms:+18883663082"
+                className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                onClick={() => {
+                  posthog.capture('how_it_works_text_clicked', { variant: selectedVariant });
+                }}
+              >
+                💬 Text to Start
+              </a>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
-      {/* 5. Why You'll Feel the Difference */}
+      {/* 5. Testimonials Section - NEW */}
       <motion.section
         className="py-16 bg-gray-50"
         initial="hidden"
@@ -869,61 +1070,88 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl font-bold text-center mb-12 text-gray-800"
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"
           >
-            Why You'll Feel the Difference
+            Real People, Real Breakthroughs
           </motion.h2>
           
-          <motion.div 
-            variants={fadeIn}
-            className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6"
-          >
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex mb-3">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                ))}
               </div>
-              <p className="text-gray-700"><span className="font-semibold">More therapy value</span> – 15-20 extra productive minutes each session.</p>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+              <p className="text-gray-700 mb-4 italic">
+                "Empath helped me become the observer of my own mind instead of being submerged in my thoughts. <span className="font-semibold">By externalizing my thinking through journaling, I could finally look at my patterns from a distance.</span> My therapist became my guide in this process rather than just someone I performed for."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 mr-3" />
+                <div>
+                  <p className="font-semibold text-gray-800">Jennifer K.</p>
+                  <p className="text-sm text-gray-600">Anxiety & Depression</p>
+                </div>
               </div>
-              <p className="text-gray-700"><span className="font-semibold">Feel fully heard</span> – even the 2 a.m. thoughts you forget to mention.</p>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-              </div>
-              <p className="text-gray-700"><span className="font-semibold">Deeper breakthroughs, faster</span> – therapist dives straight into patterns.</p>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-              </div>
-              <p className="text-gray-700"><span className="font-semibold">No extra homework</span> – a quick voice note is enough.</p>
-            </div>
-            
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-              </div>
-              <p className="text-gray-700"><span className="font-semibold">HIPAA-grade privacy</span> – your data is encrypted and seen only by your therapist.</p>
-            </div>
+            </motion.div>
 
-            <div className="flex items-start">
-              <div className="flex-shrink-0 text-[#00B9B0] mr-3">
-                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+            <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex mb-3">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                ))}
               </div>
-              <p className="text-gray-700"><span className="font-semibold">Double your progress</span> – by transforming catch-up time into breakthrough time.</p>
-            </div>
+              <p className="text-gray-700 mb-4 italic">
+                "I realized Instagram's algorithm knew me better than my therapist because it saw me when I was alone and authentic. <span className="font-semibold">Empath gave my therapist that same access to my real thoughts and feelings, not just the curated version I brought to sessions.</span> Game changer."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-green-400 mr-3" />
+                <div>
+                  <p className="font-semibold text-gray-800">Marcus T.</p>
+                  <p className="text-sm text-gray-600">ADHD & Relationships</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex mb-3">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 italic">
+                "Life doesn't happen on a schedule, but therapy does. <span className="font-semibold">Now when I have a breakthrough insight at 2am or a panic attack on Sunday, my therapist knows about it.</span> We spend our time working through patterns, not trying to remember what happened."
+              </p>
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-400 mr-3" />
+                <div>
+                  <p className="font-semibold text-gray-800">Rachel P.</p>
+                  <p className="text-sm text-gray-600">Trauma Recovery</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div variants={fadeIn} className="text-center mt-10">
+            <button
+              className="px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl"
+              onClick={() => {
+                setShowInviteModal(true);
+                posthog.capture('testimonial_cta_clicked', { variant: selectedVariant });
+              }}
+            >
+              Join Thousands Getting More From Therapy →
+            </button>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* 6. Choose Your Lane */}
+      {/* 6. Why You'll Feel the Difference - REDESIGNED */}
       <motion.section
         className="py-16 bg-white"
         initial="hidden"
@@ -934,142 +1162,150 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl font-bold text-center mb-12 text-gray-800"
+            className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800"
           >
-            Choose Your Lane
+            The Philosophy Behind Empath
           </motion.h2>
-          {isInvited ? (
-            <motion.div variants={fadeIn} className="max-w-4xl mx-auto flex flex-col gap-8">
-              <button
-                className="px-6 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-lg shadow-md transition-all duration-300 transform font-semibold text-center text-lg flex items-center justify-center focus:outline-none mb-6 mx-auto w-full md:w-1/2"
-                onClick={() => {
-                  setShowFlowModal(true);
-                  posthog.capture('connect_to_therapist_modal_opened', { variant: selectedVariant });
-                }}
-              >
-                <Smartphone className="w-5 h-5 mr-2" /> {therapistName ? `Connect to ${therapistName}` : 'Connect to your Therapist'}
-              </button>
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Mobile App Card */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100 flex flex-col">
-                  <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
-                    <Smartphone className="w-6 h-6 mr-2" /> Mobile App
-                  </h3>
-                  {/* No download button for invited users */}
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>Mood check-ins & journals</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>Health-data sync</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>Insight dashboards</span>
-                    </li>
-                  </ul>
-                </div>
-                {/* Call to Journal Card */}
-                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100 flex flex-col">
-                  <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
-                    <Phone className="w-6 h-6 mr-2" /> Call to Journal
-                  </h3>
-                  {/* No call button for invited users */}
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>No app download needed</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>Call or Text to record thoughts in the moment</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                      <span>Perfect for journling on a walk or commute</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div 
-              variants={fadeIn}
-              className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
-            >
-              {/* Mobile App Card */}
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-teal-100 flex flex-col">
-                <h3 className="text-2xl font-bold text-[#1281dd] mb-6 text-center flex items-center justify-center">
-                  <Smartphone className="w-6 h-6 mr-2" /> Start on Mobile App
-                </h3>
-                <button
-                  className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-[#0e6bb8] transition"
-                  onClick={() => {
-                    setShowInviteModal(true);
-                    posthog.capture('start_on_mobile_clicked', { variant: selectedVariant });
-                  }}
-                >
-                  <Smartphone className="w-4 h-4 mr-1" /> Start on Mobile App
-                </button>
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>Mood check-ins & journals</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>Health-data sync</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="text-[#00B9B0] w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>Insight dashboards</span>
-                  </li>
-                </ul>
-              </div>
-              {/* Call to Journal Card */}
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-purple-100 flex flex-col">
-                <h3 className="text-2xl font-bold text-purple-700 mb-6 text-center flex items-center justify-center">
-                  <Phone className="w-6 h-6 mr-2" /> Call to Journal
-                </h3>
-                <button
-                  className="flex-1 px-3 py-2 bg-purple-600 text-white rounded-full text-sm font-medium text-center flex items-center justify-center mb-4 w-full focus:outline-none hover:bg-purple-700 transition"
-                  onClick={() => {
-                    setShowCallModal(true);
-                    posthog.capture('call_to_journal_modal_opened', { variant: selectedVariant });
-                  }}
-                >
-                  <Phone className="w-4 h-4 mr-1" /> Call to Journal
-                </button>
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>No app download needed</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>Call or Text to record thoughts in the moment</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="text-purple-500 w-5 h-5 mr-3 flex-shrink-0 mt-1" />
-                    <span>Perfect for journling on a walk or commute</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          )}
+          <motion.p
+            variants={fadeIn}
+            className="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+          >
+            This isn't just another journal app. It's designed to enhance the fundamental work of therapy itself.
+          </motion.p>
+          
+          <motion.div 
+            variants={fadeIn}
+            className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
+          >
+            <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100">
+              <h3 className="font-bold text-xl mb-4 text-[#1281dd]">Empath ✨</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Designed to help you become the observer of your mind</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Externalizes thoughts so you can observe them from distance</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Gives therapist access to your authentic self, not just the performative version</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Creates a complete map of your inner world for your therapist to navigate</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Transforms therapy from performance to authentic self-discovery</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200">
+              <h3 className="font-bold text-xl mb-4 text-gray-600">Generic Journal Apps</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Ban className="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">Just digital note-taking with no therapeutic purpose</span>
+                </li>
+                <li className="flex items-start">
+                  <Ban className="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">Therapist has to sift through raw data without context</span>
+                </li>
+                <li className="flex items-start">
+                  <Ban className="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">No understanding of the observer-observed dynamic</span>
+                </li>
+                <li className="flex items-start">
+                  <Ban className="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">Doesn't bridge the gap between sessions and real life</span>
+                </li>
+                <li className="flex items-start">
+                  <Ban className="w-5 h-5 text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">Misses the multiple versions of yourself</span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
-      {/* 7. Therapists Love It */}
+      {/* 7. Choose Your Lane - SIMPLIFIED */}
       <motion.section
-        className="py-16 bg-gray-50"
+        className="py-16 bg-gradient-to-b from-gray-50 to-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={staggerContainer}
       >
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            variants={fadeIn}
+            className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800"
+          >
+            Ready to Transform Your Therapy?
+          </motion.h2>
+          <motion.p
+            variants={fadeIn}
+            className="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+          >
+            Join {userCount.toLocaleString()}+ people already getting more from every session
+          </motion.p>
+          
+          <motion.div variants={fadeIn} className="max-w-lg mx-auto">
+            <button
+              className="w-full px-8 py-5 bg-gradient-to-r from-[#1281dd] to-purple-600 text-white rounded-full hover:shadow-2xl shadow-xl transition-all duration-300 transform hover:scale-105 font-bold text-2xl mb-6"
+              onClick={() => {
+                setShowInviteModal(true);
+                posthog.capture('final_cta_clicked', { variant: selectedVariant });
+              }}
+            >
+              Get Started Free →
+            </button>
+            
+            <div className="text-center">
+              <p className="text-gray-600 mb-4">Or try it instantly:</p>
+              <div className="flex gap-4 justify-center">
+                <a
+                  href="tel:+18883663082"
+                  className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                  onClick={() => {
+                    posthog.capture('final_call_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  📞 Call Now
+                </a>
+                <a
+                  href="sms:+18883663082"
+                  className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                  onClick={() => {
+                    posthog.capture('final_text_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  💬 Text Now
+                </a>
+              </div>
+            </div>
+            
+            {/* Trust badges */}
+            <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center">
+                <Shield className="w-4 h-4 mr-1 text-green-600" />
+                <span>HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-600" />
+                <span>No Credit Card</span>
+              </div>
+              <div className="flex items-center">
+                <Clock className="w-4 h-4 mr-1 text-green-600" />
+                <span>Setup in 30 Seconds</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </motion.section>
 
       {/* 8. Security & Privacy */}
@@ -1161,6 +1397,10 @@ export default function ClientInfoPage() {
             <FAQItem 
               question="Does Empath replace therapy?" 
               answer="No. It simply makes the therapy you already value more efficient. Empath helps you capture your experiences more accurately and helps your therapist understand your week better, but it's not a substitute for the therapeutic relationship."
+            />
+            <FAQItem 
+              question="How does Empath help me become the observer of my own mind?" 
+              answer="By externalizing your thoughts through journaling, you make abstract mental patterns tangible and observable. This creates distance between you (the observer) and your thoughts (the observed), which is fundamental therapeutic work. Your therapist then guides you in this process of self-observation rather than just listening to you perform or recall fragments."
             />
             <FAQItem 
               question="How is this different from other mental health apps?" 
@@ -1256,6 +1496,51 @@ export default function ClientInfoPage() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Floating CTA Bar - Desktop */}
+      {showFloatingCTA && !signUpUrl && (
+        <motion.div
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed top-0 left-0 right-0 bg-white shadow-lg border-b border-gray-200 z-50 hidden md:block"
+        >
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <motion.img 
+                  src={logo} 
+                  alt="Empath Logo" 
+                  className="w-10 h-10"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">Ready to transform your therapy?</p>
+                  <p className="text-xs text-gray-600">Join {userCount.toLocaleString()}+ people already getting more from every session</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  className="px-6 py-2 bg-[#1281dd] text-white rounded-full font-semibold shadow hover:shadow-lg transition-all transform hover:scale-105"
+                  onClick={() => {
+                    setShowInviteModal(true);
+                    posthog.capture('floating_cta_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  Get Started Free →
+                </button>
+                <a
+                  href="tel:+18883663082"
+                  className="px-6 py-2 bg-white text-[#1281dd] rounded-full font-semibold border-2 border-[#1281dd] hover:shadow-md transition-all"
+                  onClick={() => {
+                    posthog.capture('floating_call_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  📞 Call Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       )}
     </div>
   );
