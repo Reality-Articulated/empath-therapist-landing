@@ -576,40 +576,59 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
           >
-            <button
-              className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
-              onClick={() => {
-                setShowInviteModal(true);
-                posthog.capture('hero_cta_clicked', { variant: selectedVariant });
-              }}
-            >
-              Start Free Today →
-            </button>
-            
-            <div className="flex items-center gap-4 w-full">
-              <a
-                href="tel:+18883663082"
-                className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
-                onClick={() => {
-                  posthog.capture('hero_call_clicked', { variant: selectedVariant });
-                }}
-              >
-                📞 Call to Try
-              </a>
-              <a
-                href="sms:+18883663082"
-                className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
-                onClick={() => {
-                  posthog.capture('hero_text_clicked', { variant: selectedVariant });
-                }}
-              >
-                💬 Text to Try
-              </a>
-            </div>
-            
-            <p className="text-sm text-gray-500 text-center">
-              No app download required • Works with any therapist • Cancel anytime
-            </p>
+            {isInvited ? (
+              <>
+                <button
+                  className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
+                  onClick={() => {
+                    setShowFlowModal(true);
+                    posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  {therapistName ? `Connect to ${therapistName}` : 'Connect to Your Therapist'} →
+                </button>
+                <p className="text-sm text-gray-500 text-center">
+                  Your therapist invited you • Setup takes 30 seconds
+                </p>
+              </>
+            ) : (
+              <>
+                <button
+                  className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
+                  onClick={() => {
+                    setShowInviteModal(true);
+                    posthog.capture('hero_cta_clicked', { variant: selectedVariant });
+                  }}
+                >
+                  Start Free Today →
+                </button>
+                
+                <div className="flex items-center gap-4 w-full">
+                  <a
+                    href="tel:+18883663082"
+                    className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                    onClick={() => {
+                      posthog.capture('hero_call_clicked', { variant: selectedVariant });
+                    }}
+                  >
+                    📞 Call to Try
+                  </a>
+                  <a
+                    href="sms:+18883663082"
+                    className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                    onClick={() => {
+                      posthog.capture('hero_text_clicked', { variant: selectedVariant });
+                    }}
+                  >
+                    💬 Text to Try
+                  </a>
+                </div>
+                
+                <p className="text-sm text-gray-500 text-center">
+                  No app download required • Works with any therapist • Cancel anytime
+                </p>
+              </>
+            )}
           </motion.div>
 
           {/* Quick testimonial */}
@@ -1477,7 +1496,7 @@ export default function ClientInfoPage() {
       </motion.section>
 
       {/* Fixed bottom CTA on mobile */}
-      {!signUpUrl && (
+      {!isInvited && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
           <button
             className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
@@ -1499,7 +1518,7 @@ export default function ClientInfoPage() {
       )}
 
       {/* Floating CTA Bar - Desktop */}
-      {showFloatingCTA && !signUpUrl && (
+      {showFloatingCTA && !isInvited && (
         <motion.div
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -1538,6 +1557,40 @@ export default function ClientInfoPage() {
                   📞 Call Now
                 </a>
               </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Floating CTA Bar for Invited Users - Desktop */}
+      {showFloatingCTA && isInvited && (
+        <motion.div
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg z-50 hidden md:block"
+        >
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <motion.img 
+                  src={logo} 
+                  alt="Empath Logo" 
+                  className="w-10 h-10 brightness-0 invert"
+                />
+                <div className="text-white">
+                  <p className="text-sm font-semibold">Your therapist is waiting for you to connect</p>
+                  <p className="text-xs opacity-90">Complete your setup in just 30 seconds</p>
+                </div>
+              </div>
+              <button
+                className="px-6 py-2 bg-white text-[#1281dd] rounded-full font-semibold shadow hover:shadow-lg transition-all transform hover:scale-105"
+                onClick={() => {
+                  setShowFlowModal(true);
+                  posthog.capture('floating_connect_clicked', { variant: selectedVariant });
+                }}
+              >
+                {therapistName ? `Connect to ${therapistName}` : 'Connect Now'} →
+              </button>
             </div>
           </div>
         </motion.div>
