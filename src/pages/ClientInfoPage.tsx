@@ -115,6 +115,22 @@ export default function ClientInfoPage() {
       const therapistNameParam = params.get('therapistName');
       if (signUpToken && token) {
         setSignUpUrl(`https://empath-793bdf3d3ee1.herokuapp.com/sign-up-client/${signUpToken}/${token}`);
+        
+        // Identify invited user in PostHog with their token
+        posthog.identify(token, {
+          signUpToken: signUpToken,
+          therapistName: therapistNameParam ? decodeURIComponent(therapistNameParam) : null,
+          userType: 'invited_client',
+          inviteUrl: window.location.href,
+          invitedAt: new Date().toISOString()
+        });
+        
+        // Track that an invited user visited
+        posthog.capture('invited_client_page_viewed', {
+          signUpToken: signUpToken,
+          token: token,
+          therapistName: therapistNameParam ? decodeURIComponent(therapistNameParam) : null
+        });
       } else {
         setSignUpUrl(null);
       }
