@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import posthog from 'posthog-js';
 
 export default function AtmanPage({ src }: { src: string }) {
+  useEffect(() => {
+    posthog.capture('atman_page_viewed');
+  }, []);
+
   return (
     <div className="w-full h-screen">
       <iframe
