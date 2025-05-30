@@ -27,6 +27,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
         <Route path="/atman" element={<AtmanPage />} />
+        <Route path="/about-atman" element={<AtmanPage />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
