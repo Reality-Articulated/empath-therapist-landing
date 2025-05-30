@@ -26,8 +26,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
-        <Route path="/atman" element={<AtmanPage />} />
-        <Route path="/about-atman" element={<AtmanPage />} />
+        <Route path="/atman" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
+        <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
