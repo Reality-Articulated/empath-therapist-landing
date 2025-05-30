@@ -16,9 +16,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
-  const isAtmanPage = location.pathname === '/atman';
-  const isClientInfoPage = location.pathname === '/whyempath';
-  const hideNavbar = isAtmanPage || isClientInfoPage;
+  const hideNavbar = ['/atman', '/about-atman', '/whyempath'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
