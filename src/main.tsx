@@ -11,6 +11,12 @@ init("your_public_key"); // Replace with your EmailJS public key
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  disable_toolbar: import.meta.env.PROD, // Disable toolbar in production
+  loaded: function(posthog: any) {
+    if (import.meta.env.DEV) {
+      posthog.debug(); // Only enable debug in development
+    }
+  }
 };
 
 createRoot(document.getElementById('root')!).render(
