@@ -12,7 +12,17 @@ init("your_public_key"); // Replace with your EmailJS public key
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   disable_toolbar: import.meta.env.PROD, // Disable toolbar in production
+  opt_out_capture_by_default: false,
   loaded: function(posthog: any) {
+    // Force disable toolbar in production
+    if (import.meta.env.PROD) {
+      posthog.set_config({ disable_toolbar: true });
+      // Clear any existing toolbar session
+      if (typeof window !== 'undefined') {
+        window.localStorage.removeItem('__ph_toolbar_session');
+        window.sessionStorage.removeItem('__ph_toolbar_session');
+      }
+    }
     if (import.meta.env.DEV) {
       posthog.debug(); // Only enable debug in development
     }

@@ -16,7 +16,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
-  const hideNavbar = ['/atman', '/about-atman', '/whyempath'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
-        <Route path="/atman" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
+        <Route path="/atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
         <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
