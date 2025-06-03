@@ -572,19 +572,7 @@ export default function ClientInfoPage() {
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-light mb-6"
                dangerouslySetInnerHTML={{ __html: subheading }} />
             
-            {/* Social proof right under headline */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-              <div className="flex items-center">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4,5].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 border-2 border-white" />
-                  ))}
-                </div>
-                <span className="ml-3 text-sm text-gray-600">
-                  <strong>{userCount.toLocaleString()}+</strong> people improving therapy
-                </span>
-              </div>
-            </div>
+
           </motion.div>
 
           {/* Big CTA Buttons - Much more prominent */}
@@ -840,7 +828,7 @@ export default function ClientInfoPage() {
               >
                 Claim Your Free Access →
               </button>
-              <p className="text-sm text-gray-500 mt-2">Join {userCount.toLocaleString()}+ people already saving time in therapy</p>
+              <p className="text-sm text-gray-500 mt-2">Stop wasting time in therapy</p>
             </motion.div>
           </motion.div>
         </div>
@@ -998,9 +986,7 @@ export default function ClientInfoPage() {
                 >
                   Capture Every Breakthrough →
                 </button>
-                <div className="mt-4 text-sm text-blue-100">
-                  Join {userCount.toLocaleString()}+ people who never lose important moments again
-                </div>
+
               </div>
             </motion.div>
           </motion.div>
@@ -1286,7 +1272,7 @@ export default function ClientInfoPage() {
             variants={fadeIn}
             className="text-xl text-center text-gray-600 mb-12 max-w-2xl mx-auto"
           >
-            Join {userCount.toLocaleString()}+ people already getting more from every session
+            Get more from every session
           </motion.p>
           
           <motion.div variants={fadeIn} className="max-w-lg mx-auto">
@@ -1550,7 +1536,7 @@ export default function ClientInfoPage() {
                 />
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Ready to transform your therapy?</p>
-                  <p className="text-xs text-gray-600">Join {userCount.toLocaleString()}+ people already getting more from every session</p>
+                  <p className="text-xs text-gray-600">Join users already getting more from every session</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
