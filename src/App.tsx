@@ -9,6 +9,7 @@ import ClientInfoPage from './pages/ClientInfoPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import PledgePage from './pages/PledgePage';
+import TransparencyPage from './pages/TransparencyPage';
 import TherapyValueCalculator from './pages/TherapyValueCalculator';
 import TherapyValueCalculatorDirect from './pages/TherapyValueCalculatorDirect';
 // import BlogsPage from './pages/BlogsPage';
@@ -30,6 +31,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/pledge" element={<PledgePage />} />
+        <Route path="/transparency" element={<TransparencyPage />} />
         <Route path="/calculator" element={<TherapyValueCalculator />} />
         <Route path="/calculator-direct" element={<TherapyValueCalculatorDirect />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}

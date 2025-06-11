@@ -13,7 +13,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.1.0",
     "@vercel/analytics": "^1.5.0",
-    "framer-motion": "^12.4.7",
+    "framer-motion": "^12.16.0",
     "lucide-react": "^0.344.0",
     "posthog-js": "^1.240.4",
     "react": "^18.3.1",

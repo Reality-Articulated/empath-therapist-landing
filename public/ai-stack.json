@@ -1,0 +1,9 @@
+{
+  "updated": "2025-01-16T10:30:00Z",
+  "ai_host": "OpenAI",
+  "models": ["GPT-4o", "GPT-o3"],
+  "ai_baa_pdf": "/RealityArticulatedOpenAI_BAA.pdf",
+  "storage_host": "AWS",
+  "storage_services": ["S3", "KMS", "RDS"],
+  "aws_baa_pdf": "/AWS_BAA Addendum.pdf"
+} 

@@ -81,6 +81,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/transparency" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
+                  Transparency Pledge
+                </Link>
+              </li>
+              <li>
                 <a 
                   href="https://app.empathdash.com/login" 
                   target="_blank" 
