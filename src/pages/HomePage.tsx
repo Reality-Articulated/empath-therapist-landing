@@ -228,14 +228,14 @@ export default function HomePage() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-14 leading-tight">
                 <div className="relative">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-blue-700 leading-tight">
-                    Make Every Client Feel Like
+                    Meet Parts of Your Client
                   </span>
                   <div className="absolute left-0 bottom-0 h-[2px] w-0 bg-gradient-to-r from-teal-500/40 to-blue-500/40"></div>
                 </div>
                 
                 <div className="mt-3 md:mt-4 relative inline-flex flex-col">
                   <span className="text-purple-800 font-bold relative z-10 tracking-tight">
-                    They Are Your Only Client
+                    You Haven't Yet Met
                   </span>
                   <motion.div 
                     className="absolute -bottom-3 left-0 h-[6px] w-0 bg-gradient-to-r from-teal-400/80 to-purple-400/80 rounded-full"
@@ -253,7 +253,7 @@ export default function HomePage() {
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto">
               Empath gives therapists a 3-minute catch-up on what their client has been feeling, thinking, 
-              and going through since the last session.
+              and going through BETWEEN sessions.
 
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -349,7 +349,7 @@ export default function HomePage() {
               variants={fadeIn}
               className="mb-4"
             >
-              <p className="text-xl text-gray-600">Therapeutic relationships shouldn't take months to develop</p>
+              <p className="text-xl text-gray-600">Understanding all parts of your clients shouldn't take months to develop</p>
               <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-purple-700">
                   Here's what you can achieve with Empath in just 30 days
@@ -561,7 +561,8 @@ export default function HomePage() {
               <motion.div variants={fadeIn}>
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800">Bridging the Gap Between Sessions</h3>
                 <p className="text-gray-700 mb-8 text-lg leading-relaxed">
-                  Empath creates a continuous therapeutic experience by connecting what happens in sessions with what happens in real life:
+                  Every client has parts that seek change and parts that resist it. You only meet one side in therapy. 
+                  Empath reveals the complete picture by capturing what happens when clients face their real-world triggers:
                 </p>
                 <div className="space-y-8">
                   <motion.div 
@@ -572,7 +573,7 @@ export default function HomePage() {
                     <p className="flex items-start">
                       <span className="flex-shrink-0 text-green-600 font-bold text-lg bg-green-100 px-3 py-1 rounded-lg">Perception</span>
                       <span className="text-gray-700 ml-4 leading-relaxed">
-                        Our client app captures real-world experiences as they happen, providing authentic data rather than retrospective recollections.
+                        Our client app captures real-world avoidance, resistance patterns, and defensive behaviors as they happen—the parts that don't show up in sessions.
                       </span>
                     </p>
                   </motion.div>
@@ -749,7 +750,8 @@ export default function HomePage() {
                     The Gap in Understanding
                   </h4>
                   <p className="text-red-700/80 text-sm">
-                    With limited data points, therapists miss critical context, hidden patterns, and real-world triggers that occur between sessions.
+                    You see the motivated client in session, but miss the parts that avoid, resist, and cling to old patterns. 
+                    That's where the breakthrough insights are hiding.
                   </p>
                 </motion.div>
               </motion.div>
@@ -992,7 +994,7 @@ export default function HomePage() {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    The Complete Picture
+                    Understanding All Parts of Your Client
                   </h4>
                   <p className="text-blue-700/80 text-sm">
                     Continuous data collection reveals patterns, triggers, and progress that would otherwise remain hidden, enabling more targeted and effective interventions.
