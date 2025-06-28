@@ -573,7 +573,7 @@ export default function HomePage() {
             variants={fadeIn}
             className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
           >
-            Why Empath Transforms Therapy
+            How Empath Transforms Therapy
           </motion.h2>
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div 

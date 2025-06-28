@@ -188,49 +188,12 @@ export default function AdvisoryPage() {
   return (
     <div className="flex-grow overflow-hidden pt-20">
       {/* Hero Section */}
-      <AnimatedSection className="bg-gradient-to-b from-teal-50 via-blue-50/30 to-white py-28 relative">
+      <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-          <div className="w-96 h-96 bg-teal-400/10 rounded-full absolute -top-20 -left-20 blur-3xl"></div>
-          <div className="w-96 h-96 bg-purple-400/10 rounded-full absolute top-40 -right-20 blur-3xl"></div>
-          {/* Add animated particles with mindfulness breathing effect */}
-          <motion.div 
-            className="w-8 h-8 bg-teal-400/20 rounded-full absolute top-1/4 left-1/4"
-            animate={{ 
-              scale: [1, 1.1, 1], 
-              opacity: [0.3, 0.7, 0.3] 
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity,
-              ease: "easeInOut" 
-            }}
-          />
-          <motion.div 
-            className="w-10 h-10 bg-purple-400/15 rounded-full absolute top-1/3 right-1/3"
-            animate={{ 
-              scale: [1, 1.15, 1], 
-              opacity: [0.2, 0.5, 0.2] 
-            }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1 
-            }}
-          />
-          <motion.div 
-            className="w-12 h-12 bg-blue-400/15 rounded-full absolute bottom-1/4 right-1/4"
-            animate={{ 
-              scale: [1, 1.12, 1], 
-              opacity: [0.2, 0.4, 0.2] 
-            }}
-            transition={{ 
-              duration: 7, 
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2 
-            }}
-          />
+          <div className="w-96 h-96 bg-slate-200/20 rounded-full absolute -top-20 -left-20 blur-3xl"></div>
+          <div className="w-96 h-96 bg-indigo-100/20 rounded-full absolute top-40 -right-20 blur-3xl"></div>
+          {/* Add subtle grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -239,49 +202,51 @@ export default function AdvisoryPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-700 leading-tight">
-                Join us in Building Empath
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-light mb-12 leading-tight">
+                <span className="text-slate-900 font-extralight tracking-tight">
+                  Join us in Building Empath
+                </span>
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto font-light">
                 You're the expert. Let's build technology that actually serves your practice,
                 while earning ownership in what you help create.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button 
                   onClick={() => setIsFormOpen(true)}
-                  className="px-8 py-4 bg-gradient-to-r from-teal-500 to-purple-600 text-white rounded-2xl hover:shadow-lg hover:shadow-teal-200 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
+                  className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center group cursor-pointer font-light tracking-wide"
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Submit Interest
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
                 </motion.button>
                 <motion.button
                   onClick={() => setIsCalendarOpen(true)}
-                  className="px-8 py-4 bg-white text-teal-600 rounded-2xl border-2 border-teal-100 hover:border-teal-200 hover:bg-teal-50 transition-all duration-300 flex items-center justify-center group cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
+                  className="px-8 py-4 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center group cursor-pointer font-light tracking-wide"
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Book Call for More Info
-                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
                 </motion.button>
               </div>
               <motion.div 
-                className="mt-12 flex justify-center items-center"
+                className="mt-16 flex justify-center items-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
               >
                 <motion.div 
-                  className="flex items-center px-4 py-2 bg-teal-50 rounded-full border border-teal-100"
-                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center px-5 py-2.5 bg-green-50 rounded-full border border-green-200"
+                  whileHover={{ scale: 1.02 }}
                 >
                   <motion.div 
-                    className="w-2 h-2 bg-green-500 rounded-full mr-2"
+                    className="w-2 h-2 bg-green-500 rounded-full mr-3"
                     animate={{ scale: [1, 1.5, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-sm text-gray-600">Limited spots available for founding advisors</span>
+                  <span className="text-sm text-slate-600 font-light">Limited spots available for founding advisors</span>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -290,17 +255,16 @@ export default function AdvisoryPage() {
       </AnimatedSection>
 
       {/* Benefits Section */}
-      <AnimatedSection className="py-28 bg-gradient-to-b from-white to-gray-50">
+      <AnimatedSection className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div 
             variants={fadeIn}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 relative inline-block">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Why Join Our Advisory Board?</span>
-              <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
+            <h2 className="text-3xl md:text-4xl font-light text-center mb-4 text-slate-900">
+              Why Join Our Advisory Board?
             </h2>
-            <p className="text-center text-gray-600 mt-8 text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-center text-slate-600 mt-8 text-xl max-w-3xl mx-auto leading-relaxed font-light">
               Join a community of forward-thinking therapists who are shaping the future of mental health technology.
             </p>
           </motion.div>
@@ -312,17 +276,14 @@ export default function AdvisoryPage() {
               <motion.div 
                 key={index} 
                 variants={fadeInUp}
-                className="p-8 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-teal-100 group relative overflow-hidden"
-                whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.3 } }}
+                className="p-8 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 group relative overflow-hidden"
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
               >
-                {/* Add decorative element */}
-                <div className="absolute -right-8 -top-8 w-16 h-16 bg-gradient-to-br from-teal-100 to-purple-100 rounded-full opacity-70 group-hover:scale-150 transition-transform duration-500"></div>
-                
-                <div className="mb-6 p-4 bg-teal-50 rounded-2xl inline-block group-hover:bg-gradient-to-br group-hover:from-teal-100 group-hover:to-purple-100 transition-colors duration-300 relative z-10">
-                  <benefit.icon className="w-10 h-10 text-teal-600 group-hover:text-purple-600 transition-colors duration-300" />
+                <div className="mb-6 p-4 bg-slate-50 rounded-lg inline-block group-hover:bg-slate-100 transition-colors duration-300 relative z-10">
+                  <benefit.icon className="w-8 h-8 text-slate-600" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-teal-700 transition-colors duration-300 relative z-10">{benefit.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300 relative z-10">{benefit.description}</p>
+                <h3 className="text-xl font-light mb-3 text-slate-900 relative z-10">{benefit.title}</h3>
+                <p className="text-slate-600 font-light relative z-10">{benefit.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -330,14 +291,13 @@ export default function AdvisoryPage() {
       </AnimatedSection>
 
       {/* Process Section */}
-      <AnimatedSection className="py-28 bg-white">
+      <AnimatedSection className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
+            className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">From Advisor to Owner</span>
-            <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
+            From Advisor to Owner
           </motion.h2>
           <motion.div 
             variants={staggerContainer}
@@ -345,52 +305,54 @@ export default function AdvisoryPage() {
             animate="visible"
             className="max-w-4xl mx-auto relative"
           >
-            {/* Process timeline with completely revised connecting line */}
-            <div className="relative pt-2 pb-2">
-              {/* New connecting line implementation */}
-              <div className="absolute left-6 md:left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-green-300 via-teal-400 to-purple-400 rounded-full hidden md:block" style={{ zIndex: 5 }}></div>
+            {/* Process timeline */}
+            <div className="relative">
+              {/* Single continuous vertical line */}
+              <div 
+                className="absolute left-[20px] md:left-[20px] top-[10px] h-[calc(100%-20px)] w-[1px] bg-gradient-to-b from-slate-300 via-slate-400 to-slate-500 hidden md:block"
+              ></div>
               
-              {/* Process steps with consistent spacing */}
-              <div className="space-y-20">
+              {/* Process steps */}
+              <div className="space-y-16">
                 <motion.div 
-                  variants={slideInLeft} 
-                  className="flex items-start relative"
+                  variants={slideInRight} 
+                  className="flex items-start"
                 >
-                  {/* Circle indicator with improved alignment */}
-                  <div className="absolute left-0 top-4 w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center shadow-md transform md:-translate-x-6 z-20 border-2 border-white">
-                    <span className="text-green-600 font-semibold">1</span>
+                  {/* Circle indicator */}
+                  <div className="flex-shrink-0 relative w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center border border-slate-200 z-10">
+                    <span className="text-slate-600 font-light">1</span>
                   </div>
                   
                   {/* Content card */}
-                  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-16 md:ml-8 w-full group hover:-translate-y-1">
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-green-700 transition-colors">Express Interest</h3>
-                    <p className="text-gray-600 leading-relaxed">
+                  <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                    <h3 className="text-xl font-light mb-3 text-slate-900">Express Interest</h3>
+                    <p className="text-slate-600 leading-relaxed font-light">
                       Apply to join the initiative and begin using Empath with your clients. We'll provide you with early access to our platform and guide you through the onboarding process.
                     </p>
                     <motion.button
                       onClick={() => setIsFormOpen(true)}
-                      className="mt-4 text-green-600 font-medium flex items-center text-sm hover:text-green-700 cursor-pointer"
-                      whileHover={{ x: 5 }}
+                      className="mt-4 text-slate-700 font-light flex items-center text-sm hover:text-slate-900 cursor-pointer"
+                      whileHover={{ x: 2 }}
                     >
-                      Apply Now <ChevronRight className="ml-1 w-4 h-4" />
+                      Apply Now <ChevronRight className="ml-1 w-4 h-4" strokeWidth={1.5} />
                     </motion.button>
                   </div>
                 </motion.div>
                 
                 <motion.div 
                   variants={slideInRight} 
-                  className="flex items-start relative"
+                  className="flex items-start"
                 >
-                  <div className="absolute left-0 top-4 w-12 h-12 bg-gradient-to-br from-teal-100 to-teal-200 rounded-full flex items-center justify-center shadow-md transform md:-translate-x-6 z-20 border-2 border-white">
-                    <span className="text-teal-600 font-semibold">2</span>
+                  <div className="flex-shrink-0 relative w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center border border-slate-200 z-10">
+                    <span className="text-slate-600 font-light">2</span>
                   </div>
-                  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-16 md:ml-8 w-full group hover:-translate-y-1">
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-teal-700 transition-colors">Provide Feedback</h3>
-                    <p className="text-gray-600 leading-relaxed">
+                  <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                    <h3 className="text-xl font-light mb-3 text-slate-900">Provide Feedback</h3>
+                    <p className="text-slate-600 leading-relaxed font-light">
                       Share your insights and suggestions to help refine Empath's features and functionality. Your expertise will directly influence our product development roadmap.
                     </p>
-                    <div className="mt-4 bg-teal-50 p-3 rounded-lg border border-teal-100">
-                      <p className="text-sm text-teal-700 italic">
+                    <div className="mt-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                      <p className="text-sm text-slate-700 italic font-light">
                         "We value your clinical expertise and will incorporate your feedback into our development process."
                       </p>
                     </div>
@@ -398,25 +360,25 @@ export default function AdvisoryPage() {
                 </motion.div>
                 
                 <motion.div 
-                  variants={slideInLeft} 
-                  className="flex items-start relative"
+                  variants={slideInRight} 
+                  className="flex items-start"
                 >
-                  <div className="absolute left-0 top-4 w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center shadow-md transform md:-translate-x-6 z-20 border-2 border-white">
-                    <span className="text-purple-600 font-semibold">3</span>
+                  <div className="flex-shrink-0 relative w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center border border-slate-200 z-10">
+                    <span className="text-slate-600 font-light">3</span>
                   </div>
-                  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-16 md:ml-8 w-full group hover:-translate-y-1">
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-700 transition-colors">Join Advisory Board</h3>
-                    <p className="text-gray-600 leading-relaxed">
+                  <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                    <h3 className="text-xl font-light mb-3 text-slate-900">Join Advisory Board</h3>
+                    <p className="text-slate-600 leading-relaxed font-light">
                       Based on your contributions, receive an equity stake and continue shaping Empath's future. Become part of a community of therapists who are redefining mental health technology.
                     </p>
                     <div className="mt-4 flex items-center">
                       <div className="flex -space-x-2">
-                        <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-xs text-teal-600 font-medium">MY</div>
-                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-xs text-green-600 font-medium">AN</div>
-                        <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-xs text-purple-600 font-medium">JS</div>
-                        <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-xs text-yellow-600 font-medium">+</div>
+                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-light">MY</div>
+                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-light">AN</div>
+                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-light">JS</div>
+                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-light">+</div>
                       </div>
-                      <span className="ml-3 text-sm text-gray-500">Join our growing community</span>
+                      <span className="ml-3 text-sm text-slate-500 font-light">Join our growing community</span>
                     </div>
                   </div>
                 </motion.div>
@@ -427,44 +389,16 @@ export default function AdvisoryPage() {
       </AnimatedSection>
 
       {/* FAQs Section */}
-      <AnimatedSection className="py-28 bg-gray-50">
+      <AnimatedSection className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl md:text-4xl font-bold text-center mb-16 relative inline-block mx-auto"
+            className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Frequently Asked Questions</span>
-            <div className="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full"></div>
+            Frequently Asked Questions
           </motion.h2>
           
-          {/* Add background elements */}
           <div className="relative max-w-3xl mx-auto">
-            <motion.div 
-              className="absolute -top-10 -right-10 w-40 h-40 bg-teal-50 rounded-full opacity-50 z-0 hidden md:block"
-              animate={{ 
-                scale: [1, 1.1, 1], 
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            <motion.div 
-              className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-50 rounded-full opacity-50 z-0 hidden md:block"
-              animate={{ 
-                scale: [1, 1.15, 1], 
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
-            />
-            
             <motion.div 
               variants={staggerContainer}
               className="max-w-3xl mx-auto space-y-4 relative z-10"
@@ -473,24 +407,25 @@ export default function AdvisoryPage() {
                 <motion.div 
                   key={index}
                   variants={fadeInUp}
-                  className="border border-gray-200 rounded-2xl overflow-hidden hover:border-teal-200 transition-colors duration-300 bg-white"
+                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 overflow-hidden"
+                  whileHover={{ y: -2, transition: { duration: 0.2 } }}
                 >
                   <button 
-                    className="w-full text-left p-5 flex justify-between items-center focus:outline-none cursor-pointer"
+                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none cursor-pointer"
                     onClick={() => toggleAccordion(index)}
                   >
-                    <h3 className="text-lg font-semibold text-gray-800 flex items-center">
-                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center mr-3 hidden sm:flex">
-                        <span className="text-teal-600 font-medium">Q</span>
+                    <h3 className="text-xl font-light text-slate-900 flex items-center">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mr-3">
+                        <span className="text-slate-600 font-light text-sm">Q</span>
                       </span>
                       {faq.question}
                     </h3>
                     <motion.div
                       animate={{ rotate: activeAccordion === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 ml-2 text-teal-500"
+                      className="flex-shrink-0 ml-2 text-slate-500"
                     >
-                      <ChevronRight className="w-5 h-5 transform rotate-90" />
+                      <ChevronRight className="w-5 h-5 transform rotate-90" strokeWidth={1.5} />
                     </motion.div>
                   </button>
                   <motion.div 
@@ -502,8 +437,8 @@ export default function AdvisoryPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 pt-0 border-t border-gray-100">
-                      <p className="text-gray-600 leading-relaxed pl-0 sm:pl-11">
+                    <div className="p-6 pt-0 border-t border-slate-100">
+                      <p className="text-slate-600 leading-relaxed pl-11 font-light">
                         {faq.answer}
                       </p>
                     </div>
@@ -517,69 +452,18 @@ export default function AdvisoryPage() {
 
       {/* CTA Section */}
       <AnimatedSection className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-purple-700"></div>
-        
-        {/* Add animated mindfulness-inspired elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div 
-            className="absolute top-[20%] left-[15%] w-64 h-64 rounded-full mix-blend-overlay opacity-10"
-            style={{
-              background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)"
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-[10%] right-[10%] w-80 h-80 rounded-full mix-blend-overlay opacity-10"
-            style={{
-              background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)"
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.1, 0.15, 0.1]
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
-            }}
-          />
-          <motion.div 
-            className="absolute top-[60%] left-[60%] w-40 h-40 rounded-full mix-blend-overlay opacity-10"
-            style={{
-              background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)"
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800"></div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h2 
             variants={fadeIn}
-            className="text-3xl md:text-4xl font-bold mb-8 text-white"
+            className="text-3xl md:text-4xl font-light mb-8 text-white"
           >
             Ready to Shape the Future of Therapy?
           </motion.h2>
           <motion.p 
             variants={fadeIn}
-            className="text-xl mb-10 text-teal-100 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl mb-10 text-slate-300 max-w-2xl mx-auto leading-relaxed font-light"
           >
             Join our advisory board and help build technology that truly serves therapists and their clients.
           </motion.p>
@@ -589,23 +473,23 @@ export default function AdvisoryPage() {
           >
             <motion.button 
               onClick={() => setIsFormOpen(true)}
-              className="px-8 py-4 bg-white text-teal-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group cursor-pointer"
+              className="px-8 py-4 bg-white text-slate-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group cursor-pointer font-light"
               variants={fadeIn}
-              whileHover={{ scale: 1.05, y: -3 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
               Submit Interest
-              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
             </motion.button>
             <motion.button
               onClick={() => setIsCalendarOpen(true)}
               variants={fadeIn}
-              whileHover={{ scale: 1.05, y: -3 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-2xl hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center cursor-pointer"
+              className="px-8 py-4 bg-transparent border border-white/50 text-white rounded-lg hover:bg-white/10 hover:border-white transition-all duration-300 inline-flex items-center justify-center cursor-pointer font-light"
             >
               Book a Call
-              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
             </motion.button>
           </motion.div>
 
@@ -618,26 +502,26 @@ export default function AdvisoryPage() {
       {/* Calendar Modal */}
       {isCalendarOpen && (
         <motion.div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div 
-            className="bg-white rounded-3xl p-6 w-full max-w-4xl shadow-2xl"
+            className="bg-white rounded-xl p-8 w-full max-w-4xl shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 25 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-purple-600">Schedule a Call</h2>
+              <h2 className="text-2xl font-light text-slate-900">Schedule a Call</h2>
               <motion.button 
                 onClick={() => setIsCalendarOpen(false)}
-                className="text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors cursor-pointer"
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.3 }}
+                className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.2 }}
               >
-                <X size={20} />
+                <X size={20} strokeWidth={1.5} />
               </motion.button>
             </div>
             <iframe 
@@ -646,7 +530,7 @@ export default function AdvisoryPage() {
               width="100%" 
               height="600" 
               frameBorder="0"
-              className="rounded-2xl"
+              className="rounded-lg"
             />
           </motion.div>
         </motion.div>
