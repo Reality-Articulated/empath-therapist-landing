@@ -7,7 +7,7 @@ import './index.css';
 import { PostHogProvider } from 'posthog-js/react';
 
 // Initialize EmailJS with your public key
-init("your_public_key"); // Replace with your EmailJS public key
+init("RkdQiScnBEMQIBtNL");
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
