@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, CheckCircle, Shield, Clock, Calendar, Mic, Smartphone, Brain, Ban, Info, Phone, Download, FileText } from 'lucide-react';
+import { ChevronDown, CheckCircle, Shield, Clock, Smartphone, Ban, Phone, FileText } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
@@ -29,63 +29,73 @@ const staggerContainer = {
   }
 };
 
-// FAQ Accordion Item Component
-const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
+// FAQ Accordion Item Component (accessible)
+const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const baseId = `faq-${question.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const buttonId = `${baseId}-button`;
+  const panelId = `${baseId}-panel`;
 
   return (
     <div className="border-b border-gray-200 last:border-b-0">
       <button
-        className="w-full py-4 flex justify-between items-center text-left text-lg font-medium text-gray-700 hover:text-[#1281dd] transition"
+        id={buttonId}
+        className="w-full py-4 flex justify-between items-center text-left text-lg font-medium text-gray-700 hover:text-slate-900 transition"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         {question}
-        <ChevronDown className={`w-5 h-5 text-[#1281dd] transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-slate-600 transition-transform ${isOpen ? 'transform rotate-180' : ''}`} />
       </button>
-      {isOpen && (
-        <div className="pb-6 pt-2 text-gray-600 pr-6">
-          {answer}
-        </div>
-      )}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        hidden={!isOpen}
+        className="pb-6 pt-2 text-gray-600 pr-6"
+      >
+        {answer}
+      </div>
     </div>
   );
 };
 
 const variantContent = {
   unheard_a: {
-    heading: 'Your Therapist Only Meets One Version of You<br />Give Them The <span class="text-[#1281dd] underline decoration-wavy">Complete Map</span>',
-    subheading: 'Stop performing in session. Start sharing your authentic self.<br class="hidden md:block" /><span class="font-semibold">Your therapist can only navigate as well as the map you give them.</span>'
+    heading: 'Your Therapist Needs The Whole You<br />Give Them the <span class="text-slate-900 underline decoration-wavy">Complete Map</span>',
+    subheading: 'Stop performing. Capture your real thoughts when they happen.<br class="hidden md:block" /><span class="font-semibold">Therapy works best when your therapist sees the full picture.</span>'
   },
   unheard_b: {
-    heading: 'TikTok Knows You Better Than Your Therapist<br />Time to <span class="text-[#1281dd] underline decoration-wavy">Change That</span>',
-    subheading: 'Apps see your authentic self when you\'re alone and real.<br class="hidden md:block" /><span class="font-semibold">Give your therapist that same access.</span>'
+    heading: 'Apps See the Real You<br />Now Your Therapist Can <span class="text-slate-900 underline decoration-wavy">Too</span>',
+    subheading: 'Record authentic moments between sessions.<br class="hidden md:block" /><span class="font-semibold">Bring your therapist into your real life, not just the recap.</span>'
   },
   rushed_a: {
-    heading: 'Stop Performing in Therapy<br />Start Being <span class="text-[#1281dd] underline decoration-wavy">Your Authentic Self</span>',
-    subheading: 'Life doesn\'t happen on a schedule. Neither do your breakthroughs.<br class="hidden md:block" /><span class="font-semibold">Capture yourself when you\'re most real.</span>'
+    heading: 'Breakthroughs Don\'t Wait for Tuesdays<br />Capture <span class="text-slate-900 underline decoration-wavy">Real Moments</span> As They Happen',
+    subheading: 'Voice, text, or call when it\'s real—not rehearsed.<br class="hidden md:block" /><span class="font-semibold">Start sessions already caught up.</span>'
   },
   rushed_b: {
-    heading: 'Your Therapist Sees You Perform<br />Not The <span class="text-[#1281dd] underline decoration-wavy">Real You</span>',
-    subheading: 'There\'s the version of you that shows up to therapy, and the real you.<br class="hidden md:block" /><span class="font-semibold">Bridge that gap.</span>'
+    heading: 'Stop Performing in Session<br />Show Up As the <span class="text-slate-900 underline decoration-wavy">Real You</span>',
+    subheading: 'Bridge the gap between your recap and your reality.<br class="hidden md:block" /><span class="font-semibold">Give your therapist the moments that matter.</span>'
   },
   timesave_a: {
-    heading: 'Become The Observer of Your Own Mind<br />Instead of Being <span class="text-[#1281dd] underline decoration-wavy">Submerged In It</span>',
-    subheading: 'Externalize your thoughts to create distance and clarity.<br class="hidden md:block" /><span class="font-semibold">Give your therapist the tools to guide you there.</span>'
+    heading: 'Become the Observer of Your Mind<br />Not <span class="text-slate-900 underline decoration-wavy">Submerged</span> in It',
+    subheading: 'Externalize your thoughts to create distance and clarity.<br class="hidden md:block" /><span class="font-semibold">Do the real work faster.</span>'
   },
   control: {
-    heading: 'Feel Truly Understood<br />By Your <span class="text-[#1281dd] underline decoration-wavy">Therapist</span>',
-    subheading: 'Your therapist is the captain, but they need your map to navigate.<br class="hidden md:block" /><span class="font-semibold">Give them the complete picture of your inner world.</span>'
+    heading: 'Feel Deeply Understood<br />By Your <span class="text-slate-900 underline decoration-wavy">Therapist</span>',
+    subheading: 'Your therapist can navigate as well as the map you share.<br class="hidden md:block" /><span class="font-semibold">Share the complete picture of your inner world.</span>'
   }
 };
 
 // Value Proposition Banner copy by variant
 const valuePropBanner = {
-  unheard_a: "Your therapist is the captain of the ship, but they can only navigate as well as the map you give them.<br /><span class='font-semibold text-yellow-300'>Give them access to all versions of yourself.</span>",
-  unheard_b: "Apps like Instagram know you better than your therapist because they see you when you're alone and authentic.<br /><span class='font-semibold text-yellow-300'>Give your therapist that same access to the real you.</span>",
-  rushed_a: "Life doesn't happen on a schedule. Real emotions and insights happen between sessions.<br /><span class='font-semibold text-yellow-300'>Capture yourself when you're most authentic.</span>",
-  rushed_b: "There's the version of you that performs in therapy, and the real you.<br /><span class='font-semibold text-yellow-300'>Your therapist needs to meet both.</span>",
-  timesave_a: "Externalize your thoughts to create distance between you and your mind.<br /><span class='font-semibold text-yellow-300'>Become the observer, not the observed.</span>",
-  control: "Your therapist is the captain, but they need your map to navigate your inner world.<br /><span class='font-semibold text-yellow-300'>Give them the complete picture.</span>"
+  unheard_a: "Therapy is only as good as the map you share.<br /><span class='font-semibold text-yellow-300'>Give your therapist access to all versions of you.</span>",
+  unheard_b: "Algorithms see your authentic self. Your therapist should too.<br /><span class='font-semibold text-yellow-300'>Share the real you—between sessions.</span>",
+  rushed_a: "Your biggest moments don\'t happen on a schedule.<br /><span class='font-semibold text-yellow-300'>Capture them and start sessions already aligned.</span>",
+  rushed_b: "Performing in therapy slows progress.<br /><span class='font-semibold text-yellow-300'>Show up with the moments that matter.</span>",
+  timesave_a: "Make your thoughts observable, not overwhelming.<br /><span class='font-semibold text-yellow-300'>Create distance. Find clarity. Move faster.</span>",
+  control: "Your therapist navigates the map you provide.<br /><span class='font-semibold text-yellow-300'>Share the complete picture of your inner world.</span>"
 };
 
 export default function ClientInfoPage() {
@@ -106,6 +116,9 @@ export default function ClientInfoPage() {
   
   // Add state for floating CTA
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  // Phone constants for consistency
+  const PHONE_MAIN = '+18883663082';
+  const PHONE_MAIN_DISPLAY = '(888) 366-3082';
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -278,7 +291,7 @@ export default function ClientInfoPage() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             
-            <h3 className="text-2xl font-bold mb-2 text-[#1281dd] text-center">
+            <h3 className="text-2xl font-bold mb-2 text-slate-900 text-center">
               🎉 Get Early Access
             </h3>
             
@@ -291,14 +304,16 @@ export default function ClientInfoPage() {
                 <p className="text-gray-600">Check your email for next steps. You can start journaling right now:</p>
                 <div className="flex gap-3 mt-4">
                   <a
-                    href="tel:+18883663082"
-                    className="flex-1 bg-[#1281dd] text-white rounded-full py-3 font-semibold text-center shadow hover:bg-[#0e6bb8] transition"
+                    href={`tel:${PHONE_MAIN}`}
+                    className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light text-center"
+                    aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY}`}
                   >
                     📞 Call Now
                   </a>
                   <a
-                    href="sms:+18883663082"
-                    className="flex-1 bg-white text-[#1281dd] border-2 border-[#1281dd] rounded-full py-3 font-semibold text-center shadow hover:bg-blue-50 transition"
+                    href={`sms:${PHONE_MAIN}`}
+                    className="flex-1 px-6 py-3 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-light text-center"
+                    aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY}`}
                   >
                     💬 Text Now
                   </a>
@@ -314,7 +329,7 @@ export default function ClientInfoPage() {
                   <div>
                     <input
                       type="email"
-                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] focus:border-transparent text-lg"
+                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent text-lg"
                       value={userEmail}
                       onChange={e => setUserEmail(e.target.value)}
                       placeholder="Your email address"
@@ -326,7 +341,7 @@ export default function ClientInfoPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Therapist's Email</label>
                     <input
                       type="email"
-                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1281dd] focus:border-transparent"
+                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
                       value={therapistEmail}
                       onChange={e => setTherapistEmail(e.target.value)}
                       placeholder="your.therapist@email.com"
@@ -339,7 +354,7 @@ export default function ClientInfoPage() {
                     <input
                       type="checkbox"
                       id="noTherapist"
-                      className="w-4 h-4 text-[#1281dd] bg-gray-100 border-gray-300 rounded focus:ring-[#1281dd] focus:ring-2"
+                      className="w-4 h-4 text-slate-900 bg-gray-100 border-gray-300 rounded focus:ring-slate-900 focus:ring-2"
                       checked={noTherapist}
                       onChange={e => {
                         setNoTherapist(e.target.checked);
@@ -357,7 +372,7 @@ export default function ClientInfoPage() {
                   
                   <button
                     type="submit"
-                    className="w-full bg-[#1281dd] text-white rounded-full py-3 font-semibold hover:bg-[#0e6bb8] transition text-lg shadow-lg"
+                    className="w-full px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
                   >
                     Get Instant Access →
                   </button>
@@ -380,13 +395,13 @@ export default function ClientInfoPage() {
                     <div className="flex gap-2">
                       <a
                         href="tel:+18883663082"
-                        className="flex-1 bg-[#1281dd] text-white rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-[#0e6bb8] transition"
+                        className="flex-1 px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light text-center text-sm"
                       >
                         📞 Call
                       </a>
                       <a
                         href="sms:+18883663082"
-                        className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
+                        className="flex-1 px-6 py-2 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-light text-center text-sm"
                       >
                         💬 Text
                       </a>
@@ -410,7 +425,7 @@ export default function ClientInfoPage() {
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">Connect to your Therapist</h3>
+            <h3 className="text-xl font-bold mb-2 text-slate-900">Connect to your Therapist</h3>
             <ol className="mb-4 text-gray-700 text-base list-decimal list-inside space-y-2">
               <li>You'll create your Empath account (name, phone number, password).</li>
               <li>We'll securely link you to your therapist using your invite.</li>
@@ -421,7 +436,7 @@ export default function ClientInfoPage() {
               It's needed for secure login and to enable journaling by phone if you prefer.
             </div>
             <button
-              className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition mt-4"
+              className="w-full px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light mt-4"
               onClick={() => {
                 setShowFlowModal(false);
                 if (signUpUrl) {
@@ -447,7 +462,7 @@ export default function ClientInfoPage() {
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="text-xl font-bold mb-2 text-[#1281dd]">What happens next?</h3>
+            <h3 className="text-xl font-bold mb-2 text-slate-900">What happens next?</h3>
             <ol className="mb-4 text-gray-700 text-base list-decimal list-inside space-y-2">
               <li>Complete a quick sign-up form to securely connect you to your therapist.</li>
               <li>Download the Empath app (iOS only).</li>
@@ -455,10 +470,10 @@ export default function ClientInfoPage() {
             </ol>
             <div className="mt-4 p-3 bg-blue-50 rounded text-blue-900 text-sm border border-blue-200">
               <strong>Don't have an iPhone?</strong><br />
-              You can still use Empath by calling <a href="tel:+18776528626" className="underline text-[#1281dd]">+1 877 652 8626</a> to journal by phone—no app needed!
+              You can still use Empath by calling <a href={`tel:${PHONE_MAIN}`} className="underline text-slate-900">{`+1 ${PHONE_MAIN_DISPLAY}`}</a> to journal by phone—no app needed!
             </div>
             <button
-              className="w-full bg-[#1281dd] text-white rounded-full py-2 font-semibold hover:bg-[#0e6bb8] transition"
+              className="w-full px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light"
               onClick={() => {
                 setShowFlowModal(false);
                 if (signUpUrl) {
@@ -484,14 +499,14 @@ export default function ClientInfoPage() {
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h3 className="text-xl font-bold mb-4 text-[#1281dd] text-center">Journal Instantly—No App Needed</h3>
+            <h3 className="text-xl font-bold mb-4 text-slate-900 text-center">Journal Instantly—No App Needed</h3>
             <p className="mb-6 text-gray-700 text-center text-base">
               Prefer not to download the app? You can journal by phone or text anytime.
             </p>
             <div className="flex gap-4 mb-6">
               <a
-                href="tel:+18776528626"
-                className="flex-1 bg-[#1281dd] text-white rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-[#0e6bb8] transition"
+                href={`tel:${PHONE_MAIN}`}
+                className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light text-center text-lg"
                 onClick={() => {
                   setShowCallModal(false);
                   posthog.capture('call_to_journal_call_initiated', { variant: selectedVariant });
@@ -502,12 +517,13 @@ export default function ClientInfoPage() {
                     });
                   }
                 }}
+                aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY} to journal`}
               >
                 Call to Journal
               </a>
               <a
-                href="sms:+18776528626"
-                className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-3 font-semibold text-center text-lg shadow hover:bg-blue-50 transition"
+                href={`sms:${PHONE_MAIN}`}
+                className="flex-1 px-6 py-3 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-light text-center text-lg"
                 onClick={() => {
                   setShowCallModal(false);
                   posthog.capture('text_to_journal_initiated', { variant: selectedVariant });
@@ -518,6 +534,7 @@ export default function ClientInfoPage() {
                     });
                   }
                 }}
+                aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY} to journal`}
               >
                 Text to Journal
               </a>
@@ -547,29 +564,36 @@ export default function ClientInfoPage() {
       </div>
       
       {/* Trust banner at very top */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 py-2 text-center border-b border-green-100">
-        <p className="text-sm text-gray-700">
+      <div className="bg-slate-50 py-2 text-center border-b border-slate-100">
+        <p className="text-sm text-slate-600">
           <span className="font-semibold">🔒 HIPAA-Compliant</span> • 
-          <span className="font-semibold"> 🏆 Trusted by Therapists</span> • 
+          <span className="font-semibold"> 🏥 Works With Your Therapist</span> • 
+          <span className="font-semibold"> 📞 Call or Text—No App Needed</span>
         </p>
       </div>
       
-      {/* COMPLETELY REDESIGNED Hero Section */}
+      {/* Hero Section (aligned with Home/Advisory styling) */}
       <motion.section
-        className="bg-gradient-to-b from-white to-blue-50 pt-8 pb-12 relative"
+        className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
+        {/* Subtle background shapes and grid */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+          <div className="w-96 h-96 bg-slate-200/20 rounded-full absolute -top-20 -left-20 blur-3xl"></div>
+          <div className="w-96 h-96 bg-indigo-100/20 rounded-full absolute top-40 -right-20 blur-3xl"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        </div>
         <div className="container mx-auto px-4 relative z-10">
 
           <motion.div
             variants={fadeIn}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900"
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-light mb-12 leading-tight text-slate-900"
                 dangerouslySetInnerHTML={{ __html: heading }} />
-            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-light mb-6"
+            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto font-light mb-12"
                dangerouslySetInnerHTML={{ __html: subheading }} />
             
 
@@ -583,7 +607,7 @@ export default function ClientInfoPage() {
             {isInvited ? (
               <>
                 <button
-                  className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
+                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 font-light tracking-wide"
                   onClick={() => {
                     setShowFlowModal(true);
                     posthog.capture('connect_to_therapist_clicked', { variant: selectedVariant });
@@ -598,7 +622,7 @@ export default function ClientInfoPage() {
             ) : (
               <>
                 <button
-                  className="w-full px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl animate-pulse"
+                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 font-light tracking-wide"
                   onClick={() => {
                     setShowInviteModal(true);
                     posthog.capture('hero_cta_clicked', { variant: selectedVariant });
@@ -609,20 +633,22 @@ export default function ClientInfoPage() {
                 
                 <div className="flex items-center gap-4 w-full">
                   <a
-                    href="tel:+18883663082"
-                    className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                    href={`tel:${PHONE_MAIN}`}
+                    className="flex-1 px-8 py-4 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-light flex items-center justify-center"
                     onClick={() => {
                       posthog.capture('hero_call_clicked', { variant: selectedVariant });
                     }}
+                    aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY} to try now`}
                   >
                     📞 Call to Try
                   </a>
                   <a
-                    href="sms:+18883663082"
-                    className="flex-1 px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all duration-300 font-semibold text-lg flex items-center justify-center"
+                    href={`sms:${PHONE_MAIN}`}
+                    className="flex-1 px-8 py-4 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-light flex items-center justify-center"
                     onClick={() => {
                       posthog.capture('hero_text_clicked', { variant: selectedVariant });
                     }}
+                    aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY} to try now`}
                   >
                     💬 Text to Try
                   </a>
@@ -638,7 +664,7 @@ export default function ClientInfoPage() {
           {/* Quick testimonial */}
           <motion.div
             variants={fadeIn}
-            className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-6 mb-8 border-l-4 border-[#1281dd]"
+            className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-6 mb-8 border-l-4 border-slate-300"
           >
             <p className="text-gray-700 italic mb-3">
               "There are multiple versions of me, but my therapist only met the one that showed up for therapy—not the version that had a fight with my mother, decided to skip a workout, or went for a walk to clear my head. <span className="font-semibold">Now my therapist has access to all those different versions of myself, not just the performative one I become in session.</span> It's like finally giving them the complete map instead of just fragments."
@@ -658,7 +684,7 @@ export default function ClientInfoPage() {
             className="text-center"
           >
             <p className="text-lg text-gray-600 mb-4">
-              See how it works in <span className="font-semibold text-[#1281dd]">2 minutes</span> 👇
+              See how it works in <span className="font-semibold text-slate-900">2 minutes</span> 👇
             </p>
             <div className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg aspect-video bg-gray-100 relative">
               <div className="relative w-full h-full">
@@ -666,12 +692,14 @@ export default function ClientInfoPage() {
                   width="100%" 
                   height="100%" 
                   src="https://www.youtube.com/embed/qkCoQ4t7HsQ?enablejsapi=1&controls=0&rel=0&modestbranding=1&showinfo=0" 
-                  title="Empath Explainer Video" 
+                  title="Empath: How It Works (2 minutes)" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen
                   className="absolute top-0 left-0 w-full h-full"
                   id="explainerVideo"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
                 ></iframe>
                 
                 {/* Play button overlay */}
@@ -687,7 +715,7 @@ export default function ClientInfoPage() {
                   }}
                 >
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#1281dd] ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-slate-900 ml-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -700,7 +728,7 @@ export default function ClientInfoPage() {
 
       {/* Value Proposition Banner with Map Metaphor */}
       <motion.section
-        className="py-8 bg-gradient-to-r from-blue-600 to-purple-600"
+        className="py-12 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -709,9 +737,9 @@ export default function ClientInfoPage() {
         <div className="container mx-auto px-4">
           <motion.div 
             variants={fadeIn}
-            className="text-center text-white"
+            className="text-center"
           >
-            <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed"
+            <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed text-slate-600"
                dangerouslySetInnerHTML={{ __html: valuePropBanner[selectedVariant] }} />
           </motion.div>
         </div>
@@ -734,7 +762,7 @@ export default function ClientInfoPage() {
               The Hidden Cost of "How Was Your Week?"
             </h2>
             <p className="text-xl text-center text-gray-600 mb-10">
-              You're paying <span className="font-bold text-[#1281dd]">$60-80</span> just to catch your therapist up
+              You're paying <span className="font-bold text-slate-900">$60-80</span> just to catch your therapist up
             </p>
 
             {/* Visual comparison with better design */}
@@ -764,7 +792,7 @@ export default function ClientInfoPage() {
                 </div>
                 
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold text-[#1281dd] mb-4">With Empath ✨</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-4">With Empath ✨</h3>
                   <div className="relative">
                     <div className="w-full h-24 bg-gray-100 rounded-lg overflow-hidden">
                       <div className="absolute inset-0 flex">
@@ -800,19 +828,19 @@ export default function ClientInfoPage() {
             <div className="grid md:grid-cols-3 gap-6">
               <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
                 <div className="text-4xl mb-3">⏱️</div>
-                <h3 className="text-xl font-bold text-[#1281dd] mb-2">20 Extra Minutes</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">20 Extra Minutes</h3>
                 <p className="text-gray-600">Of actual therapy work every single session</p>
               </motion.div>
               
               <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
                 <div className="text-4xl mb-3">🎯</div>
-                <h3 className="text-xl font-bold text-[#1281dd] mb-2">3x Faster Progress</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">3x Faster Progress</h3>
                 <p className="text-gray-600">Get to breakthroughs without the weekly recap</p>
               </motion.div>
               
               <motion.div variants={fadeIn} className="bg-white rounded-xl p-6 shadow-md text-center transform hover:scale-105 transition-transform">
                 <div className="text-4xl mb-3">🧠</div>
-                <h3 className="text-xl font-bold text-[#1281dd] mb-2">Never Forget</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Never Forget</h3>
                 <p className="text-gray-600">Important moments captured when they happen</p>
               </motion.div>
             </div>
@@ -820,7 +848,7 @@ export default function ClientInfoPage() {
             {/* Another CTA */}
             <motion.div variants={fadeIn} className="text-center mt-10">
               <button
-                className="px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl"
+                className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
                 onClick={() => {
                   setShowInviteModal(true);
                   posthog.capture('value_section_cta_clicked', { variant: selectedVariant });
@@ -967,7 +995,7 @@ export default function ClientInfoPage() {
             
             {/* Enhanced CTA with urgency */}
             <motion.div variants={fadeIn} className="mt-12 text-center">
-              <div className="bg-gradient-to-r from-[#1281dd] to-purple-600 text-white rounded-2xl p-8 shadow-xl">
+              <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-2xl p-8 shadow-xl">
                 <h3 className="text-3xl font-bold mb-4">
                   Stop Losing Your Breakthrough Moments
                 </h3>
@@ -978,7 +1006,7 @@ export default function ClientInfoPage() {
                   Give your therapist access to <span className="font-bold">all versions</span> of yourself
                 </p>
                 <button
-                  className="bg-white text-[#1281dd] px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all transform hover:scale-105"
+                  className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
                   onClick={() => {
                     setShowInviteModal(true);
                     posthog.capture('story_section_cta_clicked', { variant: selectedVariant });
@@ -1058,20 +1086,22 @@ export default function ClientInfoPage() {
             <p className="text-gray-600 mb-6">No commitment. See how easy it is:</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+18883663082"
-                className="px-6 py-3 bg-[#1281dd] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                href={`tel:${PHONE_MAIN}`}
+                className="px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light"
                 onClick={() => {
                   posthog.capture('how_it_works_call_clicked', { variant: selectedVariant });
                 }}
+                aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY}`}
               >
-                📞 Call (888) 366-3082
+                📞 Call {PHONE_MAIN_DISPLAY}
               </a>
               <a
-                href="sms:+18883663082"
-                className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                href={`sms:${PHONE_MAIN}`}
+                className="px-6 py-3 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all font-light"
                 onClick={() => {
                   posthog.capture('how_it_works_text_clicked', { variant: selectedVariant });
                 }}
+                aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY}`}
               >
                 💬 Text to Start
               </a>
@@ -1160,7 +1190,7 @@ export default function ClientInfoPage() {
 
           <motion.div variants={fadeIn} className="text-center mt-10">
             <button
-              className="px-8 py-4 bg-[#1281dd] text-white rounded-full hover:shadow-xl shadow-lg transition-all duration-300 transform hover:scale-105 font-bold text-xl"
+              className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
               onClick={() => {
                 setShowInviteModal(true);
                 posthog.capture('testimonial_cta_clicked', { variant: selectedVariant });
@@ -1199,7 +1229,7 @@ export default function ClientInfoPage() {
             className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
           >
             <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100">
-              <h3 className="font-bold text-xl mb-4 text-[#1281dd]">Empath ✨</h3>
+              <h3 className="font-bold text-xl mb-4 text-slate-900">Empath ✨</h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
@@ -1277,7 +1307,7 @@ export default function ClientInfoPage() {
           
           <motion.div variants={fadeIn} className="max-w-lg mx-auto">
             <button
-              className="w-full px-8 py-5 bg-gradient-to-r from-[#1281dd] to-purple-600 text-white rounded-full hover:shadow-2xl shadow-xl transition-all duration-300 transform hover:scale-105 font-bold text-2xl mb-6"
+              className="w-full px-8 py-5 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide text-2xl mb-6"
               onClick={() => {
                 setShowInviteModal(true);
                 posthog.capture('final_cta_clicked', { variant: selectedVariant });
@@ -1290,20 +1320,22 @@ export default function ClientInfoPage() {
               <p className="text-gray-600 mb-4">Or try it instantly:</p>
               <div className="flex gap-4 justify-center">
                 <a
-                  href="tel:+18883663082"
-                  className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                  href={`tel:${PHONE_MAIN}`}
+                  className="px-6 py-3 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all font-light"
                   onClick={() => {
                     posthog.capture('final_call_clicked', { variant: selectedVariant });
                   }}
+                  aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY}`}
                 >
                   📞 Call Now
                 </a>
                 <a
-                  href="sms:+18883663082"
-                  className="px-6 py-3 bg-white text-[#1281dd] rounded-full shadow-md hover:shadow-lg border-2 border-[#1281dd] transition-all font-semibold"
+                  href={`sms:${PHONE_MAIN}`}
+                  className="px-6 py-3 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all font-light"
                   onClick={() => {
                     posthog.capture('final_text_clicked', { variant: selectedVariant });
                   }}
+                  aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY}`}
                 >
                   💬 Text Now
                 </a>
@@ -1369,9 +1401,9 @@ export default function ClientInfoPage() {
               <li className="flex items-start">
                 <FileText className="text-[#00B9B0] w-6 h-6 mr-3 flex-shrink-0 mt-1" />
                 <p className="text-gray-700">
-                  Read our <Link to="/pledge" className="text-[#1281dd] hover:underline font-medium">Privacy Pledge</Link>, 
-                  <Link to="/privacy" className="text-[#1281dd] hover:underline font-medium"> Privacy Policy</Link>, and 
-                  <Link to="/terms" className="text-[#1281dd] hover:underline font-medium"> Terms & Conditions</Link> for complete details
+                  Read our <Link to="/pledge" className="text-slate-900 hover:underline font-medium">Privacy Pledge</Link>, 
+                  <Link to="/privacy" className="text-slate-900 hover:underline font-medium"> Privacy Policy</Link>, and 
+                  <Link to="/terms" className="text-slate-900 hover:underline font-medium"> Terms & Conditions</Link> for complete details
                 </p>
               </li>
             </ul>
@@ -1481,15 +1513,15 @@ export default function ClientInfoPage() {
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-center md:text-left">
             <p className="text-sm">© {new Date().getFullYear()} Reality Articulated Inc.</p>
             <div className="flex items-center gap-4 text-sm">
-              <Link to="/pledge" className="hover:text-[#1281dd] transition-colors">
+              <Link to="/pledge" className="hover:text-slate-300 transition-colors">
                 Privacy Pledge
               </Link>
               <span className="hidden md:inline">•</span>
-              <Link to="/privacy" className="hover:text-[#1281dd] transition-colors">
+              <Link to="/privacy" className="hover:text-slate-300 transition-colors">
                 Privacy Policy
               </Link>
               <span className="hidden md:inline">•</span>
-              <Link to="/terms" className="hover:text-[#1281dd] transition-colors">
+              <Link to="/terms" className="hover:text-slate-300 transition-colors">
                 Terms & Conditions
               </Link>
             </div>
@@ -1501,7 +1533,7 @@ export default function ClientInfoPage() {
       {!isInvited && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 flex gap-2 z-50">
           <button
-            className="flex-1 px-3 py-2 bg-[#1281dd] text-white rounded-full text-sm font-medium text-center flex items-center justify-center focus:outline-none"
+            className="flex-1 px-3 py-2 bg-slate-900 text-white rounded-lg text-sm font-light text-center flex items-center justify-center focus:outline-none hover:bg-slate-800 transition"
             onClick={() => {
               setShowInviteModal(true);
             }}
@@ -1510,7 +1542,7 @@ export default function ClientInfoPage() {
           </button>
           <div className="flex flex-col items-center flex-1">
             <button
-              className="w-full px-3 py-2 bg-white text-[#1281dd] rounded-full border border-[#1281dd]/20 text-sm font-medium text-center flex items-center justify-center"
+              className="w-full px-3 py-2 bg-white text-slate-900 rounded-lg border border-slate-200 text-sm font-light text-center flex items-center justify-center hover:border-slate-300 hover:bg-slate-50 transition"
               onClick={() => setShowCallModal(true)}
             >
               <Phone className="w-4 h-4 mr-1" /> Call to Journal
@@ -1541,7 +1573,7 @@ export default function ClientInfoPage() {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  className="px-6 py-2 bg-[#1281dd] text-white rounded-full font-semibold shadow hover:shadow-lg transition-all transform hover:scale-105"
+                  className="px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light"
                   onClick={() => {
                     setShowInviteModal(true);
                     posthog.capture('floating_cta_clicked', { variant: selectedVariant });
@@ -1550,11 +1582,12 @@ export default function ClientInfoPage() {
                   Get Started Free →
                 </button>
                 <a
-                  href="tel:+18883663082"
-                  className="px-6 py-2 bg-white text-[#1281dd] rounded-full font-semibold border-2 border-[#1281dd] hover:shadow-md transition-all"
+                  href={`tel:${PHONE_MAIN}`}
+                  className="px-6 py-2 bg-white text-slate-900 rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all font-light"
                   onClick={() => {
                     posthog.capture('floating_call_clicked', { variant: selectedVariant });
                   }}
+                  aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY}`}
                 >
                   📞 Call Now
                 </a>
@@ -1585,7 +1618,7 @@ export default function ClientInfoPage() {
                 </div>
               </div>
               <button
-                className="px-6 py-2 bg-white text-[#1281dd] rounded-full font-semibold shadow hover:shadow-lg transition-all transform hover:scale-105"
+                className="px-6 py-2 bg-white text-slate-900 rounded-lg hover:bg-slate-50 transition-all duration-300 font-light"
                 onClick={() => {
                   setShowFlowModal(true);
                   posthog.capture('floating_connect_clicked', { variant: selectedVariant });
