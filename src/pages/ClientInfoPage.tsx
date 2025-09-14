@@ -850,11 +850,16 @@ export default function ClientInfoPage() {
               <button
                 className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
                 onClick={() => {
-                  setShowInviteModal(true);
-                  posthog.capture('value_section_cta_clicked', { variant: selectedVariant });
+                  if (isInvited) {
+                    setShowFlowModal(true);
+                    posthog.capture('value_section_cta_clicked', { variant: selectedVariant, invited: true });
+                  } else {
+                    setShowInviteModal(true);
+                    posthog.capture('value_section_cta_clicked', { variant: selectedVariant, invited: false });
+                  }
                 }}
               >
-                Claim Your Free Access →
+                {isInvited ? (therapistName ? `Connect to ${therapistName}` : 'Connect to Your Therapist') : 'Claim Your Free Access'} →
               </button>
               <p className="text-sm text-gray-500 mt-2">Stop wasting time in therapy</p>
             </motion.div>
@@ -1008,11 +1013,16 @@ export default function ClientInfoPage() {
                 <button
                   className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
                   onClick={() => {
-                    setShowInviteModal(true);
-                    posthog.capture('story_section_cta_clicked', { variant: selectedVariant });
+                    if (isInvited) {
+                      setShowFlowModal(true);
+                      posthog.capture('story_section_cta_clicked', { variant: selectedVariant, invited: true });
+                    } else {
+                      setShowInviteModal(true);
+                      posthog.capture('story_section_cta_clicked', { variant: selectedVariant, invited: false });
+                    }
                   }}
                 >
-                  Capture Every Breakthrough →
+                  {isInvited ? (therapistName ? `Connect to ${therapistName}` : 'Connect to Your Therapist') : 'Capture Every Breakthrough'} →
                 </button>
 
               </div>
@@ -1083,7 +1093,7 @@ export default function ClientInfoPage() {
           {/* Quick start options */}
           <motion.div variants={fadeIn} className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 max-w-2xl mx-auto text-center">
             <h3 className="text-2xl font-bold mb-4 text-gray-800">Try It Right Now!</h3>
-            <p className="text-gray-600 mb-6">No commitment. See how easy it is:</p>
+            <p className="text-gray-600 mb-6">No app required. See how easy it is to journal:</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={`tel:${PHONE_MAIN}`}
@@ -1192,11 +1202,16 @@ export default function ClientInfoPage() {
             <button
               className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide"
               onClick={() => {
-                setShowInviteModal(true);
-                posthog.capture('testimonial_cta_clicked', { variant: selectedVariant });
+                if (isInvited) {
+                  setShowFlowModal(true);
+                  posthog.capture('testimonial_cta_clicked', { variant: selectedVariant, invited: true });
+                } else {
+                  setShowInviteModal(true);
+                  posthog.capture('testimonial_cta_clicked', { variant: selectedVariant, invited: false });
+                }
               }}
             >
-              Join Thousands Getting More From Therapy →
+              {isInvited ? (therapistName ? `Connect to ${therapistName}` : 'Connect to Your Therapist') : 'Join Thousands Getting More From Therapy'} →
             </button>
           </motion.div>
         </div>
@@ -1309,15 +1324,20 @@ export default function ClientInfoPage() {
             <button
               className="w-full px-8 py-5 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 font-light tracking-wide text-2xl mb-6"
               onClick={() => {
-                setShowInviteModal(true);
-                posthog.capture('final_cta_clicked', { variant: selectedVariant });
+                if (isInvited) {
+                  setShowFlowModal(true);
+                  posthog.capture('final_cta_clicked', { variant: selectedVariant, invited: true });
+                } else {
+                  setShowInviteModal(true);
+                  posthog.capture('final_cta_clicked', { variant: selectedVariant, invited: false });
+                }
               }}
             >
-              Get Started Free →
+              {isInvited ? (therapistName ? `Connect to ${therapistName}` : 'Connect to Your Therapist') : 'Get Started Free'} →
             </button>
             
             <div className="text-center">
-              <p className="text-gray-600 mb-4">Or try it instantly:</p>
+              <p className="text-gray-600 mb-4">Or try journaling instantly:</p>
               <div className="flex gap-4 justify-center">
                 <a
                   href={`tel:${PHONE_MAIN}`}
