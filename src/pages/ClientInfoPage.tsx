@@ -640,7 +640,7 @@ export default function ClientInfoPage() {
                     }}
                     aria-label={`Call Empath at ${PHONE_MAIN_DISPLAY} to try now`}
                   >
-                    📞 Call to Try
+                    📞 Call to journal
                   </a>
                   <a
                     href={`sms:${PHONE_MAIN}`}
@@ -650,12 +650,12 @@ export default function ClientInfoPage() {
                     }}
                     aria-label={`Text Empath at ${PHONE_MAIN_DISPLAY} to try now`}
                   >
-                    💬 Text to Try
+                    💬 Text to journal
                   </a>
                 </div>
                 
                 <p className="text-sm text-gray-500 text-center">
-                  No app download required • Works with any therapist • Cancel anytime
+                  No app download required
                 </p>
               </>
             )}
