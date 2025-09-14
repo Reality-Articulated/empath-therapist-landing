@@ -628,7 +628,7 @@ export default function ClientInfoPage() {
                     posthog.capture('hero_cta_clicked', { variant: selectedVariant });
                   }}
                 >
-                  Start Free Today →
+                  Use with Therapist →
                 </button>
                 
                 <div className="flex items-center gap-4 w-full">
