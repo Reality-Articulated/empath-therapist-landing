@@ -96,7 +96,7 @@ export default function Navbar() {
               )}
             </Link>
             <motion.a 
-              href="https://app.empathdash.com/login" 
+              href="https://app.empathdash.com/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-700 to-indigo-700 rounded-lg hover:shadow-md hover:shadow-blue-200 transition-all"
