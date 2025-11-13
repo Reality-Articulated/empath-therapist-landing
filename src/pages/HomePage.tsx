@@ -288,7 +288,7 @@ export default function HomePage() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-6">
-                The Comparison Your Clients Are Making Right Now
+                The Comparison People Are Making Right Now
               </h2>
             </motion.div>
             
@@ -375,7 +375,7 @@ export default function HomePage() {
                         <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mr-3">
                           <Heart className="w-6 h-6 text-red-500" />
                   </div>
-                        <h3 className="text-3xl font-semibold text-slate-900">You</h3>
+                        <h3 className="text-3xl font-semibold text-slate-900">Human Therapist</h3>
                       </div>
                     </div>
                     
