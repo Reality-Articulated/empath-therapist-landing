@@ -228,7 +228,7 @@ export default function HomePage() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Link to="/advisory" className="px-8 py-4 bg-white text-slate-900 rounded-lg border-2 border-slate-900 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center group cursor-pointer font-medium tracking-wide" aria-label="Learn about joining our advisory board">
-                    Checkout Advisory Program
+                    Advisory Program
                     <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
                 </motion.div>
@@ -664,7 +664,7 @@ export default function HomePage() {
       </AnimatedSection>
 
       {/* The Data Visualization Comparison */}
-      <AnimatedSection className="py-24 relative overflow-hidden">
+      <AnimatedSection className="py-24 relative">
         {/* Simple, clean background */}
         <div className="absolute inset-0 bg-white"></div>
         
