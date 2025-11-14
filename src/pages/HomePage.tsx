@@ -206,7 +206,7 @@ export default function HomePage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
-                <span className="text-slate-700 font-light">Empath gives you AI grade memory and pattern-recognition so your </span>
+                <span className="text-slate-700 font-light">Empath gives you memory and pattern-recognition to match AI so your </span>
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent font-semibold">
                   human value
                 </span>
@@ -431,7 +431,7 @@ export default function HomePage() {
             >
               <div className="max-w-3xl mx-auto">
                 <p className="text-lg text-slate-700 font-light leading-relaxed mb-4">
-                  You know this comparison is flawed. You only get limted data during catchups in sesssion. And therapy is about <span className="font-medium text-slate-900">human connection, attunement, and clinical judgment</span>—things AI will never replicate.
+                  You know this comparison is flawed. You only get limted data during catchups in sesssion. And therapy is about <span className="font-medium text-slate-900">human connection, attunement, and clinical judgment</span>, things AI will never replicate.
                 </p>
                 <p className="text-lg text-slate-700 font-light leading-relaxed">
                   But here's the problem: You're trying to win a <span className="font-medium text-slate-900">qualitative argument against quantitative metrics.</span> And you can't win that fight on their terms.
@@ -465,7 +465,7 @@ export default function HomePage() {
             </h2>
             
             <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto font-light leading-relaxed">
-              Empath captures your client's life experience between sessions—giving you the complete context to build 
+              Empath captures your client's life experience between sessions, giving you the complete context to build 
               <span className="text-slate-900 font-medium"> stronger therapeutic alliances and make breakthrough insights that were previously impossible.</span>
             </p>
           </motion.div>
@@ -518,7 +518,7 @@ export default function HomePage() {
                   
                   <h3 className="text-2xl font-semibold text-slate-900 mb-3">Spot Hidden Patterns</h3>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    AI analyzes their daily data to reveal connections between sleep, mood, and life events. You see patterns they can't—and make insights that transform treatment.
+                    AI analyzes their daily data to reveal connections between sleep, mood, and life events. You see patterns they can't, and make insights that transform treatment.
                   </p>
                   <div className="flex items-center text-sm text-purple-600 font-medium">
                     <span className="mr-2">→</span>
@@ -576,7 +576,7 @@ export default function HomePage() {
                     </span>
                   </h3>
                   <p className="text-slate-300 leading-relaxed mb-4">
-                    When clients feel deeply understood from complete context, trust deepens. Your empathy and attunement—powered by comprehensive data—create therapeutic bonds AI never could.
+                    When clients feel deeply understood from complete context, trust deepens. Your empathy and attunement, powered by comprehensive data, create therapeutic bonds AI never could.
                   </p>
                   <div className="flex items-center text-sm font-medium">
                     <span className="mr-2 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">→</span>
@@ -693,7 +693,7 @@ export default function HomePage() {
               {/* Subheading */}
               <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto font-light leading-relaxed">
                 Traditional therapy captures 1 hour per week. 
-                <span className="text-slate-900 font-medium"> The other 167 hours—where real life happens—remain invisible.</span>
+                <span className="text-slate-900 font-medium"> The other 167 hours, where real life happens, remain invisible.</span>
               </p>
             </motion.div>
             
@@ -1068,7 +1068,7 @@ export default function HomePage() {
                   </h4>
                   <p className="text-green-800 font-medium leading-relaxed">
                     Continuous data collection reveals patterns, triggers, and progress that would otherwise remain hidden.
-                    <span className="block mt-2 text-green-700">You finally see all parts of your client—not just the motivated version that shows up in session.</span>
+                    <span className="block mt-2 text-green-700">You finally see all parts of your client, not just the motivated version that shows up in session.</span>
                   </p>
                 </motion.div>
               </motion.div>
@@ -1227,7 +1227,7 @@ export default function HomePage() {
               <div className="relative bg-white p-8 md:p-10 rounded-lg shadow-sm border border-slate-200 z-10 h-full flex flex-col">
                 <div className="text-2xl text-slate-300 mb-4">"</div>
                 <blockquote className="text-lg md:text-xl text-slate-700 font-light leading-relaxed flex-grow">
-                  "Most sessions are spent catching up. Intake forms and assessments only go so far—ongoing life experiences, highs and lows, and even subtle details matter. Empath helps capture this and enhance sessions."
+                  "Most sessions are spent catching up. Intake forms and assessments only go so far, ongoing life experiences, highs and lows, and even subtle details matter. Empath helps capture this and enhance sessions."
                 </blockquote>
                 <div className="text-2xl text-slate-300 mt-2 text-right">"</div>
                 <div className="mt-4 border-t border-slate-100 pt-4">
@@ -1397,7 +1397,7 @@ export default function HomePage() {
                     Will this add to my workload?
                   </h3>
                   <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    No—Empath is designed to save you time. Our dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.
+                    No, Empath is designed to save you time. Our dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.
                   </p>
                 </div>
               </motion.div>
@@ -1435,7 +1435,7 @@ export default function HomePage() {
                     What makes Empath different from other therapy tools?
                   </h3>
                   <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    Empath gives you computational parity with AI—perfect memory and instant data processing—so your human qualities become the deciding factor, not an afterthought in the comparison.
+                    Empath gives you computational parity with AI-level memory and instant data processing so your human qualities become the deciding factor, not an afterthought in the comparison.
                   </p>
                 </div>
               </motion.div>
