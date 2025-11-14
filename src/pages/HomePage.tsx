@@ -142,7 +142,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex-grow overflow-hidden">
+  <div className="flex-grow overflow-x-hidden">
       {/* Hero Section */}
       <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
