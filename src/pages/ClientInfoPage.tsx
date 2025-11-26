@@ -314,22 +314,60 @@ export default function ClientInfoPage() {
             Most of life happens outside the session. Give your therapist the full map of your life so they can help you navigate better.
           </motion.p>
 
-          <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button
-              className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
-              onClick={() => {
-                if (isInvited) {
-                  setShowFlowModal(true);
-                  posthog.capture('hero_primary_cta_clicked', { variant, isInvited: true });
-                } else {
-                  setShowInviteModal(true);
-                  posthog.capture('hero_primary_cta_clicked', { variant, isInvited: false });
-                }
-              }}
-            >
-              {isInvited ? `Connect With ${therapistName || 'Therapist'}` : 'Connect With Therapist'}
-            </button>
-
+          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-12 max-w-md mx-auto">
+            {isInvited ? (
+              <>
+                <button
+                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    setShowFlowModal(true);
+                    posthog.capture('hero_primary_cta_clicked', { variant, isInvited: true });
+                  }}
+                >
+                  {therapistName ? `Connect With ${therapistName}` : 'Connect With Therapist'} →
+                </button>
+                <p className="text-sm text-slate-500 text-center">
+                  Your therapist invited you • Setup takes 30 seconds
+                </p>
+              </>
+            ) : (
+              <>
+                <button
+                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    setShowInviteModal(true);
+                    posthog.capture('hero_primary_cta_clicked', { variant, isInvited: false });
+                  }}
+                >
+                  Use with Therapist →
+                </button>
+                
+                <div className="flex items-center gap-4 w-full">
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    className="flex-1 px-8 py-4 bg-white text-slate-900 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-medium flex items-center justify-center shadow-sm"
+                    onClick={() => {
+                      posthog.capture('hero_call_clicked', { variant });
+                    }}
+                  >
+                    📞 Call to journal
+                  </a>
+                  <a
+                    href={`sms:${PHONE_MAIN}`}
+                    className="flex-1 px-8 py-4 bg-white text-slate-900 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-medium flex items-center justify-center shadow-sm"
+                    onClick={() => {
+                      posthog.capture('hero_text_clicked', { variant });
+                    }}
+                  >
+                    💬 Text to journal
+                  </a>
+                </div>
+                
+                <p className="text-sm text-slate-500 text-center">
+                  No app download required to journal
+                </p>
+              </>
+            )}
           </motion.div>
             </div>
       </motion.section>
