@@ -69,7 +69,7 @@ const ValueCalculator = () => {
              </div>
              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Calculate Your Hidden Savings</h2>
              <p className="text-lg text-slate-600 mb-12">
-                Empath eliminates the "catch-up" phase of therapy. See how much value you reclaim by starting every session deep.
+                Empath eliminates the "catch-up" phase of therapy. So every moment in the session brings you closer to your next breakthrough.
              </p>
 
              <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-10">
@@ -307,12 +307,11 @@ export default function ClientInfoPage() {
 
           <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]">
             Your Therapist Is Missing <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">99% Of Your Life.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">95% Of Your Life.</span>
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-            Don't spend the first 20 minutes of therapy recapping your week. 
-            Capture breakthroughs as they happen. Start every session aligned.
+            Most of life happens outside the session. Give your therapist the full map of your life so they can help you navigate better.
           </motion.p>
 
           <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -328,25 +327,9 @@ export default function ClientInfoPage() {
                 }
               }}
             >
-              {isInvited ? `Connect With ${therapistName || 'Therapist'}` : 'Get Started Free'}
-              <Zap className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              {isInvited ? `Connect With ${therapistName || 'Therapist'}` : 'Connect With Therapist'}
             </button>
 
-            {!isInvited && (
-            <button
-                className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 rounded-xl font-semibold text-lg hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
-                onClick={() => setShowCallModal(true)}
-            >
-                Try It Now (No App)
-            </button>
-            )}
-          </motion.div>
-
-          {/* Quick Benefit Pills */}
-          <motion.div variants={fadeIn} className="flex flex-wrap justify-center gap-4 text-sm font-medium text-slate-500">
-            <span className="flex items-center px-3 py-1 bg-slate-100 rounded-lg">🚫 No App Download Required</span>
-            <span className="flex items-center px-3 py-1 bg-slate-100 rounded-lg">🔒 Bank-Level Security</span>
-            <span className="flex items-center px-3 py-1 bg-slate-100 rounded-lg">⚡ Takes 30 Seconds</span>
           </motion.div>
             </div>
       </motion.section>
@@ -360,7 +343,7 @@ export default function ClientInfoPage() {
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
                   <h3 className="text-red-600 font-bold uppercase tracking-wider text-sm mb-2">The Old Way</h3>
-                  <h4 className="text-2xl font-bold text-slate-900 mb-4">The "Amnesia Gap"</h4>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-4">The "Missed Moments"</h4>
                   <p className="text-slate-600 mb-6">
                     You have a breakthrough in the shower on Wednesday. A panic attack on Friday. A fight with your partner on Sunday.
                   </p>
@@ -383,16 +366,16 @@ export default function ClientInfoPage() {
                    <div className="absolute top-0 left-0 w-1 h-full bg-blue-600"></div>
                    <div className="absolute top-0 right-0 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-bl-lg">NEW WAY</div>
                    <h3 className="text-blue-600 font-bold uppercase tracking-wider text-sm mb-2">With Empath</h3>
-                   <h4 className="text-2xl font-bold text-slate-900 mb-4">Therapy in Real-Time</h4>
+                   <h4 className="text-2xl font-bold text-slate-900 mb-4">The "Full Picture"</h4>
                    <p className="text-slate-600 mb-6">
                      Something happens. You send a voice note or text to Empath instantly. 
                    </p>
                    <p className="text-slate-600 mb-6 font-medium">
-                     We organize it into a clinical summary for your therapist.
+                     We organize these moments into a summary for your therapist.
                    </p>
                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
                      <p className="text-blue-800 italic">
-                       "I read your notes about the argument on Sunday. Let's dive straight into that trigger."
+                       "I know you had a fight with your partner on Sunday. Let's dive straight into that trigger."
                      </p>
                      <p className="text-slate-500 text-sm mt-2">
                        (You start working on deep issues at Minute 1)
@@ -419,19 +402,19 @@ export default function ClientInfoPage() {
                 icon: <Smartphone className="w-8 h-8 text-white" />,
                 color: "bg-blue-600",
                 title: "1. Capture The Moment",
-                desc: "Feeling anxious? Had a win? Just text or voice memo Empath. It's as easy as texting a friend."
+                desc: "Feeling anxious? Had a win? Just journal using the app or text/call Empath so the moment does not get lost."
               },
               {
                 icon: <Zap className="w-8 h-8 text-white" />,
                 color: "bg-violet-600",
-                title: "2. AI Clarifies It",
-                desc: "Our secure AI organizes your scattered thoughts into clear, clinical insights."
+                title: "2. Empath Organizes It",
+                desc: "We organize your scattered thoughts into clear summary for your therapist."
               },
               {
                 icon: <Lock className="w-8 h-8 text-white" />,
                 color: "bg-emerald-600",
                 title: "3. Therapist Receives It",
-                desc: "Your therapist gets a secure summary before your session. They walk in fully prepared."
+                desc: "Your therapist gets a secure summary before your session. They're fully prepared when you walk in."
               }
             ].map((step, i) => (
               <div key={i} className="relative group">
