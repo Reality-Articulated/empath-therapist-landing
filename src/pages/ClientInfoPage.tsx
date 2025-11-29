@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Shield, Clock, Phone, Smartphone, MessageSquare, Lock, Zap, ChevronDown, Star, DollarSign, TrendingUp } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
-import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
@@ -235,18 +234,23 @@ export default function ClientInfoPage() {
     }
 
     try {
-      await emailjs.send(
-        'service_vxj3w0n',
-        'template_k7xemzd',
-        {
-          to_email: 'karan@myempath.co',
-          user_email: userEmail,
-          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
-          no_therapist: noTherapist ? 'Yes' : 'No',
-          time: new Date().toLocaleString(),
+      const response = await fetch('/api/client-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        'RkdQiScnBEMQIBtNL'
-      );
+        body: JSON.stringify({
+          userEmail,
+          therapistEmail: noTherapist ? null : therapistEmail,
+          noTherapist,
+          variant,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
       toast.success('Request sent! We will be in touch shortly.');
       if (window.twq) {
         window.twq('event', 'tw-onbx0-onbx0', {
