@@ -57,7 +57,7 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           animations: ['framer-motion', 'react-intersection-observer'],
-          ui: ['lucide-react', '@emailjs/browser'],
+          ui: ['lucide-react'],
         },
       },
     },

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, CheckCircle, Shield, Phone, Download } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
-import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 
@@ -61,17 +60,23 @@ export default function TherapyValueCalculator() {
     posthog.capture('calculator_email_captured', { email: leadEmail });
 
     try {
-      await emailjs.send(
-        'service_vxj3w0n',
-        'template_k7xemzd',
-        {
-          to_email: 'karan@myempath.co',
-          user_email: leadEmail,
-          source: 'Therapy Value Calculator',
-          time: new Date().toLocaleString(),
+      const response = await fetch('/api/client-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        'RkdQiScnBEMQIBtNL'
-      );
+        body: JSON.stringify({
+          userEmail: leadEmail,
+          therapistEmail: null,
+          noTherapist: true,
+          variant: 'therapy_calculator_email_gate',
+          source: 'Therapy Value Calculator',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
       
       setHasEnteredEmail(true);
       posthog.capture('calculator_access_granted', { email: leadEmail });
@@ -93,19 +98,23 @@ export default function TherapyValueCalculator() {
     }
     
     try {
-      await emailjs.send(
-        'service_vxj3w0n',
-        'template_k7xemzd',
-        {
-          to_email: 'karan@myempath.co',
-          user_email: leadEmail,
-          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
-          no_therapist: noTherapist ? 'Yes' : 'No',
-          source: 'Therapy Value Calculator',
-          time: new Date().toLocaleString(),
+      const response = await fetch('/api/client-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        'RkdQiScnBEMQIBtNL'
-      );
+        body: JSON.stringify({
+          userEmail: leadEmail,
+          therapistEmail: noTherapist ? null : therapistEmail,
+          noTherapist,
+          variant: 'therapy_calculator_invite',
+          source: 'Therapy Value Calculator',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
       
       toast.success('Thank you! We will be in touch.');
       setInviteSubmitted(true);

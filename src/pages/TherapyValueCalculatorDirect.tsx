@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../../public/empath-logo.png';
-import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 
@@ -54,19 +53,23 @@ export default function TherapyValueCalculatorDirect() {
       return;
     }
     try {
-      await emailjs.send(
-        'service_vxj3w0n',
-        'template_k7xemzd',
-        {
-          to_email: 'karan@myempath.co',
-          user_email: userEmail,
-          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
-          no_therapist: noTherapist ? 'Yes' : 'No',
-          source: 'Therapy Calculator Direct',
-          time: new Date().toLocaleString(),
+      const response = await fetch('/api/client-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        'RkdQiScnBEMQIBtNL'
-      );
+        body: JSON.stringify({
+          userEmail,
+          therapistEmail: noTherapist ? null : therapistEmail,
+          noTherapist,
+          variant: 'therapy_calculator_direct_invite',
+          source: 'Therapy Calculator Direct',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
       toast.success('Thank you! We will reach out to your therapist and let you know when you are connected.');
       setInviteSubmitted(true);
       setUserEmail('');
