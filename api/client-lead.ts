@@ -9,8 +9,6 @@
 // - NOTIFY_EMAIL_TO      (where you want to receive notifications)
 // - NOTIFY_EMAIL_FROM    (verified sender in Resend, e.g. "Empath <noreply@myempath.co>")
 
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 const airtableApiKey = process.env.AIRTABLE_API_KEY;
 const airtableBaseId = process.env.AIRTABLE_BASE_ID;
 const airtableTableName = process.env.AIRTABLE_TABLE_NAME;
@@ -19,7 +17,7 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
   console.warn('Airtable env vars are not fully set. Airtable logging will be disabled.');
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
