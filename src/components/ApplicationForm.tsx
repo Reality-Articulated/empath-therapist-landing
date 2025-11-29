@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -74,20 +73,28 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        'service_vxj3w0n', // Replace with your EmailJS service ID
-        'template_7kwdlh8', // Replace with your EmailJS template ID
-        {
-          to_email: 'karan@myempath.co',
-          from_name: formData.name,
-          from_email: formData.email,
+      const response = await fetch('/api/client-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userEmail: formData.email,
+          therapistEmail: null,
+          noTherapist: true,
+          variant: 'therapist_advisory_application',
+          source: 'Advisory Application',
+          name: formData.name,
           practice: formData.practice,
           experience: formData.experience,
           clients: formData.clients,
           motivation: formData.motivation,
-        },
-        'RkdQiScnBEMQIBtNL' // Replace with your EmailJS public key
-      );
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
 
       toast.success('Application submitted successfully!');
       onClose();

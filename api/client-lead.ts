@@ -23,7 +23,14 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { userEmail, therapistEmail, noTherapist, variant } = req.body || {};
+    const {
+      userEmail,
+      therapistEmail,
+      noTherapist,
+      variant,
+      source,
+      ...extra
+    } = req.body || {};
 
     if (!userEmail || typeof userEmail !== 'string') {
       return res.status(400).json({ error: 'userEmail is required' });
@@ -50,8 +57,11 @@ export default async function handler(req: any, res: any) {
             'Therapist Email': noTherapist ? 'No therapist' : therapistEmail || '',
             'No Therapist': noTherapist ? 'Yes' : 'No',
             Variant: variant || 'control',
-            Source: 'Client Info Page',
+            Source: source || 'Client Info Page',
             SubmittedAt: timestamp,
+            ...(Object.keys(extra).length
+              ? { 'Additional Data': JSON.stringify(extra, null, 2) }
+              : {}),
           },
         }),
       });
