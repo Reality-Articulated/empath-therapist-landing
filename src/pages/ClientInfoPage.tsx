@@ -64,11 +64,11 @@ const ValueCalculator = () => {
     <section className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center max-w-3xl">
              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">
-                <DollarSign className="w-4 h-4" /> ROI Calculator
+                <DollarSign className="w-4 h-4" /> Value Calculator
              </div>
-             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Calculate Your Hidden Savings</h2>
+             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Unlock More Value From Every Session</h2>
              <p className="text-lg text-slate-600 mb-12">
-                Empath eliminates the "catch-up" phase of therapy. So every moment in the session brings you closer to your next breakthrough.
+                Empath eliminates the "catch-up" phase of therapy. Instead of spending time summarizing your week, you start deep work immediately.
              </p>
 
              <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-10">
@@ -93,23 +93,23 @@ const ValueCalculator = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
                         <div className="flex items-center justify-center gap-2 text-blue-800 font-bold mb-2">
-                             <Clock className="w-5 h-5" /> Saved Per Session
+                             <Clock className="w-5 h-5" /> Value Unlocked
                         </div>
                         <div className="text-3xl font-bold text-blue-600">${recoveredPerSession}</div>
-                        <p className="text-sm text-blue-600/80 mt-2">Value unlocked per hour</p>
+                        <p className="text-sm text-blue-600/80 mt-2">Per session in productive time</p>
                     </div>
                     <div className="bg-green-50 rounded-xl p-6 border border-green-100">
                         <div className="flex items-center justify-center gap-2 text-green-800 font-bold mb-2">
-                             <TrendingUp className="w-5 h-5" /> Yearly Value
+                             <TrendingUp className="w-5 h-5" /> Yearly Benefit
                         </div>
                          <div className="text-3xl font-bold text-green-600">${recoveredPerYear.toLocaleString()}</div>
-                         <p className="text-sm text-green-600/80 mt-2">Worth of reclaimed time</p>
+                         <p className="text-sm text-green-600/80 mt-2">Worth of extra deep work/year</p>
                     </div>
                 </div>
                 
                 <div className="mt-8 pt-8 border-t border-slate-100">
                      <p className="text-slate-500 text-sm">
-                        *Based on eliminating the 15 minutes (25%) typically spent summarizing the past week.
+                        *This calculates the monetary value of the 15-20 minutes typically lost to "updates" each session. It is not a discount on your fee, but an increase in what you get for it.
                      </p>
                 </div>
              </div>

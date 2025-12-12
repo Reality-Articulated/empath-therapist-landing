@@ -141,10 +141,10 @@ export default function TherapyValueCalculator() {
           <div className="text-center mb-8">
             <img src={logo} alt="Empath Logo" className="w-16 h-16 mx-auto mb-4" />
             <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-              Are You Overpaying for Therapy?
+              Are You Getting Full Value from Therapy?
             </h1>
             <p className="text-lg text-gray-600 mb-6">
-              See how much money you can save in therapy in 30 seconds
+              See how much more value you can unlock in 30 seconds
             </p>
           </div>
 
@@ -288,10 +288,10 @@ export default function TherapyValueCalculator() {
           {/* Simple intro */}
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              Calculate Your Potential Savings
+              Calculate Your Potential Value
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              See how much time and money Empath could save you in therapy sessions
+              See how much time and value Empath could unlock in therapy sessions
             </p>
           </div>
 
@@ -354,26 +354,26 @@ export default function TherapyValueCalculator() {
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               {hasCalculatorData ? (
                 <>
-                  <h3 className="text-xl font-semibold mb-6 text-green-700">Your Savings with Empath</h3>
+                  <h3 className="text-xl font-semibold mb-6 text-green-700">Value Unlocked with Empath</h3>
                   
                   <div className="space-y-4">
                     <div className="flex justify-between py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Time saved per session:</span>
+                      <span className="text-gray-600">Time reclaimed per session:</span>
                       <span className="font-semibold">{minutesSaved} minutes</span>
                     </div>
                     
                     <div className="flex justify-between py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Money saved per session:</span>
+                      <span className="text-gray-600">Value unlocked per session:</span>
                       <span className="font-semibold">${dollarsSavedPerSession.toFixed(2)}</span>
                     </div>
                     
                     <div className="flex justify-between py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Monthly savings:</span>
+                      <span className="text-gray-600">Monthly value gained:</span>
                       <span className="font-semibold">${monthlyDollarsSaved.toFixed(0)}</span>
                     </div>
                     
                     <div className="flex justify-between py-3 bg-green-50 rounded-lg px-4">
-                      <span className="font-semibold text-green-800">Annual savings:</span>
+                      <span className="font-semibold text-green-800">Annual value gained:</span>
                       <span className="font-bold text-green-700 text-xl">
                         ${yearlyDollarsSaved.toLocaleString(undefined, {maximumFractionDigits:0})}
                       </span>
@@ -385,7 +385,7 @@ export default function TherapyValueCalculator() {
                       onClick={() => setShowInviteModal(true)}
                       className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold hover:bg-blue-700 transition mb-3"
                     >
-                      Get Started - Save ${yearlyDollarsSaved.toFixed(0)}/year
+                      Get Started - Unlock ${yearlyDollarsSaved.toFixed(0)}/year
                     </button>
                     
                     <div className="flex gap-3">
@@ -420,7 +420,7 @@ export default function TherapyValueCalculator() {
             
             <div className="bg-white rounded-lg border border-gray-200 divide-y divide-gray-200">
               <div className="p-6">
-                <h4 className="font-semibold mb-2">How does Empath save me money?</h4>
+                <h4 className="font-semibold mb-2">How does Empath add value?</h4>
                 <p className="text-gray-600">Empath eliminates the 15-20 minutes typically spent catching your therapist up each session, so that time goes toward actual therapeutic work instead.</p>
               </div>
               
@@ -453,7 +453,7 @@ export default function TherapyValueCalculator() {
             onClick={() => setShowInviteModal(true)}
             className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold"
           >
-            Save ${yearlyDollarsSaved.toFixed(0)}/year
+            Unlock ${yearlyDollarsSaved.toFixed(0)}/year
           </button>
         </div>
       )}

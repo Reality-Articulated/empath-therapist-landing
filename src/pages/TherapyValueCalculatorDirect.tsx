@@ -222,8 +222,8 @@ export default function TherapyValueCalculatorDirect() {
       >
         <div className="flex flex-col items-center mb-6">
           <img src={logo} alt="Empath Logo" className="w-14 h-14 mb-2" />
-          <h1 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 mb-2">Your Personal Therapy ROI</h1>
-          <p className="text-gray-600 text-center max-w-md">Calculate exactly how much Empath saves you per session:</p>
+          <h1 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-teal-500 mb-2">Your Personal Therapy Value</h1>
+          <p className="text-gray-600 text-center max-w-md">Calculate exactly how much value Empath unlocks per session:</p>
         </div>
         <form className="space-y-6">
           <div>
@@ -264,23 +264,23 @@ export default function TherapyValueCalculatorDirect() {
           </div>
         </form>
         <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-5 border border-green-100 shadow-sm">
-          <h2 className="text-xl font-bold text-green-800 mb-3 text-center">🎉 Your Empath Savings:</h2>
+          <h2 className="text-xl font-bold text-green-800 mb-3 text-center">🎉 Your Empath Value Added:</h2>
           <ul className="space-y-3 text-gray-700 text-base">
-            <li className="flex justify-between"><span>Time saved per session:</span><span className="font-bold text-green-700">{minutesSaved} minutes</span></li>
-            <li className="flex justify-between"><span>Money saved per session:</span><span className="font-bold text-green-700">${dollarsSavedPerSession.toFixed(2)}</span></li>
-            <li className="flex justify-between"><span>Monthly savings:</span><span className="font-bold text-green-700">${monthlyDollarsSaved.toFixed(0)}</span></li>
-            <li className="flex justify-between border-t pt-2"><span className="font-semibold">Annual savings:</span><span className="font-bold text-green-700 text-lg">${yearlyDollarsSaved.toLocaleString(undefined, {maximumFractionDigits:0})}</span></li>
+            <li className="flex justify-between"><span>Time reclaimed per session:</span><span className="font-bold text-green-700">{minutesSaved} minutes</span></li>
+            <li className="flex justify-between"><span>Value unlocked per session:</span><span className="font-bold text-green-700">${dollarsSavedPerSession.toFixed(2)}</span></li>
+            <li className="flex justify-between"><span>Monthly value gained:</span><span className="font-bold text-green-700">${monthlyDollarsSaved.toFixed(0)}</span></li>
+            <li className="flex justify-between border-t pt-2"><span className="font-semibold">Annual value gained:</span><span className="font-bold text-green-700 text-lg">${yearlyDollarsSaved.toLocaleString(undefined, {maximumFractionDigits:0})}</span></li>
             <li className="flex justify-between bg-blue-50 p-2 rounded"><span className="font-semibold">Extra breakthrough time/year:</span><span className="font-bold text-blue-700">{extraBreakthroughHoursPerYear.toFixed(1)} hours</span></li>
           </ul>
         </div>
         <div className="mt-8 text-center">
-          <p className="text-gray-700 text-sm mb-3 font-medium">Ready to stop wasting money on catch-up time?</p>
+          <p className="text-gray-700 text-sm mb-3 font-medium">Ready to stop wasting time on catch-up?</p>
           <button
             type="button"
             onClick={handleOpenInviteModal}
             className="inline-block bg-gradient-to-r from-green-600 to-[#1281dd] text-white rounded-full px-8 py-4 font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
           >
-            💸 Start Saving Today
+            💸 Start Unlocking Value Today
           </button>
         </div>
       </motion.div>
