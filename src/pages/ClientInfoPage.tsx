@@ -1,11 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Shield, Clock, Phone, Smartphone, MessageSquare, Lock, Zap, ChevronDown, Star, DollarSign, TrendingUp, Mic, UserCheck, Brain } from 'lucide-react';
+import { CheckCircle, Shield, Clock, Phone, Smartphone, MessageSquare, Zap, ChevronDown, Star, DollarSign, TrendingUp, UserCheck, Search, User, Loader2 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import { Link } from 'react-router-dom';
+
+// Therapist type from marketplace API
+interface MarketplaceTherapist {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  title?: string;
+  specialties?: string[];
+  education?: string;
+  yearsOfExperience?: number;
+  languages?: string[];
+  sessionType?: string;
+  sessionFee?: number;
+  slidingScale?: boolean;
+  acceptingClients?: boolean;
+  schedulingLink?: string;
+  profilePicture?: string;
+  branding?: {
+    practiceName?: string;
+    practiceEmail?: string;
+    practicePhone?: string;
+    practiceAddress?: string;
+    logoUrl?: string;
+  };
+}
 
 // Declare YouTube API types
 declare global {
@@ -134,8 +160,19 @@ export default function ClientInfoPage() {
   const [showCallModal, setShowCallModal] = useState(false);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   
+  // Therapist selection state
+  const [inviteMode, setInviteMode] = useState<'email' | 'select'>('select');
+  const [therapistSearch, setTherapistSearch] = useState('');
+  const [therapistList, setTherapistList] = useState<MarketplaceTherapist[]>([]);
+  const [loadingTherapists, setLoadingTherapists] = useState(false);
+  const [therapistListError, setTherapistListError] = useState('');
+  const [selectedTherapist, setSelectedTherapist] = useState<MarketplaceTherapist | null>(null);
+  const [userName, setUserName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   // Constants
   const PHONE_MAIN = '+18883663082';
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://app.empathdash.com';
   
   // Initialization
   useEffect(() => {
@@ -207,20 +244,74 @@ export default function ClientInfoPage() {
     }
   }, []);
 
+  // Fetch therapists from marketplace
+  const fetchTherapists = async (search?: string) => {
+    setLoadingTherapists(true);
+    setTherapistListError('');
+    try {
+      const params = new URLSearchParams();
+      if (search) params.set('search', search);
+      const url = `${BACKEND_URL}/api/therapists/marketplace${params.toString() ? `?${params.toString()}` : ''}`;
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!response.ok) {
+        // Log for debugging
+        console.error('Therapist marketplace fetch failed:', response.status, response.statusText);
+        throw new Error(`Failed to fetch therapists: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      setTherapistList(data.therapists || []);
+      setTherapistListError('');
+    } catch (err) {
+      console.error('Error fetching therapists:', err);
+      setTherapistListError('Unable to load therapists. You can still enter your therapist\'s email below.');
+      setTherapistList([]);
+    } finally {
+      setLoadingTherapists(false);
+    }
+  };
+
+  // Fetch therapists when modal opens or search changes
+  useEffect(() => {
+    if (showInviteModal && inviteMode === 'select') {
+      const debounceTimer = setTimeout(() => {
+        fetchTherapists(therapistSearch);
+      }, 300);
+      return () => clearTimeout(debounceTimer);
+    }
+  }, [showInviteModal, inviteMode, therapistSearch]);
+
   // Invite Logic
   const handleInviteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setInviteError('');
     setInviteSubmitted(false);
+    setIsSubmitting(true);
     
     // PostHog Variant (Keeping simplified logic for continuity)
     const variantRaw = posthog.getFeatureFlag('client-info-copy-experiment');
     const variant = typeof variantRaw === 'string' ? variantRaw : 'control';
     
+    // Determine therapist info based on mode
+    const isSelectMode = inviteMode === 'select' && selectedTherapist;
+    const finalTherapistEmail = isSelectMode ? selectedTherapist.email : therapistEmail;
+    const finalTherapistId = isSelectMode ? selectedTherapist.id : null;
+    const finalTherapistName = isSelectMode ? selectedTherapist.name : null;
+    
     posthog.capture('invite_form_submitted', { 
       user_email: userEmail, 
-      therapist_email: therapistEmail, 
+      therapist_email: finalTherapistEmail, 
+      therapist_id: finalTherapistId,
+      therapist_name: finalTherapistName,
       no_therapist: noTherapist,
+      invite_mode: inviteMode,
       variant 
     });
     
@@ -228,44 +319,102 @@ export default function ClientInfoPage() {
       setInviteError('Please enter your email.');
       return;
     }
-    if (!noTherapist && !therapistEmail) {
-      setInviteError('Please enter your therapist\'s email.');
-      return;
+    if (!noTherapist) {
+      if (inviteMode === 'select' && !selectedTherapist) {
+        setInviteError('Please select a therapist from the list.');
+        return;
+      }
+      if (inviteMode === 'email' && !therapistEmail) {
+        setInviteError('Please enter your therapist\'s email.');
+        return;
+      }
     }
 
     try {
-      const response = await fetch('/api/client-lead', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userEmail,
-          therapistEmail: noTherapist ? null : therapistEmail,
-          noTherapist,
-          variant,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit');
-      }
-
-      toast.success('Request sent! We will be in touch shortly.');
-      if (window.twq) {
-        window.twq('event', 'tw-onbx0-onbx0', {
-          user_email: userEmail,
-          therapist_email: noTherapist ? 'No therapist' : therapistEmail,
-          no_therapist: noTherapist ? 'Yes' : 'No',
-          variant
+      // If user selected a therapist from marketplace, use the new connection request endpoint
+      if (isSelectMode && selectedTherapist) {
+        const response = await fetch(`${BACKEND_URL}/api/therapists/marketplace/request-connection`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            name: userName || undefined,
+            therapistId: selectedTherapist.id,
+          }),
         });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.message || 'Failed to send connection request');
+        }
+
+        const data = await response.json();
+        
+        toast.success(`Request sent to ${data.therapistName || selectedTherapist.name}! You'll receive an email once they approve.`);
+        
+        if (window.twq) {
+          window.twq('event', 'tw-onbx0-onbx0', {
+            user_email: userEmail,
+            therapist_id: selectedTherapist.id,
+            therapist_name: selectedTherapist.name,
+            flow: 'marketplace_connection',
+            variant
+          });
+        }
+        
+        posthog.capture('marketplace_connection_request_sent', {
+          therapist_id: selectedTherapist.id,
+          therapist_name: selectedTherapist.name,
+        });
+        
+        setInviteSubmitted(true);
+        setUserName('');
+        setUserEmail('');
+        setSelectedTherapist(null);
+      } else {
+        // For email mode or no therapist, use the existing client-lead endpoint
+        const response = await fetch('/api/client-lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userName: userName || undefined,
+            userEmail,
+            therapistEmail: noTherapist ? null : therapistEmail,
+            noTherapist,
+            variant,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to submit');
+        }
+
+        toast.success('Request sent! We will be in touch shortly.');
+        
+        if (window.twq) {
+          window.twq('event', 'tw-onbx0-onbx0', {
+            user_email: userEmail,
+            therapist_email: noTherapist ? 'No therapist' : therapistEmail,
+            no_therapist: noTherapist ? 'Yes' : 'No',
+            variant
+          });
+        }
+        
+        setInviteSubmitted(true);
+        setUserName('');
+        setUserEmail('');
+        setTherapistEmail('');
       }
-      setInviteSubmitted(true);
-      setUserEmail('');
-      setTherapistEmail('');
-    } catch (err) {
-      toast.error('Failed to submit. Please try again.');
-      setInviteError('Something went wrong. Please try again.');
+    } catch (err: any) {
+      console.error('Submit error:', err);
+      toast.error(err.message || 'Failed to submit. Please try again.');
+      setInviteError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -696,77 +845,320 @@ export default function ClientInfoPage() {
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative border-2 border-stone-900"
+            className="bg-[#FAF9F6] rounded-xl shadow-2xl w-full max-w-lg relative border-2 border-stone-900 max-h-[90vh] overflow-y-auto"
           >
-                <button
-              onClick={() => setShowInviteModal(false)}
-              className="absolute top-4 right-4 text-stone-400 hover:text-stone-900"
-            >
-              ✕
-                </button>
+            {/* Header */}
+            <div className="sticky top-0 bg-[#FAF9F6] px-6 pt-6 pb-4 border-b border-stone-100 z-10">
+              <button
+                onClick={() => {
+                  setShowInviteModal(false);
+                  setSelectedTherapist(null);
+                  setTherapistSearch('');
+                  setInviteError('');
+                  setUserName('');
+                  setUserEmail('');
+                  setTherapistEmail('');
+                  setNoTherapist(false);
+                  setInviteSubmitted(false);
+                }}
+                className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 z-10 p-1"
+              >
+                ✕
+              </button>
+              <h3 className="text-2xl font-black text-stone-900 font-serif">Connect with Your Therapist</h3>
+              <p className="text-stone-500 text-sm mt-1">Get started with Empath in just a few steps</p>
+            </div>
 
-            <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Get Early Access</h3>
-            <p className="text-stone-600 mb-6 font-medium">Connect with your therapist to start using Empath.</p>
-
-            {inviteSubmitted ? (
-              <div className="text-center py-8 bg-blue-100 rounded-xl border-2 border-blue-200">
-                <CheckCircle className="w-12 h-12 text-[#1b8af1] mx-auto mb-4" />
-                <h4 className="font-bold text-stone-900 mb-2">Request Sent!</h4>
-                <p className="text-stone-600 text-sm">We'll contact your therapist.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleInviteSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Your Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-3 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 outline-none font-medium transition-colors"
-                    placeholder="you@example.com"
-                    value={userEmail}
-                    onChange={e => setUserEmail(e.target.value)}
-                  />
-              </div>
-                
-                <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-1">Therapist's Email</label>
-                  <input
-                    type="email"
-                    required={!noTherapist}
-                    disabled={noTherapist}
-                    className="w-full px-4 py-3 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 outline-none font-medium transition-colors disabled:bg-stone-100 disabled:text-stone-400"
-                    placeholder="therapist@example.com"
-                    value={therapistEmail}
-                    onChange={e => setTherapistEmail(e.target.value)}
-                  />
-              </div>
-
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="noTherapist"
-                    className="w-4 h-4 text-[#1b8af1] rounded border-stone-300 focus:ring-blue-600"
-                    checked={noTherapist}
-                    onChange={e => {
-                      setNoTherapist(e.target.checked);
-                      if(e.target.checked) setTherapistEmail('');
-                    }}
-                  />
-                  <label htmlFor="noTherapist" className="ml-2 text-sm font-medium text-stone-600">
-                    I don't have a therapist right now
-                  </label>
-          </div>
-          
-                {inviteError && <p className="text-red-600 font-bold text-sm">{inviteError}</p>}
-
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold hover:bg-[#1b8af1] transition-colors border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+            <div className="p-6">
+              {inviteSubmitted ? (
+                <motion.div 
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="text-center py-6"
                 >
-                  Request Access
-                </button>
-              </form>
-            )}
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-green-200">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h4 className="font-black text-xl text-stone-900 mb-2">Request Sent!</h4>
+                  <p className="text-stone-600 text-sm mb-6 max-w-xs mx-auto">
+                    {inviteMode === 'select' 
+                      ? "Your therapist will receive your connection request. Once they approve, you'll get an email to complete your account setup."
+                      : "We'll reach out to your therapist and get you connected soon."
+                    }
+                  </p>
+                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                    <p className="text-xs text-blue-700 font-medium">
+                      ⏳ Most therapists respond within 24-48 hours.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowInviteModal(false);
+                      setInviteSubmitted(false);
+                    }}
+                    className="mt-6 px-6 py-2 text-stone-600 font-bold text-sm hover:text-stone-900 transition-colors"
+                  >
+                    Close
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleInviteSubmit} className="space-y-6">
+                  
+                  {/* Step 1: Find Therapist */}
+                  {!noTherapist && (
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold flex items-center justify-center">1</span>
+                        <span className="text-sm font-bold text-stone-900">Find your therapist</span>
+                      </div>
+
+                      {/* Mode Toggle - More subtle */}
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setInviteMode('select');
+                            setTherapistEmail('');
+                          }}
+                          className={`flex-1 px-3 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                            inviteMode === 'select'
+                              ? 'bg-stone-900 text-white shadow-md'
+                              : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+                          }`}
+                        >
+                          <Search className="w-3.5 h-3.5" />
+                          Search Directory
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setInviteMode('email');
+                            setSelectedTherapist(null);
+                          }}
+                          className={`flex-1 px-3 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                            inviteMode === 'email'
+                              ? 'bg-stone-900 text-white shadow-md'
+                              : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+                          }`}
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" />
+                          Enter Email
+                        </button>
+                      </div>
+
+                      {/* Select from Directory */}
+                      {inviteMode === 'select' && (
+                        <div className="space-y-3">
+                          {/* Search Input */}
+                          <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+                            <input
+                              type="text"
+                              placeholder="Search by name..."
+                              className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                              value={therapistSearch}
+                              onChange={e => setTherapistSearch(e.target.value)}
+                            />
+                          </div>
+
+                          {/* Selected Therapist Display */}
+                          {selectedTherapist && (
+                            <motion.div 
+                              initial={{ scale: 0.95 }}
+                              animate={{ scale: 1 }}
+                              className="p-3 bg-green-50 border-2 border-green-300 rounded-lg flex items-center gap-3"
+                            >
+                              <div className="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center flex-shrink-0">
+                                <CheckCircle className="w-5 h-5 text-green-600" />
+                              </div>
+                              <div className="flex-grow min-w-0">
+                                <p className="font-bold text-stone-900 truncate">{selectedTherapist.name}</p>
+                                {selectedTherapist.title && (
+                                  <p className="text-xs text-stone-500 truncate">{selectedTherapist.title}</p>
+                                )}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => setSelectedTherapist(null)}
+                                className="text-stone-400 hover:text-stone-600 p-1 hover:bg-stone-100 rounded"
+                              >
+                                ✕
+                              </button>
+                            </motion.div>
+                          )}
+
+                          {/* Therapist List */}
+                          {!selectedTherapist && (
+                            <div className="bg-white border-2 border-stone-200 rounded-lg max-h-40 overflow-y-auto">
+                              {loadingTherapists ? (
+                                <div className="p-8 text-center">
+                                  <Loader2 className="w-6 h-6 text-blue-500 animate-spin mx-auto mb-2" />
+                                  <p className="text-xs text-stone-500 font-medium">Finding therapists...</p>
+                                </div>
+                              ) : therapistListError ? (
+                                <div className="p-4 text-center">
+                                  <p className="text-xs text-stone-500 font-medium">{therapistListError}</p>
+                                  <button 
+                                    type="button" 
+                                    onClick={() => setInviteMode('email')} 
+                                    className="text-xs text-blue-600 hover:underline mt-2 font-bold"
+                                  >
+                                    Enter email instead →
+                                  </button>
+                                </div>
+                              ) : therapistList.length === 0 ? (
+                                <div className="p-6 text-center">
+                                  <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <Search className="w-5 h-5 text-stone-300" />
+                                  </div>
+                                  <p className="text-xs text-stone-500 font-medium">
+                                    {therapistSearch 
+                                      ? 'No matches found' 
+                                      : 'Start typing to search'}
+                                  </p>
+                                  {therapistSearch && (
+                                    <button 
+                                      type="button" 
+                                      onClick={() => setInviteMode('email')} 
+                                      className="text-xs text-blue-600 hover:underline mt-2 font-bold"
+                                    >
+                                      Enter their email instead →
+                                    </button>
+                                  )}
+                                </div>
+                              ) : (
+                                <div className="divide-y divide-stone-100">
+                                  {therapistList.map(therapist => (
+                                    <button
+                                      key={therapist.id}
+                                      type="button"
+                                      onClick={() => setSelectedTherapist(therapist)}
+                                      className="w-full p-3 flex items-center gap-3 hover:bg-blue-50 transition-colors text-left group"
+                                    >
+                                      <div className="w-9 h-9 bg-stone-100 group-hover:bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 transition-colors">
+                                        <User className="w-4 h-4 text-stone-400 group-hover:text-blue-500 transition-colors" />
+                                      </div>
+                                      <div className="flex-grow min-w-0">
+                                        <p className="font-bold text-stone-900 truncate text-sm">{therapist.name}</p>
+                                        {therapist.title && (
+                                          <p className="text-xs text-stone-400 truncate">{therapist.title}</p>
+                                        )}
+                                      </div>
+                                      {therapist.acceptingClients && (
+                                        <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded flex-shrink-0">
+                                          Available
+                                        </span>
+                                      )}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Email Input Mode */}
+                      {inviteMode === 'email' && (
+                        <div>
+                          <input
+                            type="email"
+                            required={inviteMode === 'email' && !noTherapist}
+                            className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                            placeholder="therapist@example.com"
+                            value={therapistEmail}
+                            onChange={e => setTherapistEmail(e.target.value)}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Step 2: Your Info */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
+                        noTherapist ? 'bg-stone-900 text-white' : 'bg-stone-200 text-stone-600'
+                      }`}>
+                        {noTherapist ? '1' : '2'}
+                      </span>
+                      <span className="text-sm font-bold text-stone-900">Your information</span>
+                    </div>
+
+                    {/* Name & Email in grid on larger screens */}
+                    <div className="grid gap-3">
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                        placeholder="Your name"
+                        value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                      />
+                      <input
+                        type="email"
+                        required
+                        className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                        placeholder="Your email"
+                        value={userEmail}
+                        onChange={e => setUserEmail(e.target.value)}
+                      />
+                    </div>
+                  </div>
+          
+                  {inviteError && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-600 font-bold text-sm bg-red-50 p-3 rounded-lg border border-red-200"
+                    >
+                      {inviteError}
+                    </motion.p>
+                  )}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-stone-900 text-white rounded-xl font-bold transition-all border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:shadow-[4px_4px_0px_0px_#1b8af1] disabled:hover:translate-x-0 disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : selectedTherapist ? (
+                      <>Connect with {selectedTherapist.name.split(' ')[0]}</>
+                    ) : noTherapist ? (
+                      'Get Started'
+                    ) : (
+                      'Send Request'
+                    )}
+                  </button>
+
+                  {/* No therapist option - subtle at bottom */}
+                  <div className="pt-2 border-t border-stone-100">
+                    <label className="flex items-center gap-2 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-stone-400 rounded border-stone-300 focus:ring-stone-400"
+                        checked={noTherapist}
+                        onChange={e => {
+                          setNoTherapist(e.target.checked);
+                          if (e.target.checked) {
+                            setTherapistEmail('');
+                            setSelectedTherapist(null);
+                          }
+                        }}
+                      />
+                      <span className="text-xs text-stone-400 group-hover:text-stone-600 transition-colors">
+                        I don't have a therapist yet — help me find one
+                      </span>
+                    </label>
+                  </div>
+                </form>
+              )}
+            </div>
           </motion.div>
         </div>
       )}
