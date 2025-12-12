@@ -33,20 +33,20 @@ const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNo
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div className="border-b-2 border-stone-200 last:border-b-0">
       <button
-        className="w-full py-5 flex justify-between items-center text-left text-lg font-medium text-slate-900 hover:text-slate-700 transition"
+        className="w-full py-5 flex justify-between items-center text-left text-lg font-bold text-stone-900 hover:text-[#1b8af1] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         {question}
-        <ChevronDown className={`w-5 h-5 text-slate-500 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-stone-900 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
       </button>
       <motion.div
         initial={false}
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         className="overflow-hidden"
       >
-        <div className="pb-6 text-slate-600 leading-relaxed">
+        <div className="pb-6 text-stone-600 leading-relaxed font-medium">
         {answer}
       </div>
       </motion.div>
@@ -61,21 +61,21 @@ const ValueCalculator = () => {
   const recoveredPerYear = Math.round(recoveredPerSession * 48); // 48 weeks
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
+    <section className="py-24 bg-[#F5F4F1]">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">
+             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
                 <DollarSign className="w-4 h-4" /> Therapy ROI
              </div>
-             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Get More Out of Every Dollar</h2>
-             <p className="text-lg text-slate-600 mb-12">
+             <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">Get More Out of Every Dollar</h2>
+             <p className="text-lg text-stone-600 mb-12 font-medium max-w-2xl mx-auto">
                 Don't spend valuable session time on "recaps." Empath helps you start deep work from minute one.
              </p>
 
-             <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-10">
+             <div className="bg-[#FAF9F6] border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-8 md:p-10 rounded-xl relative">
                 <div className="mb-10">
-                    <label className="block text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Your Cost Per Session</label>
+                    <label className="block text-xs font-bold text-stone-500 uppercase tracking-widest mb-4">Your Cost Per Session</label>
                     <div className="flex items-center justify-center gap-4 mb-6">
-                        <span className="text-xl text-slate-400">$50</span>
+                        <span className="text-xl font-bold text-stone-400">$50</span>
                         <input 
                             type="range" 
                             min="50" 
@@ -83,32 +83,33 @@ const ValueCalculator = () => {
                             step="5" 
                             value={sessionCost} 
                             onChange={(e) => setSessionCost(Number(e.target.value))}
-                            className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                            className="w-full h-2 bg-stone-200 rounded-none appearance-none cursor-pointer accent-[#1b8af1] border border-stone-300"
                         />
-                        <span className="text-xl text-slate-400">$350+</span>
+                        <span className="text-xl font-bold text-stone-400">$350+</span>
                     </div>
-                    <div className="text-5xl font-bold text-slate-900">${sessionCost}</div>
+                    <div className="text-6xl font-black text-stone-900 tracking-tighter">${sessionCost}</div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
-                        <div className="flex items-center justify-center gap-2 text-blue-800 font-bold mb-2">
-                             <Clock className="w-5 h-5" /> Productive Time
+                    <div className="bg-white p-6 border-2 border-stone-200 rounded-lg">
+                        <div className="flex items-center justify-center gap-2 text-stone-800 font-bold mb-2 uppercase text-xs tracking-wider">
+                             <Clock className="w-4 h-4 text-[#1b8af1]" /> Productive Time
                         </div>
-                        <div className="text-3xl font-bold text-blue-600">+${recoveredPerSession}</div>
-                        <p className="text-sm text-blue-600/80 mt-2">Value added per session</p>
+                        <div className="text-4xl font-black text-stone-900">+${recoveredPerSession}</div>
+                        <p className="text-xs text-stone-500 mt-2 font-medium">Value added per session</p>
                     </div>
-                    <div className="bg-green-50 rounded-xl p-6 border border-green-100">
-                        <div className="flex items-center justify-center gap-2 text-green-800 font-bold mb-2">
-                             <TrendingUp className="w-5 h-5" /> Yearly Impact
+                    <div className="bg-stone-900 p-6 border-2 border-stone-900 rounded-lg text-white relative overflow-hidden">
+                        <div className="absolute -right-4 -top-4 w-16 h-16 bg-[#1b8af1] rounded-full blur-2xl opacity-20"></div>
+                        <div className="flex items-center justify-center gap-2 text-stone-300 font-bold mb-2 uppercase text-xs tracking-wider relative z-10">
+                             <TrendingUp className="w-4 h-4 text-[#1b8af1]" /> Yearly Impact
                         </div>
-                         <div className="text-3xl font-bold text-green-600">${recoveredPerYear.toLocaleString()}</div>
-                         <p className="text-sm text-green-600/80 mt-2">Worth of extra deep work/year</p>
+                         <div className="text-4xl font-black text-white relative z-10">${recoveredPerYear.toLocaleString()}</div>
+                         <p className="text-xs text-stone-400 mt-2 font-medium relative z-10">Worth of extra deep work/year</p>
                     </div>
                 </div>
                 
-                <div className="mt-8 pt-8 border-t border-slate-100">
-                     <p className="text-slate-500 text-sm italic">
+                <div className="mt-8 pt-8 border-t-2 border-stone-100">
+                     <p className="text-stone-400 text-xs font-medium italic">
                         *Estimates based on reclaiming the typical 15-20 minutes spent updating your therapist on "what happened this week."
                      </p>
                 </div>
@@ -274,143 +275,151 @@ export default function ClientInfoPage() {
   const variant = typeof variantRaw === 'string' ? variantRaw : 'control';
 
   return (
-    <div className="flex-grow bg-white text-slate-900 font-sans selection:bg-blue-100">
-            <Toaster position="top-center" />
+    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+      <Toaster position="top-center" />
+      
+      {/* Noise Texture Overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-multiply" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
 
       {/* --- HEADER / TRUST BAR --- */}
-      <div className="bg-white/80 backdrop-blur-md border-b border-slate-200 py-3 sticky top-0 z-50">
+      <div className="bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Empath Logo" className="w-8 h-8 rounded-lg" />
-            <span className="font-bold text-slate-900 tracking-tight hidden sm:block">Empath</span>
+          <div className="flex items-center gap-3">
+            {/* Logo restored to original colors, removed grayscale/brightness filters */}
+            <div className="w-10 h-10 flex items-center justify-center">
+                <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
+            </div>
+            <span className="font-black text-stone-900 tracking-tight hidden sm:block text-lg">Empath</span>
                 </div>
-          <div className="flex items-center gap-4 text-xs sm:text-sm font-medium text-slate-600">
-            <span className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-green-600" /> HIPAA Secure</span>
-            <span className="hidden sm:flex items-center gap-1.5"><Star className="w-4 h-4 text-yellow-500" /> Trusted by Therapists</span>
+          <div className="flex items-center gap-6 text-xs sm:text-sm font-bold text-stone-600 uppercase tracking-wide">
+            <span className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-[#1b8af1]" /> HIPAA Secure</span>
+            <span className="hidden sm:flex items-center gap-1.5"><Star className="w-4 h-4 text-[#1b8af1]" /> Trusted by Therapists</span>
                 </div>
               </div>
                   </div>
                   
       {/* --- HERO SECTION --- */}
       <motion.section 
-        className="relative pt-20 pb-24 overflow-hidden"
+        className="relative pt-24 pb-32 overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-50/50 rounded-full blur-3xl -z-10 pointer-events-none translate-x-1/3 -translate-y-1/4" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-violet-50/50 rounded-full blur-3xl -z-10 pointer-events-none -translate-x-1/3 translate-y-1/4" />
-        
-        <div className="container mx-auto px-4 text-center max-w-4xl">
+        <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
           {isInvited && therapistName && (
-            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-blue-50 text-blue-800 rounded-full text-sm font-bold border border-blue-100 shadow-sm">
+            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white text-stone-900 rounded-lg text-sm font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1]">
               👋 {therapistName} invited you to Empath
             </motion.div>
           )}
 
-          <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]">
-            Make Every Session <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Count.</span>
+          <motion.h1 variants={fadeIn} className="text-6xl md:text-8xl font-black tracking-tighter text-stone-900 mb-8 leading-[0.95] font-serif">
+            Make Every <br/>
+            <span className="relative inline-block px-4">
+                <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
+                <span className="relative text-white">Session Count.</span>
+            </span>
           </motion.h1>
 
-          <motion.p variants={fadeIn} className="text-xl md:text-2xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+          <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
             Capture your thoughts, feelings, and moments between sessions. Give your therapist the full picture so you can grow faster.
           </motion.p>
 
-          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-12 max-w-md mx-auto">
+          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-16 max-w-md mx-auto">
             {isInvited ? (
               <>
                 <button
-                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-2 group"
                   onClick={() => {
                     setShowFlowModal(true);
                     posthog.capture('hero_primary_cta_clicked', { variant, isInvited: true });
                   }}
                 >
-                  {therapistName ? `Accept Invite from ${therapistName}` : 'Connect With Therapist'} →
+                  {therapistName ? `Accept Invite from ${therapistName}` : 'Connect With Therapist'} 
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </button>
-                <p className="text-sm text-slate-500 text-center flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" /> Free for you (covered by your therapist)
+                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
+                  <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free for you (covered by your therapist)
                 </p>
               </>
             ) : (
               <>
                 <button
-                  className="w-full px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-2 group"
                   onClick={() => {
                     setShowInviteModal(true);
                     posthog.capture('hero_primary_cta_clicked', { variant, isInvited: false });
                   }}
                 >
-                  Use with My Therapist →
+                  Use with My Therapist 
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </button>
                 
                 <div className="flex items-center gap-4 w-full">
                   <a
                     href={`tel:${PHONE_MAIN}`}
-                    className="flex-1 px-6 py-4 bg-white text-slate-900 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-bold flex items-center justify-center shadow-sm gap-2"
+                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
                     onClick={() => {
                       posthog.capture('hero_call_clicked', { variant });
                     }}
                   >
-                    <Phone className="w-4 h-4" /> Call to Journal
+                    <Phone className="w-4 h-4" /> Call
                   </a>
                   <a
                     href={`sms:${PHONE_MAIN}`}
-                    className="flex-1 px-6 py-4 bg-white text-slate-900 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 font-bold flex items-center justify-center shadow-sm gap-2"
+                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
                     onClick={() => {
                       posthog.capture('hero_text_clicked', { variant });
                     }}
                   >
-                    <MessageSquare className="w-4 h-4" /> Text to Journal
+                    <MessageSquare className="w-4 h-4" /> Text
                   </a>
                 </div>
                 
-                <p className="text-sm text-slate-500 text-center">
+                <p className="text-sm text-stone-500 text-center font-medium">
                   Try it now: No app download required.
                 </p>
               </>
             )}
           </motion.div>
-            </div>
+        </div>
       </motion.section>
 
       {/* --- THE PROBLEM (Visual) --- */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-white border-y-2 border-stone-200">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">Don't Let Important Moments Fade</h2>
-                <p className="text-lg text-slate-600">Life happens between sessions. Empath ensures nothing gets lost.</p>
+                <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 font-serif tracking-tight">Don't Let Moments Fade</h2>
+                <p className="text-lg text-stone-600 font-medium">Life happens between sessions. Ensure nothing gets lost.</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 items-stretch">
+            <div className="grid md:grid-cols-2 gap-12 items-stretch">
               {/* The Old Way */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden flex flex-col">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-slate-200"></div>
-                  <div className="mb-6">
-                    <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-200 relative overflow-hidden flex flex-col grayscale opacity-80 hover:opacity-100 transition-opacity">
+                  <div className="mb-8">
+                    <span className="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-xs font-bold uppercase tracking-wider rounded mb-4">
                         Without Empath
                     </span>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2">The "Recap" Trap</h3>
-                    <p className="text-slate-600">
+                    <h3 className="text-2xl font-bold text-stone-900 mb-2">The "Recap" Trap</h3>
+                    <p className="text-stone-600 font-medium leading-relaxed">
                         You spend the first 20 minutes just trying to remember and explain what happened last week.
                     </p>
                   </div>
                   
                   <div className="flex-grow space-y-4">
-                    <div className="p-4 bg-slate-50 rounded-lg border border-slate-100 opacity-60">
+                    <div className="p-4 bg-white rounded border-2 border-stone-100 border-dashed">
                         <div className="flex gap-3">
-                            <div className="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0"></div>
+                            <div className="w-8 h-8 rounded bg-stone-200 flex-shrink-0"></div>
                             <div className="space-y-2 w-full">
-                                <div className="h-2 w-1/3 bg-slate-200 rounded"></div>
-                                <div className="h-2 w-full bg-slate-200 rounded"></div>
+                                <div className="h-2 w-1/3 bg-stone-200 rounded"></div>
+                                <div className="h-2 w-full bg-stone-200 rounded"></div>
                             </div>
                         </div>
                     </div>
-                    <div className="p-4 bg-red-50 rounded-lg border border-red-100">
-                        <p className="text-red-800 font-medium italic text-sm">
+                    <div className="p-4 bg-stone-100 rounded border-l-4 border-stone-400">
+                        <p className="text-stone-600 font-medium italic text-sm">
                             "I know I felt terrible on Tuesday, but I can't remember exactly what triggered it..."
                         </p>
                     </div>
@@ -418,40 +427,39 @@ export default function ClientInfoPage() {
               </div>
               
               {/* The New Way */}
-              <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-100 relative overflow-hidden flex flex-col transform md:-translate-y-4">
-                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-violet-500"></div>
-                   <div className="mb-6">
-                    <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              <div className="bg-white p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] relative overflow-hidden flex flex-col transform md:-translate-y-4">
+                   <div className="mb-8">
+                    <span className="inline-block px-3 py-1 bg-[#1b8af1] text-white text-xs font-bold uppercase tracking-wider rounded mb-4">
                         With Empath
                     </span>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2">Continuous Growth</h3>
-                    <p className="text-slate-600">
+                    <h3 className="text-2xl font-bold text-stone-900 mb-2">Continuous Growth</h3>
+                    <p className="text-stone-600 font-medium leading-relaxed">
                         Your therapist already knows the context. You dive straight into the deep work that drives change.
                     </p>
                    </div>
 
                    <div className="flex-grow space-y-4">
-                        <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <div className="p-5 bg-[#FAF9F6] rounded border-2 border-blue-200">
                              <div className="flex gap-3 mb-2">
-                                <Zap className="w-5 h-5 text-blue-600" />
-                                <span className="font-bold text-blue-900 text-sm">Insight Unlocked</span>
+                                <Zap className="w-5 h-5 text-[#1b8af1] fill-[#1b8af1]" />
+                                <span className="font-bold text-stone-900 text-sm uppercase tracking-wide">Insight Unlocked</span>
                              </div>
-                             <p className="text-blue-800 font-medium text-sm leading-relaxed">
+                             <p className="text-stone-800 font-medium text-sm leading-relaxed border-l-2 border-blue-500 pl-3">
                                 "I saw your note about the anxiety spike on Tuesday. Let's explore that specific trigger."
                              </p>
                         </div>
                         <div className="grid grid-cols-3 gap-2">
-                             <div className="bg-slate-50 p-3 rounded text-center">
-                                <span className="block text-xs text-slate-500">Mood</span>
-                                <span className="block text-lg font-bold text-slate-700">📈</span>
+                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
+                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Mood</span>
+                                <span className="block text-xl font-black text-stone-800">📈</span>
                              </div>
-                             <div className="bg-slate-50 p-3 rounded text-center">
-                                <span className="block text-xs text-slate-500">Sleep</span>
-                                <span className="block text-lg font-bold text-slate-700">😴</span>
+                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
+                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Sleep</span>
+                                <span className="block text-xl font-black text-stone-800">😴</span>
                              </div>
-                             <div className="bg-slate-50 p-3 rounded text-center">
-                                <span className="block text-xs text-slate-500">Focus</span>
-                                <span className="block text-lg font-bold text-slate-700">🎯</span>
+                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
+                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Focus</span>
+                                <span className="block text-xl font-black text-stone-800">🎯</span>
                              </div>
                         </div>
                    </div>
@@ -461,94 +469,49 @@ export default function ClientInfoPage() {
         </div>
       </section>
 
-      {/* --- BENEFITS SECTION --- */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-             <div className="text-center max-w-3xl mx-auto mb-16">
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">Your Personal Mental Health Companion</h2>
-                <p className="text-lg text-slate-600">Empath isn't just a tool for your therapist. It's a safe space for you.</p>
-             </div>
-
-             <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                <div className="space-y-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-4">
-                        <Mic className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900">Journal Your Way</h3>
-                    <p className="text-slate-600 leading-relaxed">
-                        Voice notes, text messages, or app entries. Capture your feelings in the moment, exactly as they are. No judgment, just listening.
-                    </p>
-                </div>
-                <div className="space-y-4">
-                    <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center text-violet-600 mb-4">
-                        <Brain className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900">See Your Patterns</h3>
-                    <p className="text-slate-600 leading-relaxed">
-                        Gain insights into your own behavior. See how your sleep, activity, and interactions affect your mood over time.
-                    </p>
-                </div>
-                <div className="space-y-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-4">
-                        <Lock className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900">Private & Secure</h3>
-                    <p className="text-slate-600 leading-relaxed">
-                        Your space is sacred. We use bank-level encryption and are fully HIPAA compliant. You control what is shared.
-                    </p>
-                </div>
-             </div>
-        </div>
-      </section>
-
       {/* --- HOW IT WORKS (3 Steps) --- */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-stone-900 text-[#FAF9F6]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-16">How It Works</h2>
+          <h2 className="text-3xl md:text-5xl font-black mb-20 font-serif tracking-tight">How It Works</h2>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {[
               {
-                icon: <Smartphone className="w-8 h-8 text-white" />,
-                color: "bg-slate-900",
+                icon: <Smartphone className="w-8 h-8 text-stone-900" />,
                 step: "01",
                 title: "Capture The Moment",
                 desc: "Feeling anxious? Had a win? Just journal using the app or text/call Empath. It takes seconds."
               },
               {
-                icon: <Zap className="w-8 h-8 text-white" />,
-                color: "bg-blue-600",
+                icon: <Zap className="w-8 h-8 text-stone-900" />,
                 step: "02",
                 title: "We Organize It",
                 desc: "Our AI securely organizes your scattered thoughts into a clear, clinical summary."
               },
               {
-                icon: <UserCheck className="w-8 h-8 text-white" />,
-                color: "bg-violet-600",
+                icon: <UserCheck className="w-8 h-8 text-stone-900" />,
                 step: "03",
                 title: "Better Sessions",
                 desc: "Your therapist reviews the summary before you meet, so they are fully prepared to help you."
               }
             ].map((step, i) => (
-              <div key={i} className="relative group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white p-1 rounded-full">
-                    <div className={`w-12 h-12 ${step.color} rounded-full flex items-center justify-center shadow-lg`}>
-                        {step.icon}
-                    </div>
+              <div key={i} className="relative group text-left">
+                <div className="w-16 h-16 bg-[#FAF9F6] rounded-xl flex items-center justify-center mb-8 border-2 border-stone-500 shadow-[4px_4px_0px_0px_#1b8af1]">
+                    {step.icon}
                 </div>
-                <div className="mt-8">
-                    <span className="text-slate-200 font-bold text-5xl absolute top-4 right-6 opacity-20">{step.step}</span>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{step.desc}</p>
+                <div className="pl-2 border-l-2 border-stone-700">
+                    <span className="text-stone-500 font-bold text-sm tracking-widest uppercase mb-2 block">Step {step.step}</span>
+                    <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
+                    <p className="text-stone-400 leading-relaxed font-medium">{step.desc}</p>
                 </div>
               </div>
             ))}
             </div>
           
           {/* Video Embed */}
-          <div className="mt-20 max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video relative group">
+          <div className="mt-24 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_#1b8af1] bg-black aspect-video relative border-2 border-stone-700 group">
              {!isPlaying ? (
-                <div className="absolute inset-0 bg-slate-900/40 hover:bg-slate-900/30 transition-colors flex flex-col items-center justify-center cursor-pointer z-10"
+                <div className="absolute inset-0 bg-black/60 hover:bg-black/50 transition-colors flex flex-col items-center justify-center cursor-pointer z-10"
                   onClick={() => {
                     const iframe = document.getElementById('explainerVideo') as HTMLIFrameElement;
                     if (iframe && iframe.contentWindow) {
@@ -557,10 +520,10 @@ export default function ClientInfoPage() {
                       posthog.capture('explainer_video_played');
                     }
                      }}>
-                   <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 border border-white/40 shadow-xl">
-                     <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+                   <div className="w-24 h-24 bg-[#FAF9F6] rounded-full flex items-center justify-center group-hover:scale-105 transition-all duration-300 border-4 border-blue-500 shadow-[0_0_20px_rgba(27,138,241,0.5)]">
+                     <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[22px] border-l-orange-600 border-b-[12px] border-b-transparent ml-2"></div>
                   </div>
-                   <p className="text-white mt-6 font-bold text-lg drop-shadow-md">Watch the 2 Minute Demo</p>
+                   <p className="text-[#FAF9F6] mt-6 font-bold text-xl tracking-wide uppercase">Watch Demo</p>
                 </div>
              ) : null}
              <iframe 
@@ -581,23 +544,19 @@ export default function ClientInfoPage() {
       <ValueCalculator />
 
       {/* --- THE OFFER STACK (Grand Slam) --- */}
-      <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
-        {/* Decorative blobs */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
+      <section className="py-24 bg-white border-y-2 border-stone-200">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Premium Care, Included.</h2>
-            <p className="text-xl text-slate-300">
+            <h2 className="text-3xl md:text-5xl font-black mb-6 text-stone-900 font-serif">Premium Care, Included.</h2>
+            <p className="text-xl text-stone-600 font-medium">
               Your therapist has invested in Empath to provide you with the best possible care.
             </p>
                 </div>
                 
-          <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
+          <div className="max-w-5xl mx-auto bg-[#FAF9F6] border-2 border-stone-900 rounded-xl p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">What's Included For You:</h3>
+                <h3 className="text-2xl font-black text-stone-900 mb-8 pb-4 border-b-2 border-stone-200 uppercase tracking-tight">What's Included:</h3>
                 
                 <ul className="space-y-5">
                   {[
@@ -607,28 +566,28 @@ export default function ClientInfoPage() {
                     "Direct Integration with Your Therapist",
                     "Mobile App (iOS) + SMS/Phone Access"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="w-5 h-5 text-green-400" />
+                    <li key={i} className="flex items-center gap-4 group">
+                      <div className="w-6 h-6 rounded border-2 border-stone-900 bg-stone-900 flex items-center justify-center flex-shrink-0 group-hover:bg-[#1b8af1] group-hover:border-blue-500 transition-colors">
+                        <CheckCircle className="w-4 h-4 text-[#FAF9F6]" />
                 </div>
-                      <span className="text-lg font-medium text-slate-200">{item}</span>
+                      <span className="text-lg font-bold text-stone-700">{item}</span>
                     </li>
                   ))}
                 </ul>
             </div>
 
-              <div className="bg-slate-800/50 rounded-2xl p-8 text-center border border-white/5">
-                <p className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-4">YOUR PRICE</p>
+              <div className="bg-white rounded-xl p-8 text-center border-2 border-stone-200">
+                <p className="text-stone-400 uppercase tracking-widest text-xs font-bold mb-4">YOUR PRICE</p>
                 <div className="flex justify-center items-baseline gap-2 mb-2">
-                    <span className="text-6xl font-bold text-white">$0</span>
-                    <span className="text-slate-400 text-xl">/mo</span>
+                    <span className="text-6xl font-black text-stone-900">$0</span>
+                    <span className="text-stone-400 text-xl font-bold">/mo</span>
                 </div>
-                <p className="text-green-400 text-sm font-medium mb-8 bg-green-400/10 inline-block px-3 py-1 rounded-full">
-                    Paid by your therapist
+                <p className="text-blue-700 text-xs font-bold mb-8 bg-blue-100 inline-block px-4 py-2 rounded-full border border-blue-200">
+                    PAID BY YOUR THERAPIST
                 </p>
                 
               <button
-                  className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg"
+                  className="w-full py-4 bg-stone-900 text-white rounded-xl font-bold text-lg hover:bg-[#1b8af1] transition-colors shadow-lg"
                 onClick={() => {
                   if (isInvited) {
                     setShowFlowModal(true);
@@ -641,7 +600,7 @@ export default function ClientInfoPage() {
               >
                   {isInvited ? 'Accept Invitation' : 'Get Access Now'}
               </button>
-                <p className="mt-4 text-xs text-slate-500">Secure setup takes 30 seconds.</p>
+                <p className="mt-4 text-xs text-stone-400 font-medium">Secure setup takes 30 seconds.</p>
         </div>
                       </div>
                     </div>
@@ -649,17 +608,17 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- SOCIAL PROOF --- */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-[#FAF9F6]">
         <div className="container mx-auto px-4">
            <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">Real Stories</h2>
-                <div className="flex justify-center gap-1 text-yellow-400 mb-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-current" />)}
+                <h2 className="text-3xl font-black text-stone-900 mb-4 font-serif">Real Stories</h2>
+                <div className="flex justify-center gap-1 text-[#1b8af1] mb-2">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
                 </div>
-                <p className="text-slate-500">Trusted by thousands of clients and therapists</p>
+                <p className="text-stone-500 font-medium uppercase tracking-wide text-sm">Trusted by thousands of clients</p>
            </div>
            
-           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   quote: "I realized Instagram knew me better than my therapist. Empath fixed that. Now my therapist sees the real me.",
@@ -677,11 +636,11 @@ export default function ClientInfoPage() {
                   role: "Client"
                 }
               ].map((t, i) => (
-                <div key={i} className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
-                  <p className="text-slate-700 mb-6 leading-relaxed italic flex-grow">"{t.quote}"</p>
+                <div key={i} className="bg-white p-8 rounded-none border-l-4 border-stone-900 shadow-sm flex flex-col hover:bg-blue-50 hover:border-blue-500 transition-colors">
+                  <p className="text-stone-700 mb-6 leading-relaxed font-serif text-lg italic flex-grow">"{t.quote}"</p>
                   <div>
-                    <p className="font-bold text-slate-900">{t.author}</p>
-                    <p className="text-xs text-slate-500 uppercase tracking-wider">{t.role}</p>
+                    <p className="font-bold text-stone-900">{t.author}</p>
+                    <p className="text-[10px] text-stone-400 uppercase tracking-widest font-bold">{t.role}</p>
                     </div>
                     </div>
               ))}
@@ -690,10 +649,10 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- FAQ / OBJECTIONS --- */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-white border-t-2 border-stone-200">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-2">
+          <h2 className="text-3xl font-black text-center text-stone-900 mb-12 font-serif">Questions?</h2>
+          <div className="space-y-4">
             <FAQItem 
               question="Is my data safe?" 
               answer="Yes. Empath is fully HIPAA compliant, which means we meet the strictest standards for data protection in healthcare. Your data is encrypted and only accessible to you and your therapist." 
@@ -715,15 +674,17 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-white border-t border-slate-200 py-12">
+      <footer className="bg-[#FAF9F6] border-t-2 border-stone-200 py-16">
         <div className="container mx-auto px-4 text-center">
-          <img src={logo} alt="Empath" className="w-12 h-12 mx-auto mb-6 opacity-50 grayscale" />
-          <div className="flex justify-center gap-6 text-slate-500 text-sm mb-8">
-            <Link to="/privacy" className="hover:text-slate-900">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-slate-900">Terms of Service</Link>
-            <a href="mailto:support@myempath.co" className="hover:text-slate-900">Contact Support</a>
+            <div className="inline-block p-4 bg-stone-900 rounded-lg mb-8">
+                <img src={logo} alt="Empath" className="w-8 h-8 object-contain" />
+            </div>
+          <div className="flex justify-center gap-8 text-stone-500 font-bold text-sm mb-8 uppercase tracking-widest">
+            <Link to="/privacy" className="hover:text-stone-900 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-stone-900 transition-colors">Terms of Service</Link>
+            <a href="mailto:support@myempath.co" className="hover:text-stone-900 transition-colors">Support</a>
                       </div>
-          <p className="text-slate-400 text-sm">© {new Date().getFullYear()} Reality Articulated Inc.</p>
+          <p className="text-stone-400 text-xs font-medium">© {new Date().getFullYear()} Reality Articulated Inc.</p>
                     </div>
       </footer>
 
@@ -731,36 +692,36 @@ export default function ClientInfoPage() {
 
       {/* Invite Modal (For uninvited users) */}
       {showInviteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/90 backdrop-blur-sm p-4">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative"
+            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative border-2 border-stone-900"
           >
                 <button
               onClick={() => setShowInviteModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-900"
             >
               ✕
                 </button>
 
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">Get Early Access</h3>
-            <p className="text-slate-600 mb-6">Connect with your therapist to start using Empath.</p>
+            <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Get Early Access</h3>
+            <p className="text-stone-600 mb-6 font-medium">Connect with your therapist to start using Empath.</p>
 
             {inviteSubmitted ? (
-              <div className="text-center py-8 bg-green-50 rounded-xl">
-                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h4 className="font-bold text-slate-900 mb-2">Request Sent!</h4>
-                <p className="text-slate-600 text-sm">We'll contact your therapist.</p>
+              <div className="text-center py-8 bg-blue-100 rounded-xl border-2 border-blue-200">
+                <CheckCircle className="w-12 h-12 text-[#1b8af1] mx-auto mb-4" />
+                <h4 className="font-bold text-stone-900 mb-2">Request Sent!</h4>
+                <p className="text-stone-600 text-sm">We'll contact your therapist.</p>
               </div>
             ) : (
               <form onSubmit={handleInviteSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Your Email</label>
+                  <label className="block text-sm font-bold text-stone-700 mb-1">Your Email</label>
                   <input
                     type="email"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 outline-none font-medium transition-colors"
                     placeholder="you@example.com"
                     value={userEmail}
                     onChange={e => setUserEmail(e.target.value)}
@@ -768,12 +729,12 @@ export default function ClientInfoPage() {
               </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Therapist's Email</label>
+                  <label className="block text-sm font-bold text-stone-700 mb-1">Therapist's Email</label>
                   <input
                     type="email"
                     required={!noTherapist}
                     disabled={noTherapist}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:bg-slate-100 disabled:text-slate-400"
+                    className="w-full px-4 py-3 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 outline-none font-medium transition-colors disabled:bg-stone-100 disabled:text-stone-400"
                     placeholder="therapist@example.com"
                     value={therapistEmail}
                     onChange={e => setTherapistEmail(e.target.value)}
@@ -784,23 +745,23 @@ export default function ClientInfoPage() {
                   <input
                     type="checkbox"
                     id="noTherapist"
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+                    className="w-4 h-4 text-[#1b8af1] rounded border-stone-300 focus:ring-blue-600"
                     checked={noTherapist}
                     onChange={e => {
                       setNoTherapist(e.target.checked);
                       if(e.target.checked) setTherapistEmail('');
                     }}
                   />
-                  <label htmlFor="noTherapist" className="ml-2 text-sm text-slate-600">
+                  <label htmlFor="noTherapist" className="ml-2 text-sm font-medium text-stone-600">
                     I don't have a therapist right now
                   </label>
           </div>
           
-                {inviteError && <p className="text-red-500 text-sm">{inviteError}</p>}
+                {inviteError && <p className="text-red-600 font-bold text-sm">{inviteError}</p>}
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+                  className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold hover:bg-[#1b8af1] transition-colors border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
                 >
                   Request Access
                 </button>
@@ -812,31 +773,31 @@ export default function ClientInfoPage() {
 
       {/* Flow Modal (For Invited Users / Next Steps) */}
       {showFlowModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/90 backdrop-blur-sm p-4">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative"
+            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative border-2 border-stone-900"
           >
             <button 
               onClick={() => setShowFlowModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-900"
             >
               ✕
             </button>
 
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">One Last Step</h3>
+            <h3 className="text-2xl font-black text-stone-900 mb-6 font-serif">One Last Step</h3>
             
-            <ol className="space-y-4 mb-8 relative border-l-2 border-slate-100 ml-3 pl-8">
+            <ol className="space-y-6 mb-8 relative border-l-2 border-stone-200 ml-3 pl-8">
               <li className="relative">
-                <span className="absolute -left-[39px] w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold">1</span>
-                <h4 className="font-bold text-slate-900">Create your secure account</h4>
-                <p className="text-sm text-slate-500">We'll link you to {therapistName || 'your therapist'}.</p>
+                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">1</span>
+                <h4 className="font-bold text-stone-900 text-lg">Create your secure account</h4>
+                <p className="text-sm text-stone-500 font-medium mt-1">We'll link you to {therapistName || 'your therapist'}.</p>
               </li>
               <li className="relative">
-                <span className="absolute -left-[39px] w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-sm font-bold">2</span>
-                <h4 className="font-bold text-slate-900">Start journaling</h4>
-                <p className="text-sm text-slate-500">Download the app or just use SMS/Phone.</p>
+                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">2</span>
+                <h4 className="font-bold text-stone-900 text-lg">Start journaling</h4>
+                <p className="text-sm text-stone-500 font-medium mt-1">Download the app or just use SMS/Phone.</p>
               </li>
             </ol>
 
@@ -851,7 +812,7 @@ export default function ClientInfoPage() {
                   setShowFlowModal(false);
                 }
               }}
-              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"
+              className="w-full py-4 bg-stone-900 text-white rounded-xl font-bold text-lg hover:bg-[#1b8af1] transition-colors shadow-lg border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
             >
               Continue to Secure Sign Up →
             </button>
@@ -861,47 +822,47 @@ export default function ClientInfoPage() {
 
       {/* Call to Journal Modal */}
       {showCallModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/90 backdrop-blur-sm p-4">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative text-center"
+            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative text-center border-2 border-stone-900"
           >
             <button
               onClick={() => setShowCallModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-900"
             >
               ✕
             </button>
             
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Phone className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-blue-200">
+              <Phone className="w-8 h-8 text-[#1b8af1]" />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">Journal Instantly</h3>
-            <p className="text-slate-600 mb-8">No app needed. Just call or text our secure line to start.</p>
+            <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Journal Instantly</h3>
+            <p className="text-stone-600 mb-8 font-medium">No app needed. Just call or text our secure line to start.</p>
 
             <div className="grid grid-cols-2 gap-4">
                 <a
                   href={`tel:${PHONE_MAIN}`}
-                className="flex flex-col items-center justify-center p-6 bg-slate-50 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
-                onClick={() => posthog.capture('call_modal_call_clicked')}
+                  className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
+                  onClick={() => posthog.capture('call_modal_call_clicked')}
               >
-                <Phone className="w-8 h-8 text-slate-700 group-hover:text-blue-600 mb-3" />
-                <span className="font-bold text-slate-900">Call Now</span>
+                <Phone className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
+                <span className="font-bold text-stone-900">Call Now</span>
                 </a>
                 <a
                   href={`sms:${PHONE_MAIN}`}
-                className="flex flex-col items-center justify-center p-6 bg-slate-50 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition-all group"
+                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
                 onClick={() => posthog.capture('call_modal_text_clicked')}
               >
-                <MessageSquare className="w-8 h-8 text-slate-700 group-hover:text-blue-600 mb-3" />
-                <span className="font-bold text-slate-900">Text Now</span>
+                <MessageSquare className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
+                <span className="font-bold text-stone-900">Text Now</span>
               </a>
             </div>
             
-            <div className="mt-6 pt-6 border-t border-slate-100">
-                <p className="text-xs text-slate-400">
+            <div className="mt-6 pt-6 border-t-2 border-stone-100">
+                <p className="text-xs text-stone-400 font-medium">
                     If you don't have an account, we'll create one for you automatically using your phone number.
                 </p>
         </div>
@@ -914,10 +875,10 @@ export default function ClientInfoPage() {
         <motion.div
             initial={{ y: 100 }} 
             animate={{ y: 0 }}
-            className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-40 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
+            className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t-2 border-stone-200 p-4 z-40 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
         >
                 <button
-                className="w-full py-3 bg-slate-900 text-white rounded-lg font-bold shadow-lg"
+                className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold shadow-lg border-2 border-stone-900"
                   onClick={() => {
                     if (isInvited) {
                         setShowFlowModal(true);
@@ -936,14 +897,16 @@ export default function ClientInfoPage() {
         <motion.div
             initial={{ y: -100 }} 
             animate={{ y: 0 }}
-            className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-slate-200 p-4 z-50 hidden md:flex justify-between items-center shadow-sm"
+            className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b-2 border-stone-200 p-4 z-50 hidden md:flex justify-between items-center shadow-sm"
         >
             <div className="flex items-center gap-3 container mx-auto px-4">
-                <img src={logo} className="w-8 h-8 rounded-lg" alt="Logo" />
-                <span className="font-bold text-slate-900">Empath</span>
+                <div className="w-8 h-8 bg-stone-900 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img src={logo} className="w-full h-full object-contain" alt="Logo" />
+                </div>
+                <span className="font-black text-stone-900 text-lg">Empath</span>
                 <div className="flex-grow"></div>
               <button
-                    className="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold shadow hover:bg-slate-800 transition"
+                    className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900"
                 onClick={() => {
                         if (isInvited) {
                   setShowFlowModal(true);
