@@ -186,6 +186,30 @@ const TransparencyPage: React.FC = () => {
     transition: { duration: 0.6, ease: "easeOut" }
   };
 
+  const getProviderStyles = (color: string) => {
+    const styles: Record<string, { border: string, dot: string, tag: string, bg: string }> = {
+      blue: {
+        border: "border-blue-500/20",
+        dot: "bg-blue-400",
+        tag: "bg-blue-500/10 text-blue-300 border-blue-500/30",
+        bg: "hover:bg-blue-500/5"
+      },
+      amber: {
+        border: "border-amber-500/20",
+        dot: "bg-amber-400",
+        tag: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+        bg: "hover:bg-amber-500/5"
+      },
+      emerald: {
+        border: "border-emerald-500/20",
+        dot: "bg-emerald-400",
+        tag: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
+        bg: "hover:bg-emerald-500/5"
+      }
+    };
+    return styles[color] || styles.blue;
+  };
+
   const staggerContainer = {
     animate: {
       transition: {
@@ -737,54 +761,57 @@ const TransparencyPage: React.FC = () => {
 
                           {/* Provider List */}
                           <div className="space-y-4">
-                            {aiStackData.ai_providers?.map((provider, index) => (
-                              <div key={index} className={`bg-white/5 rounded-lg p-4 border border-${provider.color}-500/20`}>
-                                <div className="flex items-center justify-between mb-3">
-                                  <div className="flex items-center gap-2">
-                                    <div className={`w-2 h-2 bg-${provider.color}-400 rounded-full`}></div>
-                                    <span className="text-white font-semibold text-sm">{provider.name}</span>
-                                    {provider.name === "Empath Hosted" && (
-                                      <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30">Proprietary</span>
-                                    )}
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <div className="bg-green-500/20 px-2 py-0.5 rounded border border-green-500/30">
-                                      <span className="text-green-400 font-semibold text-xs">✓ BAA</span>
+                            {aiStackData.ai_providers?.map((provider, index) => {
+                              const styles = getProviderStyles(provider.color);
+                              return (
+                                <div key={index} className={`bg-white/5 rounded-lg p-4 border ${styles.border} ${styles.bg} transition-colors duration-300`}>
+                                  <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-2">
+                                      <div className={`w-2 h-2 rounded-full ${styles.dot}`}></div>
+                                      <span className="text-white font-semibold text-sm">{provider.name}</span>
+                                      {provider.name === "Empath Hosted" && (
+                                        <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30">Proprietary</span>
+                                      )}
                                     </div>
-                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <div className="flex items-center gap-2">
+                                      <div className="bg-green-500/20 px-2 py-0.5 rounded border border-green-500/30">
+                                        <span className="text-green-400 font-semibold text-xs">✓ BAA</span>
+                                      </div>
+                                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="flex flex-wrap gap-2 mb-2">
-                                  {provider.models.map((model, modelIndex) => (
-                                    <span 
-                                      key={modelIndex} 
-                                      className={`bg-gradient-to-r from-${provider.color}-500/20 to-${provider.color}-600/20 text-${provider.color}-300 px-2.5 py-1 rounded-full text-xs border border-${provider.color}-500/30`}
+                                  <div className="flex flex-wrap gap-2 mb-2">
+                                    {provider.models.map((model, modelIndex) => (
+                                      <span 
+                                        key={modelIndex} 
+                                        className={`px-2.5 py-1 rounded-full text-xs border ${styles.tag}`}
+                                      >
+                                        {model}
+                                      </span>
+                                    ))}
+                                  </div>
+                                  {provider.baa_pdf && (
+                                    <a 
+                                      href={provider.baa_pdf} 
+                                      className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs mt-1"
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
                                     >
-                                      {model}
-                                    </span>
-                                  ))}
+                                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                      </svg>
+                                      <span className="underline">View {provider.name} BAA</span>
+                                      <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    </a>
+                                  )}
+                                  {provider.name === "Empath Hosted" && (
+                                    <p className="text-gray-500 text-xs mt-1 italic">Internally hosted — no third-party data sharing</p>
+                                  )}
                                 </div>
-                                {provider.baa_pdf && (
-                                  <a 
-                                    href={provider.baa_pdf} 
-                                    className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs mt-1"
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                  >
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    <span className="underline">View {provider.name} BAA</span>
-                                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                  </a>
-                                )}
-                                {provider.name === "Empath Hosted" && (
-                                  <p className="text-gray-500 text-xs mt-1 italic">Internally hosted — no third-party data sharing</p>
-                                )}
-                              </div>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -978,44 +1005,44 @@ const TransparencyPage: React.FC = () => {
             </p>
             
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
-                <div className="w-16 h-16 mb-6 bg-cyan-500/20 rounded-full flex items-center justify-center border border-cyan-500/30">
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group">
+                <div className="w-16 h-16 mb-6 bg-cyan-500/20 rounded-full flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                   <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Journal Sharing</h3>
-                <p className="text-gray-300 font-light">You decide which journal entries to share with your therapist. You can unshare any entry at any time—it will no longer be visible to your therapist immediately.</p>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-cyan-300 transition-colors">Journal Sharing</h3>
+                <p className="text-gray-300 font-light group-hover:text-gray-200 transition-colors">You decide which journal entries to share with your therapist. You can unshare any entry at any time—it will no longer be visible to your therapist immediately.</p>
               </div>
               
-              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
-                <div className="w-16 h-16 mb-6 bg-teal-500/20 rounded-full flex items-center justify-center border border-teal-500/30">
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group">
+                <div className="w-16 h-16 mb-6 bg-teal-500/20 rounded-full flex items-center justify-center border border-teal-500/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(20,184,166,0.3)]">
                   <svg className="w-8 h-8 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Data Storage</h3>
-                <p className="text-gray-300 font-light">All journal entries are stored on encrypted AWS cloud infrastructure, protected by AES-256 encryption at rest and TLS 1.3 in transit. Covered under our signed AWS Business Associate Agreement.</p>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-teal-300 transition-colors">Data Storage</h3>
+                <p className="text-gray-300 font-light group-hover:text-gray-200 transition-colors">All journal entries are stored on encrypted AWS cloud infrastructure, protected by AES-256 encryption at rest and TLS 1.3 in transit. Covered under our signed AWS Business Associate Agreement.</p>
               </div>
               
-              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
-                <div className="w-16 h-16 mb-6 bg-rose-500/20 rounded-full flex items-center justify-center border border-rose-500/30">
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group">
+                <div className="w-16 h-16 mb-6 bg-rose-500/20 rounded-full flex items-center justify-center border border-rose-500/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(244,63,94,0.3)]">
                   <svg className="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Data Deletion</h3>
-                <p className="text-gray-300 font-light">Delete individual entries anytime from within the app. Request full account deletion at karan@myempath.co. Data is removed within 30 days; backups purged within 90 days.</p>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-rose-300 transition-colors">Data Deletion</h3>
+                <p className="text-gray-300 font-light group-hover:text-gray-200 transition-colors">Delete individual entries anytime from within the app. Request full account deletion at karan@myempath.co. Data is removed within 30 days; backups purged within 90 days.</p>
               </div>
               
-              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 p-8 rounded-xl border border-amber-500/30">
-                <div className="w-16 h-16 mb-6 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-500/30">
+              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 p-8 rounded-xl border border-amber-500/30 backdrop-blur-sm hover:from-amber-500/20 hover:to-orange-500/20 transition-all duration-300 group">
+                <div className="w-16 h-16 mb-6 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-500/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
                   <svg className="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">California Residents (CCPA)</h3>
-                <p className="text-gray-300 font-light">Under the California Consumer Privacy Act, you have the right to request deletion of all your personal data at any time. We will comply within 45 days as required by law. Contact karan@myempath.co to exercise this right.</p>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-amber-300 transition-colors">California Residents (CCPA)</h3>
+                <p className="text-gray-300 font-light group-hover:text-gray-200 transition-colors">Under the California Consumer Privacy Act, you have the right to request deletion of all your personal data at any time. We will comply within 45 days as required by law. Contact karan@myempath.co to exercise this right.</p>
               </div>
             </div>
 
@@ -1041,30 +1068,63 @@ const TransparencyPage: React.FC = () => {
               Our commitment to ethical AI practices, aligned with APA and NIST guidelines.
             </p>
             
-            <div className="space-y-6">
+            <div className="space-y-4">
               {responsibleAIItems.map((item, index) => (
-                <div key={index} className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                <motion.div 
+                  key={index} 
+                  className={`rounded-xl border transition-all duration-300 overflow-hidden ${
+                    openAccordion === index 
+                      ? 'bg-white/10 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]' 
+                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                  }`}
+                  initial={false}
+                >
                   <button
-                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset hover:bg-white/5 transition-colors"
+                    className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none group"
                     onClick={() => toggleAccordion(index)}
                     aria-label={`Explain ${item.title}`}
                   >
-                    <h3 className="text-2xl font-light">{item.title}</h3>
-                    <svg 
-                      className={`w-6 h-6 text-gray-400 transform transition-transform ${openAccordion === index ? 'rotate-180' : ''}`}
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {openAccordion === index && (
-                    <div className="px-8 pb-6 border-t border-white/10">
-                      <p className="text-gray-300 font-light text-lg pt-6">{item.content}</p>
+                    <div className="flex items-center gap-6">
+                      <span className={`text-2xl font-mono transition-colors duration-300 ${
+                        openAccordion === index ? 'text-blue-400' : 'text-gray-600 group-hover:text-gray-400'
+                      }`}>
+                        0{index + 1}
+                      </span>
+                      <h3 className={`text-2xl font-light transition-colors duration-300 ${
+                        openAccordion === index ? 'text-white' : 'text-gray-200 group-hover:text-white'
+                      }`}>
+                        {item.title}
+                      </h3>
                     </div>
-                  )}
-                </div>
+                    
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                      openAccordion === index 
+                        ? 'bg-blue-500 text-white border-blue-500 rotate-180' 
+                        : 'border-white/20 text-gray-400 group-hover:border-white/40 group-hover:text-white'
+                    }`}>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {openAccordion === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      >
+                        <div className="px-8 pb-8 pl-20">
+                          <p className="text-gray-300 font-light text-lg leading-relaxed border-l-2 border-blue-500/30 pl-6">
+                            {item.content}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               ))}
             </div>
           </section>
