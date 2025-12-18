@@ -1,9 +1,26 @@
 {
-  "updated": "2025-01-16T10:30:00Z",
-  "ai_host": "OpenAI",
-  "models": ["GPT-4o", "GPT-o3"],
-  "ai_baa_pdf": "/RealityArticulatedOpenAI_BAA.pdf",
+  "updated": "2025-11-30T10:00:00Z",
+  "ai_providers": [
+    {
+      "name": "OpenAI",
+      "models": ["GPT-4.1", "GPT-5"],
+      "baa_pdf": "",
+      "color": "blue"
+    },
+    {
+      "name": "Anthropic",
+      "models": ["Claude 4 Sonnet", "Claude 4 Opus"],
+      "baa_pdf": "",
+      "color": "amber"
+    },
+    {
+      "name": "Empath Hosted",
+      "models": ["Empath-Clinical-v2", "Empath-Insights"],
+      "baa_pdf": "",
+      "color": "emerald"
+    }
+  ],
   "storage_host": "AWS",
   "storage_services": ["S3", "KMS", "RDS"],
   "aws_baa_pdf": "/AWS_BAA Addendum.pdf"
-} 
+}

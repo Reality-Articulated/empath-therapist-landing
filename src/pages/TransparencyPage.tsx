@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
+interface AIProvider {
+  name: string;
+  models: string[];
+  baa_pdf: string;
+  color: string;
+}
+
 interface AIStackData {
   updated: string;
-  ai_host: string;
-  models: string[];
-  ai_baa_pdf: string;
+  ai_providers: AIProvider[];
   storage_host: string;
   storage_services: string[];
   aws_baa_pdf: string;
@@ -76,10 +81,27 @@ const TransparencyPage: React.FC = () => {
           } else {
             // Fallback to mock data if fetch fails
             const mockData: AIStackData = {
-              updated: new Date().toISOString(),
-              ai_host: "OpenAI",
-              models: ["GPT-4o", "GPT-o3"],
-              ai_baa_pdf: "/RealityArticulatedOpenAI_BAA.pdf",
+              updated: "2025-11-30T10:00:00Z",
+              ai_providers: [
+                {
+                  name: "OpenAI",
+                  models: ["GPT-4.1", "GPT-5"],
+                  baa_pdf: "",
+                  color: "blue"
+                },
+                {
+                  name: "Anthropic",
+                  models: ["Claude 4 Sonnet", "Claude 4 Opus"],
+                  baa_pdf: "",
+                  color: "amber"
+                },
+                {
+                  name: "Empath Hosted",
+                  models: ["Empath-Clinical-v2", "Empath-Insights"],
+                  baa_pdf: "",
+                  color: "emerald"
+                }
+              ],
               storage_host: "AWS",
               storage_services: ["S3", "KMS", "RDS"],
               aws_baa_pdf: "/AWS_BAA Addendum.pdf"
@@ -90,10 +112,27 @@ const TransparencyPage: React.FC = () => {
           console.error('Failed to fetch AI stack data:', error);
           // Fallback to mock data
           const mockData: AIStackData = {
-            updated: new Date().toISOString(),
-            ai_host: "OpenAI",
-            models: ["GPT-4o", "GPT-o3"],
-            ai_baa_pdf: "/RealityArticulatedOpenAI_BAA.pdf",
+            updated: "2025-11-30T10:00:00Z",
+            ai_providers: [
+              {
+                name: "OpenAI",
+                models: ["GPT-4.1", "GPT-5"],
+                baa_pdf: "",
+                color: "blue"
+              },
+              {
+                name: "Anthropic",
+                models: ["Claude 4 Sonnet", "Claude 4 Opus"],
+                baa_pdf: "",
+                color: "amber"
+              },
+              {
+                name: "Empath Hosted",
+                models: ["Empath-Clinical-v2", "Empath-Insights"],
+                baa_pdf: "",
+                color: "emerald"
+              }
+            ],
             storage_host: "AWS",
             storage_services: ["S3", "KMS", "RDS"],
             aws_baa_pdf: "/AWS_BAA Addendum.pdf"
@@ -127,8 +166,8 @@ const TransparencyPage: React.FC = () => {
       content: "We provide clear information about our AI systems, their capabilities, limitations, and the data they process. This page itself is part of our commitment to transparency."
     },
     {
-      title: "Data Minimization", 
-      content: "We only collect and process the minimum amount of personal health information necessary to provide therapeutic insights. Data is automatically purged according to retention policies."
+      title: "Data Minimization & Retention", 
+      content: "We only collect and process the minimum amount of personal health information necessary to provide therapeutic insights. Your journal entries are retained while your account is active. Upon account deletion, your data is removed within 30 days, with backups purged within 90 days. You control what you share—and can unshare or delete at any time."
     },
     {
       title: "Bias Monitoring",
@@ -513,7 +552,7 @@ const TransparencyPage: React.FC = () => {
                   <circle cx="45" cy="43" r="1.5" fill="url(#aiGradient)"/>
                   
                   <text x="40" y="-10" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">AI Processing</text>
-                  <text x="40" y="95" textAnchor="middle" fill="#FCD34D" fontSize="10" fontWeight="500">{aiStackData?.ai_host || "OpenAI"} + BAA</text>
+                  <text x="40" y="95" textAnchor="middle" fill="#FCD34D" fontSize="10" fontWeight="500">All Providers + BAA</text>
                   <text x="40" y="108" textAnchor="middle" fill="#FCD34D" fontSize="10">HIPAA Compliant</text>
                 </g>
 
@@ -663,54 +702,89 @@ const TransparencyPage: React.FC = () => {
                     </h4>
                     <div className="grid lg:grid-cols-2 gap-8">
                       
-                      {/* OpenAI Provider Card */}
+                      {/* AI Providers Card - Multi-Provider */}
                       <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative overflow-hidden group hover:bg-white/10 transition-colors">
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-3xl"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent rounded-bl-[4rem]"></div>
                         <div className="relative z-10">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-500/30">
-                              <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center border border-purple-500/30">
+                              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                               </svg>
                             </div>
                             <div>
                               <h4 className="text-gray-400 uppercase text-xs tracking-wider font-semibold">AI Processing</h4>
-                              <p className="text-xl font-bold text-white">{aiStackData.ai_host}</p>
+                              <p className="text-xl font-bold text-white">Multi-Provider Architecture</p>
                             </div>
                           </div>
-                          <div className="space-y-3">
-                            <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                              <span className="text-green-400 text-sm font-medium">Connected & Operational</span>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                              {aiStackData.models.map((model, index) => (
-                                <span key={index} className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-3 py-1 rounded-full text-xs border border-blue-500/30">
-                                  {model}
-                                </span>
-                              ))}
-                            </div>
-                            <div className="pt-2">
-                              <div className="flex items-center gap-2 mb-2">
-                                <div className="bg-green-500/20 px-2 py-1 rounded border border-green-500/30">
-                                  <span className="text-green-400 font-semibold text-xs">✓ BAA ACTIVE</span>
-                                </div>
+                          
+                          {/* Critical BAA Notice */}
+                          <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-lg p-4 border border-emerald-500/20 mb-5">
+                            <div className="flex items-start gap-3">
+                              <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
                               </div>
-                              <a 
-                                href={aiStackData.ai_baa_pdf} 
-                                className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-sm"
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                              >
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                <span className="underline">OpenAI BAA</span>
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                              </a>
+                              <div>
+                                <p className="text-emerald-300 font-semibold text-sm mb-1">Your Data Cannot Be Used for Training</p>
+                                <p className="text-gray-400 text-xs leading-relaxed">
+                                  Unlike consumer APIs, our BAA agreements with all providers legally prohibit them from storing or using your data for model training. Your conversations remain private and protected.
+                                </p>
+                              </div>
                             </div>
+                          </div>
+
+                          {/* Provider List */}
+                          <div className="space-y-4">
+                            {aiStackData.ai_providers?.map((provider, index) => (
+                              <div key={index} className={`bg-white/5 rounded-lg p-4 border border-${provider.color}-500/20`}>
+                                <div className="flex items-center justify-between mb-3">
+                                  <div className="flex items-center gap-2">
+                                    <div className={`w-2 h-2 bg-${provider.color}-400 rounded-full`}></div>
+                                    <span className="text-white font-semibold text-sm">{provider.name}</span>
+                                    {provider.name === "Empath Hosted" && (
+                                      <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs border border-purple-500/30">Proprietary</span>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <div className="bg-green-500/20 px-2 py-0.5 rounded border border-green-500/30">
+                                      <span className="text-green-400 font-semibold text-xs">✓ BAA</span>
+                                    </div>
+                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                  </div>
+                                </div>
+                                <div className="flex flex-wrap gap-2 mb-2">
+                                  {provider.models.map((model, modelIndex) => (
+                                    <span 
+                                      key={modelIndex} 
+                                      className={`bg-gradient-to-r from-${provider.color}-500/20 to-${provider.color}-600/20 text-${provider.color}-300 px-2.5 py-1 rounded-full text-xs border border-${provider.color}-500/30`}
+                                    >
+                                      {model}
+                                    </span>
+                                  ))}
+                                </div>
+                                {provider.baa_pdf && (
+                                  <a 
+                                    href={provider.baa_pdf} 
+                                    className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs mt-1"
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                  >
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <span className="underline">View {provider.name} BAA</span>
+                                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                                {provider.name === "Empath Hosted" && (
+                                  <p className="text-gray-500 text-xs mt-1 italic">Internally hosted — no third-party data sharing</p>
+                                )}
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
@@ -892,6 +966,70 @@ const TransparencyPage: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">15-Day Breach Notification</h3>
                 <p className="text-gray-300 font-light">We commit to notifying affected parties within 15 days of any security incident. Transparency when it matters most.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Your Data, Your Control */}
+          <section>
+            <h2 className="text-5xl font-light mb-16">Your data, your control</h2>
+            <p className="text-xl text-gray-400 font-light mb-16 max-w-3xl">
+              You decide what to share, when to share it, and when to take it back. Here's exactly how it works.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
+                <div className="w-16 h-16 mb-6 bg-cyan-500/20 rounded-full flex items-center justify-center border border-cyan-500/30">
+                  <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Journal Sharing</h3>
+                <p className="text-gray-300 font-light">You decide which journal entries to share with your therapist. You can unshare any entry at any time—it will no longer be visible to your therapist immediately.</p>
+              </div>
+              
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
+                <div className="w-16 h-16 mb-6 bg-teal-500/20 rounded-full flex items-center justify-center border border-teal-500/30">
+                  <svg className="w-8 h-8 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Data Storage</h3>
+                <p className="text-gray-300 font-light">All journal entries are stored on encrypted AWS cloud infrastructure, protected by AES-256 encryption at rest and TLS 1.3 in transit. Covered under our signed AWS Business Associate Agreement.</p>
+              </div>
+              
+              <div className="bg-white/5 p-8 rounded-xl border border-white/10">
+                <div className="w-16 h-16 mb-6 bg-rose-500/20 rounded-full flex items-center justify-center border border-rose-500/30">
+                  <svg className="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Data Deletion</h3>
+                <p className="text-gray-300 font-light">Delete individual entries anytime from within the app. Request full account deletion at karan@myempath.co. Data is removed within 30 days; backups purged within 90 days.</p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 p-8 rounded-xl border border-amber-500/30">
+                <div className="w-16 h-16 mb-6 bg-amber-500/20 rounded-full flex items-center justify-center border border-amber-500/30">
+                  <svg className="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">California Residents (CCPA)</h3>
+                <p className="text-gray-300 font-light">Under the California Consumer Privacy Act, you have the right to request deletion of all your personal data at any time. We will comply within 45 days as required by law. Contact karan@myempath.co to exercise this right.</p>
+              </div>
+            </div>
+
+            <div className="bg-white/5 p-6 rounded-xl border border-white/10">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center border border-yellow-500/30 flex-shrink-0 mt-1">
+                  <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-2">Important Note About Shared Entries</h4>
+                  <p className="text-gray-400 font-light">When you share entries with a therapist, they may save or note information from previously shared entries as part of their own clinical records. Deleting or unsharing from Empath removes their access immediately, but Empath cannot delete records your therapist may have kept separately.</p>
+                </div>
               </div>
             </div>
           </section>

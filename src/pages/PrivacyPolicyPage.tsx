@@ -209,6 +209,28 @@ export default function PrivacyPolicyPage() {
                 Retention of Your Personal Data
               </h2>
               <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our legal agreements and policies.</p>
+              
+              <div className="bg-blue-50 rounded-lg p-5 my-4 print:bg-white print:border print:border-gray-200">
+                <h4 className="text-blue-700 font-semibold mb-3">Data Retention Summary</h4>
+                <ul className="space-y-2 list-none pl-0">
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Active accounts:</strong> Journal entries are retained while your account is active.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Account deletion:</strong> Data is removed within 30 days of your deletion request.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Backup purge:</strong> Backup copies are completely purged within 90 days.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Storage location:</strong> All data is stored on encrypted AWS cloud infrastructure.</span>
+                  </li>
+                </ul>
+              </div>
 
               <div className="my-8 border-t border-gray-100"></div>
 
@@ -225,6 +247,45 @@ export default function PrivacyPolicyPage() {
                 Delete Your Personal Data
               </h2>
               <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You. Our Service may give You the ability to delete certain information about You from within the Service.</p>
+              
+              <div className="bg-blue-50 rounded-lg p-5 my-4 print:bg-white print:border print:border-gray-200">
+                <h4 className="text-blue-700 font-semibold mb-3">Your Deletion Rights</h4>
+                <ul className="space-y-2 list-none pl-0">
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Individual journal entries</strong> can be deleted at any time within the app.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Full account deletion</strong> is available upon request by contacting karan@myempath.co.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
+                    <span><strong>Data removal timeline:</strong> Your data is removed within 30 days of deletion request; backup copies are purged within 90 days.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <h3 className="text-blue-700">Journal Sharing Controls</h3>
+              <p>You are always in control of which journal entries are shared with your therapist:</p>
+              <ul className="space-y-2 mt-2">
+                <li className="flex items-start">
+                  <span className="inline-flex items-center justify-center bg-green-100 rounded-full w-5 h-5 mr-2 text-green-700 text-xs mt-1">✓</span>
+                  <span>You decide which entries to share—sharing is never automatic.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="inline-flex items-center justify-center bg-green-100 rounded-full w-5 h-5 mr-2 text-green-700 text-xs mt-1">✓</span>
+                  <span>You can unshare any entry at any time—your therapist will immediately lose access.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="inline-flex items-center justify-center bg-green-100 rounded-full w-5 h-5 mr-2 text-green-700 text-xs mt-1">✓</span>
+                  <span>Deleting an entry removes it from both your account and your therapist's view.</span>
+                </li>
+              </ul>
+
+              <div className="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-md my-4">
+                <p className="mb-0"><strong>Important:</strong> Your therapist may have saved or noted information from previously shared entries as part of their own clinical records. Deleting or unsharing from Empath removes their access within our platform, but we cannot delete records your therapist may have kept separately.</p>
+              </div>
 
               <div className="my-8 border-t border-gray-100"></div>
 
@@ -270,6 +331,16 @@ export default function PrivacyPolicyPage() {
               </h2>
               <p>This privacy notice section for California residents supplements the information contained in Our Privacy Policy and it applies solely to all visitors, users, and others who reside in the State of California.</p>
               
+              <div className="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-md my-4">
+                <h4 className="text-amber-800 font-semibold mb-2">California Residents: Your Right to Delete</h4>
+                <p className="mb-2">Under the California Consumer Privacy Act (CCPA), you have the right to request deletion of all your personal data at any time. Upon receiving a verified request, we will:</p>
+                <ul className="space-y-1 pl-5 list-disc text-amber-900">
+                  <li>Delete your personal data from our records within <strong>45 days</strong></li>
+                  <li>Direct any service providers to delete your data from their records</li>
+                  <li>Provide written confirmation of deletion upon request</li>
+                </ul>
+              </div>
+              
               <div className="mt-4 space-y-4">
                 <div className="border-l-4 border-blue-500 pl-4">
                   <h3 className="text-blue-700">Your Rights under the CCPA/CPRA</h3>
@@ -280,9 +351,14 @@ export default function PrivacyPolicyPage() {
                     <li>The right to opt-out of sale or sharing</li>
                     <li>The right to correct Personal Data</li>
                     <li>The right to limit use of sensitive Personal Data</li>
-                    <li>The right to delete Personal Data</li>
+                    <li><strong>The right to delete Personal Data</strong> — we will comply within 45 days</li>
                     <li>The right not to be discriminated against</li>
                   </ul>
+                </div>
+
+                <div className="border-l-4 border-green-500 pl-4">
+                  <h3 className="text-green-700">We Do Not Sell Your Data</h3>
+                  <p>Empath does not sell, rent, or trade your personal information to third parties. Your journal entries and personal data are never used for advertising, marketing, or sold to data brokers.</p>
                 </div>
                 
                 <div className="border-l-4 border-blue-500 pl-4">
@@ -292,6 +368,7 @@ export default function PrivacyPolicyPage() {
                     <li>By email: <a href="mailto:karan@myempath.co" className="text-blue-600">karan@myempath.co</a></li>
                     <li>By phone: 480.295.9462</li>
                   </ul>
+                  <p className="mt-2 text-sm text-gray-600">We will respond to verified requests within 45 days as required by California law.</p>
                 </div>
               </div>
 
