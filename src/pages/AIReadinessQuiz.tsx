@@ -470,26 +470,22 @@ export default function AIReadinessQuiz() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="space-y-6"
             >
-              {/* Score Visual */}
-              <div className="text-center mb-10">
+              {/* Score Header */}
+              <div className="text-center">
                 <motion.div
-                  className={`inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br ${result.color} mb-6 shadow-xl`}
+                  className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${result.color} mb-4 shadow-xl`}
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
                 >
-                  <span className="text-5xl font-bold text-white">{result.score}</span>
+                  <span className="text-4xl font-bold text-white">{result.score}</span>
                 </motion.div>
-                <h2 className="text-2xl md:text-3xl font-bold text-stone-900 mb-1">
+                <h2 className="text-2xl font-bold text-stone-900 mb-1">
                   {result.title}
                 </h2>
-                <p className={`text-sm font-medium ${result.textColor}`}>
-                  {scorePercentage}% AI-Ready
-                </p>
-
-                {/* Score bar */}
-                <div className="max-w-xs mx-auto mt-6">
+                <div className="max-w-xs mx-auto mt-4">
                   <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                     <motion.div
                       className={`h-full bg-gradient-to-r ${result.color}`}
@@ -498,112 +494,177 @@ export default function AIReadinessQuiz() {
                       transition={{ duration: 1, delay: 0.3 }}
                     />
                   </div>
+                  <p className="text-xs text-stone-400 mt-2">{scorePercentage}% AI-Ready</p>
                 </div>
               </div>
 
-              {/* Main Result Card */}
-              <div className={`${result.bgColor} rounded-2xl p-5 mb-5 border ${result.borderColor}`}>
-                <p className="text-stone-700 text-sm leading-relaxed mb-3">
-                  {result.description}
-                </p>
-                <div className="bg-white/60 rounded-xl p-3">
-                  <p className="text-sm text-stone-600">
-                    <strong className="text-stone-800">Next step:</strong> {result.recommendation}
-                  </p>
+              {/* Your Personalized Action Plan */}
+              <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                <div className="bg-stone-50 px-5 py-3 border-b border-stone-200">
+                  <h3 className="font-semibold text-stone-900">Your Action Plan</h3>
+                  <p className="text-xs text-stone-500">Based on your specific answers</p>
                 </div>
-              </div>
-
-              {/* Key Insights */}
-              <div className="bg-white rounded-2xl p-5 mb-5 border border-stone-200">
-                <h3 className="text-sm font-semibold text-stone-500 uppercase tracking-wide mb-4">
-                  Key insights
-                </h3>
-                <div className="space-y-3">
+                <div className="p-5 space-y-5">
+                  {/* Catch-up time action */}
                   {answers.catchup_time && answers.catchup_time.score >= 2 && (
-                    <div className="flex gap-3 items-start">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                      <p className="text-stone-600 text-sm">
-                        <strong className="text-stone-800">Catch-up time</strong> — {answers.catchup_time.label.toLowerCase()} per session reduces time for deep work.
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-amber-100 flex items-center justify-center">
+                          <span className="text-amber-600 text-xs font-bold">1</span>
+                        </div>
+                        <h4 className="font-semibold text-stone-800 text-sm">Reduce Session Catch-Up Time</h4>
+                      </div>
+                      <p className="text-stone-600 text-sm pl-8">
+                        You're spending {answers.catchup_time.label.toLowerCase()} on updates. That's billable time going to data transfer, not therapy.
                       </p>
+                      <div className="pl-8">
+                        <p className="text-xs font-medium text-stone-500 uppercase tracking-wide mb-1">Try this week:</p>
+                        <p className="text-sm text-stone-700 bg-stone-50 p-3 rounded-lg border-l-2 border-amber-400">
+                          Ask clients to send a brief voice memo or text before sessions: <em>"Send me a 2-minute update on your week before we meet — it helps us dive deeper, faster."</em>
+                        </p>
+                      </div>
                     </div>
                   )}
+
+                  {/* Between-session visibility action */}
                   {answers.between_session_context && answers.between_session_context.score >= 2 && (
-                    <div className="flex gap-3 items-start">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                      <p className="text-stone-600 text-sm">
-                        <strong className="text-stone-800">Visibility gap</strong> — You're missing 167 of 168 hours in your client's week.
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-amber-100 flex items-center justify-center">
+                          <span className="text-amber-600 text-xs font-bold">{answers.catchup_time?.score >= 2 ? '2' : '1'}</span>
+                        </div>
+                        <h4 className="font-semibold text-stone-800 text-sm">Close the Visibility Gap</h4>
+                      </div>
+                      <p className="text-stone-600 text-sm pl-8">
+                        You see clients ~1 hour per week. That's 0.6% of their life. AI tools are available for the other 99.4%.
                       </p>
+                      <div className="pl-8">
+                        <p className="text-xs font-medium text-stone-500 uppercase tracking-wide mb-1">Try this week:</p>
+                        <p className="text-sm text-stone-700 bg-stone-50 p-3 rounded-lg border-l-2 border-amber-400">
+                          Introduce a simple check-in: <em>"I'd like to know when something significant happens between sessions. Would you text me a quick note when it does?"</em>
+                        </p>
+                      </div>
                     </div>
                   )}
+
+                  {/* Pattern confidence action */}
                   {answers.pattern_confidence && answers.pattern_confidence.score >= 2 && (
-                    <div className="flex gap-3 items-start">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                      <p className="text-stone-600 text-sm">
-                        <strong className="text-stone-800">Pattern recognition</strong> — Without continuous data, you're working from fragments.
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-amber-100 flex items-center justify-center">
+                          <span className="text-amber-600 text-xs font-bold">
+                            {(answers.catchup_time?.score >= 2 ? 1 : 0) + (answers.between_session_context?.score >= 2 ? 1 : 0) + 1}
+                          </span>
+                        </div>
+                        <h4 className="font-semibold text-stone-800 text-sm">Improve Pattern Recognition</h4>
+                      </div>
+                      <p className="text-stone-600 text-sm pl-8">
+                        AI spots patterns across thousands of data points instantly. Without continuous data, you're connecting dots from memory.
                       </p>
+                      <div className="pl-8">
+                        <p className="text-xs font-medium text-stone-500 uppercase tracking-wide mb-1">Try this week:</p>
+                        <p className="text-sm text-stone-700 bg-stone-50 p-3 rounded-lg border-l-2 border-amber-400">
+                          Start tracking one metric: <em>"Let's track your anxiety levels daily — just a 1-10 rating. After a few weeks, we'll look for patterns together."</em>
+                        </p>
+                      </div>
                     </div>
                   )}
-                  {answers.client_ai_usage && answers.client_ai_usage.score >= 2 && (
-                    <div className="flex gap-3 items-start">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0" />
-                      <p className="text-stone-600 text-sm">
-                        <strong className="text-stone-800">AI comparison</strong> — Clients are already using AI tools and making comparisons.
-                      </p>
-                    </div>
-                  )}
-                  {Object.values(answers).every(a => a.score < 2) && (
-                    <div className="flex gap-3 items-start">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
-                      <p className="text-stone-600 text-sm">
-                        <strong className="text-stone-800">Strong position</strong> — You've minimized major gaps. Maintain your advantage.
+
+                  {/* Strong position message */}
+                  {Object.values(answers).filter(a => a.score >= 2).length === 0 && (
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-emerald-100 flex items-center justify-center">
+                          <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <h4 className="font-semibold text-stone-800 text-sm">You're Well-Positioned</h4>
+                      </div>
+                      <p className="text-stone-600 text-sm pl-8">
+                        You've already addressed the major gaps. Focus on maintaining these advantages and staying ahead as AI capabilities grow.
                       </p>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Solution Card */}
-              <div className="bg-gradient-to-br from-stone-900 to-stone-800 rounded-2xl p-6 mb-6 text-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <img src={logo} alt="Empath" className="w-8 h-8" />
-                  <span className="font-semibold">How Empath Helps</span>
+              {/* Talk Track - Everyone Gets This */}
+              <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                <div className="bg-stone-50 px-5 py-3 border-b border-stone-200">
+                  <h3 className="font-semibold text-stone-900">When Clients Mention AI</h3>
+                  <p className="text-xs text-stone-500">A talk track you can use</p>
                 </div>
-                <p className="text-stone-300 text-sm mb-6 leading-relaxed">
-                  Empath gives you AI-level memory and pattern recognition — so the comparison becomes:
+                <div className="p-5">
+                  <p className="text-sm text-stone-600 mb-4">
+                    When a client says <em>"I've been using ChatGPT..."</em> or compares your value to AI, here's how to respond:
+                  </p>
+                  <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3">
+                    <p className="text-sm text-stone-700">
+                      <strong className="text-stone-900">Acknowledge:</strong> <em>"AI tools can be helpful for processing thoughts between sessions. What's been useful about it for you?"</em>
+                    </p>
+                    <p className="text-sm text-stone-700">
+                      <strong className="text-stone-900">Differentiate:</strong> <em>"What I offer that AI can't is attunement — I notice things in your tone, your body language, the things you don't say. And I can hold you accountable in a way that an app won't."</em>
+                    </p>
+                    <p className="text-sm text-stone-700">
+                      <strong className="text-stone-900">Bridge:</strong> <em>"I'd actually love to know more about what's happening between our sessions. Would you be open to sharing some of those reflections with me too?"</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Articulate Your Edge */}
+              {answers.competitive_edge && answers.competitive_edge.score >= 2 && (
+                <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                  <div className="bg-stone-50 px-5 py-3 border-b border-stone-200">
+                    <h3 className="font-semibold text-stone-900">Articulate Your Value</h3>
+                    <p className="text-xs text-stone-500">What you offer that AI cannot</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-stone-600 mb-4">
+                      You mentioned it's difficult to articulate your edge. Here's a framework:
+                    </p>
+                    <div className="grid gap-3">
+                      {[
+                        { title: 'Therapeutic Attunement', desc: 'You read between the lines — tone, body language, what\'s left unsaid.' },
+                        { title: 'Clinical Judgment', desc: 'You know when to push, when to hold space, when something needs medical attention.' },
+                        { title: 'Relational Accountability', desc: 'Clients show up differently for a human relationship than for an app.' },
+                        { title: 'Ethical Boundaries', desc: 'You hold confidentiality, manage dual relationships, navigate complex situations.' },
+                      ].map((item, i) => (
+                        <div key={i} className="flex gap-3 items-start">
+                          <div className="w-1.5 h-1.5 rounded-full bg-stone-400 mt-2 flex-shrink-0" />
+                          <p className="text-sm text-stone-700">
+                            <strong className="text-stone-900">{item.title}:</strong> {item.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Soft Empath CTA */}
+              <div className="bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl p-5 text-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={logo} alt="Empath" className="w-7 h-7" />
+                  <span className="font-semibold text-sm">Want to automate this?</span>
+                </div>
+                <p className="text-stone-300 text-sm leading-relaxed mb-4">
+                  Empath collects client reflections between sessions and gives you an AI-powered brief before each session. All the context, none of the manual work.
                 </p>
-                <div className="bg-white/10 rounded-xl p-4 text-center">
-                  <p className="text-stone-400 text-sm mb-1">ChatGPT alone</p>
-                  <p className="text-stone-500 text-xs mb-3">vs.</p>
-                  <p className="text-xl font-bold">
-                    You <span className="text-[#1b8af1]">+</span> AI superpowers
-                  </p>
-                  <p className="text-stone-400 text-xs mt-2">
-                    Your irreplaceable human value becomes the clear advantage
-                  </p>
-                </div>
-              </div>
-
-              {/* CTAs */}
-              <div className="space-y-3">
                 <a
                   href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 bg-[#1b8af1] text-white rounded-xl font-semibold hover:bg-blue-600 transition-all shadow-lg hover:shadow-xl text-center"
+                  className="block w-full py-3 bg-white text-stone-900 rounded-xl font-semibold hover:bg-stone-100 transition-all text-center text-sm"
                   onClick={() => posthog.capture('ai_readiness_quiz_demo_clicked', { resultTier })}
                 >
                   Book a Demo with the Founder
                 </a>
-                <a
-                  href="/"
-                  className="block w-full py-4 bg-white text-stone-700 rounded-xl font-semibold hover:bg-stone-50 transition-all text-center border border-stone-200"
-                >
-                  Learn More
-                </a>
               </div>
 
-              <p className="text-xs text-center text-stone-400 mt-8">
-                A detailed report has been sent to {leadEmail}
+              <p className="text-xs text-center text-stone-400">
+                Results saved. Bookmark this page to return later.
               </p>
             </motion.div>
           )}

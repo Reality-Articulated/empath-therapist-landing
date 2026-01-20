@@ -10,7 +10,7 @@ interface AIProvider {
 }
 
 interface AIStackData {
-  updated: string;
+  npupdated: string;
   ai_providers: AIProvider[];
   storage_host: string;
   storage_services: string[];
