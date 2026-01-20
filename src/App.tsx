@@ -12,12 +12,13 @@ import PledgePage from './pages/PledgePage';
 import TransparencyPage from './pages/TransparencyPage';
 import TherapyValueCalculator from './pages/TherapyValueCalculator';
 import TherapyValueCalculatorDirect from './pages/TherapyValueCalculatorDirect';
+import AIReadinessQuiz from './pages/AIReadinessQuiz';
 // import BlogsPage from './pages/BlogsPage';
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath', '/quiz'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -34,6 +35,7 @@ function App() {
         <Route path="/transparency" element={<TransparencyPage />} />
         <Route path="/calculator" element={<TherapyValueCalculator />} />
         <Route path="/calculator-direct" element={<TherapyValueCalculatorDirect />} />
+        <Route path="/quiz" element={<AIReadinessQuiz />} />
         {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
       </Routes>
       {!hideNavbar && <Footer />}
