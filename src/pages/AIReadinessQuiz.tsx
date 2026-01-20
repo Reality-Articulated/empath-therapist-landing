@@ -193,7 +193,7 @@ export default function AIReadinessQuiz() {
     });
 
     // Save to Google Sheets
-    const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbxs9dttPWNj9fnEObu9oJMeS0t9y_I6Vj7axAXWZ3h3SAslTROos3tn1yCeUscd_v_DAA/exec';
+    const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzfWVdSypKSJNN9QROb7WK_kFtxEG1UWNZBDhPIikMw-4mxoeIM_MjTAJ17pqy9bMDy/exec';
 
     // Identify gaps for follow-up
     const gaps: string[] = [];
