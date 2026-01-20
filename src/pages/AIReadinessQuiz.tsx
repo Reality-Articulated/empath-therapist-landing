@@ -592,7 +592,7 @@ export default function AIReadinessQuiz() {
                   className="block w-full py-4 bg-[#1b8af1] text-white rounded-xl font-semibold hover:bg-blue-600 transition-all shadow-lg hover:shadow-xl text-center"
                   onClick={() => posthog.capture('ai_readiness_quiz_demo_clicked', { resultTier })}
                 >
-                  See How Empath Works →
+                  Book a Demo with the Founder
                 </a>
                 <a
                   href="/"
