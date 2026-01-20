@@ -195,17 +195,33 @@ export default function AIReadinessQuiz() {
     // Save to Google Sheets
     const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbxs9dttPWNj9fnEObu9oJMeS0t9y_I6Vj7axAXWZ3h3SAslTROos3tn1yCeUscd_v_DAA/exec';
 
+    // Identify gaps for follow-up
+    const gaps: string[] = [];
+    if (answers.between_session_context?.score >= 2) gaps.push('Between-session visibility');
+    if (answers.pattern_confidence?.score >= 2) gaps.push('Pattern recognition');
+    if (answers.catchup_time?.score >= 2) gaps.push('Session catchup time');
+    if (answers.client_perception?.score >= 2) gaps.push('AI comparison concern');
+
     try {
       await fetch(GOOGLE_SHEETS_WEBHOOK, {
         method: 'POST',
         mode: 'no-cors', // Required for Google Apps Script
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          timestamp: new Date().toISOString(),
           name: leadName,
           email: leadEmail,
           score: `${scorePercentage}%`,
-          resultTier,
-          answers: Object.entries(answers).map(([id, a]) => `${id}: ${a.label}`).join(' | ')
+          grade: resultContent[resultTier].score,
+          tier: resultTier,
+          gaps: gaps.join(', ') || 'None identified',
+          // Individual answers for analysis
+          client_ai_usage: answers.client_ai_usage?.label || '',
+          between_session_context: answers.between_session_context?.label || '',
+          catchup_time: answers.catchup_time?.label || '',
+          pattern_confidence: answers.pattern_confidence?.label || '',
+          client_perception: answers.client_perception?.label || '',
+          competitive_edge: answers.competitive_edge?.label || ''
         }),
       });
     } catch (err) {
