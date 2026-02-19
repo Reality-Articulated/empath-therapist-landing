@@ -435,17 +435,21 @@ export default function ClientInfoPage() {
       {/* --- HEADER / TRUST BAR --- */}
       <div className="bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-0">
             {/* Logo restored to original colors, removed grayscale/brightness filters */}
             <div className="w-10 h-10 flex items-center justify-center">
                 <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="font-black text-stone-900 tracking-tight hidden sm:block text-lg">Empath</span>
+            <span className="text-stone-900 tracking-tight hidden sm:block text-lg">Empath</span>
                 </div>
-          <div className="flex items-center gap-6 text-xs sm:text-sm font-bold text-stone-600 uppercase tracking-wide">
-            <span className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-[#1b8af1]" /> HIPAA Secure</span>
-            <span className="hidden sm:flex items-center gap-1.5"><Star className="w-4 h-4 text-[#1b8af1]" /> Trusted by Therapists</span>
-                </div>
+          
+          {/* Navigation Menu */}
+          <nav className="flex items-center gap-8">
+            <a href="#how-it-works" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">How It Works</a>
+            <a href="#access" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Access</a>
+            <a href="#security" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Security</a>
+            <a href="#faq" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">FAQ</a>
+          </nav>
               </div>
                   </div>
                   
@@ -527,13 +531,35 @@ export default function ClientInfoPage() {
                 </div>
                 
                 <p className="text-sm text-stone-500 text-center font-medium">
-                  Try it now: No app download required.
+                  Start capturing moments that matter.
                 </p>
               </>
             )}
           </motion.div>
         </div>
       </motion.section>
+
+      {/* --- TRUST BADGES --- */}
+      <section className="py-8 bg-white border-b-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center gap-8 flex-wrap">
+            <div className="flex items-center gap-2 text-stone-700">
+              <Shield className="w-5 h-5 text-[#1b8af1]" />
+              <span className="font-bold text-sm">HIPAA Secure</span>
+            </div>
+            <span className="text-stone-300">•</span>
+            <div className="flex items-center gap-2 text-stone-700">
+              <Star className="w-5 h-5 text-[#1b8af1]" />
+              <span className="font-bold text-sm">Trusted by Therapists</span>
+            </div>
+            <span className="text-stone-300">•</span>
+            <div className="flex items-center gap-2 text-stone-700">
+              <UserCheck className="w-5 h-5 text-[#1b8af1]" />
+              <span className="font-bold text-sm">Used by Real Practices</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* --- THE PROBLEM (Visual) --- */}
       <section className="py-24 bg-white border-y-2 border-stone-200">
@@ -619,7 +645,7 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- HOW IT WORKS (3 Steps) --- */}
-      <section className="py-24 bg-stone-900 text-[#FAF9F6]">
+      <section id="how-it-works" className="py-24 bg-stone-900 text-[#FAF9F6] scroll-mt-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-black mb-20 font-serif tracking-tight">How It Works</h2>
           
@@ -689,8 +715,237 @@ export default function ClientInfoPage() {
             </div>
       </section>
 
+      {/* --- ACCESS YOUR JOURNALS --- */}
+      <section id="access" className="py-24 bg-[#FAF9F6] scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
+              📱 Access Anywhere
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">View Your Journey</h2>
+            <p className="text-lg text-stone-600 font-medium">
+              Your journals, insights, and progress — accessible wherever you need them.
+            </p>
+          </div>
+
+          {/* Mobile App Section with Screenshots */}
+          <div className="mb-16">
+            <div className="bg-white p-8 md:p-12 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Content */}
+                <div>
+                  <div className="w-14 h-14 bg-stone-900 rounded-xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_#1b8af1]">
+                    <Smartphone className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-stone-900 mb-4">Mobile App</h3>
+                  <p className="text-stone-600 mb-8 leading-relaxed font-medium text-lg">
+                    Download the iOS app for the full experience:
+                  </p>
+                  <ul className="space-y-4 mb-8">
+                    {[
+                      'View all journals from calls or texts',
+                      'Analyze mood patterns & trends',
+                      'Connect directly with your therapist',
+                      'Track health data integration',
+                      'Respond to therapist prompts'
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
+                        <span className="text-stone-700 font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="space-y-4">
+                    <a 
+                      href="https://apps.apple.com/us/app/myempath/id6472873287"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-6 py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-[#1b8af1] transition-colors shadow-[4px_4px_0px_0px_rgba(27,138,241,1)] hover:shadow-[2px_2px_0px_0px_rgba(27,138,241,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+                      onClick={() => posthog.capture('ios_app_store_clicked')}
+                    >
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                      </svg>
+                      Download on App Store
+                    </a>
+                    <p className="text-xs text-stone-500 font-medium">Free for clients</p>
+                  </div>
+                </div>
+
+                {/* Screenshots */}
+                <div className="relative">
+                  <div className="grid grid-cols-3 gap-4">
+                    {[
+                      '/src/media/IMG_4014.jpg',
+                      '/src/media/IMG_4016.jpg',
+                      '/src/media/IMG_4017.jpg'
+                    ].map((img, i) => (
+                      <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
+                        <img src={img} alt={`App screenshot ${i + 1}`} className="w-full h-auto object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Web Platform Section */}
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white p-8 md:p-12 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] hover:shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Content */}
+                <div>
+              <div className="w-14 h-14 bg-[#1b8af1] rounded-xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+              <h3 className="text-3xl font-bold text-stone-900 mb-4">Web Platform</h3>
+              <p className="text-stone-600 mb-8 leading-relaxed font-medium text-lg">
+                Access your dashboard from any browser:
+              </p>
+              <ul className="space-y-4 mb-8">
+                {[
+                  'Full journal history & search',
+                  'Detailed analytics & insights',
+                  'Session preparation tools',
+                  'Export & share with your therapist',
+                  'Works on any device'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
+                    <span className="text-stone-700 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="space-y-4">
+                <a 
+                  href="https://www.empathdash.com/atman/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-6 py-3 bg-[#1b8af1] text-white rounded-xl font-bold hover:bg-stone-900 transition-colors shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+                  onClick={() => posthog.capture('web_platform_link_clicked')}
+                >
+                  Visit Web Platform <span className="text-lg">→</span>
+                </a>
+                <p className="text-xs text-stone-500 font-medium">Works on desktop, tablet & mobile</p>
+              </div>
+            </div>
+
+            {/* Screenshots */}
+            <div className="relative">
+              <div className="flex flex-col gap-4">
+                {[
+                  '/src/media/web/image1.png',
+                  '/src/media/web/image2.png'
+                ].map((img, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
+                    <img src={img} alt={`Web platform screenshot ${i + 1}`} className="w-full h-auto object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- VALUE CALCULATOR --- */}
       <ValueCalculator />
+
+      {/* --- PRIVACY & SECURITY --- */}
+      <section id="security" className="py-24 bg-white border-y-2 border-stone-200 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-800 border-2 border-green-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#10b981]">
+                <Shield className="w-4 h-4" /> Your Data, Your Control
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">Use It Your Way</h2>
+              <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+                Empath works as a standalone journaling app or with your therapist. You're always in control.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Standalone Journaling */}
+              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
+                <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 border-2 border-green-500">
+                  <Shield className="w-7 h-7 text-green-700" />
+                </div>
+                <h3 className="text-2xl font-bold text-stone-900 mb-4">Private Journaling</h3>
+                <p className="text-stone-600 mb-6 leading-relaxed font-medium">
+                  Use Empath as your personal journal. Your entries are encrypted and never shared unless you choose to connect with a therapist.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    'End-to-end encrypted storage',
+                    'No one can access your entries',
+                    'Link & unlink therapists anytime',
+                    'Your data stays with you',
+                    'Export or delete at any time'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-stone-700 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* With Therapist */}
+              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
+                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 border-2 border-blue-500">
+                  <UserCheck className="w-7 h-7 text-blue-700" />
+                </div>
+                <h3 className="text-2xl font-bold text-stone-900 mb-4">With Your Therapist</h3>
+                <p className="text-stone-600 mb-6 leading-relaxed font-medium">
+                  When you're ready, connect with a therapist to enhance your care. You control what's shared and when.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    'Choose what to share',
+                    'Unlink anytime with no penalty',
+                    'Data remains yours forever',
+                    'HIPAA-compliant security',
+                    'Switch therapists easily'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
+                      <span className="text-stone-700 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Security Badge */}
+            <div className="mt-12 text-center bg-stone-900 text-white p-8 rounded-xl border-2 border-stone-900">
+              <div className="flex items-center justify-center gap-4 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-6 h-6 text-green-400" />
+                  <span className="font-bold">256-bit Encryption</span>
+                </div>
+                <span className="text-stone-400">•</span>
+                <div className="flex items-center gap-2">
+                  <Shield className="w-6 h-6 text-green-400" />
+                  <span className="font-bold">HIPAA Compliant</span>
+                </div>
+                <span className="text-stone-400">•</span>
+                <div className="flex items-center gap-2">
+                  <Shield className="w-6 h-6 text-green-400" />
+                  <span className="font-bold">SOC 2 Certified</span>
+                </div>
+              </div>
+              <p className="text-stone-400 text-sm mt-4 font-medium">
+                Your data is protected with enterprise-grade security, whether you journal alone or with a therapist.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* --- THE OFFER STACK (Grand Slam) --- */}
       <section className="py-24 bg-white border-y-2 border-stone-200">
@@ -798,7 +1053,7 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- FAQ / OBJECTIONS --- */}
-      <section className="py-24 bg-white border-t-2 border-stone-200">
+      <section id="faq" className="py-24 bg-white border-t-2 border-stone-200 scroll-mt-20">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-black text-center text-stone-900 mb-12 font-serif">Questions?</h2>
           <div className="space-y-4">
@@ -811,12 +1066,28 @@ export default function ClientInfoPage() {
               answer="Not at all. Empath makes your existing sessions better. It's a tool to help you communicate more effectively with your therapist between visits." 
             />
             <FAQItem 
-              question="Do I need to download an app?" 
-              answer="You can, but you don't have to! You can use Empath entirely through text messaging or phone calls if you prefer. We do have an iOS app for a richer experience." 
+              question="How do I access my journals?" 
+              answer={<>You can access your journals through our iOS mobile app or web platform at <a href="https://www.empathdash.com/atman/" target="_blank" rel="noopener noreferrer" className="text-[#1b8af1] hover:underline font-bold">empathdash.com/atman</a>. You can journal via text, phone, or the app, and view everything from either platform.</>} 
             />
             <FAQItem 
               question="Who pays for this?" 
               answer="Empath is free for clients. Your therapist pays a subscription fee to use the platform as part of their practice." 
+            />
+            <FAQItem 
+              question="Is the app free?" 
+              answer="Yes, Empath is completely free for clients. Your therapist covers the cost as part of their practice subscription." 
+            />
+            <FAQItem 
+              question="Can I just use it for journaling without a therapist?" 
+              answer="Absolutely! We encourage it. Use Empath as your personal journal, and when you're ready to connect with a therapist, all your data will be available to share." 
+            />
+            <FAQItem 
+              question="Can I connect to a therapist at a later point?" 
+              answer="Yes, you can connect with a therapist whenever you're ready. Your journal entries stay with you and can be shared with your therapist at any time." 
+            />
+            <FAQItem 
+              question="Do you have support?" 
+              answer="Yes! For any questions or assistance, contact us at kara@myempath.co and we'll be happy to help." 
             />
                       </div>
                     </div>
@@ -825,7 +1096,7 @@ export default function ClientInfoPage() {
       {/* --- FOOTER --- */}
       <footer className="bg-[#FAF9F6] border-t-2 border-stone-200 py-16">
         <div className="container mx-auto px-4 text-center">
-            <div className="inline-block p-4 bg-stone-900 rounded-lg mb-8">
+            <div className="inline-block p-4 rounded-lg mb-8">
                 <img src={logo} alt="Empath" className="w-8 h-8 object-contain" />
             </div>
           <div className="flex justify-center gap-8 text-stone-500 font-bold text-sm mb-8 uppercase tracking-widest">
@@ -1189,7 +1460,7 @@ export default function ClientInfoPage() {
               <li className="relative">
                 <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">2</span>
                 <h4 className="font-bold text-stone-900 text-lg">Start journaling</h4>
-                <p className="text-sm text-stone-500 font-medium mt-1">Download the app or just use SMS/Phone.</p>
+                <p className="text-sm text-stone-500 font-medium mt-1">Download the app or use SMS/Phone to capture moments.</p>
               </li>
             </ol>
 
@@ -1232,7 +1503,7 @@ export default function ClientInfoPage() {
             </div>
 
             <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Journal Instantly</h3>
-            <p className="text-stone-600 mb-8 font-medium">No app needed. Just call or text our secure line to start.</p>
+            <p className="text-stone-600 mb-8 font-medium">Call or text our secure line to capture your thoughts instantly.</p>
 
             <div className="grid grid-cols-2 gap-4">
                 <a
@@ -1291,11 +1562,11 @@ export default function ClientInfoPage() {
             animate={{ y: 0 }}
             className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b-2 border-stone-200 p-4 z-50 hidden md:flex justify-between items-center shadow-sm"
         >
-            <div className="flex items-center gap-3 container mx-auto px-4">
-                <div className="w-8 h-8 bg-stone-900 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src={logo} className="w-full h-full object-contain" alt="Logo" />
-                </div>
-                <span className="font-black text-stone-900 text-lg">Empath</span>
+            <div className="flex items-center gap-0 container mx-auto px-4">
+              <div className="w-10 h-10 flex items-center justify-center">
+                  <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
+              </div>
+                <span className="text-stone-900 text-lg">Empath</span>
                 <div className="flex-grow"></div>
               <button
                     className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900"
