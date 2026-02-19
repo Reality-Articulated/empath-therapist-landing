@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Shield, Clock, Phone, Smartphone, MessageSquare, Zap, ChevronDown, Star, DollarSign, TrendingUp, UserCheck, Search, User, Loader2 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
+import img1 from '../media/IMG_4014.jpg';
+import img2 from '../media/IMG_4016.jpg';
+import img3 from '../media/IMG_4017.jpg';
+import webImg1 from '../media/web/image1.png';
+import webImg2 from '../media/web/image2.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
@@ -776,9 +781,9 @@ export default function ClientInfoPage() {
                 <div className="relative">
                   <div className="grid grid-cols-3 gap-4">
                     {[
-                      '/src/media/IMG_4014.jpg',
-                      '/src/media/IMG_4016.jpg',
-                      '/src/media/IMG_4017.jpg'
+                      img1,
+                      img2,
+                      img3
                     ].map((img, i) => (
                       <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
                         <img src={img} alt={`App screenshot ${i + 1}`} className="w-full h-auto object-cover" />
@@ -837,8 +842,8 @@ export default function ClientInfoPage() {
             <div className="relative">
               <div className="flex flex-col gap-4">
                 {[
-                  '/src/media/web/image1.png',
-                  '/src/media/web/image2.png'
+                  webImg1,
+                  webImg2
                 ].map((img, i) => (
                   <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
                     <img src={img} alt={`Web platform screenshot ${i + 1}`} className="w-full h-auto object-cover" />
