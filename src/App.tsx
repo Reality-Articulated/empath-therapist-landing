@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import AdvisoryPage from './pages/AdvisoryPage';
 import AtmanPage from './pages/AtmanPage';
 import ClientInfoPage from './pages/ClientInfoPage';
+import JournalingPage from './pages/JournalingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import PledgePage from './pages/PledgePage';
@@ -18,7 +19,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath', '/quiz'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath', '/quiz', '/app'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -29,6 +30,7 @@ function App() {
         <Route path="/atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
         <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
+        <Route path="/app" element={<JournalingPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/pledge" element={<PledgePage />} />
