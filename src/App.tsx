@@ -1,5 +1,6 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import posthog from 'posthog-js';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -19,6 +20,37 @@ import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();
+
+  // Track page views and capture ad engagement parameters
+  useEffect(() => {
+    // Get URL search parameters
+    const searchParams = new URLSearchParams(location.search);
+    
+    // Capture UTM parameters and Reddit ad parameters
+    const adParams: Record<string, string> = {};
+    const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const redditParams = ['reddit_ad_id', 'reddit_campaign_id', 'reddit_adgroup_id'];
+    
+    [...utmParams, ...redditParams].forEach(param => {
+      const value = searchParams.get(param);
+      if (value) {
+        adParams[param] = value;
+      }
+    });
+
+    // Store ad parameters in PostHog super properties if present
+    if (Object.keys(adParams).length > 0) {
+      posthog.register(adParams);
+      posthog.capture('ad_engagement_parameters_captured', adParams);
+    }
+
+    // Track page view
+    posthog.capture('$pageview', {
+      path: location.pathname,
+      search: location.search,
+      ...adParams
+    });
+  }, [location]);
   const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath', '/quiz', '/app'].includes(location.pathname);
 
   return (
