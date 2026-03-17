@@ -4,7 +4,6 @@ import {
   CheckCircle, 
   Shield, 
   Phone, 
-  Smartphone, 
   MessageSquare, 
   Zap, 
   ChevronDown, 
@@ -30,6 +29,9 @@ import img2 from '../media/IMG_4016.jpg';
 import img3 from '../media/IMG_4017.jpg';
 import img4 from '../media/Simulator Screenshot - iPhone 17 Pro - 2026-03-15 at 22.59.06.png';
 import img5 from '../media/simulator_screenshot_A6B0AF54-EEF6-4CFC-803F-3153AD369F5C.png';
+import desktop1 from '../media/web/image1.png';
+import desktop2 from '../media/web/image2.png';
+import desktop3 from '../media/web/image3.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
@@ -75,11 +77,25 @@ const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNo
 
 export default function JournalingPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const PHONE_MAIN = '+18883663082';
-  const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
+  const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
+  const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
+  const mobileScreens = [img1, img2, img3, img4, img5];
+  const desktopScreens = [desktop1, desktop2, desktop3];
 
   useEffect(() => {
     posthog.capture('journaling_page_viewed');
+
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -151,43 +167,71 @@ export default function JournalingPage() {
           </motion.p>
 
           <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-16 max-w-md mx-auto">
-            <button
-              onClick={handleAppStoreClick}
-              className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-3 group"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-              </svg>
-              Download on App Store
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-            
-            <div className="flex items-center gap-4 w-full">
-              <a
-                href={`tel:${PHONE_MAIN}`}
-                className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
-                onClick={() => posthog.capture('journaling_page_call_clicked')}
-              >
-                <Phone className="w-4 h-4" /> Call to Journal
-              </a>
-              <a
-                href={`sms:${PHONE_MAIN}`}
-                className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
-                onClick={() => posthog.capture('journaling_page_text_clicked')}
-              >
-                <MessageSquare className="w-4 h-4" /> Text to Journal
-              </a>
-            </div>
-            
-            <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
-              <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to download • No credit card required
-            </p>
+            {isMobile ? (
+              <>
+                <button
+                  onClick={handleAppStoreClick}
+                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-3 group"
+                >
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                  </svg>
+                  Download on App Store
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+                
+                <div className="flex items-center gap-4 w-full">
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
+                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                  >
+                    <Phone className="w-4 h-4" /> Call to Journal
+                  </a>
+                  <a
+                    href={`sms:${PHONE_MAIN}`}
+                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
+                    onClick={() => posthog.capture('journaling_page_text_clicked')}
+                  >
+                    <MessageSquare className="w-4 h-4" /> Text to Journal
+                  </a>
+                </div>
+                
+                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
+                  <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to download • No credit card required
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="w-full px-8 py-6 bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] text-left space-y-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">On desktop</p>
+                    <p className="text-lg font-black text-stone-900 mb-1">Use the web dashboard</p>
+                    <button
+                      onClick={() => {
+                        posthog.capture('journaling_page_web_app_clicked');
+                        window.location.href = WEB_APP_URL;
+                      }}
+                      className="w-full mt-2 px-4 py-3 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                    >
+                      <Brain className="w-5 h-5" /> Open Web Dashboard
+                    </button>
+                  </div>
+                  <div className="pt-2 border-t border-stone-200">
+                    <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Prefer phone?</p>
+                    <p className="text-lg font-black text-stone-900 mb-1">Text or call Empath</p>
+                    <p className="text-2xl font-mono font-bold text-stone-900 mb-1">{PHONE_MAIN}</p>
+                    <p className="text-sm text-stone-600 font-medium">Send a text to start journaling or call to speak your thoughts. No downloads needed on desktop.</p>
+                  </div>
+                </div>
+              </>
+            )}
           </motion.div>
 
           {/* App Screenshots */}
           <motion.div variants={fadeIn} className="mt-16">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
-              {[img1, img2, img3, img4, img5].map((img, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {(isMobile ? mobileScreens : desktopScreens).map((img, i) => (
                 <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105 transition-all">
                   <img src={img} alt={`App screenshot ${i + 1}`} className="w-full h-auto object-cover" />
                 </div>
@@ -266,23 +310,6 @@ export default function JournalingPage() {
                         <p className="text-stone-600 text-sm font-medium">Text in images? We'll read and extract it for you.</p>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <a
-                      href={`tel:${PHONE_MAIN}`}
-                      className="flex-1 px-6 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 hover:bg-[#1b8af1] transition-all font-bold flex items-center justify-center shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] gap-2"
-                      onClick={() => posthog.capture('feature_call_clicked')}
-                    >
-                      <Phone className="w-5 h-5" /> Call Now
-                    </a>
-                    <a
-                      href={`sms:${PHONE_MAIN}`}
-                      className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 hover:bg-blue-50 hover:border-[#1b8af1] transition-all font-bold flex items-center justify-center gap-2"
-                      onClick={() => posthog.capture('feature_text_clicked')}
-                    >
-                      <MessageSquare className="w-5 h-5" /> Text Now
-                    </a>
                   </div>
                 </div>
 
@@ -472,13 +499,6 @@ export default function JournalingPage() {
                       </div>
                     </div>
                   </div>
-
-                  <button
-                    onClick={handleAppStoreClick}
-                    className="px-8 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-                  >
-                    Start Tracking Free
-                  </button>
                 </div>
               </div>
             </div>
@@ -841,22 +861,28 @@ export default function JournalingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-16 text-center">
-              <button
-                onClick={handleAppStoreClick}
-                className="inline-flex items-center gap-3 px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-              >
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-                </svg>
-                Download Empath Free
-                <span>→</span>
-              </button>
-              <p className="text-sm text-stone-500 mt-4 font-medium">
-                No credit card required • Free forever
-              </p>
+      {/* --- IOS APP CALL-OUT --- */}
+      <section className="py-12 bg-white border-y-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">iOS app available</p>
+              <h3 className="text-2xl md:text-3xl font-black mb-2">On iPhone? Download Empath</h3>
+              <p className="text-stone-200 font-medium max-w-xl">Keep journaling on the go. Voice, text, photos, and instant insights — all in the app.</p>
             </div>
+            <button
+              onClick={handleAppStoreClick}
+              className="inline-flex items-center gap-3 px-6 py-4 bg-white text-stone-900 rounded-xl font-bold text-base border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+              </svg>
+              Download on App Store
+            </button>
           </div>
         </div>
       </section>
@@ -950,15 +976,34 @@ export default function JournalingPage() {
               Join thousands using Empath to capture thoughts, track patterns, and grow faster.
             </p>
             
-            <button
-              onClick={handleAppStoreClick}
-              className="inline-flex items-center gap-3 px-8 py-5 bg-white text-stone-900 rounded-xl font-bold text-lg border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all mb-6"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-              </svg>
-              Download Free on App Store
-            </button>
+            {isMobile ? (
+              <button
+                onClick={handleAppStoreClick}
+                className="inline-flex items-center gap-3 px-8 py-5 bg-white text-stone-900 rounded-xl font-bold text-lg border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all mb-6"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                </svg>
+                Download Free on App Store
+              </button>
+            ) : (
+              <div className="inline-flex flex-col items-center gap-3 px-8 py-6 bg-white text-stone-900 rounded-xl font-bold text-lg border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
+                <button
+                  onClick={() => {
+                    posthog.capture('final_cta_web_app_clicked');
+                    window.location.href = WEB_APP_URL;
+                  }}
+                  className="w-full px-4 py-3 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                >
+                  <Brain className="w-5 h-5" /> Open Web Dashboard
+                </button>
+                <div className="text-center">
+                  <p className="text-sm font-bold text-stone-900">Or text/call to journal</p>
+                  <p className="text-2xl font-mono font-bold">{PHONE_MAIN}</p>
+                  <p className="text-sm text-stone-700 font-medium">Text “Hello” or call to start right away.</p>
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-center gap-8 flex-wrap text-sm text-stone-400 font-medium">
               <div className="flex items-center gap-2">
@@ -994,45 +1039,46 @@ export default function JournalingPage() {
       </footer>
 
       {/* --- FLOATING CTAs --- */}
-      {showFloatingCTA && (
-        <>
-          {/* Mobile */}
-          <motion.div
-            initial={{ y: 100 }} 
-            animate={{ y: 0 }}
-            className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t-2 border-stone-200 p-4 z-40 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
+      {showFloatingCTA && isMobile && (
+        <motion.div
+          initial={{ y: 100 }} 
+          animate={{ y: 0 }}
+          className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t-2 border-stone-200 p-4 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
+        >
+          <button
+            onClick={handleAppStoreClick}
+            className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold shadow-lg border-2 border-stone-900"
           >
+            Download Free
+          </button>
+        </motion.div>
+      )}
+      
+      {showFloatingCTA && !isMobile && (
+        <motion.div
+          initial={{ y: -100 }} 
+          animate={{ y: 0 }}
+          className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b-2 border-stone-200 p-4 z-50 shadow-sm"
+        >
+          <div className="flex items-center gap-0 container mx-auto px-4">
+            <Link to="/" className="flex items-center gap-0">
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
+              </div>
+              <span className="text-stone-900 text-lg">Empath</span>
+            </Link>
+            <div className="flex-grow"></div>
             <button
-              onClick={handleAppStoreClick}
-              className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold shadow-lg border-2 border-stone-900"
+              onClick={() => {
+                posthog.capture('floating_cta_web_app_clicked');
+                window.location.href = WEB_APP_URL;
+              }}
+              className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
             >
-              Download Free
+              <Brain className="w-4 h-4" /> Try Web App
             </button>
-          </motion.div>
-
-          {/* Desktop */}
-          <motion.div
-            initial={{ y: -100 }} 
-            animate={{ y: 0 }}
-            className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b-2 border-stone-200 p-4 z-50 hidden md:flex justify-between items-center shadow-sm"
-          >
-            <div className="flex items-center gap-0 container mx-auto px-4">
-              <Link to="/" className="flex items-center gap-0">
-                <div className="w-10 h-10 flex items-center justify-center">
-                  <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
-                </div>
-                <span className="text-stone-900 text-lg">Empath</span>
-              </Link>
-              <div className="flex-grow"></div>
-              <button
-                onClick={handleAppStoreClick}
-                className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900"
-              >
-                Download Free
-              </button>
-            </div>
-          </motion.div>
-        </>
+          </div>
+        </motion.div>
       )}
     </div>
   );
