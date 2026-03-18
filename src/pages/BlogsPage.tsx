@@ -18,6 +18,7 @@ export default function BlogsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title =
       'Clinical Insights for Therapists | Empath Blog';
     const description = document.querySelector(

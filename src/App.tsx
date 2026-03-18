@@ -25,6 +25,11 @@ import { Analytics } from '@vercel/analytics/react';
 function App() {
   const location = useLocation();
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Track page views and capture ad engagement parameters
   useEffect(() => {
     // Get URL search parameters

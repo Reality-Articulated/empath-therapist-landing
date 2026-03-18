@@ -222,6 +222,7 @@ const principles = [
 
 export default function SciencePage() {
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = 'Science & Research | Empath — Evidence-Based Therapy Technology';
     const description = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (description) {

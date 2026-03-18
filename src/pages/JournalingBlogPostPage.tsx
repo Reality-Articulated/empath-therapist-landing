@@ -106,6 +106,7 @@ export default function JournalingBlogPostPage() {
   }, [post]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!post) {
       document.title = 'Article Not Found | Empath Journaling Blog';
       return;
@@ -117,7 +118,7 @@ export default function JournalingBlogPostPage() {
     if (description) {
       description.content = post.metaDescription;
     }
-  }, [post]);
+  }, [post, slug]);
 
   const schemas = useMemo(() => {
     if (!post) return { article: null, faq: null };
