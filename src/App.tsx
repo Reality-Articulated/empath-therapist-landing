@@ -15,7 +15,11 @@ import TransparencyPage from './pages/TransparencyPage';
 import TherapyValueCalculator from './pages/TherapyValueCalculator';
 import TherapyValueCalculatorDirect from './pages/TherapyValueCalculatorDirect';
 import AIReadinessQuiz from './pages/AIReadinessQuiz';
-// import BlogsPage from './pages/BlogsPage';
+import BlogsPage from './pages/BlogsPage';
+import SciencePage from './pages/SciencePage';
+import BlogPostPage from './pages/BlogPostPage';
+import JournalingBlogsPage from './pages/JournalingBlogsPage';
+import JournalingBlogPostPage from './pages/JournalingBlogPostPage';
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
@@ -51,7 +55,7 @@ function App() {
       ...adParams
     });
   }, [location]);
-  const hideNavbar = location.pathname.startsWith('/atman') || ['/about-atman', '/whyempath', '/quiz', '/app'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/about-atman', '/whyempath', '/quiz'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -63,6 +67,8 @@ function App() {
         <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
         <Route path="/whyempath" element={<ClientInfoPage />} />
         <Route path="/app" element={<JournalingPage />} />
+        <Route path="/app/blog" element={<JournalingBlogsPage />} />
+        <Route path="/app/blog/:slug" element={<JournalingBlogPostPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/pledge" element={<PledgePage />} />
@@ -70,7 +76,10 @@ function App() {
         <Route path="/calculator" element={<TherapyValueCalculator />} />
         <Route path="/calculator-direct" element={<TherapyValueCalculatorDirect />} />
         <Route path="/quiz" element={<AIReadinessQuiz />} />
-        {/* // <Route path="/blogs" element={<BlogsPage />} /> */}
+        <Route path="/science" element={<SciencePage />} />
+        <Route path="/blog" element={<BlogsPage />} />
+        <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
       </Routes>
       {!hideNavbar && <Footer />}
       <Analytics />

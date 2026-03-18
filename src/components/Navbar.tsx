@@ -8,6 +8,8 @@ export default function Navbar() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isBlogRoute = location.pathname === '/blog' || location.pathname === '/blogs' || location.pathname.startsWith('/blog/');
+  const isScienceRoute = location.pathname === '/science';
   
   // Handle scroll effect
   useEffect(() => {
@@ -95,6 +97,40 @@ export default function Navbar() {
                 />
               )}
             </Link>
+            <Link 
+              to="/science" 
+              className={`text-sm font-medium transition-all duration-300 relative ${
+                isScienceRoute
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
+              }`}
+              aria-current={isScienceRoute ? 'page' : undefined}
+            >
+              <span>Science</span>
+              {isScienceRoute && (
+                <motion.div 
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+                  layoutId="navIndicator"
+                />
+              )}
+            </Link>
+            <Link 
+              to="/blog" 
+              className={`text-sm font-medium transition-all duration-300 relative ${
+                isBlogRoute
+                  ? 'text-blue-700' 
+                  : 'text-gray-700 hover:text-blue-700'
+              }`}
+              aria-current={isBlogRoute ? 'page' : undefined}
+            >
+              <span>Blog</span>
+              {isBlogRoute && (
+                <motion.div 
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
+                  layoutId="navIndicator"
+                />
+              )}
+            </Link>
             <motion.a 
               href="https://app.empathdash.com/" 
               target="_blank" 
@@ -156,6 +192,24 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Advisory Program
+              </Link>
+              <Link 
+                to="/science" 
+                className={`text-sm font-medium py-2 ${
+                  isScienceRoute ? 'text-blue-600' : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Science
+              </Link>
+              <Link 
+                to="/blog" 
+                className={`text-sm font-medium py-2 ${
+                  isBlogRoute ? 'text-blue-600' : 'text-gray-600'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
               </Link>
               <a 
                 href="https://app.empathdash.com/login" 

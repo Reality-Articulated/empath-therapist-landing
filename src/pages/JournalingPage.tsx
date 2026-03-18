@@ -120,6 +120,7 @@ export default function JournalingPage() {
             <a href="#features" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Features</a>
             <a href="#how-it-works" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">How It Works</a>
             <a href="#faq" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">FAQ</a>
+            <Link to="/app/blog" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Blog</Link>
             <button
               onClick={handleAppStoreClick}
               className="px-4 py-2 bg-stone-900 text-white rounded-lg font-bold text-sm hover:bg-[#1b8af1] transition-colors border-2 border-stone-900"

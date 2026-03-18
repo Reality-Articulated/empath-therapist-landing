@@ -71,6 +71,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/science" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
+                  Science
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link to="/pledge" className="text-gray-300 hover:text-white transition-colors inline-flex items-center">
                   Privacy Policy
                 </Link>
