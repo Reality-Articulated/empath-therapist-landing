@@ -23,6 +23,7 @@ export default function JournalingBlogsPage() {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     posthog.capture('journaling_blog_page_viewed');
     document.title = 'Journaling Blog: Tips, Apps & Guides | Empath';
     const description = document.querySelector(
