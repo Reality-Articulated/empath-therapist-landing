@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
-  ArrowUpRight,
   CalendarDays,
   CheckCircle2,
   ChevronRight,
@@ -10,7 +9,9 @@ import {
   Copy,
   ExternalLink,
   Sparkles,
+  X,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { blogPosts } from '../data/blogPosts';
 
 function toAnchorId(value: string) {
@@ -34,9 +35,10 @@ function getCategoryBadgeColor(category: string) {
 
 interface MarketingCardProps {
   compact?: boolean;
+  onBookDemo?: () => void;
 }
 
-function MarketingCard({ compact = false }: MarketingCardProps) {
+function MarketingCard({ compact = false, onBookDemo }: MarketingCardProps) {
   return (
     <div
       className={`rounded-lg border border-blue-200 bg-blue-50/50 ${
@@ -45,27 +47,27 @@ function MarketingCard({ compact = false }: MarketingCardProps) {
     >
       <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1.5">
         <Sparkles className="w-3.5 h-3.5" />
-        Try Empath Free
+        Empath for Therapists
       </p>
       <h3
         className={`${compact ? 'text-base' : 'text-lg'} font-semibold text-slate-900 mb-1.5`}
       >
-        Turn journaling into therapy-ready insights
+        Bring AI memory and pattern insight into every session
       </h3>
       <p className="text-slate-600 text-sm leading-relaxed mb-3">
-        Capture reflections, track patterns, and prepare better for every therapy session.
+        Empath surfaces client trends between sessions so you can spend less time catching up and
+        more time delivering high-impact care.
       </p>
       <div className="flex flex-wrap gap-2">
-        <a
-          href="https://app.empathdash.com/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={onBookDemo}
           className="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors"
         >
-          Try it free <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
-        </a>
+          Book a 15-Min Demo <ChevronRight className="w-3.5 h-3.5 ml-1.5" />
+        </button>
         <a
-          href="https://app.empathdash.com/login"
+          href="https://app.empathdash.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-slate-300 text-slate-700 text-sm hover:bg-white transition-colors"
@@ -80,6 +82,7 @@ function MarketingCard({ compact = false }: MarketingCardProps) {
 export default function BlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   const post = blogPosts.find((entry) => entry.slug === slug);
 
   const articleUrl =
@@ -197,6 +200,48 @@ export default function BlogPostPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       )}
+      {showCalendar && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="calendar-modal-title"
+        >
+          <motion.div
+            className="bg-white rounded-xl p-8 w-full max-w-4xl shadow-2xl"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', damping: 25 }}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">
+                Schedule a Demo
+              </h2>
+              <motion.button
+                onClick={() => setShowCalendar(false)}
+                className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.2 }}
+                aria-label="Close calendar"
+              >
+                <X size={20} aria-hidden="true" />
+              </motion.button>
+            </div>
+            <iframe
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true"
+              style={{ border: 0 }}
+              width="100%"
+              height="600"
+              frameBorder="0"
+              className="rounded-lg"
+              title="Schedule a Demo"
+            />
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* Article Header */}
       <div className="border-b border-slate-200 bg-white">
@@ -276,7 +321,7 @@ export default function BlogPostPage() {
                     </div>
                     {index === 1 && (
                       <div className="mt-6">
-                        <MarketingCard />
+                        <MarketingCard onBookDemo={() => setShowCalendar(true)} />
                       </div>
                     )}
                   </section>
@@ -304,7 +349,7 @@ export default function BlogPostPage() {
 
                 {/* Bottom CTA */}
                 <section className="pt-6 border-t border-slate-200">
-                  <MarketingCard />
+                  <MarketingCard onBookDemo={() => setShowCalendar(true)} />
                 </section>
 
                 {/* Footer */}
@@ -334,7 +379,7 @@ export default function BlogPostPage() {
 
             {/* Sidebar */}
             <aside className="order-2 space-y-4 lg:sticky lg:top-28 lg:self-start">
-              <MarketingCard compact />
+              <MarketingCard compact onBookDemo={() => setShowCalendar(true)} />
 
               {/* Table of Contents */}
               <div className="rounded-lg border border-slate-200 bg-white p-4">

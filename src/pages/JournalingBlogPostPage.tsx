@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -11,10 +11,8 @@ import {
   Copy,
   ExternalLink,
   Sparkles,
-  BookOpen,
-  Shield,
-  Brain,
-  Star,
+  Phone,
+  MessageSquare,
 } from 'lucide-react';
 import { journalingBlogPosts } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
@@ -42,6 +40,19 @@ function getCategoryColor(category: string) {
 
 function MarketingCard({ compact = false }: { compact?: boolean }) {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
+  const PHONE_MAIN = '+18883663082';
+  const WEB_APP_URL = 'https://www.empathdash.com/atman/';
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div
@@ -59,23 +70,68 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
         Call, text, or type your thoughts. Empath captures everything and helps you understand
         yourself better over time.
       </p>
-      <div className="flex flex-wrap gap-2.5">
-        <a
-          href={APP_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
-          className="inline-flex items-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
-        >
-          Download Free <ArrowUpRight className="w-4 h-4" />
-        </a>
-        <Link
-          to="/app"
-          className="inline-flex items-center px-4 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors"
-        >
-          Learn more
-        </Link>
-      </div>
+      {isMobile ? (
+        <div className="space-y-2.5">
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
+            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
+          >
+            Download on App Store <ArrowUpRight className="w-4 h-4" />
+          </a>
+          <div className="grid grid-cols-2 gap-2.5">
+            <a
+              href={`tel:${PHONE_MAIN}`}
+              onClick={() => posthog.capture('journaling_blog_post_call_clicked')}
+              className="inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
+            >
+              <Phone className="w-4 h-4" /> Call
+            </a>
+            <a
+              href={`sms:${PHONE_MAIN}`}
+              onClick={() => posthog.capture('journaling_blog_post_text_clicked')}
+              className="inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
+            >
+              <MessageSquare className="w-4 h-4" /> Text
+            </a>
+          </div>
+          <p className="text-xs text-stone-500 font-medium">
+            Free to download. Call or text to start journaling right away.
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <a
+            href={WEB_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture('journaling_blog_post_web_app_clicked')}
+            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
+          >
+            Open Web Dashboard <ArrowUpRight className="w-4 h-4" />
+          </a>
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
+            className="inline-flex items-center px-4 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
+          >
+            Download iOS App <ArrowUpRight className="w-4 h-4" />
+          </a>
+          <div className="rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-3">
+            <p className="text-xs uppercase tracking-wide text-stone-500 font-bold mb-1">
+              Prefer phone?
+            </p>
+            <p className="text-sm font-bold text-stone-900">{PHONE_MAIN}</p>
+            <p className="text-xs text-stone-600 font-medium">
+              Text or call this number to start journaling without downloading the app.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
