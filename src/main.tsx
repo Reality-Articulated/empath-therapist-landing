@@ -37,7 +37,7 @@ createRoot(document.getElementById('root')!).render(
         apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
         options={options}
       >
-        <App />
+          <App />
       </PostHogProvider>
     </BrowserRouter>
   </StrictMode>
