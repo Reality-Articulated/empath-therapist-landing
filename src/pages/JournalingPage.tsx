@@ -168,7 +168,7 @@ export default function JournalingPage() {
             The AI journaling assistant that captures every thought, analyzes your patterns, and helps you understand yourself better.
           </motion.p>
 
-          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-16 max-w-md mx-auto">
+          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto">
             {isMobile ? (
               <>
                 <button
@@ -181,63 +181,71 @@ export default function JournalingPage() {
                   Download on App Store
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </button>
-                
-                <div className="flex items-center gap-2 w-full">
-                  <a
-                    href={`tel:${PHONE_MAIN}`}
-                    className="flex-1 px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_call_clicked')}
-                  >
-                    <Phone className="w-4 h-4" /> Call
-                  </a>
-                  <a
-                    href={`sms:${PHONE_MAIN}`}
-                    className="flex-1 px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_text_clicked')}
-                  >
-                    <MessageSquare className="w-4 h-4" /> Text
-                  </a>
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] hover:bg-[#20BD5A] transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    WhatsApp
-                  </a>
-                </div>
-                
                 <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
                   <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to download • No credit card required
                 </p>
               </>
             ) : (
               <>
-                <div className="w-full px-8 py-6 bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] text-left space-y-3">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">On desktop</p>
-                    <p className="text-lg font-black text-stone-900 mb-1">Use the web dashboard</p>
-                    <button
-                      onClick={() => {
-                        posthog.capture('journaling_page_web_app_clicked');
-                        window.location.href = WEB_APP_URL;
-                      }}
-                      className="w-full mt-2 px-4 py-3 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
-                    >
-                      <Brain className="w-5 h-5" /> Open Web Dashboard
-                    </button>
-                  </div>
-                  <div className="pt-2 border-t border-stone-200">
-                    <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Prefer phone?</p>
-                    <p className="text-lg font-black text-stone-900 mb-1">Text or call Empath</p>
-                    <p className="text-2xl font-mono font-bold text-stone-900 mb-1">{PHONE_MAIN}</p>
-                    <p className="text-sm text-stone-600 font-medium">Send a text to start journaling or call to speak your thoughts. No downloads needed on desktop.</p>
-                  </div>
-                </div>
+                <button
+                  onClick={() => {
+                    posthog.capture('journaling_page_web_app_clicked');
+                    window.location.href = WEB_APP_URL;
+                  }}
+                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-3 group"
+                >
+                  <Brain className="w-5 h-5" /> Open Web Dashboard
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
+                  <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to use • No credit card required
+                </p>
               </>
             )}
+          </motion.div>
+
+          {/* --- NO APP? CALL/TEXT/WHATSAPP --- */}
+          <motion.div variants={fadeIn} className="mb-16 max-w-lg mx-auto">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t-2 border-stone-200"></div>
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-[#FAF9F6] px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Or skip the app entirely</span>
+              </div>
+            </div>
+            <p className="text-stone-600 font-medium mt-4 mb-5 text-center">
+              Don't want to download anything? Just reach out directly — journal by calling, texting, or messaging us.
+            </p>
+            <div className="flex items-center gap-3 w-full">
+              <a
+                href={isMobile ? `tel:${PHONE_MAIN}` : `tel:${PHONE_MAIN}`}
+                className="flex-1 px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                onClick={() => posthog.capture('journaling_page_call_clicked')}
+              >
+                <Phone className="w-4 h-4" /> Call
+              </a>
+              <a
+                href={isMobile ? `sms:${PHONE_MAIN}` : `sms:${PHONE_MAIN}`}
+                className="flex-1 px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                onClick={() => posthog.capture('journaling_page_text_clicked')}
+              >
+                <MessageSquare className="w-4 h-4" /> Text
+              </a>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+            <p className="text-xs text-stone-400 text-center mt-3 font-medium">
+              {PHONE_MAIN} • Available 24/7 • No account needed
+            </p>
           </motion.div>
 
           {/* App Screenshots */}
