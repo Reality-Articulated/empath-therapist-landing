@@ -158,15 +158,15 @@ export default function JournalingPage() {
       >
         <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
           <motion.h1 variants={fadeIn} className="text-6xl md:text-8xl font-black tracking-tighter text-stone-900 mb-8 leading-[0.95] font-serif">
-            Your Mind, <br/>
+            The Journal<br/>
             <span className="relative inline-block px-4">
               <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
-              <span className="relative text-white">Understood.</span>
+              <span className="relative text-white">You Won't Quit.</span>
             </span>
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            The AI journaling assistant that captures every thought, analyzes your patterns, and helps you understand yourself better.
+            Because it lives in your texts, calls, WhatsApp, and Telegram — not another app you'll forget to open.
           </motion.p>
 
           <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto">
