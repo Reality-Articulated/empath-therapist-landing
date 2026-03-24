@@ -169,25 +169,79 @@ export default function JournalingPage() {
             Because it lives in your texts, calls, WhatsApp, and Telegram — not another app you'll forget to open.
           </motion.p>
 
-          <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto">
-            {isMobile ? (
-              <>
+          {isMobile ? (
+            <>
+              {/* Mobile: messaging-first CTAs (matches "not another app" hero copy) */}
+              <motion.div variants={fadeIn} className="mb-8 max-w-lg mx-auto">
+                <p className="text-stone-600 font-medium mb-5 text-center">
+                  Start journaling right now — just call, text, or message us.
+                </p>
+                <div className="grid grid-cols-2 gap-3 w-full mb-3">
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                  >
+                    <Phone className="w-4 h-4" /> Call
+                  </a>
+                  <a
+                    href={`sms:${PHONE_MAIN}`}
+                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_text_clicked')}
+                  >
+                    <MessageSquare className="w-4 h-4" /> Text
+                  </a>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
+                  >
+                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`https://t.me/${TELEGRAM_USERNAME}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_telegram_clicked')}
+                  >
+                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                    Telegram
+                  </a>
+                </div>
+                <p className="text-xs text-stone-400 text-center font-medium">
+                  {PHONE_MAIN} • Available 24/7 • No account needed
+                </p>
+
+                <div className="relative mt-6 mb-4">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t-2 border-stone-200"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Want mood trends & insights?</span>
+                  </div>
+                </div>
                 <button
                   onClick={handleAppStoreClick}
-                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-3 group"
+                  className="w-full px-6 py-4 bg-white text-stone-900 rounded-xl font-bold text-sm border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 flex items-center justify-center gap-3"
                 >
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                   </svg>
-                  Download on App Store
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  Get the App — Free
                 </button>
-                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
-                  <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to download • No credit card required
+                <p className="text-xs text-stone-400 text-center mt-2 font-medium">
+                  Mood charts, pattern detection, Apple Health sync
                 </p>
-              </>
-            ) : (
-              <>
+              </motion.div>
+            </>
+          ) : (
+            <>
+              {/* Desktop: web dashboard primary, messaging secondary */}
+              <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto">
                 <button
                   onClick={() => {
                     posthog.capture('journaling_page_web_app_clicked');
@@ -201,63 +255,62 @@ export default function JournalingPage() {
                 <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
                   <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to use • No credit card required
                 </p>
-              </>
-            )}
-          </motion.div>
+              </motion.div>
 
-          {/* --- NO APP? CALL/TEXT/WHATSAPP --- */}
-          <motion.div variants={fadeIn} className="mb-16 max-w-lg mx-auto">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                <div className="w-full border-t-2 border-stone-200"></div>
-              </div>
-              <div className="relative flex justify-center">
-                <span className="bg-[#FAF9F6] px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Or skip the app entirely</span>
-              </div>
-            </div>
-            <p className="text-stone-600 font-medium mt-4 mb-5 text-center">
-              Don't want to download anything? Just reach out directly — journal by calling, texting, or messaging us.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
-              <a
-                href={isMobile ? `tel:${PHONE_MAIN}` : `tel:${PHONE_MAIN}`}
-                className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                onClick={() => posthog.capture('journaling_page_call_clicked')}
-              >
-                <Phone className="w-4 h-4" /> Call
-              </a>
-              <a
-                href={isMobile ? `sms:${PHONE_MAIN}` : `sms:${PHONE_MAIN}`}
-                className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                onClick={() => posthog.capture('journaling_page_text_clicked')}
-              >
-                <MessageSquare className="w-4 h-4" /> Text
-              </a>
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
-              >
-                <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
-                WhatsApp
-              </a>
-              <a
-                href={`https://t.me/${TELEGRAM_USERNAME}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:shadow-[4px_4px_0px_0px_#15638a] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                onClick={() => posthog.capture('journaling_page_telegram_clicked')}
-              >
-                <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-                Telegram
-              </a>
-            </div>
-            <p className="text-xs text-stone-400 text-center mt-3 font-medium">
-              {PHONE_MAIN} • Available 24/7 • No account needed
-            </p>
-          </motion.div>
+              <motion.div variants={fadeIn} className="mb-16 max-w-lg mx-auto">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t-2 border-stone-200"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Or just text or call</span>
+                  </div>
+                </div>
+                <p className="text-stone-600 font-medium mt-4 mb-5 text-center">
+                  No app, no account — just call, text, or message to start journaling.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                  >
+                    <Phone className="w-4 h-4" /> Call
+                  </a>
+                  <a
+                    href={`sms:${PHONE_MAIN}`}
+                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_text_clicked')}
+                  >
+                    <MessageSquare className="w-4 h-4" /> Text
+                  </a>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
+                  >
+                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`https://t.me/${TELEGRAM_USERNAME}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:shadow-[4px_4px_0px_0px_#15638a] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_telegram_clicked')}
+                  >
+                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                    Telegram
+                  </a>
+                </div>
+                <p className="text-xs text-stone-400 text-center mt-3 font-medium">
+                  {PHONE_MAIN} • Available 24/7 • No account needed
+                </p>
+              </motion.div>
+            </>
+          )}
 
           {/* App Screenshots */}
         </div>
@@ -379,10 +432,10 @@ export default function JournalingPage() {
                 <Sparkles className="w-4 h-4" /> AI Intelligence
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                Remember Everything
+                "Wait, When Did I Start Feeling This Way?"
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                Never lose track of important moments. Our AI organizes and surfaces your memories when you need them most.
+                Just ask. Empath remembers every entry, every thought, every feeling — and finds it in seconds.
               </p>
             </div>
 
@@ -490,10 +543,10 @@ export default function JournalingPage() {
                     <BarChart3 className="w-4 h-4" /> Analytics
                   </div>
                   <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                    Track Your Mental Health
+                    See What Actually Affects Your Mood
                   </h2>
                   <p className="text-lg text-stone-600 mb-8 leading-relaxed font-medium">
-                    Beautiful visualizations of your emotional journey. Understand what affects your mood and make informed decisions about your wellbeing.
+                    You'll notice things like "I'm happier on days I walk" or "work deadlines spike my anxiety every Thursday." It's your data, shown simply.
                   </p>
                   
                   <div className="space-y-4 mb-8">
@@ -537,10 +590,10 @@ export default function JournalingPage() {
                 <Heart className="w-4 h-4" /> Holistic Health
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                Connect Mind & Body
+                Know Why You Feel Off
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                Integrate health data from Apple Health to understand how your physical wellbeing affects your mental state.
+                Empath reads your Apple Health data and connects the dots. Bad sleep? Skipped workouts? You'll see exactly what's dragging your mood down.
               </p>
             </div>
 
@@ -708,13 +761,13 @@ export default function JournalingPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-100 text-purple-800 border-2 border-purple-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#9333ea]">
-                <Sparkles className="w-4 h-4" /> Pro Feature
+                <Sparkles className="w-4 h-4" /> Also In Therapy?
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                Supercharge Your Therapy
+                Make Every Session Count
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                Connect with your therapist to experience the most in-depth way to share your experiences and unlock deeper insights together.
+                If you see a therapist, Empath can share your week with them automatically. No more "so, what happened?" — your sessions start where they matter.
               </p>
             </div>
 
@@ -923,12 +976,12 @@ export default function JournalingPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                quote: "This app has completely changed how I approach therapy. My therapist actually knows what happened in my week now.",
+                quote: "I've tried 5 journaling apps and quit every one. Empath stuck because I just text when something's on my mind — no opening an app, no blank page.",
                 author: "Alex M.",
                 role: "User since 2024"
               },
               {
-                quote: "The AI insights are incredible. It spotted patterns I never would have seen on my own.",
+                quote: "Empath showed me I get anxious every Sunday night before work. I never connected those dots in 3 years of journaling on paper.",
                 author: "Jordan K.",
                 role: "User since 2023"
               },
@@ -992,10 +1045,10 @@ export default function JournalingPage() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight font-serif">
-              Start Understanding Yourself Today
+              Your Next Journal Entry Is a Phone Call Away
             </h2>
             <p className="text-xl text-stone-300 mb-12 leading-relaxed font-medium">
-              Join thousands using Empath to capture thoughts, track patterns, and grow faster.
+              No app to learn. No blank page to stare at. Just call, text, or message — and start noticing patterns in days, not months.
             </p>
             
             {isMobile ? (

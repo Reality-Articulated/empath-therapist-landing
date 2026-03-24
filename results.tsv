@@ -1,0 +1,8 @@
+round	score	status	description
+0	50%	baseline	6/12 checks passing. Fails: buzzwords, generic headlines, no proof numbers, corporate tone, vague testimonial, repetitive structure
+1	67%	keep	Rewrote Feature 6 headline+body: removed buzzwords (Supercharge/unlock), added concrete number (167 hours), conversational tone. +3 checks
+2	75%	keep	Rewrote Jordan K testimonial with specific pattern (Sunday night anxiety) and concrete comparison (3 years paper journaling). +1 check
+3	83%	keep	Feature 3 headline+body: corporate ("Beautiful visualizations") → conversational with examples ("happier on days I walk"). +2 checks (tone + benefit headline)
+4	92%	keep	Feature 4 headline+body: vague ("Connect Mind & Body") → specific ("Know Why You Feel Off") with concrete examples. +1 check
+5	92%	keep	Feature 2 headline: declarative ("Remember Everything") → quoted question ("What did my therapist say about that?"). Adds tonal variety across sections
+6	92%	keep	Final CTA: vague aspiration ("Start Understanding Yourself Today") → specific ("Your Next Journal Entry Is a Phone Call Away") with pain points and timeframe
