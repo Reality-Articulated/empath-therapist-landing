@@ -8,6 +8,7 @@ import img3 from '../media/IMG_4017.jpg';
 import webImg1 from '../media/web/image1.png';
 import webImg2 from '../media/web/image2.png';
 import toast, { Toaster } from 'react-hot-toast';
+import SEO from '../components/SEO';
 import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import { Link } from 'react-router-dom';
@@ -430,8 +431,13 @@ export default function ClientInfoPage() {
 
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+      <SEO
+        title="Why Empath? | Get More From Your Therapy"
+        description="Empath helps therapy clients capture insights between sessions so their therapist sees the full picture. Better context, better sessions, better outcomes."
+        path="/whyempath"
+      />
       <Toaster position="top-center" />
-      
+
       {/* Noise Texture Overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-multiply" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>

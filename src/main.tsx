@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import './index.css';
 import { PostHogProvider } from 'posthog-js/react';
@@ -37,7 +38,9 @@ createRoot(document.getElementById('root')!).render(
         apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
         options={options}
       >
+        <HelmetProvider>
           <App />
+        </HelmetProvider>
       </PostHogProvider>
     </BrowserRouter>
   </StrictMode>

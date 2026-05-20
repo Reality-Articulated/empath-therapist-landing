@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import howitworksPng from '../../public/howitworks.png';
 import howitworksWebp from '../../public/optimized/howitworks.webp';
+import SEO from '../components/SEO';
 
 import { 
   Brain, 
@@ -143,6 +144,12 @@ export default function HomePage() {
 
   return (
   <div className="flex-grow overflow-x-hidden">
+      <SEO
+        title="Empath for Therapists | Between-Session AI Insights"
+        description="Empath captures what happens between sessions so therapists can see how clients are doing in real life — not just what they remember to share. AI-powered insights, secure and HIPAA-aligned."
+        path="/therapist"
+        keywords="therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management"
+      />
       {/* Hero Section */}
       <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">

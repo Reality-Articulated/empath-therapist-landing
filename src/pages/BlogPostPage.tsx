@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { blogPosts } from '../data/blogPosts';
+import SEO from '../components/SEO';
 
 function toAnchorId(value: string) {
   return value
@@ -106,17 +107,6 @@ export default function BlogPostPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!post) {
-      document.title = 'Article Not Found | Empath Blog';
-      return;
-    }
-    document.title = post.seoTitle;
-    const description = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-    if (description) {
-      description.content = post.metaDescription;
-    }
   }, [post, slug]);
 
   const schemas = useMemo(() => {
@@ -169,6 +159,12 @@ export default function BlogPostPage() {
   if (!post) {
     return (
       <div className="flex-grow bg-white pt-24 pb-20">
+        <SEO
+          title="Article Not Found | Empath Blog"
+          description="This article may have moved or is still being prepared."
+          path={`/blog/${slug ?? ''}`}
+          noIndex
+        />
         <div className="container mx-auto px-4 max-w-3xl text-center">
           <h1 className="text-2xl font-bold text-slate-900 mb-3">Article not found</h1>
           <p className="text-slate-600 mb-6">
@@ -188,6 +184,13 @@ export default function BlogPostPage() {
 
   return (
     <div className="flex-grow">
+      <SEO
+        title={post.seoTitle}
+        description={post.metaDescription}
+        path={`/blog/${post.slug}`}
+        ogType="article"
+        keywords={[post.keyword, post.category, 'mental health'].join(', ')}
+      />
       {schemas.article && (
         <script
           type="application/ld+json"

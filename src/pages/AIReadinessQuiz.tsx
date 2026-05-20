@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
+import SEO from '../components/SEO';
 
 // Quiz questions with scoring - professional tone for clinicians
 const questions = [
@@ -239,6 +240,11 @@ export default function AIReadinessQuiz() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] selection:bg-blue-100">
+      <SEO
+        title="AI Readiness Quiz for Therapists | Empath"
+        description="A quick assessment to see where your practice stands on adopting AI tools — and what to do next."
+        path="/quiz"
+      />
       <Toaster position="top-center" />
 
       {/* Subtle background pattern */}

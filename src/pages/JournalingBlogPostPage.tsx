@@ -17,6 +17,7 @@ import {
 import { journalingBlogPosts } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
+import SEO from '../components/SEO';
 
 function toAnchorId(value: string) {
   return value
@@ -163,17 +164,6 @@ export default function JournalingBlogPostPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!post) {
-      document.title = 'Article Not Found | Empath Journaling Blog';
-      return;
-    }
-    document.title = post.seoTitle;
-    const description = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-    if (description) {
-      description.content = post.metaDescription;
-    }
   }, [post, slug]);
 
   const schemas = useMemo(() => {
@@ -228,6 +218,12 @@ export default function JournalingBlogPostPage() {
   if (!post) {
     return (
       <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans pt-32 pb-20">
+        <SEO
+          title="Article Not Found | Empath Journaling Blog"
+          description="This article may have moved or is still being prepared."
+          path={`/app/blog/${slug ?? ''}`}
+          noIndex
+        />
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto bg-white rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-12 text-center">
             <h1 className="text-3xl font-black text-stone-900 mb-4 font-serif">
@@ -252,6 +248,13 @@ export default function JournalingBlogPostPage() {
 
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+      <SEO
+        title={post.seoTitle}
+        description={post.metaDescription}
+        path={`/app/blog/${post.slug}`}
+        ogType="article"
+        keywords={[post.keyword, post.category, 'journaling'].join(', ')}
+      />
       {/* Noise Texture */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-multiply"

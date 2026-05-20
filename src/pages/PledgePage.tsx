@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function PledgePage() {
     const [showPledge, setShowPledge] = useState(false);
@@ -10,6 +11,11 @@ export default function PledgePage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <SEO
+        title="Our Pledge | Empath"
+        description="Empath's commitment to user privacy, mental health ethics, and responsible AI."
+        path="/pledge"
+      />
       {/* Hero Section */}
       <div className="relative h-screen flex flex-col items-center justify-center text-center">
         <div className="absolute inset-0 z-0">

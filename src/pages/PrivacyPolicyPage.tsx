@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUp, ChevronLeft, FileText, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function PrivacyPolicyPage() {
   const [showScrollTop, setShowScrollTop] = React.useState(false);
@@ -24,6 +25,11 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-slate-50 to-white pt-16 pb-24">
+      <SEO
+        title="Privacy Policy | Empath"
+        description="How Empath collects, uses, and protects your data. HIPAA-aligned practices, encryption, and user-controlled privacy settings."
+        path="/privacy"
+      />
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-blue-50 to-transparent opacity-70"></div>
       <div className="absolute top-0 right-0 w-32 h-32 md:w-64 md:h-64 bg-blue-100 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl opacity-30"></div>

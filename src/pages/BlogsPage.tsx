@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
+import SEO from '../components/SEO';
 
 function getCategoryBadgeColor(category: string) {
   const styles: Record<string, string> = {
@@ -79,6 +80,11 @@ export default function BlogsPage() {
 
   return (
     <div className="flex-grow">
+      <SEO
+        title="Empath Blog | Research & Practice Insights for Therapists"
+        description="Evidence-based articles on between-session data, therapeutic alliance, AI in clinical practice, and the science of therapy outcomes."
+        path="/blog"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}

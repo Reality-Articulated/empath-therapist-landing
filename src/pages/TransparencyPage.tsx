@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 interface AIProvider {
   name: string;
@@ -251,6 +252,12 @@ const TransparencyPage: React.FC = () => {
   );
 
   return (
+    <>
+      <SEO
+        title="AI Transparency | Empath"
+        description="Which AI models Empath uses, what data they see, and the BAAs that protect your information."
+        path="/transparency"
+      />
     <AnimatePresence mode="wait">
       {isLoading ? (
         <LoadingSpinner key="loading" />
@@ -1180,6 +1187,7 @@ const TransparencyPage: React.FC = () => {
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 };
 

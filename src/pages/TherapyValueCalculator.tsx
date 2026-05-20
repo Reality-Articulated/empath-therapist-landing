@@ -4,6 +4,7 @@ import { ChevronDown, CheckCircle, Shield, Phone, Download } from 'lucide-react'
 import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
+import SEO from '../components/SEO';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -186,8 +187,13 @@ export default function TherapyValueCalculator() {
   // Main calculator page
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Therapy Value Calculator | Empath"
+        description="See how much more value you can get from each therapy session by capturing what happens between sessions."
+        path="/calculator"
+      />
       <Toaster position="top-center" />
-      
+
       {/* Simple header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center">

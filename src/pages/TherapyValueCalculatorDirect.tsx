@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
+import SEO from '../components/SEO';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -89,6 +90,12 @@ export default function TherapyValueCalculatorDirect() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-teal-50/30 to-white flex flex-col items-center justify-center py-12 px-4">
+      <SEO
+        title="Therapy Value Calculator | Empath"
+        description="Quick estimate of the value Empath adds to each therapy session."
+        path="/calculator-direct"
+        noIndex
+      />
       {/* Invite Modal */}
       {showInviteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">

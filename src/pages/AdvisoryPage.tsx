@@ -3,6 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ChevronRight, X, TrendingUp, Users, Lightbulb, BarChart3 } from 'lucide-react';
 import { ApplicationForm } from '../components/ApplicationForm';
+import SEO from '../components/SEO';
 
 // Animation variants
 const fadeIn = {
@@ -187,6 +188,11 @@ export default function AdvisoryPage() {
 
   return (
     <div className="flex-grow overflow-hidden pt-20">
+      <SEO
+        title="Clinical Advisory Board | Empath for Therapists"
+        description="Join Empath's clinical advisory board. Help shape the future of between-session data capture and AI-driven clinical insights alongside leading therapists and researchers."
+        path="/advisory"
+      />
       {/* Hero Section */}
       <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">

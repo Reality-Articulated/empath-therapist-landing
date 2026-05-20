@@ -4,6 +4,7 @@ import { ArrowRight, Search } from 'lucide-react';
 import { journalingBlogPosts } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
+import SEO from '../components/SEO';
 
 function getCategoryBadgeColor(category: string) {
   const styles: Record<string, string> = {
@@ -86,6 +87,11 @@ export default function JournalingBlogsPage() {
 
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900">
+      <SEO
+        title="Journaling Blog | Empath - Tips, Reviews & Guides"
+        description="Guides to journaling apps, mood tracking, mental wellness, and getting more out of your daily reflection practice."
+        path="/app/blog"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}

@@ -15,6 +15,7 @@ import {
   Smartphone,
   Heart,
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const evidenceSources = [
   {
@@ -233,6 +234,11 @@ export default function SciencePage() {
 
   return (
     <div className="flex-grow">
+      <SEO
+        title="The Science Behind Empath | Research-Backed Therapy Insights"
+        description="Empath is built on decades of psychotherapy research — therapeutic alliance, between-session change, sudden gains, homework effects. See the studies that inform our approach."
+        path="/science"
+      />
       {/* Header */}
       <div className="border-b border-slate-200 bg-white">
         <div className="container mx-auto px-4 max-w-5xl py-16 md:py-24">

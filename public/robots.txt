@@ -2,5 +2,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap location (when one becomes available)
-# Sitemap: https://yoursite.com/sitemap.xml 
+Sitemap: https://www.empathdash.com/sitemap.xml
