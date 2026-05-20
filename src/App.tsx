@@ -60,13 +60,14 @@ function App() {
       ...adParams
     });
   }, [location]);
-  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/about-atman', '/whyempath', '/quiz'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<JournalingPage />} />
+        <Route path="/therapist" element={<HomePage />} />
         <Route path="/advisory" element={<AdvisoryPage />} />
         <Route path="/atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
         <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
