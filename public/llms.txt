@@ -1,0 +1,42 @@
+# Empath
+
+> Empath is "the journal you won't quit" — an AI journaling and memory app that lives where you already are. Call a number, send a text, drop a voice note on WhatsApp or Telegram, or use the iOS app. Empath transcribes, tracks mood, surfaces patterns, and builds a searchable memory of your inner life over time. Empath is operated by Reality Articulated Inc.
+
+The core insight: most journaling apps fail because they require opening another app. Empath removes that friction by working over the channels you already use — phone calls, SMS, WhatsApp, Telegram, and iOS. Entries are transcribed, analyzed for sentiment and themes, and stitched into a growing personal memory you can query and reflect on. Empath also offers an optional therapist platform that lets clinicians see between-session patterns from clients who choose to share, but the journaling app stands on its own.
+
+## Empath the journaling app
+
+- [Empath app](https://www.empathdash.com/) and [/app](https://www.empathdash.com/app): The product home. Features include phone-call journaling, SMS/WhatsApp/Telegram journaling, AI voice transcription, mood tracking, pattern detection, and AI-generated insights.
+- [Why Empath?](https://www.empathdash.com/whyempath): Why people stick with Empath when other journals fail — friction-free capture, ambient input channels, durable memory.
+- [Journaling Blog](https://www.empathdash.com/app/blog): Guides on journaling habits, app reviews, and mental wellness practices.
+
+### What makes Empath different
+
+- **Call to journal**: Dial a number and talk. Empath transcribes and stores the entry.
+- **Message anywhere**: Journal via SMS, WhatsApp, or Telegram — no app switching.
+- **Memories**: Entries accumulate into a searchable, queryable memory of your patterns, themes, and history.
+- **Insights**: AI surfaces mood trends, recurring topics, and reflections over time.
+- **Privacy**: End-to-end encryption, HIPAA-compliant, never used to train third-party AI models.
+- **Free**: Core journaling, transcription, mood tracking, and insights are free.
+
+## Empath for therapists (additional offering)
+
+Empath also offers an optional platform for therapists whose clients use Empath, giving clinicians a between-session view of how clients are doing. This is a separate product available to credentialed therapists; it does not affect how individual journaling users experience the app.
+
+- [Empath for Therapists](https://www.empathdash.com/therapist): Therapist product overview.
+- [The Science](https://www.empathdash.com/science): Research underpinning the therapist offering — therapeutic alliance, sudden gains, homework effects.
+- [Clinical Advisory Board](https://www.empathdash.com/advisory): For therapists who want to shape the product.
+- [Therapist Blog](https://www.empathdash.com/blog): Evidence-based articles for clinicians.
+
+## Policies and transparency
+
+- [AI Transparency](https://www.empathdash.com/transparency): AI models used, what data they see, BAAs.
+- [Privacy Policy](https://www.empathdash.com/privacy)
+- [Terms of Service](https://www.empathdash.com/terms)
+- [Our Pledge](https://www.empathdash.com/pledge): Ethical commitments on privacy and responsible AI.
+
+## Contact
+
+- Email: karan@myempath.co
+- X / Twitter: https://x.com/my_empath
+- LinkedIn: https://www.linkedin.com/company/reality-articulated/

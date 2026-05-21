@@ -142,6 +142,45 @@ export default function HomePage() {
     }
   ];
 
+  const therapistFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How does Empath protect client privacy?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'All data is encrypted, HIPAA-compliant, and only accessible to the therapist and client. Clients have full control over what they share.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Will this add to my workload?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No, Empath is designed to save you time. The dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do clients respond to using the app?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Early feedback suggests clients appreciate the opportunity to reflect between sessions and feel more engaged in their therapy journey.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What makes Empath different from other therapy tools?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Empath gives therapists computational parity with AI — instant data processing and recall — so the human qualities of the clinician become the deciding factor rather than an afterthought.',
+        },
+      },
+    ],
+  };
+
   return (
   <div className="flex-grow overflow-x-hidden">
       <SEO
@@ -149,6 +188,10 @@ export default function HomePage() {
         description="Empath captures what happens between sessions so therapists can see how clients are doing in real life — not just what they remember to share. AI-powered insights, secure and HIPAA-aligned."
         path="/therapist"
         keywords="therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(therapistFaqSchema) }}
       />
       {/* Hero Section */}
       <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">

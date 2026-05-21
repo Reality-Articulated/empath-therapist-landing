@@ -116,6 +116,69 @@ export default function JournalingPage() {
     window.open(APP_STORE_URL, '_blank', 'noopener,noreferrer');
   };
 
+  const appFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is Empath really free?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Empath is completely free to download and use. All core journaling features, AI transcription, mood tracking, and insights are included at no cost.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How does the AI work?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Empath uses natural language processing to transcribe your voice, analyze sentiment, identify patterns, and generate insights. All processing is secure and HIPAA compliant.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I use Empath without a therapist?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Empath works as a standalone journaling and self-reflection tool. You can connect with a therapist later if you choose.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is my data private and secure?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. All data is encrypted end-to-end, HIPAA compliant, and never used to train AI models. You control who has access and can delete everything at any time.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is Empath available on Android?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Empath is currently iOS-only, but you can journal via phone call or text message from any device. An Android app is in development.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I connect with my therapist?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'If your therapist uses Empath, they can send you an invite. If not, you can journal privately and share your insights manually, or invite them to join Empath.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I export my journals?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. You can export all your journals, insights, and data at any time. Your data belongs to you.',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEO
@@ -123,6 +186,10 @@ export default function JournalingPage() {
         description="Transform your mental wellness with Empath's AI-powered journaling and mood tracking. Get personalized insights, track your emotional patterns, and improve your mental health with intelligent daily reflections."
         path="/app"
         keywords="AI journaling app, mood tracking, mental health app, emotional wellness, AI journal, mental wellness tracker, mood diary, daily reflection app"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appFaqSchema) }}
       />
       <Toaster position="top-center" />
 
