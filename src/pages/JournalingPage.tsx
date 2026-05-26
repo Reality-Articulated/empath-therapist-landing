@@ -122,10 +122,18 @@ export default function JournalingPage() {
     mainEntity: [
       {
         '@type': 'Question',
+        name: 'Do I need to download the app to journal?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. You can journal entirely by text, WhatsApp, or phone call — no app and no account required. The iOS app is optional: it is where you read back your entries, search past moments, and see your mood patterns over time.',
+        },
+      },
+      {
+        '@type': 'Question',
         name: 'Is Empath really free?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. Empath is completely free to download and use. All core journaling features, AI transcription, mood tracking, and insights are included at no cost.',
+          text: 'Yes. Empath is completely free to use. All core journaling — by text, call, or app — plus AI transcription, mood tracking, and insights are included at no cost.',
         },
       },
       {

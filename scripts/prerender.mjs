@@ -38,15 +38,15 @@ const staticRoutes = [
   {
     path: '/',
     canonicalPath: '/app',
-    title: 'Empath - AI Journaling & Mood Tracking App',
-    description: "Transform your mental wellness with Empath's AI-powered journaling and mood tracking. Get personalized insights, track your emotional patterns, and improve your mental health with intelligent daily reflections.",
-    keywords: 'AI journaling app, mood tracking, mental health app, emotional wellness, AI journal, mental wellness tracker, mood diary, daily reflection app',
+    title: 'Empath - Journaling As Easy As Texting a Friend',
+    description: 'Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time.',
+    keywords: 'journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call',
   },
   {
     path: '/app',
-    title: 'Empath - AI Journaling & Mood Tracking App',
-    description: "Transform your mental wellness with Empath's AI-powered journaling and mood tracking. Get personalized insights, track your emotional patterns, and improve your mental health with intelligent daily reflections.",
-    keywords: 'AI journaling app, mood tracking, mental health app, emotional wellness, AI journal, mental wellness tracker, mood diary, daily reflection app',
+    title: 'Empath - Journaling As Easy As Texting a Friend',
+    description: 'Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time.',
+    keywords: 'journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call',
   },
   {
     path: '/therapist',
