@@ -17,7 +17,6 @@ import {
   Calendar,
   Sparkles,
   Lock,
-  Download,
   BarChart3,
   FileText,
   Image as ImageIcon,
@@ -80,6 +79,7 @@ export default function JournalingPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const PHONE_MAIN = '+18883663082';
+  const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
   const WHATSAPP_NUMBER = '16234698978'; // Yap WhatsApp number
   const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
@@ -182,10 +182,10 @@ export default function JournalingPage() {
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEO
-        title="Empath - AI Journaling & Mood Tracking App"
-        description="Transform your mental wellness with Empath's AI-powered journaling and mood tracking. Get personalized insights, track your emotional patterns, and improve your mental health with intelligent daily reflections."
+        title="Empath - Journaling As Easy As Texting a Friend"
+        description="Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
         path="/app"
-        keywords="AI journaling app, mood tracking, mental health app, emotional wellness, AI journal, mental wellness tracker, mood diary, daily reflection app"
+        keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call"
       />
       <script
         type="application/ld+json"
@@ -231,16 +231,16 @@ export default function JournalingPage() {
         variants={staggerContainer}
       >
         <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
-          <motion.h1 variants={fadeIn} className="text-6xl md:text-8xl font-black tracking-tighter text-stone-900 mb-8 leading-[0.95] font-serif">
-            The Journal<br/>
-            <span className="relative inline-block px-4">
+          <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-stone-900 mb-8 leading-[1.1] font-serif">
+            Journaling, as easy as{' '}
+            <span className="relative inline-block px-3 whitespace-nowrap">
               <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
-              <span className="relative text-white">You Won't Quit.</span>
+              <span className="relative text-white">texting a friend.</span>
             </span>
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            Because it lives in your texts, calls, WhatsApp, and Telegram — not another app you'll forget to open.
+            When something's on your mind, just text or call — the way you already do with a friend. Empath turns it into a journal that reveals your patterns over time.
           </motion.p>
 
           {isMobile ? (
@@ -314,55 +314,40 @@ export default function JournalingPage() {
             </>
           ) : (
             <>
-              {/* Desktop: web dashboard primary, messaging secondary */}
-              <motion.div variants={fadeIn} className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto">
-                <button
-                  onClick={() => {
-                    posthog.capture('journaling_page_web_app_clicked');
-                    window.location.href = WEB_APP_URL;
-                  }}
-                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-3 group"
-                >
-                  <Brain className="w-5 h-5" /> Open Web Dashboard
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </button>
-                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
-                  <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free to use • No credit card required
-                </p>
-              </motion.div>
-
+              {/* Desktop: messaging-first CTAs, web dashboard demoted to secondary */}
               <motion.div variants={fadeIn} className="mb-16 max-w-lg mx-auto">
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div className="w-full border-t-2 border-stone-200"></div>
-                  </div>
-                  <div className="relative flex justify-center">
-                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Or just text or call</span>
-                  </div>
-                </div>
-                <p className="text-stone-600 font-medium mt-4 mb-5 text-center">
-                  No app, no account — just call, text, or message to start journaling.
+                <p className="text-stone-600 font-medium mb-4 text-center">
+                  Start journaling right now — call or text. No app to download, no account to create.
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
-                  <a
-                    href={`tel:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_call_clicked')}
-                  >
-                    <Phone className="w-4 h-4" /> Call
-                  </a>
+
+                {/* Primary CTAs — call or text, the way you'd reach a friend */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                   <a
                     href={`sms:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    title={`Text us at ${PHONE_DISPLAY}`}
+                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
                     onClick={() => posthog.capture('journaling_page_text_clicked')}
                   >
-                    <MessageSquare className="w-4 h-4" /> Text
+                    <MessageSquare className="w-5 h-5" /> Text to journal
                   </a>
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    title={`Call us at ${PHONE_DISPLAY}`}
+                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                  >
+                    <Phone className="w-5 h-5" /> Call & just talk
+                  </a>
+                </div>
+
+                {/* Secondary channels */}
+                <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or message us on</p>
+                <div className="grid grid-cols-2 gap-3 w-full">
                   <a
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-3 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
@@ -372,16 +357,36 @@ export default function JournalingPage() {
                     href={`https://t.me/${TELEGRAM_USERNAME}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:shadow-[4px_4px_0px_0px_#15638a] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-3 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:shadow-[4px_4px_0px_0px_#15638a] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_telegram_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                     Telegram
                   </a>
                 </div>
-                <p className="text-xs text-stone-400 text-center mt-3 font-medium">
-                  {PHONE_MAIN} • Available 24/7 • No account needed
+                <p className="text-xs text-stone-400 text-center mt-3 font-medium flex items-center justify-center gap-2">
+                  <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> Available 24/7 • Free • Works from any phone
                 </p>
+
+                {/* Secondary: web dashboard for desktop typers */}
+                <div className="relative mt-7 mb-4">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t-2 border-stone-200"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">Prefer typing at your desk?</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    posthog.capture('journaling_page_web_app_clicked');
+                    window.location.href = WEB_APP_URL;
+                  }}
+                  className="w-full px-6 py-3.5 bg-white text-stone-900 rounded-xl font-bold text-sm border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 flex items-center justify-center gap-2 group"
+                >
+                  <Brain className="w-4 h-4" /> Open the web dashboard
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
               </motion.div>
             </>
           )}
@@ -420,13 +425,13 @@ export default function JournalingPage() {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-100 text-purple-800 border-2 border-purple-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-6 shadow-[4px_4px_0px_0px_#9333ea]">
-                    <Mic className="w-4 h-4" /> Voice Journaling
+                    <MessageSquare className="w-4 h-4" /> Text, WhatsApp, or Call
                   </div>
                   <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                    Just Call & Talk
+                    Use the Apps You Already Open
                   </h2>
                   <p className="text-lg text-stone-600 mb-8 leading-relaxed font-medium">
-                    Your AI journaling assistant is always ready. Call or text Empath anytime to capture thoughts, feelings, or moments. No typing required.
+                    The moment a thought hits, fire off a text or voice note — or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.
                   </p>
                   
                   <div className="space-y-6 mb-8">
@@ -509,7 +514,7 @@ export default function JournalingPage() {
                 "Wait, When Did I Start Feeling This Way?"
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                Just ask. Empath remembers every entry, every thought, every feeling — and finds it in seconds.
+                Open the app and just ask. Every text, call, and thought you've sent is remembered — and surfaced in seconds.
               </p>
             </div>
 
@@ -970,10 +975,10 @@ export default function JournalingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
-                Get Started in Minutes
+                Capture by Text or Call. Reflect in the App.
               </h2>
               <p className="text-lg text-stone-600 font-medium">
-                No complicated setup. Just download and start journaling.
+                No setup, no new habit to build. Journal the way you already talk to friends.
               </p>
             </div>
 
@@ -981,21 +986,21 @@ export default function JournalingPage() {
               {[
                 {
                   step: '01',
-                  icon: <Download className="w-8 h-8 text-white" />,
-                  title: 'Download the App',
-                  desc: 'Free on the App Store. Set up your account in 30 seconds.'
+                  icon: <MessageSquare className="w-8 h-8 text-white" />,
+                  title: 'Text or Call',
+                  desc: "Whenever a thought or feeling shows up, text, WhatsApp, or call Empath — just like you'd message a friend. No app, no account, no blank page."
                 },
                 {
                   step: '02',
-                  icon: <Mic className="w-8 h-8 text-white" />,
-                  title: 'Start Journaling',
-                  desc: 'Call, text, or use the app. Capture thoughts instantly, anytime.'
+                  icon: <Sparkles className="w-8 h-8 text-white" />,
+                  title: 'Empath Captures It',
+                  desc: 'Every message and call becomes a journal entry — transcribed, organized, and saved automatically. You just keep living your life.'
                 },
                 {
                   step: '03',
-                  icon: <Sparkles className="w-8 h-8 text-white" />,
-                  title: 'Gain Insights',
-                  desc: 'Let AI organize your thoughts and reveal patterns automatically.'
+                  icon: <BarChart3 className="w-8 h-8 text-white" />,
+                  title: 'Open the App to Reflect',
+                  desc: 'When you want to look back, revisit a memory, or see your mood patterns and trends, it’s all waiting for you in the app.'
                 }
               ].map((step, i) => (
                 <div key={i} className="text-center">
@@ -1020,8 +1025,8 @@ export default function JournalingPage() {
           <div className="bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">iOS app available</p>
-              <h3 className="text-2xl md:text-3xl font-black mb-2">On iPhone? Download Empath</h3>
-              <p className="text-stone-200 font-medium max-w-xl">Keep journaling on the go. Voice, text, photos, and instant insights — all in the app.</p>
+              <h3 className="text-2xl md:text-3xl font-black mb-2">Want to Look Back? Get the App</h3>
+              <p className="text-stone-200 font-medium max-w-xl">You journal by text and call — the app is where you read it all back, search past entries, and watch your mood patterns unfold.</p>
             </div>
             <button
               onClick={handleAppStoreClick}
@@ -1082,9 +1087,13 @@ export default function JournalingPage() {
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-black text-center text-stone-900 mb-12 font-serif">Common Questions</h2>
           <div className="space-y-4">
-            <FAQItem 
-              question="Is Empath really free?" 
-              answer="Yes! Empath is completely free to download and use. All core journaling features, AI transcription, mood tracking, and insights are included at no cost." 
+            <FAQItem
+              question="Do I need to download the app to journal?"
+              answer="Nope. You can journal entirely by text, WhatsApp, or phone call — no app and no account required. The iOS app is optional: it's where you read back your entries, search past moments, and see your mood patterns over time."
+            />
+            <FAQItem
+              question="Is Empath really free?"
+              answer="Yes! Empath is completely free to use. All core journaling — by text, call, or app — plus AI transcription, mood tracking, and insights are included at no cost."
             />
             <FAQItem 
               question="How does the AI work?" 
@@ -1119,10 +1128,10 @@ export default function JournalingPage() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight font-serif">
-              Your Next Journal Entry Is a Phone Call Away
+              Your Next Journal Entry Is One Text Away
             </h2>
             <p className="text-xl text-stone-300 mb-12 leading-relaxed font-medium">
-              No app to learn. No blank page to stare at. Just call, text, or message — and start noticing patterns in days, not months.
+              No app to learn, no blank page to stare at. Just text or call the way you already do with a friend — and start seeing your patterns in days, not months.
             </p>
             
             {isMobile ? (
@@ -1136,21 +1145,35 @@ export default function JournalingPage() {
                 Download Free on App Store
               </button>
             ) : (
-              <div className="inline-flex flex-col items-center gap-3 px-8 py-6 bg-white text-stone-900 rounded-xl font-bold text-lg border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
+              <div className="inline-flex flex-col items-center gap-4 px-8 py-7 bg-white text-stone-900 rounded-xl border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
+                <p className="text-sm font-bold uppercase tracking-wider text-stone-500">No app, no account — just say hi</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                  <a
+                    href={`sms:${PHONE_MAIN}`}
+                    title={`Text us at ${PHONE_DISPLAY}`}
+                    className="px-5 py-4 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                    onClick={() => posthog.capture('final_cta_text_clicked')}
+                  >
+                    <MessageSquare className="w-5 h-5" /> Text to journal
+                  </a>
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    title={`Call us at ${PHONE_DISPLAY}`}
+                    className="px-5 py-4 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                    onClick={() => posthog.capture('final_cta_call_clicked')}
+                  >
+                    <Phone className="w-5 h-5" /> Call & just talk
+                  </a>
+                </div>
                 <button
                   onClick={() => {
                     posthog.capture('final_cta_web_app_clicked');
                     window.location.href = WEB_APP_URL;
                   }}
-                  className="w-full px-4 py-3 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                  className="text-sm font-bold text-stone-500 hover:text-stone-900 transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <Brain className="w-5 h-5" /> Open Web Dashboard
+                  <Brain className="w-4 h-4" /> Prefer to type? Open the web dashboard →
                 </button>
-                <div className="text-center">
-                  <p className="text-sm font-bold text-stone-900">Or text/call to journal</p>
-                  <p className="text-2xl font-mono font-bold">{PHONE_MAIN}</p>
-                  <p className="text-sm text-stone-700 font-medium">Text “Hello” or call to start right away.</p>
-                </div>
               </div>
             )}
 
@@ -1239,15 +1262,33 @@ export default function JournalingPage() {
               <span className="text-stone-900 text-lg">Empath</span>
             </Link>
             <div className="flex-grow"></div>
-            <button
-              onClick={() => {
-                posthog.capture('floating_cta_web_app_clicked');
-                window.location.href = WEB_APP_URL;
-              }}
-              className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
-            >
-              <Brain className="w-4 h-4" /> Try Web App
-            </button>
+            <div className="flex items-center gap-3">
+              <a
+                href={`tel:${PHONE_MAIN}`}
+                title={`Call us at ${PHONE_DISPLAY}`}
+                className="px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition flex items-center gap-2 hidden lg:flex"
+                onClick={() => posthog.capture('floating_cta_call_clicked')}
+              >
+                <Phone className="w-4 h-4" /> Call
+              </a>
+              <a
+                href={`sms:${PHONE_MAIN}`}
+                title={`Text us at ${PHONE_DISPLAY}`}
+                className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
+                onClick={() => posthog.capture('floating_cta_text_clicked')}
+              >
+                <MessageSquare className="w-4 h-4" /> Text to journal
+              </a>
+              <button
+                onClick={() => {
+                  posthog.capture('floating_cta_web_app_clicked');
+                  window.location.href = WEB_APP_URL;
+                }}
+                className="px-4 py-2 text-stone-500 hover:text-stone-900 font-bold transition-colors hidden md:flex items-center gap-1.5 text-sm"
+              >
+                <Brain className="w-4 h-4" /> Web app
+              </button>
+            </div>
           </div>
         </motion.div>
       )}
