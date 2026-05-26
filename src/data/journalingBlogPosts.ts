@@ -1335,5 +1335,908 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
         'Export capabilities vary. Day One supports PDF and JSON export on the free tier. Notion allows export in multiple formats. Apple Journal currently has no export feature, which is a significant limitation. Always check export options before committing to an app, because your journal data should belong to you regardless of whether you keep using the app.',
     },
   ],
+},
+// Article 11
+{
+  id: 'j11',
+  title: 'Best AI Journaling Apps in 2026: 10 Apps Compared',
+  seoTitle: 'Best AI Journaling Apps 2026: Top 10 Reviewed & Compared | Empath',
+  metaDescription:
+    'Compare the 10 best AI journaling apps of 2026 including Empath, Rosebud, Reflectly, Stoic, Mindsera, and more. Honest reviews of features, privacy, and pricing.',
+  excerpt:
+    'AI journaling has matured into a real category in 2026. Here is an honest comparison of the ten apps worth considering, what each does best, and where each falls short.',
+  author: 'Empath Team',
+  date: 'April 2, 2026',
+  readTime: '18 min read',
+  category: 'App Reviews',
+  slug: 'best-ai-journaling-apps',
+  keyword: 'best AI journaling apps',
+  intro:
+    'AI journaling has gone from a niche experiment to a crowded category in less than three years. As of early 2026, there are more than forty journaling apps marketing some form of artificial intelligence, ranging from simple sentiment tags to fully conversational reflection partners. Research published in the Journal of Medical Internet Research in late 2024 found that digital journaling tools with intelligent feedback mechanisms improved emotional awareness scores by 34% compared to unstructured writing, which helps explain the rush. But not all AI journaling is created equal. Some apps use AI as a marketing label on top of basic mood tracking, while others have built genuinely thoughtful systems for surfacing patterns and prompting deeper reflection. We spent two months testing the ten most credible options across iOS and Android, looking at the quality of insights, privacy posture, voice support, and how each app actually fits into a sustainable journaling habit.',
+  sections: [
+    {
+      heading: 'What Counts as AI Journaling in 2026',
+      body: [
+        'The term AI journaling covers a wider range of behavior than most people realize. At the simplest end, it means an app that runs sentiment analysis on your entry and tags it as positive, negative, or neutral. At the most sophisticated end, it means a system that reads your entries longitudinally, surfaces patterns across weeks and months, generates personalized prompts based on what you have written before, and produces summaries that genuinely help you understand yourself. The gap between these two definitions is enormous, and the marketing language often blurs them.',
+        'A useful filter when evaluating any AI journaling app is to ask three questions. First, does the AI actually read what you wrote, or is it pattern-matching keywords? Second, does it consider your history, or does each entry exist in isolation? Third, does it produce output that changes your behavior, or does it just generate text that looks like insight? Apps that answer yes to all three are rare, and they are the ones worth paying for.',
+        'Privacy posture matters more in AI journaling than in any other software category. You are not just storing data, you are feeding your most intimate thoughts into a language model. The best operators in this space publish clear data-use policies, refuse to train models on user content, and offer encryption that meets healthcare standards. The worst ones bury vague language about improving services deep in their terms of service. Read carefully before you write anything you would not want a stranger to see.',
+        'Finally, consider how the AI fits into your existing practice. Some apps replace the blank page with a chat interface, which works beautifully for people who think through dialogue but feels intrusive to those who prefer monologue. Others sit quietly in the background, only surfacing insights when you ask. There is no objectively best design, but matching the interaction model to your personality is a stronger predictor of sticking with the app than any feature comparison.',
+      ],
+    },
+    {
+      heading: 'Rosebud: The Chat-First Reflection Partner',
+      body: [
+        'Rosebud has become the default reference point for chat-based AI journaling, and for good reason. The interface looks like a messaging app, with the AI playing the role of a curious, gentle reflection partner. You type or speak a thought, and Rosebud responds with a question designed to push you slightly deeper. Over the course of a session, you typically move from surface-level venting to something that feels closer to insight.',
+        'The prompts are designed in consultation with therapists, and the app includes specific frameworks like Internal Family Systems for users interested in parts work. Weekly summaries pull threads across multiple entries, and a mood tracker visualizes emotional trends over time. Rosebud also supports voice input, transcribing spoken entries and feeding them into the same conversational flow as typed messages.',
+        'Pricing sits at roughly $12.99 per month or $89.99 per year, with a limited free tier that allows a handful of sessions to evaluate the experience. The cost is on the higher end of the AI journaling category, which reflects the depth of the conversational model. Users who fully engage with the chat format tend to feel the value, while those who prefer freeform writing often find the constant questioning intrusive.',
+        'Rosebud is at its best for people who already think of journaling as a dialogue with themselves and want a more structured version of that internal conversation. It is less ideal for people who want to vent without interruption or who prefer to do their own pattern-finding. The privacy policy is reasonably clear about not training models on user data, though the entries are stored on Rosebud\'s servers in unencrypted form for the AI to access during sessions.',
+      ],
+    },
+    {
+      heading: 'Empath: Multimodal Voice and Text with Longitudinal Insight',
+      body: [
+        'Empath takes a different architectural bet than most AI journaling apps. Instead of locking the user into a single interaction model, it accepts entries through four channels that all flow into one record: a phone call to a dedicated number, an SMS text conversation, in-app typing, and in-app voice recording. The AI processes everything together, treating a voice note from a Tuesday commute and a typed entry from Saturday morning as parts of the same ongoing story.',
+        'The voice transcription is tuned to preserve emotional nuance rather than just produce clean text. Pauses, pacing, and tone shifts are captured in the underlying record, which the analysis layer uses when generating longitudinal patterns. This matters because research from affective computing labs consistently shows that vocal prosody carries information about emotional state that pure text cannot represent. For users who do a lot of voice journaling, the difference shows up in the quality of weekly summaries.',
+        'Pattern detection runs across weeks and months rather than just within a single entry. The app surfaces recurring themes, identifies emotional triggers that appear across multiple entries, and produces outputs designed to help users prepare for therapy sessions. Empath positions itself explicitly as a complement to therapy rather than a replacement, and the insight format reflects that, with summaries oriented toward what a user might want to discuss with a clinician.',
+        'The free tier is genuinely useful, including voice and text journaling along with AI-powered mood analysis and pattern detection. Premium features expand the depth of analysis and add additional integrations. Pricing for the paid tier is competitive with other AI journaling apps in the category. For users whose primary requirement is voice flexibility paired with longitudinal AI, Empath is one of the few options purpose-built for that combination.',
+      ],
+    },
+    {
+      heading: 'Reflectly and Stoic: Structured Prompts with Lightweight AI',
+      body: [
+        'Reflectly was one of the earliest journaling apps to use machine learning meaningfully, and its design philosophy still holds up. The app guides you through a short daily check-in with mood selection, a few targeted prompts, and AI-generated suggestions for reframing negative thoughts. The visual design is bright and friendly, and the daily structure is forgiving enough that even users who skip several days can re-enter without feeling like they failed.',
+        'The AI in Reflectly is lighter touch than in Rosebud or Empath. It generates suggested reframes and occasional positive reinforcement rather than running deep longitudinal analysis. This is a feature for users who want gentle support without an app that feels like it is studying them. Reflectly Premium runs about $9.99 per month or $59.99 per year, with a functional free tier that includes daily prompts and basic mood tracking.',
+        'Stoic takes the prompt-first approach in a different direction. Rather than building around AI conversation, it structures journaling around philosophical exercises drawn from the Stoic tradition, with quotes from Marcus Aurelius, Seneca, and Epictetus paired with morning and evening reflections. The AI features added in 2024 focus on personalized prompt selection based on which exercises you have engaged with before, rather than generating long-form responses to your entries.',
+        'Both apps work best for users who want a tightly scaffolded experience. Reflectly is the more emotion-forward of the two, while Stoic appeals to people drawn to cognitive frameworks and ancient philosophy. Neither attempts the depth of analysis that Empath or Rosebud offer, which is a deliberate trade-off in favor of simplicity and consistency. For many users, that trade-off is exactly right.',
+      ],
+    },
+    {
+      heading: 'Mindsera and Journey AI: Coaching-Oriented Approaches',
+      body: [
+        'Mindsera positions itself as an AI thinking coach more than a journal. The interface is closer to a focused writing environment than a chat window, with the AI offering structured feedback after you finish an entry rather than interrupting you while you write. The feedback often includes named mental models, cognitive distortions to consider, and suggested follow-up questions. Users who enjoy frameworks like first-principles thinking or stoic dichotomy tend to feel at home in this format.',
+        'The app supports voice transcription and offers character-based personas that frame the feedback in different voices, ranging from a calm coach to a more direct critic. Pricing is roughly $14 per month or $108 per year, putting it in the premium tier of the category. Mindsera is a strong choice for analytically minded users who want their journal to also function as a thinking tool, though its emphasis on frameworks can feel clinical for users seeking emotional processing.',
+        'Journey AI is the artificial intelligence layer added to the long-running Journey journaling app. Rather than building a new product from scratch, the Journey team grafted AI features onto an existing cross-platform journal that already had a large user base. The result is a more traditional journaling experience with optional AI summaries, prompt suggestions, and a coaching feature that asks follow-up questions.',
+        'The advantage of Journey AI is that it does not force you into the chat paradigm. You can write a long entry the way you always have, and the AI features sit alongside as optional enhancements rather than the central interaction. The depth of the AI is more modest than in dedicated AI-first apps, but for users migrating from traditional journaling who want a gentle introduction to AI features, this graduated approach is easier to adopt.',
+      ],
+    },
+    {
+      heading: 'Multimodal AI Journaling: Voice, Text, and Beyond',
+      body: [
+        'The most significant shift in AI journaling in 2026 has been the rise of true multimodal input. Early AI journaling apps were almost entirely text-based, with voice as an afterthought or transcription layer. The newer generation treats voice, text, photos, and even ambient context as first-class inputs that the AI considers together. This matters because the way we process emotion varies by channel, and a journal that can only accept one channel misses information.',
+        'Empath is the most fully realized example of this approach. A user might call the dedicated phone number on a drive home, send a text from the grocery store later that evening, and type a longer reflection before bed. All three entries are stitched into a single ongoing record that the AI analyzes as one continuous narrative. Weekly patterns capture the emotional arc across all three modalities rather than treating each as a separate silo.',
+        'Day One added voice notes and richer media support in its 2024 refresh, though the AI layer remains relatively thin. The app excels at capturing media-rich memories with location, weather, and music metadata, but its analytical features are limited compared to dedicated AI journaling apps. For users who care more about beautifully preserved memories than active analysis, Day One remains the gold standard, with AI as a future direction rather than a present strength.',
+        'Mem.ai is worth noting briefly as a broader personal knowledge tool that some users have adapted for journaling. It uses AI to surface connections across notes, which can be powerful when your journal sits alongside other long-form writing. The trade-off is that Mem is not designed for emotional reflection, so the connections it surfaces are often topical rather than psychological. It is a good choice for users whose journaling overlaps heavily with their broader thinking practice.',
+      ],
+    },
+    {
+      heading: 'Privacy, HIPAA Compliance, and the Trust Question',
+      body: [
+        'When you write an AI journal, you are doing something genuinely new in the history of journaling: you are handing your most private thoughts to a system that processes them on remote servers. This is a real shift, and the privacy posture of the app matters more than for any traditional journal. The best operators in this category have responded by adopting practices that go well beyond standard consumer software.',
+        'Empath holds HIPAA-compliant infrastructure, which is the healthcare-industry standard for protecting sensitive personal information. In practice, this means the same access controls, audit logging, breach notification rules, and data handling practices that apply to electronic medical records also apply to journal entries. Few consumer journaling apps make this commitment, and for users who share insights with a therapist or counselor, the alignment with clinical privacy standards is meaningful. Empath also commits explicitly to never training AI models on user data.',
+        'Other apps in the space vary widely. Rosebud has a clear policy against training on user data and stores entries with standard encryption at rest. Reflectly and Stoic have less detailed disclosures, though both have indicated that user content is not used for model training. Replika, sometimes used informally for journaling, has had a more complicated privacy history, including past incidents involving moderation changes that affected user trust. It is worth treating Replika as a companion app that happens to allow journaling-like interactions rather than as a dedicated journaling tool.',
+        'A practical heuristic when evaluating any AI journaling app is to look for three commitments in plain language: data is encrypted in transit and at rest, user entries are never used to train AI models, and access is restricted through documented controls. If any of these are missing or hedged, treat the app as a draft notebook rather than a long-term home for sensitive material. Your future self will thank you for the caution.',
+      ],
+    },
+    {
+      heading: 'How to Choose the Right AI Journaling App',
+      body: [
+        'Start with your preferred input style. If you naturally think through conversation, Rosebud and Mindsera both lean into that with chat-style interfaces, though they differ in tone. If you think through voice, Empath is the most fully developed multimodal option, with phone calls, texts, and in-app recording all feeding the same record. If you prefer to write long entries and have the AI sit quietly until you want it, Journey AI or Day One with optional AI features are gentler entry points.',
+        'Next, consider how seriously you want to integrate journaling with mental health care. Users who already work with a therapist or counselor often benefit from apps that produce outputs designed for clinical context. Empath\'s longitudinal pattern detection and HIPAA-compliant posture make it the strongest fit for that use case. Apps like Reflectly and Stoic are better positioned as standalone self-care tools, which is also a legitimate fit for many users.',
+        'Budget is real. AI journaling subscriptions cluster between $9.99 and $14.99 per month, with annual discounts that bring the effective cost down meaningfully. Empath\'s free tier is unusually capable for the category, including voice and AI features that competitors often paywall. Rosebud and Mindsera both gate most of their depth behind a paid subscription. Try the free tiers for at least a week before committing to any annual plan.',
+        'Finally, accept that no app is perfect for everyone. The best AI journaling app is the one you actually open three or four times a week for several months. If you find yourself avoiding an app because the AI feels intrusive, switch to one with a quieter interaction model. If you find yourself bored because the AI never says anything interesting, switch to one with more depth. Your journal is yours, and the right tool is the one that disappears into your life rather than the one with the longest feature list.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What is the best AI journaling app in 2026?',
+      answer:
+        'There is no single best app, but Empath, Rosebud, and Mindsera are the strongest options in different categories. Empath leads on multimodal voice and text input with HIPAA-compliant privacy and longitudinal pattern detection. Rosebud is the strongest chat-first reflection partner. Mindsera is the best fit for users who want coaching frameworks and structured feedback. The right choice depends on your preferred interaction style and how integrated you want the tool to be with broader mental health care.',
+    },
+    {
+      question: 'Are AI journaling apps safe for sensitive content?',
+      answer:
+        'Safety varies significantly across the category. The best operators publish clear data-use policies, refuse to train AI models on user content, and offer encryption at rest and in transit. Empath holds HIPAA-compliant infrastructure, which is the same standard used to protect electronic medical records. Always read the privacy policy before writing anything sensitive, and prefer apps that explicitly state user entries are not used for model training.',
+    },
+    {
+      question: 'Can an AI journal replace therapy?',
+      answer:
+        'No. An AI journal is a complement to therapy, not a replacement. It can help you capture thoughts between sessions, notice patterns over time, and arrive at appointments better prepared. It cannot provide diagnosis, crisis intervention, or the nuanced human attunement of a trained clinician. Apps like Empath position their insights specifically to support work with a therapist rather than to substitute for one.',
+    },
+    {
+      question: 'Do AI journaling apps work with voice?',
+      answer:
+        'Most do, but the depth of voice support varies. Empath is built around voice as a first-class input, with phone calls, SMS, and in-app recording all feeding the same record. Rosebud and Mindsera support voice transcription within their chat interfaces. Day One added richer voice notes in 2024, though analysis remains text-driven. If voice is central to how you process emotion, prefer apps that treat it as a primary channel rather than a transcription layer.',
+    },
+    {
+      question: 'How much do AI journaling apps cost?',
+      answer:
+        'Subscriptions typically range from $9.99 to $14.99 per month, with annual plans that reduce the effective cost. Rosebud runs about $12.99 monthly or $89.99 annually. Mindsera is closer to $14 monthly. Reflectly sits at $9.99 monthly with a substantial free tier. Empath offers an unusually capable free tier that includes voice and AI features many competitors paywall, with paid tiers adding deeper analysis.',
+    },
+    {
+      question: 'What is the difference between AI journaling and regular journaling?',
+      answer:
+        'Regular journaling stores your entries and leaves the reflection entirely to you. AI journaling adds an analytical layer that reads your writing, surfaces patterns across entries, generates personalized prompts, and produces summaries that highlight emotional themes. The best AI journaling apps consider your full history rather than treating each entry in isolation, which is what distinguishes meaningful AI from simple sentiment tagging.',
+    },
+    {
+      question: 'Will AI journaling apps train models on my entries?',
+      answer:
+        'Reputable operators in this category have committed not to. Empath explicitly states that user data is never used to train AI models. Rosebud has a similar policy. Always confirm this in the privacy policy of any app you consider, because the practice is not universal and the terms can change. If an app cannot clearly state that your entries are not used for training, treat that as a meaningful warning sign.',
+    },
+  ],
+},
+// Article 12
+{
+  id: 'j12',
+  title: 'Best Journaling Apps for Mental Health in 2026',
+  seoTitle: 'Best Mental Health Journaling Apps 2026: Reviewed | Empath',
+  metaDescription:
+    'A clinically grounded review of the best journaling apps for mental health in 2026, including Empath, Sanvello, Wysa, Stoic, Reflectly, Daylio, Moodfit, Rosebud, and Day One.',
+  excerpt:
+    'A clinically grounded look at the journaling apps most useful for anxiety, depression, and stress in 2026, and how each one fits alongside professional care.',
+  author: 'Empath Team',
+  date: 'April 9, 2026',
+  readTime: '18 min read',
+  category: 'Mental Wellness',
+  slug: 'best-journaling-apps-mental-health',
+  keyword: 'best journaling apps for mental health',
+  intro:
+    'Journaling has one of the strongest evidence bases of any low-cost mental health practice. The original expressive writing studies by social psychologist James Pennebaker at the University of Texas, replicated across more than two hundred trials since the 1980s, found that writing about emotionally significant experiences for fifteen to twenty minutes over several days was associated with reductions in self-reported anxiety, fewer doctor visits, and improvements in immune markers. Subsequent meta-analyses, including a 2022 Cochrane review on writing therapy for depression, have been more cautious, noting modest effect sizes and significant variation across populations. The honest takeaway is that journaling is a useful adjunct for many people, particularly when paired with therapy, medication, or other clinical care. This guide reviews the journaling apps most often used for anxiety, depression, and general mental wellness in 2026, and is intended to complement, not replace, professional treatment.',
+  sections: [
+    {
+      heading: 'What to Look For in a Mental Health Journaling App',
+      body: [
+        'The first quality worth checking is whether the app was designed with mental health in mind, or whether it is a general productivity tool with mood emojis bolted on. Mental health journaling apps tend to include validated screening questions, mood tracking that aligns with clinical scales, prompts grounded in cognitive behavioral therapy or acceptance and commitment therapy, and clear language about what the app is and is not. A 2023 review in JAMA Network Open of more than two hundred mental health apps found that fewer than ten percent had any published evidence of efficacy, which makes design intent and transparency more important than marketing claims.',
+        'Privacy matters more in this category than almost any other. Entries written during a depressive episode, panic attack, or relationship crisis are some of the most sensitive personal data that exist. Look for end-to-end encryption, a clear policy stating that entries are not used to train AI models, and ideally HIPAA-aligned infrastructure for anything involving health information. Empath builds on HIPAA-compliant infrastructure for this reason, treating journal entries with the same standards a healthcare provider would apply to clinical notes.',
+        'Friction is the next consideration. People living with anxiety or depression often have less energy for setup, and a complicated app becomes another source of guilt when it goes unused. The most effective mental health journaling apps offer multiple input methods so that on hard days you can speak instead of type, or send a single sentence by text instead of opening a full screen. Research on behavior change consistently shows that the easiest version of a habit is the one that survives during the weeks when it is needed most.',
+        'Finally, consider whether the app helps you notice patterns over time. A single entry has limited value. The clinical case for journaling rests on longitudinal data, the ability to look back across weeks and months and notice which situations consistently raise anxiety, which interventions help, and how mood shifts after sleep, exercise, or social contact. Pattern detection turns a journal from a diary into a feedback loop you can actually learn from.',
+      ],
+    },
+    {
+      heading: 'Empath: Voice-First Journaling Designed to Complement Therapy',
+      body: [
+        'Empath is built for the moments when sitting down to write feels impossible. Users can journal by phone call, SMS text, in-app typing, or in-app voice recording, and every modality flows into one unified record. The voice transcription preserves emotional nuance through pacing, pauses, and word choice, which research from affective computing labs at MIT and elsewhere has shown can carry information about mood that pure text strips out. For people who freeze at a blank screen during anxious or depressive periods, the ability to call a number and simply talk is often the difference between journaling and not.',
+        'The app was designed from the start to work alongside therapy rather than to substitute for it. Longitudinal pattern detection surfaces themes across weeks and months, including recurring triggers, relationship dynamics, and shifts in language that often precede mood changes. These summaries are intended to help clients arrive at sessions with a clearer sense of what to bring up, and to help track progress on goals set with a therapist. Empath does not provide diagnosis, crisis support, or treatment recommendations.',
+        'Privacy is treated as a healthcare problem rather than a marketing checkbox. Empath runs on HIPAA-compliant infrastructure, encrypts journal content at rest, and is explicit that user entries are never used to train AI models or sold to third parties. For users who eventually want to share insights with a clinician, the app can produce summaries that condense weeks of journaling into something readable in a few minutes, which is a meaningful change from handing a therapist a notebook of raw entries.',
+        'Empath offers a free tier with meaningful features, including voice journaling and pattern summaries, with paid tiers unlocking deeper longitudinal analysis and additional capacity. It will not be the right fit for everyone, particularly those who prefer a purely text-based, offline writing experience. But for people who want a low-friction, privacy-respecting tool that pairs cleanly with professional care, it is among the strongest options in this category in 2026.',
+      ],
+    },
+    {
+      heading: 'Sanvello: CBT-Focused Mood and Thought Tracking',
+      body: [
+        'Sanvello, formerly Pacifica, is one of the longest-running mental health apps and remains a solid choice for people who want a journaling experience grounded in cognitive behavioral therapy. Its core flow combines mood check-ins with thought records, the CBT exercise where users identify an automatic thought, the cognitive distortions it contains, and a more balanced reframe. This structure mirrors what a CBT therapist would walk a client through, and the app includes psychoeducation that explains each step.',
+        'The app integrates daily mood tracking with guided journeys for anxiety, depression, and stress, and offers meditations and coping tools alongside writing. Sanvello has historically partnered with health plans and employers, and many users access it through insurance, which lowers the cost barrier significantly. The premium subscription, when paid out of pocket, sits in the typical mid-range for the category.',
+        'Where Sanvello is less strong is open-ended reflection. The journaling component is tightly tied to mood and thought records, which is excellent for structured CBT practice but less suited to free writing about life events, relationships, or longer narratives. People who want both structured CBT tools and an open journaling space often pair Sanvello with a second app for narrative entries.',
+        'For anyone whose therapist uses CBT or who is working through a self-guided CBT program, Sanvello is one of the cleanest implementations available. Its evidence base is among the more developed in this market, with several published studies examining its effects on anxiety and depression symptoms in adult populations. As always, the published evidence is most relevant when the app is used as part of a broader treatment plan rather than in isolation.',
+      ],
+    },
+    {
+      heading: 'Wysa: Chatbot-Driven Reflection With a Journaling Layer',
+      body: [
+        'Wysa pairs a conversational AI penguin with a library of evidence-based exercises drawn from CBT, dialectical behavior therapy, and mindfulness. The journaling experience within Wysa is conversational rather than blank-page. Users tell the chatbot what is going on, and Wysa responds with reflections, suggested exercises, and structured prompts. This format can feel more approachable than an empty text field, particularly for users new to journaling or therapy.',
+        'Wysa has invested heavily in clinical validation, including a randomized trial published in 2022 that examined its use as an adjunct to physical therapy for patients with chronic musculoskeletal pain and reported improvements in depression and anxiety symptoms. The company also offers a coach tier where users can message a human mental health professional, which sits in a different regulatory category than the AI chatbot alone.',
+        'Privacy is reasonably well documented for the category. Wysa publishes details about how conversations are stored, allows anonymous use, and has stated that it does not sell personal data. Users who want the strongest possible privacy posture, particularly around health-grade compliance, may still prefer apps that go further on HIPAA alignment, such as Empath for journaling specifically.',
+        'Where Wysa fits best is as a first step or a between-sessions companion. The conversational format makes it easy to externalize a worry quickly. The structured exercises give users something concrete to try. It is less suited to people who want a long-term, searchable archive of their own writing in their own words, since the conversational format prioritizes interaction over preserved narrative.',
+      ],
+    },
+    {
+      heading: 'Stoic, Reflectly, and Daylio: Mood Tracking With Structured Prompts',
+      body: [
+        'Stoic blends mood tracking with prompts drawn from Stoic philosophy, modern CBT, and positive psychology. Morning and evening routines guide users through brief reflections on intentions, gratitude, and the day\'s events. The visual design is calm and minimal, and the prompts rotate enough to avoid feeling repetitive. Stoic is particularly useful for users who respond well to philosophical framing rather than purely clinical language.',
+        'Reflectly takes a similar structured approach but with a brighter, more conversational tone. Daily check-ins ask about mood, gratitude, and a single event from the day, and the app offers AI-generated reframes for negative entries. Reflectly is most useful for beginners who want a friendly, low-pressure introduction to journaling, though some users find the cheerful tone less appropriate during more difficult periods.',
+        'Daylio occupies a different point on the spectrum, offering microjournaling that emphasizes mood and activity tagging over prose. Users select an emoji-style mood, tag the activities of their day, and optionally add a short note. Over time, Daylio generates charts showing which activities correlate with better or worse moods. For users who find writing draining but still want quantitative insight into their mental health, Daylio is one of the most efficient tools available.',
+        'None of these three apps should be confused with treatment. They are self-monitoring and reflection tools, and they work best when the data they generate is reviewed with a therapist or used to inform self-directed change. People who notice consistent patterns of low mood, anxiety, or distress in any of these apps should treat that as information worth discussing with a clinician, not as something the app itself can resolve.',
+      ],
+    },
+    {
+      heading: 'Moodfit and Rosebud: Coaching-Style Journaling',
+      body: [
+        'Moodfit positions itself as a fitness app for mental health. It combines mood tracking, gratitude journaling, thought records, sleep logging, and CBT-based exercises into a customizable dashboard. Users can choose which tools matter to them and ignore the rest, which makes Moodfit more flexible than apps that force a single workflow. The app has been studied in several small trials examining its use for depressive symptoms in adult populations, with generally favorable but modest results.',
+        'Rosebud takes a coaching approach to journaling, using AI to guide users through reflective conversations and to surface patterns over time. Therapist-designed prompts cover topics ranging from relationships to work stress to inner child work, and the app generates weekly summaries that highlight recurring themes. Rosebud has gained particular traction with users interested in Internal Family Systems and parts work, an approach that has grown in popularity over the past several years.',
+        'Both apps are most useful for people who want more structure than a blank journal but more flexibility than a tightly scripted CBT workbook. They sit in the middle of the spectrum between open reflection and clinical exercises, and the right choice depends largely on tone preference. Moodfit feels more measured and metrics-driven. Rosebud feels more conversational and exploratory.',
+        'As with any AI-assisted journaling tool, the question of trust matters. Users should read the privacy policy carefully, look for clear statements about data use and AI training, and be aware that conversational interfaces can sometimes generate responses that sound more authoritative than the underlying evidence supports. Empath, Rosebud, and similar tools in this space vary in their privacy postures, and the differences are worth checking against your own comfort level before writing anything sensitive.',
+      ],
+    },
+    {
+      heading: 'Day One: General Journaling Adapted for Mental Health Use',
+      body: [
+        'Day One is not a mental health app, but it deserves mention in this category because many people use it successfully for mental health purposes. Its strengths are a clean writing experience, strong media support, end-to-end encryption available on the premium tier, and the On This Day feature that surfaces entries from the same calendar date in previous years. For users who want a beautiful general-purpose journal that they can shape into a mental health practice, Day One is the most polished option.',
+        'The limitation is that Day One does not include mood tracking, structured prompts, or pattern detection out of the box. Users who want those features either build their own templates within Day One or pair it with a second app. This separation can be a strength for people who do not want their reflective writing analyzed by an algorithm, and a limitation for people who specifically want the analysis.',
+        'A common pattern in 2026 is to use Day One for long-form reflective writing while using a more clinical tool, such as Sanvello for CBT exercises or Empath for voice-based pattern detection, for structured mental health work. This division of labor keeps each tool focused on what it does best and avoids forcing a single app to be all things to all needs.',
+        'Day One is also one of the few apps in this guide that can be used effectively without any internet connection or AI involvement at all. For users who specifically want to journal without algorithmic interpretation of their writing, Day One offers a quieter, more traditional experience that still has the convenience and search of a modern app.',
+      ],
+    },
+    {
+      heading: 'How Journaling Apps Fit Into Mental Health Care',
+      body: [
+        'No journaling app, including any reviewed here, is a treatment for a mental health condition. They are self-help and self-monitoring tools, and their best documented use is as an adjunct to professional care. Anyone experiencing persistent symptoms of depression, anxiety, trauma, or any other mental health concern should consider speaking with a licensed clinician, and anyone in crisis should contact emergency services or a crisis line rather than open an app.',
+        'Within that boundary, journaling apps can do meaningful work. Pennebaker\'s expressive writing research and subsequent meta-analyses suggest that the process of putting difficult experiences into language is associated with modest improvements in psychological wellbeing for many people. Mood tracking can help clients and clinicians identify patterns that are difficult to recall accurately during sessions. Structured CBT exercises can extend the work of therapy into daily life. Voice journaling, which Empath emphasizes, can lower the activation energy required to reflect during difficult periods.',
+        'For people currently in therapy, the most valuable feature is often the ability to bring something concrete to a session. A summary of recent themes, a record of when a particular trigger appeared, or a transcript of a moment of high distress can sharpen a fifty-minute conversation considerably. Empath\'s longitudinal summaries are explicitly designed for this purpose, though similar outputs can be produced manually from any journaling app with search and export.',
+        'For people not currently in therapy, journaling apps can serve as an entry point. The act of writing about distress often clarifies whether the difficulty is acute and situational or chronic and worth addressing with professional support. If patterns in your journal entries suggest the latter, treat that as a signal to consult a clinician. The app has done its job by helping you see what was difficult to see on your own.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Can a journaling app actually help with anxiety or depression?',
+      answer:
+        'The research suggests journaling can provide modest benefits for many people, particularly when used alongside professional care. Expressive writing studies by James Pennebaker and subsequent meta-analyses have associated structured writing with improvements in psychological wellbeing, though effect sizes vary. Apps add convenience, mood tracking, and pattern detection on top of writing itself. No app should be considered a substitute for therapy, medication, or crisis support when those are needed.',
+    },
+    {
+      question: 'Which journaling app is best for someone in therapy?',
+      answer:
+        'Empath was specifically designed to complement therapy, with HIPAA-compliant infrastructure, voice journaling for moments when typing feels like too much, and longitudinal pattern detection that helps clients prepare for sessions. Sanvello and Wysa are also useful for clients whose therapists work in CBT. The best fit depends on whether you want a tool focused on structured exercises, open reflection, or pattern recognition across weeks.',
+    },
+    {
+      question: 'How private are mental health journaling apps?',
+      answer:
+        'Privacy varies widely. Empath runs on HIPAA-compliant infrastructure and does not use journal content to train AI models. Other apps offer end-to-end encryption to varying degrees. The most important step is reading the privacy policy before writing anything sensitive, looking specifically for statements about data sharing, model training, and what happens if the company is acquired. If the policy is unclear, that itself is a signal worth taking seriously.',
+    },
+    {
+      question: 'Is voice journaling better than writing for mental health?',
+      answer:
+        'Neither is universally better. Voice journaling lowers the activation energy for people who find typing draining during anxious or depressive periods, and it preserves emotional nuance through tone and pacing that text often loses. Written journaling allows for slower, more deliberate processing and can feel more meditative. Apps like Empath support both, which lets users match the modality to the day rather than to a fixed habit.',
+    },
+    {
+      question: 'How often should someone journal for mental health benefits?',
+      answer:
+        'The expressive writing protocol studied by Pennebaker involved fifteen to twenty minutes of writing on three to four consecutive days about a single emotionally significant experience. Daily journaling has been studied separately and is associated with self-reported benefits for many people. Realistically, consistency matters more than length, and a brief entry on most days will usually outperform a long entry once a month. Discuss frequency with your clinician if you have one.',
+    },
+    {
+      question: 'What should someone do if journaling makes them feel worse?',
+      answer:
+        'It is not unusual for journaling to surface difficult feelings, particularly in the first weeks of practice or when writing about trauma. If entries consistently leave you feeling worse rather than clearer, pause the practice and consider whether you are working through material that needs professional support. A licensed therapist can help you process difficult content safely. Apps are not designed for trauma processing in isolation, and pushing through distress without support is not the goal.',
+    },
+    {
+      question: 'Are free mental health journaling apps worth using?',
+      answer:
+        'Several reputable apps offer meaningful free tiers, including Empath, Daylio, and Wysa. Free versions are often enough to determine whether journaling is a fit before paying for premium features. Be cautious of free apps with unclear privacy policies or aggressive advertising, since data practices are how many free products are funded. A free tier from a transparent company is generally preferable to a slightly more featured tier from an opaque one.',
+    },
+  ],
+},
+// Article 13
+{
+  id: 'j13',
+  title: 'Best Voice Journaling Apps in 2026: A Complete Guide',
+  seoTitle: 'Best Voice Journaling Apps 2026: Top Picks Reviewed | Empath',
+  metaDescription:
+    'Compare the best voice journaling apps of 2026 including Empath, Otter.ai, Day One, Rosebud, and Apple Voice Memos. Honest reviews of features, transcription, and privacy.',
+  excerpt:
+    'Voice journaling is the fastest-growing way to reflect in 2026. Here is an honest guide to the apps that do it well, from call-in services to in-app recording.',
+  author: 'Empath Team',
+  date: 'April 16, 2026',
+  readTime: '17 min read',
+  category: 'App Reviews',
+  slug: 'best-voice-journaling-apps',
+  keyword: 'best voice journaling apps',
+  intro:
+    'Voice journaling has quietly become one of the fastest-growing ways people reflect on their lives. Research from Frontiers in Psychology has noted that spoken self-disclosure activates different cognitive and emotional pathways than writing, with vocal prosody carrying information about emotional state that pure text cannot represent. On a practical level, speaking is roughly three to four times faster than typing, which removes the single biggest friction point that causes journaling habits to collapse. The result is a wave of apps that treat voice as a primary input rather than an afterthought, ranging from dedicated journaling tools that let you call a phone number from your commute to general-purpose transcription apps that double as reflection captures. This guide compares the eight most credible options in 2026, with honest notes on what each does well, where each falls short, and which kind of voice journaler each app is built for.',
+  sections: [
+    {
+      heading: 'Why Voice Journaling Has Grown So Quickly',
+      body: [
+        'The blank page is the single most cited reason that journaling habits fail to take root. When you sit down to type, the act of starting feels heavier than it should, and the mental friction often pushes the practice off until later, which usually means never. Voice removes that friction almost entirely. Most people can speak a coherent thought before they could finish typing the first sentence, and the cognitive load of forming spoken language is lower than the load of formal writing.',
+        'A 2024 study published in the Journal of Medical Internet Research found that audio-based reflection produced comparable improvements in emotional awareness to written journaling, while requiring significantly less perceived effort. Lower effort means higher consistency, and consistency is the actual driver of journaling benefits. An imperfect voice habit you maintain for six months outperforms a perfect written habit you abandon after two weeks.',
+        'Voice also captures emotional nuance that text systematically loses. The pause before naming a difficult feeling, the change in pacing when something genuinely matters, the slight rise in pitch when a thought surprises the speaker, all of these carry information about emotional state that disappears the moment a transcription is cleaned up. The best voice journaling apps in 2026 preserve some of this nuance in their underlying records, which makes their longitudinal analysis meaningfully richer than text-only equivalents.',
+        'Finally, voice journaling fits the actual shape of modern life. Many of the moments when reflection is most needed, the drive home from a hard conversation, the walk after a difficult meeting, the quiet minute before bed, are moments when typing is impractical or unwelcome. A voice journal that can ride along with these moments captures reflections that would otherwise be lost. The apps that have grown fastest in 2026 are the ones built around this insight rather than the ones treating voice as an optional accessibility feature.',
+      ],
+    },
+    {
+      heading: 'Empath: Call, Text, or Speak from Inside the App',
+      body: [
+        'Empath is the most fully developed voice-first journaling app in the current market, and its core differentiator is the range of channels through which a voice entry can be captured. Users can call a dedicated phone number and speak for as long as they want, send a text message from anywhere, type a longer reflection in the app, or record a voice note inside the app interface. All four channels flow into a single ongoing record that the AI analyzes as one continuous narrative.',
+        'The phone-call channel is the standout. There is no app to open, no permissions to grant, no waiting for a screen to load. You dial the number, and you talk. This works during a commute, while walking the dog, or in any moment where holding the phone like a phone is more natural than holding it like a screen. The voice transcription is tuned to preserve emotional cues like pacing and tone shifts rather than just producing clean text, which the analysis layer uses when generating weekly patterns.',
+        'On the privacy side, Empath operates on HIPAA-compliant infrastructure, the same standard used to protect electronic medical records in healthcare settings. User entries are explicitly never used to train AI models. For voice journaling in particular, this matters because voice recordings are biometric data, and the privacy implications of leaking voice content go beyond the implications of leaking written text. The healthcare-grade posture is unusual in consumer apps and meaningful for users who share insights with a therapist.',
+        'The free tier is genuinely useful for voice journaling, including the phone-call channel, SMS, and in-app recording along with AI-powered mood analysis. Paid tiers expand the depth of analysis and add additional integrations. Empath is the strongest fit for users who want voice as the primary input rather than a fallback, and who value the ability to journal across multiple channels without losing continuity. It is less ideal for users who specifically want a beautiful media-rich journaling experience focused on memory preservation, where Day One remains the leader.',
+      ],
+    },
+    {
+      heading: 'Otter.ai: General Transcription That Doubles as Voice Journal',
+      body: [
+        'Otter.ai was not designed as a journaling app. It is a transcription service primarily marketed to professionals for recording meetings and interviews. But a sizable community of voice journalers has adopted it because the transcription quality is among the best in the industry, and the unlimited recording lengths on paid plans make it suitable for longer voice entries.',
+        'The workflow is straightforward. You open the app, hit record, speak for as long as you want, and end with a clean transcript that you can search later. Otter handles multiple speakers, can identify named individuals over time, and supports cloud sync across devices. For users who want a transcription tool that happens to work for journaling rather than a journaling tool that includes transcription, this is the most reliable option.',
+        'The limitations are real for journaling-specific use. There is no mood tracking, no longitudinal pattern detection, no journaling-specific prompts, and no purpose-built privacy framing around emotionally sensitive content. The default privacy posture is oriented toward business use, with policies that allow Otter to use content for product improvement unless users opt out. Anyone using Otter for journaling should check the data settings carefully and adjust to the most private configuration.',
+        'Pricing starts with a limited free tier and scales to several paid plans, with the most popular individual plan landing around $16.99 per month for substantial transcription minutes. Otter is best for voice journalers who want professional-grade transcription as the central feature and are willing to forgo journaling-specific niceties. It pairs well with a dedicated journaling app: record in Otter, then paste the transcript into the journal of your choice for analysis and storage.',
+      ],
+    },
+    {
+      heading: 'Day One Voice Notes: Beautiful Memory Capture',
+      body: [
+        'Day One has been the gold standard of traditional journaling apps since 2011, and its voice features have matured into a credible voice journaling option for users who care about the broader Day One experience. You can record voice notes directly inside any entry, with automatic transcription appearing alongside the audio. The audio file remains attached to the entry, which means you can listen back as well as read.',
+        'The strength of Day One voice notes is integration. A voice note sits alongside photos, location data, weather, music metadata, and rich text within a single entry, producing a media-rich record that feels closer to a memory than a transcript. For users journaling moments they want to remember in vivid detail, the combination of voice, photo, and context is hard to beat. The On This Day feature surfaces past voice notes from the same calendar date, which can be unexpectedly powerful after a year of use.',
+        'The limitations are on the analysis side. Day One does not run longitudinal AI analysis on voice content the way dedicated AI journaling apps do, and the voice features remain framed as media attachments rather than primary inputs. There is no equivalent to Empath\'s phone-call channel, no SMS option, and no insight generation specifically derived from voice content. For users who want voice as a memory-preservation feature, Day One excels. For users who want voice as the primary reflective input, the lack of dedicated voice tooling becomes a constraint.',
+        'Day One Premium runs $34.99 per year on Apple platforms and $24.99 per year on Android, with voice notes included in the premium tier. The free tier limits voice features alongside other capabilities. For Apple-ecosystem users who already love the Day One aesthetic and want voice as a richer dimension of their existing journal, the upgrade is well worth it.',
+      ],
+    },
+    {
+      heading: 'Apple Voice Memos with Transcription: The Free Workflow',
+      body: [
+        'Apple Voice Memos is built into every iPhone, iPad, and Mac, and the transcription feature added in iOS 18 has made it a surprisingly viable voice journaling option for users who want a free, no-account workflow. You open the app, record, and end with both an audio file and a searchable transcript. iCloud sync keeps recordings available across devices for users in the Apple ecosystem.',
+        'The advantage is simplicity and cost. There is no signup, no subscription, no privacy review of a third-party app. Recordings live on your device and in your personal iCloud backup, with the same privacy posture as the rest of your Apple data. For users who want to start voice journaling immediately without evaluating apps, opening Voice Memos and hitting record is the lowest-friction path possible.',
+        'The disadvantages are obvious for anyone who wants more than capture. There is no mood tracking, no organization beyond folder structure, no AI analysis, no prompts, and no longitudinal insights. The transcription is competent but not tuned for emotional content. Many serious voice journalers start with Voice Memos and graduate to dedicated apps once they want their recordings to do more than sit in a folder.',
+        'A reasonable hybrid workflow is to record in Voice Memos for true privacy on the device, then selectively paste transcripts into a dedicated journaling app for analysis when the content is appropriate to share. This preserves the Apple privacy posture for sensitive entries while still benefiting from the AI features of an app like Empath for entries you want analyzed. Many users find this two-tier approach more comfortable than committing fully to either extreme.',
+      ],
+    },
+    {
+      heading: 'Rosebud Voice Mode and Journey Voice Entries',
+      body: [
+        'Rosebud added a voice mode in 2024 that integrates spoken input into its chat-based reflection format. You speak, the app transcribes, and the AI responds in the same conversational style as in the text-based version. For users who already use Rosebud and enjoy the dialogue-style journaling experience, voice mode removes the typing barrier without changing the underlying interaction model.',
+        'The strength of Rosebud voice mode is continuity with the rest of the app. Spoken entries feed the same pattern detection and weekly summaries as typed entries, and the conversational follow-up questions adapt naturally to voice input. The limitation is that voice mode lives inside a single chat interface rather than supporting the kinds of distributed capture, phone calls, SMS, ambient recording, that voice-first apps offer. It is voice as an input method, not voice as a channel.',
+        'Journey added voice entries to its long-running cross-platform journal as part of its 2024 AI expansion. Users can record audio inside the app, attach voice notes to entries, and access automatic transcription. The implementation is solid for a journaling app that started life as a text tool, and the cross-platform reach across iOS, Android, web, Mac, Windows, and Chrome OS is unmatched in the category.',
+        'Both Rosebud voice mode and Journey voice entries are best understood as voice features within otherwise text-oriented apps, rather than as voice-first products. For users whose primary attachment is to those apps, the voice additions are welcome. For users who want voice to be the central organizing input rather than an optional channel, apps built around voice from the start, particularly Empath, will feel more natural.',
+      ],
+    },
+    {
+      heading: 'Stoic Voice Prompts and Other Lightweight Options',
+      body: [
+        'Stoic uses voice in a specific and limited way, offering spoken versions of its philosophy-inspired prompts that users can listen to before responding. The intent is meditative rather than transcriptional, with the voice serving as a guide into reflection rather than as the medium of the reflection itself. Users typically respond in writing, though the app supports voice transcription in newer versions.',
+        'For users drawn to Stoic philosophy and structured prompts, the combination of spoken guidance and written or voice response works well as a low-pressure daily practice. Stoic is free at its core with optional premium tiers, and it runs on iPhone, iPad, Mac, Apple Watch, and the web. It is best understood as a contemplative tool that includes voice rather than a voice journaling app per se.',
+        'Voicea and Speeko are sometimes mentioned in voice journaling discussions, though both are primarily speech-coaching tools rather than journals. Speeko analyzes spoken delivery, pace, and filler words to help users improve public speaking. Some users have repurposed it for reflective speech practice, but the feedback orientation is on delivery rather than content, which makes it a poor fit for emotional journaling. They are worth mentioning for completeness but not for serious voice journaling consideration.',
+        'A growing number of users combine multiple voice tools for different purposes. Apple Voice Memos for raw private capture, Empath for analyzed reflection, Otter for longer-form recorded conversations, and Day One for memory-rich attachments. This combination is more work than committing to a single app, but for users with diverse voice journaling needs, the layered approach often produces better results than forcing a single tool to cover everything.',
+      ],
+    },
+    {
+      heading: 'How to Choose the Right Voice Journaling App',
+      body: [
+        'Start with how you actually want to capture voice. If you want to journal during commutes or walks without holding a screen, a phone-call channel like Empath\'s is unmatched in convenience. If you want to record in-app sessions in a quiet setting, Rosebud, Journey, or Empath\'s in-app recorder all work well. If you want raw private recordings with no analysis, Apple Voice Memos is the simplest free path.',
+        'Consider how much analysis you want layered on top of voice. The richest analytical experience for voice content currently comes from Empath, where the AI considers tone and pacing alongside content and runs longitudinal patterns across weeks of entries. Rosebud offers strong analysis within its chat format. Day One and Journey treat voice more as a media attachment with lighter analytical processing. Otter and Voice Memos offer essentially no journaling-specific analysis.',
+        'Privacy matters more for voice than for text. Voice recordings are biometric data, and the privacy implications go beyond standard journal content. Empath\'s HIPAA-compliant infrastructure is the strongest posture in the consumer category. Apple Voice Memos offers strong device-level privacy for users who never sync recordings to third-party services. Otter\'s default privacy posture is oriented toward business use and requires explicit settings adjustment for sensitive content.',
+        'Finally, test the actual voice workflow before committing to any annual plan. Record a real entry, listen back, read the transcript, and check what the app does with it. Voice journaling either fits your life immediately or it does not, and you will know within a few days whether a particular app is right for you. The best voice journaling app is the one you instinctively reach for in the moments when you most need to reflect, not the one with the most impressive feature list.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What is the best voice journaling app in 2026?',
+      answer:
+        'Empath is the most fully developed voice-first journaling app in the current market, supporting phone calls to a dedicated number, SMS, and in-app voice recording, all flowing into a single AI-analyzed record. Day One is the strongest option for media-rich memory preservation that includes voice notes. Otter.ai offers the highest-quality general transcription for users who want professional-grade recording. The right choice depends on whether you want voice as the central channel or as one feature among many.',
+    },
+    {
+      question: 'Can you journal by phone call?',
+      answer:
+        'Yes. Empath offers a dedicated phone number that users can call to record voice journal entries. The call is transcribed, analyzed, and stitched into the same record as text and in-app entries. This channel works well for journaling during commutes or walks when holding the phone like a screen is impractical. Few other journaling apps currently support a phone-call channel as a first-class input.',
+    },
+    {
+      question: 'Is voice journaling as effective as writing?',
+      answer:
+        'Research suggests it is comparable, with some advantages and some trade-offs. Voice captures emotional nuance through tone and pacing that text misses, and the lower effort of speaking improves consistency for many users. Writing tends to produce slower, more deliberate processing, which some users find clarifying. The most effective approach is often to mix both, using voice for in-the-moment capture and writing for slower reflection.',
+    },
+    {
+      question: 'Are voice journals safe for private thoughts?',
+      answer:
+        'Privacy varies by app. Voice recordings are biometric data, which carries different implications than text. Empath operates on HIPAA-compliant infrastructure, the same standard used to protect electronic medical records, and commits to never training AI models on user data. Apple Voice Memos offers strong device-level privacy for recordings kept off third-party services. Always check whether voice content can be used for model training before recording sensitive entries.',
+    },
+    {
+      question: 'How accurate is voice journaling transcription?',
+      answer:
+        'Top-tier transcription is now reliably accurate for clear speech in quiet environments, with word error rates typically below five percent. Background noise, strong accents, and emotional speech with long pauses or vocal shifts can reduce accuracy. Empath, Otter, and Day One all use high-quality transcription, with Empath specifically tuned to preserve emotional cues like pacing rather than producing maximally clean text.',
+    },
+    {
+      question: 'Can I use Apple Voice Memos as a journal?',
+      answer:
+        'Yes, with caveats. Voice Memos is free, built in on Apple devices, and offers transcription in iOS 18 and later. It has no mood tracking, no AI analysis, no prompts, and no journaling-specific organization. Many users start with Voice Memos for capture and graduate to dedicated apps like Empath once they want analysis or longitudinal insights. It is a strong free starting point but rarely the long-term home for a serious voice journaling practice.',
+    },
+    {
+      question: 'How much do voice journaling apps cost?',
+      answer:
+        'Costs vary widely. Apple Voice Memos is free. Empath offers a free tier that includes voice journaling and AI features, with paid tiers for deeper analysis. Day One Premium runs $34.99 per year on Apple platforms. Otter.ai\'s most popular individual plan is roughly $16.99 per month. Rosebud sits at $12.99 monthly or $89.99 annually. The right price depends on whether voice journaling is your primary practice or an occasional feature.',
+    },
+  ],
+},
+// Article 14
+{
+  id: 'j14',
+  title: 'Best Journaling Apps for Therapy: Use Between Sessions in 2026',
+  seoTitle: 'Best Journaling Apps for Therapy 2026: Tools for Clients | Empath',
+  metaDescription:
+    'A guide for therapy clients comparing the best journaling apps for use between sessions in 2026, including Empath, Sanvello, Wysa, Bloom, Worry Watch, Day One, Stoic, Rosebud, and Penzu.',
+  excerpt:
+    'A practical look at the journaling apps best suited to people already in therapy, with attention to between-session work, privacy, and what to share with your clinician.',
+  author: 'Empath Team',
+  date: 'April 23, 2026',
+  readTime: '18 min read',
+  category: 'Mental Wellness',
+  slug: 'best-journaling-apps-therapy',
+  keyword: 'best journaling apps for therapy',
+  intro:
+    'Therapy is intermittent. A typical fifty-minute session covers a fraction of the week\'s emotional terrain, and most of what happens in a client\'s life unfolds between appointments. Research on psychotherapy outcomes has consistently pointed to between-session work as a meaningful contributor to progress. A 2021 review in Clinical Psychology Review noted that homework adherence, including structured reflection between sessions, was associated with better outcomes across several modalities, including cognitive behavioral therapy and acceptance and commitment therapy. Journaling apps have become one of the most accessible ways to do that between-session work, but the field has fragmented considerably, and not every app is well-suited to the specific demands of clinical work. This guide reviews the journaling apps most useful for people currently in therapy in 2026, with attention to what to journal, what to share, and how to keep entries private until you decide otherwise.',
+  sections: [
+    {
+      heading: 'What Between-Session Journaling Is Actually For',
+      body: [
+        'The most common mistake clients make with between-session journaling is treating it as a transcript. They try to record everything that happened, which produces volume without insight. What therapists actually benefit from is a record of moments, not chronicles. A brief note about the situation that triggered a panic response on Tuesday is more useful in a session than a paragraph-long account of the entire day. Empath\'s longitudinal pattern detection is designed around this principle, surfacing recurring moments and themes rather than asking clients to reconstruct everything.',
+        'The second purpose of between-session journaling is to extend the session itself. A therapist might suggest that a client notice a specific pattern during the week, practice a skill, or sit with a particular question. Journaling is the place where that homework lives. Apps that support quick capture, including voice notes and short text entries, are usually better suited to this than apps that pressure users into long, polished entries.',
+        'The third purpose is preparation. Most clients have had the experience of arriving at a session and being unable to remember what they wanted to discuss. A simple practice of jotting down two or three things during the week, then reviewing them an hour before the session, can transform what feels like a wasted appointment into a focused one. Several apps now generate weekly summaries explicitly designed for this preparation, including Empath, Rosebud, and Bloom.',
+        'Finally, between-session journaling provides continuity of self-understanding. Therapy can feel like a series of disconnected insights that are hard to integrate. Reading back through a month of journal entries shows how thinking has evolved, which interventions seem to be working, and which patterns persist. This is information both client and therapist can use, and it is often the single most valuable output of consistent journaling.',
+      ],
+    },
+    {
+      heading: 'Empath: Built to Pair With Therapy',
+      body: [
+        'Empath was designed from the outset with therapy clients and their clinicians in mind. The core problem the app addresses is that what happens between sessions tends to be lost. Memory is unreliable, particularly during emotionally charged moments, and reconstructing a week from scratch at the start of a session loses most of the material worth discussing. Empath gives clients multiple low-friction ways to capture what is happening as it happens, including phone calls, SMS texts, in-app typing, and in-app voice recording. Each modality flows into one unified record that the client owns.',
+        'Voice journaling is a particular strength for therapy clients. Speaking is several times faster than typing, and the resulting transcripts preserve emotional nuance through tone, pacing, and word choice that text alone tends to flatten. For clients who find it difficult to sit down and write during a hard week, the option to call a number and simply talk often determines whether journaling happens at all. The voice transcription is then searchable, summarizable, and reviewable like any other entry.',
+        'AI pattern detection runs across weeks and months rather than within a single entry. The app surfaces themes the client may not consciously notice, including recurring triggers, language shifts that often precede mood changes, and topics that come up across many entries without being central to any one of them. These summaries are framed as material to bring to a therapist, not as interpretations or treatment recommendations. Empath does not diagnose, treat, or provide crisis support.',
+        'Privacy is treated as a clinical-grade requirement. Empath runs on HIPAA-compliant infrastructure, encrypts journal content at rest, and is explicit that user entries are never used to train AI models or sold to third parties. Sharing with a therapist, when the client chooses to do so, can happen through curated summaries rather than raw entries, which respects both the client\'s privacy and the therapist\'s time. For clients who want the strongest available alignment between journaling app and clinical practice in 2026, Empath is the most direct fit reviewed in this guide.',
+      ],
+    },
+    {
+      heading: 'Sanvello and Wysa: Structured Skills Between Sessions',
+      body: [
+        'Sanvello is a strong fit for clients working with a CBT or CBT-adjacent therapist. Its thought records mirror the structure used in CBT homework, prompting users to identify a situation, the automatic thoughts that arose, the cognitive distortions present, and a more balanced alternative. Clients can bring completed thought records into sessions, which gives the therapist concrete material to work with rather than vague descriptions. Sanvello\'s mood tracking also aligns reasonably well with the kinds of measures clinicians often use to track symptom change.',
+        'Wysa offers a conversational interface that some therapy clients find useful for moments when they need to externalize a worry but the session is days away. The chatbot guides users through brief exercises drawn from CBT, DBT, and mindfulness, and the company has invested more than most in published research on its effects. Wysa\'s coach tier, where users can message a human mental health professional, occupies a different regulatory category than the chatbot alone and should not be confused with primary therapeutic care.',
+        'Neither app is designed primarily as a long-form journal. They work best as structured skill-building tools that extend the work of a session into the week. Many clients use them alongside a separate journaling app, with Sanvello or Wysa handling the structured exercises while a tool like Empath or Day One holds open reflection and narrative entries.',
+        'Therapists who prescribe specific homework, such as a daily thought record or a behavioral activation log, often find that clients adhere better when those exercises live in a dedicated app rather than on paper or in a general notes app. The structure removes ambiguity about what to do, and the visible streak or completion count adds a small but real motivational pull. The caveat is that streaks should not become a source of shame when life intervenes, which is a conversation worth having explicitly with clients.',
+      ],
+    },
+    {
+      heading: 'Bloom and Worry Watch: Targeted Tools for Specific Concerns',
+      body: [
+        'Bloom positions itself as therapist-designed self-guided therapy, with video-based sessions, journaling prompts, and exercises drawn primarily from CBT. For therapy clients, Bloom can serve as a structured supplement between sessions, particularly during periods when sessions are spaced further apart or during gaps caused by vacation or scheduling. It should not be confused with therapy itself, and Bloom is clear about that distinction in its own materials.',
+        'Worry Watch is narrower in scope, focusing specifically on anxiety and worry tracking. Users log worries as they arise, predict outcomes, and later record what actually happened. Over time, this reveals how often anxious predictions overestimate the likelihood or severity of bad outcomes, which is one of the core insights CBT for anxiety aims to instill. For clients working specifically on anxiety, Worry Watch can provide concrete data to discuss in sessions in a way that general journaling apps cannot.',
+        'Both tools are most useful when they fit a specific clinical focus. Bloom suits clients who want additional structured material between sessions and are comfortable with video-based self-guided exercises. Worry Watch suits clients with anxiety as a primary concern. Clients with broader or more complex presentations often benefit from a more general journaling tool, with Empath\'s multimodal capture and pattern detection serving as one of the more versatile options for that purpose.',
+        'A practical consideration is the cognitive load of using multiple apps. Adding a dedicated anxiety tracker, a thought record app, and a general journal on top of therapy itself can become its own source of stress. Many clients do better with one or two tools that they actually use consistently than with a sophisticated stack that they abandon after three weeks. The right number is usually the smallest that meets the actual need.',
+      ],
+    },
+    {
+      heading: 'Day One, Stoic, and Rosebud: Open Reflection With Different Tones',
+      body: [
+        'Day One remains the most polished general-purpose journaling app, and many therapy clients use it specifically because it is not a mental health app. The clean writing experience, end-to-end encryption available on the premium tier, and absence of algorithmic interpretation make Day One feel more like a private notebook than a clinical instrument. Clients who specifically want a space that is not analyzed, summarized, or scored often gravitate to Day One.',
+        'Stoic offers structured morning and evening reflections drawn from Stoic philosophy and modern CBT. For therapy clients working on values, meaning, or acceptance-based approaches, Stoic\'s framing can feel more aligned with the work of therapy than apps focused primarily on symptom tracking. The prompts rotate enough to avoid feeling stale, and the visual design is calm and uncluttered.',
+        'Rosebud takes a conversational, coaching-oriented approach to journaling. AI prompts guide users through reflective conversations, and weekly summaries highlight recurring themes. Rosebud has gained traction with users interested in Internal Family Systems and parts work, which has grown in popularity in some therapy modalities. As with any AI-assisted tool, clients should read the privacy policy and consider whether they want AI interpretation of sensitive material at all.',
+        'These three tools differ primarily in tone. Day One feels like a journal. Stoic feels like a philosophical practice. Rosebud feels like a conversation. The right choice depends on what kind of space the client wants between sessions. Empath sits somewhat orthogonal to all three, prioritizing capture and pattern detection over either pure journaling or coaching, and is often used alongside one of these tools rather than instead of them.',
+      ],
+    },
+    {
+      heading: 'Penzu: Privacy-First Journaling for Clients Who Value Discretion',
+      body: [
+        'Penzu has been around for years and remains one of the most privacy-focused journaling apps available. Its core promise is simple: a private digital diary with 256-bit AES encryption, individual journal locks, and no AI involvement in the contents of entries. For therapy clients who specifically do not want algorithmic interpretation of their writing, or who have concerns about journaling in apps that include AI features at all, Penzu addresses those concerns directly.',
+        'The limitation is that Penzu offers no pattern detection, no mood tracking, no structured prompts, and no summaries. It is, deliberately, a quieter tool. Users who want their journaling to feed back into self-understanding through analysis will find Penzu too minimal. Users who want to write privately and revisit their own entries on their own terms will find it appropriate.',
+        'Penzu sometimes makes sense as a second tool for therapy clients. Sensitive material that the client is not ready to process can live in Penzu without ever passing through an AI system. More general reflection, pattern tracking, and material intended for eventual discussion in therapy can live in an app like Empath, where the multimodal capture and longitudinal summaries do meaningful work. Dividing journaling across tools is not for everyone, but for clients with strong privacy preferences, it can preserve the benefits of each approach.',
+        'The privacy conversation in 2026 has shifted noticeably. Several high-profile incidents involving mental health apps and data brokers in 2024 and 2025 made clients more attuned to where their entries actually go. Penzu\'s positioning has aged well in that context. Empath\'s HIPAA-compliant infrastructure addresses similar concerns from a different angle, with health-grade compliance rather than a no-AI promise. Either approach is defensible, and the right one depends on the client\'s specific concerns.',
+      ],
+    },
+    {
+      heading: 'What to Share With Your Therapist, and What to Keep',
+      body: [
+        'Sharing journal entries with a therapist is a choice, not an obligation. Some clients find it useful to read short passages aloud during sessions. Others prefer to summarize patterns rather than share raw text. A growing number bring AI-generated summaries to sessions, which condense weeks of journaling into a few paragraphs the therapist can read in minutes. Empath was designed in part to produce exactly this kind of summary, with the explicit goal of helping clients use session time more effectively.',
+        'There is no consensus among clinicians about how to handle client journals, and individual therapists vary in how much they want to engage with between-session writing. Some welcome direct reading. Others prefer the client to translate the writing into spoken reflection. A useful early conversation with a new therapist is what to bring, in what form, and how the therapist prefers to work with between-session material. That conversation prevents both over-sharing and under-sharing.',
+        'Privacy boundaries within the client\'s own journal also matter. Clients are not obligated to share entries that feel too private, too raw, or too unformed to discuss. The journal belongs to the client, not the therapist. A common and healthy pattern is for clients to keep parts of their journaling entirely private while sharing summaries or specific passages from other parts. Apps that allow selective sharing, including Empath\'s curated summary outputs, make this easier than apps that present journaling as either fully visible or fully hidden.',
+        'For clients who eventually want to share more substantial material, HIPAA-compliant infrastructure becomes important. A therapist working within healthcare privacy regulations cannot simply receive screenshots from an unencrypted email and treat them as clinical records. Empath\'s alignment with HIPAA standards is one reason the app has gained traction with therapists who want their clients to have a between-session tool that fits cleanly into existing privacy frameworks.',
+      ],
+    },
+    {
+      heading: 'Building a Sustainable Between-Session Practice',
+      body: [
+        'The most durable journaling practice for therapy clients is usually the smallest one. A daily entry of two or three sentences, captured by voice on a commute or typed in bed before sleep, beats an elaborate weekly entry that gets skipped during stressful weeks. BJ Fogg\'s tiny habits research and James Clear\'s atomic habits framework both converge on this point: the goal in the first two months is not depth but consistency. Depth follows once the habit is established.',
+        'Pair journaling with an existing routine to remove the question of when. Many therapy clients find it useful to journal briefly after each session itself, while the conversation is still fresh, and again at the end of each day. The post-session entry captures what stood out, what the client wants to revisit, and what felt unresolved. The end-of-day entry captures whatever surfaced during the day worth bringing to the next session. Voice journaling makes both of these easier than typing, which is part of why Empath\'s call-in option is heavily used by clients in this exact pattern.',
+        'Review weekly, ideally before each session. A short review of the week\'s entries, even five minutes, is what turns journaling from accumulation into preparation. Apps that generate weekly summaries automate part of this, but a manual review on top of the summary tends to surface things the algorithm misses. The combination of human and algorithmic review is more useful than either alone.',
+        'Finally, treat the practice as something that evolves with the therapy itself. Early sessions often benefit from broad capture: what happened, what felt difficult, what surprised you. Later sessions, particularly when working on specific patterns, may benefit from narrower journaling focused on those patterns. The right journaling practice at month one is rarely the right practice at month twelve. Apps with enough flexibility to support both phases, including Empath, are more likely to remain useful across the full arc of a therapeutic relationship.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Which journaling app is best for someone currently in therapy?',
+      answer:
+        'Empath is the most direct fit reviewed here, with HIPAA-compliant infrastructure, voice journaling for low-effort capture, and longitudinal pattern detection designed to help clients prepare for sessions. Sanvello suits clients in CBT-focused work. Day One suits clients who want a polished general journal without AI involvement. The best choice depends on whether you want structured exercises, open reflection, or pattern detection across weeks.',
+    },
+    {
+      question: 'Should I share my journal entries with my therapist?',
+      answer:
+        'Sharing is a choice, not an obligation. Many clients share summaries or specific passages rather than raw entries. A useful early conversation with a new therapist is to ask what they prefer to receive and in what form. Apps like Empath can produce curated summaries that condense weeks of journaling into something a therapist can read in minutes, which often makes session time more focused.',
+    },
+    {
+      question: 'How private are journaling apps used between therapy sessions?',
+      answer:
+        'Privacy varies significantly. Empath runs on HIPAA-compliant infrastructure and does not use journal content to train AI models. Penzu uses 256-bit AES encryption and includes no AI. Other apps fall along a spectrum. For anything you might eventually share with a clinician, choosing an app aligned with healthcare-grade privacy standards keeps your options open and avoids creating records that sit outside normal clinical privacy expectations.',
+    },
+    {
+      question: 'What should I journal about between therapy sessions?',
+      answer:
+        'Focus on moments rather than chronicles. A short note about a situation that triggered a strong response is more useful than a long account of the entire day. Anything your therapist has asked you to notice or practice belongs in the journal. So does anything you want to remember to discuss in the next session. Empath\'s pattern detection helps surface recurring themes you might not catch yourself.',
+    },
+    {
+      question: 'Can voice journaling really capture more than text?',
+      answer:
+        'Voice journaling preserves pacing, pauses, and word choice that text often loses, and research on affective computing suggests these cues carry meaningful information about emotional state. Speaking is also several times faster than typing, which lowers the friction during difficult weeks. Apps like Empath transcribe voice entries and run pattern detection on the resulting text, so you get both the original recording and a searchable record.',
+    },
+    {
+      question: 'How often should I journal if I am in weekly therapy?',
+      answer:
+        'There is no single right frequency, but most clients benefit from brief daily capture rather than long weekly entries. A two-minute voice note or a few sentences typed at the end of the day, paired with a short review before each session, tends to outperform longer, less frequent entries. Consistency matters more than length, and the first two months should focus on building the habit before optimizing for depth.',
+    },
+    {
+      question: 'What if I want to journal without AI involvement at all?',
+      answer:
+        'Penzu and Day One are the strongest options for AI-free journaling. Penzu emphasizes encryption and includes no AI features. Day One offers a polished writing experience with end-to-end encryption on the premium tier and no algorithmic interpretation of entries by default. Some clients use Penzu or Day One for sensitive material alongside an app like Empath for pattern detection on less sensitive entries, which preserves the benefits of each approach.',
+    },
+  ],
+},
+// Article 15
+{
+  id: 'j15',
+  title: 'Don\'t Use AI Like This for Journaling: 7 Common Mistakes',
+  seoTitle: '7 Mistakes to Avoid When Using AI for Journaling (2026) | Empath',
+  metaDescription:
+    'AI journaling can deepen self-reflection or quietly undermine it. Here are the seven most common mistakes people make with AI journaling apps, and how to avoid each one.',
+  excerpt:
+    'AI journaling is genuinely useful when it is set up well and quietly harmful when it is not. These are the seven mistakes that turn a promising practice into a problem.',
+  author: 'Empath Team',
+  date: 'May 1, 2026',
+  readTime: '16 min read',
+  category: 'AI & Technology',
+  slug: 'ai-journaling-mistakes',
+  keyword: 'AI journaling mistakes',
+  intro:
+    'AI journaling has become one of the most popular wellness practices of the last few years, and for good reason. When it is done well, it adds a layer of pattern recognition and gentle reflection that traditional journaling cannot match. But the same tools that help you understand yourself can also distort your self-perception, expose your most private thoughts to companies you would never knowingly trust, or quietly replace the relationships and professional support you actually need. The mistakes are rarely dramatic. They tend to be small habits that compound over months until your journaling practice is doing something different from what you intended. This guide walks through the seven most common ways AI journaling goes wrong and offers a clearer path to using these tools well.',
+  sections: [
+    {
+      heading: 'Mistake 1: Treating an AI journal as a substitute for therapy',
+      body: [
+        'The most common and most consequential mistake is treating an AI journaling app as a therapist. The conversational interfaces of modern AI tools can feel remarkably warm, and after a few weeks of nightly check-ins, it is easy to slide from journaling into something that feels like treatment. The app remembers you, asks thoughtful follow-ups, and seems to understand what you are going through. None of that makes it qualified to provide care.',
+        'A trained therapist does several things an AI cannot. They hold a professional duty of care, recognize when symptoms cross into clinical territory, assess suicide risk in real time, and adapt treatment based on a relationship built over months. They also work inside a legal and ethical framework that protects you. An AI journaling app, no matter how sophisticated, has none of those guardrails. It can pattern-match against language it has seen before, but it cannot make a clinical judgment about your particular situation.',
+        'The American Psychological Association has repeatedly cautioned that consumer AI chatbots are not clinical interventions and should not be marketed as such. The Food and Drug Administration treats software intended to diagnose or treat mental illness as a medical device, which means tools that have not been cleared as devices are not making clinical claims regardless of how they feel to use. The distinction matters because the language of self-help can quietly drift into the language of treatment when no one is checking.',
+        'A healthier framing is to treat AI journaling as a supplement to professional care, not a replacement for it. Empath is explicitly built around this principle. It is designed to complement therapy by helping users notice patterns between sessions and prepare for the work they do with their clinician, not to stand in for the therapist. If you find yourself relying on an AI app for what only a person can provide, that is a signal to add support, not to ask the app to do more.',
+      ],
+    },
+    {
+      heading: 'Mistake 2: Pouring your inner life into apps that train on your data',
+      body: [
+        'A surprising number of journaling and general-purpose AI apps reserve the right to use your inputs to train future models. This is usually buried in a privacy policy or terms of service that most users never open. The result is that some of the most personal text you will ever write, including descriptions of trauma, relationships, mental health symptoms, and financial fears, may end up shaping commercial models or being reviewed by human contractors as part of model evaluation.',
+        'Even when companies anonymize training data, the protection is weaker than it sounds. Journal entries are full of specific names, places, employers, and timelines that can re-identify a person more easily than generic chat logs. Researchers have repeatedly shown that anonymized text datasets can be partially re-identified when they contain rich personal context, which is exactly what a good journal entry provides.',
+        'The fix is to read the data use section of any AI journaling app carefully before you start writing. Look for an explicit statement that your content is not used to train AI models, that it is not shared with third parties for analytics or advertising, and that you can request deletion at any time. If the policy is vague, treat that as an answer in itself. Tools that are confident about their data practices tend to say so plainly.',
+        'Empath does not train AI models on user journal entries. The infrastructure is HIPAA-compliant and designed around the assumption that the content is healthcare-grade sensitive, because for most users it is. That is not a marketing differentiator so much as a baseline that any tool handling this kind of content should meet. If a journaling app is reluctant to commit to that baseline in writing, it is reasonable to use a different one.',
+      ],
+    },
+    {
+      heading: 'Mistake 3: Letting the AI write your entries for you',
+      body: [
+        'A subtle but increasingly common mistake is using AI to generate the entry itself. People will give a chatbot a few bullet points about their day and ask it to write the journal entry in a reflective voice. The output looks like a polished journal entry, but it is doing none of the work that makes journaling beneficial. The therapeutic value of journaling comes from the act of putting your own experience into words, not from producing a piece of well-crafted text.',
+        'Research on expressive writing, including the foundational work of James Pennebaker at the University of Texas, consistently finds that the benefits depend on personal authorship. The slow, sometimes uncomfortable process of choosing your own words is what allows the prefrontal cortex to organize emotional experience and helps you make meaning out of events. Outsourcing that process to a language model produces something that reads like a journal entry but does not function like one.',
+        'There is a more useful role for AI in the writing process. It can prompt you with questions you might not have thought to ask yourself. It can summarize a long entry back to you so you see your own thinking from a different angle. It can highlight a recurring word or theme and ask whether you want to explore it. These uses keep the writing itself in your hands while adding a layer of reflection on top.',
+        'A good test is to ask whether the AI is helping you write or writing for you. If your role has shifted from author to editor, the practice has changed shape in a way that probably does not serve you. Tools that are designed for genuine reflection, including Empath, focus on what comes after you have written, not on producing the entry on your behalf.',
+      ],
+    },
+    {
+      heading: 'Mistake 4: Skimming past the privacy and encryption fine print',
+      body: [
+        'Most people do not read privacy policies, and journaling apps know this. The fine print is where you find out whether your entries are encrypted in transit and at rest, who at the company can read your content, what happens to your data if the company is acquired, and how long entries are retained after you delete your account. None of these are minor details for a tool that stores your inner life.',
+        'Encryption at rest means your entries are stored in encrypted form on the company\'s servers, which protects you if the servers are breached. End-to-end encryption goes further by ensuring that only you can decrypt the content, which protects you even from the company itself. The two are often confused in marketing copy, and the difference matters. If a company can read your entries when it wants to, an attacker who compromises the right credentials can too.',
+        'There have been several enforcement actions against mental health apps in recent years, including a notable Federal Trade Commission settlement with a mental health platform that shared sensitive user data with advertisers despite promising it would not. The 2023 Mozilla Privacy Not Included reviews of mental health apps flagged a majority of the apps tested for serious privacy concerns. These are not theoretical risks. They are documented patterns in the category.',
+        'A practical rule of thumb is to assume that anything you write in a journaling app could one day become public, then decide whether the company\'s privacy practices make that risk acceptable. Empath operates on healthcare-grade privacy standards because journal content is best treated like protected health information, not like a social media post. If a tool you are evaluating cannot describe its encryption and data handling in plain language, that is informative on its own.',
+      ],
+    },
+    {
+      heading: 'Mistake 5: Writing for the algorithm instead of yourself',
+      body: [
+        'A quieter problem with AI journaling is what happens to authenticity when you know the AI is reading. Many users start performing for the system, writing in a clearer, more articulate, more emotionally legible voice than they would in a private notebook. They avoid topics they suspect will produce unhelpful responses. They lean into themes that the AI seems to engage with most thoughtfully. Over time, the journal becomes a record of how the user wants to appear to the AI rather than how they actually feel.',
+        'Psychologists call this the observer effect in self-report, and it shows up across self-tracking tools, not just journaling. The act of being measured changes the thing being measured. In journaling, this is especially costly because the practice depends on honesty. An entry full of carefully chosen, presentable language is not doing the work of an entry written messily and truthfully at the end of a hard day.',
+        'The risk is highest when the AI provides immediate, conversational feedback. The more the tool feels like a listener, the more naturally you begin to address it. This can be helpful for people who struggle to write into a blank page, but it can also turn the journal into a performance. Tools that delay feedback, summarize gently, or focus on long-term patterns tend to invite more honest writing than tools that respond to every entry with warm commentary.',
+        'A useful corrective is to write a portion of your entries with no expectation of feedback at all, or to use a tool that emphasizes longitudinal reflection over conversational interaction. Empath\'s approach favors patterns over reactions, so users tend to write the way they would in a private journal rather than the way they would in a chat. Whichever tool you use, periodically check whether you are writing for yourself or curating yourself for an audience that does not really exist.',
+      ],
+    },
+    {
+      heading: 'Mistake 6: Reading the AI summary instead of your own entries',
+      body: [
+        'Modern AI journaling tools produce summaries, weekly recaps, and themed insights. These are useful, and they are often the feature that distinguishes a good AI journal from a plain text file. The mistake is letting the summary replace the original. Users start reading the AI\'s version of their week instead of rereading what they actually wrote, and the summary subtly becomes their memory of the period.',
+        'This matters because language models compress. A weekly summary necessarily flattens detail, picks dominant themes, and smooths over contradictions. Your own raw entries contain texture that the summary loses: the small turn of phrase that surprised you, the resentment you talked yourself out of by the end of the entry, the specific image that explained your mood better than any label. If you only read the summary, you lose access to the parts of your own writing that often matter most.',
+        'There is also an interpretation risk. A summary is the AI\'s reading of your entries, and that reading can be subtly wrong. It may label a difficult week as anxious when the underlying feeling was grief, or call a productive week balanced when it was actually frantic. If you accept the summary uncritically, you end up adopting the AI\'s framing of your own life. Over months, that framing can shape how you think about yourself in ways that have little to do with what you originally felt.',
+        'The fix is simple and consistent across tools. Treat AI summaries as a useful starting point and reread your original entries on a regular cadence, especially before any high-stakes reflection like a therapy session, a major decision, or an annual review of your year. Empath is built around longitudinal review of real entries, with summaries that point you back toward what you wrote rather than standing in for it. Whatever tool you use, the summary is a lens, not the picture.',
+      ],
+    },
+    {
+      heading: 'Mistake 7: Using an AI journal that resets every session',
+      body: [
+        'A surprising number of people journal with general-purpose AI assistants that have no real memory of previous sessions. Each conversation starts from scratch, and any continuity across days or weeks depends on the user manually re-supplying context. This works for one-off conversations, but it does not work for journaling, where most of the value comes from pattern detection over time.',
+        'The point of an AI-assisted journaling practice is to notice the patterns you cannot easily see on your own. That requires the tool to actually hold the history. If the AI cannot remember that you have been writing about the same conflict for three weeks, that your sleep tends to deteriorate before you start describing yourself as overwhelmed, or that your mood reliably shifts in certain months, it can only react to whatever you wrote today. The reflective layer that justifies using AI in the first place is missing.',
+        'Real longitudinal memory in a journaling context also requires that the storage is structured around you rather than around individual conversations. The system needs to know which entries belong together, how they relate over time, and what signals across weeks are worth surfacing. This is a different design problem from a stateless chatbot, and it is one of the reasons that journaling-specific tools tend to outperform generic AI for this use case.',
+        'Empath is built around longitudinal memory by design. It treats every voice call, text message, and in-app entry as part of a continuous record, which is what enables pattern detection across months rather than minutes. If you are using AI for journaling, the question to ask is whether the tool can actually see your history or whether it is starting fresh each time you open it. The difference between those two experiences is the difference between a reflective practice and a series of disconnected notes.',
+      ],
+    },
+    {
+      heading: 'How to do AI journaling well',
+      body: [
+        'The mistakes above share a common shape. They tend to happen when AI journaling drifts away from its strongest use case, which is supporting your own honest reflection over time, and toward something else, whether that is performance, dependence, or convenience. Doing it well is mostly a matter of staying anchored to the original purpose. Write for yourself, in your own words, with a tool that you trust to handle the content responsibly.',
+        'Practically, that means a few habits worth building. Choose a tool whose privacy policy you have actually read and whose data practices you can describe in a sentence. Write your own entries, even when an AI could draft them faster. Reread your original writing alongside any AI summaries. Treat insights as hypotheses rather than verdicts. And keep the practice connected to whatever human support you have, whether that is a therapist, a partner, a friend, or a community.',
+        'It is also worth periodically auditing your relationship with the tool. Are you writing more honestly than you were six months ago, or less? Are the insights helping you act differently, or are they becoming a kind of self-narration you read and forget? Is the journal complementing your other relationships, or quietly substituting for them? These are not questions a tool can answer for you, which is part of why they matter.',
+        'Empath is designed around the assumption that the user is the expert on their own life and that the AI\'s job is to support reflection rather than direct it. The multimodal options, including voice calls, text messages, and in-app voice and typing, exist to make honest journaling possible in real conditions, not to add features for their own sake. Whatever tool you choose, the same principle applies. The best AI journaling practice is the one that keeps you in the center and uses the technology to serve that, not the other way around.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Is it okay to use AI journaling instead of therapy?',
+      answer:
+        'No. AI journaling can be a useful complement to therapy, but it cannot provide clinical assessment, crisis intervention, or the genuine therapeutic relationship that drives change. If you are dealing with serious symptoms, a journaling tool is not a substitute for a qualified clinician. Empath is explicitly designed to work alongside professional care rather than replace it.',
+    },
+    {
+      question: 'How do I know if a journaling app trains AI on my entries?',
+      answer:
+        'Read the privacy policy and the terms of service, and look for a clear, plainly worded statement about whether your content is used to train or improve AI models. Vague language is usually a signal to keep looking. Tools that take this seriously tend to commit to no training on user data in writing, and Empath is one of them.',
+    },
+    {
+      question: 'Is it bad to let AI write my journal entries for me?',
+      answer:
+        'It defeats most of the purpose. The benefits of journaling come from the process of putting your own experience into words, which is the part that helps you organize emotion and make meaning. AI can usefully prompt you, summarize your writing, or ask follow-up questions, but the entry itself should be yours. If you have shifted from writing to editing AI output, the practice has changed in a way that probably does not serve you.',
+    },
+    {
+      question: 'What is the difference between encryption at rest and end-to-end encryption?',
+      answer:
+        'Encryption at rest means your entries are stored in encrypted form on the company\'s servers, which protects against many breach scenarios but still allows the company to access your data internally. End-to-end encryption means only you hold the keys to decrypt your content, so even the company cannot read it. Both are improvements over plain storage, and the right standard depends on how sensitive your content is and how much you trust the provider.',
+    },
+    {
+      question: 'Why does longitudinal memory matter in an AI journal?',
+      answer:
+        'Most of the value of AI journaling comes from pattern detection across weeks and months, not from reacting to a single entry. A tool with no memory of your past entries can only respond to what you wrote today, which misses the point of using AI in the first place. Empath is built around continuous longitudinal memory across voice, text, and in-app entries, which is what makes meaningful pattern detection possible.',
+    },
+    {
+      question: 'How do I avoid writing for the algorithm instead of myself?',
+      answer:
+        'Notice whether your entries have become more polished, more articulate, or more performative over time. If they have, try writing some entries with no expectation of AI feedback, or use a tool that emphasizes long-term review over conversational responses. The goal is to write the way you would in a private notebook, even when you know the tool is reading.',
+    },
+    {
+      question: 'What should I check before signing up for an AI journaling app?',
+      answer:
+        'At minimum, verify that the app does not train AI on your data, uses strong encryption, has a clear data retention and deletion policy, and is transparent about its limits. For anything you might share with a clinician, look for HIPAA-compliant infrastructure. If a tool is unwilling to describe these practices in plain language, that is meaningful information about how it handles your content.',
+    },
+  ],
+},
+// Article 16
+{
+  id: 'j16',
+  title: 'Warning: Read This Before You Use AI for Journaling',
+  seoTitle: 'AI Journaling Warning: What to Know Before You Start | Empath',
+  metaDescription:
+    'AI journaling can be powerful and deeply useful, but there are real risks worth understanding first. A calm, evidence-led guide to the questions to ask before you sign up.',
+  excerpt:
+    'AI journaling is not anti-user by design, but a few category-wide patterns are worth knowing before you trust an app with your inner life. Here is what to look for, and what to ask.',
+  author: 'Empath Team',
+  date: 'May 8, 2026',
+  readTime: '17 min read',
+  category: 'AI & Technology',
+  slug: 'ai-journaling-warning',
+  keyword: 'AI journaling warning',
+  intro:
+    'AI journaling can be one of the most rewarding habits you build. Done well, it deepens self-awareness, surfaces patterns you would never notice on your own, and can meaningfully complement therapy. Done carelessly, it can expose your most private thoughts to companies you would not choose to trust, create a quiet dependency on a tool that was never designed to bear that weight, or distort your self-understanding through the limits of a language model. Most of the people who run into these problems are not careless. They simply did not know which questions to ask before signing up. This guide is a calm walk through the real risks of AI journaling, the regulatory and design gaps that make some of them more common than they should be, and the small set of checks that separate a responsible tool from a risky one.',
+  sections: [
+    {
+      heading: 'The privacy problem most people do not think about',
+      body: [
+        'A paper journal is, in security terms, an air-gapped device. The only realistic risk is that someone physically finds it. An AI journal is the opposite. Your entries travel over the internet, are stored on a company\'s servers, are processed by language models that may run on third-party infrastructure, and are potentially reviewed by employees as part of quality assurance or model evaluation. None of this is inherently wrong, but it is a fundamentally different threat model from a notebook in a drawer.',
+        'Most users mentally model an AI journaling app as a private space, when it is closer to a private message sent through a company\'s servers. The content is still personal, but the operational reality is that it has been replicated, indexed, and processed by systems you do not see. This shift matters most for the topics people are most likely to write about in a journal: mental health, relationships, work struggles, family conflict, financial fear, and identity.',
+        'The 2023 Mozilla Privacy Not Included reviews of mental health and prayer apps flagged a majority of the apps tested for serious privacy concerns, including unclear data sharing practices and weak consent mechanisms. The Federal Trade Commission has brought enforcement actions against mental health platforms that shared sensitive user information with advertisers in violation of their own stated policies. The pattern is consistent enough that treating any consumer wellness app as private by default is no longer reasonable.',
+        'The fix is not to avoid AI journaling, but to choose tools that treat journal content with healthcare-grade seriousness. Empath operates on HIPAA-compliant infrastructure and commits in writing to not training AI models on user entries, because journal content is closer to a clinical record than to a social media post. Whatever tool you choose, the question to ask is not whether it claims to be private, but how its privacy practices would hold up if you read them line by line.',
+      ],
+    },
+    {
+      heading: 'Why a free AI journaling app may not really be free',
+      body: [
+        'Building and running a modern AI journaling app is expensive. Language model inference, secure storage, mobile development, and customer support all cost real money, and there is no version of an AI tool that is free to operate. When a journaling app is offered for free with no obvious monetization, it is worth asking how the company actually pays its bills.',
+        'The most common answers are advertising, data sale to third parties, and use of user content to train AI models that are then sold or licensed. Each of these is a tradeoff between price and privacy, and each becomes more concerning when the data in question is journal content. The information density of a journal entry, with its names, dates, employers, medical details, and emotional context, makes it especially valuable for behavioral profiling and targeting.',
+        'A second pattern is the freemium tier that is functionally a trial. The app appears free, but core features are locked behind a paywall, free entries are limited per day or week, or the content you have already written is held hostage behind an upgrade prompt. These models are not necessarily exploitative, but they are worth recognizing for what they are. The free experience is a sales funnel, not the product.',
+        'A genuinely sustainable AI journaling app is usually one that charges a clear subscription, explains its costs honestly, and does not monetize your content in the background. Empath offers a transparent pricing model and does not subsidize its operations by selling or training on user data. If a tool you are considering cannot answer the question of how it makes money in a sentence, that is a useful signal in itself.',
+      ],
+    },
+    {
+      heading: 'The dependency risk no one warns you about',
+      body: [
+        'AI journaling tools are designed to be engaging, and the same qualities that make them effective can quietly make them habit-forming in ways that are not always healthy. The conversational interface remembers you, validates you, never has a bad day, and is always available at 2 a.m. For people who are isolated, anxious, or short on support, this can fill a real gap. It can also crowd out the human relationships and professional care that are doing the actual long-term work.',
+        'Researchers studying parasocial relationships with chatbots have documented patterns where users begin to prefer the AI over human connection because the AI is lower-friction, more predictable, and less likely to disappoint. This is not unique to journaling apps, but it shows up here because journaling is intimate by nature. The longer you write to a system that responds warmly, the more naturally it begins to feel like a relationship.',
+        'There is nothing wrong with finding comfort in a tool. The risk is when comfort becomes substitution. If your journaling app is the only place you talk about how you actually feel, the tool has moved into a role it was never designed to fill, and the human supports in your life have receded by the same amount. Therapists, friends, and family are not interchangeable with an AI, and a journaling practice that depends entirely on a chatbot is missing the people who do the most for you over time.',
+        'A simple check is to ask whether your AI journaling is adding to your reflective life or replacing parts of it. Empath is designed around the assumption that the AI is one input among many and that the user\'s relationships, including with a therapist where relevant, are doing the central work. Tools that position themselves as your closest confidant are usually overpromising, regardless of how well they perform in any single session.',
+      ],
+    },
+    {
+      heading: 'Hallucination and the limits of AI pattern detection',
+      body: [
+        'Large language models hallucinate. They produce confident, well-formed statements that are not true, and the rate at which they do so varies by task and model. In an AI journaling context, hallucination most often shows up not as obvious fabrications but as subtle interpretive errors. The model labels a difficult week as anxious when the underlying feeling was grief, identifies a theme that is not actually present in your entries, or claims a pattern across weeks that does not survive a careful rereading.',
+        'These errors are easy to miss because the output reads like a thoughtful observation. If a friend told you that you seemed to be wrestling with perfectionism, you might pause and consider whether they were right. If an AI summary tells you the same thing, you may simply accept it, especially if the tool has been useful in other ways. Over months, the accumulated influence of small interpretive errors can shape your self-understanding in ways that have little to do with what you originally wrote.',
+        'The deeper limitation is that AI pattern detection is statistical, not psychological. It identifies correlations in language across your entries, but it does not understand your life. It cannot tell the difference between a healthy boundary and avoidance, between productive ambition and burnout, or between a temporary low and a clinical depression. Those distinctions require human context, and often professional judgment, neither of which a language model can supply.',
+        'The right posture is to treat AI insights as hypotheses, not verdicts. Reread the original entries the AI is summarizing, hold the interpretation lightly, and bring anything that genuinely concerns you to a person who can engage with the full context. Empath\'s design encourages this kind of review by keeping the underlying entries central and using AI insights to point back toward your own writing rather than substitute for it.',
+      ],
+    },
+    {
+      heading: 'The regulatory gap most journaling apps sit inside',
+      body: [
+        'Most journaling apps are not regulated as medical devices, are not covered by HIPAA, and are not subject to the same data protection standards as a clinic or a hospital. This is not necessarily wrong, because a journal is not inherently medical, but it creates a regulatory gap that consumers often misunderstand. The protections that apply when you tell your doctor about a panic attack do not apply when you write the same words into a wellness app.',
+        'HIPAA in the United States covers covered entities and their business associates, which generally means healthcare providers, health plans, and the vendors that serve them. A direct-to-consumer journaling app that has no clinical relationship with you is typically outside of HIPAA\'s scope, which means its data handling is governed by its own privacy policy and the general consumer protection rules of its jurisdiction. Those rules are looser than HIPAA in most countries.',
+        'The European Union\'s General Data Protection Regulation provides stronger general protections, including the right to access, correct, and delete your data, but it is not specific to health content. Other jurisdictions have varying levels of protection, and in many places, mental health content in a consumer app has no special status at all. The result is that the same entry can be protected very differently depending on where the app is based, where you live, and whether the company has chosen to apply stricter standards voluntarily.',
+        'Some tools have chosen to apply healthcare-grade standards regardless of whether they are strictly required to. Empath operates on HIPAA-compliant infrastructure because journal content is best treated like protected health information, not because consumer law forces that choice. When you evaluate any AI journaling tool, it is worth asking which standard it has chosen to meet, and whether that choice is documented or only implied.',
+      ],
+    },
+    {
+      heading: 'What to verify before you sign up',
+      body: [
+        'The most useful pre-signup check is the privacy policy, read with specific questions in mind rather than as a wall of legalese. Look for an explicit statement on whether your entries are used to train AI models, whether they are shared with third parties, how long they are retained after deletion, and what happens to your data if the company is acquired or shuts down. If any of these are unclear, the answer is usually that the company has not committed to a strong position.',
+        'A second check is the security model. The relevant questions are whether entries are encrypted in transit and at rest, who at the company can technically access your content, and whether the architecture supports end-to-end encryption or relies on the company being trustworthy. None of these answers are inherently disqualifying, but you should know which model the tool uses before you write anything sensitive into it.',
+        'A third check is the role the tool claims for itself. There is a meaningful difference between a journaling tool that supports reflection and a chatbot that markets itself as a therapist or counselor. The first is honest about its limits and tends to encourage you to seek human support when appropriate. The second is making clinical claims that consumer software is generally not qualified to make. Marketing language is often the clearest signal of which category a tool falls into.',
+        'A final check is whether the company\'s incentives are aligned with yours over the long run. A tool funded by subscriptions has an incentive to be useful enough that you continue paying. A tool funded by data has an incentive to keep you producing content. A tool funded by advertising has an incentive to maximize engagement. None of these are automatically bad, but they predict different design choices. Empath\'s model is a transparent subscription with no data monetization, which is the alignment most users would choose if they were asked.',
+      ],
+    },
+    {
+      heading: 'How to use AI journaling responsibly',
+      body: [
+        'The responsible use of AI journaling looks a lot like the responsible use of any other tool that handles sensitive information. Choose a provider whose practices you trust, understand the limits of what the tool can do, keep human support in the loop, and audit the relationship every few months to make sure it is still serving you. None of this is dramatic. It is the same kind of attention you would bring to a banking app or a healthcare portal.',
+        'On the writing side, the most useful habit is to keep your entries genuinely yours. Write in your own voice, even when the AI could draft something more polished. Be honest, even when you suspect the AI will not handle a topic well. Read your own entries periodically, not just the AI summaries, so the tool stays in the role of assistant rather than narrator. These habits are small individually and substantial in combination.',
+        'On the reflection side, treat AI insights as starting points rather than conclusions. When the tool surfaces a pattern, ask whether the underlying entries actually support it. When the tool labels a feeling, ask whether the label fits or whether you would have used a different word. The goal is to use the AI to deepen your self-awareness, not to outsource it. The best AI journaling experiences tend to be the ones where the user is the most actively engaged with the output.',
+        'On the support side, keep the people in your life close. An AI journal can help you prepare for a therapy session, notice a recurring theme worth bringing up with a friend, or organize your thinking before a difficult conversation. It cannot do the work of those relationships. Empath is designed to fit into a life that already has human support and to make that support more effective, which is the role AI journaling is best suited to play.',
+      ],
+    },
+    {
+      heading: 'When to put the app down and talk to a person',
+      body: [
+        'There are situations where an AI journal is not the right tool, no matter how good it is. If you are experiencing thoughts of harming yourself or someone else, if your symptoms are interfering meaningfully with your work, sleep, or relationships, or if you find yourself in a sustained low that does not respond to anything you try, the next step is a person, not a prompt. A clinician can do things an AI cannot, including assess risk, coordinate care, and stay with you through a real crisis.',
+        'It is also worth talking to a person when the journaling itself starts to feel like a problem. If you are writing compulsively, if your entries are becoming a place to spiral rather than to reflect, or if you notice that you are using the AI to avoid harder conversations in your life, those are signals that the tool has moved into a role it was not designed for. None of this means journaling is bad. It means the practice needs an adjustment, and a therapist or counselor is the right partner for that.',
+        'For users who already work with a therapist, the journal can be one of the most useful inputs to that relationship. A consistent record of how you actually felt during the week, surfaced patterns that you might not have noticed on your own, and a few well-formed questions to bring into the room are all things an AI journal can produce. The point is to make the session better, not to make it unnecessary.',
+        'Empath is built around this division of labor. The AI handles the parts it is genuinely good at, including longitudinal pattern detection, gentle prompting, and structured review of your writing over time. The harder work, including clinical judgment, crisis response, and the long arc of a therapeutic relationship, stays with the humans who are trained for it. That separation is not a limitation. It is the design that makes AI journaling responsible in the first place.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Is AI journaling actually safe to use?',
+      answer:
+        'It depends entirely on which tool you choose. A well-designed AI journaling app with strong encryption, a clear no-training policy, and HIPAA-grade infrastructure is reasonable to use for almost any reflection. A free app with vague privacy practices and a business model that depends on your data is a meaningfully different proposition. Empath is built to the first standard, but the broader category includes both.',
+    },
+    {
+      question: 'What is the biggest risk of using an AI journal?',
+      answer:
+        'The two risks worth taking seriously are privacy exposure and quiet substitution for human support. Privacy exposure shows up when your entries are used to train models, shared with third parties, or stored without strong encryption. Substitution shows up when the AI becomes the only place you talk about how you actually feel, and the people in your life recede by the same amount.',
+    },
+    {
+      question: 'Are free AI journaling apps trustworthy?',
+      answer:
+        'Some are and many are not. The question to ask is how the company actually makes money. If a tool offers a sophisticated AI experience for free with no clear revenue model, the funding usually comes from advertising, data sale, or use of your content to train models. None of these are automatically disqualifying, but you should know which one applies before writing anything sensitive into the app.',
+    },
+    {
+      question: 'Can AI journaling apps misinterpret my entries?',
+      answer:
+        'Yes, and they sometimes do. AI pattern detection is statistical rather than psychological, which means it can label feelings incorrectly, identify themes that are not really present, or claim patterns that do not hold up on careful rereading. Treat AI insights as hypotheses to consider, not verdicts to accept, and reread your original entries to keep the interpretation honest.',
+    },
+    {
+      question: 'Is AI journaling HIPAA-compliant by default?',
+      answer:
+        'No. Most consumer journaling apps sit outside of HIPAA because they do not have a clinical relationship with their users, which means their data handling is governed only by their own privacy policy and general consumer protection law. Empath chooses to operate on HIPAA-compliant infrastructure regardless, because journal content is best treated like protected health information.',
+    },
+    {
+      question: 'How do I know if I am too dependent on my AI journal?',
+      answer:
+        'A useful check is whether the journal is adding to your reflective life or replacing parts of it. If your AI journal is the only place you talk about how you actually feel, if you find yourself preferring it to conversations with the people in your life, or if you notice that it is becoming a substitute for therapy you should probably be in, the relationship has shifted. Adding human support is the right response, not asking the tool to do more.',
+    },
+    {
+      question: 'When should I stop journaling and talk to a person?',
+      answer:
+        'If you are experiencing thoughts of harming yourself or someone else, if your symptoms are seriously interfering with your daily life, or if you are in a sustained low that does not respond to your usual coping strategies, the next step is a clinician, not an app. Journaling, AI or otherwise, is not a substitute for professional care in those situations. Empath is designed to complement that care, not to replace it.',
+    },
+  ],
+},
+// Article 17
+{
+  id: 'j17',
+  title: '10 Things to Avoid When Using AI for Journaling',
+  seoTitle: '10 Things to Avoid When Using AI for Journaling (2026) | Empath',
+  metaDescription:
+    'AI journaling can be transformative, but a few avoidable mistakes derail most people. Learn the 10 most common pitfalls and how to use AI for reflection responsibly.',
+  excerpt:
+    'AI journaling can deepen self-reflection, but a few avoidable mistakes can quietly undermine the practice. Here are ten pitfalls to watch for, and how to journal with AI responsibly.',
+  author: 'Empath Team',
+  date: 'May 15, 2026',
+  readTime: '16 min read',
+  category: 'AI & Technology',
+  slug: 'things-to-avoid-ai-journaling',
+  keyword: 'things to avoid AI journaling',
+  intro:
+    'AI journaling, done well, can be one of the most useful self-reflection tools to emerge in the last decade. It can surface patterns across hundreds of entries, ask better follow-up questions than most of us ask ourselves, and reduce the friction that keeps people from journaling at all. But the technology is still new, the marketing often outpaces the science, and the privacy landscape is uneven. A practice that should help you understand yourself can quietly drift into something less useful, or in some cases, something actively harmful to your data and your mental health. The good news is that almost every common pitfall is avoidable once you know what to look for. This guide walks through ten of the most consequential mistakes people make when adopting AI journaling, with practical context drawn from privacy research, behavioral science, and the broader literature on expressive writing.',
+  sections: [
+    {
+      heading: '1. Sharing With Apps That Train On Your Data',
+      body: [
+        'The single most important thing to verify before pouring your inner life into an AI journaling app is whether your entries will be used to train the company\'s models. This is not a hypothetical concern. Independent audits like Mozilla\'s Privacy Not Included reviews have repeatedly flagged mental-health and journaling apps for vague or permissive data-use language, and the U.S. Federal Trade Commission has taken action against mental-health platforms that shared sensitive user data in ways consumers did not reasonably expect.',
+        'The reason this matters is that training data is, by design, hard to fully retract. Once a model has seen your text, even anonymized fragments can influence its weights in ways that are not cleanly reversible. If you later change your mind or the company is acquired by a less careful operator, the data is already absorbed. Paper journals and locally encrypted apps do not have this problem, because there is no model on the other end learning from you.',
+        'When you read a privacy policy, look for explicit language. The phrase you want to see is something close to "we do not use your content to train AI models." Soft phrases like "we may use aggregated insights to improve our services" leave the door open to model training under a different name. If the policy is silent on the topic, assume the answer is unfavorable until you can confirm otherwise in writing.',
+        'Empath was built with this constraint in the foundation rather than bolted on later. User journal content is never used to train AI models, and the infrastructure is HIPAA-compliant, which imposes stricter handling requirements than a typical consumer app. That is not a marketing flourish; it is a baseline most people should expect from any tool that holds their inner life.',
+      ],
+    },
+    {
+      heading: '2. Treating AI Like a Therapist',
+      body: [
+        'AI journaling tools have become remarkably good at sounding empathetic. Modern language models can validate feelings, ask reasonable follow-up questions, and produce reflections that read as thoughtful. The risk is that this performance of care gets mistaken for the real thing, and people begin to substitute AI conversations for clinical support they actually need.',
+        'A therapist does several things an AI cannot. They hold a long-term relationship that itself is therapeutic. They assess risk in real time, including risk you may not be aware of yourself. They adapt their approach based on training, supervision, and accumulated case experience, and they are accountable to a licensing body if something goes wrong. None of that exists in an AI chat window, no matter how kind the responses sound.',
+        'The practical danger is most acute around crisis moments. If you are in acute distress, having suicidal thoughts, or working through trauma, an AI journaling app is not the right primary support. Many apps include crisis-resource handoffs, which is good, but the handoff is only useful if the user takes it. People who have built up a sense that the AI "gets them" sometimes resist that handoff, which is the opposite of what should happen in a crisis.',
+        'A healthier framing is to treat AI journaling as a between-sessions companion, not a replacement for sessions. Empath was explicitly designed to complement therapy rather than replace it, which is why many users bring summaries and patterns from their entries into their next appointment. The AI helps you notice; the human helps you heal.',
+      ],
+    },
+    {
+      heading: '3. Letting the AI Write For You',
+      body: [
+        'One of the most subtle ways AI journaling goes wrong is when the user stops doing the reflective work and starts outsourcing it. This usually happens gradually. You begin by asking the AI to rephrase an entry, then to summarize a week, then to draft "what you would write if you had more time." At some point, the journal contains more of the model\'s voice than your own, and the practice loses most of its psychological value.',
+        'The expressive writing literature, much of it built on decades of research by James Pennebaker and colleagues, is fairly clear that the benefit of journaling comes from the act of articulating your own experience in your own words. The struggle to find language for something half-formed is where insight tends to happen. If a model finishes the sentence for you, you get a clean paragraph but lose the cognitive work that produces understanding.',
+        'There is also an authorship problem that compounds over time. If you reread entries a year later and cannot tell which thoughts were yours and which were the model\'s, the journal loses its function as a record of your inner life. It becomes a co-authored document with a partner who has no skin in the game. That is fine for a blog post; it is not fine for the only longitudinal account of your own mind.',
+        'A reasonable rule of thumb is that the AI should ask questions, surface patterns, and reflect what you wrote back to you, but the prose in the entry itself should be yours. Use AI as a mirror and a prompt machine, not a ghostwriter. The friction of writing badly in your own voice is part of the practice, not a bug to be optimized away.',
+      ],
+    },
+    {
+      heading: '4. Skipping Encryption and Privacy Policy Fine Print',
+      body: [
+        'Most people will not read a ten-page privacy policy, and product teams know this. The result is that a lot of consequential detail lives in language that is technically disclosed but practically invisible. Before committing to an AI journaling app for any length of time, it is worth spending fifteen minutes skimming the policy specifically for a handful of items: how data is encrypted, where it is stored, who can access it internally, how long it is retained after deletion, and what happens if the company is sold.',
+        'Encryption in transit is now standard and means very little on its own. What matters more is encryption at rest, ideally with strong key management, and in some cases end-to-end encryption where the provider itself cannot read your entries. Each model has trade-offs. End-to-end encryption is the strongest privacy posture but limits what AI features the app can offer, since the server cannot see plaintext. Server-side encryption with strict access controls is a common middle ground that preserves AI features while still protecting against most realistic threats.',
+        'Data retention after deletion is another underread section. Some apps continue to hold "backups" or "anonymized" copies for months or years after you delete your account. If your goal is to be able to fully withdraw your information later, you want a clear, time-bound retention policy and a documented deletion path. "We will delete your data upon request, subject to legal and business requirements" is a phrase that quietly preserves the company\'s right to keep almost anything.',
+        'Apps operating under HIPAA, like Empath, are bound to a tighter baseline because health-information regulation imposes specific requirements around access logging, breach notification, business-associate agreements, and minimum-necessary use. That does not make any single HIPAA-compliant app automatically perfect, but it removes a significant amount of guesswork about the floor.',
+      ],
+    },
+    {
+      heading: '5. Using Apps Without Longitudinal Memory',
+      body: [
+        'Many AI tools that look like journaling apps are actually thin chat interfaces over a stateless model. Each session begins from scratch. The AI may seem to remember earlier sessions because you paste in context, but under the hood it has no durable view of who you are, what you have been through, or what patterns are emerging in your life. For one-off venting, that is fine. For journaling, it is a significant limitation.',
+        'The reason longitudinal memory matters is that the most valuable journaling insights are almost never visible in a single entry. They show up across weeks and months: the recurring trigger you only notice on the third occurrence, the seasonal mood pattern that takes two years of data to confirm, the slow shift in how you talk about a relationship. A stateless chatbot cannot see any of that, no matter how clever it sounds inside a single conversation.',
+        'When evaluating an app, it is worth asking what it actually remembers. Does it index entries so the AI can reference your own prior writing? Can it produce summaries that span a month or a quarter? Does it surface patterns you did not ask about, or only respond to direct prompts? An app that cannot do these things is a useful writing surface but not really a journaling AI in any meaningful sense.',
+        'Empath was designed around this longitudinal view. Patterns are detected across entries rather than reset each session, which is what makes voice calls, text messages, and in-app entries combine into a coherent picture over time rather than a series of disconnected snapshots. Without that continuity, the AI is essentially meeting you for the first time every day.',
+      ],
+    },
+    {
+      heading: '6. Writing for the Algorithm Instead of Yourself',
+      body: [
+        'There is a quiet failure mode where users begin to write differently because they know an AI is reading. The entries get more articulate, more structured, sometimes more positive. The rough edges that make journaling therapeutic get sanded off, because the user has internalized an imagined reader who is graded on whether their week looks good. This is a documented version of the broader observer effect in psychology: behavior shifts when people know they are being watched, and the same shift can quietly distort a journaling practice.',
+        'The cost is not abstract. Pennebaker\'s expressive writing research suggests that the therapeutic benefits of journaling come disproportionately from writing about difficult, unresolved, or emotionally messy material. If the practice starts selecting for entries that read well, the entries that would actually help most never get written. Over time, the journal becomes a curated highlight reel rather than an honest record.',
+        'One useful corrective is to deliberately write entries you have no intention of sharing or summarizing. Resist the urge to read the AI\'s response immediately after writing. Some users find it helpful to keep a small portion of their journal completely outside the app, in a paper notebook or a fully local note, specifically for material that feels too tender or too unflattering to entrust to any system.',
+        'It is also worth checking your own writing periodically against a simple question: would you write this the same way if no AI were going to read it? If the honest answer is no, that is useful information about the practice, not a failure of the tool. The remedy is usually to write rougher, not to find a better app.',
+      ],
+    },
+    {
+      heading: '7. Over-Relying on AI Summaries Instead of Reading Your Own Entries',
+      body: [
+        'AI-generated summaries are genuinely useful. They can compress a month of entries into a few paragraphs, highlight emotional themes, and surface things you would not have spotted on your own. They are also, by design, a compression, which means information is being lost on purpose. The mistake is treating the summary as a substitute for the underlying entries rather than as a pointer back into them.',
+        'There is a specific class of insight that only emerges from rereading your own words. The way you described a relationship two months ago, the small detail you mentioned and then never returned to, the change in vocabulary you use when you describe your work. These artifacts almost never survive summarization, because they are not the kind of pattern the model is trained to extract. They are the kind of pattern that catches you off guard when you reread, and that surprise is often where personal insight lives.',
+        'A reasonable practice is to read the AI summary, then go back and skim the actual entries it was built from at least occasionally. Monthly is usually enough. You are not trying to audit the AI; you are giving yourself the chance to encounter your past self directly rather than through a model\'s interpretation. The two activities are complementary, and neither one replaces the other.',
+        'It is also worth being skeptical of confident-sounding AI summaries, especially when they categorize your emotional life with clean labels. Real inner lives rarely sort cleanly into "themes," and a summary that sounds too tidy is often smoothing over exactly the contradictions and ambiguities that matter most. Treat AI summaries as drafts of a possible interpretation, not the official transcript.',
+      ],
+    },
+    {
+      heading: '8. Ignoring Modality Mismatch and Quiet Red Flags',
+      body: [
+        'A surprisingly large share of failed journaling habits come down to a simple modality mismatch. The user signed up for an app that requires typing, decided typing felt like a chore on hard days, and stopped journaling on exactly the days when journaling would have helped most. The right modality depends on the moment. Sometimes a five-minute voice ramble in the car is the only realistic option. Sometimes a single sentence sent by text is enough. Sometimes a long, considered written entry is what the day calls for.',
+        'This is one of the reasons Empath supports multiple inputs by design: phone call, SMS text, in-app typing, and in-app voice all flow into the same longitudinal record. The point is not novelty for its own sake; it is that a journaling practice survives much longer when it adapts to your day instead of demanding that your day adapt to it. BJ Fogg\'s habit research has been making variations of this point for years: behaviors that require less friction get repeated, and behaviors that require more get dropped.',
+        'The final pitfall worth naming is ignoring quiet red flags about the app itself. Privacy policies that change without clear notice, a sudden acquisition by a company in an unrelated industry, vague answers to direct data-handling questions, or new features that read more like advertising hooks than reflection tools. None of these individually mean an app is unsafe, but together they often mean the product\'s priorities are shifting in a direction that is no longer aligned with the user\'s.',
+        'A useful habit is to do a brief annual check on whatever app holds your journal. Reread the current privacy policy, confirm export and deletion still work, and make sure the company\'s public posture still matches what attracted you in the first place. If something has quietly changed, you want to know before you have another year of entries inside it. The whole point of journaling is to know yourself better over time; the tooling around it should make that easier, not quietly trade it away.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Is it safe to use AI for journaling at all?',
+      answer:
+        'For most people, yes, provided the app is carefully chosen. The core risks come from how a specific product handles data, not from AI journaling as a category. Look for clear statements that your entries are not used to train models, strong encryption, a defined retention policy, and ideally compliance frameworks like HIPAA. If those pieces are in place, AI journaling can be both useful and reasonably private.',
+    },
+    {
+      question: 'How can I tell if an AI journaling app trains on my data?',
+      answer:
+        'Read the privacy policy and look for an explicit statement one way or the other. The clearest sign is direct language such as "we do not use your content to train AI models." If the policy is vague or talks about using "aggregated" or "anonymized" data to "improve services," treat that as ambiguous and ask support for clarification in writing. Silence on the topic generally favors the company, not the user.',
+    },
+    {
+      question: 'Can AI journaling replace seeing a therapist?',
+      answer:
+        'No. AI journaling can complement therapy by helping you notice patterns, prepare for sessions, and reflect between appointments, but it cannot provide diagnosis, crisis intervention, or the long-term therapeutic relationship that drives real healing. If you are in acute distress or working through trauma, the AI is best treated as a journaling tool that points you toward professional support, not as a substitute for it.',
+    },
+    {
+      question: 'What is the difference between AI that remembers and AI that does not?',
+      answer:
+        'Some AI journaling tools are essentially stateless chatbots that start from zero each session. Others maintain a longitudinal view of your entries and can reference patterns across weeks or months. The longitudinal version is much closer to what people usually mean by "AI journaling," because the most valuable insights tend to require continuity. Empath is built around that continuity rather than around isolated chats.',
+    },
+    {
+      question: 'Should I let the AI write entries for me to save time?',
+      answer:
+        'Generally no. The therapeutic value of journaling comes largely from the act of putting your own experience into your own words, even when the words come out clumsy. AI is best used to ask questions, surface patterns, and reflect content back, while the entries themselves stay in your voice. A journal mostly written by a model is a fine artifact but does not produce the same psychological benefits.',
+    },
+    {
+      question: 'What should I do if my journaling app gets acquired or changes its policy?',
+      answer:
+        'Treat it as a prompt for a careful re-read. Look at the new privacy policy, confirm whether data-handling practices have changed, and verify that export and deletion still work the way they used to. If the new terms are materially worse, export your data and consider moving to a different tool. A journal is a long-lived asset, and the underlying product\'s posture toward your data should be something you actively re-consent to over time.',
+    },
+    {
+      question: 'How do I journal honestly when I know an AI is reading?',
+      answer:
+        'Awareness of an observer can quietly shift what you write, which is a documented effect in psychology. Useful corrections include writing entries you have no intention of reviewing as summaries, keeping a small portion of your reflection completely offline, and periodically checking whether you would write the same way if no AI were going to see it. The goal is honesty with yourself; the tool is supposed to serve that, not shape it.',
+    },
+  ],
 }
 ];
