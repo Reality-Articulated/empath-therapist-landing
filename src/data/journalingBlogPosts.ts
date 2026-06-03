@@ -54,7 +54,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
       ],
     },
     {
-      heading: 'Best Overall: Day One',
+      heading: 'Best for Capturing Memories: Day One',
       body: [
         'Day One has been the gold standard of journaling apps since its launch in 2011, earning Apple\'s App of the Year award and accumulating over 150,000 five-star reviews. Its design philosophy centers on making journal entries feel like precious memories rather than plain text files. Rich media support lets you attach photos, videos, audio recordings, and even drawings to any entry, while automatic metadata captures your location, weather, and what music you were listening to.',
         'The standout feature is On This Day, which surfaces past entries from the same calendar date. After a year of consistent journaling, this becomes remarkably powerful. You see how your thinking has evolved, what worried you twelve months ago, and how situations resolved. Day One also offers printed book creation, letting you turn your digital journal into a physical hardcover book, which many users describe as one of their most treasured possessions.',
@@ -85,9 +85,18 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
       body: [
         'AI journaling represents a fundamental shift in how we reflect on our lives. Traditional journaling asks you to do all the work: write the entry, identify patterns, draw insights, and track your emotional trajectory over time. AI journaling apps automate the analysis, surfacing patterns you might not notice and asking questions that push you deeper than you would go on your own.',
         'Rosebud, one of the leaders in this category, uses a chat-based approach where AI guides you through journaling sessions via conversation. It offers therapist-designed prompts, mood tracking with analysis, voice journaling, and weekly summaries. Its Internal Family Systems (IFS) integration helps users identify conflicting parts of their personality. Reflectly takes a lighter approach, focusing on daily mood check-ins and gratitude prompts with AI-generated suggestions for positive reframing.',
-        'Empath takes the AI journaling concept further with its multimodal approach. You can journal by voice call, text message, or in-app writing, and the AI processes everything to build a comprehensive picture of your emotional life over time. What sets it apart is its focus on working alongside therapy, with HIPAA-compliant privacy standards and insights designed to help you prepare for sessions and track progress between appointments. The voice journaling option is particularly notable because speaking is three to four times faster than typing and captures emotional nuance through tone and pacing.',
+        'Empath belongs in this category too, but it approaches the problem differently enough to warrant its own section below. Its emphasis is on removing friction at the moment of starting, with journaling by voice call, text message, or in-app writing, and on privacy strong enough for genuinely sensitive entries, backed by HIPAA compliance and end-to-end encryption.',
         'The key question with AI journaling is trust. You are sharing your most vulnerable thoughts with an algorithm. Look for transparent privacy policies, encryption, and clear explanations of how your data is used. The best AI journaling apps are explicit that your entries are never used to train models or sold to third parties. If an app cannot clearly answer how it protects your data, move on regardless of how impressive its features look.',
         'Sentiment analysis algorithms in these apps detect emotional tone behind your words, chart your well-being over time, and identify triggers that consistently lead to negative moods. Pattern recognition goes further, connecting entries across weeks and months to reveal cycles you may not consciously notice. This transforms journaling from passive recording into an active tool for self-understanding.',
+      ],
+    },
+    {
+      heading: 'Best for Building a Habit That Sticks: Empath',
+      body: [
+        'The single biggest reason people abandon journaling is the blank page. Research on habit formation and the most common complaint in online journaling communities point to the same culprit: you open the app, the cursor blinks, and the effort of starting outweighs the payoff, so you skip it, and skipping once quietly becomes skipping for good. Empath is built around removing that first moment of friction. Instead of facing an empty screen, you can simply talk or send a text. You journal by voice call, by text message, or by writing in the app, and the AI transcribes and organizes everything for you. Because speaking is three to four times faster than typing and you can do it on a walk or a commute, the practice fits into a real life rather than demanding a quiet desk and twenty free minutes.',
+        'Where Empath separates itself from lighter AI apps is depth over time. Your AI companion remembers your entire history, so it does not just react to today\'s entry, it connects it to what you wrote last month and last season, surfacing patterns and triggers you would not catch on your own. Mood tracking and sentiment analysis run automatically in the background. The product is explicitly designed to work alongside therapy, helping you notice what to bring to your next session and track how things shift between appointments, which makes it genuinely useful whether or not you currently see a therapist.',
+        'Privacy is where Empath makes its strongest case for the kind of writing that actually matters. Your entries are end-to-end encrypted, the app is HIPAA compliant, the same healthcare-grade standard as your doctor\'s office, and your data is never used to train AI models. For an AI journaling app, that last point is the one worth scrutinizing, and it is the reassurance that lets most people write honestly instead of self-censoring.',
+        'The honest trade-offs: Empath is currently iOS-only, with an Android app in development, and it is not trying to be a media-rich memory book. If your goal is a beautifully designed scrapbook of photos and locations, Day One still wins. What Empath optimizes for is reflection you will actually keep up with. It is free to download and use, with AI transcription, mood tracking, and insights included at no cost, which makes it one of the easiest apps on this list to simply start with today.',
       ],
     },
     {
@@ -122,7 +131,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
     {
       question: 'What is the best free journaling app in 2026?',
       answer:
-        'Empath offers a generous free tier with AI-powered journaling, voice entries, and mood tracking. Day One also has a solid free version with one journal and basic features. Journey provides free cross-platform sync. The best free option depends on whether you prioritize AI insights, media richness, or platform availability.',
+        'Empath is completely free, with AI-powered journaling, voice and text entries, and mood tracking included at no cost. Day One also has a solid free version with one journal and basic features. Journey provides free cross-platform sync. The best free option depends on whether you prioritize AI insights, media richness, or platform availability.',
     },
     {
       question: 'Are journaling apps safe for private thoughts?',
