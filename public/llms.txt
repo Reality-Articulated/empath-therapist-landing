@@ -6,7 +6,7 @@ The core insight: most journaling apps fail because they require opening another
 
 ## Empath the journaling app
 
-- [Empath app](https://www.empathdash.com/) and [/app](https://www.empathdash.com/app): The product home. Features include phone-call journaling, SMS/WhatsApp/Telegram journaling, AI voice transcription, mood tracking, pattern detection, and AI-generated insights.
+- [Empath app](https://www.empathdash.com/) and [/app](https://www.empathdash.com/app): The product home. Features include phone-call journaling, SMS/WhatsApp/Telegram journaling, AI voice transcription, chat-to-journal (an AI assistant that interviews you and turns the conversation into an entry), journaling plans (cadence commitments with forgiving streaks and adaptive reminders), mood tracking, pattern detection, and AI-generated insights.
 - [Why Empath?](https://www.empathdash.com/whyempath): Why people stick with Empath when other journals fail — friction-free capture, ambient input channels, durable memory.
 - [Journaling Blog](https://www.empathdash.com/app/blog): Guides on journaling habits, app reviews, and mental wellness practices.
 
@@ -14,6 +14,8 @@ The core insight: most journaling apps fail because they require opening another
 
 - **Call to journal**: Dial a number and talk. Empath transcribes and stores the entry.
 - **Message anywhere**: Journal via SMS, WhatsApp, or Telegram — no app switching.
+- **Chat to journal**: When you don't know where to start, an AI companion interviews you one question at a time, then composes the conversation into a journal entry in your own voice. Distinct from chatting with your existing journals.
+- **Journaling plans**: Set a daily or weekly cadence with forgiving streaks (grace days), track progress, and get adaptive reminders by push, SMS, or email that skip themselves on days you've already journaled.
 - **Memories**: Entries accumulate into a searchable, queryable memory of your patterns, themes, and history.
 - **Insights**: AI surfaces mood trends, recurring topics, and reflections over time.
 - **Privacy**: End-to-end encryption, HIPAA-compliant, never used to train third-party AI models.

@@ -184,6 +184,22 @@ export default function JournalingPage() {
           text: 'Yes. You can export all your journals, insights, and data at any time. Your data belongs to you.',
         },
       },
+      {
+        '@type': 'Question',
+        name: 'What if I do not know what to write?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'You can chat your way into an entry. Empath has an AI journaling assistant that interviews you one gentle question at a time, then turns the whole conversation into a journal entry written in your own voice. It is the easiest way past the blank page when you are not sure where to start.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can Empath help me build a journaling habit?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. You can set a Journaling Plan with a daily or weekly cadence, forgiving streaks that survive a missed day, and adaptive reminders by push, SMS, or email that skip themselves on days you have already journaled. The app shows your progress so the habit sticks without feeling like a chore.',
+        },
+      },
     ],
   };
 
@@ -193,7 +209,7 @@ export default function JournalingPage() {
         title="Empath - Journaling As Easy As Texting a Friend"
         description="Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
         path="/app"
-        keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call"
+        keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker"
       />
       <script
         type="application/ld+json"
@@ -1123,9 +1139,17 @@ export default function JournalingPage() {
               question="How do I connect with my therapist?" 
               answer={<>If your therapist uses Empath, they can send you an invite. If not, you can journal privately and share your insights manually, or invite them to join Empath at <a href="/" className="text-[#1b8af1] hover:underline font-bold">empath.com</a>.</>} 
             />
-            <FAQItem 
-              question="Can I export my journals?" 
-              answer="Yes! You can export all your journals, insights, and data at any time. Your data belongs to you, always." 
+            <FAQItem
+              question="Can I export my journals?"
+              answer="Yes! You can export all your journals, insights, and data at any time. Your data belongs to you, always."
+            />
+            <FAQItem
+              question="What if I don't know what to write?"
+              answer={<>You can chat your way into an entry. Empath's AI journaling assistant interviews you one gentle question at a time, then turns the whole conversation into a journal entry in your own voice — the easiest way past the blank page. <Link to="/app/blog/chat-journaling" className="text-[#1b8af1] hover:underline font-bold">Learn how chat journaling works</Link>.</>}
+            />
+            <FAQItem
+              question="Can Empath help me build a journaling habit?"
+              answer={<>Yes. Set a Journaling Plan with a daily or weekly cadence, forgiving streaks that survive a missed day, and adaptive reminders by push, SMS, or email that skip themselves once you've already journaled. <Link to="/app/blog/journaling-plan" className="text-[#1b8af1] hover:underline font-bold">See how to build a journaling plan that sticks</Link>.</>}
             />
           </div>
         </div>
