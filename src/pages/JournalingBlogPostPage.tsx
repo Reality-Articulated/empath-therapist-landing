@@ -204,7 +204,10 @@ export default function JournalingBlogPostPage() {
 
   const handleAppStoreClick = () => {
     posthog.capture('journaling_blog_post_app_store_clicked');
-    window.open(APP_STORE_URL, '_blank', 'noopener,noreferrer');
+    // Plain new-tab open; a windowFeatures string opens a popup that blockers
+    // reject and mobile Safari shows as an error page.
+    const newWindow = window.open(APP_STORE_URL, '_blank');
+    if (newWindow) newWindow.opener = null;
   };
 
   // Related posts (same category, excluding current)

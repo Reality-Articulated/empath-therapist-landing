@@ -113,7 +113,11 @@ export default function JournalingPage() {
 
   const handleAppStoreClick = () => {
     posthog.capture('journaling_page_app_store_clicked');
-    window.open(APP_STORE_URL, '_blank', 'noopener,noreferrer');
+    // Open as a normal new tab. Passing a windowFeatures string (e.g.
+    // 'noopener,noreferrer') makes browsers open a popup window instead, which
+    // popup blockers reject and mobile Safari surfaces as an error page.
+    const newWindow = window.open(APP_STORE_URL, '_blank');
+    if (newWindow) newWindow.opener = null;
   };
 
   const appFaqSchema = {
@@ -206,7 +210,7 @@ export default function JournalingPage() {
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEO
-        title="Empath - Journaling As Easy As Texting a Friend"
+        title="Empath - The Journal You Won't Quit"
         description="Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
         path="/app"
         keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker"
@@ -256,15 +260,15 @@ export default function JournalingPage() {
       >
         <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
           <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-stone-900 mb-8 leading-[1.1] font-serif">
-            Journaling, as easy as{' '}
+            The journal you{' '}
             <span className="relative inline-block px-3 whitespace-nowrap">
               <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
-              <span className="relative text-white">texting a friend.</span>
+              <span className="relative text-white">won't quit.</span>
             </span>
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            When something's on your mind, just text or call — the way you already do with a friend. Empath turns it into a journal that reveals your patterns over time.
+            Because it lives wherever you go — just text or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.
           </motion.p>
 
           {isMobile ? (
@@ -272,7 +276,7 @@ export default function JournalingPage() {
               {/* Mobile: messaging-first CTAs (matches "not another app" hero copy) */}
               <motion.div variants={fadeIn} className="mb-8 max-w-lg mx-auto">
                 <p className="text-stone-600 font-medium mb-5 text-center">
-                  Start journaling right now — just call, text, or message us.
+                  Start journaling right now — just call, text, or message.
                 </p>
                 <div className="grid grid-cols-2 gap-3 w-full mb-3">
                   <a
@@ -365,7 +369,7 @@ export default function JournalingPage() {
                 </div>
 
                 {/* Secondary channels */}
-                <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or message us on</p>
+                <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on</p>
                 <div className="grid grid-cols-2 gap-3 w-full">
                   <a
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
