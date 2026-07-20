@@ -18,6 +18,8 @@ import { journalingBlogPosts } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
+import BlogChart from '../components/BlogChart';
+import { getCategoryColor } from '../utils/blogCategoryColors';
 
 function toAnchorId(value: string) {
   return value
@@ -25,18 +27,6 @@ function toAnchorId(value: string) {
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-');
-}
-
-function getCategoryColor(category: string) {
-  const styles: Record<string, { bg: string; text: string; border: string; shadow: string }> = {
-    'App Reviews': { bg: 'bg-blue-100', text: 'text-blue-800', border: 'border-blue-900', shadow: '#1b8af1' },
-    'Getting Started': { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-900', shadow: '#16a34a' },
-    'Science & Research': { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-900', shadow: '#9333ea' },
-    'Habits & Routines': { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-900', shadow: '#f59e0b' },
-    'AI & Technology': { bg: 'bg-indigo-100', text: 'text-indigo-800', border: 'border-indigo-900', shadow: '#6366f1' },
-    'Mental Wellness': { bg: 'bg-rose-100', text: 'text-rose-800', border: 'border-rose-900', shadow: '#e11d48' },
-  };
-  return styles[category] ?? { bg: 'bg-stone-100', text: 'text-stone-800', border: 'border-stone-900', shadow: '#1c1917' };
 }
 
 function MarketingCard({ compact = false }: { compact?: boolean }) {
@@ -140,6 +130,7 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
 export default function JournalingBlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
   const post = journalingBlogPosts.find((entry) => entry.slug === slug);
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
 
@@ -166,8 +157,60 @@ export default function JournalingBlogPostPage() {
     window.scrollTo(0, 0);
   }, [post, slug]);
 
+  useEffect(() => {
+    if (!post) return;
+    posthog.capture('journaling_blog_post_viewed', {
+      slug: post.slug,
+      title: post.title,
+      category: post.category,
+    });
+  }, [post]);
+
+  // Reading progress bar under the sticky header.
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        setReadingProgress(
+          scrollable > 0 ? Math.min(100, (window.scrollY / scrollable) * 100) : 0
+        );
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [slug]);
+
+  // Scroll-depth milestones (25/50/75/100), fired once each per article.
+  useEffect(() => {
+    if (!post) return;
+    const fired = new Set<number>();
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const pct = (window.scrollY / scrollable) * 100;
+      for (const threshold of [25, 50, 75, 100]) {
+        if (pct >= threshold && !fired.has(threshold)) {
+          fired.add(threshold);
+          posthog.capture('journaling_blog_scroll_depth', {
+            slug: post.slug,
+            depth: threshold,
+          });
+        }
+      }
+      if (fired.size === 4) window.removeEventListener('scroll', onScroll);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [post]);
+
   const schemas = useMemo(() => {
-    if (!post) return { article: null, faq: null };
+    if (!post) return { article: null, faq: null, breadcrumb: null };
     const origin =
       typeof window !== 'undefined' ? window.location.origin : 'https://myempath.co';
     const article = {
@@ -176,6 +219,7 @@ export default function JournalingBlogPostPage() {
       headline: post.seoTitle,
       description: post.metaDescription,
       datePublished: post.date,
+      dateModified: post.date,
       author: { '@type': 'Organization', name: post.author },
       mainEntityOfPage: `${origin}/app/blog/${post.slug}`,
       keywords: [post.keyword, post.category, 'journaling'],
@@ -189,10 +233,42 @@ export default function JournalingBlogPostPage() {
         acceptedAnswer: { '@type': 'Answer', text: item.answer },
       })),
     };
-    return { article, faq };
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Empath', item: `${origin}/app` },
+        { '@type': 'ListItem', position: 2, name: 'Journaling Blog', item: `${origin}/app/blog` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: `${origin}/app/blog/${post.slug}` },
+      ],
+    };
+    return { article, faq, breadcrumb };
   }, [post]);
 
+  const handleShare = (channel: string) => {
+    posthog.capture('journaling_blog_share_clicked', {
+      slug: post?.slug ?? slug,
+      channel,
+    });
+  };
+
+  const handleTocClick = (section: string, placement: 'mobile' | 'sidebar') => {
+    posthog.capture('journaling_blog_toc_clicked', {
+      slug: post?.slug ?? slug,
+      section,
+      placement,
+    });
+  };
+
+  const handleRelatedClick = (toSlug: string) => {
+    posthog.capture('journaling_blog_related_clicked', {
+      from_slug: post?.slug ?? slug,
+      to_slug: toSlug,
+    });
+  };
+
   const handleCopyLink = async () => {
+    handleShare('copy_link');
     try {
       await navigator.clipboard.writeText(articleUrl);
       setCopied(true);
@@ -278,9 +354,20 @@ export default function JournalingBlogPostPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       )}
+      {schemas.breadcrumb && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+        />
+      )}
 
       {/* Header */}
-      <div className="bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
+      <div className="relative bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
+        <div
+          className="absolute bottom-[-2px] left-0 h-[3px] bg-[#1b8af1] transition-[width] duration-150 ease-out"
+          style={{ width: `${readingProgress}%` }}
+          aria-hidden="true"
+        />
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Link to="/app" className="flex items-center gap-0">
             <div className="w-10 h-10 flex items-center justify-center">
@@ -370,6 +457,36 @@ export default function JournalingBlogPostPage() {
             {/* Main Content */}
             <article className="order-1">
               <div className="space-y-10">
+                {/* Mobile TOC — the sidebar stacks below the article on small screens */}
+                <details className="lg:hidden bg-white rounded-xl border-2 border-stone-200 p-5">
+                  <summary className="text-xs font-bold uppercase tracking-wider text-stone-500 cursor-pointer select-none list-none flex items-center justify-between">
+                    In this article
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </summary>
+                  <ul className="mt-4 space-y-2.5 text-sm text-stone-600 font-medium">
+                    {sectionsWithId.map((section) => (
+                      <li key={section.id}>
+                        <a
+                          href={`#${section.id}`}
+                          onClick={() => handleTocClick(section.heading, 'mobile')}
+                          className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                        >
+                          {section.heading}
+                        </a>
+                      </li>
+                    ))}
+                    <li>
+                      <a
+                        href="#faq"
+                        onClick={() => handleTocClick('FAQ', 'mobile')}
+                        className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                      >
+                        Frequently asked questions
+                      </a>
+                    </li>
+                  </ul>
+                </details>
+
                 <section className="bg-white rounded-xl border-2 border-stone-200 p-6 md:p-8">
                   <p className="text-stone-700 leading-8 text-lg font-medium">{post.intro}</p>
                 </section>
@@ -389,7 +506,7 @@ export default function JournalingBlogPostPage() {
                   </ul>
                 </section>
 
-                {sectionsWithId.map((section, index) => (
+                {sectionsWithId.map((section) => (
                   <section key={section.id} id={section.id} className="scroll-mt-28">
                     <h2 className="text-2xl md:text-3xl font-black text-stone-900 mb-4 font-serif">
                       {section.heading}
@@ -400,11 +517,7 @@ export default function JournalingBlogPostPage() {
                       ))}
                     </div>
 
-                    {index === 1 && (
-                      <div className="mt-8">
-                        <MarketingCard />
-                      </div>
-                    )}
+                    {section.chart && <BlogChart chart={section.chart} />}
                   </section>
                 ))}
 
@@ -444,6 +557,7 @@ export default function JournalingBlogPostPage() {
                           <Link
                             key={related.id}
                             to={`/app/blog/${related.slug}`}
+                            onClick={() => handleRelatedClick(related.slug)}
                             className="bg-white rounded-xl border-2 border-stone-200 p-5 hover:border-stone-900 hover:shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all group"
                           >
                             <span
@@ -477,6 +591,11 @@ export default function JournalingBlogPostPage() {
                     </Link>
                     <Link
                       to="/app"
+                      onClick={() =>
+                        posthog.capture('journaling_blog_post_learn_more_clicked', {
+                          slug: post.slug,
+                        })
+                      }
                       className="inline-flex items-center px-5 py-2.5 rounded-lg bg-stone-900 text-white border-2 border-stone-900 hover:bg-[#1b8af1] transition-all font-bold gap-1.5"
                     >
                       Learn about Empath <ArrowRight className="w-4 h-4" />
@@ -488,10 +607,14 @@ export default function JournalingBlogPostPage() {
 
             {/* Sidebar */}
             <aside className="order-2 space-y-5 lg:sticky lg:top-28 lg:self-start">
-              <MarketingCard compact />
+              {/* Hidden on mobile: the aside stacks below the article there, which
+                  would put this right next to the bottom-CTA MarketingCard. */}
+              <div className="hidden lg:block">
+                <MarketingCard compact />
+              </div>
 
-              {/* Table of Contents */}
-              <div className="bg-white rounded-xl border-2 border-stone-200 p-5">
+              {/* Table of Contents (desktop; mobile gets the collapsible one above the article) */}
+              <div className="hidden lg:block bg-white rounded-xl border-2 border-stone-200 p-5">
                 <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-4">
                   In this article
                 </p>
@@ -500,6 +623,7 @@ export default function JournalingBlogPostPage() {
                     <li key={section.id}>
                       <a
                         href={`#${section.id}`}
+                        onClick={() => handleTocClick(section.heading, 'sidebar')}
                         className="hover:text-[#1b8af1] transition-colors block py-0.5"
                       >
                         {section.heading}
@@ -507,7 +631,11 @@ export default function JournalingBlogPostPage() {
                     </li>
                   ))}
                   <li>
-                    <a href="#faq" className="hover:text-[#1b8af1] transition-colors block py-0.5">
+                    <a
+                      href="#faq"
+                      onClick={() => handleTocClick('FAQ', 'sidebar')}
+                      className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                    >
                       Frequently asked questions
                     </a>
                   </li>
@@ -532,6 +660,7 @@ export default function JournalingBlogPostPage() {
                     href={twitterShare}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleShare('x')}
                     className="inline-flex items-center px-3 py-1.5 rounded-lg border-2 border-stone-200 text-xs text-stone-700 font-bold hover:border-stone-900 hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all"
                   >
                     X <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
@@ -540,6 +669,7 @@ export default function JournalingBlogPostPage() {
                     href={linkedInShare}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleShare('linkedin')}
                     className="inline-flex items-center px-3 py-1.5 rounded-lg border-2 border-stone-200 text-xs text-stone-700 font-bold hover:border-stone-900 hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all"
                   >
                     LinkedIn <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
