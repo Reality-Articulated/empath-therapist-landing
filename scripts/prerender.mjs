@@ -203,8 +203,8 @@ function buildHeadMeta(route) {
       headline: route.title,
       description: route.description,
       author: { '@type': 'Person', name: route.article.author },
-      datePublished: route.article.date,
-      dateModified: route.article.date,
+      datePublished: toIsoDate(route.article.date),
+      dateModified: toIsoDate(route.article.date),
       image: ogImage,
       publisher: {
         '@type': 'Organization',

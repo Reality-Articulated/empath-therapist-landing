@@ -25,30 +25,43 @@ const staticRoutes = [
   { path: '/terms', changefreq: 'yearly', priority: '0.3' },
 ];
 
-function extractSlugs(filePath) {
+// Each post's `date:` field precedes its `slug:` field, so the nearest date
+// found in the window before a slug is that post's publish date. Using the
+// real date as <lastmod> (instead of the build date for every URL) keeps the
+// signal credible — Google ignores lastmod when it changes on every deploy.
+function extractPosts(filePath) {
   const text = readFileSync(filePath, 'utf-8');
-  const slugs = [];
-  const re = /slug:\s*['"]([^'"]+)['"]/g;
+  const posts = [];
+  const slugRe = /slug:\s*['"]([^'"]+)['"]/g;
   let match;
-  while ((match = re.exec(text)) !== null) {
-    slugs.push(match[1]);
+  while ((match = slugRe.exec(text)) !== null) {
+    const before = text.slice(Math.max(0, match.index - 2000), match.index);
+    const dates = [...before.matchAll(/date:\s*['"]([^'"]+)['"]/g)];
+    const rawDate = dates.length ? dates[dates.length - 1][1] : '';
+    const parsed = Date.parse(rawDate);
+    posts.push({
+      slug: match[1],
+      lastmod: Number.isNaN(parsed) ? today : new Date(parsed).toISOString().split('T')[0],
+    });
   }
-  return slugs;
+  return posts;
 }
 
-const therapistBlogSlugs = extractSlugs(join(ROOT, 'src/data/blogPosts.ts'));
-const journalingBlogSlugs = extractSlugs(join(ROOT, 'src/data/journalingBlogPosts.ts'));
+const therapistBlogPosts = extractPosts(join(ROOT, 'src/data/blogPosts.ts'));
+const journalingBlogPosts = extractPosts(join(ROOT, 'src/data/journalingBlogPosts.ts'));
 
 const blogRoutes = [
-  ...therapistBlogSlugs.map((slug) => ({
+  ...therapistBlogPosts.map(({ slug, lastmod }) => ({
     path: `/blog/${slug}`,
     changefreq: 'monthly',
     priority: '0.7',
+    lastmod,
   })),
-  ...journalingBlogSlugs.map((slug) => ({
+  ...journalingBlogPosts.map(({ slug, lastmod }) => ({
     path: `/app/blog/${slug}`,
     changefreq: 'monthly',
     priority: '0.7',
+    lastmod,
   })),
 ];
 
@@ -56,9 +69,9 @@ const allRoutes = [...staticRoutes, ...blogRoutes];
 
 const urls = allRoutes
   .map(
-    ({ path, changefreq, priority }) => `  <url>
+    ({ path, changefreq, priority, lastmod }) => `  <url>
     <loc>${SITE_URL}${path}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod ?? today}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`
@@ -74,4 +87,4 @@ ${urls}
 const outPath = join(ROOT, 'public/sitemap.xml');
 writeFileSync(outPath, xml);
 console.log(`Wrote ${allRoutes.length} URLs to ${outPath}`);
-console.log(`  ${staticRoutes.length} static + ${therapistBlogSlugs.length} therapist blogs + ${journalingBlogSlugs.length} journaling blogs`);
+console.log(`  ${staticRoutes.length} static + ${therapistBlogPosts.length} therapist blogs + ${journalingBlogPosts.length} journaling blogs`);
