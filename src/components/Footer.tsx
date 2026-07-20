@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import logoPng from '../../public/empath-logo.png';
 import logoWebp from '../../public/optimized/empath-logo.webp';
 import { Twitter, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { openSupportChat } from '../utils/supportChat';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -45,14 +46,15 @@ export default function Footer() {
               >
                 <Linkedin size={20} />
               </motion.a>
-              <motion.a 
-                href="mailto:karan@myempath.co" 
+              <motion.button
+                type="button"
+                onClick={() => openSupportChat()}
                 className="text-gray-300 hover:text-blue-400 transition-colors"
                 whileHover={{ y: -3, scale: 1.1 }}
-                aria-label="Contact us via Email"
+                aria-label="Chat with support"
               >
                 <Mail size={20} />
-              </motion.a>
+              </motion.button>
             </div>
           </div>
           
@@ -115,14 +117,15 @@ export default function Footer() {
             <p className="text-gray-400 mb-4">
               Have questions or want to learn more about Empath?
             </p>
-            <motion.a 
-              href="mailto:karan@myempath.co"
+            <motion.button
+              type="button"
+              onClick={() => openSupportChat()}
               className="inline-block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:shadow-lg hover:shadow-blue-900/20 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               Get in Touch
-            </motion.a>
+            </motion.button>
           </div>
         </div>
         

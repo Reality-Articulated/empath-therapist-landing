@@ -16,6 +16,7 @@ import {
   Heart,
 } from 'lucide-react';
 import SEO from '../components/SEO';
+import { openSupportChat } from '../utils/supportChat';
 
 const evidenceSources = [
   {
@@ -261,12 +262,13 @@ export default function SciencePage() {
               Read the Blog
               <ChevronRight className="ml-1.5 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            <a
-              href="mailto:karan@myempath.co?subject=Science%20and%20Research%20Inquiry"
+            <button
+              type="button"
+              onClick={() => openSupportChat('Science & research partnership inquiry: ')}
               className="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
             >
               Partner on Research
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -424,12 +426,13 @@ export default function SciencePage() {
               Read the Blog
               <ChevronRight className="ml-1.5 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            <a
-              href="mailto:karan@myempath.co?subject=Science%20and%20Research%20Inquiry"
+            <button
+              type="button"
+              onClick={() => openSupportChat('Science & research partnership inquiry: ')}
               className="inline-flex items-center px-5 py-2.5 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
             >
               Partner on Research
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -263,7 +263,7 @@ export default function PrivacyPolicyPage() {
                   </li>
                   <li className="flex items-start">
                     <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
-                    <span><strong>Full account deletion</strong> is available upon request by contacting karan@myempath.co.</span>
+                    <span><strong>Full account deletion</strong> is available upon request by contacting support@myempath.co.</span>
                   </li>
                   <li className="flex items-start">
                     <span className="inline-flex items-center justify-center bg-blue-100 rounded-full w-5 h-5 mr-2 text-blue-700 text-xs mt-1 print:bg-gray-200">•</span>
@@ -371,7 +371,7 @@ export default function PrivacyPolicyPage() {
                   <h3 className="text-blue-700">Exercising Your CCPA/CPRA Data Protection Rights</h3>
                   <p>To exercise any of Your rights under the CCPA/CPRA as a California resident, You can contact Us:</p>
                   <ul className="space-y-1 pl-5 list-disc">
-                    <li>By email: <a href="mailto:karan@myempath.co" className="text-blue-600">karan@myempath.co</a></li>
+                    <li>By email: <a href="mailto:support@myempath.co" className="text-blue-600">support@myempath.co</a></li>
                     <li>By phone: 480.295.9462</li>
                   </ul>
                   <p className="mt-2 text-sm text-gray-600">We will respond to verified requests within 45 days as required by California law.</p>
@@ -414,7 +414,7 @@ export default function PrivacyPolicyPage() {
               <div className="p-4 bg-blue-50 rounded-lg mt-2">
                 <p className="flex items-center mb-2">
                   <span className="text-blue-700 mr-2">📧</span>
-                  <a href="mailto:karan@myempath.co" className="text-blue-600 hover:text-blue-800 transition-colors">karan@myempath.co</a>
+                  <a href="mailto:support@myempath.co" className="text-blue-600 hover:text-blue-800 transition-colors">support@myempath.co</a>
                 </p>
                 <p className="flex items-center">
                   <span className="text-blue-700 mr-2">📞</span>

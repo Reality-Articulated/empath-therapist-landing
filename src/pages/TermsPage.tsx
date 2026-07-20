@@ -320,7 +320,7 @@ export default function TermsPage() {
               <div className="p-4 bg-blue-50 rounded-lg mt-2 print:bg-white print:border print:border-blue-200">
                 <p className="flex items-center mb-2">
                   <span className="text-blue-700 mr-2">📧</span>
-                  <a href="mailto:karan@myempath.co" className="text-blue-600 hover:text-blue-800 transition-colors">karan@myempath.co</a>
+                  <a href="mailto:support@myempath.co" className="text-blue-600 hover:text-blue-800 transition-colors">support@myempath.co</a>
                 </p>
                 <p className="flex items-center">
                   <span className="text-blue-700 mr-2">📞</span>

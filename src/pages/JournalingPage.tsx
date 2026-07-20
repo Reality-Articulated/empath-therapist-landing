@@ -35,6 +35,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { openSupportChat } from '../utils/supportChat';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -1240,7 +1241,13 @@ export default function JournalingPage() {
           <div className="flex justify-center gap-8 text-stone-500 font-bold text-sm mb-8 uppercase tracking-widest">
             <Link to="/privacy" className="hover:text-stone-900 transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-stone-900 transition-colors">Terms of Service</Link>
-            <a href="mailto:support@myempath.co" className="hover:text-stone-900 transition-colors">Support</a>
+            <button
+              type="button"
+              onClick={() => openSupportChat()}
+              className="hover:text-stone-900 transition-colors uppercase tracking-widest font-bold"
+            >
+              Support
+            </button>
           </div>
           <p className="text-stone-400 text-xs font-medium">© {new Date().getFullYear()} Reality Articulated Inc.</p>
         </div>
