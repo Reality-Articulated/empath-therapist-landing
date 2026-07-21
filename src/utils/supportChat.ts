@@ -27,6 +27,13 @@ function ensureCrispLoaded() {
   const script = document.createElement('script');
   script.src = 'https://client.crisp.chat/l.js';
   script.async = true;
+  // Ad blockers commonly block client.crisp.chat; without this the support
+  // button would silently do nothing. Fall back to email instead.
+  script.onerror = () => {
+    delete window.$crisp;
+    posthog.capture('support_chat_blocked_fallback_email');
+    window.location.href = 'mailto:support@myempath.co';
+  };
   document.head.appendChild(script);
 }
 

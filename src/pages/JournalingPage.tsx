@@ -23,15 +23,7 @@ import {
   MessageCircle
 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
-import img1 from '../media/IMG_4014.jpg';
-import img2 from '../media/IMG_4016.jpg';
-import img3 from '../media/IMG_4017.jpg';
-import img4 from '../media/Simulator Screenshot - iPhone 17 Pro - 2026-03-15 at 22.59.06.png';
-import img5 from '../media/simulator_screenshot_A6B0AF54-EEF6-4CFC-803F-3153AD369F5C.png';
-import desktop1 from '../media/web/image1.png';
-import desktop2 from '../media/web/image2.png';
-import desktop3 from '../media/web/image3.png';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
@@ -85,8 +77,6 @@ export default function JournalingPage() {
   const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
   const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
-  const mobileScreens = [img1, img2, img3, img4, img5];
-  const desktopScreens = [desktop1, desktop2, desktop3];
 
   useEffect(() => {
     posthog.capture('journaling_page_viewed');
@@ -253,8 +243,8 @@ export default function JournalingPage() {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <motion.section 
-        className="relative bg-white pt-24 overflow-hidden"
+      <motion.section
+        className="relative bg-white pt-24 pb-6 overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
@@ -282,14 +272,14 @@ export default function JournalingPage() {
                 <div className="grid grid-cols-2 gap-3 w-full mb-3">
                   <a
                     href={`tel:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_call_clicked')}
                   >
                     <Phone className="w-4 h-4" /> Call
                   </a>
                   <a
                     href={`sms:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_text_clicked')}
                   >
                     <MessageSquare className="w-4 h-4" /> Text
@@ -298,7 +288,7 @@ export default function JournalingPage() {
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
@@ -308,7 +298,7 @@ export default function JournalingPage() {
                     href={`https://t.me/${TELEGRAM_USERNAME}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a7eb0] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_telegram_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
@@ -316,7 +306,7 @@ export default function JournalingPage() {
                   </a>
                 </div>
                 <p className="text-xs text-stone-400 text-center font-medium">
-                  {PHONE_MAIN} • Available 24/7 • No account needed
+                  {PHONE_DISPLAY} • Available 24/7 • No account needed
                 </p>
 
                 <div className="relative mt-6 mb-4">
@@ -354,7 +344,7 @@ export default function JournalingPage() {
                   <a
                     href={`sms:${PHONE_MAIN}`}
                     title={`Text us at ${PHONE_DISPLAY}`}
-                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
                     onClick={() => posthog.capture('journaling_page_text_clicked')}
                   >
                     <MessageSquare className="w-5 h-5" /> Text to journal
@@ -362,7 +352,7 @@ export default function JournalingPage() {
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`Call us at ${PHONE_DISPLAY}`}
-                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
                     onClick={() => posthog.capture('journaling_page_call_clicked')}
                   >
                     <Phone className="w-5 h-5" /> Call & just talk
@@ -376,7 +366,7 @@ export default function JournalingPage() {
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-3 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#15803d] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-3 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
@@ -386,7 +376,7 @@ export default function JournalingPage() {
                     href={`https://t.me/${TELEGRAM_USERNAME}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-3 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:shadow-[4px_4px_0px_0px_#15638a] hover:translate-y-[-1px] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    className="px-4 py-3 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a7eb0] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                     onClick={() => posthog.capture('journaling_page_telegram_clicked')}
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
@@ -419,8 +409,6 @@ export default function JournalingPage() {
               </motion.div>
             </>
           )}
-
-          {/* App Screenshots */}
         </div>
       </motion.section>
 
@@ -709,28 +697,30 @@ export default function JournalingPage() {
               {[
                 {
                   icon: <Activity className="w-7 h-7 text-red-600" />,
-                  color: 'red',
+                  // Tailwind's JIT only generates classes it can see as literal
+                  // strings, so these must not be built from `${color}` templates.
+                  chipClass: 'bg-red-100 border-red-200',
                   title: 'Activity & Exercise',
                   desc: 'See how movement impacts your mood and energy levels.',
                   metrics: ['Steps', 'Workouts', 'Active minutes']
                 },
                 {
                   icon: <Heart className="w-7 h-7 text-pink-600" />,
-                  color: 'pink',
+                  chipClass: 'bg-pink-100 border-pink-200',
                   title: 'Sleep & Recovery',
                   desc: 'Track sleep quality and its effects on your mental clarity.',
                   metrics: ['Sleep duration', 'Sleep quality', 'Heart rate']
                 },
                 {
                   icon: <Calendar className="w-7 h-7 text-purple-600" />,
-                  color: 'purple',
+                  chipClass: 'bg-purple-100 border-purple-200',
                   title: 'Daily Patterns',
                   desc: 'Discover connections between habits and wellbeing.',
                   metrics: ['Energy levels', 'Stress markers', 'Recovery time']
                 }
               ].map((feature, i) => (
                 <div key={i} className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] hover:shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                  <div className={`w-14 h-14 bg-${feature.color}-100 rounded-xl flex items-center justify-center mb-6 border-2 border-${feature.color}-200`}>
+                  <div className={`w-14 h-14 ${feature.chipClass} rounded-xl flex items-center justify-center mb-6 border-2`}>
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-bold text-stone-900 mb-3">{feature.title}</h3>
@@ -1099,7 +1089,15 @@ export default function JournalingPage() {
                 role: "User since 2024"
               }
             ].map((t, i) => (
-              <div key={i} className="bg-white p-8 rounded-none border-l-4 border-stone-900 shadow-sm flex flex-col hover:bg-blue-50 hover:border-blue-500 transition-colors">
+              <div
+                key={i}
+                className="bg-white p-8 rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex flex-col"
+              >
+                <div className="flex gap-0.5 text-[#1b8af1] mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
                 <p className="text-stone-700 mb-6 leading-relaxed font-serif text-lg italic flex-grow">"{t.quote}"</p>
                 <div>
                   <p className="font-bold text-stone-900">{t.author}</p>
@@ -1188,7 +1186,7 @@ export default function JournalingPage() {
                   <a
                     href={`sms:${PHONE_MAIN}`}
                     title={`Text us at ${PHONE_DISPLAY}`}
-                    className="px-5 py-4 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                    className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
                     onClick={() => posthog.capture('final_cta_text_clicked')}
                   >
                     <MessageSquare className="w-5 h-5" /> Text to journal
@@ -1196,7 +1194,7 @@ export default function JournalingPage() {
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`Call us at ${PHONE_DISPLAY}`}
-                    className="px-5 py-4 bg-stone-900 text-white rounded-lg font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2"
+                    className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
                     onClick={() => posthog.capture('final_cta_call_clicked')}
                   >
                     <Phone className="w-5 h-5" /> Call & just talk
