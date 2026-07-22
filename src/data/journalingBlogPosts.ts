@@ -1,3 +1,5 @@
+import { kinzerJournalingBlogPosts } from './kinzerJournalingBlogPosts';
+
 export interface JournalingBlogChartDatum {
   label: string;
   value: number;
@@ -58,6 +60,7 @@ export interface JournalingBlogPost {
 }
 
 export const journalingBlogPosts: JournalingBlogPost[] = [
+...kinzerJournalingBlogPosts,
 // Article 31
 {
   id: 'j31',

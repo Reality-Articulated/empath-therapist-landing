@@ -75,7 +75,10 @@ function extractPosts(filePath) {
 }
 
 const therapistBlogPosts = extractPosts(join(ROOT, 'src/data/blogPosts.ts'));
-const journalingBlogPosts = extractPosts(join(ROOT, 'src/data/journalingBlogPosts.ts'));
+const journalingBlogPosts = [
+  ...extractPosts(join(ROOT, 'src/data/kinzerJournalingBlogPosts.ts')),
+  ...extractPosts(join(ROOT, 'src/data/journalingBlogPosts.ts')),
+];
 
 const blogRoutes = [
   ...therapistBlogPosts.map(({ slug, lastmod }) => ({

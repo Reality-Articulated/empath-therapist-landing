@@ -114,8 +114,8 @@ const staticRoutes = [
 
 // The blog files are plain TypeScript data modules. Transpiling and loading them
 // keeps prerender output in lockstep with the content users see in React.
-async function loadBlogPosts(filePath, exportName) {
-  const source = readFileSync(filePath, 'utf-8');
+async function loadBlogPosts(filePath, exportName, transformSource = (source) => source) {
+  const source = transformSource(readFileSync(filePath, 'utf-8'));
   const { outputText } = ts.transpileModule(source, {
     compilerOptions: {
       module: ts.ModuleKind.ESNext,
@@ -164,10 +164,18 @@ const therapistBlogs = (await loadBlogPosts(join(ROOT, 'src/data/blogPosts.ts'),
   ogType: 'article',
   keywords: [p.keyword, p.category, 'mental health'].filter(Boolean).join(', '),
 }));
-const journalingBlogs = (await loadBlogPosts(
+const kinzerJournalingBlogs = await loadBlogPosts(
+  join(ROOT, 'src/data/kinzerJournalingBlogPosts.ts'),
+  'kinzerJournalingBlogPosts'
+);
+const legacyJournalingBlogs = await loadBlogPosts(
   join(ROOT, 'src/data/journalingBlogPosts.ts'),
-  'journalingBlogPosts'
-)).map((p) => ({
+  'journalingBlogPosts',
+  (source) => source
+    .replace("import { kinzerJournalingBlogPosts } from './kinzerJournalingBlogPosts';", '')
+    .replace('...kinzerJournalingBlogPosts,', '')
+);
+const journalingBlogs = [...kinzerJournalingBlogs, ...legacyJournalingBlogs].map((p) => ({
   ...p,
   path: `/app/blog/${p.slug}`,
   ogType: 'article',
