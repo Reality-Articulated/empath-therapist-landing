@@ -8,6 +8,34 @@ const SITE_URL = 'https://www.empathdash.com';
 
 const today = new Date().toISOString().split('T')[0];
 
+const monthNumbers = {
+  January: '01',
+  February: '02',
+  March: '03',
+  April: '04',
+  May: '05',
+  June: '06',
+  July: '07',
+  August: '08',
+  September: '09',
+  October: '10',
+  November: '11',
+  December: '12',
+};
+
+function toIsoDate(value) {
+  const normalized = value.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return normalized;
+
+  const humanDate = /^(\w+)\s+(\d{1,2}),\s+(\d{4})$/.exec(normalized);
+  if (humanDate && monthNumbers[humanDate[1]]) {
+    return `${humanDate[3]}-${monthNumbers[humanDate[1]]}-${humanDate[2].padStart(2, '0')}`;
+  }
+
+  const parsed = Date.parse(normalized);
+  return Number.isNaN(parsed) ? today : new Date(parsed).toISOString().split('T')[0];
+}
+
 const staticRoutes = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/app', changefreq: 'weekly', priority: '1.0' },
@@ -38,10 +66,9 @@ function extractPosts(filePath) {
     const before = text.slice(Math.max(0, match.index - 2000), match.index);
     const dates = [...before.matchAll(/date:\s*['"]([^'"]+)['"]/g)];
     const rawDate = dates.length ? dates[dates.length - 1][1] : '';
-    const parsed = Date.parse(rawDate);
     posts.push({
       slug: match[1],
-      lastmod: Number.isNaN(parsed) ? today : new Date(parsed).toISOString().split('T')[0],
+      lastmod: rawDate ? toIsoDate(rawDate) : today,
     });
   }
   return posts;

@@ -17,6 +17,11 @@ import posthog from 'posthog-js';
 import SEO from '../components/SEO';
 import { getCategoryColor } from '../utils/blogCategoryColors';
 
+function toIsoDate(value: string) {
+  const parsed = Date.parse(`${value} UTC`);
+  return Number.isNaN(parsed) ? value : new Date(parsed).toISOString().split('T')[0];
+}
+
 function getCategoryIcon(category: string) {
   const icons: Record<string, typeof BookOpen> = {
     'App Reviews': Star,
@@ -90,7 +95,7 @@ export default function JournalingBlogsPage() {
 
   const blogSchema = useMemo(() => {
     const origin =
-      typeof window !== 'undefined' ? window.location.origin : 'https://myempath.co';
+      typeof window !== 'undefined' ? window.location.origin : 'https://www.empathdash.com';
     return {
       '@context': 'https://schema.org',
       '@type': 'Blog',
@@ -99,12 +104,17 @@ export default function JournalingBlogsPage() {
         'Expert guides on journaling apps, techniques, habits, and AI-powered self-reflection.',
       blogPost: journalingBlogPosts.map((post) => ({
         '@type': 'BlogPosting',
-        headline: post.seoTitle,
+        headline: post.title,
         description: post.metaDescription,
-        datePublished: post.date,
+        abstract: post.answerSummary,
+        datePublished: toIsoDate(post.date),
+        dateModified: toIsoDate(post.date),
         author: { '@type': 'Organization', name: post.author },
         url: `${origin}/app/blog/${post.slug}`,
         keywords: [post.keyword, post.category, 'journaling'],
+        citation: post.sources?.map((source) => source.url),
+        inLanguage: 'en-US',
+        isAccessibleForFree: true,
       })),
     };
   }, []);

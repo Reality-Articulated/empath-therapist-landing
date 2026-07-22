@@ -29,6 +29,11 @@ function toAnchorId(value: string) {
     .replace(/\s+/g, '-');
 }
 
+function toIsoDate(value: string) {
+  const parsed = Date.parse(`${value} UTC`);
+  return Number.isNaN(parsed) ? value : new Date(parsed).toISOString().split('T')[0];
+}
+
 function MarketingCard({ compact = false }: { compact?: boolean }) {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
   const PHONE_MAIN = '+18883663082';
@@ -137,7 +142,7 @@ export default function JournalingBlogPostPage() {
   const articleUrl =
     typeof window !== 'undefined'
       ? `${window.location.origin}/app/blog/${slug ?? ''}`
-      : `https://myempath.co/app/blog/${slug ?? ''}`;
+      : `https://www.empathdash.com/app/blog/${slug ?? ''}`;
   const twitterShare = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
     articleUrl
   )}&text=${encodeURIComponent(post?.title ?? 'Empath Journaling Blog')}`;
@@ -212,17 +217,40 @@ export default function JournalingBlogPostPage() {
   const schemas = useMemo(() => {
     if (!post) return { article: null, faq: null, breadcrumb: null };
     const origin =
-      typeof window !== 'undefined' ? window.location.origin : 'https://myempath.co';
+      typeof window !== 'undefined' ? window.location.origin : 'https://www.empathdash.com';
+    const canonicalUrl = `${origin}/app/blog/${post.slug}`;
+    const wordCount = [
+      post.answerSummary,
+      post.intro,
+      ...post.sections.flatMap((section) => section.body),
+      ...post.faq.flatMap((item) => [item.question, item.answer]),
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .trim()
+      .split(/\s+/).length;
     const article = {
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: post.seoTitle,
       description: post.metaDescription,
-      datePublished: post.date,
-      dateModified: post.date,
-      author: { '@type': 'Organization', name: post.author },
-      mainEntityOfPage: `${origin}/app/blog/${post.slug}`,
+      abstract: post.answerSummary,
+      datePublished: toIsoDate(post.date),
+      dateModified: toIsoDate(post.date),
+      author: { '@type': 'Organization', name: post.author, url: origin },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Empath',
+        url: origin,
+        logo: { '@type': 'ImageObject', url: `${origin}/empath-logo.png` },
+      },
+      url: canonicalUrl,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
       keywords: [post.keyword, post.category, 'journaling'],
+      citation: post.sources?.map((source) => source.url),
+      wordCount,
+      inLanguage: 'en-US',
+      isAccessibleForFree: true,
     };
     const faq = {
       '@context': 'https://schema.org',
@@ -239,7 +267,7 @@ export default function JournalingBlogPostPage() {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Empath', item: `${origin}/app` },
         { '@type': 'ListItem', position: 2, name: 'Journaling Blog', item: `${origin}/app/blog` },
-        { '@type': 'ListItem', position: 3, name: post.title, item: `${origin}/app/blog/${post.slug}` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
       ],
     };
     return { article, faq, breadcrumb };
@@ -475,6 +503,17 @@ export default function JournalingBlogPostPage() {
                         </a>
                       </li>
                     ))}
+                    {post.sources && post.sources.length > 0 && (
+                      <li>
+                        <a
+                          href="#sources"
+                          onClick={() => handleTocClick('Sources', 'mobile')}
+                          className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                        >
+                          Sources and further reading
+                        </a>
+                      </li>
+                    )}
                     <li>
                       <a
                         href="#faq"
@@ -487,6 +526,24 @@ export default function JournalingBlogPostPage() {
                   </ul>
                 </details>
 
+                {post.answerSummary && (
+                  <section
+                    id="quick-answer"
+                    className="relative overflow-hidden bg-[#EAF5FF] rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] p-6 md:p-8"
+                  >
+                    <div
+                      className="absolute -right-10 -top-10 h-32 w-32 rounded-full border-[18px] border-white/50"
+                      aria-hidden="true"
+                    />
+                    <p className="relative text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-3">
+                      Quick answer
+                    </p>
+                    <p className="relative text-lg md:text-xl leading-8 text-stone-900 font-bold">
+                      {post.answerSummary}
+                    </p>
+                  </section>
+                )}
+
                 <section className="bg-white rounded-xl border-2 border-stone-200 p-6 md:p-8">
                   <p className="text-stone-700 leading-8 text-lg font-medium">{post.intro}</p>
                 </section>
@@ -494,13 +551,19 @@ export default function JournalingBlogPostPage() {
                 {/* Key Takeaways */}
                 <section className="bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] p-6">
                   <h2 className="text-lg font-black text-stone-900 mb-4 font-serif">
-                    What you'll learn
+                    {post.keyTakeaways ? 'Key takeaways' : "What you'll learn"}
                   </h2>
                   <ul className="space-y-3">
-                    {post.sections.slice(0, 3).map((section) => (
-                      <li key={section.heading} className="flex items-start gap-3 text-stone-700 font-medium">
+                    {(
+                      post.keyTakeaways ??
+                      post.sections.slice(0, 3).map((section) => section.heading)
+                    ).map((takeaway) => (
+                      <li
+                        key={takeaway}
+                        className="flex items-start gap-3 text-stone-700 font-medium"
+                      >
                         <CheckCircle className="w-5 h-5 text-[#1b8af1] mt-0.5 flex-shrink-0" />
-                        <span>{section.heading}</span>
+                        <span>{takeaway}</span>
                       </li>
                     ))}
                   </ul>
@@ -520,6 +583,47 @@ export default function JournalingBlogPostPage() {
                     {section.chart && <BlogChart chart={section.chart} />}
                   </section>
                 ))}
+
+                {post.sources && post.sources.length > 0 && (
+                  <section
+                    id="sources"
+                    className="scroll-mt-28 rounded-xl border-2 border-stone-200 bg-white p-6 md:p-8"
+                  >
+                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-2">
+                      Research notes
+                    </p>
+                    <h2 className="text-2xl font-black text-stone-900 mb-3 font-serif">
+                      Sources and further reading
+                    </h2>
+                    <p className="text-stone-600 leading-7 font-medium mb-6">
+                      These references support the distinctions between reflective and repetitive
+                      thought, if-then planning, and action-oriented approaches discussed above.
+                    </p>
+                    <ol className="space-y-4">
+                      {post.sources.map((source, index) => (
+                        <li key={source.url} className="flex gap-4">
+                          <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-stone-900 text-xs font-black text-white">
+                            {index + 1}
+                          </span>
+                          <div>
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-start gap-1.5 font-bold leading-6 text-stone-900 underline decoration-stone-300 underline-offset-4 hover:text-[#1b8af1] hover:decoration-[#1b8af1]"
+                            >
+                              {source.title}
+                              <ExternalLink className="mt-1 h-3.5 w-3.5 flex-none" />
+                            </a>
+                            <p className="mt-1 text-sm leading-6 text-stone-600 font-medium">
+                              {source.authors}. <em>{source.publication}</em> ({source.year}).
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                )}
 
                 {/* FAQ */}
                 <section id="faq" className="pt-8 border-t-2 border-stone-200 scroll-mt-28">
@@ -630,6 +734,17 @@ export default function JournalingBlogPostPage() {
                       </a>
                     </li>
                   ))}
+                  {post.sources && post.sources.length > 0 && (
+                    <li>
+                      <a
+                        href="#sources"
+                        onClick={() => handleTocClick('Sources', 'sidebar')}
+                        className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                      >
+                        Sources and further reading
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <a
                       href="#faq"

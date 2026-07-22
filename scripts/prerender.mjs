@@ -1,9 +1,9 @@
 /**
  * Build-time prerender: emits per-route static HTML so non-JS crawlers
  * (Twitter, Slack, LinkedIn, iMessage, ChatGPT, Perplexity, etc.) see the
- * correct <title>, <meta description>, OG/Twitter tags, and canonical URL
- * for every route. Google still renders JS and consumes runtime helmet
- * updates, but indexing is faster when the initial HTML already matches.
+ * correct metadata and readable page content for every route. JS-enabled
+ * browsers replace the fallback body with React; non-JS search and AI crawlers
+ * can still extract the complete article, FAQ, sources, and calls to action.
  *
  * Strategy: take dist/index.html (built by `vite build`) as a template,
  * rewrite the head meta block per route, and write to dist/<route>/index.html.
@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import ts from 'typescript';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -111,57 +112,62 @@ const staticRoutes = [
   },
 ];
 
-// Blog routes: pull seoTitle, metaDescription, slug, date, author, category, keyword
-// from the data files via the same regex pattern used in generate-sitemap.mjs.
-// Falls back gracefully if a field is missing.
-function extractBlogPosts(filePath) {
-  const text = readFileSync(filePath, 'utf-8');
-  const posts = [];
-  // Split on top-level object opens that follow `{` after a newline or array start
-  // Then per-post extract fields via regex. Brittle but matches the sitemap script's pattern.
-  const slugRe = /slug:\s*['"]([^'"]+)['"]/g;
-  const slugs = [];
-  let m;
-  while ((m = slugRe.exec(text)) !== null) slugs.push({ slug: m[1], idx: m.index });
-
-  for (const { slug, idx } of slugs) {
-    // Look backwards from the slug for the post-open brace, forwards for the close
-    const before = text.slice(Math.max(0, idx - 4000), idx);
-    const after = text.slice(idx, idx + 4000);
-    const block = before + after;
-    const seoTitle = pluck(block, /seoTitle:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const metaDescription = pluck(block, /metaDescription:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const title = pluck(block, /title:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const author = pluck(block, /author:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const date = pluck(block, /date:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const category = pluck(block, /category:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    const keyword = pluck(block, /keyword:\s*['"]((?:[^'"\\]|\\.)*)['"]/);
-    posts.push({ slug, seoTitle, metaDescription, title, author, date, category, keyword });
-  }
-  return posts;
+// The blog files are plain TypeScript data modules. Transpiling and loading them
+// keeps prerender output in lockstep with the content users see in React.
+async function loadBlogPosts(filePath, exportName) {
+  const source = readFileSync(filePath, 'utf-8');
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2022,
+    },
+    fileName: filePath,
+  });
+  const moduleUrl = `data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`;
+  const loaded = await import(moduleUrl);
+  return Array.isArray(loaded[exportName]) ? loaded[exportName] : [];
 }
 
-function pluck(text, re) {
-  const m = re.exec(text);
-  return m ? m[1].replace(/\\(['"])/g, '$1') : '';
-}
+const monthNumbers = {
+  January: '01',
+  February: '02',
+  March: '03',
+  April: '04',
+  May: '05',
+  June: '06',
+  July: '07',
+  August: '08',
+  September: '09',
+  October: '10',
+  November: '11',
+  December: '12',
+};
 
-// Convert "March 18, 2026" → "2026-03-18" for schema.org datePublished.
-// Falls back to the original string if Date.parse can't interpret it.
+// Parse human dates without passing through the machine's local timezone.
 function toIsoDate(s) {
   if (!s) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+
+  const humanDate = /^(\w+)\s+(\d{1,2}),\s+(\d{4})$/.exec(s);
+  if (humanDate && monthNumbers[humanDate[1]]) {
+    return `${humanDate[3]}-${monthNumbers[humanDate[1]]}-${humanDate[2].padStart(2, '0')}`;
+  }
+
   const t = Date.parse(s);
   if (Number.isNaN(t)) return s;
   return new Date(t).toISOString().split('T')[0];
 }
 
-const therapistBlogs = extractBlogPosts(join(ROOT, 'src/data/blogPosts.ts')).map((p) => ({
+const therapistBlogs = (await loadBlogPosts(join(ROOT, 'src/data/blogPosts.ts'), 'blogPosts')).map((p) => ({
   ...p,
   path: `/blog/${p.slug}`,
   ogType: 'article',
   keywords: [p.keyword, p.category, 'mental health'].filter(Boolean).join(', '),
 }));
-const journalingBlogs = extractBlogPosts(join(ROOT, 'src/data/journalingBlogPosts.ts')).map((p) => ({
+const journalingBlogs = (await loadBlogPosts(
+  join(ROOT, 'src/data/journalingBlogPosts.ts'),
+  'journalingBlogPosts'
+)).map((p) => ({
   ...p,
   path: `/app/blog/${p.slug}`,
   ogType: 'article',
@@ -174,7 +180,14 @@ const blogRoutes = [...therapistBlogs, ...journalingBlogs].map((p) => ({
   description: p.metaDescription || '',
   keywords: p.keywords,
   ogType: 'article',
-  article: { author: p.author, date: p.date, category: p.category },
+  article: {
+    author: p.author,
+    date: p.date,
+    category: p.category,
+    abstract: p.answerSummary,
+    citations: p.sources?.map((source) => source.url) ?? [],
+    content: p,
+  },
 }));
 
 const allRoutes = [...staticRoutes, ...blogRoutes];
@@ -183,6 +196,101 @@ const template = readFileSync(join(DIST, 'index.html'), 'utf-8');
 
 function htmlEscape(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function articleWordCount(post) {
+  return [
+    post.answerSummary,
+    post.intro,
+    ...(post.sections ?? []).flatMap((section) => section.body ?? []),
+    ...(post.faq ?? []).flatMap((item) => [item.question, item.answer]),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .trim()
+    .split(/\s+/).length;
+}
+
+function renderStaticArticle(route, canonical) {
+  const post = route.article?.content;
+  if (!post) return '';
+
+  const takeaways = post.keyTakeaways?.length
+    ? post.keyTakeaways
+    : (post.sections ?? []).slice(0, 3).map((section) => section.heading);
+  const quickAnswer = post.answerSummary
+    ? `<section class="pr-answer"><p class="pr-label">Quick answer</p><p>${htmlEscape(post.answerSummary)}</p></section>`
+    : '';
+  const takeawayHtml = takeaways.length
+    ? `<section><h2>Key takeaways</h2><ul>${takeaways.map((item) => `<li>${htmlEscape(item)}</li>`).join('')}</ul></section>`
+    : '';
+  const sectionHtml = (post.sections ?? [])
+    .map(
+      (section) =>
+        `<section><h2>${htmlEscape(section.heading)}</h2>${(section.body ?? [])
+          .map((paragraph) => `<p>${htmlEscape(paragraph)}</p>`)
+          .join('')}</section>`
+    )
+    .join('');
+  const sourceHtml = post.sources?.length
+    ? `<section id="sources"><h2>Sources and further reading</h2><ol>${post.sources
+        .map(
+          (source) =>
+            `<li><a href="${htmlEscape(source.url)}">${htmlEscape(source.title)}</a><br><small>${htmlEscape(source.authors)}. <em>${htmlEscape(source.publication)}</em> (${htmlEscape(source.year)}).</small></li>`
+        )
+        .join('')}</ol></section>`
+    : '';
+  const faqHtml = post.faq?.length
+    ? `<section id="faq"><h2>Frequently asked questions</h2>${post.faq
+        .map(
+          (item) =>
+            `<h3>${htmlEscape(item.question)}</h3><p>${htmlEscape(item.answer)}</p>`
+        )
+        .join('')}</section>`
+    : '';
+
+  return `
+    <style>
+      [data-prerendered-article] { max-width: 760px; margin: 0 auto; padding: 48px 24px 72px; color: #292524; font: 17px/1.75 Georgia, serif; }
+      [data-prerendered-article] nav, [data-prerendered-article] .pr-meta, [data-prerendered-article] .pr-label { font-family: ui-sans-serif, sans-serif; }
+      [data-prerendered-article] nav { margin-bottom: 36px; font-weight: 700; }
+      [data-prerendered-article] a { color: #1166b8; }
+      [data-prerendered-article] h1 { margin: 12px 0 16px; font-size: clamp(36px, 7vw, 60px); line-height: 1.05; }
+      [data-prerendered-article] h2 { margin: 48px 0 14px; font-size: 30px; line-height: 1.2; }
+      [data-prerendered-article] h3 { margin: 28px 0 8px; font-size: 21px; line-height: 1.3; }
+      [data-prerendered-article] p { margin: 0 0 18px; }
+      [data-prerendered-article] li { margin-bottom: 10px; }
+      [data-prerendered-article] .pr-meta { color: #78716c; font-size: 14px; font-weight: 650; }
+      [data-prerendered-article] .pr-dek { color: #57534e; font-size: 21px; line-height: 1.55; }
+      [data-prerendered-article] .pr-answer { margin: 38px 0; padding: 24px; border: 2px solid #292524; border-radius: 12px; background: #eaf5ff; box-shadow: 6px 6px 0 #1b8af1; }
+      [data-prerendered-article] .pr-answer p:last-child { margin: 0; font-family: ui-sans-serif, sans-serif; font-size: 19px; font-weight: 750; line-height: 1.6; }
+      [data-prerendered-article] .pr-label { margin-bottom: 8px; color: #1166b8; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+      [data-prerendered-article] .pr-cta { margin-top: 48px; padding: 28px; border-radius: 12px; background: #292524; color: white; }
+      [data-prerendered-article] .pr-cta h2 { margin-top: 0; }
+      [data-prerendered-article] .pr-cta a { display: inline-block; padding: 10px 16px; border-radius: 8px; background: #1b8af1; color: white; font-family: ui-sans-serif, sans-serif; font-weight: 800; text-decoration: none; }
+    </style>
+    <main data-prerendered-article>
+      <nav><a href="${SITE_URL}/app/blog">Empath Journaling Blog</a></nav>
+      <article>
+        <header>
+          <p class="pr-meta">${htmlEscape(post.category)} &middot; ${htmlEscape(post.author)} &middot; ${htmlEscape(post.date)} &middot; ${htmlEscape(post.readTime)}</p>
+          <h1>${htmlEscape(post.title)}</h1>
+          <p class="pr-dek">${htmlEscape(post.excerpt)}</p>
+        </header>
+        ${quickAnswer}
+        <p>${htmlEscape(post.intro)}</p>
+        ${takeawayHtml}
+        ${sectionHtml}
+        ${sourceHtml}
+        ${faqHtml}
+        <section class="pr-cta">
+          <h2>Turn reflection into action with Empath</h2>
+          <p>Call, text, or type what is happening, notice recurring patterns, and keep your next step connected to the moment that created it.</p>
+          <a href="${SITE_URL}/atman/">Try Empath free</a>
+        </section>
+        <p class="pr-meta">This article is educational and is not a substitute for professional mental health advice. Canonical URL: <a href="${canonical}">${canonical}</a></p>
+      </article>
+    </main>`;
 }
 
 function buildHeadMeta(route) {
@@ -196,13 +304,16 @@ function buildHeadMeta(route) {
     : '';
 
   let articleLd = '';
+  let faqLd = '';
   if (route.article && route.article.author && route.article.date) {
+    const post = route.article.content;
     const articleSchema = {
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: route.title,
+      headline: post?.title ?? route.title,
       description: route.description,
-      author: { '@type': 'Person', name: route.article.author },
+      abstract: route.article.abstract || undefined,
+      author: { '@type': 'Organization', name: route.article.author, url: SITE_URL },
       datePublished: toIsoDate(route.article.date),
       dateModified: toIsoDate(route.article.date),
       image: ogImage,
@@ -211,17 +322,36 @@ function buildHeadMeta(route) {
         name: 'Empath',
         logo: { '@type': 'ImageObject', url: `${SITE_URL}/empath-logo.png` },
       },
+      url: canonical,
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
       articleSection: route.article.category || undefined,
+      keywords: route.keywords || undefined,
+      citation: route.article.citations.length ? route.article.citations : undefined,
+      wordCount: post ? articleWordCount(post) : undefined,
+      inLanguage: 'en-US',
+      isAccessibleForFree: true,
     };
-    articleLd = `\n    <script type="application/ld+json">${JSON.stringify(articleSchema)}</script>`;
+    articleLd = `\n    <script type="application/ld+json" data-prerendered-schema>${JSON.stringify(articleSchema)}</script>`;
+
+    if (post?.faq?.length) {
+      const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: post.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      };
+      faqLd = `\n    <script type="application/ld+json" data-prerendered-schema>${JSON.stringify(faqSchema)}</script>`;
+    }
   }
 
-  return { canonical, title, description, ogType, ogImage, keywordsTag, articleLd };
+  return { canonical, title, description, ogType, ogImage, keywordsTag, articleLd, faqLd };
 }
 
 function rewriteHtml(html, route) {
-  const { canonical, title, description, ogType, ogImage, keywordsTag, articleLd } = buildHeadMeta(route);
+  const { canonical, title, description, ogType, ogImage, keywordsTag, articleLd, faqLd } = buildHeadMeta(route);
 
   let out = html;
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
@@ -245,9 +375,14 @@ function rewriteHtml(html, route) {
   out = out.replace(/<meta\s+property="twitter:description"[^>]*\/?>/, `<meta property="twitter:description" content="${description}" />`);
   out = out.replace(/<meta\s+property="twitter:image"[^>]*\/?>/, `<meta property="twitter:image" content="${ogImage}" />`);
 
-  // Inject <link rel="canonical"> and Article JSON-LD before </head>
+  // Inject canonical and structured data before </head>.
   const canonicalTag = `<link rel="canonical" href="${canonical}" />`;
-  out = out.replace(/<\/head>/, `    ${canonicalTag}${articleLd}\n  </head>`);
+  out = out.replace(/<\/head>/, `    ${canonicalTag}${articleLd}${faqLd}\n  </head>`);
+
+  const staticArticle = renderStaticArticle(route, canonical);
+  if (staticArticle) {
+    out = out.replace('<div id="root"></div>', `<div id="root">${staticArticle}</div>`);
+  }
 
   return out;
 }

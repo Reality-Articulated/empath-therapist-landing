@@ -5,12 +5,13 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import './index.css';
 import { PostHogProvider } from 'posthog-js/react';
+import type { PostHog } from 'posthog-js';
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   disable_toolbar: import.meta.env.PROD, // Disable toolbar in production
   opt_out_capture_by_default: false,
-  loaded: function(posthog: any) {
+  loaded: function(posthog: PostHog) {
     // Force disable toolbar in production
     if (import.meta.env.PROD) {
       posthog.set_config({ disable_toolbar: true });
@@ -26,7 +27,12 @@ const options = {
   }
 };
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')!;
+// Production builds include readable fallback HTML for non-JS crawlers.
+rootElement.replaceChildren();
+document.querySelectorAll('[data-prerendered-schema]').forEach((node) => node.remove());
+
+createRoot(rootElement).render(
   <StrictMode>
     <BrowserRouter
       future={{
