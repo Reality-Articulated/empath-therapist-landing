@@ -18,11 +18,38 @@ export interface JournalingBlogChart {
   maxValue?: number;
 }
 
+export interface JournalingBlogTableRow {
+  feature: string;
+  empath: string;
+  competitor: string;
+}
+
+export interface JournalingBlogTable {
+  title: string;
+  /** Column header for the non-Empath app, e.g. "Day One" */
+  competitorName: string;
+  rows: JournalingBlogTableRow[];
+  /** Small print under the table, e.g. pricing-accuracy note */
+  caption?: string;
+}
+
+export interface JournalingBlogCallout {
+  /** One-line lead-in above the link */
+  text: string;
+  linkText: string;
+  /** Slug of another journaling blog post to link to */
+  slug: string;
+}
+
 export interface JournalingBlogSection {
   heading: string;
   body: string[];
   /** Optional chart rendered after this section's paragraphs */
   chart?: JournalingBlogChart;
+  /** Optional Empath-vs-competitor table rendered after this section's paragraphs */
+  table?: JournalingBlogTable;
+  /** Optional internal-link card rendered at the end of this section */
+  callout?: JournalingBlogCallout;
 }
 
 export interface JournalingBlogFAQ {
@@ -54,6 +81,8 @@ export interface JournalingBlogPost {
   featured?: boolean;
   /** A self-contained 40-60 word answer for answer engines and quick scanning. */
   answerSummary?: string;
+  /** Explicit "Keep reading" picks (slugs, max 3 shown). Falls back to the first 3 posts when absent. */
+  relatedSlugs?: string[];
   keyTakeaways?: string[];
   intro: string;
   sections: JournalingBlogSection[];
@@ -63,6 +92,348 @@ export interface JournalingBlogPost {
 
 export const journalingBlogPosts: JournalingBlogPost[] = [
 ...kinzerJournalingBlogPosts,
+// Article 38
+{
+  id: 'j38',
+  title: 'Empath vs Day One: Which Journaling App Should You Choose in 2026?',
+  seoTitle: 'Empath vs Day One (2026): AI Voice Journal or Classic Diary? | Empath',
+  metaDescription:
+    'Empath vs Day One compared honestly: journaling input, AI insights, media and archiving, privacy, and pricing. Find out which app actually fits how you reflect.',
+  excerpt:
+    'One is a beautifully crafted digital diary built for writers and archivists. The other journals with you by call, text, or chat. Here is how to pick.',
+  author: 'Empath Team',
+  date: 'July 23, 2026',
+  readTime: '12 min read',
+  category: 'App Reviews',
+  slug: 'empath-vs-day-one',
+  keyword: 'empath vs day one',
+  relatedSlugs: ['best-journaling-apps', 'empath-vs-rosebud', 'voice-journaling-guide'],
+  answerSummary:
+    'Choose Day One if you love writing, want a beautiful long-term archive of entries, photos, and memories, and do not need AI feedback. Choose Empath if the blank page is what stops you: you journal by phone call, text message, or typing, and the AI organizes entries and surfaces emotional patterns over time.',
+  keyTakeaways: [
+    'Day One is a classic diary at heart: you compose entries. Empath is capture-first: you talk or text, and the app does the organizing.',
+    'Day One wins on media, scrapbooking, and long-term archiving. Empath wins on friction, voice input, and AI-generated insights.',
+    'Both take privacy seriously, but in different ways: Day One offers end-to-end encryption on paid plans, while Empath encrypts entries at rest and keeps AI analysis opt-in.',
+    'Plenty of people use both: Day One as the permanent archive, Empath as the low-effort daily capture and reflection tool.',
+  ],
+  intro:
+    'Day One has been the gold standard of digital diaries for over a decade: elegant typography, photo-rich entries, and an archive designed to be re-read years later. Empath comes from the opposite direction. Instead of giving you a beautiful blank page, it removes the page entirely: you journal by calling a phone number, sending a text, or typing a quick note, and the AI transcribes, titles, and analyzes everything for you. Both are excellent at what they set out to do, and that is exactly why the comparison is worth making carefully. This is not a case of one app being better; it is a case of two different theories about why people stop journaling. This guide compares them feature by feature so you can pick the one that matches how you actually reflect.',
+  sections: [
+    {
+      heading: 'What Are Empath and Day One?',
+      body: [
+        'Day One, made by Automattic, is one of the longest-running and most polished journaling apps available. It is built around composed entries: you open the app, write in a clean editor, attach photos, videos, audio, or scanned pages, and organize everything into multiple journals. Features like On This Day resurface old entries, templates give structure, and streaks encourage consistency. It has earned its reputation as the journaling app for people who love the act of writing and want a permanent, exportable record of their life.',
+        'Empath is an AI journaling assistant built around capture instead of composition. You can call or text a phone number, or type directly in the iOS app, and Empath transcribes the entry, gives it a title, detects the emotions in it, and files it automatically. Over time, its Deeper Insights analyze your entries for recurring themes, mood patterns, and connections between what you do and how you feel. The core bet is that most people abandon journaling not because they stop caring but because sitting down to write is effort, and talking is not.',
+        'In other words: Day One optimizes what happens after you decide to journal. Empath optimizes whether you journal at all. That single difference explains almost every row of the comparison table below.',
+      ],
+    },
+    {
+      heading: 'Empath vs Day One at a Glance',
+      body: [
+        'Here is the short version of the comparison. The pattern to notice: Day One dominates the rows about crafting and keeping entries, while Empath dominates the rows about capturing entries and understanding them.',
+      ],
+      table: {
+        title: 'Empath vs Day One, feature by feature',
+        competitorName: 'Day One',
+        caption:
+          'Pricing and plan details reflect publicly listed information at the time of writing (July 2026) and may change. Always check each app’s current pricing page.',
+        rows: [
+          {
+            feature: 'How you journal',
+            empath: 'Phone call, text message, or typed entry; AI transcribes and organizes everything',
+            competitor: 'Typed entries in a polished editor, with photos, video, audio recordings, and templates',
+          },
+          {
+            feature: 'Blank-page help',
+            empath: 'No blank page: you talk or text, and follow-up structure is generated for you',
+            competitor: 'Templates, writing prompts, and daily reminders, but composing is still on you',
+          },
+          {
+            feature: 'AI insights',
+            empath: 'Emotion detection on every entry, mood tracking, and Deeper Insights that surface patterns over weeks',
+            competitor: 'Minimal by design; reflection comes from re-reading via On This Day and search',
+          },
+          {
+            feature: 'Media & scrapbooking',
+            empath: 'Voice recordings and text; entries are about what you said, not what you attach',
+            competitor: 'Excellent: photo-rich entries, layouts, scanned pages, and location/weather metadata',
+          },
+          {
+            feature: 'Archiving & export',
+            empath: 'Entries live in the app and web dashboard',
+            competitor: 'Best in class: PDF and JSON export, printed books, a decade-plus track record',
+          },
+          {
+            feature: 'Privacy',
+            empath: 'Entries encrypted at rest; AI analysis is built in and consent-gated for deeper features',
+            competitor: 'End-to-end encryption available on paid plans; no AI reading entries by default',
+          },
+          {
+            feature: 'Price',
+            empath: 'Free to download and start journaling by call, text, or app',
+            competitor: 'Limited free tier (one journal, one device); Premium subscription for full features',
+          },
+          {
+            feature: 'Best for',
+            empath: 'People who abandon journaling apps, verbal processors, and anyone who wants insights without effort',
+            competitor: 'Writers, memory-keepers, and archivists who enjoy composing and re-reading entries',
+          },
+        ],
+      },
+      callout: {
+        text: 'Want the full landscape beyond these two? We tested and ranked twelve apps across AI, voice, and traditional journaling.',
+        linkText: 'Read our Best Journaling Apps of 2026 guide',
+        slug: 'best-journaling-apps',
+      },
+    },
+    {
+      heading: 'How Journaling Feels Day to Day',
+      body: [
+        'With Day One, journaling is a small ritual. You open the app, pick a journal, and write. The editor is genuinely lovely: clean typography, Markdown support, and effortless photo placement. On a good evening, that ritual is the point. The friction is the feature, the way a paper notebook and a nice pen are. But on a stressful Tuesday when you got home late, the ritual is exactly what gets skipped, and journaling research consistently shows that skipped days, not bad entries, are what kill the habit.',
+        'With Empath, journaling happens inside moments you already have. You call the Empath number on a walk and talk for four minutes. You fire off a text between meetings when something rattles you. You type three sentences in bed. None of these require deciding to journal in the ceremonial sense; they are closer to leaving yourself a voicemail. Because speaking is roughly three to four times faster than typing, a four-minute call can capture more raw material than most people would ever type.',
+        'The honest trade-off: Day One entries tend to be more considered, because composing forces you to shape your thoughts. Empath entries are more frequent and more candid, because nothing stands between the feeling and the capture. Which of those you value more is probably the single best predictor of which app you will still be using in six months.',
+      ],
+    },
+    {
+      heading: 'AI Insights and Reflection',
+      body: [
+        'Day One’s theory of reflection is re-reading. On This Day shows you what you wrote one, three, or seven years ago, and it is genuinely moving once you have an archive. Search, tags, and multiple journals let you go back deliberately. What Day One does not do is interpret: it will not tell you that your mood has dipped every Sunday for two months, or that entries mentioning your commute skew anxious. The archive is rich, but the analysis is yours to perform.',
+        'Empath is built around that analysis. Every entry gets emotion detection automatically, mood check-ins plot how you actually feel over time, and Deeper Insights periodically synthesize your recent entries into patterns: recurring stressors, what reliably lifts your mood, how your energy tracks against your habits. It is the difference between owning a library and having a librarian who has read everything and occasionally says, “have you noticed this theme?”',
+        'If the idea of AI reading your journal makes you uncomfortable, that discomfort is legitimate and Day One’s approach will fit you better. If your problem is that you journal and then never learn anything from it, Empath closes that loop in a way a traditional diary structurally cannot.',
+      ],
+    },
+    {
+      heading: 'Media, Archiving, and Data Ownership',
+      body: [
+        'This section is Day One’s home turf, and it deserves the credit plainly: if you want a multimedia record of your life, Day One is the best tool in the category. Entries can hold photos, videos, audio, and scanned handwriting; location and weather are stamped automatically; and the whole archive exports cleanly to PDF or JSON. You can even order printed books of your journals. For a wedding year, a first baby, or a long trip, that scrapbook quality is unmatched.',
+        'Empath’s record is a different kind of artifact: a longitudinal account of your inner life in your own voice. The voice notes, texts, and typed entries accumulate into something less like a photo album and more like a therapy notebook that organizes itself. It is optimized for being understood, not for being displayed.',
+        'A practical note if you are considering a switch in either direction: Day One’s export tools make it easy to keep a permanent copy of your existing archive, so trying Empath costs you nothing in terms of your history. Many people reasonably land on both: Day One as the deliberate, media-rich record of events, Empath as the frictionless daily emotional capture.',
+      ],
+    },
+    {
+      heading: 'Privacy and Security',
+      body: [
+        'Day One offers end-to-end encryption on its paid plan, which means entries are encrypted with keys only you hold; even Day One’s servers cannot read them. That is the strongest privacy model available in mainstream journaling apps, and if E2E encryption is your hard requirement, Day One earns the point outright. The corollary is structural: an app that cannot read your entries also cannot analyze them, which is part of why Day One’s AI footprint is minimal.',
+        'Empath encrypts journal content at rest with per-user keys, and its more sensitive analysis features are consent-gated: you explicitly opt in before the app performs deeper kinds of analysis. AI processing is inherent to what Empath does, since transcription, emotion detection, and insights all require the system to work with your words. The design goal is that this processing serves only you: your entries train your insights, not a public model.',
+        'The right way to frame this is not “which app is private” but “which privacy trade you prefer.” Day One trades analysis away for maximal secrecy. Empath trades maximal secrecy for understanding, with encryption and consent gates around the exchange. Both are defensible; they are just different answers to what a journal is for.',
+      ],
+    },
+    {
+      heading: 'Pricing and Value',
+      body: [
+        'Day One has a free tier that works but is deliberately narrow: one journal, one device, and limited media. The Premium subscription, priced around the cost of a coffee per month billed annually at the time of writing, unlocks multiple journals, sync across devices, end-to-end encryption, and the full media features. For a serious keeper of journals, it is fairly priced for what is genuinely best-in-class software.',
+        'Empath is free to download, and you can start journaling immediately by phone call, text message, or in the app. The economics matter less than the shape of the value: with Day One you are paying for a permanent home for entries you compose; with Empath the value concentrates in the entries you would otherwise never have made and the patterns you would never have noticed.',
+        'A fair test costs you two weeks and nothing else: journal however each app makes natural. If you find yourself lovingly composing entries in the evening, Day One is your app. If you find that most of your entries happened in moments no editor would have been opened, you have your answer in the other direction.',
+      ],
+    },
+    {
+      heading: 'Which One Should You Choose?',
+      body: [
+        'Choose Day One if you identify as a writer or memory-keeper, if photos and place are central to how you remember your life, if you want end-to-end encryption, or if you are building an archive you intend to re-read for decades. It rewards intention, and if you have the intention, nothing else in the category matches its craft.',
+        'Choose Empath if your journaling history is a graveyard of abandoned apps, if you process out loud better than on the page, if you want mood tracking and AI insights without doing the analysis yourself, or if the ability to journal by calling or texting a phone number, with no app open, is the difference between reflecting and not.',
+        'And if you genuinely cannot decide, run them in parallel: Empath for the daily capture, Day One for the weekly deliberate entry. The apps are different enough that they compete less than the comparison suggests. The only wrong choice is the app you stop opening.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Is Empath or Day One better for beginners?',
+      answer:
+        'Empath is generally easier to start with because there is no blank page: you call, text, or type a few sentences, and the app structures everything. Day One is beginner-friendly too, but it assumes you are comfortable composing entries yourself. If past journaling attempts have fizzled, the lower-friction option is usually the safer bet.',
+    },
+    {
+      question: 'Does Day One have AI features like Empath?',
+      answer:
+        'Day One has intentionally kept AI minimal, focusing on writing, media, and archiving; reflection happens by re-reading through features like On This Day. Empath is AI-native: it transcribes voice entries, detects emotions, tracks mood, and generates pattern insights from your entries. If AI reading your journal is a dealbreaker, Day One fits better; if AI insight is the point, that is Empath’s core feature.',
+    },
+    {
+      question: 'Can I journal by voice in both apps?',
+      answer:
+        'Both support audio, but differently. Day One lets you attach audio recordings to entries inside the app. Empath treats voice as a primary input: you can call a phone number from any phone, talk, and the entry is transcribed, titled, and analyzed automatically, with no app open at all.',
+    },
+    {
+      question: 'Which app is more private, Empath or Day One?',
+      answer:
+        'They make different trades. Day One offers end-to-end encryption on paid plans, so even its servers cannot read entries, which also means little AI analysis. Empath encrypts entries at rest and gates deeper analysis behind explicit consent, but AI processing of your words is inherent to how it works. Choose based on whether secrecy or understanding matters more to you.',
+    },
+    {
+      question: 'Can I use Empath and Day One together?',
+      answer:
+        'Yes, and it is a genuinely good combination. Many people use Empath for frictionless daily capture, journaling by call or text in the moments things happen, and Day One as the deliberate, media-rich archive for weekly reflections, photos, and milestones. Day One’s export tools also make it easy to keep a permanent copy of your history while you try Empath.',
+    },
+  ],
+},
+// Article 37
+{
+  id: 'j37',
+  title: 'Empath vs Rosebud: Which AI Journaling App Is Right for You?',
+  seoTitle: 'Empath vs Rosebud (2026): Honest AI Journaling App Comparison | Empath',
+  metaDescription:
+    'Empath vs Rosebud compared: guided AI chat vs voice-first capture, insights, mood tracking, privacy, and pricing. An honest guide to which AI journal fits you.',
+  excerpt:
+    'Both use AI to make journaling stick, but they disagree about how. Rosebud coaches you through typed conversations; Empath lets you talk and does the work after.',
+  author: 'Empath Team',
+  date: 'July 23, 2026',
+  readTime: '12 min read',
+  category: 'App Reviews',
+  slug: 'empath-vs-rosebud',
+  keyword: 'empath vs rosebud',
+  relatedSlugs: ['best-journaling-apps', 'empath-vs-day-one', 'best-ai-journaling-apps'],
+  answerSummary:
+    'Rosebud and Empath are both AI journals with different centers of gravity. Rosebud is an interactive coach: you type, and it asks thoughtful follow-up questions in the moment. Empath is capture-first: you journal by phone call, text, or typing, and the AI transcribes, tracks mood, and surfaces patterns afterward. Pick Rosebud for guided sessions, Empath for frictionless capture and longitudinal insight.',
+  keyTakeaways: [
+    'Rosebud journals with you in real time through typed conversation; Empath gets out of the way during capture and does its thinking afterward.',
+    'Empath’s phone-call and text-message journaling works from any phone with no app open; Rosebud sessions happen inside the app or website.',
+    'Both generate insights, but they emphasize different layers: Rosebud reflects within and across sessions, Empath focuses on emotion detection and long-range mood and behavior patterns.',
+    'Neither app is therapy. Both are reflection tools, and the better one is simply the one that matches how you naturally process.',
+  ],
+  intro:
+    'Rosebud and Empath usually end up on the same shortlist, and for good reason: both exist because traditional journaling apps quietly assume a discipline most people do not have, and both use AI to remove that assumption. But they remove it from opposite ends. Rosebud makes the writing itself easier by turning it into a guided conversation: you type a thought, and it responds with the kind of follow-up question a good coach would ask. Empath makes the capturing easier by letting you talk: you call or text a number, say what is on your mind, and the AI handles transcription, organization, emotion tracking, and insights. Choosing between them is less about features and more about which moment of journaling breaks down for you: the writing or the starting. This comparison walks through both honestly.',
+  sections: [
+    {
+      heading: 'What Are Empath and Rosebud?',
+      body: [
+        'Rosebud is an interactive AI journal. A session feels like a written dialogue: you type what happened or how you feel, and Rosebud responds with reflective follow-up questions, gently pushing you to go one layer deeper. Its prompts draw on established therapeutic framings, it remembers context from previous entries, and it produces summaries that tie sessions together. For people who like journaling but stall after two sentences, that conversational scaffolding is the product.',
+        'Empath is an AI journaling assistant built for capture-first reflection. You journal by calling a phone number, sending a text message, or typing in the iOS app; the AI transcribes voice entries, titles and files them, detects the emotions in each one, and tracks your mood over time. Its Deeper Insights layer periodically analyzes your recent entries for patterns: recurring stressors, mood cycles, what correlates with your better weeks. The interaction is deliberately thin at capture time and rich afterward.',
+        'The simplest way to hold the difference: Rosebud is a conversation partner, Empath is a listener with a good memory. Both are legitimate answers to why journaling fails; they are just aimed at different failure points.',
+      ],
+    },
+    {
+      heading: 'Empath vs Rosebud at a Glance',
+      body: [
+        'Here is the side-by-side. Notice that the rows split cleanly along the same axis: Rosebud invests in the quality of each session, Empath invests in the quantity of capture and the quality of what is learned across entries.',
+      ],
+      table: {
+        title: 'Empath vs Rosebud, feature by feature',
+        competitorName: 'Rosebud',
+        caption:
+          'Feature and plan details reflect publicly listed information at the time of writing (July 2026) and may change. Always check each app’s current pricing page.',
+        rows: [
+          {
+            feature: 'Core interaction',
+            empath: 'Capture-first: talk or text freely; AI organizes, titles, and analyzes afterward',
+            competitor: 'Conversation-first: typed dialogue where the AI asks reflective follow-up questions live',
+          },
+          {
+            feature: 'Voice journaling',
+            empath: 'Call a phone number from any phone, no app open; entries are transcribed automatically',
+            competitor: 'Voice input available inside app sessions',
+          },
+          {
+            feature: 'Journaling away from your phone screen',
+            empath: 'Yes: phone call or SMS works on a walk, in the car, or from a dumb phone',
+            competitor: 'Sessions happen in the app or on the web',
+          },
+          {
+            feature: 'Guided prompts',
+            empath: 'Light-touch: structure is applied after capture rather than during it',
+            competitor: 'Its core strength: personalized prompts and in-the-moment digging deeper',
+          },
+          {
+            feature: 'Insights & memory',
+            empath: 'Emotion detection per entry, mood tracking, and Deeper Insights across weeks of entries',
+            competitor: 'Remembers past sessions, generates summaries, and reflects themes back over time',
+          },
+          {
+            feature: 'Mood tracking',
+            empath: 'Built-in mood check-ins plus emotion analysis of every entry',
+            competitor: 'Mood and theme reflection woven into sessions and summaries',
+          },
+          {
+            feature: 'Price',
+            empath: 'Free to download and start journaling by call, text, or app',
+            competitor: 'Free trial with subscription for unlimited journaling',
+          },
+          {
+            feature: 'Best for',
+            empath: 'Verbal processors, busy people, and anyone who wants insight without a sit-down session',
+            competitor: 'People who want a guided, coach-like session and enjoy typing through their thoughts',
+          },
+        ],
+      },
+      callout: {
+        text: 'Comparing more than these two? Our 2026 roundup covers the full field, from AI journals to classic diaries.',
+        linkText: 'Read our Best Journaling Apps of 2026 guide',
+        slug: 'best-journaling-apps',
+      },
+    },
+    {
+      heading: 'Two Different Conversations: Coach vs Listener',
+      body: [
+        'A Rosebud session is interactive by design. You write, “I snapped at my partner tonight and I am not sure why,” and Rosebud asks what was happening just before, or what the feeling underneath the irritation might have been. Done well, and Rosebud does it well, this mirrors the most useful move in reflective practice: the follow-up question you would not have asked yourself. Sessions have a beginning, a middle, and a natural sense of completion.',
+        'Empath deliberately does not interrupt. When you call and talk for five minutes, nothing prompts or redirects you; the value of speaking freely is that you say things you did not plan to say. The intelligence arrives afterward: the entry comes back transcribed and titled, its emotions identified, and, over weeks, Deeper Insights start connecting that snapped-at-my-partner entry to the three others that also followed short-sleep nights.',
+        'Neither approach is objectively deeper. Guided questioning goes deeper within an entry; unguided capture plus longitudinal analysis goes deeper across entries. If you re-read your old journals and find single profound entries, you think like a Rosebud user. If you find patterns you wish you had spotted sooner, you think like an Empath user.',
+      ],
+    },
+    {
+      heading: 'Voice Journaling: A Phone Call vs an App Session',
+      body: [
+        'Both apps understand that speaking beats typing for many people, but they implement it differently, and the difference matters more than it sounds. Rosebud offers voice input within its sessions: you are in the app, in a conversation, speaking instead of typing. It works, and it keeps the guided format intact.',
+        'Empath treats the phone call itself as the journal. You dial a number, any phone, no app installed, and talk. You can do it on a commute, on a walk, or in the car after a hard conversation, which happen to be exactly the moments when feelings are freshest and screens are least available. Text-message journaling covers the moments too small for a call: three sentences fired off between meetings still become a titled, emotion-tagged entry.',
+        'If you already journal comfortably in an app, this distinction may not move you. But if your honest history is that apps get opened for two weeks and then forgotten, journaling that works through the phone’s oldest features, calls and texts, is a structurally different level of friction. It is the difference between a tool you use and a habit that survives you at your busiest.',
+      ],
+    },
+    {
+      heading: 'Insights, Mood Tracking, and Memory',
+      body: [
+        'Rosebud’s memory shows up inside the experience: it recalls what you have shared before, references earlier themes in its questions, and generates summaries that give a week of sessions a narrative shape. The insight is woven into the conversation, which makes it feel personal and immediate. For self-understanding of the “help me think this through” variety, that is a real strength.',
+        'Empath’s analysis is more like instrumentation. Every entry gets emotion detection, mood check-ins accumulate into trend lines, and Deeper Insights periodically synthesize your entries into explicit pattern reports: what recurs, what correlates, what changed. Because entries arrive constantly, by call, text, and app, the dataset those insights draw on tends to be denser than what a sit-down-session app collects.',
+        'The practical question to ask yourself: do you want insight delivered as conversation or as findings? Rosebud tells you things the way a coach would, mid-dialogue. Empath tells you things the way a report would, after watching for a month. People genuinely differ on which lands harder, and it is worth knowing which you are.',
+      ],
+    },
+    {
+      heading: 'Privacy and Emotional Safety',
+      body: [
+        'Both apps ask you to share your inner life with an AI, so both deserve scrutiny. Empath encrypts journal content at rest with per-user keys, and its more sensitive analysis is consent-gated: deeper features require an explicit opt-in rather than being silently enabled. Your entries power your own insights, not a public model.',
+        'Rosebud also states that entries are private and takes a careful tone around sensitive content, with its prompting style built on recognized therapeutic frameworks. As with any cloud AI product, the honest baseline for both apps is the same: your words are processed by AI systems in order to deliver the product, and you should read the current privacy policy of whichever you choose rather than trusting any comparison article, including this one.',
+        'One thing both apps agree on, and users should too: neither is therapy. They are reflection tools. If what you are working through involves crisis, trauma, self-harm, or symptoms that are impairing your life, the right comparison is not Empath vs Rosebud but which licensed professional to contact, with either app serving as a useful record to bring into that work.',
+      ],
+    },
+    {
+      heading: 'Pricing and Value',
+      body: [
+        'Rosebud operates on a subscription model, with a trial to test the experience and paid plans for unlimited journaling; its cost is comparable to other premium AI apps at the time of writing. Whether it is worth it comes down to whether the guided sessions actually happen for you. If you journal three times a week with it, the coaching value is obvious; if sessions feel like appointments you keep rescheduling, no discount fixes that.',
+        'Empath is free to download, and journaling by call, text, or app is available from the start. The value question there is the same in mirror image: if you never talk out loud about your life, the phone-first design will not save you either.',
+        'The cheapest way to decide is the same two-week test we recommend in every comparison: use each the way it wants to be used, and count entries at the end, because the entry count is the whole ballgame. The app that produced more honest entries is the one that will still be producing them in a year.',
+      ],
+    },
+    {
+      heading: 'Which One Should You Choose?',
+      body: [
+        'Choose Rosebud if you like typing through your thoughts, want a coach-like presence asking the next question in the moment, and value sessions that feel complete on their own. It is one of the best implementations of guided AI journaling available, and for deliberate processors it can be genuinely transformative.',
+        'Choose Empath if starting is your bottleneck, if you process out loud, if you want to journal from a walk or a commute without opening anything, or if what you really want is the longitudinal picture: mood over months, patterns across entries, and insights you did not have to dig for yourself.',
+        'If you are still torn, notice which sentence you related to more: “I do not know what to write next” points to Rosebud; “I never get around to it” points to Empath. Both are real problems, both apps solve theirs well, and either is a better outcome than another year of an empty notebook.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What is the main difference between Empath and Rosebud?',
+      answer:
+        'Rosebud is conversation-first: you type in a session and the AI asks reflective follow-up questions in real time. Empath is capture-first: you journal by phone call, text message, or typing, and the AI transcribes, detects emotions, and surfaces patterns afterward. Rosebud deepens each entry; Empath maximizes how many honest entries exist and what can be learned across them.',
+    },
+    {
+      question: 'Can I journal by voice in both Empath and Rosebud?',
+      answer:
+        'Yes, but differently. Rosebud supports voice input inside its app sessions. Empath treats voice as a primary channel: you call a phone number from any phone, with no app open, and the conversation becomes a transcribed, emotion-tagged journal entry. Empath also supports journaling over SMS for moments too small for a call.',
+    },
+    {
+      question: 'Is Empath or Rosebud better for building a journaling habit?',
+      answer:
+        'It depends on where your habit breaks. If you open journaling apps but freeze after two sentences, Rosebud’s guided questions keep the session moving. If you never open the app at all, Empath’s call-and-text journaling removes that step entirely. The most reliable predictor is your entry count after two weeks with each.',
+    },
+    {
+      question: 'Are Empath and Rosebud a replacement for therapy?',
+      answer:
+        'No. Both are reflection tools, not treatment, and neither should be used in place of professional care for crisis, trauma, self-harm, or symptoms that impair daily life. They can complement therapy well, as a record of moods and events between sessions, and both are best framed as journaling aids rather than mental health treatment.',
+    },
+    {
+      question: 'How do Empath and Rosebud handle privacy?',
+      answer:
+        'Both process your entries with AI to deliver their features, so neither offers end-to-end encryption. Empath encrypts journal content at rest with per-user keys and gates its deeper analysis behind explicit consent. Rosebud states that entries are private and handles sensitive content carefully. For either app, read the current privacy policy before writing anything you consider high-stakes.',
+    },
+  ],
+},
 // Article 31
 {
   id: 'j31',
@@ -542,6 +913,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-journaling-apps',
   keyword: 'best journaling apps',
+  relatedSlugs: ['empath-vs-day-one', 'empath-vs-rosebud', 'best-ai-journaling-apps'],
   intro:
     'Finding the right journaling app can make the difference between a habit that sticks and one that fades after a week. The journaling app market has exploded in 2026, with over 200 options across iOS and Android, ranging from simple text editors to sophisticated AI companions that analyze your emotional patterns over time. We spent three months testing the most popular options across categories including traditional journaling, AI-powered reflection, voice journaling, and structured prompts. Whether you want a beautiful writing space, intelligent insights, or the lowest possible friction, this guide will help you find the right fit.',
   sections: [

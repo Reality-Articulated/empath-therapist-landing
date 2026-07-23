@@ -14,7 +14,7 @@ import {
   Phone,
   MessageSquare,
 } from 'lucide-react';
-import { journalingBlogPosts } from '../data/journalingBlogPosts';
+import { journalingBlogPosts, JournalingBlogPost } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
@@ -314,9 +314,15 @@ export default function JournalingBlogPostPage() {
     if (newWindow) newWindow.opener = null;
   };
 
-  // Related posts (same category, excluding current)
+  // Related posts: explicit picks via relatedSlugs, otherwise the newest posts.
   const relatedPosts = useMemo(() => {
     if (!post) return [];
+    if (post.relatedSlugs?.length) {
+      return post.relatedSlugs
+        .map((relatedSlug) => journalingBlogPosts.find((p) => p.slug === relatedSlug))
+        .filter((p): p is JournalingBlogPost => p !== undefined && p.id !== post.id)
+        .slice(0, 3);
+    }
     return journalingBlogPosts
       .filter((p) => p.id !== post.id)
       .slice(0, 3);
@@ -581,6 +587,91 @@ export default function JournalingBlogPostPage() {
                     </div>
 
                     {section.chart && <BlogChart chart={section.chart} />}
+
+                    {section.table && (
+                      <div className="mt-8 overflow-hidden rounded-xl border-2 border-stone-900 bg-white shadow-[6px_6px_0px_0px_#1b8af1]">
+                        <div className="border-b-2 border-stone-900 bg-[#EAF5FF] px-5 py-4">
+                          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-1">
+                            Side by side
+                          </p>
+                          <h3 className="font-serif text-lg font-black text-stone-900">
+                            {section.table.title}
+                          </h3>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full min-w-[560px] border-collapse text-left">
+                            <thead>
+                              <tr className="border-b-2 border-stone-200">
+                                <th className="w-[26%] px-5 py-3" aria-label="Feature" />
+                                <th className="w-[37%] bg-[#EAF5FF]/70 px-5 py-3 text-xs font-black uppercase tracking-wider text-[#1166b8]">
+                                  Empath
+                                </th>
+                                <th className="w-[37%] px-5 py-3 text-xs font-black uppercase tracking-wider text-stone-500">
+                                  {section.table.competitorName}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {section.table.rows.map((row, rowIndex) => (
+                                <tr
+                                  key={row.feature}
+                                  className={`border-b border-stone-100 last:border-b-0 ${
+                                    rowIndex % 2 === 1 ? 'bg-stone-50/70' : ''
+                                  }`}
+                                >
+                                  <th
+                                    scope="row"
+                                    className="px-5 py-4 align-top text-sm font-black text-stone-900"
+                                  >
+                                    {row.feature}
+                                  </th>
+                                  <td className="bg-[#EAF5FF]/40 px-5 py-4 align-top text-sm font-medium leading-6 text-stone-800">
+                                    {row.empath}
+                                  </td>
+                                  <td className="px-5 py-4 align-top text-sm font-medium leading-6 text-stone-700">
+                                    {row.competitor}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        {section.table.caption && (
+                          <p className="border-t-2 border-stone-200 bg-stone-50 px-5 py-3 text-xs font-medium leading-5 text-stone-500">
+                            {section.table.caption}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {section.callout && (
+                      <Link
+                        to={`/app/blog/${section.callout.slug}`}
+                        onClick={() =>
+                          posthog.capture('journaling_blog_callout_clicked', {
+                            from_slug: post.slug,
+                            to_slug: section.callout?.slug,
+                          })
+                        }
+                        className="group mt-8 flex items-start gap-4 rounded-xl border-2 border-stone-900 bg-[#FFF9EC] p-5 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#1b8af1] md:p-6"
+                      >
+                        <span className="mt-0.5 flex h-9 w-9 flex-none items-center justify-center rounded-lg border-2 border-stone-900 bg-white">
+                          <Sparkles className="h-4 w-4 text-[#1b8af1]" />
+                        </span>
+                        <span>
+                          <span className="mb-1 block text-xs font-black uppercase tracking-[0.16em] text-stone-500">
+                            Related reading
+                          </span>
+                          <span className="block font-medium leading-7 text-stone-700">
+                            {section.callout.text}
+                          </span>
+                          <span className="mt-1.5 inline-flex items-center gap-1.5 font-bold text-[#1166b8] underline decoration-[#1b8af1]/40 underline-offset-4 transition-colors group-hover:text-stone-900 group-hover:decoration-stone-900">
+                            {section.callout.linkText}
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                          </span>
+                        </span>
+                      </Link>
+                    )}
                   </section>
                 ))}
 
