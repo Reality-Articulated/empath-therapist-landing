@@ -50,6 +50,8 @@ export interface JournalingBlogPost {
   category: string;
   slug: string;
   keyword: string;
+  /** Pinned into the Featured section on /app/blog (max 2 shown, array order wins). Falls back to the newest post when none are flagged. */
+  featured?: boolean;
   /** A self-contained 40-60 word answer for answer engines and quick scanning. */
   answerSummary?: string;
   keyTakeaways?: string[];
@@ -2072,6 +2074,15 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-ai-journaling-apps',
   keyword: 'best AI journaling apps',
+  featured: true,
+  answerSummary:
+    'The best AI journaling app depends on how you reflect: Empath leads for multimodal voice-and-text journaling with HIPAA-compliant privacy and longitudinal pattern detection, Rosebud is the strongest chat-first reflection partner, and Mindsera suits users who want coaching frameworks. Match the interaction model to your style, verify the privacy policy, and trial free tiers before paying.',
+  keyTakeaways: [
+    'AI journaling ranges from simple sentiment tags to systems that read your history and surface patterns — the marketing label hides an enormous quality gap.',
+    'Pick by input style: Empath for voice-first multimodal capture, Rosebud for chat-based reflection, Mindsera for structured thinking frameworks.',
+    'Privacy matters more here than in any other app category — prefer apps that encrypt entries and explicitly refuse to train models on your writing.',
+    'Subscriptions cluster at $9.99–$14.99/month; Empath has an unusually capable free tier, so trial before committing to an annual plan.',
+  ],
   intro:
     'AI journaling has gone from a niche experiment to a crowded category in less than three years. As of early 2026, there are more than forty journaling apps marketing some form of artificial intelligence, ranging from simple sentiment tags to fully conversational reflection partners. Research published in the Journal of Medical Internet Research in late 2024 found that digital journaling tools with intelligent feedback mechanisms improved emotional awareness scores by 34% compared to unstructured writing, which helps explain the rush. But not all AI journaling is created equal. Some apps use AI as a marketing label on top of basic mood tracking, while others have built genuinely thoughtful systems for surfacing patterns and prompting deeper reflection. We spent two months testing the ten most credible options across iOS and Android, looking at the quality of insights, privacy posture, voice support, and how each app actually fits into a sustainable journaling habit.',
   sections: [

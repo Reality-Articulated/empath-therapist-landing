@@ -53,13 +53,26 @@ export default function JournalingBlogsPage() {
     posthog.capture('journaling_blog_category_selected', { category });
   };
 
-  const handleArticleClick = (slug: string, source: 'featured' | 'grid', category: string) => {
-    posthog.capture('journaling_blog_article_clicked', { slug, source, category });
+  const handleArticleClick = (
+    slug: string,
+    source: 'featured' | 'grid',
+    category: string,
+    position?: number
+  ) => {
+    posthog.capture('journaling_blog_article_clicked', { slug, source, category, position });
   };
+
+  const featuredPosts = useMemo(() => {
+    const flagged = journalingBlogPosts.filter((post) => post.featured).slice(0, 2);
+    return flagged.length > 0 ? flagged : [journalingBlogPosts[0]];
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     posthog.capture('journaling_blog_page_viewed');
+    posthog.capture('journaling_blog_featured_impression', {
+      slugs: featuredPosts.map((post) => post.slug),
+    });
     document.title = 'Journaling Blog: Tips, Apps & Guides | Empath';
     const description = document.querySelector(
       'meta[name="description"]'
@@ -68,7 +81,7 @@ export default function JournalingBlogsPage() {
       description.content =
         'Explore expert guides on journaling apps, techniques, and habits. Learn how to start journaling, build a routine, and use AI to understand yourself better.';
     }
-  }, []);
+  }, [featuredPosts]);
 
   const categories = useMemo(() => {
     const set = new Set(journalingBlogPosts.map((post) => post.category));
@@ -89,9 +102,14 @@ export default function JournalingBlogsPage() {
     });
   }, [searchTerm, selectedCategory]);
 
-  const featuredPost = journalingBlogPosts[0];
   const isDefaultView = !searchTerm && selectedCategory === 'All';
-  const gridPosts = isDefaultView ? filteredPosts.slice(1) : filteredPosts;
+  const featuredSlugs = useMemo(
+    () => new Set(featuredPosts.map((post) => post.slug)),
+    [featuredPosts]
+  );
+  const gridPosts = isDefaultView
+    ? filteredPosts.filter((post) => !featuredSlugs.has(post.slug))
+    : filteredPosts;
 
   const blogSchema = useMemo(() => {
     const origin =
@@ -119,6 +137,22 @@ export default function JournalingBlogsPage() {
     };
   }, []);
 
+  const featuredSchema = useMemo(() => {
+    const origin =
+      typeof window !== 'undefined' ? window.location.origin : 'https://www.empathdash.com';
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Featured journaling articles',
+      itemListElement: featuredPosts.map((post, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: post.seoTitle,
+        url: `${origin}/app/blog/${post.slug}`,
+      })),
+    };
+  }, [featuredPosts]);
+
   const handleAppStoreClick = () => {
     posthog.capture('journaling_blog_app_store_clicked');
     // Plain new-tab open; a windowFeatures string opens a popup that blockers
@@ -137,6 +171,10 @@ export default function JournalingBlogsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(featuredSchema) }}
       />
 
       {/* Header / Navbar */}
@@ -229,67 +267,61 @@ export default function JournalingBlogsPage() {
         </div>
       </div>
 
-      {/* Featured Post */}
+      {/* Featured Posts */}
       {isDefaultView && (
         <div className="border-b border-stone-200 bg-white">
           <div className="container mx-auto px-4 max-w-5xl py-10">
-            <Link
-              to={`/app/blog/${featuredPost.slug}`}
-              className="block group"
-              onClick={() =>
-                handleArticleClick(featuredPost.slug, 'featured', featuredPost.category)
-              }
+            <div
+              className={`grid gap-6 ${featuredPosts.length > 1 ? 'md:grid-cols-2' : ''}`}
             >
-              <div className="bg-[#FAF9F6] rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] group-hover:shadow-[6px_6px_0px_0px_#1b8af1] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all p-6 md:p-8">
-                <div className="grid md:grid-cols-[1.2fr,1fr] gap-6 items-center">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-stone-900 text-white border-2 border-stone-900">
-                        Featured
-                      </span>
-                      {(() => {
-                        const colors = getCategoryColor(featuredPost.category);
-                        return (
-                          <span
-                            className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-bold border-2 ${colors.bg} ${colors.text} ${colors.border}`}
-                          >
-                            {featuredPost.category}
-                          </span>
-                        );
-                      })()}
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-black text-stone-900 leading-tight mb-3 group-hover:text-[#1b8af1] transition-colors font-serif">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-stone-600 leading-relaxed mb-4 font-medium">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3 text-sm text-stone-500 font-medium">
-                      <span className="font-bold text-stone-700">{featuredPost.author}</span>
-                      <span>·</span>
-                      <span>{featuredPost.date}</span>
-                      <span>·</span>
-                      <span>{featuredPost.readTime}</span>
-                    </div>
-                  </div>
-                  <div className="hidden md:flex justify-end">
-                    {(() => {
-                      const colors = getCategoryColor(featuredPost.category);
-                      const Icon = getCategoryIcon(featuredPost.category);
-                      return (
-                        <div
-                          className={`w-full max-w-sm aspect-[4/3] bg-gradient-to-br ${colors.gradient} rounded-xl border-2 border-stone-900 flex items-center justify-center`}
-                        >
-                          <div className="w-20 h-20 bg-white rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] flex items-center justify-center">
-                            <Icon className="w-10 h-10" style={{ color: colors.shadow }} />
-                          </div>
+              {featuredPosts.map((post, index) => {
+                const colors = getCategoryColor(post.category);
+                const Icon = getCategoryIcon(post.category);
+                return (
+                  <Link
+                    key={post.id}
+                    to={`/app/blog/${post.slug}`}
+                    className="block group h-full"
+                    onClick={() =>
+                      handleArticleClick(post.slug, 'featured', post.category, index + 1)
+                    }
+                  >
+                    <div className="flex flex-col h-full bg-[#FAF9F6] rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] group-hover:shadow-[6px_6px_0px_0px_#1b8af1] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all p-6 md:p-8">
+                      <div
+                        className={`hidden md:flex h-28 mb-6 bg-gradient-to-br ${colors.gradient} rounded-xl border-2 border-stone-900 items-center justify-center`}
+                      >
+                        <div className="w-14 h-14 bg-white rounded-2xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] flex items-center justify-center">
+                          <Icon className="w-7 h-7" style={{ color: colors.shadow }} />
                         </div>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </div>
-            </Link>
+                      </div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-stone-900 text-white border-2 border-stone-900">
+                          Featured
+                        </span>
+                        <span
+                          className={`inline-flex px-2.5 py-1 rounded-lg text-xs font-bold border-2 ${colors.bg} ${colors.text} ${colors.border}`}
+                        >
+                          {post.category}
+                        </span>
+                      </div>
+                      <h2 className="text-2xl font-black text-stone-900 leading-tight mb-3 group-hover:text-[#1b8af1] transition-colors font-serif">
+                        {post.title}
+                      </h2>
+                      <p className="text-stone-600 leading-relaxed mb-4 font-medium">
+                        {post.excerpt}
+                      </p>
+                      <div className="mt-auto flex items-center gap-3 text-sm text-stone-500 font-medium">
+                        <span className="font-bold text-stone-700">{post.author}</span>
+                        <span>·</span>
+                        <span>{post.date}</span>
+                        <span>·</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
