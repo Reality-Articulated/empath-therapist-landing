@@ -48,6 +48,33 @@ PostHog is initialized in `src/main.tsx` (toolbar forcibly disabled in prod) and
 
 Add new ad-network params to the arrays in `App.tsx` so they flow into super properties consistently. See `REDDIT_TRACKING.md` for the full Reddit pixel setup.
 
+### Campaign survey page (`/survey`)
+
+`src/pages/SurveyPage.tsx` — chrome-less (in the `hideNavbar` list), noindex,
+deliberately NOT in the sitemap. Opened by the iOS marketing-campaign bottom
+sheet with `?cid={client_id}&theme=dark|light&utm_campaign=<name>` (iOS
+substitutes the placeholder; `cid` is absent for anonymous/web visitors).
+Questions are a typed config array at the top of the file (single / multi
+with max-selections + exclusive options / matrix, conditional follow-ups,
+inline "Other" text) — **bump `SURVEY_ID` whenever questions change** so
+analytics don't mix across versions.
+
+Dual write on every answer:
+1. **Upsert to empath-heroku** `POST https://app.empathdash.com/api/survey/response`,
+   keyed by a per-session response UUID — fire-and-forget with `keepalive`
+   (never blocks the UI; partial responses from abandoners are the point).
+   This is the **system of record**, encrypted at rest, aggregated in
+   empath-admin → Survey Feedback.
+2. **PostHog events** (`survey_viewed` / `survey_answer` / `survey_completed`)
+   for funnels — multi-selects fire one event per selected option because
+   PostHog breakdowns can't split array properties. Note posthog-js silently
+   drops events from bot UAs / `navigator.webdriver` / HeadlessChrome
+   `userAgentData` — headless tests must override all three.
+
+Contact (name/email) is optional; there is no login. **A new campaign survey
+needs only this file**: edit the questions, bump `SURVEY_ID`, point the
+campaign URL at `/survey` — backend and admin need no changes.
+
 ### Serverless functions (`/api`)
 
 Plain Vercel Node handlers (no framework). Each one is the deployed endpoint at `/api/<filename>`:

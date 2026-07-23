@@ -284,6 +284,12 @@ const THEMES = {
 
 const slug = (label: string) => label.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 
+// System of record: every answer upserts the response row in the Empath
+// backend (keyed by a per-session UUID, so partial responses are captured).
+// PostHog events are kept as a secondary layer for funnels. Fire-and-forget:
+// a failed write must never block the survey UI.
+const SURVEY_API_URL = 'https://app.empathdash.com/api/survey/response';
+
 export default function SurveyPage() {
   const location = useLocation();
   const [step, setStep] = useState(0); // 0..questions.length-1, then contact step
@@ -308,13 +314,43 @@ export default function SurveyPage() {
     return prefersDark ? THEMES.dark : THEMES.light;
   }, [location.search]);
 
+  // ?cid= is the app's client_id, substituted into the campaign URL by iOS.
+  // Absent for anonymous/web visitors — backend verifies it server-side.
+  const { cid, utmCampaign } = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return { cid: params.get('cid'), utmCampaign: params.get('utm_campaign') };
+  }, [location.search]);
+  const [responseId] = useState(() =>
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `${Date.now().toString(16).padStart(8, '0').slice(-8)}-0000-4000-8000-${Math.random().toString(16).slice(2, 14).padEnd(12, '0')}`,
+  );
+
+  const postResponse = (body: Record<string, unknown>) => {
+    fetch(SURVEY_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        responseId,
+        surveyId: SURVEY_ID,
+        clientId: cid || undefined,
+        utmCampaign: utmCampaign || undefined,
+        source: cid ? 'marketing_campaign_sheet' : 'web',
+        ...body,
+      }),
+      keepalive: true, // survives the sheet/webview closing mid-flight
+    }).catch(() => {});
+  };
+
   const isContactStep = step === questions.length;
   const q = isContactStep ? null : questions[step];
   const totalSteps = questions.length + 1;
   const progress = done ? 1 : step / totalSteps;
 
   useEffect(() => {
+    if (cid) posthog.register({ app_client_id: cid });
     posthog.capture('survey_viewed', { survey_id: SURVEY_ID });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Long questions leave the viewport scrolled down when advancing
@@ -361,6 +397,15 @@ export default function SurveyPage() {
     if (question.followUp && extras.followUp?.trim()) {
       setFollowUpTexts(prev => ({ ...prev, [question.followUp!.id]: extras.followUp!.trim() }));
     }
+
+    postResponse({
+      answers: { ...answers, [question.id]: answer },
+      otherTexts: other ? { ...otherTexts, [question.id]: other } : otherTexts,
+      followUps: question.followUp && extras.followUp?.trim()
+        ? { ...followUpTexts, [question.followUp.id]: extras.followUp.trim() }
+        : followUpTexts,
+      questionCount: step + 1,
+    });
   };
 
   const advance = () => {
@@ -411,6 +456,12 @@ export default function SurveyPage() {
       });
     });
     setAnswers(prev => ({ ...prev, [question.id]: matrixSel }));
+    postResponse({
+      answers: { ...answers, [question.id]: matrixSel },
+      otherTexts,
+      followUps: followUpTexts,
+      questionCount: step + 1,
+    });
     advance();
   };
 
@@ -435,6 +486,15 @@ export default function SurveyPage() {
       ...flat,
       respondent_name: name.trim() || null,
       respondent_email: email.trim() || null,
+    });
+
+    postResponse({
+      answers,
+      otherTexts,
+      followUps: followUpTexts,
+      contact: { name: name.trim() || null, email: email.trim() || null },
+      questionCount: questions.length + 1,
+      completed: true,
     });
     setDone(true);
   };
