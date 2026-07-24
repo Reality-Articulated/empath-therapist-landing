@@ -2446,7 +2446,6 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-ai-journaling-apps',
   keyword: 'best AI journaling apps',
-  featured: true,
   answerSummary:
     'The best AI journaling app depends on how you reflect: Empath leads for multimodal voice-and-text journaling with HIPAA-compliant privacy and longitudinal pattern detection, Rosebud is the strongest chat-first reflection partner, and Mindsera suits users who want coaching frameworks. Match the interaction model to your style, verify the privacy policy, and trial free tiers before paying.',
   keyTakeaways: [
@@ -2713,6 +2712,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-voice-journaling-apps',
   keyword: 'best voice journaling apps',
+  featured: true,
   intro:
     'Voice journaling has quietly become one of the fastest-growing ways people reflect on their lives. Research from Frontiers in Psychology has noted that spoken self-disclosure activates different cognitive and emotional pathways than writing, with vocal prosody carrying information about emotional state that pure text cannot represent. On a practical level, speaking is roughly three to four times faster than typing, which removes the single biggest friction point that causes journaling habits to collapse. The result is a wave of apps that treat voice as a primary input rather than an afterthought, ranging from dedicated journaling tools that let you call a phone number from your commute to general-purpose transcription apps that double as reflection captures. This guide compares the eight most credible options in 2026, with honest notes on what each does well, where each falls short, and which kind of voice journaler each app is built for.',
   sections: [
