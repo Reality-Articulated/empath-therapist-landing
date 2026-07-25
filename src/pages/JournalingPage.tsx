@@ -73,7 +73,7 @@ export default function JournalingPage() {
   const [isMobile, setIsMobile] = useState(false);
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
-  const WHATSAPP_NUMBER = '16234698978'; // Yap WhatsApp number
+  const WHATSAPP_NUMBER = '18883663082'; // Empath WhatsApp number (same as SMS/voice)
   const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
   const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
