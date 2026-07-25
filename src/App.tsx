@@ -16,6 +16,7 @@ import TherapyValueCalculator from './pages/TherapyValueCalculator';
 import TherapyValueCalculatorDirect from './pages/TherapyValueCalculatorDirect';
 import AIReadinessQuiz from './pages/AIReadinessQuiz';
 import SurveyPage from './pages/SurveyPage';
+import UpgradePage from './pages/UpgradePage';
 import BlogsPage from './pages/BlogsPage';
 import SciencePage from './pages/SciencePage';
 import BlogPostPage from './pages/BlogPostPage';
@@ -61,7 +62,7 @@ function App() {
       ...adParams
     });
   }, [location]);
-  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz', '/survey'].includes(location.pathname);
+  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -84,6 +85,7 @@ function App() {
         <Route path="/calculator-direct" element={<TherapyValueCalculatorDirect />} />
         <Route path="/quiz" element={<AIReadinessQuiz />} />
         <Route path="/survey" element={<SurveyPage />} />
+        <Route path="/upgrade" element={<UpgradePage />} />
         <Route path="/science" element={<SciencePage />} />
         <Route path="/blog" element={<BlogsPage />} />
         <Route path="/blogs" element={<BlogsPage />} />
