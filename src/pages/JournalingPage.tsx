@@ -285,7 +285,7 @@ export default function JournalingPage() {
                     <MessageSquare className="w-4 h-4" /> Text
                   </a>
                   <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
@@ -363,7 +363,7 @@ export default function JournalingPage() {
                 <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on</p>
                 <div className="grid grid-cols-2 gap-3 w-full">
                   <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-3 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
@@ -1266,7 +1266,7 @@ export default function JournalingPage() {
               Download Free
             </button>
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('hey')}`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-3 bg-[#25D366] text-white rounded-lg font-bold border-2 border-[#25D366] flex items-center gap-1.5 text-sm shrink-0"
