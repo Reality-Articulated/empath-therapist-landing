@@ -77,8 +77,8 @@ export interface JournalingBlogPost {
   category: string;
   slug: string;
   keyword: string;
-  /** Pinned into the Featured section on /app/blog (max 2 shown, array order wins). Falls back to the newest post when none are flagged. */
-  featured?: boolean;
+  /** Rank (1–7) in the Featured Top 7 section on /app/blog; 1 is the lead story. Posts without a rank appear only in the all-articles grid. */
+  featuredRank?: number;
   /** A self-contained 40-60 word answer for answer engines and quick scanning. */
   answerSummary?: string;
   /** Explicit "Keep reading" picks (slugs, max 3 shown). Falls back to the first 3 posts when absent. */
@@ -92,6 +92,312 @@ export interface JournalingBlogPost {
 
 export const journalingBlogPosts: JournalingBlogPost[] = [
 ...kinzerJournalingBlogPosts,
+// Article 40
+{
+  id: 'j40',
+  title: 'Empath vs Apple Journal: Should You Upgrade From the Built-In App?',
+  seoTitle: 'Empath vs Apple Journal (2026): Built-In Diary or AI Journal? | Empath',
+  metaDescription:
+    'Empath vs Apple Journal compared honestly: journaling suggestions vs AI insights, State of Mind vs emotion detection, privacy, platforms, and price. Which fits you?',
+  excerpt:
+    'Apple Journal is free, private, and already on your iPhone. So when is it worth using anything else? An honest comparison with Empath, trade-off by trade-off.',
+  author: 'Empath Team',
+  date: 'July 29, 2026',
+  readTime: '12 min read',
+  category: 'App Reviews',
+  slug: 'empath-vs-apple-journal',
+  keyword: 'empath vs apple journal',
+  featuredRank: 4,
+  relatedSlugs: ['empath-vs-day-one', 'best-journaling-apps', 'best-voice-journaling-apps'],
+  answerSummary:
+    'Apple Journal is the best free starting point for iPhone owners: private, polished, and already installed. Empath is worth the switch when you want more than storage — journaling by phone call or text, automatic emotion detection, and AI insights that surface patterns across weeks of entries. Many people start in Apple Journal and move to Empath when they want their journal to talk back.',
+  keyTakeaways: [
+    'Apple Journal is a beautifully made container: it makes capturing moments easy and keeps them extremely private, but it never interprets what you write.',
+    'Empath is an active journal: entries arrive by call, text, or typing, and the AI titles them, detects emotions, and surfaces patterns over time.',
+    'Apple wins on price (free), lock-screen convenience, and end-to-end encrypted secrecy. Empath wins on capture channels, mood analytics, and insight.',
+    'Apple Journal lives inside the Apple ecosystem; Empath works from any phone that can call or text, plus a web dashboard.',
+  ],
+  intro:
+    'Apple Journal is the journaling app most iPhone owners try first, for the best possible reason: it is already there. It is free, it is elegant, and its journaling suggestions — surfacing your photos, workouts, places, and songs as prompts — solve the blank page in a genuinely clever way. So the honest question is not whether Apple Journal is good. It is. The question is what you get by graduating to a dedicated journaling app, and whether that difference matters for you. Empath makes a specific bet that Apple deliberately avoids: that a journal should not just store your reflections but understand them — transcribing calls and texts into entries, detecting the emotions in each one, and connecting patterns you would never spot yourself. This guide compares the two honestly, including the places where the built-in app is simply the right answer.',
+  sections: [
+    {
+      heading: 'What Are Empath and Apple Journal?',
+      body: [
+        'Apple Journal shipped with iOS 17.2 and has since expanded beyond the iPhone to iPad and Mac. It is a clean, private space for capturing moments: you write entries, attach photos, videos, and audio recordings, and Apple’s on-device intelligence suggests things to journal about based on your day — the photos you took, the run you logged, the place you visited, the song you had on repeat. State of Mind logging connects your reflections to the Health app, entries can be locked behind Face ID, and iCloud sync is end-to-end encrypted. It is journaling as Apple believes it should be: quiet, beautiful, and none of anyone’s business, including Apple’s.',
+        'Empath is an AI journaling assistant built around two ideas Apple Journal deliberately leaves out. First, capture should not require opening an app: you can journal by calling a phone number, sending a text message, or typing in the app, and everything lands in one organized record. Second, a journal should give something back: every entry is automatically titled and analyzed for emotion, mood check-ins accumulate into trend lines, and Deeper Insights periodically synthesize weeks of entries into patterns — recurring stressors, what correlates with better weeks, how your energy moves.',
+        'The cleanest way to frame it: Apple Journal is a beautifully crafted, extremely private shoebox for your moments. Empath is a listener that organizes what you say and eventually tells you what it has noticed. Both are legitimate ideas of what a journal is for, and the comparison below follows directly from that split.',
+      ],
+    },
+    {
+      heading: 'Empath vs Apple Journal at a Glance',
+      body: [
+        'Here is the side-by-side. The pattern to notice: Apple Journal wins the rows about cost, convenience, and secrecy, while Empath wins the rows about capture flexibility and what the journal does with your words after you write them.',
+      ],
+      table: {
+        title: 'Empath vs Apple Journal, feature by feature',
+        competitorName: 'Apple Journal',
+        caption:
+          'Feature details reflect publicly available information at the time of writing (July 2026) and may change with OS and app updates.',
+        rows: [
+          {
+            feature: 'How you journal',
+            empath: 'Phone call, text message, or typed entry; AI transcribes and organizes everything',
+            competitor: 'Typed entries in the app with photos, video, and audio recordings',
+          },
+          {
+            feature: 'Blank-page help',
+            empath: 'No blank page: talk or text, and structure is generated for you',
+            competitor: 'Journaling suggestions from your photos, workouts, places, and music — genuinely good prompts',
+          },
+          {
+            feature: 'AI insights',
+            empath: 'Emotion detection on every entry, mood trends, and Deeper Insights across weeks',
+            competitor: 'None by design; suggestions help you start, but entries are never analyzed',
+          },
+          {
+            feature: 'Mood tracking',
+            empath: 'Built-in mood check-ins plus automatic emotion analysis of each entry',
+            competitor: 'Manual State of Mind logging, connected to the Health app',
+          },
+          {
+            feature: 'Privacy',
+            empath: 'Entries encrypted at rest; deeper AI analysis is explicitly consent-gated',
+            competitor: 'Best in class: on-device suggestions, Face ID lock, end-to-end encrypted iCloud sync',
+          },
+          {
+            feature: 'Platforms',
+            empath: 'iOS app, web dashboard, and any phone that can call or text',
+            competitor: 'iPhone, iPad, and Mac only; no Android or web',
+          },
+          {
+            feature: 'Price',
+            empath: 'Free to download and start journaling by call, text, or app',
+            competitor: 'Completely free, included with iOS',
+          },
+          {
+            feature: 'Best for',
+            empath: 'People who want frictionless capture and a journal that surfaces patterns',
+            competitor: 'iPhone owners who want a private, polished, zero-cost place to record moments',
+          },
+        ],
+      },
+      callout: {
+        text: 'Wondering how both stack up against the full field? We ranked the leading journaling apps across every category.',
+        linkText: 'Read our Best Journaling Apps of 2026 guide',
+        slug: 'best-journaling-apps',
+      },
+    },
+    {
+      heading: 'How Journaling Feels Day to Day',
+      body: [
+        'Apple Journal’s daily experience is built around suggestions. You open the app in the evening and it offers your day back to you: the photos from lunch, the walk you took, the album you played. Tapping a suggestion starts an entry with the moment already in place, and you write around it. For memory-keeping, this is quietly brilliant — it turns journaling from an essay assignment into captioning your own life. Streaks and scheduled reminders help the habit along.',
+        'The dependency, though, is the same one every traditional journal has: you still have to open the app and write. On a full day — which is precisely the day worth journaling about — that step is what disappears. Empath is built for that day. You call the number on the drive home and talk for four minutes, or you fire off three sentences by text between meetings. Nothing was opened, nothing was composed, and the entry still comes back titled, transcribed, and tagged with the emotions it carried.',
+        'The honest summary: Apple Journal makes journaling more inviting; Empath makes it nearly unavoidable. If you reliably have a quiet moment with your phone each evening, Apple’s ritual works beautifully. If your journaling history is a series of two-week streaks that die on busy weeks, the call-and-text channel is the structural difference, not a gimmick.',
+      ],
+    },
+    {
+      heading: 'Journaling Suggestions vs AI Insights',
+      body: [
+        'This is the most interesting philosophical difference between the two apps, because both use machine intelligence — just pointed in opposite directions. Apple points it at the start of the process: on-device intelligence looks at your photos, workouts, locations, and listening history to suggest what you might write about. The intelligence stops the moment you start typing. Apple never reads, scores, or interprets the entry itself; that is a privacy commitment, and it is genuine.',
+        'Empath points the intelligence at the other end. It does not need to suggest topics, because talking or texting removes the blank page by itself. Instead, the AI works on what you actually said: each entry gets emotion detection, your mood accumulates into trend lines you can actually see, and Deeper Insights periodically step back and report the patterns — that entries mentioning your commute skew anxious, that your best weeks follow the weekends you spent outside, that a particular person keeps appearing next to a particular feeling.',
+        'The trade is clean: Apple’s intelligence helps you write more; Empath’s intelligence helps you learn more. If you re-read your journal regularly and draw your own conclusions, Apple’s hands-off approach may be all you need. If you are honest that you never re-read old entries — and most people never do — then a journal that does the re-reading for you is the difference between collecting reflections and benefiting from them.',
+      ],
+    },
+    {
+      heading: 'Mood Tracking: State of Mind vs Emotion Detection',
+      body: [
+        'Apple’s State of Mind feature lets you log how you feel — momentary emotions and daily moods on a pleasant-to-unpleasant scale, with contributing factors — and stores it all in the Health app alongside sleep, exercise, and mindfulness data. If you use Apple Watch and the broader Health ecosystem, this integration is a real advantage: your mood sits next to the physiological data that influences it. The catch is that it is entirely manual. The log only knows what you remember to tell it, in the moments you remember to open it.',
+        'Empath flips the direction of effort. You do not log your emotions; your entries reveal them. Every voice call, text, and typed entry is analyzed for the feelings it carries, so the mood record builds itself as a byproduct of journaling you were doing anyway. Deliberate mood check-ins exist too, but the baseline never depends on your diligence. Over months, that difference compounds: a manual log has gaps exactly where life got hardest, while an automatic one is often densest there, because hard days produce the most journaling.',
+        'For clinical-style tracking that a doctor or therapist might ask about, Apple’s Health integration is tidy and exportable. For actually noticing that your mood dips every Sunday night or lifts after every long walk, the automatic, entry-derived record tends to be the one with enough data to show it.',
+      ],
+    },
+    {
+      heading: 'Privacy: Two Different Promises',
+      body: [
+        'Apple Journal makes the strongest privacy promise in journaling: suggestions are computed on your device, entries can require Face ID, and iCloud sync is end-to-end encrypted, meaning not even Apple can read your journal. If maximal secrecy is your first requirement, Apple Journal wins this section outright, and it is worth saying so plainly.',
+        'Empath’s promise is different by necessity: an app that transcribes your calls and detects your emotions must process your words to exist. Around that processing, Empath encrypts journal content at rest with per-user keys, gates its deeper analysis behind explicit consent rather than silent defaults, and uses your entries to power your insights, not to train public models.',
+        'The right question is the same one from our Day One comparison: not “which app is private?” but “which trade do you want?” Apple trades understanding away for perfect secrecy — the app cannot analyze what it cannot read. Empath trades perfect secrecy for understanding, with encryption and consent gates around the exchange. Neither trade is wrong; they are answers to different questions about what a journal is for.',
+      ],
+    },
+    {
+      heading: 'Platforms, Lock-In, and Leaving',
+      body: [
+        'Apple Journal runs on iPhone, iPad, and Mac, and nowhere else. There is no Android app, no web version, and no way to journal from a device Apple did not make. Export options exist but are limited compared to dedicated journaling apps, so a multi-year archive in Apple Journal is fairly committed to staying there. For lifelong Apple users, none of this may ever matter; it is simply worth knowing before year three.',
+        'Empath’s footprint is broader in an unusual way: beyond the iOS app and web dashboard, the call and text channels work from literally any phone — including an Android phone, a work phone, or a flip phone. Your journal is not tied to a device category, because the phone network is the input.',
+        'A practical note for the switch-curious: nothing about trying Empath disturbs your Apple Journal archive. Keep the built-in app as your private, media-rich record and give the call-a-number habit two weeks. The entry count at the end will tell you more than any comparison article can.',
+      ],
+    },
+    {
+      heading: 'Which One Should You Choose?',
+      body: [
+        'Stay with Apple Journal if you want a free, genuinely private place to capture moments, if the photo-and-place suggestions match how you remember your life, if you live happily inside the Apple ecosystem, and if you are content to draw your own conclusions from your own re-reading. It is the best default journaling app ever shipped with a phone, and for many people the default is enough.',
+        'Choose Empath if the default has not actually produced a habit — if the app is installed but the entries are not happening — or if you have outgrown storage and want insight: automatic emotion tracking, mood trends, and AI-surfaced patterns across your entries. Choose it especially if talking is more natural to you than writing, because journaling by phone call is the one thing no built-in app offers.',
+        'And the two coexist gracefully: Apple Journal as the private scrapbook of moments worth remembering, Empath as the frictionless emotional record that notices what the moments add up to. The only wrong outcome is the one where the journal — whichever one — sits unopened.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'Is Apple Journal good enough, or do I need a dedicated journaling app?',
+      answer:
+        'For capturing moments privately at zero cost, Apple Journal is genuinely good enough, and its suggestions are the best blank-page cure in any free app. A dedicated app earns its place when you want things Apple deliberately omits: journaling by phone call or text, automatic emotion detection, mood trends, and AI insights that find patterns across entries. If you journal and want to learn from it, that is when to upgrade.',
+    },
+    {
+      question: 'Does Apple Journal have AI insights like Empath?',
+      answer:
+        'No, by design. Apple uses on-device intelligence to suggest what to write about, but it never reads or analyzes the entries themselves — that is central to its privacy promise. Empath is the opposite: light guidance during capture, then AI transcription, emotion detection, and pattern insights applied to what you actually said. Suggestions help you start; insights tell you what it means.',
+    },
+    {
+      question: 'Which is more private, Empath or Apple Journal?',
+      answer:
+        'Apple Journal, and it is not close on pure secrecy: on-device processing, Face ID locking, and end-to-end encrypted sync mean even Apple cannot read your entries. Empath must process your words to transcribe and analyze them; it encrypts entries at rest, gates deeper analysis behind explicit consent, and never trains public models on your data. Choose Apple for maximal secrecy, Empath for understanding with strong safeguards.',
+    },
+    {
+      question: 'Can I journal by voice in Apple Journal?',
+      answer:
+        'You can attach audio recordings to entries and get transcripts inside the app, which works well for in-app voice notes. What Apple Journal cannot do is journal through a phone call: with Empath you dial a number from any phone — no app open, no screen involved — talk, and receive a transcribed, emotion-tagged entry. If voice is your primary way of processing, that channel is the biggest single difference between the two.',
+    },
+    {
+      question: 'Can I use Empath and Apple Journal together?',
+      answer:
+        'Yes, and the combination is coherent: Apple Journal as the private, media-rich record of moments — photos, places, milestones — and Empath as the low-friction daily capture that tracks emotions and surfaces patterns. They overlap less than they appear to, because one is organized around memories and the other around understanding. Many people keep both without redundancy.',
+    },
+    {
+      question: 'Does Apple Journal work on Android or the web?',
+      answer:
+        'No. Apple Journal is available on iPhone, iPad, and Mac only, with no Android or web version. Empath offers an iOS app and a web dashboard, and its call and text journaling works from any phone on any platform, which makes it the more flexible option for mixed-device households or anyone who might not carry an iPhone forever.',
+    },
+  ],
+},
+// Article 39
+{
+  id: 'j39',
+  title: 'Best Chat Journaling Apps in 2026: Journal by Texting',
+  seoTitle: 'Best Chat Journaling Apps 2026: Top Text-Based Journals | Empath',
+  metaDescription:
+    'The best chat journaling apps of 2026 compared: Empath, Rosebud, Mindsera, Youper, Wysa, and ChatGPT as a DIY journal. Honest reviews of features, privacy, and price.',
+  excerpt:
+    'Texting is how we already process our lives. These are the apps that turn that instinct into a real journaling practice, honestly compared.',
+  author: 'Empath Team',
+  date: 'July 29, 2026',
+  readTime: '14 min read',
+  category: 'App Reviews',
+  slug: 'best-chat-journaling-apps',
+  keyword: 'best chat journaling apps',
+  featuredRank: 3,
+  relatedSlugs: ['chat-journaling', 'empath-vs-rosebud', 'best-ai-journaling-apps'],
+  answerSummary:
+    'The best chat journaling app in 2026 depends on where you want the conversation to happen. Empath is the strongest overall pick because you can journal by plain text message from any phone, with AI titling, emotion detection, and pattern insights layered on top. Rosebud is the best guided, coach-like experience; Mindsera suits structured thinkers; Youper and Wysa lean therapeutic. ChatGPT works in a pinch but keeps no journal.',
+  keyTakeaways: [
+    'Chat journaling works because it borrows a habit you already have: most people can text honestly at moments when they could never sit down to write.',
+    'Empath is the only major option where the chat can be a literal text message — no app open — and every message becomes an organized, emotion-tagged entry.',
+    'Rosebud and Mindsera are the strongest in-app conversational journals, with different personalities: warm coach versus structured thinking partner.',
+    'General chatbots like ChatGPT can simulate a journaling session but keep no organized record, no mood history, and no journaling-grade privacy posture.',
+  ],
+  intro:
+    'Most people already process their lives in a chat window. We narrate our days to friends in text messages, think out loud in group chats, and draft our feelings in messages we never send. Chat journaling apps are built on a simple observation: that instinct is journaling, minus the organization. Instead of a blank page demanding an essay, you get a conversation — sometimes with an AI that asks the next question, sometimes with a quiet listener that simply files what you said and learns from it. The category has matured fast, and the options now differ in ways that matter: where the chat happens, whether the AI guides or listens, what gets remembered, and what it costs. This guide compares the credible chat journaling options in 2026, with honest notes on who each is actually for.',
+  sections: [
+    {
+      heading: 'What Chat Journaling Is (and Why It Beats the Blank Page)',
+      body: [
+        'Chat journaling replaces the open-ended writing session with message-sized reflection. The unit of journaling shrinks from “an entry” to “a text,” and that change does more work than it appears to. A blank page asks you to decide what today meant; a chat just asks what is on your mind, and three honest sentences count. Because the format matches how people already communicate, the activation energy drops to nearly zero.',
+        'The psychology is well-worn: consistency, not depth, drives journaling benefits, and consistency is a friction problem. Every step between the feeling and the capture — opening an app, facing an editor, deciding where to start — sheds users. Chat formats delete most of those steps, and the best chat journaling apps delete the remaining ones by meeting you in channels you already use.',
+        'Within the category there is one axis that separates every app in this guide: does the AI talk with you or listen to you? Conversational journals like Rosebud and Mindsera respond in real time, asking follow-up questions that pull the next layer out of you. Capture-first journals like Empath stay quiet in the moment and do their thinking afterward — organizing, tagging emotions, and surfacing patterns across weeks. Neither is better in the abstract; they fix different failure points, and knowing yours is most of the decision.',
+      ],
+      callout: {
+        text: 'New to the idea entirely? We wrote a full guide to how chat journaling works and why an AI that interviews you beats the blank page.',
+        linkText: 'Read our Chat Journaling guide',
+        slug: 'chat-journaling',
+      },
+    },
+    {
+      heading: 'Empath: Journal by Actual Text Message',
+      body: [
+        'Empath’s claim to the top of this list rests on one structural feature no other journaling app matches: the chat does not have to happen in an app. You can journal by sending a plain text message — or a WhatsApp message — to Empath’s number from any phone, alongside in-app chat and even phone calls for the moments too big to type. Every message becomes a real journal entry: automatically titled, filed, and analyzed for the emotions it carries.',
+        'That channel design changes when journaling happens. The moments most worth capturing — right after the difficult meeting, in line at the pharmacy, ninety seconds before bed — are exactly the moments when nobody opens a journaling app. A text message fits inside all of them. Empath users end up with entry counts that surprise them, not because they became more disciplined, but because the bar dropped below the level where discipline is required.',
+        'The intelligence arrives after capture. Emotion detection runs on every entry, mood check-ins accumulate into visible trends, and Deeper Insights periodically synthesize weeks of messages into patterns: recurring stressors, what your good weeks have in common, which people and situations travel with which feelings. In-app, a chat assistant can also talk through what you have written, grounded in your own entries rather than generic advice.',
+        'Honest limitations: Empath’s SMS channel is deliberately a listener, not a coach — if you want an AI actively interviewing you at capture time, Rosebud’s guided sessions do that better. And like every AI journal, it processes your words to work: entries are encrypted at rest, deeper analysis is consent-gated, and nothing trains public models, but people who want end-to-end encrypted secrecy should pair it with something like Apple Journal for their most sensitive material. Empath is free to download and start, which makes the two-week test essentially riskless.',
+      ],
+    },
+    {
+      heading: 'Rosebud: The Guided Conversation Specialist',
+      body: [
+        'Rosebud is the best pure conversational journal on the market. A session is a written dialogue: you type what happened, and the AI responds with the kind of follow-up question a good coach would ask — what was underneath the irritation, what you would say to a friend in the same spot. Its prompting draws on established therapeutic framings, it remembers context across sessions, and its summaries give a week of entries a narrative shape.',
+        'For people whose journaling stalls two sentences in, that live scaffolding is the product. Rosebud sessions have a beginning and an end, and they reliably go one layer deeper than the user would have gone alone. Voice input exists inside sessions for people who prefer speaking to typing.',
+        'The trade-offs are the mirror image of Empath’s. Sessions happen in the app or on the web, so the habit depends on you showing up to them — Rosebud cannot meet you in your text messages. And its insight layer is woven into the conversation rather than accumulated as longitudinal instrumentation, so the appeal is depth-per-session more than patterns-per-quarter. Rosebud runs on a subscription after a trial. If “I do not know what to write next” is your failure point, it is the best answer in the category; we compared the two head-to-head in our Empath vs Rosebud guide.',
+      ],
+    },
+    {
+      heading: 'Mindsera: Chat Journaling for Structured Thinkers',
+      body: [
+        'Mindsera approaches the chat journal from the productivity-and-clarity side rather than the emotional-wellness side. Its signature move is applying mental models and frameworks to your writing: journal about a decision, and it can structure the reflection through first-principles thinking, inversion, or a coaching persona. It generates summaries and analyses of your entries and appeals strongly to founders, engineers, and journalers who want their reflection to produce decisions, not just catharsis.',
+        'The experience is more tool than companion. Where Rosebud feels like a warm coach and Empath like a quiet listener, Mindsera feels like a sharp thinking partner with a whiteboard. Its emotional analysis exists but is not the center of gravity, and the app assumes you arrive with something to think through rather than a feeling to unload.',
+        'It is a strong pick for the journaler whose entries are 60 percent work decisions and 40 percent life, and a weaker pick for building an emotional record: mood tracking is not its strength. Mindsera is subscription-based, in the same general price band as other premium AI journals.',
+      ],
+    },
+    {
+      heading: 'Youper and Wysa: When the Chat Is Really a Check-In',
+      body: [
+        'Youper and Wysa sit at the therapeutic end of the chat spectrum. Both are CBT-informed chatbots: short, structured conversations that identify a feeling, examine the thought behind it, and walk through an evidence-based technique — reframing, grounding, behavioral activation. Wysa in particular has real clinical research behind its approach and is deployed in healthcare settings; Youper blends its conversations with mood tracking and symptom measures.',
+        'Calling them journaling apps is a stretch, and that is the point of including them: many people searching for a chat journal actually want this. If your goal is managing anxiety spirals or low moods with structured techniques, a CBT chatbot is the better-shaped tool than any journal. The conversations are guided, skill-focused, and deliberately short.',
+        'What they do not build is a journal. The record they keep is oriented around symptoms and exercises, not a life narrative you can re-read or an emotional history the AI mines for patterns. Both offer free tiers with subscriptions for depth. A reasonable pairing exists here too: a CBT chatbot for acute moments, a true chat journal like Empath or Rosebud for the ongoing record. And a note that applies to everything in this guide: none of these apps is therapy or a substitute for it.',
+      ],
+    },
+    {
+      heading: 'ChatGPT as a DIY Chat Journal: Tempting, With Caveats',
+      body: [
+        'Plenty of people have discovered that a general-purpose chatbot makes a decent-feeling journaling companion. Tell ChatGPT you want to reflect on your day, and it will ask reasonable follow-up questions, mirror your feelings back, and even summarize the session on request. The marginal cost is zero if you already subscribe, and the conversational quality is genuinely high.',
+        'The problems appear at exactly the point where a conversation becomes a journal. There is no entry system: your reflections live in a chat history not designed for retrieval, with no titles, no mood record, and no way to see this month against last month. There is no longitudinal analysis: each conversation is an island unless you manually curate memory. And the privacy posture is built for a general assistant, not a diary — depending on your settings, conversations may be used to improve models, and nothing about the product is designed around the sensitivity of a journal.',
+        'The honest verdict: ChatGPT is a fine way to discover that you like chat-based reflection, and a poor place to keep a journaling practice. If you find yourself journaling into a general chatbot more than twice a week, that is the signal to move the habit into a purpose-built app that will actually accumulate the record. We wrote more broadly about this failure mode in our guide to AI journaling mistakes.',
+      ],
+      callout: {
+        text: 'Using a general AI chatbot as your journal has more pitfalls than the privacy one.',
+        linkText: 'Read: 7 common AI journaling mistakes',
+        slug: 'ai-journaling-mistakes',
+      },
+    },
+    {
+      heading: 'How to Choose the Right Chat Journaling App',
+      body: [
+        'Start with where the chat should live. If the honest answer is “wherever I already am,” Empath is the only option in the category that journals over plain SMS and WhatsApp, and that single fact predicts entry counts better than any feature list. If you can reliably show up to an in-app session a few times a week, the guided experiences — Rosebud for emotional depth, Mindsera for structured thinking — reward that consistency.',
+        'Then decide whether you want a talker or a listener. Choose a conversational journal if your entries die from not knowing what to say next; the live follow-up question is the cure. Choose a capture-first journal if your entries die from never starting; the frictionless channel is the cure, and the insight arrives later, compounding across everything you have captured.',
+        'Finally, run the same test we recommend in every roundup, because it settles arguments that speclists cannot: pick two apps, use each the way it wants to be used for two weeks, and count honest entries at the end. The best chat journaling app of 2026 is the one still receiving your texts in March. For most people, most reliably, that is Empath — but the entry count is the referee, not us.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What is the best chat journaling app in 2026?',
+      answer:
+        'Empath is the strongest overall pick because the chat can be a literal text message from any phone — no app open — and every message becomes a titled, emotion-tagged journal entry feeding long-term pattern insights. Rosebud is the best guided in-app experience, Mindsera the best for structured decision-focused reflection, and Youper or Wysa fit people who really want CBT-style support rather than a journal.',
+    },
+    {
+      question: 'Is texting a number really journaling?',
+      answer:
+        'Yes, if the messages are captured, organized, and reviewable — which is exactly what a chat journaling app adds over texting a friend. In Empath, each text becomes a dated entry with a title and detected emotions, searchable later and included in pattern analysis. The format is casual; the record is a real journal. Research on journaling benefits points to consistency as the active ingredient, and message-sized entries are the most consistent format most people ever find.',
+    },
+    {
+      question: 'Can I use ChatGPT as my journal?',
+      answer:
+        'You can, and as a way to discover whether you like conversational reflection, it works. As a journal, it falls short: no entry organization, no mood history, no analysis across conversations, and a privacy posture designed for a general assistant rather than a diary. If chat journaling sticks for you, a purpose-built app like Empath or Rosebud keeps the actual record — and treats it with journal-grade care.',
+    },
+    {
+      question: 'Are chat journaling apps private?',
+      answer:
+        'Every AI chat journal processes your words to function, so none offers end-to-end encryption; the differences are in safeguards. Empath encrypts entries at rest, gates deeper analysis behind explicit consent, and does not train public models on your data. Rosebud and Mindsera state similar commitments around entry privacy. General chatbots are the weakest fit for sensitive material. Whatever you choose, read the current privacy policy before writing anything high-stakes.',
+    },
+    {
+      question: 'What is the difference between chat journaling and voice journaling?',
+      answer:
+        'The input channel, and the moments each fits. Chat journaling is typed and silent — ideal for offices, waiting rooms, and 11 p.m. Voice journaling is spoken and faster, ideal for commutes and walks. They are complements rather than rivals, which is why Empath supports both: text when you cannot talk, call when you cannot type, and everything lands in one analyzed record. See our best voice journaling apps guide for that side of the category.',
+    },
+    {
+      question: 'Are there free chat journaling apps?',
+      answer:
+        'Empath is free to download and start journaling by text, call, or in-app chat, with paid tiers for deeper analysis. Wysa and Youper offer free tiers of their CBT conversations. Rosebud and Mindsera are subscription products with trials. Among fully free options, Empath’s free tier is the most complete chat journaling experience, since the SMS channel and emotion analysis are included from the start.',
+    },
+  ],
+},
 // Article 38
 {
   id: 'j38',
@@ -107,7 +413,8 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'empath-vs-day-one',
   keyword: 'empath vs day one',
-  relatedSlugs: ['best-journaling-apps', 'empath-vs-rosebud', 'voice-journaling-guide'],
+  featuredRank: 5,
+  relatedSlugs: ['empath-vs-apple-journal', 'empath-vs-rosebud', 'best-journaling-apps'],
   answerSummary:
     'Choose Day One if you love writing, want a beautiful long-term archive of entries, photos, and memories, and do not need AI feedback. Choose Empath if the blank page is what stops you: you journal by phone call, text message, or typing, and the AI organizes entries and surfaces emotional patterns over time.',
   keyTakeaways: [
@@ -278,7 +585,8 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'empath-vs-rosebud',
   keyword: 'empath vs rosebud',
-  relatedSlugs: ['best-journaling-apps', 'empath-vs-day-one', 'best-ai-journaling-apps'],
+  featuredRank: 6,
+  relatedSlugs: ['best-chat-journaling-apps', 'empath-vs-day-one', 'best-journaling-apps'],
   answerSummary:
     'Rosebud and Empath are both AI journals with different centers of gravity. Rosebud is an interactive coach: you type, and it asks thoughtful follow-up questions in the moment. Empath is capture-first: you journal by phone call, text, or typing, and the AI transcribes, tracks mood, and surfaces patterns afterward. Pick Rosebud for guided sessions, Empath for frictionless capture and longitudinal insight.',
   keyTakeaways: [
@@ -913,6 +1221,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-journaling-apps',
   keyword: 'best journaling apps',
+  featuredRank: 1,
   relatedSlugs: ['empath-vs-day-one', 'empath-vs-rosebud', 'best-ai-journaling-apps'],
   intro:
     'Finding the right journaling app can make the difference between a habit that sticks and one that fades after a week. The journaling app market has exploded in 2026, with over 200 options across iOS and Android, ranging from simple text editors to sophisticated AI companions that analyze your emotional patterns over time. We spent three months testing the most popular options across categories including traditional journaling, AI-powered reflection, voice journaling, and structured prompts. Whether you want a beautiful writing space, intelligent insights, or the lowest possible friction, this guide will help you find the right fit.',
@@ -1526,7 +1835,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 12, 2026',
   readTime: '15 min read',
-  category: 'Guides',
+  category: 'Getting Started',
   slug: 'digital-vs-paper-journaling',
   keyword: 'digital vs paper journal',
   intro:
@@ -1657,7 +1966,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 10, 2026',
   readTime: '15 min read',
-  category: 'Habits',
+  category: 'Habits & Routines',
   slug: 'morning-journaling-routine',
   keyword: 'morning journaling',
   intro:
@@ -1788,7 +2097,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 18, 2026',
   readTime: '13 min read',
-  category: 'Technology',
+  category: 'AI & Technology',
   slug: 'ai-journaling-guide',
   keyword: 'AI journaling',
   intro:
@@ -1920,7 +2229,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 17, 2026',
   readTime: '12 min read',
-  category: 'Techniques',
+  category: 'Getting Started',
   slug: 'gratitude-journaling-guide',
   keyword: 'gratitude journaling',
   intro:
@@ -2050,7 +2359,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 16, 2026',
   readTime: '14 min read',
-  category: 'Mental Health',
+  category: 'Mental Wellness',
   slug: 'journaling-for-anxiety',
   keyword: 'journaling for anxiety',
   intro:
@@ -2182,7 +2491,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'March 15, 2026',
   readTime: '12 min read',
-  category: 'Methods',
+  category: 'Getting Started',
   slug: 'voice-journaling-guide',
   keyword: 'voice journaling',
   intro:
@@ -2446,6 +2755,8 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-ai-journaling-apps',
   keyword: 'best AI journaling apps',
+  featuredRank: 7,
+  relatedSlugs: ['best-journaling-apps', 'best-chat-journaling-apps', 'empath-vs-rosebud'],
   answerSummary:
     'The best AI journaling app depends on how you reflect: Empath leads for multimodal voice-and-text journaling with HIPAA-compliant privacy and longitudinal pattern detection, Rosebud is the strongest chat-first reflection partner, and Mindsera suits users who want coaching frameworks. Match the interaction model to your style, verify the privacy policy, and trial free tiers before paying.',
   keyTakeaways: [
@@ -2712,7 +3023,8 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-voice-journaling-apps',
   keyword: 'best voice journaling apps',
-  featured: true,
+  featuredRank: 2,
+  relatedSlugs: ['best-chat-journaling-apps', 'empath-vs-apple-journal', 'best-ai-journaling-apps'],
   intro:
     'Voice journaling has quietly become one of the fastest-growing ways people reflect on their lives. Research from Frontiers in Psychology has noted that spoken self-disclosure activates different cognitive and emotional pathways than writing, with vocal prosody carrying information about emotional state that pure text cannot represent. On a practical level, speaking is roughly three to four times faster than typing, which removes the single biggest friction point that causes journaling habits to collapse. The result is a wave of apps that treat voice as a primary input rather than an afterthought, ranging from dedicated journaling tools that let you call a phone number from your commute to general-purpose transcription apps that double as reflection captures. This guide compares the eight most credible options in 2026, with honest notes on what each does well, where each falls short, and which kind of voice journaler each app is built for.',
   sections: [
@@ -3355,7 +3667,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   author: 'Empath Team',
   date: 'June 9, 2026',
   readTime: '13 min read',
-  category: 'Habits',
+  category: 'Habits & Routines',
   slug: 'journaling-plan',
   keyword: 'journaling plan',
   intro:
@@ -3469,6 +3781,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'AI & Technology',
   slug: 'chat-journaling',
   keyword: 'chat journaling',
+  relatedSlugs: ['best-chat-journaling-apps', 'empath-vs-rosebud', 'best-ai-journaling-apps'],
   intro:
     'The hardest part of journaling has never been the writing — it is the starting. You open the app, the cursor blinks at the top of an empty page, and the question "what do I even write about?" is enough to make you close it again. Chat journaling flips that dynamic. Instead of facing a blank page, you have a short, guided conversation: a warm AI companion asks you one open question at a time, you answer the way you would text a friend, and when you are done it turns the whole exchange into a finished journal entry written in your own voice. This guide explains what conversational journaling is, why the interview format works when free-form writing stalls, and how Empath\'s chat-to-journal assistant fits into a real journaling practice.',
   sections: [

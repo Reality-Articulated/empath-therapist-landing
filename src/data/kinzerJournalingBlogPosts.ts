@@ -16,7 +16,6 @@ export const kinzerJournalingBlogPosts: JournalingBlogPost[] = [
     category: 'Mental Wellness',
     slug: 'why-you-replay-conversations-after-socializing',
     keyword: 'how to stop replaying conversations after socializing',
-    featured: true,
     answerSummary:
       'Replaying conversations is often post-event rumination: attention turns inward, ambiguous moments are interpreted negatively, and memory begins to favor perceived mistakes. Stop the loop by separating observable facts from anxious guesses, shifting attention back to the outside world, and limiting reflection to one useful lesson followed by a present-focused action.',
     keyTakeaways: [
@@ -314,7 +313,7 @@ export const kinzerJournalingBlogPosts: JournalingBlogPost[] = [
     author: 'Empath Team',
     date: 'July 23, 2026',
     readTime: '11 min read',
-    category: 'Self Growth',
+    category: 'Mental Wellness',
     slug: 'why-adults-feel-guilty-having-fun',
     keyword: 'why do adults feel guilty having fun',
     answerSummary:
@@ -464,7 +463,7 @@ export const kinzerJournalingBlogPosts: JournalingBlogPost[] = [
     author: 'Empath Team',
     date: 'July 23, 2026',
     readTime: '12 min read',
-    category: 'Relationships',
+    category: 'Mental Wellness',
     slug: 'how-to-stop-controlling-people-you-love',
     keyword: 'how to stop trying to control other people',
     answerSummary:
