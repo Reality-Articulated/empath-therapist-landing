@@ -37,7 +37,6 @@ function toIsoDate(value: string) {
 function MarketingCard({ compact = false }: { compact?: boolean }) {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
   const PHONE_MAIN = '+18883663082';
-  const WEB_APP_URL = 'https://www.empathdash.com/atman/';
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -100,22 +99,13 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
       ) : (
         <div className="space-y-3">
           <a
-            href={WEB_APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => posthog.capture('journaling_blog_post_web_app_clicked')}
-            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
-          >
-            Open Web Dashboard <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <a
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
-            className="inline-flex items-center px-4 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
+            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
           >
-            Download iOS App <ArrowUpRight className="w-4 h-4" />
+            Download on App Store <ArrowUpRight className="w-4 h-4" />
           </a>
           <div className="rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-3">
             <p className="text-xs uppercase tracking-wide text-stone-500 font-bold mb-1">
