@@ -19,6 +19,7 @@ import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
 import BlogChart from '../components/BlogChart';
+import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
 import { getCategoryColor } from '../utils/blogCategoryColors';
 
 function toAnchorId(value: string) {
@@ -37,17 +38,47 @@ function toIsoDate(value: string) {
 function MarketingCard({ compact = false }: { compact?: boolean }) {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
   const PHONE_MAIN = '+18883663082';
-  const [isMobile, setIsMobile] = useState(false);
+  const WHATSAPP_NUMBER = '18883663082';
+  const TELEGRAM_USERNAME = 'MyEmpathBot';
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const channels = [
+    {
+      key: 'call',
+      label: 'Call',
+      href: `tel:${PHONE_MAIN}`,
+      Icon: Phone,
+      hover: 'hover:border-[#1b8af1] hover:text-[#1b8af1]',
+      event: 'journaling_blog_post_call_clicked',
+      external: false,
+    },
+    {
+      key: 'text',
+      label: 'Text',
+      href: `sms:${PHONE_MAIN}`,
+      Icon: MessageSquare,
+      hover: 'hover:border-[#1b8af1] hover:text-[#1b8af1]',
+      event: 'journaling_blog_post_text_clicked',
+      external: false,
+    },
+    {
+      key: 'whatsapp',
+      label: 'WhatsApp',
+      href: `https://wa.me/${WHATSAPP_NUMBER}`,
+      Icon: WhatsAppIcon,
+      hover: 'hover:border-[#25D366] hover:text-[#1a9e4d]',
+      event: 'journaling_blog_post_whatsapp_clicked',
+      external: true,
+    },
+    {
+      key: 'telegram',
+      label: 'Telegram',
+      href: `https://t.me/${TELEGRAM_USERNAME}`,
+      Icon: TelegramIcon,
+      hover: 'hover:border-[#229ED9] hover:text-[#1a7eb0]',
+      event: 'journaling_blog_post_telegram_clicked',
+      external: true,
+    },
+  ];
 
   return (
     <div
@@ -62,62 +93,36 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
         Your AI Journaling Assistant
       </h3>
       <p className="text-stone-600 text-sm leading-relaxed mb-4 font-medium">
-        Call, text, or type your thoughts. Empath captures everything and helps you understand
-        yourself better over time.
+        Call, text, or message your thoughts. Empath captures everything and helps you
+        understand yourself better over time.
       </p>
-      {isMobile ? (
-        <div className="space-y-2.5">
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
-            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
-          >
-            Download on App Store <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <div className="grid grid-cols-2 gap-2.5">
+      <div className="space-y-2.5">
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
+          className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
+        >
+          Download on App Store <ArrowUpRight className="w-4 h-4" />
+        </a>
+        <div className="grid grid-cols-2 gap-2.5">
+          {channels.map(({ key, label, href, Icon, hover, event, external }) => (
             <a
-              href={`tel:${PHONE_MAIN}`}
-              onClick={() => posthog.capture('journaling_blog_post_call_clicked')}
-              className="inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
+              key={key}
+              href={href}
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              onClick={() => posthog.capture(event)}
+              className={`inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold transition-colors gap-1.5 ${hover}`}
             >
-              <Phone className="w-4 h-4" /> Call
+              <Icon className="w-4 h-4" /> {label}
             </a>
-            <a
-              href={`sms:${PHONE_MAIN}`}
-              onClick={() => posthog.capture('journaling_blog_post_text_clicked')}
-              className="inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold hover:border-stone-900 transition-colors gap-1.5"
-            >
-              <MessageSquare className="w-4 h-4" /> Text
-            </a>
-          </div>
-          <p className="text-xs text-stone-500 font-medium">
-            Free to download. Call or text to start journaling right away.
-          </p>
+          ))}
         </div>
-      ) : (
-        <div className="space-y-3">
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
-            className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
-          >
-            Download on App Store <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <div className="rounded-lg border border-stone-200 bg-stone-50 px-3.5 py-3">
-            <p className="text-xs uppercase tracking-wide text-stone-500 font-bold mb-1">
-              Prefer phone?
-            </p>
-            <p className="text-sm font-bold text-stone-900">{PHONE_MAIN}</p>
-            <p className="text-xs text-stone-600 font-medium">
-              Text or call this number to start journaling without downloading the app.
-            </p>
-          </div>
-        </div>
-      )}
+        <p className="text-xs text-stone-500 font-medium">
+          One number for everything: +1 (888) 366-3082 — no app required.
+        </p>
+      </div>
     </div>
   );
 }
