@@ -18,6 +18,24 @@ export function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+export function MessengerIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3C6.9 3 3 6.8 3 11.4c0 2.6 1.2 4.9 3.2 6.4V21l3-1.6c.9.3 1.8.4 2.8.4 5.1 0 9-3.8 9-8.4S17.1 3 12 3z" />
+      <path d="M7.5 13.5l3-3 2.3 2.2 3.7-3.2" />
+    </svg>
+  );
+}
+
 export function TelegramIcon({ className }: { className?: string }) {
   return (
     <svg

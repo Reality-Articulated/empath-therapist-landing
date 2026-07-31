@@ -27,6 +27,7 @@ import { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
 import { openSupportChat } from '../utils/supportChat';
 
 const fadeIn = {
@@ -74,7 +75,7 @@ export default function JournalingPage() {
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
   const WHATSAPP_NUMBER = '18883663082'; // Empath WhatsApp number (same as SMS/voice)
-  const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username
+  const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username (carousel channels live in MessagingChannelsCarousel)
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
   const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
 
@@ -284,27 +285,9 @@ export default function JournalingPage() {
                   >
                     <MessageSquare className="w-4 h-4" /> Text
                   </a>
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
-                  >
-                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
-                    WhatsApp
-                  </a>
-                  <a
-                    href={`https://t.me/${TELEGRAM_USERNAME}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-4 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a7eb0] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_telegram_clicked')}
-                  >
-                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-                    Telegram
-                  </a>
                 </div>
+                <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">Or journal on your favorite app</p>
+                <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3 -mx-4" />
                 <p className="text-xs text-stone-400 text-center font-medium">
                   {PHONE_DISPLAY} • Available 24/7 • No account needed
                 </p>
@@ -360,29 +343,8 @@ export default function JournalingPage() {
                 </div>
 
                 {/* Secondary channels */}
-                <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on</p>
-                <div className="grid grid-cols-2 gap-3 w-full">
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-3 bg-[#25D366] text-white rounded-xl border-2 border-[#25D366] shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a9e4d] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_whatsapp_clicked')}
-                  >
-                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
-                    WhatsApp
-                  </a>
-                  <a
-                    href={`https://t.me/${TELEGRAM_USERNAME}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-3 bg-[#229ED9] text-white rounded-xl border-2 border-[#229ED9] shadow-[4px_4px_0px_0px_#1a7eb0] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1a7eb0] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_telegram_clicked')}
-                  >
-                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-                    Telegram
-                  </a>
-                </div>
+                <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on your favorite app</p>
+                <MessagingChannelsCarousel eventPrefix="journaling_page" />
                 <p className="text-xs text-stone-400 text-center mt-3 font-medium flex items-center justify-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> Available 24/7 • Free • Works from any phone
                 </p>
