@@ -50,6 +50,12 @@ const staticRoutes = [
     keywords: 'journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
   },
   {
+    path: '/call-me',
+    title: 'Empath Calls You — Journal by Phone, No App Needed',
+    description: "Enter your number and Empath calls you for your first voice journal entry. Talk it out, hang up, and it's saved. No app, no account, no typing.",
+    keywords: 'journal by phone, voice journaling, phone journaling, journaling without an app, audio diary',
+  },
+  {
     path: '/therapist',
     title: 'Empath for Therapists | Between-Session AI Insights',
     description: 'Empath captures what happens between sessions so therapists can see how clients are doing in real life — not just what they remember to share. AI-powered insights, secure and HIPAA-aligned.',

@@ -75,6 +75,32 @@ Contact (name/email) is optional; there is no login. **A new campaign survey
 needs only this file**: edit the questions, bump `SURVEY_ID`, point the
 campaign URL at `/survey` — backend and admin need no changes.
 
+### "Empath calls you" (`/call-me` + homepage hero form)
+
+`src/pages/CallMePage.tsx` — chrome-less (in the `hideNavbar` list), indexed
+(in BOTH `scripts/generate-sitemap.mjs` `staticRoutes` AND
+`scripts/prerender.mjs` `staticRoutes` — the two lists are separate; a new
+top-level route belongs in both). Visitor enters a US number → POST
+`https://app.empathdash.com/api/phone/requestCall` (empath-heroku
+`routes/phone/webCall.js`) → Empath places an outbound AI voice call for a
+first journal entry. Server does the real validation/throttling; the page just
+maps `{error, code}` responses to inline copy. PostHog: `call_me_page_viewed`,
+`call_me_call_requested` / `_placed` / `_failed`.
+
+The request state machine lives in `src/components/CallMeForm.tsx`
+(`useCallMeRequest` hook) shared by two surfaces: the full `/call-me` page and
+a compact `CallMeForm` embedded in BOTH JournalingPage hero branches (mobile
+AND desktop are separate JSX — edit both). PostHog events there are
+`journaling_page_call_me_requested` / `_placed` / `_failed`, `source:
+'homepage_hero'`.
+
+**Scheduling:** `/call-me` (not the compact form) offers "schedule the call
+for later" via `datetime-local` (min now+15m, max +7d client-side; server
+enforces 10min–7d). The picked local time is sent as absolute UTC
+(`scheduledAt` ISO) + IANA `timezone` — all timezone resolution happens in
+the browser, the server compares UTC only. `{ok, scheduled: true}` →
+'scheduled' confirmation card showing the local time.
+
 ### Serverless functions (`/api`)
 
 Plain Vercel Node handlers (no framework). Each one is the deployed endpoint at `/api/<filename>`:

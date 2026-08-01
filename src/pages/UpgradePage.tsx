@@ -19,7 +19,7 @@
 // together.
 //
 // Prices are static (RC Web Billing has no public price API): keep in sync
-// with the Stripe products behind the purchase link ($6.99/mo, $39.99/yr).
+// with the Stripe products behind the purchase link ($6.99/mo, $49.99/yr).
 //
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -78,11 +78,11 @@ interface CompareRow {
 const COMPARE_ROWS: CompareRow[] = [
   { id: 'phone_messages', icon: MessageSquare, title: 'Journaling by text', free: text('15/mo'), plus: UNLIMITED },
   { id: 'voice_calls', icon: Phone, title: 'AI voice calls', free: text('4/mo'), plus: UNLIMITED },
-  { id: 'ai_chat', icon: MessageCircle, title: 'AI chat', free: text('10/mo'), plus: UNLIMITED },
+  { id: 'ai_chat', icon: MessageCircle, title: 'AI chat', free: text('10 total'), plus: UNLIMITED },
   { id: 'journal_assistant', icon: PenSquare, title: 'Journal assistant', free: text('5 total'), plus: UNLIMITED },
   { id: 'voice_analysis', icon: AudioWaveform, title: 'Voice analysis', free: text('5 total'), plus: UNLIMITED },
   { id: 'deeper_insights', icon: Sparkles, title: 'Deeper Insights', free: text('3 total'), plus: UNLIMITED },
-  { id: 'self_reflection', icon: Lightbulb, title: 'Discover Yourself', free: text('3/mo'), plus: UNLIMITED },
+  { id: 'self_reflection', icon: Lightbulb, title: 'Discover Yourself', free: text('3 total'), plus: UNLIMITED },
   { id: 'widgets', icon: LayoutGrid, title: 'Home Screen widgets', free: text('2 basic'), plus: text('All') },
   { id: 'integrations', icon: Link2, title: 'Integrations', free: text('Health only'), plus: text('All') },
   { id: 'health', icon: Heart, title: 'Apple Health', free: text('Partial'), plus: text('Full') },
@@ -112,10 +112,10 @@ const PLANS: Plan[] = [
   {
     id: 'annual',
     title: 'Yearly',
-    price: '$39.99',
+    price: '$49.99',
     periodSuffix: '/ year',
-    detail: 'Only $3.33 per month, billed annually. Cancel anytime.',
-    badge: 'Save 52%',
+    detail: 'Only $4.17 per month, billed annually. Cancel anytime.',
+    badge: 'Save 40%',
   },
 ];
 

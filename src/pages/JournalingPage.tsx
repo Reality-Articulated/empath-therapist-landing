@@ -28,6 +28,7 @@ import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
+import CallMeForm from '../components/CallMeForm';
 import { openSupportChat } from '../utils/supportChat';
 
 const fadeIn = {
@@ -292,6 +293,14 @@ export default function JournalingPage() {
                   {PHONE_DISPLAY} • Available 24/7 • No account needed
                 </p>
 
+                {/* Empath calls YOU */}
+                <div className="mt-5 bg-stone-50 rounded-xl border-2 border-stone-200 p-4 text-left">
+                  <p className="text-sm font-bold text-stone-700 mb-2.5">
+                    Shy about dialing? Type your number and Empath calls you.
+                  </p>
+                  <CallMeForm eventPrefix="journaling_page" source="homepage_hero" />
+                </div>
+
                 <div className="relative mt-6 mb-4">
                   <div className="absolute inset-0 flex items-center" aria-hidden="true">
                     <div className="w-full border-t-2 border-stone-200"></div>
@@ -340,6 +349,14 @@ export default function JournalingPage() {
                   >
                     <Phone className="w-5 h-5" /> Call & just talk
                   </a>
+                </div>
+
+                {/* Empath calls YOU — the desktop-friendly way to voice journal */}
+                <div className="mt-5 bg-stone-50 rounded-xl border-2 border-stone-200 p-4 text-left">
+                  <p className="text-sm font-bold text-stone-700 mb-2.5">
+                    Or type your number — Empath calls you, and your first entry writes itself.
+                  </p>
+                  <CallMeForm eventPrefix="journaling_page" source="homepage_hero" />
                 </div>
 
                 {/* Secondary channels */}
