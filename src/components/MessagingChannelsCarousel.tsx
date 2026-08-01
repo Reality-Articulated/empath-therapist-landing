@@ -62,20 +62,28 @@ const CHANNELS: MessagingChannel[] = [
 const COPIES = 4;
 
 /**
- * Auto-scrolling belt of branded messaging-service buttons ("journal on…").
- * Pauses on hover/focus; falls back to a static wrapped row when the user
- * prefers reduced motion. Only the first copy is focusable/visible to
- * screen readers — the rest are decorative fill for the loop.
+ * Branded messaging-service buttons ("journal on…").
+ *
+ * variant="marquee" (default): auto-scrolling belt. Pauses on hover/focus;
+ * falls back to a static wrapped row when the user prefers reduced motion.
+ * Only the first copy is focusable/visible to screen readers — the rest are
+ * decorative fill for the loop.
+ *
+ * variant="static": a fixed full-bleed row that spans the viewport width
+ * (breaks out of any centered max-w ancestor), one stretched button per
+ * channel. Use on desktop where there's room for all channels at once.
  */
 export default function MessagingChannelsCarousel({
   eventPrefix,
   className = '',
+  variant = 'marquee',
 }: {
   /** PostHog prefix, e.g. 'journaling_page' → journaling_page_whatsapp_clicked */
   eventPrefix: string;
   className?: string;
+  variant?: 'marquee' | 'static';
 }) {
-  const chip = (channel: MessagingChannel, copy: number) => (
+  const chip = (channel: MessagingChannel, copy: number, extraClass = '') => (
     <a
       key={`${channel.key}-${copy}`}
       href={channel.href}
@@ -84,7 +92,7 @@ export default function MessagingChannelsCarousel({
       aria-hidden={copy > 0 ? true : undefined}
       tabIndex={copy > 0 ? -1 : undefined}
       onClick={() => posthog.capture(`${eventPrefix}_${channel.key}_clicked`)}
-      className="px-4 py-3 text-white rounded-xl border-2 font-bold flex items-center justify-center gap-2 text-sm whitespace-nowrap transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px]"
+      className={`px-4 py-3 text-white rounded-xl border-2 font-bold flex items-center justify-center gap-2 text-sm whitespace-nowrap transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] ${extraClass}`}
       style={{
         backgroundColor: channel.bg,
         borderColor: channel.bg,
@@ -101,6 +109,20 @@ export default function MessagingChannelsCarousel({
       {channel.label}
     </a>
   );
+
+  if (variant === 'static') {
+    return (
+      // Full-bleed: center on the viewport and span its width, regardless of
+      // how narrow the centered ancestor container is.
+      <div
+        className={`relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-8 lg:px-16 ${className}`}
+      >
+        <div className="flex flex-wrap justify-center gap-3">
+          {CHANNELS.map((channel) => chip(channel, 0, 'flex-1 basis-40'))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={className}>

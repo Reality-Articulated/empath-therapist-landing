@@ -89,10 +89,11 @@ maps `{error, code}` responses to inline copy. PostHog: `call_me_page_viewed`,
 
 The request state machine lives in `src/components/CallMeForm.tsx`
 (`useCallMeRequest` hook) shared by two surfaces: the full `/call-me` page and
-a compact `CallMeForm` embedded in BOTH JournalingPage hero branches (mobile
-AND desktop are separate JSX — edit both). PostHog events there are
+a compact `CallMeForm` in JournalingPage's dedicated "Empath calls you"
+section (between the trust badges and Feature 1 — deliberately NOT in the
+hero, which was too crammed). PostHog events there are
 `journaling_page_call_me_requested` / `_placed` / `_failed`, `source:
-'homepage_hero'`.
+'homepage_section'`.
 
 **Scheduling:** `/call-me` (not the compact form) offers "schedule the call
 for later" via `datetime-local` (min now+15m, max +7d client-side; server

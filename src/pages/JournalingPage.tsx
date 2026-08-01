@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  CheckCircle, 
-  Shield, 
-  Phone, 
-  MessageSquare, 
+  CheckCircle,
+  Shield,
+  Phone,
+  PhoneCall,
+  MessageSquare,
   Zap, 
   ChevronDown, 
   Star, 
@@ -122,7 +123,7 @@ export default function JournalingPage() {
         name: 'Do I need to download the app to journal?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'No. You can journal entirely by text, WhatsApp, or phone call — no app and no account required. The iOS app is optional: it is where you read back your entries, search past moments, and see your mood patterns over time.',
+          text: 'No. You can journal entirely by text, WhatsApp, or phone call, with no app and no account required. The iOS app is optional: it is where you read back your entries, search past moments, and see your mood patterns over time.',
         },
       },
       {
@@ -130,7 +131,7 @@ export default function JournalingPage() {
         name: 'Is Empath really free?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. Empath is completely free to use. All core journaling — by text, call, or app — plus AI transcription, mood tracking, and insights are included at no cost.',
+          text: 'Yes. Empath is completely free to use. All core journaling by text, call, or app, plus AI transcription, mood tracking, and insights, is included at no cost.',
         },
       },
       {
@@ -204,7 +205,7 @@ export default function JournalingPage() {
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEO
         title="Empath - The Journal You Won't Quit"
-        description="Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
+        description="Empath lets you journal by text, WhatsApp, or call. No app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
         path="/app"
         keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker"
       />
@@ -261,7 +262,7 @@ export default function JournalingPage() {
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            Because it lives wherever you go — just text or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.
+            Because it lives wherever you go: just text or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.
           </motion.p>
 
           {isMobile ? (
@@ -269,7 +270,7 @@ export default function JournalingPage() {
               {/* Mobile: messaging-first CTAs (matches "not another app" hero copy) */}
               <motion.div variants={fadeIn} className="mb-8 max-w-lg mx-auto">
                 <p className="text-stone-600 font-medium mb-5 text-center">
-                  Start journaling right now — just call, text, or message.
+                  Start journaling right now. Just call, text, or message.
                 </p>
                 <div className="grid grid-cols-2 gap-3 w-full mb-3">
                   <a
@@ -293,14 +294,6 @@ export default function JournalingPage() {
                   {PHONE_DISPLAY} • Available 24/7 • No account needed
                 </p>
 
-                {/* Empath calls YOU */}
-                <div className="mt-5 bg-stone-50 rounded-xl border-2 border-stone-200 p-4 text-left">
-                  <p className="text-sm font-bold text-stone-700 mb-2.5">
-                    Shy about dialing? Type your number and Empath calls you.
-                  </p>
-                  <CallMeForm eventPrefix="journaling_page" source="homepage_hero" />
-                </div>
-
                 <div className="relative mt-6 mb-4">
                   <div className="absolute inset-0 flex items-center" aria-hidden="true">
                     <div className="w-full border-t-2 border-stone-200"></div>
@@ -316,7 +309,7 @@ export default function JournalingPage() {
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                   </svg>
-                  Get the App — Free
+                  Get the Free App
                 </button>
                 <p className="text-xs text-stone-400 text-center mt-2 font-medium">
                   Mood charts, pattern detection, Apple Health sync
@@ -328,7 +321,7 @@ export default function JournalingPage() {
               {/* Desktop: messaging-first CTAs, web dashboard demoted to secondary */}
               <motion.div variants={fadeIn} className="mb-16 max-w-lg mx-auto">
                 <p className="text-stone-600 font-medium mb-4 text-center">
-                  Start journaling right now — call or text. No app to download, no account to create.
+                  Start journaling right now with a call or text. No app to download, no account to create.
                 </p>
 
                 {/* Primary CTAs — call or text, the way you'd reach a friend */}
@@ -351,17 +344,9 @@ export default function JournalingPage() {
                   </a>
                 </div>
 
-                {/* Empath calls YOU — the desktop-friendly way to voice journal */}
-                <div className="mt-5 bg-stone-50 rounded-xl border-2 border-stone-200 p-4 text-left">
-                  <p className="text-sm font-bold text-stone-700 mb-2.5">
-                    Or type your number — Empath calls you, and your first entry writes itself.
-                  </p>
-                  <CallMeForm eventPrefix="journaling_page" source="homepage_hero" />
-                </div>
-
                 {/* Secondary channels */}
                 <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on your favorite app</p>
-                <MessagingChannelsCarousel eventPrefix="journaling_page" />
+                <MessagingChannelsCarousel eventPrefix="journaling_page" variant="static" />
                 <p className="text-xs text-stone-400 text-center mt-3 font-medium flex items-center justify-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> Available 24/7 • Free • Works from any phone
                 </p>
@@ -413,6 +398,35 @@ export default function JournalingPage() {
         </div>
       </section>
 
+      {/* --- EMPATH CALLS YOU --- */}
+      <section className="py-20 bg-[#FAF9F6] border-b-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-6 shadow-[4px_4px_0px_0px_#1b8af1]">
+                <PhoneCall className="w-4 h-4" /> New: Empath calls you
+              </motion.div>
+              <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-5 tracking-tight font-serif">
+                Don't feel like dialing? We'll call you.
+              </motion.h2>
+              <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+                Type your number and your phone rings within seconds. Talk about your day like
+                you would with a friend, hang up, and it's already saved as a journal entry:
+                transcribed, titled, and private. You can even schedule the call for later.
+              </motion.p>
+              <motion.div variants={fadeIn} className="max-w-md mx-auto bg-white p-6 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] text-left">
+                <CallMeForm eventPrefix="journaling_page" source="homepage_section" />
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* --- FEATURE 1: CALL TO JOURNAL --- */}
       <section id="features" className="py-24 bg-[#FAF9F6] scroll-mt-20">
         <div className="container mx-auto px-4">
@@ -427,7 +441,7 @@ export default function JournalingPage() {
                     Use the Apps You Already Open
                   </h2>
                   <p className="text-lg text-stone-600 mb-8 leading-relaxed font-medium">
-                    The moment a thought hits, fire off a text or voice note — or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.
+                    The moment a thought hits, fire off a text or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.
                   </p>
                   
                   <div className="space-y-6 mb-8">
@@ -510,7 +524,7 @@ export default function JournalingPage() {
                 "Wait, When Did I Start Feeling This Way?"
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                Open the app and just ask. Every text, call, and thought you've sent is remembered — and surfaced in seconds.
+                Open the app and just ask. Every text, call, and thought you've sent is remembered and surfaced in seconds.
               </p>
             </div>
 
@@ -724,8 +738,8 @@ export default function JournalingPage() {
                 <div>
                   <h3 className="font-bold text-stone-900 text-lg mb-2">Automatic Health Insights</h3>
                   <p className="text-stone-600 font-medium">
-                    Our AI analyzes your health data alongside your journals to reveal powerful connections. 
-                    "Your anxiety decreases 35% on days you sleep 7+ hours" — these insights help you make better choices.
+                    Our AI analyzes your health data alongside your journals to reveal powerful connections.
+                    "Your anxiety decreases 35% on days you sleep 7+ hours." Insights like these help you make better choices.
                   </p>
                 </div>
               </div>
@@ -844,7 +858,7 @@ export default function JournalingPage() {
                 Make Every Session Count
               </h2>
               <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
-                If you see a therapist, Empath can share your week with them automatically. No more "so, what happened?" — your sessions start where they matter.
+                If you see a therapist, Empath can share your week with them automatically. No more "so, what happened?" Your sessions start where they matter.
               </p>
             </div>
 
@@ -853,7 +867,7 @@ export default function JournalingPage() {
                 <div>
                   <h3 className="text-3xl font-bold text-stone-900 mb-6">Give Your Therapist Access to Your Mind</h3>
                   <p className="text-stone-600 mb-8 leading-relaxed font-medium text-lg">
-                    When you connect with your therapist through Empath, they get a complete picture of your week — 
+                    When you connect with your therapist through Empath, they get a complete picture of your week,
                     not just what you remember to share in session.
                   </p>
 
@@ -986,13 +1000,13 @@ export default function JournalingPage() {
                   step: '01',
                   icon: <MessageSquare className="w-8 h-8 text-white" />,
                   title: 'Text or Call',
-                  desc: "Whenever a thought or feeling shows up, text, WhatsApp, or call Empath — just like you'd message a friend. No app, no account, no blank page."
+                  desc: "Whenever a thought or feeling shows up, text, WhatsApp, or call Empath, just like you'd message a friend. No app, no account, no blank page."
                 },
                 {
                   step: '02',
                   icon: <Sparkles className="w-8 h-8 text-white" />,
                   title: 'Empath Captures It',
-                  desc: 'Every message and call becomes a journal entry — transcribed, organized, and saved automatically. You just keep living your life.'
+                  desc: 'Every message and call becomes a journal entry: transcribed, organized, and saved automatically. You just keep living your life.'
                 },
                 {
                   step: '03',
@@ -1024,7 +1038,7 @@ export default function JournalingPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">iOS app available</p>
               <h3 className="text-2xl md:text-3xl font-black mb-2">Want to Look Back? Get the App</h3>
-              <p className="text-stone-200 font-medium max-w-xl">You journal by text and call — the app is where you read it all back, search past entries, and watch your mood patterns unfold.</p>
+              <p className="text-stone-200 font-medium max-w-xl">You journal by text and call. The app is where you read it all back, search past entries, and watch your mood patterns unfold.</p>
             </div>
             <button
               onClick={handleAppStoreClick}
@@ -1095,11 +1109,11 @@ export default function JournalingPage() {
           <div className="space-y-4">
             <FAQItem
               question="Do I need to download the app to journal?"
-              answer="Nope. You can journal entirely by text, WhatsApp, or phone call — no app and no account required. The iOS app is optional: it's where you read back your entries, search past moments, and see your mood patterns over time."
+              answer="Nope. You can journal entirely by text, WhatsApp, or phone call, with no app and no account required. The iOS app is optional: it's where you read back your entries, search past moments, and see your mood patterns over time."
             />
             <FAQItem
               question="Is Empath really free?"
-              answer="Yes! Empath is completely free to use. All core journaling — by text, call, or app — plus AI transcription, mood tracking, and insights are included at no cost."
+              answer="Yes! Empath is completely free to use. All core journaling by text, call, or app, plus AI transcription, mood tracking, and insights, is included at no cost."
             />
             <FAQItem 
               question="How does the AI work?" 
@@ -1127,7 +1141,7 @@ export default function JournalingPage() {
             />
             <FAQItem
               question="What if I don't know what to write?"
-              answer={<>You can chat your way into an entry. Empath's AI journaling assistant interviews you one gentle question at a time, then turns the whole conversation into a journal entry in your own voice — the easiest way past the blank page. <Link to="/app/blog/chat-journaling" className="text-[#1b8af1] hover:underline font-bold">Learn how chat journaling works</Link>.</>}
+              answer={<>You can chat your way into an entry. Empath's AI journaling assistant interviews you one gentle question at a time, then turns the whole conversation into a journal entry in your own voice. It's the easiest way past the blank page. <Link to="/app/blog/chat-journaling" className="text-[#1b8af1] hover:underline font-bold">Learn how chat journaling works</Link>.</>}
             />
             <FAQItem
               question="Can Empath help me build a journaling habit?"
@@ -1145,7 +1159,7 @@ export default function JournalingPage() {
               Your Next Journal Entry Is One Text Away
             </h2>
             <p className="text-xl text-stone-300 mb-12 leading-relaxed font-medium">
-              No app to learn, no blank page to stare at. Just text or call the way you already do with a friend — and start seeing your patterns in days, not months.
+              No app to learn, no blank page to stare at. Just text or call the way you already do with a friend, and start seeing your patterns in days, not months.
             </p>
             
             {isMobile ? (
@@ -1160,7 +1174,7 @@ export default function JournalingPage() {
               </button>
             ) : (
               <div className="inline-flex flex-col items-center gap-4 px-8 py-7 bg-white text-stone-900 rounded-xl border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
-                <p className="text-sm font-bold uppercase tracking-wider text-stone-500">No app, no account — just say hi</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-stone-500">No app, no account. Just say hi</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                   <a
                     href={`sms:${PHONE_MAIN}`}
