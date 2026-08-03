@@ -26,7 +26,7 @@ const CHANNELS: MessagingChannel[] = [
     key: 'whatsapp',
     label: 'WhatsApp',
     href: `https://wa.me/${WHATSAPP_NUMBER}`,
-    icon: <WhatsAppIcon className="w-5 h-5 shrink-0" />,
+    icon: <WhatsAppIcon className="w-6 h-6 shrink-0" />,
     bg: '#25D366',
     shadow: '#1a9e4d',
   },
@@ -34,7 +34,7 @@ const CHANNELS: MessagingChannel[] = [
     key: 'telegram',
     label: 'Telegram',
     href: `https://t.me/${TELEGRAM_USERNAME}`,
-    icon: <TelegramIcon className="w-5 h-5 shrink-0" />,
+    icon: <TelegramIcon className="w-6 h-6 shrink-0" />,
     bg: '#229ED9',
     shadow: '#1a7eb0',
   },
@@ -42,7 +42,7 @@ const CHANNELS: MessagingChannel[] = [
     key: 'messenger',
     label: 'Messenger',
     href: `https://m.me/${MESSENGER_PAGE}`,
-    icon: <MessengerIcon className="w-5 h-5 shrink-0" />,
+    icon: <MessengerIcon className="w-6 h-6 shrink-0" />,
     bg: '#0084FF',
     shadow: '#0063bf',
   },
@@ -50,125 +50,53 @@ const CHANNELS: MessagingChannel[] = [
     key: 'instagram',
     label: 'Instagram',
     href: `https://ig.me/m/${INSTAGRAM_USERNAME}`,
-    icon: <Instagram className="w-5 h-5 shrink-0" />,
+    icon: <Instagram className="w-6 h-6 shrink-0" />,
     bg: '#E4405F',
     shadow: '#b32945',
   },
 ];
 
-// Copies of the channel set on the marquee belt. The animation slides exactly
-// one set width (100/COPIES %), so the loop is seamless as long as the belt
-// is wider than the container plus one set — 4 copies covers that comfortably.
-const COPIES = 4;
-
 /**
- * Branded messaging-service buttons ("journal on…").
- *
- * variant="marquee" (default): auto-scrolling belt. Pauses on hover/focus;
- * falls back to a static wrapped row when the user prefers reduced motion.
- * Only the first copy is focusable/visible to screen readers — the rest are
- * decorative fill for the loop.
- *
- * variant="static": a fixed full-bleed row that spans the viewport width
- * (breaks out of any centered max-w ancestor), one stretched button per
- * channel. Use on desktop where there's room for all channels at once.
+ * Branded messaging-service buttons ("journal on…"): a centered row of
+ * icon-only brand tiles. The service name lives in the aria-label/tooltip —
+ * the logos are recognizable on their own and the compact row fits every
+ * viewport, so there's no marquee/static split anymore.
  */
 export default function MessagingChannelsCarousel({
   eventPrefix,
   className = '',
-  variant = 'marquee',
 }: {
   /** PostHog prefix, e.g. 'journaling_page' → journaling_page_whatsapp_clicked */
   eventPrefix: string;
   className?: string;
-  variant?: 'marquee' | 'static';
 }) {
-  const chip = (channel: MessagingChannel, copy: number, extraClass = '') => (
-    <a
-      key={`${channel.key}-${copy}`}
-      href={channel.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-hidden={copy > 0 ? true : undefined}
-      tabIndex={copy > 0 ? -1 : undefined}
-      onClick={() => posthog.capture(`${eventPrefix}_${channel.key}_clicked`)}
-      className={`px-4 py-3 text-white rounded-xl border-2 font-bold flex items-center justify-center gap-2 text-sm whitespace-nowrap transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] ${extraClass}`}
-      style={{
-        backgroundColor: channel.bg,
-        borderColor: channel.bg,
-        boxShadow: `4px 4px 0px 0px ${channel.shadow}`,
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `2px 2px 0px 0px ${channel.shadow}`;
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${channel.shadow}`;
-      }}
-    >
-      {channel.icon}
-      {channel.label}
-    </a>
-  );
-
-  if (variant === 'static') {
-    return (
-      // Full-bleed: center on the viewport and span its width, regardless of
-      // how narrow the centered ancestor container is.
-      <div
-        className={`relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-8 lg:px-16 ${className}`}
-      >
-        <div className="flex flex-wrap justify-center gap-3">
-          {CHANNELS.map((channel) => chip(channel, 0, 'flex-1 basis-40'))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={className}>
-      <style>{`
-        @keyframes channel-marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-${100 / COPIES}%); }
-        }
-        .channel-marquee-track {
-          animation: channel-marquee ${CHANNELS.length * 5}s linear infinite;
-        }
-        .channel-marquee:hover .channel-marquee-track,
-        .channel-marquee:focus-within .channel-marquee-track {
-          animation-play-state: paused;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .channel-marquee-track { animation: none; width: 100%; }
-          .channel-marquee-track > div:first-child {
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            padding-right: 0;
-          }
-          .channel-marquee-copy { display: none; }
-        }
-      `}</style>
-      <div
-        className="channel-marquee overflow-hidden py-1"
-        style={{
-          maskImage:
-            'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
-          WebkitMaskImage:
-            'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
-        }}
-      >
-        <div className="channel-marquee-track flex w-max">
-          {Array.from({ length: COPIES }, (_, copy) => (
-            <div
-              key={copy}
-              className={`flex gap-3 pr-3 ${copy > 0 ? 'channel-marquee-copy' : ''}`}
-            >
-              {CHANNELS.map((channel) => chip(channel, copy))}
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className={`flex flex-wrap justify-center gap-4 py-1 ${className}`}>
+      {CHANNELS.map((channel) => (
+        <a
+          key={channel.key}
+          href={channel.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Journal on ${channel.label}`}
+          title={channel.label}
+          onClick={() => posthog.capture(`${eventPrefix}_${channel.key}_clicked`)}
+          className="w-12 h-12 text-white rounded-xl border-2 flex items-center justify-center transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px]"
+          style={{
+            backgroundColor: channel.bg,
+            borderColor: channel.bg,
+            boxShadow: `4px 4px 0px 0px ${channel.shadow}`,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = `2px 2px 0px 0px ${channel.shadow}`;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${channel.shadow}`;
+          }}
+        >
+          {channel.icon}
+        </a>
+      ))}
     </div>
   );
 }

@@ -29,6 +29,8 @@ import posthog from 'posthog-js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
+import WhatsAppExamples from '../components/WhatsAppExamples';
+import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
 import CallMeForm from '../components/CallMeForm';
 import { openSupportChat } from '../utils/supportChat';
 
@@ -289,7 +291,7 @@ export default function JournalingPage() {
                   </a>
                 </div>
                 <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">Or journal on your favorite app</p>
-                <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3 -mx-4" />
+                <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3" />
                 <p className="text-xs text-stone-400 text-center font-medium">
                   {PHONE_DISPLAY} • Available 24/7 • No account needed
                 </p>
@@ -346,7 +348,7 @@ export default function JournalingPage() {
 
                 {/* Secondary channels */}
                 <p className="text-sm text-stone-500 font-medium text-center mt-5 mb-3">Or journal on your favorite app</p>
-                <MessagingChannelsCarousel eventPrefix="journaling_page" variant="static" />
+                <MessagingChannelsCarousel eventPrefix="journaling_page" />
                 <p className="text-xs text-stone-400 text-center mt-3 font-medium flex items-center justify-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> Available 24/7 • Free • Works from any phone
                 </p>
@@ -421,6 +423,53 @@ export default function JournalingPage() {
               </motion.p>
               <motion.div variants={fadeIn} className="max-w-md mx-auto bg-white p-6 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] text-left">
                 <CallMeForm eventPrefix="journaling_page" source="homepage_section" />
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- WHATSAPP EXAMPLES --- */}
+      <section className="py-24 bg-white border-y-2 border-stone-200 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <div className="text-center mb-16">
+                <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-800 border-2 border-green-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#25D366]">
+                  <WhatsAppIcon className="w-4 h-4" /> Journaling in your DMs
+                </motion.div>
+                <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
+                  What It Actually Looks Like
+                </motion.h2>
+                <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+                  A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it
+                  like you'd text a friend — Empath listens, responds, and quietly saves it as a
+                  journal entry.
+                </motion.p>
+              </div>
+
+              <motion.div variants={fadeIn}>
+                <WhatsAppExamples />
+              </motion.div>
+
+              <motion.div variants={fadeIn} className="text-center mt-14">
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => posthog.capture('journaling_page_wa_examples_whatsapp_clicked')}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#25D366] text-white rounded-xl font-bold text-base border-2 border-[#25D366] shadow-[6px_6px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                >
+                  <WhatsAppIcon className="w-5 h-5" /> Journal on WhatsApp
+                </a>
+                <p className="text-sm text-stone-500 font-medium mt-4">
+                  Or text {PHONE_DISPLAY} — plain SMS works too. Example conversations shown.
+                </p>
               </motion.div>
             </motion.div>
           </div>
@@ -1262,21 +1311,23 @@ export default function JournalingPage() {
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-3 bg-[#25D366] text-white rounded-lg font-bold border-2 border-[#25D366] flex items-center gap-1.5 text-sm shrink-0"
+              aria-label="Journal on WhatsApp"
+              title="WhatsApp"
+              className="px-3 py-3 bg-[#25D366] text-white rounded-lg border-2 border-[#25D366] flex items-center justify-center shrink-0"
               onClick={() => posthog.capture('floating_cta_whatsapp_clicked')}
             >
-              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
-              WA
+              <WhatsAppIcon className="w-5 h-5 shrink-0" />
             </a>
             <a
               href={`https://t.me/${TELEGRAM_USERNAME}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-3 bg-[#229ED9] text-white rounded-lg font-bold border-2 border-[#229ED9] flex items-center gap-1.5 text-sm shrink-0"
+              aria-label="Journal on Telegram"
+              title="Telegram"
+              className="px-3 py-3 bg-[#229ED9] text-white rounded-lg border-2 border-[#229ED9] flex items-center justify-center shrink-0"
               onClick={() => posthog.capture('floating_cta_telegram_clicked')}
             >
-              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-              TG
+              <TelegramIcon className="w-5 h-5 shrink-0" />
             </a>
           </div>
         </motion.div>
