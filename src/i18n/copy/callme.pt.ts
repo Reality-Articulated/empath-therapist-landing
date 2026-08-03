@@ -5,7 +5,7 @@ import type { CallMeCopy } from './callme.en';
 
 export const callmePt: CallMeCopy = {
   seo: {
-    title: 'A Empath liga para você — Journaling por telefone, sem app',
+    title: 'A Empath liga para você: journaling por telefone, sem app',
     description:
       'Digite seu número e a Empath liga para você para sua primeira entrada de diário por voz. Desabafe, desligue, e pronto: está salva. Sem app, sem cadastro, sem digitar.',
     keywords:
@@ -15,14 +15,14 @@ export const callmePt: CallMeCopy = {
   hero: {
     badge: 'Sem app. Sem cadastro. Sem digitar.',
     h1: 'Sua primeira entrada de diário está a uma ligação de distância.',
-    sub: 'Digite seu número e a Empath liga para você. Fale sobre o seu dia por alguns minutos, desligue, e a conversa vira uma entrada de diário privada — transcrita, com título, esperando por você quando quiser.',
+    sub: 'Digite seu número e a Empath liga para você. Fale sobre o seu dia por alguns minutos, desligue, e a conversa vira uma entrada de diário privada: transcrita, com título, esperando por você quando quiser.',
   },
 
   ringing: {
-    title: 'Estamos ligando agora — atenda!',
+    title: 'Estamos ligando agora, atenda!',
     body: 'Diga oi, fale sobre o seu dia e desligue quando terminar. Sua entrada é salva automaticamente e enviamos um SMS de confirmação.',
     missedPre: 'Perdeu a ligação? Ligue para',
-    missedPost: 'a qualquer momento — o journaling por telefone funciona 24 horas por dia.',
+    missedPost: 'a qualquer momento. O journaling por telefone funciona 24 horas por dia.',
   },
 
   scheduled: {
@@ -30,7 +30,7 @@ export const callmePt: CallMeCopy = {
     bodyPre: 'A Empath vai ligar para você em',
     bodyPost: '(no seu horário local). Atenda, fale sobre o seu dia e desligue quando terminar.',
     cantWaitPre: 'Não quer esperar? Ligue para',
-    cantWaitPost: 'a qualquer momento — o journaling por telefone funciona 24 horas por dia.',
+    cantWaitPost: 'a qualquer momento. O journaling por telefone funciona 24 horas por dia.',
   },
 
   form: {
@@ -51,7 +51,7 @@ export const callmePt: CallMeCopy = {
 
   dialYourself: {
     pre: 'Prefere ligar você mesmo? Ligue ou mande mensagem para',
-    post: '— o mesmo diário, a qualquer hora.',
+    post: 'e use o mesmo diário, a qualquer hora.',
   },
 
   how: {
@@ -63,7 +63,7 @@ export const callmePt: CallMeCopy = {
       },
       {
         title: 'Só fale',
-        text: 'Divague, desabafe, reflita — a Empath escuta e faz perguntas com delicadeza. Nada de decorar prompts.',
+        text: 'Divague, desabafe, reflita: a Empath escuta e faz perguntas com delicadeza. Nada de decorar prompts.',
       },
       {
         title: 'Desligue, está salvo',
@@ -74,7 +74,7 @@ export const callmePt: CallMeCopy = {
 
   why: {
     title: 'Journaling para quem nunca escreve diário',
-    body: 'A parte mais difícil de escrever um diário é a página em branco. Uma ligação não tem página em branco — você já sabe falar sobre o seu dia. A Empath pergunta, você responde, e três minutos no trajeto viram uma entrada que você nunca teria digitado.',
+    body: 'A parte mais difícil de escrever um diário é a página em branco. Uma ligação não tem página em branco: você já sabe falar sobre o seu dia. A Empath pergunta, você responde, e três minutos no trajeto viram uma entrada que você nunca teria digitado.',
     encrypted: 'As entradas são criptografadas em repouso. Seu diário pertence a você.',
   },
 
@@ -83,11 +83,11 @@ export const callmePt: CallMeCopy = {
     items: [
       {
         q: 'Preciso do app?',
-        a: 'Não. A ligação é a experiência completa — sem download, sem cadastro, sem senha. Se depois você quiser reler suas entradas e ver insights de humor, o app gratuito para iOS continua exatamente de onde suas ligações pararam.',
+        a: 'Não. A ligação é a experiência completa: sem download, sem cadastro, sem senha. Se depois você quiser reler suas entradas e ver insights de humor, o app gratuito para iOS continua exatamente de onde suas ligações pararam.',
       },
       {
         q: 'É realmente uma pessoa ligando?',
-        a: 'É a companheira de journaling com IA da Empath — a mesma por trás do nosso número que atende a qualquer hora. Ela escuta, faz perguntas atenciosas e transforma a conversa em uma entrada escrita.',
+        a: 'É a companheira de journaling com IA da Empath, a mesma por trás do nosso número que atende a qualquer hora. Ela escuta, faz perguntas atenciosas e transforma a conversa em uma entrada escrita.',
       },
       {
         q: 'Meu diário é privado?',
@@ -95,7 +95,7 @@ export const callmePt: CallMeCopy = {
       },
       {
         q: 'Quanto custa?',
-        a: 'Suas primeiras entradas são gratuitas — sem cartão, sem período de teste para cancelar. Ligar faz parte da Empath, e aplicam-se as tarifas padrão da operadora para uma ligação comum.',
+        a: 'Suas primeiras entradas são gratuitas: sem cartão, sem período de teste para cancelar. Ligar faz parte da Empath, e aplicam-se as tarifas padrão da operadora para uma ligação comum.',
       },
     ],
     readBackPrompt: 'Quer reler suas entradas?',

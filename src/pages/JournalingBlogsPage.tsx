@@ -344,7 +344,7 @@ export default function JournalingBlogsPage() {
               <span className="font-semibold text-stone-900">
                 Written by the team behind Empath
               </span>{' '}
-              — the journal you can call, text, or message. Free to try.
+              , the journal you can call, text, or message. Free to try.
             </p>
             <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
               <button

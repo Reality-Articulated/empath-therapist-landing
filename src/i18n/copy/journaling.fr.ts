@@ -1,5 +1,5 @@
 // French copy catalog for the consumer landing page.
-// Mirrors journaling.en.ts exactly — the `JournalingCopy` type makes any
+// Mirrors journaling.en.ts exactly; the `JournalingCopy` type makes any
 // missing key a compile error. PURE DATA ONLY (no JSX).
 
 import type { JournalingCopy } from './journaling.en';
@@ -8,7 +8,7 @@ export const journalingFr: JournalingCopy = {
   seo: {
     title: 'Empath - Le journal que tu ne lâcheras pas',
     description:
-      'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un SMS, un message WhatsApp, appelle — ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
+      'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un SMS, un message WhatsApp, appelle, ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
     keywords:
       'journal par sms, journal vocal, journal intime sans application, tenir un journal par sms, journal WhatsApp, journal par téléphone, suivi de l’humeur, journal par chat, assistant de journal IA, journal conversationnel, plan de journaling, habitude d’écriture, application journal intime',
   },
@@ -52,9 +52,9 @@ export const journalingFr: JournalingCopy = {
   whatsappSection: {
     badge: 'Le journal dans tes DM',
     title: 'À quoi ça ressemble vraiment',
-    sub: 'Une spirale à 2h du matin, une note vocale parce que taper c’est trop d’effort, une sale journée. Tu envoies ça comme un texto à un ami — Empath écoute, répond, et l’enregistre discrètement comme une entrée de journal.',
+    sub: 'Une spirale à 2h du matin, une note vocale parce que taper c’est trop d’effort, une sale journée. Tu envoies ça comme un texto à un ami. Empath écoute, répond, et l’enregistre discrètement comme une entrée de journal.',
     cta: 'Journaler sur WhatsApp',
-    phoneNote: 'Ou envoie un SMS au {phone} — le simple SMS marche aussi. Conversations données en exemple.',
+    phoneNote: 'Ou envoie un SMS au {phone} : le simple SMS marche aussi. Conversations données en exemple.',
     examples: [
       {
         key: 'late-night',
@@ -70,7 +70,7 @@ export const journalingFr: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'Tu n’as pas à trancher ça ce soir. Si tu la rejoues, c’est en général que ça comptait — pas que tu as surréagi. Je te la garde pour demain matin ?',
+            text: 'Tu n’as pas à trancher ça ce soir. Si tu la rejoues, c’est en général que ça comptait, pas que tu as surréagi. Je te la garde pour demain matin ?',
             time: '02h47',
           },
           { from: 'user', text: 'garde-la. merci', time: '02h48' },
@@ -87,7 +87,7 @@ export const journalingFr: JournalingCopy = {
           { from: 'user', voice: true, duration: '1:47', time: '23h12' },
           {
             from: 'empath',
-            text: 'Longue journée — je l’ai entendu. Trois trucs qui s’empilent avant midi, et tu as quand même répondu à l’appel de ta sœur. Tu as dit deux fois que tu « aurais dû mieux gérer ». En toute douceur : tu as géré. Enregistré.',
+            text: 'Longue journée, je l’ai entendu. Trois trucs qui s’empilent avant midi, et tu as quand même répondu à l’appel de ta sœur. Tu as dit deux fois que tu « aurais dû mieux gérer ». En toute douceur : tu as géré. Enregistré.',
             time: '23h13',
           },
           { from: 'user', text: 'comment tu fais pour que ça paraisse toujours surmontable', time: '23h14' },
@@ -108,7 +108,7 @@ export const journalingFr: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'Le fait que ça te pèse autant montre à quel point tu tiens à elle. Tu es à bout depuis mardi — t’énerver, c’est le trop-plein qui déborde, pas la vérité sur ce que tu es pour elle. Vous vous êtes reparlé depuis ?',
+            text: 'Le fait que ça te pèse autant montre à quel point tu tiens à elle. Tu es à bout depuis mardi : t’énerver, c’est le trop-plein qui déborde, pas la vérité sur ce que tu es pour elle. Vous vous êtes reparlé depuis ?',
             time: '18h04',
           },
           { from: 'user', text: 'pas encore. demain peut-être', time: '18h06' },
@@ -125,11 +125,11 @@ export const journalingFr: JournalingCopy = {
           { from: 'user', text: 'attends je peux vraiment tenir un journal juste en textant ce numéro ? sans appli ?', time: '09h14' },
           {
             from: 'empath',
-            text: 'C’est ça. Pas d’appli, pas d’inscription, pas de page blanche qui te fixe. Raconte-moi ta journée — une phrase suffit.',
+            text: 'C’est ça. Pas d’appli, pas d’inscription, pas de page blanche qui te fixe. Raconte-moi ta journée, une phrase suffit.',
             time: '09h14',
           },
           { from: 'user', text: 'ok. honnêtement déjà épuisé et il est 9h du matin', time: '09h15' },
-          { from: 'empath', text: 'Alors c’est la première entrée du jour — enregistrée. Qu’est-ce qui te prend le plus d’énergie ce matin ?', time: '09h15' },
+          { from: 'empath', text: 'Alors c’est la première entrée du jour, enregistrée. Qu’est-ce qui te prend le plus d’énergie ce matin ?', time: '09h15' },
         ],
       },
     ],
@@ -143,7 +143,7 @@ export const journalingFr: JournalingCopy = {
   crossChannel: {
     badge: 'Un seul journal, toutes tes applis',
     title: 'Commence n’importe où. Continue partout.',
-    sub: 'Empath vit là où tu es déjà. Écris dans ton journal ce soir, reviens dessus sur WhatsApp autour d’un café, creuse sur Telegram après le boulot, boucle la boucle sur Instagram en scrollant. Tous les canaux parlent au même journal — et à la même mémoire.',
+    sub: 'Empath vit là où tu es déjà. Écris dans ton journal ce soir, reviens dessus sur WhatsApp autour d’un café, creuse sur Telegram après le boulot, boucle la boucle sur Instagram en scrollant. Tous les canaux parlent au même journal, et à la même mémoire.',
     pickApp: 'Choisis l’appli que tu utilises déjà',
     journalStep: {
       time: 'mardi 21h41',
@@ -160,7 +160,7 @@ export const journalingFr: JournalingCopy = {
         channel: 'WhatsApp',
         userMsg: 'salut. j’en ai fait des caisses hier soir ?',
         empathMsg:
-          'Un peu 💛 Tu as répété l’intro quatre fois. Mais tu as aussi dit que tu connais ce sujet mieux que personne — c’est cette partie-là qu’il faut garder aujourd’hui.',
+          'Un peu 💛 Tu as répété l’intro quatre fois. Mais tu as aussi dit que tu connais ce sujet mieux que personne : c’est cette partie-là qu’il faut garder aujourd’hui.',
       },
       {
         key: 'telegram',
@@ -168,7 +168,7 @@ export const journalingFr: JournalingCopy = {
         channel: 'Telegram',
         userMsg: 'présentation finie, ça s’est bien passé. pourquoi je pars toujours en vrille la veille ?',
         empathMsg:
-          'C’est la troisième spirale de veille dans ton journal depuis mai — et les trois fois, tout s’est bien passé le lendemain. Le schéma, c’est la spirale, pas l’échec.',
+          'C’est la troisième spirale de veille dans ton journal depuis mai, et les trois fois, tout s’est bien passé le lendemain. Le schéma, c’est la spirale, pas l’échec.',
       },
       {
         key: 'instagram',
@@ -193,7 +193,7 @@ export const journalingFr: JournalingCopy = {
   },
 
   callMeForm: {
-    ringingTitle: '📞 On t’appelle — décroche !',
+    ringingTitle: '📞 On t’appelle, décroche !',
     ringingSub: 'Raconte ta journée, raccroche, et c’est enregistré comme ta première entrée de journal.',
     phoneAria: 'Ton numéro de téléphone (États-Unis)',
     dialing: 'Appel en cours…',
@@ -364,7 +364,7 @@ export const journalingFr: JournalingCopy = {
     steps: [
       {
         title: 'Écris ou appelle',
-        desc: 'Dès qu’une pensée ou une émotion se pointe, écris à Empath par SMS ou WhatsApp, ou appelle — exactement comme tu écrirais à un ami. Pas d’appli, pas d’inscription, pas de page blanche.',
+        desc: 'Dès qu’une pensée ou une émotion se pointe, écris à Empath par SMS ou WhatsApp, ou appelle, exactement comme tu écrirais à un ami. Pas d’appli, pas d’inscription, pas de page blanche.',
       },
       {
         title: 'Empath capture tout',
@@ -390,7 +390,7 @@ export const journalingFr: JournalingCopy = {
     testimonials: [
       {
         quote:
-          'J’ai essayé 5 applis de journal et j’ai abandonné à chaque fois. Empath est resté parce que j’envoie juste un texto quand j’ai un truc en tête — pas d’appli à ouvrir, pas de page blanche.',
+          'J’ai essayé 5 applis de journal et j’ai abandonné à chaque fois. Empath est resté parce que j’envoie juste un texto quand j’ai un truc en tête : pas d’appli à ouvrir, pas de page blanche.',
         author: 'Alex M.',
         role: 'Utilisateur depuis 2024',
       },
@@ -402,7 +402,7 @@ export const journalingFr: JournalingCopy = {
       },
       {
         quote:
-          'J’adore pouvoir juste appeler et parler. C’est tellement naturel — tenir un journal aurait toujours dû être aussi simple.',
+          'J’adore pouvoir juste appeler et parler. C’est tellement naturel. Tenir un journal aurait toujours dû être aussi simple.',
         author: 'Sam R.',
         role: 'Utilisateur depuis 2024',
       },
@@ -418,7 +418,7 @@ export const journalingFr: JournalingCopy = {
       },
       {
         q: 'Empath est vraiment gratuit ?',
-        a: 'Oui ! Empath est entièrement gratuit. Tout l’essentiel — le journal par SMS, appel ou appli, plus la transcription IA, le suivi d’humeur et les insights — est inclus sans rien payer.',
+        a: 'Oui ! Empath est entièrement gratuit. Tout l’essentiel est inclus sans rien payer : le journal par SMS, appel ou appli, plus la transcription IA, le suivi d’humeur et les insights.',
       },
       {
         q: 'Comment fonctionne l’IA ?',

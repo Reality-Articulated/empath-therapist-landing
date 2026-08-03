@@ -1,5 +1,5 @@
 // Hindi (hi) copy catalog for the consumer landing page.
-// Mirrors the exact shape of journaling.en.ts — `JournalingCopy` enforces
+// Mirrors the exact shape of journaling.en.ts; `JournalingCopy` enforces
 // key parity at compile time. Values only are translated; keys, `key`/`from`
 // fields, times, phone numbers, {phone} tokens and link paths are unchanged.
 
@@ -9,7 +9,7 @@ export const journalingHi: JournalingCopy = {
   seo: {
     title: 'Empath - वो Journal जो आप छोड़ेंगे नहीं',
     description:
-      'एक नंबर है जिस पर आप बस journal कर सकते हैं। Text करें, WhatsApp करें, call करें — या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
+      'एक नंबर है जिस पर आप बस journal कर सकते हैं। Text करें, WhatsApp करें, call करें, या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
     keywords:
       'text से journaling, voice journaling, बिना app के journal, WhatsApp journal, phone call से journaling, mood tracking, mood tracker, डायरी app, डायरी लिखना, journal कैसे लिखें, AI journaling assistant, chat journaling, journaling habit, journaling plan',
   },
@@ -53,9 +53,9 @@ export const journalingHi: JournalingCopy = {
   whatsappSection: {
     badge: 'Journaling, सीधे आपके DMs में',
     title: 'असल में ये दिखता कैसा है',
-    sub: 'रात 2 बजे की overthinking, वो voice note जो type करने की energy नहीं, एक बुरा दिन। आप वैसे ही भेजते हैं जैसे किसी दोस्त को text करते हैं — Empath सुनता है, जवाब देता है, और चुपचाप उसे journal entry बनाकर save कर लेता है।',
+    sub: 'रात 2 बजे की overthinking, वो voice note जो type करने की energy नहीं, एक बुरा दिन। आप वैसे ही भेजते हैं जैसे किसी दोस्त को text करते हैं। Empath सुनता है, जवाब देता है, और चुपचाप उसे journal entry बनाकर save कर लेता है।',
     cta: 'WhatsApp पर journal करें',
-    phoneNote: 'या {phone} पर text करें — सादा SMS भी चलता है। नीचे example conversations हैं।',
+    phoneNote: 'या {phone} पर text करें, सादा SMS भी चलता है। नीचे example conversations हैं।',
     examples: [
       {
         key: 'late-night',
@@ -71,7 +71,7 @@ export const journalingHi: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'ये आज रात ही सुलझाना ज़रूरी नहीं। कोई बात बार-बार दिमाग़ में चलती है तो अक्सर मतलब ये होता है कि वो तुम्हारे लिए मायने रखती थी — ये नहीं कि तुमने overreact किया। इसे सुबह तक सँभालकर रखूँ?',
+            text: 'ये आज रात ही सुलझाना ज़रूरी नहीं। कोई बात बार-बार दिमाग़ में चलती है तो अक्सर मतलब ये होता है कि वो तुम्हारे लिए मायने रखती थी, ये नहीं कि तुमने overreact किया। इसे सुबह तक सँभालकर रखूँ?',
             time: '2:47 AM',
           },
           { from: 'user', text: 'रख लो. thank you', time: '2:48 AM' },
@@ -88,7 +88,7 @@ export const journalingHi: JournalingCopy = {
           { from: 'user', voice: true, duration: '1:47', time: '11:12 PM' },
           {
             from: 'empath',
-            text: 'लंबा दिन था — आवाज़ से ही पता चल गया। दोपहर से पहले ही तीन चीज़ें एक साथ आ गिरीं, फिर भी तुमने अपनी बहन का call लिया। तुमने दो बार कहा कि "और बेहतर handle करना चाहिए था"। धीरे से कहूँ तो: तुमने handle कर लिया। Save हो गया।',
+            text: 'लंबा दिन था, आवाज़ से ही पता चल गया। दोपहर से पहले ही तीन चीज़ें एक साथ आ गिरीं, फिर भी तुमने अपनी बहन का call लिया। तुमने दो बार कहा कि "और बेहतर handle करना चाहिए था"। धीरे से कहूँ तो: तुमने handle कर लिया। Save हो गया।',
             time: '11:13 PM',
           },
           { from: 'user', text: 'तुम हर चीज़ को इतना survivable कैसे बना देते हो', time: '11:14 PM' },
@@ -109,7 +109,7 @@ export const journalingHi: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'ये बात तुम्हें इतनी चुभ रही है — यही दिखाता है कि उनकी तुम्हें कितनी परवाह है। मंगलवार से तुम पर काफ़ी load चल रहा है — चिढ़कर बोलना बस उसका छलक जाना है, ये सच नहीं कि तुम उनके लिए क्या हो। उसके बाद बात हुई?',
+            text: 'ये बात तुम्हें इतनी चुभ रही है, यही दिखाता है कि उनकी तुम्हें कितनी परवाह है। मंगलवार से तुम पर काफ़ी load चल रहा है। चिढ़कर बोलना बस उसका छलक जाना है, ये सच नहीं कि तुम उनके लिए क्या हो। उसके बाद बात हुई?',
             time: '6:04 PM',
           },
           { from: 'user', text: 'अभी नहीं. शायद कल', time: '6:06 PM' },
@@ -126,11 +126,11 @@ export const journalingHi: JournalingCopy = {
           { from: 'user', text: 'रुको, मतलब बस इस नंबर पर text करके journal कर सकते हैं? कोई app नहीं?', time: '9:14 AM' },
           {
             from: 'empath',
-            text: 'बस इतना ही। न app, न साइन-अप, न कोई खाली page तुम्हें घूरता हुआ। बताओ आज का दिन कैसा जा रहा है — एक लाइन भी काफ़ी है।',
+            text: 'बस इतना ही। न app, न साइन-अप, न कोई खाली page तुम्हें घूरता हुआ। बताओ आज का दिन कैसा जा रहा है, एक लाइन भी काफ़ी है।',
             time: '9:14 AM',
           },
           { from: 'user', text: 'ok. सच बताऊँ तो सुबह के 9 बजे हैं और अभी से थकान हो रही है', time: '9:15 AM' },
-          { from: 'empath', text: 'तो यही आज की पहली entry है — save हो गई। आज सुबह सबसे ज़्यादा energy किस चीज़ में जा रही है?', time: '9:15 AM' },
+          { from: 'empath', text: 'तो यही आज की पहली entry है, save हो गई। आज सुबह सबसे ज़्यादा energy किस चीज़ में जा रही है?', time: '9:15 AM' },
         ],
       },
     ],
@@ -144,7 +144,7 @@ export const journalingHi: JournalingCopy = {
   crossChannel: {
     badge: 'एक journal, हर app पर',
     title: 'कहीं से भी शुरू करें। हर जगह जारी रखें।',
-    sub: 'Empath वहीं रहता है जहाँ आप पहले से हैं। रात को journal कीजिए, सुबह चाय के साथ WhatsApp पर उसी बारे में पूछिए, काम के बाद Telegram पर गहराई में जाइए, scroll करते-करते Instagram से बात पूरी कर लीजिए। हर channel उसी एक journal से जुड़ा है — और उसी एक memory से।',
+    sub: 'Empath वहीं रहता है जहाँ आप पहले से हैं। रात को journal कीजिए, सुबह चाय के साथ WhatsApp पर उसी बारे में पूछिए, काम के बाद Telegram पर गहराई में जाइए, scroll करते-करते Instagram से बात पूरी कर लीजिए। हर channel उसी एक journal से जुड़ा है, और उसी एक memory से।',
     pickApp: 'जो app पहले से खुला है, वही चुन लीजिए',
     journalStep: {
       time: 'मंगलवार 9:41 PM',
@@ -161,7 +161,7 @@ export const journalingHi: JournalingCopy = {
         channel: 'WhatsApp',
         userMsg: 'morning. कल रात मैंने कुछ ज़्यादा ही drama कर दिया क्या?',
         empathMsg:
-          'थोड़ा सा 💛 तुमने intro चार बार rehearse किया। पर तुमने ये भी कहा था कि ये material तुमसे बेहतर कोई नहीं जानता — आज बस वही बात पकड़कर रखना।',
+          'थोड़ा सा 💛 तुमने intro चार बार rehearse किया। पर तुमने ये भी कहा था कि ये material तुमसे बेहतर कोई नहीं जानता। आज बस वही बात पकड़कर रखना।',
       },
       {
         key: 'telegram',
@@ -169,7 +169,7 @@ export const journalingHi: JournalingCopy = {
         channel: 'Telegram',
         userMsg: 'presentation हो गया, सब ठीक रहा. पर हर बार एक रात पहले ही ये spiral क्यों होता है मेरे साथ?',
         empathMsg:
-          'मई से तुम्हारे journal में ये तीसरा night-before spiral है — और तीनों बार अगला दिन ठीक ही गया। Pattern spiral का है, fail होने का नहीं।',
+          'मई से तुम्हारे journal में ये तीसरा night-before spiral है, और तीनों बार अगला दिन ठीक ही गया। Pattern spiral का है, fail होने का नहीं।',
       },
       {
         key: 'instagram',
@@ -177,7 +177,7 @@ export const journalingHi: JournalingCopy = {
         channel: 'Instagram',
         userMsg: 'नींद नहीं आ रही. imposter syndrome पर एक reel देखी और लगा जैसे सीधा मेरे बारे में ही है',
         empathMsg:
-          'आज की entry में जोड़ रहा हूँ। और एक बात — तुम्हारा अपना journal उस reel से सहमत नहीं है: इस महीने तुम्हारा score तीन में से तीन है।',
+          'आज की entry में जोड़ रहा हूँ। और एक बात, तुम्हारा अपना journal उस reel से सहमत नहीं है: इस महीने तुम्हारा score तीन में से तीन है।',
       },
     ],
   },
@@ -190,11 +190,11 @@ export const journalingHi: JournalingCopy = {
   callsYou: {
     badge: 'नया: Empath आपको call करता है',
     title: 'Dial करने का मन नहीं? हम आपको call कर देंगे.',
-    sub: 'अपना नंबर डालिए और कुछ ही सेकंड में आपका फ़ोन बजेगा। दोस्त से बात करने जैसे अपने दिन के बारे में बोलिए, call काटिए — और वो journal entry बनकर save भी हो चुकी होगी: transcribe की हुई, title के साथ, बिल्कुल private। चाहें तो call बाद के लिए schedule भी कर सकते हैं।',
+    sub: 'अपना नंबर डालिए और कुछ ही सेकंड में आपका फ़ोन बजेगा। दोस्त से बात करने जैसे अपने दिन के बारे में बोलिए, call काटिए, और वो journal entry बनकर save भी हो चुकी होगी: transcribe की हुई, title के साथ, बिल्कुल private। चाहें तो call बाद के लिए schedule भी कर सकते हैं।',
   },
 
   callMeForm: {
-    ringingTitle: '📞 आपको अभी call कर रहे हैं — उठाइए!',
+    ringingTitle: '📞 आपको अभी call कर रहे हैं, उठाइए!',
     ringingSub: 'अपने दिन के बारे में बात कीजिए, call काटिए, और वो आपकी पहली journal entry बनकर save हो जाएगी।',
     phoneAria: 'आपका फ़ोन नंबर (US)',
     dialing: 'Call लगा रहे हैं…',
@@ -208,7 +208,7 @@ export const journalingHi: JournalingCopy = {
   feature1: {
     badge: 'Text, WhatsApp या Call',
     title: 'वही Apps इस्तेमाल कीजिए जो आप पहले से खोलते हैं',
-    body: 'जैसे ही कोई ख़याल आए, एक text या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना — बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
+    body: 'जैसे ही कोई ख़याल आए, एक text या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
     items: [
       { title: 'AI Transcription', desc: 'एकदम सटीक। आपके शब्द, ठीक वैसे ही जैसे आपने कहे।' },
       { title: 'Photos और Images', desc: 'Text से photos भेजिए। हम उन्हें अपने आप analyze करके समझ लेंगे।' },
@@ -325,7 +325,7 @@ export const journalingHi: JournalingCopy = {
     sub: 'अगर आप किसी therapist के पास जाते हैं, तो Empath आपका हफ़्ता अपने आप उनके साथ share कर सकता है। फिर कभी "तो, क्या-क्या हुआ?" से शुरुआत नहीं। आपके sessions सीधे काम की बात से शुरू होते हैं।',
     cardTitle: 'अपने Therapist को अपने मन तक पहुँच दीजिए',
     cardBody:
-      'जब आप Empath के ज़रिए अपने therapist से जुड़ते हैं, तो उन्हें आपके पूरे हफ़्ते की तस्वीर मिलती है — सिर्फ़ वो नहीं जो session में याद रह जाता है।',
+      'जब आप Empath के ज़रिए अपने therapist से जुड़ते हैं, तो उन्हें आपके पूरे हफ़्ते की तस्वीर मिलती है, सिर्फ़ वो नहीं जो session में याद रह जाता है।',
     items: [
       {
         title: 'Session से पहले Summaries',
@@ -365,7 +365,7 @@ export const journalingHi: JournalingCopy = {
     steps: [
       {
         title: 'Text करें या Call',
-        desc: 'जब भी कोई ख़याल या feeling आए, Empath को text, WhatsApp या call कर दीजिए — जैसे किसी दोस्त को message करते हैं। न app, न साइन-अप, न खाली page।',
+        desc: 'जब भी कोई ख़याल या feeling आए, Empath को text, WhatsApp या call कर दीजिए, जैसे किसी दोस्त को message करते हैं। न app, न साइन-अप, न खाली page।',
       },
       {
         title: 'Empath उसे सँभाल लेता है',
@@ -373,7 +373,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         title: 'मुड़कर देखने के लिए App खोलिए',
-        desc: 'जब पीछे मुड़कर देखना हो, कोई memory दोबारा जीनी हो, या अपने mood patterns और trends देखने हों — सब app में आपका इंतज़ार कर रहा है।',
+        desc: 'जब पीछे मुड़कर देखना हो, कोई memory दोबारा जीनी हो, या अपने mood patterns और trends देखने हों, तो सब app में आपका इंतज़ार कर रहा है।',
       },
     ],
   },
@@ -391,7 +391,7 @@ export const journalingHi: JournalingCopy = {
     testimonials: [
       {
         quote:
-          'मैंने 5 journaling apps try कीं और हर एक छोड़ दी। Empath इसलिए टिक गया क्योंकि मन में कुछ हो तो मैं बस text कर देता हूँ — न app खोलना, न खाली page।',
+          'मैंने 5 journaling apps try कीं और हर एक छोड़ दी। Empath इसलिए टिक गया क्योंकि मन में कुछ हो तो मैं बस text कर देता हूँ। न app खोलना, न खाली page।',
         author: 'Alex M.',
         role: '2024 से user',
       },
@@ -403,7 +403,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         quote:
-          'मुझे ये बहुत पसंद है कि मैं बस call करके बोल सकती हूँ। इतना natural लगता है — journaling हमेशा से इतनी आसान होनी चाहिए थी।',
+          'मुझे ये बहुत पसंद है कि मैं बस call करके बोल सकती हूँ। इतना natural लगता है, journaling हमेशा से इतनी आसान होनी चाहिए थी।',
         author: 'Sam R.',
         role: '2024 से user',
       },
@@ -415,11 +415,11 @@ export const journalingHi: JournalingCopy = {
     items: [
       {
         q: 'क्या journal करने के लिए app download करना ज़रूरी है?',
-        a: 'बिल्कुल नहीं। आप पूरी तरह text, WhatsApp या phone call से journal कर सकते हैं — न app चाहिए, न साइन-अप। iOS app optional है: वहाँ आप अपनी entries पढ़ते हैं, पुराने पल search करते हैं और समय के साथ अपने mood patterns देखते हैं।',
+        a: 'बिल्कुल नहीं। आप पूरी तरह text, WhatsApp या phone call से journal कर सकते हैं। न app चाहिए, न साइन-अप। iOS app optional है: वहाँ आप अपनी entries पढ़ते हैं, पुराने पल search करते हैं और समय के साथ अपने mood patterns देखते हैं।',
       },
       {
         q: 'क्या Empath सच में free है?',
-        a: 'हाँ! Empath पूरी तरह free है। Text, call या app से journaling, साथ में AI transcription, mood tracking और insights — सब कुछ बिना किसी क़ीमत के शामिल है।',
+        a: 'हाँ! Empath पूरी तरह free है। Text, call या app से journaling, साथ में AI transcription, mood tracking और insights, सब कुछ बिना किसी क़ीमत के शामिल है।',
       },
       {
         q: 'AI काम कैसे करता है?',
@@ -439,7 +439,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         q: 'अपने therapist से कैसे जुड़ें?',
-        a: 'अगर आपके therapist Empath इस्तेमाल करते हैं, तो वो आपको invite भेज सकते हैं। अगर नहीं, तो आप निजी तौर पर journal कर सकते हैं और अपनी insights ख़ुद share कर सकते हैं — या उन्हें Empath पर invite कर सकते हैं।',
+        a: 'अगर आपके therapist Empath इस्तेमाल करते हैं, तो वो आपको invite भेज सकते हैं। अगर नहीं, तो आप निजी तौर पर journal कर सकते हैं और अपनी insights ख़ुद share कर सकते हैं, या उन्हें Empath पर invite कर सकते हैं।',
       },
       {
         q: 'क्या अपने journals export किए जा सकते हैं?',
@@ -452,7 +452,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         q: 'क्या Empath journaling की आदत बनाने में मदद कर सकता है?',
-        a: 'हाँ। एक Journaling Plan set कीजिए — रोज़ाना या हफ़्ते के हिसाब से, ऐसी streaks जो एक दिन छूट जाने पर भी नहीं टूटतीं, और push, SMS या email से smart reminders जो उस दिन ख़ुद skip हो जाते हैं जब आप journal कर चुके होते हैं।',
+        a: 'हाँ। एक Journaling Plan set कीजिए: रोज़ाना या हफ़्ते के हिसाब से, ऐसी streaks जो एक दिन छूट जाने पर भी नहीं टूटतीं, और push, SMS या email से smart reminders जो उस दिन ख़ुद skip हो जाते हैं जब आप journal कर चुके होते हैं।',
         link: { text: 'देखिए टिकने वाला journaling plan कैसे बनता है', to: '/app/blog/journaling-plan' },
       },
     ],

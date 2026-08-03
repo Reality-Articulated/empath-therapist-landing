@@ -121,7 +121,7 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
         <p className="text-xs text-stone-500 font-medium">
-          One number for everything: +1 (888) 366-3082 — no app required.
+          One number for everything: +1 (888) 366-3082. No app required.
         </p>
       </div>
     </div>

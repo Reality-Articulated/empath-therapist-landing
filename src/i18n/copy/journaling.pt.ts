@@ -1,5 +1,5 @@
 // Brazilian Portuguese copy catalog for the consumer landing page.
-// Mirrors journaling.en.ts exactly — see that file for structure notes.
+// Mirrors journaling.en.ts exactly; see that file for structure notes.
 
 import type { JournalingCopy } from './journaling.en';
 
@@ -7,7 +7,7 @@ export const journalingPt: JournalingCopy = {
   seo: {
     title: 'Empath - O diário que você não vai abandonar',
     description:
-      'Existe um número onde você simplesmente escreve seu diário. Mande um SMS, um WhatsApp, ligue — ou peça para ele te ligar. Sem app, sem cadastro, sem página em branco. Suas entradas viram padrões de humor e insights que você consegue ver de verdade.',
+      'Existe um número onde você simplesmente escreve seu diário. Mande um SMS, um WhatsApp, ligue. Ou peça para ele te ligar. Sem app, sem cadastro, sem página em branco. Suas entradas viram padrões de humor e insights que você consegue ver de verdade.',
     keywords:
       'diário por mensagem, diário por voz, diário sem aplicativo, diário por SMS, diário no WhatsApp, diário por ligação, monitoramento de humor, diário por chat, assistente de diário com IA, diário em conversa, plano de journaling, hábito de escrever diário',
   },
@@ -51,9 +51,9 @@ export const journalingPt: JournalingCopy = {
   whatsappSection: {
     badge: 'Diário direto nas suas mensagens',
     title: 'Como é na prática',
-    sub: 'Aquele surto das 2 da manhã, um áudio que você está cansado demais para digitar, um dia difícil. Você manda como mandaria para um amigo — o Empath escuta, responde e salva tudo discretamente como uma entrada do seu diário.',
+    sub: 'Aquele surto das 2 da manhã, um áudio que você está cansado demais para digitar, um dia difícil. Você manda como mandaria para um amigo. O Empath escuta, responde e salva tudo discretamente como uma entrada do seu diário.',
     cta: 'Escrever no WhatsApp',
-    phoneNote: 'Ou mande SMS para {phone} — mensagem comum também funciona. Conversas de exemplo.',
+    phoneNote: 'Ou mande SMS para {phone}. Mensagem comum também funciona. Conversas de exemplo.',
     examples: [
       {
         key: 'late-night',
@@ -69,7 +69,7 @@ export const journalingPt: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'Você não precisa resolver isso hoje. Ficar repassando geralmente significa que foi importante — não que você exagerou. Quer que eu guarde isso até amanhã de manhã?',
+            text: 'Você não precisa resolver isso hoje. Ficar repassando geralmente significa que foi importante, não que você exagerou. Quer que eu guarde isso até amanhã de manhã?',
             time: '02:47',
           },
           { from: 'user', text: 'guarda sim. obrigada', time: '02:48' },
@@ -86,7 +86,7 @@ export const journalingPt: JournalingCopy = {
           { from: 'user', voice: true, duration: '1:47', time: '23:12' },
           {
             from: 'empath',
-            text: 'Dia longo — deu para ouvir. Três coisas acumuladas antes do meio-dia, e mesmo assim você atendeu a ligação da sua irmã. Você disse duas vezes que "devia ter lidado melhor". Com carinho: você lidou. Salvo.',
+            text: 'Dia longo, deu para ouvir. Três coisas acumuladas antes do meio-dia, e mesmo assim você atendeu a ligação da sua irmã. Você disse duas vezes que "devia ter lidado melhor". Com carinho: você lidou. Salvo.',
             time: '23:13',
           },
           { from: 'user', text: 'como você sempre faz parecer que dá pra sobreviver', time: '23:14' },
@@ -107,7 +107,7 @@ export const journalingPt: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'O fato de isso estar pesando tanto em você mostra o quanto você se importa. Você está no limite desde terça — a grosseria é o transbordo, não a verdade sobre quem você é para ela. Vocês conversaram depois?',
+            text: 'O fato de isso estar pesando tanto em você mostra o quanto você se importa. Você está no limite desde terça: a grosseria é o transbordo, não a verdade sobre quem você é para ela. Vocês conversaram depois?',
             time: '18:04',
           },
           { from: 'user', text: 'ainda não. talvez amanhã', time: '18:06' },
@@ -124,11 +124,11 @@ export const journalingPt: JournalingCopy = {
           { from: 'user', text: 'pera, então eu posso escrever meu diário só mandando mensagem pra esse número? sem app?', time: '09:14' },
           {
             from: 'empath',
-            text: 'É isso mesmo. Sem app, sem cadastro, sem página em branco te encarando. Me conta como foi seu dia — uma frase já basta.',
+            text: 'É isso mesmo. Sem app, sem cadastro, sem página em branco te encarando. Me conta como foi seu dia. Uma frase já basta.',
             time: '09:14',
           },
           { from: 'user', text: 'ok. sinceramente já tô exausta e são 9 da manhã', time: '09:15' },
-          { from: 'empath', text: 'Então essa é a primeira entrada de hoje — salva. O que está drenando mais a sua energia essa manhã?', time: '09:15' },
+          { from: 'empath', text: 'Então essa é a primeira entrada de hoje: salva. O que está drenando mais a sua energia essa manhã?', time: '09:15' },
         ],
       },
     ],
@@ -142,7 +142,7 @@ export const journalingPt: JournalingCopy = {
   crossChannel: {
     badge: 'Um diário, todos os apps',
     title: 'Comece em qualquer lugar. Continue em todos.',
-    sub: 'O Empath vive onde você já está. Escreva no diário hoje à noite, pergunte sobre isso no WhatsApp tomando café, aprofunde no Telegram depois do trabalho, feche o ciclo no Instagram enquanto rola o feed. Todos os canais falam com o mesmo diário — e com a mesma memória.',
+    sub: 'O Empath vive onde você já está. Escreva no diário hoje à noite, pergunte sobre isso no WhatsApp tomando café, aprofunde no Telegram depois do trabalho, feche o ciclo no Instagram enquanto rola o feed. Todos os canais falam com o mesmo diário, e com a mesma memória.',
     pickApp: 'Escolha o app em que você já está',
     journalStep: {
       time: 'Terça 21:41',
@@ -159,7 +159,7 @@ export const journalingPt: JournalingCopy = {
         channel: 'WhatsApp',
         userMsg: 'bom dia. eu tava sendo dramática ontem à noite?',
         empathMsg:
-          'Um pouquinho 💛 Você ensaiou a introdução quatro vezes. Mas também disse que conhece esse conteúdo melhor que qualquer um — segura essa parte hoje.',
+          'Um pouquinho 💛 Você ensaiou a introdução quatro vezes. Mas também disse que conhece esse conteúdo melhor que qualquer um. Segura essa parte hoje.',
       },
       {
         key: 'telegram',
@@ -167,7 +167,7 @@ export const journalingPt: JournalingCopy = {
         channel: 'Telegram',
         userMsg: 'apresentação feita, foi tranquilo. por que eu sempre surto na noite anterior?',
         empathMsg:
-          'É o terceiro surto de véspera no seu diário desde maio — e nas três vezes deu tudo certo no dia seguinte. O padrão é o surto, não o fracasso.',
+          'É o terceiro surto de véspera no seu diário desde maio, e nas três vezes deu tudo certo no dia seguinte. O padrão é o surto, não o fracasso.',
       },
       {
         key: 'instagram',
@@ -188,11 +188,11 @@ export const journalingPt: JournalingCopy = {
   callsYou: {
     badge: 'Novo: o Empath liga para você',
     title: 'Sem vontade de discar? A gente liga.',
-    sub: 'Digite seu número e seu telefone toca em segundos. Fale do seu dia como falaria com um amigo, desligue, e pronto: já está salvo como uma entrada do diário — transcrita, com título e privada. Você pode até agendar a ligação para depois.',
+    sub: 'Digite seu número e seu telefone toca em segundos. Fale do seu dia como falaria com um amigo, desligue, e pronto: já está salvo como uma entrada do diário: transcrita, com título e privada. Você pode até agendar a ligação para depois.',
   },
 
   callMeForm: {
-    ringingTitle: '📞 Ligando para você agora — atende!',
+    ringingTitle: '📞 Ligando para você agora, atende!',
     ringingSub: 'Fale do seu dia, desligue, e está salvo como sua primeira entrada do diário.',
     phoneAria: 'Seu número de telefone (EUA)',
     dialing: 'Discando…',
@@ -389,7 +389,7 @@ export const journalingPt: JournalingCopy = {
     testimonials: [
       {
         quote:
-          'Já testei 5 apps de diário e abandonei todos. O Empath ficou porque eu só mando uma mensagem quando algo está na minha cabeça — sem abrir app, sem página em branco.',
+          'Já testei 5 apps de diário e abandonei todos. O Empath ficou porque eu só mando uma mensagem quando algo está na minha cabeça, sem abrir app, sem página em branco.',
         author: 'Alex M.',
         role: 'Usuário desde 2024',
       },

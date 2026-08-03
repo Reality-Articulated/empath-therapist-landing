@@ -82,14 +82,14 @@ const staticRoutes = [
     path: '/',
     canonicalPath: '/app',
     title: "Empath - The Journal You Won't Quit",
-    description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+    description: "There's a number you can just journal at. Text it, WhatsApp it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
     alternates: hreflangCluster('/app'),
   },
   {
     path: '/app',
     title: "Empath - The Journal You Won't Quit",
-    description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+    description: "There's a number you can just journal at. Text it, WhatsApp it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
     alternates: hreflangCluster('/app'),
   },
@@ -111,7 +111,7 @@ const staticRoutes = [
   }),
   {
     path: '/call-me',
-    title: 'Empath Calls You — Journal by Phone, No App Needed',
+    title: 'Empath Calls You: Journal by Phone, No App Needed',
     description: "Enter your number and Empath calls you for your first voice journal entry. Talk it out, hang up, and it's saved. No app, no account, no typing.",
     keywords: 'journal by phone, voice journaling, phone journaling, journaling without an app, audio diary',
     alternates: hreflangCluster('/call-me'),
@@ -127,7 +127,7 @@ const staticRoutes = [
   {
     path: '/therapist',
     title: 'Empath for Therapists | Between-Session AI Insights',
-    description: 'Empath captures what happens between sessions so therapists can see how clients are doing in real life — not just what they remember to share. AI-powered insights, secure and HIPAA-aligned.',
+    description: 'Empath captures what happens between sessions so therapists can see how clients are doing in real life, not just what they remember to share. AI-powered insights, secure and HIPAA-aligned.',
     keywords: 'therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management',
   },
   {
@@ -143,7 +143,7 @@ const staticRoutes = [
   {
     path: '/science',
     title: 'The Science Behind Empath | Research-Backed Therapy Insights',
-    description: 'Empath is built on decades of psychotherapy research — therapeutic alliance, between-session change, sudden gains, homework effects. See the studies that inform our approach.',
+    description: 'Empath is built on decades of psychotherapy research: therapeutic alliance, between-session change, sudden gains, homework effects. See the studies that inform our approach.',
   },
   {
     path: '/calculator',
@@ -153,7 +153,7 @@ const staticRoutes = [
   {
     path: '/quiz',
     title: 'AI Readiness Quiz for Therapists | Empath',
-    description: 'A quick assessment to see where your practice stands on adopting AI tools — and what to do next.',
+    description: 'A quick assessment to see where your practice stands on adopting AI tools, and what to do next.',
   },
   {
     path: '/blog',

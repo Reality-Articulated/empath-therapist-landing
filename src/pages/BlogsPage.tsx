@@ -27,7 +27,7 @@ export default function BlogsPage() {
     ) as HTMLMetaElement | null;
     if (description) {
       description.content =
-        'Evidence-based articles on between-session data, measurement-based care, AI in therapy, and clinical practice — written by clinicians, for clinicians.';
+        'Evidence-based articles on between-session data, measurement-based care, AI in therapy, and clinical practice, written by clinicians, for clinicians.';
     }
   }, []);
 
@@ -101,7 +101,7 @@ export default function BlogsPage() {
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mb-8">
             Evidence-based articles on between-session data, measurement-based care, AI in clinical practice,
-            and strategies to improve outcomes — written by clinicians, for clinicians.
+            and strategies to improve outcomes, written by clinicians, for clinicians.
           </p>
 
           {/* Search */}

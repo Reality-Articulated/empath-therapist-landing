@@ -5,7 +5,7 @@ import type { CallMeCopy } from './callme.en';
 
 export const callmeIt: CallMeCopy = {
   seo: {
-    title: 'Empath ti chiama — Il diario per telefono, senza app',
+    title: 'Empath ti chiama: il diario per telefono, senza app',
     description:
       "Inserisci il tuo numero ed Empath ti chiama per la tua prima voce di diario a voce. Parla, riattacca ed è salvata. Niente app, senza registrazione, niente da scrivere.",
     keywords:
@@ -15,14 +15,14 @@ export const callmeIt: CallMeCopy = {
   hero: {
     badge: 'Niente app. Senza registrazione. Niente da scrivere.',
     h1: 'La tua prima voce di diario è a una telefonata di distanza.',
-    sub: 'Inserisci il tuo numero ed Empath ti chiama. Racconta la tua giornata per un paio di minuti, riattacca, ed è salvata come voce privata del tuo diario — trascritta, con un titolo, pronta per quando vorrai rileggerla.',
+    sub: 'Inserisci il tuo numero ed Empath ti chiama. Racconta la tua giornata per un paio di minuti, riattacca, ed è salvata come voce privata del tuo diario: trascritta, con un titolo, pronta per quando vorrai rileggerla.',
   },
 
   ringing: {
-    title: 'Ti stiamo chiamando — rispondi!',
+    title: 'Ti stiamo chiamando: rispondi!',
     body: 'Saluta, racconta la tua giornata e riattacca quando hai finito. La tua voce si salva automaticamente e ti mandiamo un SMS di conferma.',
     missedPre: 'Non hai fatto in tempo a rispondere? Chiama il',
-    missedPost: 'quando vuoi — il diario per telefono funziona a qualsiasi ora.',
+    missedPost: 'quando vuoi: il diario per telefono funziona a qualsiasi ora.',
   },
 
   scheduled: {
@@ -30,7 +30,7 @@ export const callmeIt: CallMeCopy = {
     bodyPre: 'Empath ti chiamerà il',
     bodyPost: '(la tua ora locale). Rispondi, racconta la tua giornata e riattacca quando hai finito.',
     cantWaitPre: "Non vedi l'ora? Chiama il",
-    cantWaitPost: 'quando vuoi — il diario per telefono funziona a qualsiasi ora.',
+    cantWaitPost: 'quando vuoi: il diario per telefono funziona a qualsiasi ora.',
   },
 
   form: {
@@ -51,7 +51,7 @@ export const callmeIt: CallMeCopy = {
 
   dialYourself: {
     pre: 'Preferisci chiamare tu? Chiama o scrivi al',
-    post: '— stesso diario, a qualsiasi ora.',
+    post: 'per lo stesso diario, a qualsiasi ora.',
   },
 
   how: {
@@ -63,7 +63,7 @@ export const callmeIt: CallMeCopy = {
       },
       {
         title: 'Parla e basta',
-        text: 'Divaga, sfogati, rifletti — Empath ascolta e ti fa domande con delicatezza. Niente spunti da imparare a memoria.',
+        text: 'Divaga, sfogati, rifletti: Empath ascolta e ti fa domande con delicatezza. Niente spunti da imparare a memoria.',
       },
       {
         title: 'Riattacca, ed è salvata',
@@ -74,7 +74,7 @@ export const callmeIt: CallMeCopy = {
 
   why: {
     title: 'Il diario per chi il diario non lo tiene mai',
-    body: 'La parte più difficile del tenere un diario è la pagina bianca. Una telefonata non ha pagine bianche — parlare della tua giornata lo sai già fare. Empath chiede, tu rispondi, e tre minuti di tragitto diventano una voce che non avresti mai scritto.',
+    body: 'La parte più difficile del tenere un diario è la pagina bianca. Una telefonata non ha pagine bianche: parlare della tua giornata lo sai già fare. Empath chiede, tu rispondi, e tre minuti di tragitto diventano una voce che non avresti mai scritto.',
     encrypted: 'Le voci sono crittografate a riposo. Il tuo diario appartiene a te.',
   },
 
@@ -83,11 +83,11 @@ export const callmeIt: CallMeCopy = {
     items: [
       {
         q: "Mi serve l'app?",
-        a: "No. La chiamata è l'esperienza completa — niente download, senza registrazione, niente password. Se poi vorrai rileggere le tue voci e vedere gli insight sul tuo umore, l'app gratuita per iOS riprende esattamente da dove sono arrivate le tue chiamate.",
+        a: "No. La chiamata è l'esperienza completa: niente download, senza registrazione, niente password. Se poi vorrai rileggere le tue voci e vedere gli insight sul tuo umore, l'app gratuita per iOS riprende esattamente da dove sono arrivate le tue chiamate.",
       },
       {
         q: 'Ma è davvero una persona a chiamarmi?',
-        a: 'È il compagno di diario AI di Empath — lo stesso dietro il nostro numero attivo a qualsiasi ora. Ascolta, fa domande ponderate e trasforma la conversazione in una voce scritta.',
+        a: 'È il compagno di diario AI di Empath, lo stesso dietro il nostro numero attivo a qualsiasi ora. Ascolta, fa domande ponderate e trasforma la conversazione in una voce scritta.',
       },
       {
         q: 'Il mio diario è privato?',
@@ -95,7 +95,7 @@ export const callmeIt: CallMeCopy = {
       },
       {
         q: 'Quanto costa?',
-        a: 'Le tue prime voci sono gratuite — niente carta, nessuna prova da disdire. Chiamare fa parte di Empath, e si applicano le tariffe standard del tuo operatore per una normale telefonata.',
+        a: 'Le tue prime voci sono gratuite: niente carta, nessuna prova da disdire. Chiamare fa parte di Empath, e si applicano le tariffe standard del tuo operatore per una normale telefonata.',
       },
     ],
     readBackPrompt: 'Vuoi rileggere le tue voci?',

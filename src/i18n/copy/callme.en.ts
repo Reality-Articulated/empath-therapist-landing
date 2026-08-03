@@ -7,7 +7,7 @@
 
 export const callmeEn = {
   seo: {
-    title: 'Empath Calls You — Journal by Phone, No App Needed',
+    title: 'Empath Calls You: Journal by Phone, No App Needed',
     description:
       "Enter your number and Empath calls you for your first voice journal entry. Talk it out, hang up, and it's saved. No app, no account, no typing.",
     keywords: 'journal by phone, voice journaling, phone journaling, journaling without an app, audio diary',
@@ -16,14 +16,14 @@ export const callmeEn = {
   hero: {
     badge: 'No app. No account. No typing.',
     h1: 'Your first journal entry is a phone call away.',
-    sub: 'Enter your number and Empath calls you. Talk about your day for a couple of minutes, hang up, and it’s saved as a private journal entry — transcribed, titled, and waiting whenever you want it.',
+    sub: 'Enter your number and Empath calls you. Talk about your day for a couple of minutes, hang up, and it’s saved as a private journal entry: transcribed, titled, and waiting whenever you want it.',
   },
 
   ringing: {
-    title: 'Calling you now — pick up!',
+    title: 'Calling you now. Pick up!',
     body: 'Say hi, talk about your day, and hang up whenever you’re done. Your entry saves automatically and we’ll text you a confirmation.',
     missedPre: 'Missed it? Dial',
-    missedPost: 'any time — journaling by phone works around the clock.',
+    missedPost: 'any time. Journaling by phone works around the clock.',
   },
 
   scheduled: {
@@ -31,7 +31,7 @@ export const callmeEn = {
     bodyPre: 'Empath will call you on',
     bodyPost: '(your local time). Pick up, talk about your day, and hang up when you’re done.',
     cantWaitPre: 'Can’t wait? Dial',
-    cantWaitPost: 'any time — journaling by phone works around the clock.',
+    cantWaitPost: 'any time. Journaling by phone works around the clock.',
   },
 
   form: {
@@ -52,7 +52,7 @@ export const callmeEn = {
 
   dialYourself: {
     pre: 'Prefer to dial yourself? Call or text',
-    post: '— same journal, any time.',
+    post: 'whenever you like. It all lands in the same journal.',
   },
 
   how: {
@@ -64,7 +64,7 @@ export const callmeEn = {
       },
       {
         title: 'Just talk',
-        text: 'Ramble, vent, reflect — Empath listens and gently asks follow-up questions. No prompts to memorize.',
+        text: 'Ramble, vent, reflect. Empath listens and gently asks follow-up questions. No prompts to memorize.',
       },
       {
         title: 'Hang up, it’s saved',
@@ -75,7 +75,7 @@ export const callmeEn = {
 
   why: {
     title: 'Journaling for people who never journal',
-    body: 'The hardest part of journaling is the blank page. A phone call has no blank page — you already know how to talk about your day. Empath asks, you answer, and three minutes on your commute becomes an entry you’d never have typed.',
+    body: 'The hardest part of journaling is the blank page. A phone call has no blank page. You already know how to talk about your day. Empath asks, you answer, and three minutes on your commute becomes an entry you’d never have typed.',
     encrypted: 'Entries are encrypted at rest. Your journal belongs to you.',
   },
 
@@ -84,11 +84,11 @@ export const callmeEn = {
     items: [
       {
         q: 'Do I need the app?',
-        a: 'No. The call is the whole experience — no download, no account, no password. If you later want to read your entries back and see mood insights, the free iOS app picks up right where your calls left off.',
+        a: 'No. The call is the whole experience: no download, no account, no password. If you later want to read your entries back and see mood insights, the free iOS app picks up right where your calls left off.',
       },
       {
         q: 'Is it really a person calling?',
-        a: 'It’s Empath’s AI journaling companion — the same one behind our call-anytime number. It listens, asks thoughtful questions, and turns the conversation into a written entry.',
+        a: 'It’s Empath’s AI journaling companion, the same one behind our call-anytime number. It listens, asks thoughtful questions, and turns the conversation into a written entry.',
       },
       {
         q: 'Is my journal private?',
@@ -96,7 +96,7 @@ export const callmeEn = {
       },
       {
         q: 'What does it cost?',
-        a: 'Your first entries are free — no card, no trial to cancel. Calling is part of Empath, and standard carrier rates for a regular phone call apply.',
+        a: 'Your first entries are free: no card, no trial to cancel. Calling is part of Empath, and standard carrier rates for a regular phone call apply.',
       },
     ],
     readBackPrompt: 'Want to read your entries back?',

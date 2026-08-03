@@ -736,7 +736,7 @@ export default function ClientInfoPage() {
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">View Your Journey</h2>
             <p className="text-lg text-stone-600 font-medium">
-              Your journals, insights, and progress — accessible wherever you need them.
+              Your journals, insights, and progress, accessible wherever you need them.
             </p>
           </div>
 
@@ -1441,7 +1441,7 @@ export default function ClientInfoPage() {
                         }}
                       />
                       <span className="text-xs text-stone-400 group-hover:text-stone-600 transition-colors">
-                        I don't have a therapist yet — help me find one
+                        I don't have a therapist yet, help me find one
                       </span>
                     </label>
                   </div>

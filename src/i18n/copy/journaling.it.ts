@@ -7,7 +7,7 @@ export const journalingIt: JournalingCopy = {
   seo: {
     title: 'Empath - Il diario che non mollerai',
     description:
-      "C'è un numero a cui puoi semplicemente tenere il tuo diario. Mandagli un SMS, scrivigli su WhatsApp, chiamalo — o fatti chiamare. Niente app, senza registrazione, niente pagina bianca. Le tue voci diventano andamenti dell'umore e insight che puoi davvero vedere.",
+      "C'è un numero a cui puoi semplicemente tenere il tuo diario. Mandagli un SMS, scrivigli su WhatsApp, chiamalo, o fatti chiamare. Niente app, senza registrazione, niente pagina bianca. Le tue voci diventano andamenti dell'umore e insight che puoi davvero vedere.",
     keywords:
       "diario via SMS, diario vocale, diario senza app, journaling via messaggio, diario su WhatsApp, diario per telefono, monitoraggio dell'umore, journaling in chat, assistente AI per il diario, journaling conversazionale, piano di journaling, abitudine del diario",
   },
@@ -51,9 +51,9 @@ export const journalingIt: JournalingCopy = {
   whatsappSection: {
     badge: 'Il diario nei tuoi DM',
     title: "Ecco com'è davvero",
-    sub: "Una spirale di pensieri alle 2 di notte, un vocale che sei troppo stanco per trascrivere, una giornata storta. Lo mandi come lo manderesti a un amico — Empath ascolta, risponde e lo salva in silenzio come voce del diario.",
+    sub: "Una spirale di pensieri alle 2 di notte, un vocale che sei troppo stanco per trascrivere, una giornata storta. Lo mandi come lo manderesti a un amico: Empath ascolta, risponde e lo salva in silenzio come voce del diario.",
     cta: 'Tieni il diario su WhatsApp',
-    phoneNote: 'Oppure scrivi al {phone} — funzionano anche i normali SMS. Conversazioni di esempio.',
+    phoneNote: 'Oppure scrivi al {phone}: funzionano anche i normali SMS. Conversazioni di esempio.',
     examples: [
       {
         key: 'late-night',
@@ -69,7 +69,7 @@ export const journalingIt: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'Non devi risolverla stanotte. Se continui a ripensarci, di solito è perché contava — non perché hai esagerato. Vuoi che la tenga da parte fino a domattina?',
+            text: 'Non devi risolverla stanotte. Se continui a ripensarci, di solito è perché contava, non perché hai esagerato. Vuoi che la tenga da parte fino a domattina?',
             time: '02:47',
           },
           { from: 'user', text: 'tienila da parte. grazie', time: '02:48' },
@@ -86,7 +86,7 @@ export const journalingIt: JournalingCopy = {
           { from: 'user', voice: true, duration: '1:47', time: '23:12' },
           {
             from: 'empath',
-            text: 'Giornata lunga — si sentiva. Tre cose una sopra l\'altra prima di mezzogiorno, e hai comunque risposto alla chiamata di tua sorella. Hai detto due volte che "avresti dovuto gestirla meglio". Con dolcezza: l\'hai gestita. Salvato.',
+            text: 'Giornata lunga, e si sentiva. Tre cose una sopra l\'altra prima di mezzogiorno, e hai comunque risposto alla chiamata di tua sorella. Hai detto due volte che "avresti dovuto gestirla meglio". Con dolcezza: l\'hai gestita. Salvato.',
             time: '23:13',
           },
           { from: 'user', text: 'come fai a farla sembrare sempre sopravvivibile', time: '23:14' },
@@ -107,7 +107,7 @@ export const journalingIt: JournalingCopy = {
           },
           {
             from: 'empath',
-            text: 'Il fatto che ti pesi così tanto dimostra quanto ci tieni. Sei al limite da martedì — rispondere male è il troppopieno, non la verità su chi sei per lei. Ne avete già parlato?',
+            text: 'Il fatto che ti pesi così tanto dimostra quanto ci tieni. Sei al limite da martedì: rispondere male è il troppopieno, non la verità su chi sei per lei. Ne avete già parlato?',
             time: '18:04',
           },
           { from: 'user', text: 'non ancora. forse domani', time: '18:06' },
@@ -124,11 +124,11 @@ export const journalingIt: JournalingCopy = {
           { from: 'user', text: 'aspetta, quindi posso tenere un diario semplicemente scrivendo a questo numero? niente app?', time: '09:14' },
           {
             from: 'empath',
-            text: 'Esatto. Niente app, senza registrazione, niente pagina bianca che ti fissa. Raccontami la tua giornata — basta anche una frase.',
+            text: 'Esatto. Niente app, senza registrazione, niente pagina bianca che ti fissa. Raccontami la tua giornata: basta anche una frase.',
             time: '09:14',
           },
           { from: 'user', text: 'ok. onestamente sono già senza energie e sono le 9 di mattina', time: '09:15' },
-          { from: 'empath', text: "Allora questa è la prima voce di oggi — salvata. Cos'è che ti sta prendendo più energie stamattina?", time: '09:15' },
+          { from: 'empath', text: "Allora questa è la prima voce di oggi, salvata. Cos'è che ti sta prendendo più energie stamattina?", time: '09:15' },
         ],
       },
     ],
@@ -142,7 +142,7 @@ export const journalingIt: JournalingCopy = {
   crossChannel: {
     badge: 'Un solo diario, ogni app',
     title: 'Inizia ovunque. Continua dappertutto.',
-    sub: 'Empath vive dove sei già. Scrivi nel diario stasera, chiedine su WhatsApp davanti al caffè, approfondisci su Telegram dopo il lavoro, chiudi il cerchio da Instagram mentre scorri il feed. Ogni canale parla con lo stesso diario — e con la stessa memoria.',
+    sub: 'Empath vive dove sei già. Scrivi nel diario stasera, chiedine su WhatsApp davanti al caffè, approfondisci su Telegram dopo il lavoro, chiudi il cerchio da Instagram mentre scorri il feed. Ogni canale parla con lo stesso diario, e con la stessa memoria.',
     pickApp: "Scegli l'app che usi già",
     journalStep: {
       time: 'Martedì 21:41',
@@ -159,7 +159,7 @@ export const journalingIt: JournalingCopy = {
         channel: 'WhatsApp',
         userMsg: 'buongiorno. ieri sera stavo esagerando?',
         empathMsg:
-          "Un po' 💛 Hai ripassato l'introduzione quattro volte. Ma hai anche detto che conosci questo materiale meglio di chiunque altro — oggi tieniti stretta quella parte.",
+          "Un po' 💛 Hai ripassato l'introduzione quattro volte. Ma hai anche detto che conosci questo materiale meglio di chiunque altro: oggi tieniti stretta quella parte.",
       },
       {
         key: 'telegram',
@@ -167,7 +167,7 @@ export const journalingIt: JournalingCopy = {
         channel: 'Telegram',
         userMsg: 'presentazione fatta, è andata bene. perché vado sempre in spirale la sera prima?',
         empathMsg:
-          'È la terza spirale della sera prima nel tuo diario da maggio — e tutte e tre le volte il giorno dopo è andato bene. Lo schema è la spirale, non il fallimento.',
+          'È la terza spirale della sera prima nel tuo diario da maggio, e tutte e tre le volte il giorno dopo è andato bene. Lo schema è la spirale, non il fallimento.',
       },
       {
         key: 'instagram',
@@ -192,7 +192,7 @@ export const journalingIt: JournalingCopy = {
   },
 
   callMeForm: {
-    ringingTitle: '📞 Ti stiamo chiamando — rispondi!',
+    ringingTitle: '📞 Ti stiamo chiamando: rispondi!',
     ringingSub: 'Racconta la tua giornata, riattacca, ed è salvata come prima voce del tuo diario.',
     phoneAria: 'Il tuo numero di telefono (USA)',
     dialing: 'Chiamata in corso…',
@@ -389,7 +389,7 @@ export const journalingIt: JournalingCopy = {
     testimonials: [
       {
         quote:
-          "Ho provato 5 app per il diario e le ho mollate tutte. Empath è rimasta perché scrivo un messaggio appena ho qualcosa in testa — senza aprire un'app, senza pagina bianca.",
+          "Ho provato 5 app per il diario e le ho mollate tutte. Empath è rimasta perché scrivo un messaggio appena ho qualcosa in testa, senza aprire un'app e senza pagina bianca.",
         author: 'Alex M.',
         role: 'Utente dal 2024',
       },
@@ -401,7 +401,7 @@ export const journalingIt: JournalingCopy = {
       },
       {
         quote:
-          'Adoro poter semplicemente chiamare e parlare. È naturalissimo — tenere un diario avrebbe sempre dovuto essere così facile.',
+          'Adoro poter semplicemente chiamare e parlare. È naturalissimo: tenere un diario avrebbe sempre dovuto essere così facile.',
         author: 'Sam R.',
         role: 'Utente dal 2024',
       },

@@ -176,6 +176,27 @@ function firstShapeDiff(a, b, path = '$') {
   return typeof a === typeof b ? null : `${path} (${typeof a} → ${typeof b})`;
 }
 
+// One call with strict shape validation; throws with the mismatch path.
+async function translateChunk(chunk, locale) {
+  const translated = await chatJson(systemPrompt(locale), JSON.stringify(chunk));
+  const diff = firstShapeDiff(chunk, translated);
+  if (diff) throw new Error(`shape mismatch at ${diff}`);
+  return translated;
+}
+
+// Long arrays (sections, faq) are translated a few entries per call —
+// whole-post payloads truncated gpt-4o-mini's 16k output on long articles
+// and tempted it into dropping top-level keys.
+async function translateArrayChunked(arr, locale, batchSize) {
+  const out = [];
+  for (let i = 0; i < arr.length; i += batchSize) {
+    const batch = arr.slice(i, i + batchSize);
+    const translated = await translateChunk({ items: batch }, locale);
+    out.push(...translated.items);
+  }
+  return out;
+}
+
 async function translatePost(post, kind, locale) {
   const outDir = join(OUT_ROOT, locale, kind);
   const outPath = join(outDir, `${post.slug}.json`);
@@ -187,11 +208,10 @@ async function translatePost(post, kind, locale) {
     (EXCLUDE_KEYS.includes(k) ? excluded : translatable)[k] = v;
   }
 
-  const translated = await chatJson(systemPrompt(locale), JSON.stringify(translatable));
-  const diff = firstShapeDiff(translatable, translated);
-  if (diff) {
-    throw new Error(`shape mismatch at ${diff}`);
-  }
+  const { sections, faq, ...rest } = translatable;
+  const translated = await translateChunk(rest, locale);
+  if (Array.isArray(sections)) translated.sections = await translateArrayChunked(sections, locale, 2);
+  if (Array.isArray(faq)) translated.faq = await translateArrayChunked(faq, locale, 4);
 
   mkdirSync(outDir, { recursive: true });
   // Excluded fields are re-attached verbatim so the merged object is complete

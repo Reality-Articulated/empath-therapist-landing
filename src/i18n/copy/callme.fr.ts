@@ -5,7 +5,7 @@ import type { CallMeCopy } from './callme.en';
 
 export const callmeFr: CallMeCopy = {
   seo: {
-    title: 'Empath t’appelle — Ton journal par téléphone, sans appli',
+    title: 'Empath t’appelle : ton journal par téléphone, sans appli',
     description:
       'Entre ton numéro et Empath t’appelle pour ta première entrée de journal vocale. Parle, raccroche, c’est enregistré. Pas d’appli, pas d’inscription, rien à taper.',
     keywords: 'journal par téléphone, journal vocal, journaling par téléphone, tenir un journal sans appli, journal audio',
@@ -14,14 +14,14 @@ export const callmeFr: CallMeCopy = {
   hero: {
     badge: 'Pas d’appli. Pas d’inscription. Rien à taper.',
     h1: 'Ta première entrée de journal ? Un simple coup de fil.',
-    sub: 'Entre ton numéro et Empath t’appelle. Parle de ta journée pendant quelques minutes, raccroche, et c’est enregistré comme une entrée de journal privée — transcrite, titrée, et qui t’attend quand tu veux.',
+    sub: 'Entre ton numéro et Empath t’appelle. Parle de ta journée pendant quelques minutes, raccroche, et c’est enregistré comme une entrée de journal privée : transcrite, titrée, et qui t’attend quand tu veux.',
   },
 
   ringing: {
-    title: 'On t’appelle — décroche !',
+    title: 'On t’appelle, décroche !',
     body: 'Dis bonjour, parle de ta journée et raccroche quand tu as fini. Ton entrée s’enregistre automatiquement et on t’envoie un SMS de confirmation.',
     missedPre: 'Appel manqué ? Compose le',
-    missedPost: 'quand tu veux — le journal par téléphone, ça marche 24h/24.',
+    missedPost: 'quand tu veux : le journal par téléphone, ça marche 24h/24.',
   },
 
   scheduled: {
@@ -29,7 +29,7 @@ export const callmeFr: CallMeCopy = {
     bodyPre: 'Empath t’appellera le',
     bodyPost: '(heure locale). Décroche, parle de ta journée et raccroche quand tu as fini.',
     cantWaitPre: 'Pas envie d’attendre ? Compose le',
-    cantWaitPost: 'quand tu veux — le journal par téléphone, ça marche 24h/24.',
+    cantWaitPost: 'quand tu veux : le journal par téléphone, ça marche 24h/24.',
   },
 
   form: {
@@ -50,7 +50,7 @@ export const callmeFr: CallMeCopy = {
 
   dialYourself: {
     pre: 'Tu préfères appeler toi-même ? Appelle ou envoie un SMS au',
-    post: '— même journal, à toute heure.',
+    post: ': même journal, à toute heure.',
   },
 
   how: {
@@ -62,7 +62,7 @@ export const callmeFr: CallMeCopy = {
       },
       {
         title: 'Parle, c’est tout',
-        text: 'Divague, vide ton sac, réfléchis à voix haute — Empath écoute et pose doucement quelques questions. Aucune consigne à retenir.',
+        text: 'Divague, vide ton sac, réfléchis à voix haute. Empath écoute et pose doucement quelques questions. Aucune consigne à retenir.',
       },
       {
         title: 'Raccroche, c’est enregistré',
@@ -73,7 +73,7 @@ export const callmeFr: CallMeCopy = {
 
   why: {
     title: 'Un journal pour ceux qui n’en tiennent jamais',
-    body: 'Le plus dur, quand on tient un journal, c’est la page blanche. Un coup de fil n’a pas de page blanche — raconter ta journée, tu sais déjà le faire. Empath pose les questions, tu réponds, et trois minutes sur ton trajet deviennent une entrée que tu n’aurais jamais tapée.',
+    body: 'Le plus dur, quand on tient un journal, c’est la page blanche. Un coup de fil n’a pas de page blanche : raconter ta journée, tu sais déjà le faire. Empath pose les questions, tu réponds, et trois minutes sur ton trajet deviennent une entrée que tu n’aurais jamais tapée.',
     encrypted: 'Tes entrées sont chiffrées au repos. Ton journal t’appartient.',
   },
 
@@ -82,11 +82,11 @@ export const callmeFr: CallMeCopy = {
     items: [
       {
         q: 'Est-ce qu’il me faut l’appli ?',
-        a: 'Non. L’appel, c’est toute l’expérience — rien à télécharger, pas d’inscription, pas de mot de passe. Et si un jour tu veux relire tes entrées et voir tes tendances d’humeur, l’appli iOS gratuite reprend exactement là où tes appels se sont arrêtés.',
+        a: 'Non. L’appel, c’est toute l’expérience : rien à télécharger, pas d’inscription, pas de mot de passe. Et si un jour tu veux relire tes entrées et voir tes tendances d’humeur, l’appli iOS gratuite reprend exactement là où tes appels se sont arrêtés.',
       },
       {
         q: 'C’est vraiment une personne qui appelle ?',
-        a: 'C’est le compagnon de journal IA d’Empath — le même que derrière notre numéro joignable à toute heure. Il écoute, pose des questions pleines d’attention et transforme la conversation en entrée écrite.',
+        a: 'C’est le compagnon de journal IA d’Empath, le même que derrière notre numéro joignable à toute heure. Il écoute, pose des questions pleines d’attention et transforme la conversation en entrée écrite.',
       },
       {
         q: 'Mon journal est-il privé ?',
@@ -94,7 +94,7 @@ export const callmeFr: CallMeCopy = {
       },
       {
         q: 'Combien ça coûte ?',
-        a: 'Tes premières entrées sont gratuites — pas de carte bancaire, pas d’essai à résilier. Appeler fait partie d’Empath, et seul le tarif standard de ton opérateur pour un appel classique s’applique.',
+        a: 'Tes premières entrées sont gratuites : pas de carte bancaire, pas d’essai à résilier. Appeler fait partie d’Empath, et seul le tarif standard de ton opérateur pour un appel classique s’applique.',
       },
     ],
     readBackPrompt: 'Envie de relire tes entrées ?',

@@ -1,6 +1,6 @@
 // Master (English) copy catalog for the consumer landing page (JournalingPage
 // + WhatsAppExamples + CrossChannelStory + CallMeForm + channel row).
-// Every locale file in this directory must export the same shape — the
+// Every locale file in this directory must export the same shape: the
 // `JournalingCopy` type is derived from this object, so a missing key in a
 // translation is a compile error.
 //
@@ -10,7 +10,7 @@
 // Translation notes:
 // - Keep product/brand names (Empath, WhatsApp, Telegram, Instagram, Apple
 //   Health, App Store) untranslated.
-// - Chat messages: user texts are deliberately lowercase/casual — keep that
+// - Chat messages: user texts are deliberately lowercase/casual; keep that
 //   register. Empath replies are warm but plain; never clinical.
 // - Say the local equivalent of "no sign-up", NOT "no account" (an account
 //   is auto-created server-side; "no sign-up" is the claim that holds).
@@ -28,7 +28,7 @@ export const journalingEn = {
   seo: {
     title: "Empath - The Journal You Won't Quit",
     description:
-      "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+      "There's a number you can just journal at. Text it, WhatsApp it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords:
       'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
   },
@@ -72,9 +72,9 @@ export const journalingEn = {
   whatsappSection: {
     badge: 'Journaling in your DMs',
     title: 'What It Actually Looks Like',
-    sub: "A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it like you'd text a friend — Empath listens, responds, and quietly saves it as a journal entry.",
+    sub: "A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it like you'd text a friend. Empath listens, responds, and quietly saves it as a journal entry.",
     cta: 'Journal on WhatsApp',
-    phoneNote: 'Or text {phone} — plain SMS works too. Example conversations shown.',
+    phoneNote: 'Or text {phone}. Plain SMS works too. Example conversations shown.',
     examples: [
       {
         key: 'late-night',
@@ -90,7 +90,7 @@ export const journalingEn = {
           },
           {
             from: 'empath',
-            text: "You don't have to settle that tonight. Replaying it usually means it mattered — not that you overreacted. Should I hold onto this until morning?",
+            text: "You don't have to settle that tonight. Replaying it usually means it mattered, not that you overreacted. Should I hold onto this until morning?",
             time: '2:47 AM',
           },
           { from: 'user', text: 'hold onto it. thank you', time: '2:48 AM' },
@@ -107,7 +107,7 @@ export const journalingEn = {
           { from: 'user', voice: true, duration: '1:47', time: '11:12 PM' },
           {
             from: 'empath',
-            text: 'Long day — I heard it. Three things stacked before noon, and you still showed up for your sister\'s call. You said you "should have handled it better" twice. Gently: you handled it. Saved.',
+            text: 'Long day. I heard it. Three things stacked before noon, and you still showed up for your sister\'s call. You said you "should have handled it better" twice. Gently: you handled it. Saved.',
             time: '11:13 PM',
           },
           { from: 'user', text: 'how do you always make it sound survivable', time: '11:14 PM' },
@@ -128,7 +128,7 @@ export const journalingEn = {
           },
           {
             from: 'empath',
-            text: "The fact that it's sitting with you this heavily shows how much you care. You've been stretched thin since Tuesday — snapping is the overflow, not the truth about who you are to her. Have you talked since?",
+            text: "The fact that it's sitting with you this heavily shows how much you care. You've been stretched thin since Tuesday. Snapping is the overflow, not the truth about who you are to her. Have you talked since?",
             time: '6:04 PM',
           },
           { from: 'user', text: 'not yet. maybe tomorrow', time: '6:06 PM' },
@@ -145,11 +145,11 @@ export const journalingEn = {
           { from: 'user', text: 'wait so i can journal by just texting this number? no app?', time: '9:14 AM' },
           {
             from: 'empath',
-            text: "That's it. No app, no sign-up, no blank page staring at you. Tell me about your day — one sentence is plenty.",
+            text: "That's it. No app, no sign-up, no blank page staring at you. Tell me about your day. One sentence is plenty.",
             time: '9:14 AM',
           },
           { from: 'user', text: "ok. honestly already exhausted and it's 9am", time: '9:15 AM' },
-          { from: 'empath', text: "Then that's today's first entry — saved. What's taking the most energy this morning?", time: '9:15 AM' },
+          { from: 'empath', text: "Then that's today's first entry, saved. What's taking the most energy this morning?", time: '9:15 AM' },
         ] as ChatMessage[],
       },
     ],
@@ -163,7 +163,7 @@ export const journalingEn = {
   crossChannel: {
     badge: 'One journal, every app',
     title: 'Start Anywhere. Continue Everywhere.',
-    sub: 'Empath lives wherever you already are. Journal tonight, ask about it on WhatsApp over coffee, dig deeper on Telegram after work, close the loop from Instagram while you scroll. Every channel talks to the same journal — and the same memory.',
+    sub: 'Empath lives wherever you already are. Journal tonight, ask about it on WhatsApp over coffee, dig deeper on Telegram after work, close the loop from Instagram while you scroll. Every channel talks to the same journal, and the same memory.',
     pickApp: "Pick whichever app you're already in",
     journalStep: {
       time: 'Tuesday 9:41 PM',
@@ -180,7 +180,7 @@ export const journalingEn = {
         channel: 'WhatsApp',
         userMsg: 'morning. was i being dramatic last night?',
         empathMsg:
-          'A little 💛 You rehearsed the intro four times. But you also said you know this material better than anyone — hold onto that part today.',
+          'A little 💛 You rehearsed the intro four times. But you also said you know this material better than anyone. Hold onto that part today.',
       },
       {
         key: 'telegram',
@@ -188,7 +188,7 @@ export const journalingEn = {
         channel: 'Telegram',
         userMsg: 'presentation done, it went fine. why do i always spiral the night before?',
         empathMsg:
-          "That's the third night-before spiral in your journal since May — and all three went fine the next day. The pattern is the spiral, not the failing.",
+          "That's the third night-before spiral in your journal since May, and all three went fine the next day. The pattern is the spiral, not the failing.",
       },
       {
         key: 'instagram',
@@ -213,7 +213,7 @@ export const journalingEn = {
   },
 
   callMeForm: {
-    ringingTitle: '📞 Calling you now — pick up!',
+    ringingTitle: '📞 Calling you now. Pick up!',
     ringingSub: "Talk about your day, hang up, and it's saved as your first journal entry.",
     phoneAria: 'Your phone number (US)',
     dialing: 'Dialing…',
@@ -410,7 +410,7 @@ export const journalingEn = {
     testimonials: [
       {
         quote:
-          "I've tried 5 journaling apps and quit every one. Empath stuck because I just text when something's on my mind — no opening an app, no blank page.",
+          "I've tried 5 journaling apps and quit every one. Empath stuck because I just text when something's on my mind. No opening an app, no blank page.",
         author: 'Alex M.',
         role: 'User since 2024',
       },
