@@ -9,8 +9,8 @@ const SITE_URL = 'https://www.empathdash.com';
 
 // Keep in sync with src/i18n/locales.ts (this script stays dependency-free).
 const LOCALE_CODES = ['es', 'pt', 'hi', 'de', 'fr', 'it'];
-// Locale-prefixed variants exist for the consumer landing…
-const LOCALIZED_STATIC = ['/', '/app'];
+// Locale-prefixed variants exist for the consumer funnel…
+const LOCALIZED_STATIC = ['/', '/app', '/call-me'];
 // …and for any blog post with a generated translation JSON.
 const translationExists = (code, kind, slug) =>
   existsSync(join(ROOT, 'src/data/i18n', code, kind, `${slug}.json`));

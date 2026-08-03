@@ -44,10 +44,15 @@ const TRANSLATED_LOCALES = await loadTsExport(join(ROOT, 'src/i18n/locales.ts'),
 const LOCALE_CODES = Object.keys(TRANSLATED_LOCALES);
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 const landingCopy = {};
+const callmeCopy = {};
 for (const code of LOCALE_CODES) {
   landingCopy[code] = await loadTsExport(
     join(ROOT, `src/i18n/copy/journaling.${code}.ts`),
     `journaling${cap(code)}`
+  );
+  callmeCopy[code] = await loadTsExport(
+    join(ROOT, `src/i18n/copy/callme.${code}.ts`),
+    `callme${cap(code)}`
   );
 }
 
@@ -109,7 +114,16 @@ const staticRoutes = [
     title: 'Empath Calls You — Journal by Phone, No App Needed',
     description: "Enter your number and Empath calls you for your first voice journal entry. Talk it out, hang up, and it's saved. No app, no account, no typing.",
     keywords: 'journal by phone, voice journaling, phone journaling, journaling without an app, audio diary',
+    alternates: hreflangCluster('/call-me'),
   },
+  ...LOCALE_CODES.map((code) => ({
+    path: `/${code}/call-me`,
+    title: callmeCopy[code].seo.title,
+    description: callmeCopy[code].seo.description,
+    keywords: callmeCopy[code].seo.keywords,
+    htmlLang: TRANSLATED_LOCALES[code].htmlLang,
+    alternates: hreflangCluster('/call-me'),
+  })),
   {
     path: '/therapist',
     title: 'Empath for Therapists | Between-Session AI Insights',

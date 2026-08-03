@@ -1,0 +1,165 @@
+{
+  "id": "j38",
+  "title": "Empath vs Day One : Quelle application de journal intime choisir en 2026 ?",
+  "seoTitle": "Empath vs Day One (2026) : Journal vocal AI ou journal classique ? | Empath",
+  "metaDescription": "Comparaison honnête entre Empath et Day One : saisie de journal, insights AI, médias et archivage, confidentialité et tarification. Découvre quelle application correspond vraiment à ta façon de réfléchir.",
+  "excerpt": "L'une est un journal numérique magnifiquement conçu pour les écrivains et les archivistes. L'autre journalise avec toi par appel, SMS ou chat. Voici comment faire ton choix.",
+  "readTime": "12 min de lecture",
+  "category": "Avis d'applications",
+  "keyword": "empath vs day one",
+  "featuredRank": 5,
+  "answerSummary": "Choisis Day One si tu aimes écrire, si tu veux un bel archive à long terme d'entrées, de photos et de souvenirs, et si tu n'as pas besoin de retours AI. Choisis Empath si la page blanche est ce qui te freine : tu journalises par appel téléphonique, message texte ou en tapant, et l'AI organise les entrées et fait ressortir des schémas émotionnels au fil du temps.",
+  "keyTakeaways": [
+    "Day One est un journal classique : tu composes des entrées. Empath est axé sur la capture : tu parles ou envoies un texte, et l'application s'occupe de l'organisation.",
+    "Day One excelle dans les médias, le scrapbooking et l'archivage à long terme. Empath brille par sa facilité d'utilisation, l'entrée vocale et les insights générés par l'AI.",
+    "Les deux prennent la confidentialité au sérieux, mais de manières différentes : Day One propose un cryptage de bout en bout sur les plans payants, tandis qu'Empath crypte les entrées au repos et rend l'analyse AI optionnelle.",
+    "Beaucoup de gens utilisent les deux : Day One comme archive permanente, Empath comme outil de capture et de réflexion quotidienne à faible effort."
+  ],
+  "intro": "Day One est la référence des journaux numériques depuis plus d'une décennie : typographie élégante, entrées riches en photos et archive conçue pour être relue des années plus tard. Empath vient d'une approche totalement différente. Au lieu de te donner une belle page blanche, il supprime complètement la page : tu journalises en appelant un numéro de téléphone, en envoyant un SMS ou en tapant une note rapide, et l'AI transcrit, titre et analyse tout pour toi. Les deux sont excellents dans ce qu'ils font, et c'est exactement pourquoi la comparaison mérite d'être faite avec soin. Ce n'est pas une question de savoir quelle application est meilleure ; c'est une question de deux théories différentes sur les raisons pour lesquelles les gens abandonnent le journal intime. Ce guide les compare fonctionnalité par fonctionnalité pour que tu puisses choisir celle qui correspond à ta façon de réfléchir.",
+  "sections": [
+    {
+      "heading": "Qu'est-ce qu'Empath et Day One ?",
+      "body": [
+        "Day One, créé par Automattic, est l'une des applications de journaling les plus anciennes et les plus abouties. Elle est construite autour d'entrées composées : tu ouvres l'application, écris dans un éditeur épuré, attaches des photos, vidéos, enregistrements audio ou pages scannées, et organises le tout dans plusieurs journaux. Des fonctionnalités comme 'Ce jour-là' font remonter d'anciennes entrées, des modèles donnent une structure, et des séries encouragent la régularité. Elle a gagné sa réputation en tant qu'application de journaling pour les personnes qui aiment l'acte d'écrire et qui souhaitent un enregistrement permanent et exportable de leur vie.",
+        "Empath est un assistant de journaling AI construit autour de la capture plutôt que de la composition. Tu peux appeler ou envoyer un SMS à un numéro de téléphone, ou taper directement dans l'application iOS, et Empath transcrit l'entrée, lui donne un titre, détecte les émotions et l'archive automatiquement. Au fil du temps, ses 'Insights Plus' analysent tes entrées pour des thèmes récurrents, des schémas d'humeur et des connexions entre ce que tu fais et comment tu te sens. L'idée principale est que la plupart des gens abandonnent le journaling non pas parce qu'ils ne se soucient plus, mais parce que s'asseoir pour écrire demande des efforts, alors que parler ne l'est pas.",
+        "En d'autres termes : Day One optimise ce qui se passe après que tu aies décidé de journaliser. Empath optimise le fait que tu journalises ou non. Cette unique différence explique presque chaque ligne du tableau de comparaison ci-dessous."
+      ]
+    },
+    {
+      "heading": "Empath vs Day One en un coup d'œil",
+      "body": [
+        "Voici la version courte de la comparaison. Le schéma à noter : Day One domine les lignes concernant la création et la conservation des entrées, tandis qu'Empath domine les lignes concernant la capture des entrées et leur compréhension."
+      ],
+      "table": {
+        "title": "Empath vs Day One, fonctionnalité par fonctionnalité",
+        "competitorName": "Day One",
+        "caption": "Les détails de tarification et de plan reflètent les informations publiquement disponibles au moment de l'écriture (juillet 2026) et peuvent changer. Vérifie toujours la page de tarification actuelle de chaque application.",
+        "rows": [
+          {
+            "feature": "Comment tu journalises",
+            "empath": "Appel téléphonique, message texte ou entrée tapée ; l'AI transcrit et organise tout",
+            "competitor": "Entrées tapées dans un éditeur soigné, avec photos, vidéos, enregistrements audio et modèles"
+          },
+          {
+            "feature": "Aide à la page blanche",
+            "empath": "Pas de page blanche : tu parles ou envoies un texte, et une structure de suivi est générée pour toi",
+            "competitor": "Modèles, incitations à l'écriture et rappels quotidiens, mais la composition reste à ta charge"
+          },
+          {
+            "feature": "Insights AI",
+            "empath": "Détection des émotions sur chaque entrée, suivi de l'humeur et Insights Plus qui font ressortir des schémas sur plusieurs semaines",
+            "competitor": "Minimale par conception ; la réflexion vient de la relecture via 'Ce jour-là' et la recherche"
+          },
+          {
+            "feature": "Médias & scrapbooking",
+            "empath": "Enregistrements vocaux et textes ; les entrées concernent ce que tu as dit, pas ce que tu attaches",
+            "competitor": "Excellent : entrées riches en photos, mises en page, pages scannées et métadonnées sur la localisation/météo"
+          },
+          {
+            "feature": "Archivage & exportation",
+            "empath": "Les entrées vivent dans l'application et le tableau de bord web",
+            "competitor": "Meilleur de sa catégorie : exportation PDF et JSON, livres imprimés, plus d'une décennie d'expérience"
+          },
+          {
+            "feature": "Confidentialité",
+            "empath": "Entrées cryptées au repos ; l'analyse AI est intégrée et nécessite un consentement pour des fonctionnalités plus approfondies",
+            "competitor": "Cryptage de bout en bout disponible sur les plans payants ; pas de lecture AI des entrées par défaut"
+          },
+          {
+            "feature": "Prix",
+            "empath": "Gratuit à télécharger et commencer à journaliser par appel, SMS ou application",
+            "competitor": "Niveau gratuit limité (un journal, un appareil) ; abonnement Premium pour toutes les fonctionnalités"
+          },
+          {
+            "feature": "Idéal pour",
+            "empath": "Les personnes qui abandonnent les applications de journaling, les processeurs verbaux et quiconque souhaite des insights sans effort",
+            "competitor": "Écrivains, gardiens de mémoire et archivistes qui aiment composer et relire des entrées"
+          }
+        ]
+      },
+      "callout": {
+        "text": "Tu veux explorer au-delà de ces deux options ? Nous avons testé et classé douze applications sur l'AI, la voix et le journaling traditionnel.",
+        "linkText": "Lis notre guide des meilleures applications de journaling de 2026",
+        "slug": "best-journaling-apps"
+      }
+    },
+    {
+      "heading": "Comment le journaling se ressent au quotidien",
+      "body": [
+        "Avec Day One, le journaling est un petit rituel. Tu ouvres l'application, choisis un journal et écris. L'éditeur est vraiment agréable : typographie épurée, support Markdown et placement facile des photos. Lors d'une bonne soirée, ce rituel est le but. La friction est la fonctionnalité, comme un carnet de papier et un joli stylo. Mais un mardi stressant où tu rentres tard, c'est exactement ce rituel qui est sauté, et les recherches sur le journaling montrent constamment que les jours sautés, pas les mauvaises entrées, sont ce qui tue l'habitude.",
+        "Avec Empath, le journaling se fait dans des moments que tu as déjà. Tu appelles le numéro Empath pendant une promenade et parles pendant quatre minutes. Tu envoies un SMS entre deux réunions quand quelque chose te perturbe. Tu tapes trois phrases au lit. Aucun de ces moments ne nécessite de décider de journaliser dans un sens cérémoniel ; c'est plus proche de laisser un message vocal. Parce que parler est environ trois à quatre fois plus rapide que taper, un appel de quatre minutes peut capturer plus de matière brute que la plupart des gens ne pourraient jamais taper.",
+        "Le compromis honnête : les entrées de Day One ont tendance à être plus réfléchies, car la composition te force à structurer tes pensées. Les entrées d'Empath sont plus fréquentes et plus sincères, car rien ne se met entre le sentiment et la capture. Ce que tu valorises le plus est probablement le meilleur prédicteur de l'application que tu utiliseras encore dans six mois."
+      ]
+    },
+    {
+      "heading": "Insights AI et réflexion",
+      "body": [
+        "La théorie de la réflexion de Day One est la relecture. 'Ce jour-là' te montre ce que tu as écrit il y a un, trois ou sept ans, et c'est vraiment émouvant une fois que tu as une archive. La recherche, les tags et plusieurs journaux te permettent de revenir délibérément. Ce que Day One ne fait pas, c'est interpréter : il ne te dira pas que ton humeur a chuté chaque dimanche pendant deux mois, ou que les entrées mentionnant ton trajet sont anxieuses. L'archive est riche, mais l'analyse t'appartient.",
+        "Empath est construit autour de cette analyse. Chaque entrée obtient automatiquement une détection des émotions, des vérifications d'humeur tracent comment tu te sens réellement au fil du temps, et les Insights Plus synthétisent périodiquement tes entrées récentes en schémas : facteurs de stress récurrents, ce qui soulève systématiquement ton humeur, comment ton énergie suit tes habitudes. C'est la différence entre posséder une bibliothèque et avoir un bibliothécaire qui a tout lu et te dit parfois : 'as-tu remarqué ce thème ?'",
+        "Si l'idée qu'une AI lise ton journal te met mal à l'aise, cette inquiétude est légitime et l'approche de Day One te conviendra mieux. Si ton problème est que tu journalises et que tu n'apprends jamais rien de cela, Empath boucle ce processus d'une manière qu'un journal traditionnel ne peut pas."
+      ]
+    },
+    {
+      "heading": "Médias, archivage et propriété des données",
+      "body": [
+        "Cette section est le terrain de jeu de Day One, et elle mérite d'être reconnue : si tu veux un enregistrement multimédia de ta vie, Day One est le meilleur outil de la catégorie. Les entrées peuvent contenir des photos, vidéos, audio et écriture manuscrite scannée ; la localisation et la météo sont automatiquement estampillées ; et l'ensemble de l'archive s'exporte proprement en PDF ou JSON. Tu peux même commander des livres imprimés de tes journaux. Pour une année de mariage, un premier bébé ou un long voyage, cette qualité de scrapbook est inégalée.",
+        "L'enregistrement d'Empath est un type d'artéfact différent : un compte rendu longitudinal de ta vie intérieure dans ta propre voix. Les notes vocales, les textes et les entrées tapées s'accumulent en quelque chose de moins semblable à un album photo et plus à un carnet de thérapie qui s'organise tout seul. Il est optimisé pour être compris, pas pour être affiché.",
+        "Une note pratique si tu envisages un changement dans l'une ou l'autre direction : les outils d'exportation de Day One facilitent la conservation d'une copie permanente de ton archive existante, donc essayer Empath ne te coûte rien en termes de ton histoire. Beaucoup de gens se retrouvent raisonnablement avec les deux : Day One comme l'enregistrement délibéré et riche en médias des événements, Empath comme la capture émotionnelle quotidienne sans friction."
+      ]
+    },
+    {
+      "heading": "Confidentialité et sécurité",
+      "body": [
+        "Day One propose un cryptage de bout en bout sur son plan payant, ce qui signifie que les entrées sont cryptées avec des clés que toi seul détiens ; même les serveurs de Day One ne peuvent pas les lire. C'est le modèle de confidentialité le plus solide disponible dans les applications de journaling grand public, et si le cryptage E2E est ta condition essentielle, Day One mérite le point. La conséquence est structurelle : une application qui ne peut pas lire tes entrées ne peut pas non plus les analyser, ce qui est en partie pourquoi l'empreinte AI de Day One est minimale.",
+        "Empath crypte le contenu du journal au repos avec des clés par utilisateur, et ses fonctionnalités d'analyse plus sensibles nécessitent un consentement : tu optes explicitement pour que l'application effectue des types d'analyse plus approfondis. Le traitement AI est inhérent à ce qu'Empath fait, car la transcription, la détection des émotions et les insights nécessitent que le système travaille avec tes mots. L'objectif de conception est que ce traitement te serve uniquement : tes entrées entraînent tes insights, pas un modèle public.",
+        "La bonne façon de formuler cela n'est pas 'quelle application est privée' mais 'quel compromis de confidentialité préfères-tu ?' Day One échange l'analyse contre un secret maximal. Empath échange le secret maximal contre la compréhension, avec cryptage et portes de consentement autour de l'échange. Les deux sont défendables ; ce sont juste des réponses différentes à ce qu'est un journal."
+      ]
+    },
+    {
+      "heading": "Tarification et valeur",
+      "body": [
+        "Day One a un niveau gratuit qui fonctionne mais est délibérément limité : un journal, un appareil et des médias restreints. L'abonnement Premium, au prix d'un café par mois facturé annuellement au moment de l'écriture, débloque plusieurs journaux, la synchronisation entre appareils, le cryptage de bout en bout et toutes les fonctionnalités multimédias. Pour un gardien sérieux de journaux, c'est un prix raisonnable pour ce qui est réellement un logiciel de premier ordre.",
+        "Empath est gratuit à télécharger, et tu peux commencer à journaliser immédiatement par appel, message texte ou dans l'application. L'économie compte moins que la forme de la valeur : avec Day One, tu paies pour un foyer permanent pour les entrées que tu composes ; avec Empath, la valeur se concentre sur les entrées que tu n'aurais autrement jamais faites et les schémas que tu n'aurais jamais remarqués.",
+        "Un test équitable te coûte deux semaines et rien d'autre : journalise comme chaque application te le fait naturellement. Si tu te retrouves à composer avec amour des entrées le soir, Day One est ton application. Si tu trouves que la plupart de tes entrées se produisent dans des moments où aucun éditeur n'aurait été ouvert, tu as ta réponse dans l'autre direction."
+      ]
+    },
+    {
+      "heading": "Laquelle devrais-tu choisir ?",
+      "body": [
+        "Choisis Day One si tu t'identifies comme écrivain ou gardien de mémoire, si les photos et les lieux sont centraux pour te souvenir de ta vie, si tu veux un cryptage de bout en bout, ou si tu construis une archive que tu comptes relire pendant des décennies. Cela récompense l'intention, et si tu as l'intention, rien d'autre dans la catégorie ne correspond à son savoir-faire.",
+        "Choisis Empath si ton histoire de journaling est un cimetière d'applications abandonnées, si tu traites mieux à voix haute que sur la page, si tu veux un suivi de l'humeur et des insights AI sans faire l'analyse toi-même, ou si la possibilité de journaliser par appel ou SMS, sans application ouverte, est la différence entre réfléchir ou non.",
+        "Et si tu ne peux vraiment pas décider, fais-les fonctionner en parallèle : Empath pour la capture quotidienne, Day One pour l'entrée délibérée hebdomadaire. Les applications sont suffisamment différentes pour qu'elles ne se concurrencent pas autant que la comparaison le suggère. La seule mauvaise décision est l'application que tu arrêtes d'ouvrir."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Empath ou Day One, laquelle est meilleure pour les débutants ?",
+      "answer": "Empath est généralement plus facile à commencer car il n'y a pas de page blanche : tu appelles, envoies un SMS ou tapes quelques phrases, et l'application structure tout. Day One est aussi convivial pour les débutants, mais il suppose que tu es à l'aise avec la composition d'entrées toi-même. Si tes tentatives de journaling passées ont échoué, l'option à faible friction est généralement le choix le plus sûr."
+    },
+    {
+      "question": "Day One a-t-il des fonctionnalités AI comme Empath ?",
+      "answer": "Day One a intentionnellement gardé l'AI minimale, se concentrant sur l'écriture, les médias et l'archivage ; la réflexion se fait par la relecture via des fonctionnalités comme 'Ce jour-là'. Empath est natif AI : il transcrit les entrées vocales, détecte les émotions, suit l'humeur et génère des insights de schéma à partir de tes entrées. Si l'AI lisant ton journal est un obstacle, Day One te conviendra mieux ; si l'insight AI est l'objectif, c'est la fonctionnalité principale d'Empath."
+    },
+    {
+      "question": "Puis-je journaliser par voix dans les deux applications ?",
+      "answer": "Les deux prennent en charge l'audio, mais différemment. Day One te permet d'attacher des enregistrements audio aux entrées dans l'application. Empath traite la voix comme une entrée principale : tu peux appeler un numéro de téléphone depuis n'importe quel téléphone, parler, et l'entrée est transcrite, titrée et analysée automatiquement, sans application ouverte."
+    },
+    {
+      "question": "Quelle application est plus privée, Empath ou Day One ?",
+      "answer": "Elles font des compromis différents. Day One propose un cryptage de bout en bout sur les plans payants, donc même ses serveurs ne peuvent pas lire les entrées, ce qui signifie aussi peu d'analyse AI. Empath crypte les entrées au repos et limite l'analyse plus approfondie à un consentement explicite, mais le traitement AI de tes mots est inhérent à son fonctionnement. Choisis en fonction de ce qui compte le plus pour toi : le secret ou la compréhension."
+    },
+    {
+      "question": "Puis-je utiliser Empath et Day One ensemble ?",
+      "answer": "Oui, et c'est une combinaison vraiment bonne. Beaucoup de gens utilisent Empath pour une capture quotidienne sans friction, journalisant par appel ou SMS dans les moments où les choses se passent, et Day One comme l'archive délibérée et riche en médias pour des réflexions hebdomadaires, des photos et des jalons. Les outils d'exportation de Day One facilitent également la conservation d'une copie permanente de ton histoire pendant que tu essaies Empath."
+    }
+  ],
+  "author": "Empath Team",
+  "date": "July 23, 2026",
+  "slug": "empath-vs-day-one",
+  "relatedSlugs": [
+    "empath-vs-apple-journal",
+    "empath-vs-rosebud",
+    "best-journaling-apps"
+  ]
+}
