@@ -1,10 +1,19 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import ts from 'typescript';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SITE_URL = 'https://www.empathdash.com';
+
+// Keep in sync with src/i18n/locales.ts (this script stays dependency-free).
+const LOCALE_CODES = ['es', 'pt', 'hi', 'de', 'fr', 'it'];
+// Locale-prefixed variants exist for the consumer landing…
+const LOCALIZED_STATIC = ['/', '/app'];
+// …and for any blog post with a generated translation JSON.
+const translationExists = (code, kind, slug) =>
+  existsSync(join(ROOT, 'src/data/i18n', code, kind, `${slug}.json`));
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -54,49 +63,67 @@ const staticRoutes = [
   { path: '/terms', changefreq: 'yearly', priority: '0.3' },
 ];
 
-// Each post's `date:` field precedes its `slug:` field, so the nearest date
-// found in the window before a slug is that post's publish date. Using the
-// real date as <lastmod> (instead of the build date for every URL) keeps the
-// signal credible — Google ignores lastmod when it changes on every deploy.
-function extractPosts(filePath) {
-  const text = readFileSync(filePath, 'utf-8');
-  const posts = [];
-  const slugRe = /slug:\s*['"]([^'"]+)['"]/g;
-  let match;
-  while ((match = slugRe.exec(text)) !== null) {
-    const before = text.slice(Math.max(0, match.index - 2000), match.index);
-    const dates = [...before.matchAll(/date:\s*['"]([^'"]+)['"]/g)];
-    const rawDate = dates.length ? dates[dates.length - 1][1] : '';
-    posts.push({
-      slug: match[1],
-      lastmod: rawDate ? toIsoDate(rawDate) : today,
-    });
-  }
-  return posts;
+// Load the blog data modules for real (transpiled TS, same as prerender.mjs)
+// instead of regex-scraping `slug:` fields — the regex also matched nested
+// related-post references, which put duplicate <loc> entries in the sitemap.
+// Real post dates become <lastmod> (not the build date) so the signal stays
+// credible — Google ignores lastmod when it changes on every deploy.
+async function loadTsExport(filePath, exportName, transformSource = (s) => s) {
+  const source = transformSource(readFileSync(filePath, 'utf-8'));
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+    fileName: filePath,
+  });
+  const loaded = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
+  return loaded[exportName] ?? [];
 }
 
-const therapistBlogPosts = extractPosts(join(ROOT, 'src/data/blogPosts.ts'));
+function toSitemapPost(post) {
+  return { slug: post.slug, lastmod: post.date ? toIsoDate(post.date) : today };
+}
+
+const therapistBlogPosts = (await loadTsExport(join(ROOT, 'src/data/blogPosts.ts'), 'blogPosts')).map(toSitemapPost);
 const journalingBlogPosts = [
-  ...extractPosts(join(ROOT, 'src/data/kinzerJournalingBlogPosts.ts')),
-  ...extractPosts(join(ROOT, 'src/data/journalingBlogPosts.ts')),
-];
+  ...(await loadTsExport(join(ROOT, 'src/data/kinzerJournalingBlogPosts.ts'), 'kinzerJournalingBlogPosts')),
+  ...(await loadTsExport(
+    join(ROOT, 'src/data/journalingBlogPosts.ts'),
+    'journalingBlogPosts',
+    (s) => s
+      .replace("import { kinzerJournalingBlogPosts } from './kinzerJournalingBlogPosts';", '')
+      .replace('...kinzerJournalingBlogPosts,', '')
+  )),
+].map(toSitemapPost);
 
 const blogRoutes = [
-  ...therapistBlogPosts.map(({ slug, lastmod }) => ({
-    path: `/blog/${slug}`,
-    changefreq: 'monthly',
-    priority: '0.7',
-    lastmod,
-  })),
-  ...journalingBlogPosts.map(({ slug, lastmod }) => ({
-    path: `/app/blog/${slug}`,
-    changefreq: 'monthly',
-    priority: '0.7',
-    lastmod,
-  })),
+  ...therapistBlogPosts.flatMap(({ slug, lastmod }) => [
+    { path: `/blog/${slug}`, changefreq: 'monthly', priority: '0.7', lastmod },
+    ...LOCALE_CODES.filter((code) => translationExists(code, 'therapist', slug)).map((code) => ({
+      path: `/${code}/blog/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.6',
+      lastmod,
+    })),
+  ]),
+  ...journalingBlogPosts.flatMap(({ slug, lastmod }) => [
+    { path: `/app/blog/${slug}`, changefreq: 'monthly', priority: '0.7', lastmod },
+    ...LOCALE_CODES.filter((code) => translationExists(code, 'journaling', slug)).map((code) => ({
+      path: `/${code}/app/blog/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.6',
+      lastmod,
+    })),
+  ]),
 ];
 
-const allRoutes = [...staticRoutes, ...blogRoutes];
+const localizedStaticRoutes = LOCALE_CODES.flatMap((code) =>
+  LOCALIZED_STATIC.map((path) => ({
+    path: path === '/' ? `/${code}` : `/${code}${path}`,
+    changefreq: 'weekly',
+    priority: '0.9',
+  }))
+);
+
+const allRoutes = [...staticRoutes, ...localizedStaticRoutes, ...blogRoutes];
 
 const urls = allRoutes
   .map(

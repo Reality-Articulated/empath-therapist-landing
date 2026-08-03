@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PhoneCall, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import posthog from 'posthog-js';
+import { useJournalingCopy } from '../i18n/copy';
 
 export const REQUEST_CALL_URL = 'https://app.empathdash.com/api/phone/requestCall';
 export const PHONE_MAIN = '+18883663082';
@@ -30,8 +31,16 @@ export function formatAsYouType(digits: string): string {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
 }
 
-/** Shared state machine behind every "Empath calls you" form on the site. */
-export function useCallMeRequest(events: CallMeEvents, source: string) {
+/**
+ * Shared state machine behind every "Empath calls you" form on the site.
+ * `errorCopy` localizes the two client-side failure messages; callers that
+ * don't pass it (the English /call-me page) keep the defaults.
+ */
+export function useCallMeRequest(
+  events: CallMeEvents,
+  source: string,
+  errorCopy?: { generic: string; network: string },
+) {
   const [digits, setDigits] = useState('');
   const [state, setState] = useState<CallState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -79,12 +88,15 @@ export function useCallMeRequest(events: CallMeEvents, source: string) {
         posthog.capture(events.placed, scheduledAt ? { scheduled: true } : undefined);
       } else {
         setState('error');
-        setErrorMessage(body.error || "We couldn't place the call. Please try again in a moment.");
+        setErrorMessage(body.error || errorCopy?.generic || "We couldn't place the call. Please try again in a moment.");
         posthog.capture(events.failed, { code: body.code || `http_${res.status}` });
       }
     } catch {
       setState('error');
-      setErrorMessage(`Something went wrong. You can always dial ${PHONE_DISPLAY} directly.`);
+      setErrorMessage(
+        errorCopy?.network.replace('{phone}', PHONE_DISPLAY)
+          ?? `Something went wrong. You can always dial ${PHONE_DISPLAY} directly.`,
+      );
       posthog.capture(events.failed, { code: 'network' });
     }
   };
@@ -98,6 +110,7 @@ export function useCallMeRequest(events: CallMeEvents, source: string) {
  * experience with FAQ etc. lives at /call-me (CallMePage).
  */
 export default function CallMeForm({ eventPrefix, source }: { eventPrefix: string; source: string }) {
+  const { callMeForm } = useJournalingCopy();
   const { digits, state, errorMessage, handleInput, requestCall } = useCallMeRequest(
     {
       requested: `${eventPrefix}_call_me_requested`,
@@ -105,14 +118,15 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
       failed: `${eventPrefix}_call_me_failed`,
     },
     source,
+    { generic: callMeForm.errorGeneric, network: callMeForm.errorNetwork },
   );
 
   if (state === 'ringing') {
     return (
       <div className="bg-white rounded-xl border-2 border-[#1b8af1] p-4 text-center shadow-[4px_4px_0px_0px_#1b8af1]">
-        <p className="font-bold text-stone-900 mb-1">📞 Calling you now — pick up!</p>
+        <p className="font-bold text-stone-900 mb-1">{callMeForm.ringingTitle}</p>
         <p className="text-sm text-stone-600 font-medium">
-          Talk about your day, hang up, and it's saved as your first journal entry.
+          {callMeForm.ringingSub}
         </p>
       </div>
     );
@@ -125,7 +139,7 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
           type="tel"
           autoComplete="tel-national"
           inputMode="tel"
-          aria-label="Your phone number (US)"
+          aria-label={callMeForm.phoneAria}
           placeholder="(555) 123-4567"
           value={formatAsYouType(digits)}
           onChange={(e) => handleInput(e.target.value)}
@@ -138,16 +152,16 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
           className="px-5 py-3 bg-[#1b8af1] text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] disabled:bg-stone-300 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed transition-all duration-200 font-bold flex items-center justify-center gap-2 whitespace-nowrap"
         >
           {state === 'requesting'
-            ? (<><Loader2 className="w-4 h-4 animate-spin" /> Dialing…</>)
-            : (<><PhoneCall className="w-4 h-4" /> Call me now</>)}
+            ? (<><Loader2 className="w-4 h-4 animate-spin" /> {callMeForm.dialing}</>)
+            : (<><PhoneCall className="w-4 h-4" /> {callMeForm.callMeNow}</>)}
         </button>
       </div>
       {state === 'error' && (
         <p className="text-sm text-red-600 font-medium mt-2 text-left" role="alert">{errorMessage}</p>
       )}
       <p className="text-xs text-stone-400 font-medium mt-2">
-        US numbers only. One automated call, standard rates.{' '}
-        <Link to="/call-me" className="text-[#1b8af1] hover:underline font-semibold">Schedule for later or learn more →</Link>
+        {callMeForm.disclaimer}{' '}
+        <Link to="/call-me" className="text-[#1b8af1] hover:underline font-semibold">{callMeForm.scheduleLink}</Link>
       </p>
     </div>
   );

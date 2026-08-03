@@ -26,6 +26,43 @@ const DIST = join(ROOT, 'dist');
 const SITE_URL = 'https://www.empathdash.com';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/empath-logo.png`;
 
+// ------------------------------------------------------------------ i18n
+// Locale registry + landing copy catalogs are TS data modules — transpile-
+// loaded so the prerendered titles/descriptions can never drift from what
+// React renders (same source of truth).
+async function loadTsExport(filePath, exportName, transformSource = (source) => source) {
+  const source = transformSource(readFileSync(filePath, 'utf-8'));
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+    fileName: filePath,
+  });
+  const moduleUrl = `data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`;
+  return (await import(moduleUrl))[exportName];
+}
+
+const TRANSLATED_LOCALES = await loadTsExport(join(ROOT, 'src/i18n/locales.ts'), 'TRANSLATED_LOCALES');
+const LOCALE_CODES = Object.keys(TRANSLATED_LOCALES);
+const cap = (s) => s[0].toUpperCase() + s.slice(1);
+const landingCopy = {};
+for (const code of LOCALE_CODES) {
+  landingCopy[code] = await loadTsExport(
+    join(ROOT, `src/i18n/copy/journaling.${code}.ts`),
+    `journaling${cap(code)}`
+  );
+}
+
+/** hreflang link cluster for a locale-free path, e.g. "/app". x-default = English. */
+function hreflangCluster(path, localeCodes = LOCALE_CODES) {
+  return [
+    { hreflang: 'en', href: `${SITE_URL}${path}` },
+    ...localeCodes.map((code) => ({
+      hreflang: TRANSLATED_LOCALES[code].hreflang,
+      href: `${SITE_URL}/${code}${path}`,
+    })),
+    { hreflang: 'x-default', href: `${SITE_URL}${path}` },
+  ];
+}
+
 if (!existsSync(join(DIST, 'index.html'))) {
   console.error('[prerender] dist/index.html not found — run `vite build` first.');
   process.exit(1);
@@ -42,13 +79,31 @@ const staticRoutes = [
     title: "Empath - The Journal You Won't Quit",
     description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    alternates: hreflangCluster('/app'),
   },
   {
     path: '/app',
     title: "Empath - The Journal You Won't Quit",
     description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    alternates: hreflangCluster('/app'),
   },
+  // Localized consumer landing: /<code> and /<code>/app per translated locale,
+  // titled/described from the same catalogs the React page renders.
+  ...LOCALE_CODES.flatMap((code) => {
+    const seo = landingCopy[code].seo;
+    const shared = {
+      title: seo.title,
+      description: seo.description,
+      keywords: seo.keywords,
+      htmlLang: TRANSLATED_LOCALES[code].htmlLang,
+      alternates: hreflangCluster('/app'),
+    };
+    return [
+      { path: `/${code}`, canonicalPath: `/${code}/app`, ...shared },
+      { path: `/${code}/app`, ...shared },
+    ];
+  }),
   {
     path: '/call-me',
     title: 'Empath Calls You — Journal by Phone, No App Needed',
@@ -188,21 +243,50 @@ const journalingBlogs = [...kinzerJournalingBlogs, ...legacyJournalingBlogs].map
   keywords: [p.keyword, p.category, 'journaling'].filter(Boolean).join(', '),
 }));
 
-const blogRoutes = [...therapistBlogs, ...journalingBlogs].map((p) => ({
-  path: p.path,
-  title: p.seoTitle || `${p.title} | Empath`,
-  description: p.metaDescription || '',
-  keywords: p.keywords,
-  ogType: 'article',
-  article: {
-    author: p.author,
-    date: p.date,
-    category: p.category,
-    abstract: p.answerSummary,
-    citations: p.sources?.map((source) => source.url) ?? [],
-    content: p,
-  },
-}));
+// Machine translations produced by scripts/translate-content.mjs. An English
+// post gets an hreflang cluster (and localized sibling routes) only for the
+// locales whose JSON actually exists — never a link to an untranslated URL.
+const I18N_DATA = join(ROOT, 'src/data/i18n');
+const translationPath = (code, kind, slug) => join(I18N_DATA, code, kind, `${slug}.json`);
+const translatedLocalesFor = (kind, slug) =>
+  LOCALE_CODES.filter((code) => existsSync(translationPath(code, kind, slug)));
+
+function blogRoute(post, { locale, alternates } = {}) {
+  return {
+    path: locale ? `/${locale}${post.path}` : post.path,
+    title: post.seoTitle || `${post.title} | Empath`,
+    description: post.metaDescription || '',
+    keywords: post.keywords,
+    ogType: 'article',
+    ...(locale ? { htmlLang: TRANSLATED_LOCALES[locale].htmlLang } : {}),
+    ...(alternates ? { alternates } : {}),
+    article: {
+      author: post.author,
+      date: post.date,
+      category: post.category,
+      abstract: post.answerSummary,
+      citations: post.sources?.map((source) => source.url) ?? [],
+      content: post,
+    },
+  };
+}
+
+const blogRoutes = [];
+for (const { kind, posts } of [
+  { kind: 'therapist', posts: therapistBlogs },
+  { kind: 'journaling', posts: journalingBlogs },
+]) {
+  for (const post of posts) {
+    const codes = translatedLocalesFor(kind, post.slug);
+    const alternates = codes.length ? hreflangCluster(post.path, codes) : undefined;
+    blogRoutes.push(blogRoute(post, { alternates }));
+    for (const code of codes) {
+      const translation = JSON.parse(readFileSync(translationPath(code, kind, post.slug), 'utf-8'));
+      const merged = { ...post, ...translation, slug: post.slug, path: post.path };
+      blogRoutes.push(blogRoute(merged, { locale: code, alternates }));
+    }
+  }
+}
 
 const allRoutes = [...staticRoutes, ...blogRoutes];
 
@@ -368,6 +452,7 @@ function rewriteHtml(html, route) {
   const { canonical, title, description, ogType, ogImage, keywordsTag, articleLd, faqLd } = buildHeadMeta(route);
 
   let out = html;
+  out = out.replace(/<html lang="[^"]*"/, `<html lang="${route.htmlLang ?? 'en'}"`);
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
   out = out.replace(/<meta\s+name="title"[^>]*\/?>/, `<meta name="title" content="${title}" />`);
   out = out.replace(/<meta\s+name="description"[^>]*\/?>/, `<meta name="description" content="${description}" />`);
@@ -389,9 +474,12 @@ function rewriteHtml(html, route) {
   out = out.replace(/<meta\s+property="twitter:description"[^>]*\/?>/, `<meta property="twitter:description" content="${description}" />`);
   out = out.replace(/<meta\s+property="twitter:image"[^>]*\/?>/, `<meta property="twitter:image" content="${ogImage}" />`);
 
-  // Inject canonical and structured data before </head>.
+  // Inject canonical, hreflang alternates, and structured data before </head>.
   const canonicalTag = `<link rel="canonical" href="${canonical}" />`;
-  out = out.replace(/<\/head>/, `    ${canonicalTag}${articleLd}${faqLd}\n  </head>`);
+  const alternateTags = (route.alternates ?? [])
+    .map((alt) => `\n    <link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}" />`)
+    .join('');
+  out = out.replace(/<\/head>/, `    ${canonicalTag}${alternateTags}${articleLd}${faqLd}\n  </head>`);
 
   const staticArticle = renderStaticArticle(route, canonical);
   if (staticArticle) {

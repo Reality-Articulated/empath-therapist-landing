@@ -1,109 +1,13 @@
 // WhatsApp-style example conversations for the landing page, rebuilt in
 // JSX from the ad creatives in marketing/whatsapp-creatives (c1–c4) so they
 // render crisp at any size instead of shipping 1080×1350 PNGs.
-// Conversations are fictional/composed — no real user content.
+// Conversations are fictional/composed — no real user content. All copy
+// (including the chats) lives in the i18n catalog so it localizes.
+import { useJournalingCopy } from '../i18n/copy';
+import { ChatMessage, JournalingCopy } from '../i18n/copy/journaling.en';
 
-interface TextMessage {
-  from: 'user' | 'empath';
-  text: string;
-  time: string;
-}
-
-interface VoiceMessage {
-  from: 'user';
-  voice: true;
-  duration: string;
-  time: string;
-}
-
-type Message = TextMessage | VoiceMessage;
-
-interface ChatExample {
-  key: string;
-  /** Short label shown under the phone frame */
-  title: string;
-  caption: string;
-  contactName: string;
-  /** Gray silhouette avatar (unsaved number) instead of the Empath gradient */
-  unknownAvatar?: boolean;
-  messages: Message[];
-}
-
-const EXAMPLES: ChatExample[] = [
-  {
-    key: 'late-night',
-    title: 'The 2:47 AM vent',
-    caption: "For when your brain won't shut up and everyone's asleep.",
-    contactName: 'Empath',
-    messages: [
-      {
-        from: 'user',
-        text: "i know it's late. i keep replaying that conversation with my manager and i can't tell if i overreacted. didn't want to wake anyone so i'm telling you",
-        time: '2:47 AM',
-      },
-      {
-        from: 'empath',
-        text: "You don't have to settle that tonight. Replaying it usually means it mattered — not that you overreacted. Should I hold onto this until morning?",
-        time: '2:47 AM',
-      },
-      { from: 'user', text: 'hold onto it. thank you', time: '2:48 AM' },
-      { from: 'empath', text: "Always. It'll be here when you wake up. Try to sleep 💛", time: '2:48 AM' },
-    ],
-  },
-  {
-    key: 'voice-note',
-    title: 'Too tired to type',
-    caption: 'Send a voice note. It actually listens.',
-    contactName: 'Empath',
-    messages: [
-      { from: 'user', voice: true, duration: '1:47', time: '11:12 PM' },
-      {
-        from: 'empath',
-        text: 'Long day — I heard it. Three things stacked before noon, and you still showed up for your sister\'s call. You said you "should have handled it better" twice. Gently: you handled it. Saved.',
-        time: '11:13 PM',
-      },
-      { from: 'user', text: 'how do you always make it sound survivable', time: '11:14 PM' },
-      { from: 'empath', text: "Because you're the one telling the story. Goodnight.", time: '11:14 PM' },
-    ],
-  },
-  {
-    key: 'mom',
-    title: 'The everyday guilt',
-    caption: "A journal that remembers what you're trying to do better.",
-    contactName: 'Empath',
-    messages: [
-      {
-        from: 'user',
-        text: 'snapped at my mom again today and i feel terrible. she was just asking about the trip',
-        time: '6:03 PM',
-      },
-      {
-        from: 'empath',
-        text: "The fact that it's sitting with you this heavily shows how much you care. You've been stretched thin since Tuesday — snapping is the overflow, not the truth about who you are to her. Have you talked since?",
-        time: '6:04 PM',
-      },
-      { from: 'user', text: 'not yet. maybe tomorrow', time: '6:06 PM' },
-      { from: 'empath', text: "Tomorrow's good. I'll remember you wanted to.", time: '6:06 PM' },
-    ],
-  },
-  {
-    key: 'no-app',
-    title: '"Wait, no app?"',
-    caption: 'No app. No sign-up. You just text the number.',
-    contactName: '+1 (888) 366-3082',
-    unknownAvatar: true,
-    messages: [
-      { from: 'user', text: 'wait so i can journal by just texting this number? no app?', time: '9:14 AM' },
-      {
-        from: 'empath',
-        text: "That's it. No app, no sign-up, no blank page staring at you. Tell me about your day — one sentence is plenty.",
-        time: '9:14 AM',
-      },
-      { from: 'user', text: "ok. honestly already exhausted and it's 9am", time: '9:15 AM' },
-      { from: 'empath', text: "Then that's today's first entry — saved. What's taking the most energy this morning?", time: '9:15 AM' },
-    ],
-  },
-];
+type ChatExample = JournalingCopy['whatsappSection']['examples'][number];
+type ChatUi = JournalingCopy['whatsappSection']['chatUi'];
 
 // WhatsApp's real read-receipt double tick
 const Ticks = () => (
@@ -125,7 +29,7 @@ const TAIL_OUT =
 const WAVE_HEIGHTS = [22, 38, 54, 70, 62, 44, 30, 50, 72, 66, 48, 28, 36, 58, 74, 60, 42, 26, 40, 64, 70, 52, 32, 24, 46, 68, 72, 56];
 const WAVE_PLAYED = 14;
 
-const VoiceBubble = ({ msg }: { msg: VoiceMessage }) => (
+const VoiceBubble = ({ msg }: { msg: ChatMessage }) => (
   <div
     className="relative self-end max-w-[88%] w-60 rounded-lg rounded-tr-[2px] bg-[#005c4b] px-2.5 pt-2.5 pb-5 shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
     style={{ backgroundImage: 'none' }}
@@ -163,7 +67,7 @@ const VoiceBubble = ({ msg }: { msg: VoiceMessage }) => (
   </div>
 );
 
-const TextBubble = ({ msg }: { msg: TextMessage }) => {
+const TextBubble = ({ msg }: { msg: ChatMessage }) => {
   const out = msg.from === 'user';
   return (
     <div
@@ -191,7 +95,7 @@ const TextBubble = ({ msg }: { msg: TextMessage }) => {
   );
 };
 
-const ChatCard = ({ example }: { example: ChatExample }) => (
+const ChatCard = ({ example, ui }: { example: ChatExample; ui: ChatUi }) => (
   <div className="snap-center shrink-0 w-[280px] md:w-auto md:shrink">
     <div className="rounded-2xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] overflow-hidden bg-[#0b141a]">
       {/* Header */}
@@ -215,7 +119,7 @@ const ChatCard = ({ example }: { example: ChatExample }) => (
         )}
         <div className="flex-1 min-w-0">
           <p className="text-[#e9edef] text-[13px] font-semibold leading-tight truncate">{example.contactName}</p>
-          <p className="text-[#8696a0] text-[10px] leading-tight">online</p>
+          <p className="text-[#8696a0] text-[10px] leading-tight">{ui.online}</p>
         </div>
         <div className="flex items-center gap-3.5 shrink-0" aria-hidden="true">
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
@@ -241,10 +145,10 @@ const ChatCard = ({ example }: { example: ChatExample }) => (
           aria-hidden="true"
         />
         <span className="relative self-center bg-[#182229] text-[#8696a0] text-[10px] px-2.5 py-1 rounded-lg shadow mb-1">
-          Today
+          {ui.today}
         </span>
         {example.messages.map((msg, i) =>
-          'voice' in msg ? <VoiceBubble key={i} msg={msg} /> : <TextBubble key={i} msg={msg} />
+          msg.voice ? <VoiceBubble key={i} msg={msg} /> : <TextBubble key={i} msg={msg} />
         )}
       </div>
 
@@ -252,7 +156,7 @@ const ChatCard = ({ example }: { example: ChatExample }) => (
       <div className="flex items-center gap-2 bg-[#1f2c34] px-3 py-2" aria-hidden="true">
         <span className="text-[#8696a0] text-lg font-light leading-none">+</span>
         <div className="flex-1 flex items-center justify-between bg-[#2a3942] rounded-full px-3 py-1.5 text-[#8696a0] text-xs">
-          Message
+          {ui.inputPlaceholder}
           <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="9" stroke="#8696a0" strokeWidth="1.6" />
             <circle cx="9" cy="10" r="1.2" fill="#8696a0" />
@@ -289,12 +193,13 @@ const ChatCard = ({ example }: { example: ChatExample }) => (
  * page that embeds this.
  */
 export default function WhatsAppExamples({ className = '' }: { className?: string }) {
+  const { whatsappSection } = useJournalingCopy();
   return (
     <div
       className={`flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0 md:mx-0 md:px-0 ${className}`}
     >
-      {EXAMPLES.map((example) => (
-        <ChatCard key={example.key} example={example} />
+      {whatsappSection.examples.map((example) => (
+        <ChatCard key={example.key} example={example} ui={whatsappSection.chatUi} />
       ))}
     </div>
   );

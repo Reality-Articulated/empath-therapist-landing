@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { blogPosts } from '../data/blogPosts';
+import { useTranslatedPost } from '../data/i18n/useTranslatedPost';
 import SEO from '../components/SEO';
 
 function toAnchorId(value: string) {
@@ -84,7 +85,10 @@ export default function BlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const post = blogPosts.find((entry) => entry.slug === slug);
+  const basePost = blogPosts.find((entry) => entry.slug === slug);
+  // Swaps in the machine-translated text fields when the route has a locale
+  // prefix and a translation JSON exists; English otherwise.
+  const post = useTranslatedPost(basePost, 'therapist');
 
   const articleUrl =
     typeof window !== 'undefined'

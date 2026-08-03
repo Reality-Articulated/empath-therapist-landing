@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import posthog from 'posthog-js';
+import { LocaleShell } from './i18n/LocaleContext';
+import { stripLocalePrefix, TRANSLATED_LOCALE_CODES } from './i18n/locales';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -60,38 +62,58 @@ function App() {
     posthog.capture('$pageview', {
       path: location.pathname,
       search: location.search,
+      locale: stripLocalePrefix(location.pathname).locale,
       ...adParams
     });
   }, [location]);
-  const hideNavbar = location.pathname.startsWith('/atman') || location.pathname.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(location.pathname);
+  // Chrome visibility is locale-agnostic: /es/app hides the navbar like /app.
+  const basePath = stripLocalePrefix(location.pathname).path;
+  const hideNavbar = basePath.startsWith('/atman') || basePath.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(basePath);
+
+  // One shared route table, mounted at / (English) and under every locale
+  // prefix (/es, /pt, …). Untranslated pages render English under a prefix;
+  // their <SEO /> canonicals keep pointing at the English URL so localized
+  // duplicates never compete in search.
+  const routeChildren = (
+    <>
+      <Route index element={<JournalingPage />} />
+      <Route path="therapist" element={<HomePage />} />
+      <Route path="advisory" element={<AdvisoryPage />} />
+      <Route path="atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
+      <Route path="about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
+      <Route path="whyempath" element={<ClientInfoPage />} />
+      <Route path="app" element={<JournalingPage />} />
+      <Route path="app/blog" element={<JournalingBlogsPage />} />
+      <Route path="app/blog/:slug" element={<JournalingBlogPostPage />} />
+      <Route path="privacy" element={<PrivacyPolicyPage />} />
+      <Route path="terms" element={<TermsPage />} />
+      <Route path="pledge" element={<PledgePage />} />
+      <Route path="transparency" element={<TransparencyPage />} />
+      <Route path="calculator" element={<TherapyValueCalculator />} />
+      <Route path="calculator-direct" element={<TherapyValueCalculatorDirect />} />
+      <Route path="quiz" element={<AIReadinessQuiz />} />
+      <Route path="survey" element={<SurveyPage />} />
+      <Route path="call-me" element={<CallMePage />} />
+      <Route path="upgrade" element={<UpgradePage />} />
+      <Route path="science" element={<SciencePage />} />
+      <Route path="blog" element={<BlogsPage />} />
+      <Route path="blogs" element={<BlogsPage />} />
+      <Route path="blog/:slug" element={<BlogPostPage />} />
+    </>
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<JournalingPage />} />
-        <Route path="/therapist" element={<HomePage />} />
-        <Route path="/advisory" element={<AdvisoryPage />} />
-        <Route path="/atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
-        <Route path="/about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
-        <Route path="/whyempath" element={<ClientInfoPage />} />
-        <Route path="/app" element={<JournalingPage />} />
-        <Route path="/app/blog" element={<JournalingBlogsPage />} />
-        <Route path="/app/blog/:slug" element={<JournalingBlogPostPage />} />
-        <Route path="/privacy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/pledge" element={<PledgePage />} />
-        <Route path="/transparency" element={<TransparencyPage />} />
-        <Route path="/calculator" element={<TherapyValueCalculator />} />
-        <Route path="/calculator-direct" element={<TherapyValueCalculatorDirect />} />
-        <Route path="/quiz" element={<AIReadinessQuiz />} />
-        <Route path="/survey" element={<SurveyPage />} />
-        <Route path="/call-me" element={<CallMePage />} />
-        <Route path="/upgrade" element={<UpgradePage />} />
-        <Route path="/science" element={<SciencePage />} />
-        <Route path="/blog" element={<BlogsPage />} />
-        <Route path="/blogs" element={<BlogsPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/" element={<LocaleShell locale="en" />}>
+          {routeChildren}
+        </Route>
+        {TRANSLATED_LOCALE_CODES.map((code) => (
+          <Route key={code} path={`/${code}`} element={<LocaleShell locale={code} />}>
+            {routeChildren}
+          </Route>
+        ))}
       </Routes>
       {!hideNavbar && <Footer />}
       <Analytics />

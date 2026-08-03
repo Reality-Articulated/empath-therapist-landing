@@ -15,6 +15,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { journalingBlogPosts, JournalingBlogPost } from '../data/journalingBlogPosts';
+import { useTranslatedPost } from '../data/i18n/useTranslatedPost';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
@@ -131,7 +132,10 @@ export default function JournalingBlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
-  const post = journalingBlogPosts.find((entry) => entry.slug === slug);
+  const basePost = journalingBlogPosts.find((entry) => entry.slug === slug);
+  // Swaps in the machine-translated text fields when the route has a locale
+  // prefix and a translation JSON exists; English otherwise.
+  const post = useTranslatedPost(basePost, 'journaling');
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
 
   const articleUrl =

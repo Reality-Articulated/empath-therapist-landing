@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Instagram } from 'lucide-react';
 import posthog from 'posthog-js';
 import { WhatsAppIcon, TelegramIcon, MessengerIcon } from './ChannelIcons';
+import { useJournalingCopy } from '../i18n/copy';
 
 const WHATSAPP_NUMBER = '18883663082';
 const TELEGRAM_USERNAME = 'MyEmpathBot';
@@ -70,6 +71,7 @@ export default function MessagingChannelsCarousel({
   eventPrefix: string;
   className?: string;
 }) {
+  const { channelRow } = useJournalingCopy();
   return (
     <div className={`flex flex-wrap justify-center gap-4 py-1 ${className}`}>
       {CHANNELS.map((channel) => (
@@ -78,7 +80,7 @@ export default function MessagingChannelsCarousel({
           href={channel.href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Journal on ${channel.label}`}
+          aria-label={`${channelRow.journalOn} ${channel.label}`}
           title={channel.label}
           onClick={() => posthog.capture(`${eventPrefix}_${channel.key}_clicked`)}
           className="w-12 h-12 text-white rounded-xl border-2 flex items-center justify-center transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px]"
