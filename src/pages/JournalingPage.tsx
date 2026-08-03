@@ -208,9 +208,9 @@ export default function JournalingPage() {
     <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEO
         title="Empath - The Journal You Won't Quit"
-        description="Empath lets you journal by text, WhatsApp, or call. No app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time."
+        description="There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see."
         path="/app"
-        keywords="journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker"
+        keywords="journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker"
       />
       <script
         type="application/ld+json"

@@ -39,15 +39,15 @@ const staticRoutes = [
   {
     path: '/',
     canonicalPath: '/app',
-    title: 'Empath - Journaling As Easy As Texting a Friend',
-    description: 'Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time.',
-    keywords: 'journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    title: "Empath - The Journal You Won't Quit",
+    description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+    keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
   },
   {
     path: '/app',
-    title: 'Empath - Journaling As Easy As Texting a Friend',
-    description: 'Empath lets you journal by text, WhatsApp, or call — no app to open, no blank page. Capture how you feel the moment it happens, then open the app to see your mood patterns and insights over time.',
-    keywords: 'journal by text, voice journaling, AI journaling app, mood tracking, mental health app, text journaling, WhatsApp journal, journaling without an app, journaling by phone call, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    title: "Empath - The Journal You Won't Quit",
+    description: "There's a number you can just journal at. Text it, WhatsApp it, call it — or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+    keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
   },
   {
     path: '/call-me',
