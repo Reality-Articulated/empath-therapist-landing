@@ -400,37 +400,8 @@ export default function JournalingPage() {
         </div>
       </section>
 
-      {/* --- EMPATH CALLS YOU --- */}
-      <section className="py-20 bg-[#FAF9F6] border-b-2 border-stone-200">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-6 shadow-[4px_4px_0px_0px_#1b8af1]">
-                <PhoneCall className="w-4 h-4" /> New: Empath calls you
-              </motion.div>
-              <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-5 tracking-tight font-serif">
-                Don't feel like dialing? We'll call you.
-              </motion.h2>
-              <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
-                Type your number and your phone rings within seconds. Talk about your day like
-                you would with a friend, hang up, and it's already saved as a journal entry:
-                transcribed, titled, and private. You can even schedule the call for later.
-              </motion.p>
-              <motion.div variants={fadeIn} className="max-w-md mx-auto bg-white p-6 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] text-left">
-                <CallMeForm eventPrefix="journaling_page" source="homepage_section" />
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* --- WHATSAPP EXAMPLES --- */}
-      <section className="py-24 bg-white border-y-2 border-stone-200 overflow-hidden">
+      <section className="py-24 bg-white border-b-2 border-stone-200 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -470,6 +441,35 @@ export default function JournalingPage() {
                 <p className="text-sm text-stone-500 font-medium mt-4">
                   Or text {PHONE_DISPLAY} — plain SMS works too. Example conversations shown.
                 </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- EMPATH CALLS YOU --- */}
+      <section className="py-20 bg-[#FAF9F6] border-b-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-6 shadow-[4px_4px_0px_0px_#1b8af1]">
+                <PhoneCall className="w-4 h-4" /> New: Empath calls you
+              </motion.div>
+              <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-5 tracking-tight font-serif">
+                Don't feel like dialing? We'll call you.
+              </motion.h2>
+              <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+                Type your number and your phone rings within seconds. Talk about your day like
+                you would with a friend, hang up, and it's already saved as a journal entry:
+                transcribed, titled, and private. You can even schedule the call for later.
+              </motion.p>
+              <motion.div variants={fadeIn} className="max-w-md mx-auto bg-white p-6 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] text-left">
+                <CallMeForm eventPrefix="journaling_page" source="homepage_section" />
               </motion.div>
             </motion.div>
           </div>
