@@ -30,6 +30,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
 import WhatsAppExamples from '../components/WhatsAppExamples';
+import CrossChannelStory from '../components/CrossChannelStory';
 import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
 import CallMeForm from '../components/CallMeForm';
 import { openSupportChat } from '../utils/supportChat';
@@ -441,6 +442,45 @@ export default function JournalingPage() {
                 <p className="text-sm text-stone-500 font-medium mt-4">
                   Or text {PHONE_DISPLAY} — plain SMS works too. Example conversations shown.
                 </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- CROSS-CHANNEL MEMORY --- */}
+      <section className="py-24 bg-[#FAF9F6] border-b-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <div className="text-center mb-16">
+                <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
+                  <MessageCircle className="w-4 h-4" /> One journal, every app
+                </motion.div>
+                <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
+                  Start Anywhere. Continue Everywhere.
+                </motion.h2>
+                <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+                  Empath lives wherever you already are. Journal tonight, ask about it on WhatsApp
+                  over coffee, dig deeper on Telegram after work, close the loop from Instagram
+                  while you scroll. Every channel talks to the same journal — and the same memory.
+                </motion.p>
+              </div>
+
+              <motion.div variants={fadeIn}>
+                <CrossChannelStory />
+              </motion.div>
+
+              <motion.div variants={fadeIn} className="text-center mt-14">
+                <p className="text-sm text-stone-500 font-medium mb-4">
+                  Pick whichever app you're already in
+                </p>
+                <MessagingChannelsCarousel eventPrefix="journaling_page_everywhere" />
               </motion.div>
             </motion.div>
           </div>
