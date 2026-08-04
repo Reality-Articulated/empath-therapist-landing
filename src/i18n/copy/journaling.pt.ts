@@ -209,8 +209,14 @@ export const journalingPt: JournalingCopy = {
     body: 'Na hora em que um pensamento surgir, dispare uma mensagem ou um áudio, ou simplesmente ligue e desabafe. É a mesma coisa que você faria com um amigo, só que aqui vira discretamente o seu diário. Nenhum app novo para aprender, nenhuma página em branco para encarar.',
     items: [
       { title: 'Transcrição com IA', desc: 'Precisão perfeita. Suas palavras, capturadas exatamente como você as diz.' },
-      { title: 'Fotos e imagens', desc: 'Mande fotos por mensagem. A gente analisa e entende automaticamente.' },
-      { title: 'Transcrição de imagens', desc: 'Texto em imagens? A gente lê e extrai para você.' },
+      {
+        title: 'Análise de voz',
+        desc: 'Ouça como você soou de verdade. Tom, energia e ritmo, lidos em cada áudio.',
+      },
+      {
+        title: 'Fotos e digitalizações',
+        desc: 'Mande uma foto e o Empath lê, até páginas escritas à mão, direto no seu diário.',
+      },
     ],
     mockVoiceTitle: 'Diário por voz',
     mockVoiceTime: 'há 2 minutos',
@@ -240,6 +246,15 @@ export const journalingPt: JournalingCopy = {
       'Acompanhe seu progresso ao longo do tempo',
       'Insights e sugestões personalizados',
     ],
+    peopleTitle: 'Insights sobre pessoas',
+    peopleBody:
+      'O Empath percebe quem aparece sempre no seu diário, e como você costuma se sentir quando isso acontece.',
+    peopleItems: [
+      'Todas as pessoas sobre quem você escreve, em um só lugar',
+      'Os sentimentos que surgem em torno de cada pessoa',
+      'Cada menção, pronta para reler',
+      'Edite ou remova qualquer pessoa, quando quiser',
+    ],
   },
 
   feature3: {
@@ -259,6 +274,7 @@ export const journalingPt: JournalingCopy = {
     items: [
       { title: 'Registro diário de humor', desc: 'Análise automática de sentimento a partir do seu diário' },
       { title: 'Análise de correlações', desc: 'Descubra quais atividades melhoram seu humor' },
+      { title: 'Lugares e clima', desc: 'Veja como você se sente em casa, no trabalho e nos dias nublados' },
       { title: 'Tendências de longo prazo', desc: 'Veja seu progresso ao longo de semanas e meses' },
     ],
   },
@@ -276,17 +292,17 @@ export const journalingPt: JournalingCopy = {
       {
         title: 'Sono e recuperação',
         desc: 'Acompanhe a qualidade do sono e seus efeitos na sua clareza mental.',
-        metrics: ['Duração do sono', 'Qualidade do sono', 'Frequência cardíaca'],
+        metrics: ['Duração do sono', 'Frequência cardíaca', 'Pressão arterial'],
       },
       {
-        title: 'Padrões diários',
-        desc: 'Descubra conexões entre hábitos e bem-estar.',
-        metrics: ['Níveis de energia', 'Sinais de estresse', 'Tempo de recuperação'],
+        title: 'Hábitos diários',
+        desc: 'Os pequenos detalhes do dia a dia que mexem no seu humor sem você notar.',
+        metrics: ['Cafeína', 'Consumo de água', 'Luz do dia', 'Minutos de mindfulness'],
       },
     ],
     calloutTitle: 'Insights de saúde automáticos',
     calloutBody:
-      'Nossa IA analisa seus dados de saúde junto com seu diário para revelar conexões poderosas. "Sua ansiedade cai 35% nos dias em que você dorme 7+ horas." Insights assim ajudam você a fazer escolhas melhores.',
+      'O Empath lê dez categorias do Apple Health e analisa junto com seu diário para revelar conexões poderosas. "Sua ansiedade cai 35% nos dias em que você dorme 7+ horas." Insights assim ajudam você a fazer escolhas melhores.',
   },
 
   feature5: {
@@ -308,13 +324,53 @@ export const journalingPt: JournalingCopy = {
     askItems: [
       'Encontre padrões no seu comportamento',
       'Entenda seus gatilhos',
-      'Acompanhe seu progresso',
-      'Receba sugestões personalizadas',
+      'Lembra o que importa de uma entrada para outra',
+      'Conhece sua bio e as pessoas sobre quem você escreve',
       'Resgate memórias específicas',
       'Prepare-se para as sessões de terapia',
     ],
     privacyTitle: '100% privado e seguro',
     privacyBody: 'Suas conversas são criptografadas e nunca usadas para treinar modelos de IA. Sua privacidade é nossa prioridade.',
+  },
+
+  featureGrid: {
+    badge: 'E o resto',
+    title: 'Todo o resto no app',
+    sub: 'As coisas pequenas que fazem o app ser seu.',
+    items: [
+      {
+        title: 'Bloqueio biométrico do diário',
+        desc: 'Deixe suas entradas mais pessoais atrás do Face ID ou Touch ID.',
+      },
+      {
+        title: 'Assistente de diário',
+        desc: 'Travou no meio da entrada? Peça uma pergunta, um empurrão ou ajuda para achar as palavras.',
+      },
+      {
+        title: 'Descubra você',
+        desc: 'Perguntas tiradas do seu próprio diário, para os dias em que você quer ir mais fundo.',
+      },
+      {
+        title: 'Widgets na tela de início',
+        desc: 'Registre o humor com um toque e leia a frase do dia sem abrir o app.',
+      },
+      {
+        title: 'Sua bio',
+        desc: 'Conte seu contexto ao Empath uma vez. Depois disso, cada insight chega mais perto.',
+      },
+      {
+        title: 'Entradas antigas relacionadas',
+        desc: 'Ao ler uma entrada, aparecem as mais antigas que combinam com ela.',
+      },
+      {
+        title: 'Importar e exportar',
+        desc: 'Traga seus diários antigos. Leve tudo com você quando quiser.',
+      },
+      {
+        title: 'Diário offline',
+        desc: 'Escreva sem sinal. Sincroniza no momento em que você volta.',
+      },
+    ],
   },
 
   feature6: {

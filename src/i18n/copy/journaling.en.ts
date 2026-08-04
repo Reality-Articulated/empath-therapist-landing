@@ -230,8 +230,14 @@ export const journalingEn = {
     body: "The moment a thought hits, fire off a text or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.",
     items: [
       { title: 'AI Transcription', desc: 'Perfect accuracy. Your words, captured exactly as you say them.' },
-      { title: 'Photos & Images', desc: "Send photos via text. We'll analyze and understand them automatically." },
-      { title: 'Image Transcription', desc: "Text in images? We'll read and extract it for you." },
+      {
+        title: 'Voice Analysis',
+        desc: 'Hear how you really sounded. Tone, energy, and pace, read back from every spoken entry.',
+      },
+      {
+        title: 'Photos & Scans',
+        desc: "Send a photo and Empath reads it, handwritten pages included, straight into your journal.",
+      },
     ],
     mockVoiceTitle: 'Voice Journal',
     mockVoiceTime: '2 minutes ago',
@@ -249,7 +255,7 @@ export const journalingEn = {
     memoryBody: "Find any moment, any feeling, any insight. Our AI understands context and surfaces exactly what you're looking for.",
     memoryItems: [
       'Search by emotion, topic, or date',
-      'AI-powered semantic understanding',
+      'Semantic search, so you can search by feeling',
       'Instant recall of important moments',
       'Timeline view of your journey',
     ],
@@ -260,6 +266,15 @@ export const journalingEn = {
       'Recognize behavioral patterns',
       'Track progress over time',
       'Personalized insights & suggestions',
+    ],
+    peopleTitle: 'People Insights',
+    peopleBody:
+      'Empath notices who keeps showing up in your entries, and how you tend to feel when they do.',
+    peopleItems: [
+      'Everyone you write about, in one place',
+      'The feelings that come up around each person',
+      'Every mention, ready to reread',
+      'Edit or remove anyone, anytime',
     ],
   },
 
@@ -280,6 +295,7 @@ export const journalingEn = {
     items: [
       { title: 'Daily Mood Tracking', desc: 'Automatic sentiment analysis from your journals' },
       { title: 'Correlation Analysis', desc: 'Discover what activities boost your mood' },
+      { title: 'Places & Weather', desc: 'See how you feel at home, at work, and on grey days' },
       { title: 'Long-term Trends', desc: 'See your progress over weeks and months' },
     ],
   },
@@ -297,17 +313,17 @@ export const journalingEn = {
       {
         title: 'Sleep & Recovery',
         desc: 'Track sleep quality and its effects on your mental clarity.',
-        metrics: ['Sleep duration', 'Sleep quality', 'Heart rate'],
+        metrics: ['Sleep duration', 'Heart rate', 'Blood pressure'],
       },
       {
-        title: 'Daily Patterns',
-        desc: 'Discover connections between habits and wellbeing.',
-        metrics: ['Energy levels', 'Stress markers', 'Recovery time'],
+        title: 'Daily Habits',
+        desc: 'The small daily inputs that quietly move your mood.',
+        metrics: ['Caffeine', 'Water intake', 'Daylight', 'Mindful minutes'],
       },
     ],
     calloutTitle: 'Automatic Health Insights',
     calloutBody:
-      'Our AI analyzes your health data alongside your journals to reveal powerful connections. "Your anxiety decreases 35% on days you sleep 7+ hours." Insights like these help you make better choices.',
+      'Empath reads ten categories from Apple Health and analyzes them alongside your journals to reveal powerful connections. "Your anxiety decreases 35% on days you sleep 7+ hours." Insights like these help you make better choices.',
   },
 
   feature5: {
@@ -329,13 +345,56 @@ export const journalingEn = {
     askItems: [
       'Find patterns in your behavior',
       'Understand your triggers',
-      'Track your progress',
-      'Get personalized suggestions',
+      'Remembers what matters between entries',
+      'Knows your bio and the people you write about',
       'Recall specific memories',
       'Prepare for therapy sessions',
     ],
     privacyTitle: '100% Private & Secure',
     privacyBody: 'Your conversations are encrypted and never used to train AI models. Your privacy is our priority.',
+  },
+
+  // Compact grid closing the features region: the shipped features that don't
+  // warrant a section of their own. Order matches the tile order in
+  // JournalingPage's FEATURE GRID block, whose icons are index-matched.
+  featureGrid: {
+    badge: 'And The Rest',
+    title: 'Everything Else In The App',
+    sub: 'The smaller things that make it yours.',
+    items: [
+      {
+        title: 'Biometric Journal Lock',
+        desc: 'Keep your most personal entries behind Face ID or Touch ID.',
+      },
+      {
+        title: 'Journal Assistant',
+        desc: 'Stuck mid-entry? Ask for a prompt, a nudge, or help finding the words.',
+      },
+      {
+        title: 'Discover Yourself',
+        desc: 'Questions drawn from your own entries, for the days you want to dig deeper.',
+      },
+      {
+        title: 'Home Screen Widgets',
+        desc: 'One-tap mood check-ins and a daily quote, without opening the app.',
+      },
+      {
+        title: 'Your Bio',
+        desc: 'Tell Empath your context once. Every insight after that lands closer to home.',
+      },
+      {
+        title: 'Related Past Entries',
+        desc: 'Reading one entry surfaces the older ones it rhymes with.',
+      },
+      {
+        title: 'Import & Export',
+        desc: 'Bring your old journals in. Take everything with you whenever you want.',
+      },
+      {
+        title: 'Offline Journaling',
+        desc: "Write with no signal. It syncs the moment you're back.",
+      },
+    ],
   },
 
   feature6: {

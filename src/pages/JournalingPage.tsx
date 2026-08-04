@@ -21,7 +21,18 @@ import {
   BarChart3,
   FileText,
   Image as ImageIcon,
-  MessageCircle
+  MessageCircle,
+  AudioWaveform,
+  ScanText,
+  Users,
+  ScanFace,
+  PenSquare,
+  Lightbulb,
+  LayoutGrid,
+  UserSquare,
+  SquareStack,
+  Upload,
+  WifiOff
 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import { Toaster } from 'react-hot-toast';
@@ -33,7 +44,7 @@ import WhatsAppExamples from '../components/WhatsAppExamples';
 import CrossChannelStory from '../components/CrossChannelStory';
 import CallMeForm from '../components/CallMeForm';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
+import { WhatsAppIcon } from '../components/ChannelIcons';
 import { useJournalingCopy } from '../i18n/copy';
 import { openSupportChat } from '../utils/supportChat';
 
@@ -83,7 +94,6 @@ export default function JournalingPage() {
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
   const WHATSAPP_NUMBER = '18883663082'; // Empath WhatsApp number (same as SMS/voice)
-  const TELEGRAM_USERNAME = 'MyEmpathBot'; // Telegram bot username (channel row lives in MessagingChannelsCarousel)
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
   const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
 
@@ -463,8 +473,8 @@ export default function JournalingPage() {
                   <div className="space-y-6 mb-8">
                     {[
                       { icon: <Zap className="w-6 h-6 text-purple-600" />, chip: 'bg-purple-100 border-purple-200' },
-                      { icon: <Camera className="w-6 h-6 text-blue-600" />, chip: 'bg-blue-100 border-blue-200' },
-                      { icon: <ImageIcon className="w-6 h-6 text-green-600" />, chip: 'bg-green-100 border-green-200' },
+                      { icon: <AudioWaveform className="w-6 h-6 text-blue-600" />, chip: 'bg-blue-100 border-blue-200' },
+                      { icon: <ScanText className="w-6 h-6 text-green-600" />, chip: 'bg-green-100 border-green-200' },
                     ].map((visual, i) => (
                       <div key={i} className="flex items-start gap-4">
                         <div className={`w-12 h-12 ${visual.chip} rounded-xl flex items-center justify-center flex-shrink-0 border-2`}>
@@ -530,7 +540,8 @@ export default function JournalingPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            {/* 2-up at md (three p-8 cards get cramped at 768px), 3-up from lg. */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] hover:shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
                 <div className="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-6 border-2 border-amber-200">
                   <Brain className="w-7 h-7 text-amber-600" />
@@ -561,6 +572,24 @@ export default function JournalingPage() {
                   {c.feature2.patternsItems.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-stone-700 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] hover:shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 border-2 border-blue-200">
+                  <Users className="w-7 h-7 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-stone-900 mb-4">{c.feature2.peopleTitle}</h3>
+                <p className="text-stone-600 mb-6 leading-relaxed font-medium">
+                  {c.feature2.peopleBody}
+                </p>
+                <ul className="space-y-3">
+                  {c.feature2.peopleItems.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                       <span className="text-stone-700 font-medium">{item}</span>
                     </li>
                   ))}
@@ -785,6 +814,56 @@ export default function JournalingPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FEATURE GRID: EVERYTHING ELSE --- */}
+      {/* Closes the #features region: the shipped features that don't warrant a
+          section of their own. Icons are index-matched to
+          `featureGrid.items` in the copy catalog — reorder both together. */}
+      <section className="py-24 bg-white border-b-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-stone-100 text-stone-800 border-2 border-stone-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]">
+                <LayoutGrid className="w-4 h-4" /> {c.featureGrid.badge}
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
+                {c.featureGrid.title}
+              </h2>
+              <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+                {c.featureGrid.sub}
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                // Tailwind's JIT only sees literal class strings, so the chip
+                // colours can't be built from a `${color}` template.
+                { icon: <ScanFace className="w-6 h-6 text-purple-600" />, chip: 'bg-purple-100 border-purple-200' },
+                { icon: <PenSquare className="w-6 h-6 text-[#1b8af1]" />, chip: 'bg-blue-100 border-blue-200' },
+                { icon: <Lightbulb className="w-6 h-6 text-amber-600" />, chip: 'bg-amber-100 border-amber-200' },
+                { icon: <LayoutGrid className="w-6 h-6 text-green-600" />, chip: 'bg-green-100 border-green-200' },
+                { icon: <UserSquare className="w-6 h-6 text-pink-600" />, chip: 'bg-pink-100 border-pink-200' },
+                { icon: <SquareStack className="w-6 h-6 text-amber-600" />, chip: 'bg-amber-100 border-amber-200' },
+                { icon: <Upload className="w-6 h-6 text-[#1b8af1]" />, chip: 'bg-blue-100 border-blue-200' },
+                { icon: <WifiOff className="w-6 h-6 text-stone-600" />, chip: 'bg-stone-100 border-stone-200' },
+              ].map((visual, i) => (
+                <div
+                  key={i}
+                  className="bg-[#FAF9F6] p-6 rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                >
+                  <div className={`w-12 h-12 ${visual.chip} rounded-xl flex items-center justify-center mb-4 border-2`}>
+                    {visual.icon}
+                  </div>
+                  <h3 className="font-bold text-stone-900 mb-2">{c.featureGrid.items[i].title}</h3>
+                  <p className="text-sm text-stone-600 font-medium leading-relaxed">
+                    {c.featureGrid.items[i].desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1106,46 +1185,9 @@ export default function JournalingPage() {
         </div>
       </footer>
 
-      {/* --- FLOATING CTAs --- */}
-      {showFloatingCTA && isMobile && (
-        <motion.div
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t-2 border-stone-200 p-4 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
-        >
-          <div className="flex gap-2">
-            <button
-              onClick={handleAppStoreClick}
-              className="flex-1 py-3 bg-stone-900 text-white rounded-lg font-bold shadow-lg border-2 border-stone-900 text-sm"
-            >
-              {c.floating.downloadFree}
-            </button>
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${c.channelRow.journalOn} WhatsApp`}
-              title="WhatsApp"
-              className="px-3 py-3 bg-[#25D366] text-white rounded-lg border-2 border-[#25D366] flex items-center justify-center shrink-0"
-              onClick={() => posthog.capture('floating_cta_whatsapp_clicked')}
-            >
-              <WhatsAppIcon className="w-5 h-5 shrink-0" />
-            </a>
-            <a
-              href={`https://t.me/${TELEGRAM_USERNAME}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${c.channelRow.journalOn} Telegram`}
-              title="Telegram"
-              className="px-3 py-3 bg-[#229ED9] text-white rounded-lg border-2 border-[#229ED9] flex items-center justify-center shrink-0"
-              onClick={() => posthog.capture('floating_cta_telegram_clicked')}
-            >
-              <TelegramIcon className="w-5 h-5 shrink-0" />
-            </a>
-          </div>
-        </motion.div>
-      )}
-
+      {/* --- FLOATING CTA --- */}
+      {/* Desktop only. The mobile sticky bottom bar was removed deliberately —
+          it covered content while scrolling; mobile keeps the in-page CTAs. */}
       {showFloatingCTA && !isMobile && (
         <motion.div
           initial={{ y: -100 }}

@@ -211,8 +211,14 @@ export const journalingHi: JournalingCopy = {
     body: 'जैसे ही कोई ख़याल आए, एक text या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
     items: [
       { title: 'AI Transcription', desc: 'एकदम सटीक। आपके शब्द, ठीक वैसे ही जैसे आपने कहे।' },
-      { title: 'Photos और Images', desc: 'Text से photos भेजिए। हम उन्हें अपने आप analyze करके समझ लेंगे।' },
-      { title: 'Image Transcription', desc: 'Image में लिखा text? हम उसे पढ़कर निकाल देंगे।' },
+      {
+        title: 'Voice Analysis',
+        desc: 'सुनिए आप असल में कैसे लग रहे थे। हर voice entry से tone, energy और रफ़्तार पढ़कर।',
+      },
+      {
+        title: 'Photos और Scans',
+        desc: 'एक photo भेजिए, Empath उसे पढ़ लेगा, हाथ से लिखे पन्ने भी, सीधे आपके journal में।',
+      },
     ],
     mockVoiceTitle: 'Voice Journal',
     mockVoiceTime: '2 मिनट पहले',
@@ -242,6 +248,15 @@ export const journalingHi: JournalingCopy = {
       'समय के साथ progress track करें',
       'Personalized insights और सुझाव',
     ],
+    peopleTitle: 'People Insights',
+    peopleBody:
+      'Empath देखता है कि आपके journals में बार-बार कौन आता है, और उनके ज़िक्र पर आप आम तौर पर कैसा महसूस करते हैं।',
+    peopleItems: [
+      'जिन लोगों के बारे में आप लिखते हैं, सब एक जगह',
+      'हर व्यक्ति के साथ जुड़ी feelings',
+      'हर ज़िक्र, दोबारा पढ़ने के लिए तैयार',
+      'किसी को भी कभी भी edit कीजिए या हटाइए',
+    ],
   },
 
   feature3: {
@@ -261,6 +276,7 @@ export const journalingHi: JournalingCopy = {
     items: [
       { title: 'Daily Mood Tracking', desc: 'आपके journals से अपने आप sentiment analysis' },
       { title: 'Correlation Analysis', desc: 'जानिए कौन सी activities आपका mood बेहतर करती हैं' },
+      { title: 'जगहें और मौसम', desc: 'देखिए घर पर, काम पर और बादल वाले दिनों में आप कैसा महसूस करते हैं' },
       { title: 'Long-term Trends', desc: 'हफ़्तों और महीनों में अपनी progress देखिए' },
     ],
   },
@@ -278,17 +294,17 @@ export const journalingHi: JournalingCopy = {
       {
         title: 'नींद और Recovery',
         desc: 'नींद की quality और आपकी mental clarity पर उसका असर track कीजिए।',
-        metrics: ['कितनी नींद', 'नींद की quality', 'Heart rate'],
+        metrics: ['कितनी नींद', 'Heart rate', 'Blood pressure'],
       },
       {
-        title: 'रोज़ के Patterns',
-        desc: 'आदतों और wellbeing के बीच के connections जानिए।',
-        metrics: ['Energy levels', 'Stress के संकेत', 'Recovery time'],
+        title: 'रोज़ की आदतें',
+        desc: 'दिन की वो छोटी-छोटी चीज़ें जो चुपचाप आपका mood बदल देती हैं।',
+        metrics: ['Caffeine', 'पानी', 'Daylight', 'Mindful minutes'],
       },
     ],
     calloutTitle: 'अपने आप मिलने वाली Health Insights',
     calloutBody:
-      'हमारा AI आपके health data को आपके journals के साथ मिलाकर देखता है और गहरे connections सामने लाता है। "जिन दिनों आप 7+ घंटे सोते हैं, आपकी anxiety 35% कम रहती है।" ऐसी insights आपको बेहतर फ़ैसले लेने में मदद करती हैं।',
+      'Empath, Apple Health से दस categories पढ़ता है और उन्हें आपके journals के साथ मिलाकर देखता है और गहरे connections सामने लाता है। "जिन दिनों आप 7+ घंटे सोते हैं, आपकी anxiety 35% कम रहती है।" ऐसी insights आपको बेहतर फ़ैसले लेने में मदद करती हैं।',
   },
 
   feature5: {
@@ -310,13 +326,53 @@ export const journalingHi: JournalingCopy = {
     askItems: [
       'अपने behavior के patterns ढूँढें',
       'अपने triggers समझें',
-      'अपनी progress track करें',
-      'Personalized सुझाव पाएँ',
+      'Entries के बीच जो ज़रूरी है, वो याद रखता है',
+      'आपकी bio और जिन लोगों के बारे में आप लिखते हैं, उन्हें जानता है',
       'कोई ख़ास memory याद करें',
       'Therapy sessions की तैयारी करें',
     ],
     privacyTitle: '100% Private और सुरक्षित',
     privacyBody: 'आपकी बातचीत encrypted रहती है और कभी भी AI models को train करने में इस्तेमाल नहीं होती। आपकी privacy हमारी प्राथमिकता है।',
+  },
+
+  featureGrid: {
+    badge: 'और बाक़ी सब',
+    title: 'App में और क्या-क्या है',
+    sub: 'वो छोटी-छोटी चीज़ें जो इसे आपका बना देती हैं।',
+    items: [
+      {
+        title: 'Biometric Journal Lock',
+        desc: 'अपनी सबसे निजी entries को Face ID या Touch ID के पीछे रखिए।',
+      },
+      {
+        title: 'Journal Assistant',
+        desc: 'Entry के बीच अटक गए? कोई सवाल, एक धक्का, या शब्द ढूँढने में मदद माँग लीजिए।',
+      },
+      {
+        title: 'ख़ुद को जानिए',
+        desc: 'आपके ही journals से निकले सवाल, उन दिनों के लिए जब गहरे उतरना हो।',
+      },
+      {
+        title: 'Home Screen Widgets',
+        desc: 'एक tap में mood, और दिन का quote, app खोले बिना।',
+      },
+      {
+        title: 'आपकी Bio',
+        desc: 'अपना context Empath को एक बार बता दीजिए। उसके बाद हर insight ज़्यादा अपना लगेगा।',
+      },
+      {
+        title: 'पुरानी जुड़ी Entries',
+        desc: 'एक entry पढ़ते ही वो पुरानी entries सामने आ जाती हैं जो उससे मिलती हैं।',
+      },
+      {
+        title: 'Import और Export',
+        desc: 'अपने पुराने journals ले आइए। जब चाहें सब कुछ साथ ले जाइए।',
+      },
+      {
+        title: 'Offline Journaling',
+        desc: 'Signal न हो तो भी लिखिए। जैसे ही वापस आते हैं, sync हो जाता है।',
+      },
+    ],
   },
 
   feature6: {

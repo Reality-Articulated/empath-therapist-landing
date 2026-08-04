@@ -210,8 +210,14 @@ export const journalingDe: JournalingCopy = {
     body: 'Sobald dir ein Gedanke kommt, schick eine Nachricht oder Sprachnachricht, oder ruf einfach an und red dich frei. Genau das, was du beim Dampfablassen mit Freunden auch machst, nur dass hier ganz nebenbei dein Tagebuch daraus wird. Keine neue App zum Lernen, keine leere Seite.',
     items: [
       { title: 'KI-Transkription', desc: 'Perfekte Genauigkeit. Deine Worte, festgehalten genau so, wie du sie sagst.' },
-      { title: 'Fotos & Bilder', desc: 'Schick Fotos per Nachricht. Wir analysieren und verstehen sie automatisch.' },
-      { title: 'Text aus Bildern', desc: 'Text im Bild? Wir lesen ihn und ziehen ihn für dich heraus.' },
+      {
+        title: 'Stimmanalyse',
+        desc: 'Hör, wie du wirklich geklungen hast. Tonlage, Energie und Tempo aus jedem Sprachbeitrag.',
+      },
+      {
+        title: 'Fotos & Scans',
+        desc: 'Schick ein Foto und Empath liest es, handschriftliche Seiten inklusive, direkt in dein Tagebuch.',
+      },
     ],
     mockVoiceTitle: 'Sprachjournal',
     mockVoiceTime: 'vor 2 Minuten',
@@ -241,6 +247,15 @@ export const journalingDe: JournalingCopy = {
       'Fortschritt über die Zeit verfolgen',
       'Persönliche Erkenntnisse & Vorschläge',
     ],
+    peopleTitle: 'Menschen-Erkenntnisse',
+    peopleBody:
+      'Empath merkt, wer in deinen Einträgen immer wieder auftaucht und wie du dich dabei meist fühlst.',
+    peopleItems: [
+      'Alle Menschen, über die du schreibst, an einem Ort',
+      'Die Gefühle, die bei jeder Person hochkommen',
+      'Jede Erwähnung, bereit zum Nachlesen',
+      'Jederzeit jemanden bearbeiten oder entfernen',
+    ],
   },
 
   feature3: {
@@ -260,6 +275,7 @@ export const journalingDe: JournalingCopy = {
     items: [
       { title: 'Tägliches Stimmungstracking', desc: 'Automatische Stimmungsanalyse aus deinen Einträgen' },
       { title: 'Zusammenhänge erkennen', desc: 'Finde heraus, welche Aktivitäten deine Stimmung heben' },
+      { title: 'Orte & Wetter', desc: 'Sieh, wie du dich zu Hause, auf der Arbeit und an grauen Tagen fühlst' },
       { title: 'Langfristige Trends', desc: 'Sieh deinen Fortschritt über Wochen und Monate' },
     ],
   },
@@ -277,17 +293,17 @@ export const journalingDe: JournalingCopy = {
       {
         title: 'Schlaf & Erholung',
         desc: 'Verfolge deine Schlafqualität und ihre Wirkung auf deine mentale Klarheit.',
-        metrics: ['Schlafdauer', 'Schlafqualität', 'Herzfrequenz'],
+        metrics: ['Schlafdauer', 'Herzfrequenz', 'Blutdruck'],
       },
       {
-        title: 'Tagesmuster',
-        desc: 'Entdecke Verbindungen zwischen Gewohnheiten und Wohlbefinden.',
-        metrics: ['Energielevel', 'Stressmarker', 'Erholungszeit'],
+        title: 'Tägliche Gewohnheiten',
+        desc: 'Die kleinen Dinge im Alltag, die deine Stimmung leise verschieben.',
+        metrics: ['Koffein', 'Wasseraufnahme', 'Tageslicht', 'Achtsamkeitsminuten'],
       },
     ],
     calloutTitle: 'Automatische Gesundheits-Erkenntnisse',
     calloutBody:
-      'Unsere KI analysiert deine Gesundheitsdaten zusammen mit deinen Einträgen und deckt starke Zusammenhänge auf. „Deine Anspannung sinkt um 35 % an Tagen mit mehr als 7 Stunden Schlaf." Solche Erkenntnisse helfen dir, bessere Entscheidungen zu treffen.',
+      'Empath liest zehn Kategorien aus Apple Health und analysiert sie zusammen mit deinen Einträgen und deckt starke Zusammenhänge auf. „Deine Anspannung sinkt um 35 % an Tagen mit mehr als 7 Stunden Schlaf." Solche Erkenntnisse helfen dir, bessere Entscheidungen zu treffen.',
   },
 
   feature5: {
@@ -309,13 +325,53 @@ export const journalingDe: JournalingCopy = {
     askItems: [
       'Muster in deinem Verhalten finden',
       'Deine Auslöser verstehen',
-      'Deinen Fortschritt verfolgen',
-      'Persönliche Vorschläge bekommen',
+      'Merkt sich zwischen Einträgen, was wichtig ist',
+      'Kennt deine Bio und die Menschen, über die du schreibst',
       'Bestimmte Erinnerungen abrufen',
       'Therapiesitzungen vorbereiten',
     ],
     privacyTitle: '100 % privat & sicher',
     privacyBody: 'Deine Gespräche sind verschlüsselt und werden nie zum Trainieren von KI-Modellen verwendet. Deine Privatsphäre hat für uns Priorität.',
+  },
+
+  featureGrid: {
+    badge: 'Und der Rest',
+    title: 'Alles Weitere in der App',
+    sub: 'Die kleinen Dinge, die sie zu deiner machen.',
+    items: [
+      {
+        title: 'Biometrische Tagebuchsperre',
+        desc: 'Halte deine persönlichsten Einträge hinter Face ID oder Touch ID.',
+      },
+      {
+        title: 'Tagebuch-Assistent',
+        desc: 'Mitten im Eintrag hängen geblieben? Frag nach einem Impuls, einem Anstoß oder Hilfe bei den Worten.',
+      },
+      {
+        title: 'Entdecke dich selbst',
+        desc: 'Fragen aus deinen eigenen Einträgen, für die Tage, an denen du tiefer gehen willst.',
+      },
+      {
+        title: 'Widgets auf dem Homescreen',
+        desc: 'Stimmung mit einem Tipp festhalten und das Zitat des Tages lesen, ohne die App zu öffnen.',
+      },
+      {
+        title: 'Deine Bio',
+        desc: 'Erzähl Empath einmal deinen Kontext. Danach trifft jede Erkenntnis näher.',
+      },
+      {
+        title: 'Passende alte Einträge',
+        desc: 'Beim Lesen eines Eintrags tauchen die älteren auf, die dazu passen.',
+      },
+      {
+        title: 'Import & Export',
+        desc: 'Bring deine alten Tagebücher mit. Nimm jederzeit alles wieder mit.',
+      },
+      {
+        title: 'Tagebuch ohne Netz',
+        desc: 'Schreib ohne Signal. Es synchronisiert, sobald du wieder online bist.',
+      },
+    ],
   },
 
   feature6: {
