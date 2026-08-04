@@ -10,6 +10,15 @@
 // Without a cid the checkout link would 404 by design, so the CTA degrades
 // to the App Store.
 //
+// The CTA also carries `?package_id=$rc_monthly|$rc_annual` (the RC offering's
+// package identifiers — RC's own app-to-web `web_checkout_url` uses exactly
+// this form). That makes RC skip its OWN hosted paywall/package-selection page
+// and land the user directly on checkout with the plan they picked here — this
+// page IS the paywall, a second one is a wasted click. If the identifier ever
+// stops matching a package, RC silently falls back to rendering its paywall
+// (which still carries stale "7 days free" copy — no trial exists anywhere,
+// see empath-heroku CLAUDE.md), so keep these in sync with the RC dashboard.
+//
 // Styling intentionally copies the iOS paywall recipe: dark scrim over a
 // blue glow, offWhite text, frosted 18px-radius panels, and the comparison
 // table's accent-tinted "Empath+" column strip. The comparison rows mirror
@@ -94,6 +103,8 @@ const COMPARE_ROWS: CompareRow[] = [
 
 interface Plan {
   id: 'monthly' | 'annual';
+  /** RevenueCat package identifier in the `default` offering. */
+  packageId: string;
   title: string;
   price: string;
   periodSuffix: string;
@@ -104,6 +115,7 @@ interface Plan {
 const PLANS: Plan[] = [
   {
     id: 'monthly',
+    packageId: '$rc_monthly',
     title: 'Monthly',
     price: '$6.99',
     periodSuffix: '/ month',
@@ -111,6 +123,7 @@ const PLANS: Plan[] = [
   },
   {
     id: 'annual',
+    packageId: '$rc_annual',
     title: 'Yearly',
     price: '$49.99',
     periodSuffix: '/ year',
@@ -153,7 +166,14 @@ export default function UpgradePage() {
   );
   const [selectedPlan, setSelectedPlan] = useState<Plan['id']>('annual');
 
-  const checkoutUrl = cid ? `${PAY_LINK_BASE}/${encodeURIComponent(cid)}` : APP_STORE_URL;
+  // Deep-links straight to RC's checkout for the selected package (no second
+  // paywall). URLSearchParams encodes the `$` in the package identifier.
+  const checkoutUrl = useMemo(() => {
+    if (!cid) return APP_STORE_URL;
+    const plan = PLANS.find((p) => p.id === selectedPlan) ?? PLANS[0];
+    const params = new URLSearchParams({ package_id: plan.packageId });
+    return `${PAY_LINK_BASE}/${encodeURIComponent(cid)}?${params.toString()}`;
+  }, [cid, selectedPlan]);
 
   const handleCheckout = () => {
     posthog.capture('upgrade_checkout_clicked', {
