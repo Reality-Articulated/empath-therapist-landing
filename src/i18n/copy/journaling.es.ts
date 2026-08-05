@@ -11,7 +11,7 @@ export const journalingEs: JournalingCopy = {
   seo: {
     title: 'Empath - El diario que no vas a abandonar',
     description:
-      'Hay un número al que simplemente puedes escribir tu diario. Mándale un texto, un WhatsApp, llámalo, o deja que te llame. Sin app, sin registro, sin página en blanco. Tus entradas se convierten en patrones de ánimo e insights que de verdad puedes ver.',
+      'Hay un número al que simplemente puedes escribir tu diario. Mándale un WhatsApp, un Telegram, llámalo, o deja que te llame. Sin app, sin registro, sin página en blanco. Tus entradas se convierten en patrones de ánimo e insights que de verdad puedes ver.',
     keywords:
       'diario por mensaje de texto, diario de voz, diario sin app, escribir un diario por texto, diario por WhatsApp, diario por llamada, seguimiento del estado de ánimo, diario por chat, asistente de diario con IA, diario conversacional, plan de diario, hábito de escribir un diario',
   },
@@ -27,8 +27,8 @@ export const journalingEs: JournalingCopy = {
   hero: {
     h1Pre: 'El diario que',
     h1Highlight: 'no vas a abandonar.',
-    sub: 'Porque vive donde tú vives: solo manda un texto o llama cuando algo te dé vueltas en la cabeza. Empath te ayuda a escribir tu diario y explorar tu mente, revelando tus patrones con el tiempo.',
-    mobileLead: 'Empieza a escribir tu diario ahora mismo. Solo llama, textea o manda un mensaje.',
+    sub: 'Porque vive donde tú vives: solo manda un mensaje o llama cuando algo te dé vueltas en la cabeza. Empath te ayuda a escribir tu diario y explorar tu mente, revelando tus patrones con el tiempo.',
+    mobileLead: 'Empieza a escribir tu diario ahora mismo. Solo llama o manda un mensaje.',
     call: 'Llamar',
     text: 'Textear',
     orFavoriteApp: 'O escribe tu diario en tu app favorita',
@@ -36,7 +36,7 @@ export const journalingEs: JournalingCopy = {
     wantInsights: '¿Quieres tendencias de ánimo e insights?',
     getApp: 'Descarga la app gratis',
     appBenefits: 'Gráficas de ánimo, detección de patrones, sincronización con Apple Health',
-    desktopLead: 'Empieza a escribir tu diario ahora mismo con una llamada o un texto. Sin app que descargar, sin registro.',
+    desktopLead: 'Empieza a escribir tu diario ahora mismo con una llamada o un mensaje. Sin app que descargar, sin registro.',
     textToJournal: 'Textea tu diario',
     callAndTalk: 'Llama y solo habla',
     textUsAt: 'Escríbenos al',
@@ -57,7 +57,7 @@ export const journalingEs: JournalingCopy = {
     title: 'Así se ve en la vida real',
     sub: 'Una espiral a las 2 a.m., una nota de voz porque ya no te quedan fuerzas para teclear, un día pesado. Lo mandas como le escribirías a un amigo: Empath escucha, responde y lo guarda en silencio como una entrada de tu diario.',
     cta: 'Escribe tu diario en WhatsApp',
-    phoneNote: 'O manda un texto al {phone}. Un SMS normal también funciona. Conversaciones de ejemplo.',
+    phoneNote: 'O escríbenos al {phone} por Telegram, Messenger o Instagram. Conversaciones de ejemplo.',
     examples: [
       {
         key: 'late-night',
@@ -208,9 +208,9 @@ export const journalingEs: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'Texto, WhatsApp o llamada',
+    badge: 'WhatsApp, Telegram o llamada',
     title: 'Usa las apps que ya abres todos los días',
-    body: 'En cuanto te llegue un pensamiento, manda un texto o una nota de voz, o simplemente llama y suéltalo. Es lo mismo que haces cuando te desahogas con un amigo, solo que aquí se convierte en tu diario sin que hagas nada más. Sin app nueva que aprender, sin página en blanco que enfrentar.',
+    body: 'En cuanto te llegue un pensamiento, manda un mensaje o una nota de voz, o simplemente llama y suéltalo. Es lo mismo que haces cuando te desahogas con un amigo, solo que aquí se convierte en tu diario sin que hagas nada más. Sin app nueva que aprender, sin página en blanco que enfrentar.',
     items: [
       { title: 'Transcripción con IA', desc: 'Precisión perfecta. Tus palabras, capturadas exactamente como las dices.' },
       {
@@ -233,7 +233,7 @@ export const journalingEs: JournalingCopy = {
   feature2: {
     badge: 'Inteligencia artificial',
     title: '"Un momento, ¿cuándo empecé a sentirme así?"',
-    sub: 'Abre la app y solo pregunta. Cada texto, llamada y pensamiento que has mandado queda en la memoria y aparece en segundos.',
+    sub: 'Abre la app y solo pregunta. Cada mensaje, llamada y pensamiento que has mandado queda en la memoria y aparece en segundos.',
     memoryTitle: 'Búsqueda inteligente en tu memoria',
     memoryBody: 'Encuentra cualquier momento, cualquier emoción, cualquier insight. Nuestra IA entiende el contexto y saca justo lo que buscas.',
     memoryItems: [
@@ -417,13 +417,13 @@ export const journalingEs: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Captura por texto o llamada. Reflexiona en la app.',
+    title: 'Captura por mensaje o llamada. Reflexiona en la app.',
     sub: 'Sin configuración, sin hábito nuevo que construir. Escribe tu diario como ya hablas con tus amigos.',
     stepLabel: 'Paso',
     steps: [
       {
-        title: 'Textea o llama',
-        desc: 'Cuando aparezca un pensamiento o una emoción, mándale un texto, un WhatsApp o una llamada a Empath, como le escribirías a un amigo. Sin app, sin registro, sin página en blanco.',
+        title: 'Escribe o llama',
+        desc: 'Cuando aparezca un pensamiento o una emoción, mándale un WhatsApp, un Telegram o una llamada a Empath, como le escribirías a un amigo. Sin app, sin registro, sin página en blanco.',
       },
       {
         title: 'Empath lo captura',
@@ -439,7 +439,7 @@ export const journalingEs: JournalingCopy = {
   iosCallout: {
     kicker: 'App para iOS disponible',
     title: '¿Quieres mirar atrás? Descarga la app',
-    body: 'Tú escribes tu diario por texto y llamada. La app es donde lo relees todo, buscas entradas pasadas y ves cómo se revelan tus patrones de ánimo.',
+    body: 'Tú escribes tu diario por mensaje y llamada. La app es donde lo relees todo, buscas entradas pasadas y ves cómo se revelan tus patrones de ánimo.',
     button: 'Descargar en el App Store',
   },
 
@@ -473,11 +473,11 @@ export const journalingEs: JournalingCopy = {
     items: [
       {
         q: '¿Necesito descargar la app para escribir mi diario?',
-        a: 'No. Puedes llevar tu diario por completo por texto, WhatsApp o llamada, sin app y sin registro. La app de iOS es opcional: es donde relees tus entradas, buscas momentos pasados y ves tus patrones de ánimo con el tiempo.',
+        a: 'No. Puedes llevar tu diario por completo por WhatsApp, Telegram o llamada, sin app y sin registro. La app de iOS es opcional: es donde relees tus entradas, buscas momentos pasados y ves tus patrones de ánimo con el tiempo.',
       },
       {
         q: '¿Empath es gratis de verdad?',
-        a: '¡Sí! Empath es completamente gratis. Todo lo esencial está incluido sin costo: el diario por texto, llamada o app, más transcripción con IA, seguimiento del ánimo e insights.',
+        a: '¡Sí! Empath es completamente gratis. Todo lo esencial está incluido sin costo: el diario por mensaje, llamada o app, más transcripción con IA, seguimiento del ánimo e insights.',
       },
       {
         q: '¿Cómo funciona la IA?',
@@ -493,7 +493,7 @@ export const journalingEs: JournalingCopy = {
       },
       {
         q: '¿Y Android?',
-        a: 'Por ahora solo estamos en iOS, ¡pero igual puedes escribir tu diario por llamada o mensaje de texto desde cualquier teléfono! La app para Android está en desarrollo.',
+        a: 'Por ahora solo estamos en iOS, ¡pero igual puedes escribir tu diario por llamada o WhatsApp desde cualquier teléfono! La app para Android está en desarrollo.',
       },
       {
         q: '¿Cómo me conecto con mi terapeuta?',
@@ -510,15 +510,15 @@ export const journalingEs: JournalingCopy = {
       },
       {
         q: '¿Empath puede ayudarme a crear el hábito de escribir un diario?',
-        a: 'Sí. Configura un Plan de Diario con ritmo diario o semanal, rachas flexibles que sobreviven a un día perdido, y recordatorios adaptativos por notificación, SMS o correo que se saltan solos cuando ya escribiste ese día.',
+        a: 'Sí. Configura un Plan de Diario con ritmo diario o semanal, rachas flexibles que sobreviven a un día perdido, y recordatorios adaptativos por notificación o correo que se saltan solos cuando ya escribiste ese día.',
         link: { text: 'Mira cómo armar un plan de diario que sí se mantenga', to: '/app/blog/journaling-plan' },
       },
     ],
   },
 
   finalCta: {
-    title: 'Tu próxima entrada está a un texto de distancia',
-    sub: 'Sin app que aprender, sin página en blanco que mirar. Solo textea o llama como ya lo haces con un amigo, y empieza a ver tus patrones en días, no en meses.',
+    title: 'Tu próxima entrada está a un mensaje de distancia',
+    sub: 'Sin app que aprender, sin página en blanco que mirar. Solo escribe o llama como ya lo haces con un amigo, y empieza a ver tus patrones en días, no en meses.',
     downloadFree: 'Descarga gratis en el App Store',
     justSayHi: 'Sin app, sin registro. Solo di hola',
     preferTyping: '¿Prefieres teclear? Abre el panel web →',

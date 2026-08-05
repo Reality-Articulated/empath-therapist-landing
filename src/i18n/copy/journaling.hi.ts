@@ -9,7 +9,7 @@ export const journalingHi: JournalingCopy = {
   seo: {
     title: 'Empath - वो Journal जो आप छोड़ेंगे नहीं',
     description:
-      'एक नंबर है जिस पर आप बस journal कर सकते हैं। Text करें, WhatsApp करें, call करें, या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
+      'एक नंबर है जिस पर आप बस journal कर सकते हैं। WhatsApp करें, Telegram करें, call करें, या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
     keywords:
       'text से journaling, voice journaling, बिना app के journal, WhatsApp journal, phone call से journaling, mood tracking, mood tracker, डायरी app, डायरी लिखना, journal कैसे लिखें, AI journaling assistant, chat journaling, journaling habit, journaling plan',
   },
@@ -25,8 +25,8 @@ export const journalingHi: JournalingCopy = {
   hero: {
     h1Pre: 'वो journal जो आप',
     h1Highlight: 'कभी नहीं छोड़ेंगे.',
-    sub: 'क्योंकि ये वहीं रहता है जहाँ आप हैं: जब भी मन में कुछ हो, बस text कर दीजिए या call कर लीजिए। Empath आपको journal करने और अपने मन को समझने में मदद करता है, और वक़्त के साथ आपके patterns सामने लाता है।',
-    mobileLead: 'अभी से journaling शुरू करें। बस call, text या message कीजिए।',
+    sub: 'क्योंकि ये वहीं रहता है जहाँ आप हैं: जब भी मन में कुछ हो, बस message कर दीजिए या call कर लीजिए। Empath आपको journal करने और अपने मन को समझने में मदद करता है, और वक़्त के साथ आपके patterns सामने लाता है।',
+    mobileLead: 'अभी से journaling शुरू करें। बस call या message कीजिए।',
     call: 'Call करें',
     text: 'Text करें',
     orFavoriteApp: 'या अपने पसंदीदा app पर journal करें',
@@ -34,7 +34,7 @@ export const journalingHi: JournalingCopy = {
     wantInsights: 'Mood trends और insights चाहिए?',
     getApp: 'Free App डाउनलोड करें',
     appBenefits: 'Mood charts, pattern detection, Apple Health sync',
-    desktopLead: 'एक call या text से अभी journaling शुरू कीजिए। न कोई app download करना है, न कोई साइन-अप।',
+    desktopLead: 'एक call या message से अभी journaling शुरू कीजिए। न कोई app download करना है, न कोई साइन-अप।',
     textToJournal: 'Text करके journal करें',
     callAndTalk: 'Call करें और बस बोलें',
     textUsAt: 'हमें text करें',
@@ -55,7 +55,7 @@ export const journalingHi: JournalingCopy = {
     title: 'असल में ये दिखता कैसा है',
     sub: 'रात 2 बजे की overthinking, वो voice note जो type करने की energy नहीं, एक बुरा दिन। आप वैसे ही भेजते हैं जैसे किसी दोस्त को text करते हैं। Empath सुनता है, जवाब देता है, और चुपचाप उसे journal entry बनाकर save कर लेता है।',
     cta: 'WhatsApp पर journal करें',
-    phoneNote: 'या {phone} पर text करें, सादा SMS भी चलता है। नीचे example conversations हैं।',
+    phoneNote: 'या {phone} पर Telegram, Messenger या Instagram से message करें। नीचे example conversations हैं।',
     examples: [
       {
         key: 'late-night',
@@ -119,7 +119,7 @@ export const journalingHi: JournalingCopy = {
       {
         key: 'no-app',
         title: '"रुको, कोई app ही नहीं?"',
-        caption: 'न app। न साइन-अप। बस नंबर पर text कीजिए।',
+        caption: 'न app। न साइन-अप। बस नंबर पर message कीजिए।',
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
@@ -206,9 +206,9 @@ export const journalingHi: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'Text, WhatsApp या Call',
+    badge: 'WhatsApp, Telegram या Call',
     title: 'वही Apps इस्तेमाल कीजिए जो आप पहले से खोलते हैं',
-    body: 'जैसे ही कोई ख़याल आए, एक text या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
+    body: 'जैसे ही कोई ख़याल आए, एक message या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
     items: [
       { title: 'AI Transcription', desc: 'एकदम सटीक। आपके शब्द, ठीक वैसे ही जैसे आपने कहे।' },
       {
@@ -231,7 +231,7 @@ export const journalingHi: JournalingCopy = {
   feature2: {
     badge: 'AI Intelligence',
     title: '"रुको, ये feeling शुरू कब हुई थी?"',
-    sub: 'App खोलिए और बस पूछ लीजिए। आपका भेजा हर text, call और ख़याल याद रखा जाता है और सेकंडों में सामने आ जाता है।',
+    sub: 'App खोलिए और बस पूछ लीजिए। आपका भेजा हर message, call और ख़याल याद रखा जाता है और सेकंडों में सामने आ जाता है।',
     memoryTitle: 'Smart Memory Search',
     memoryBody: 'कोई भी पल, कोई भी feeling, कोई भी insight ढूँढिए। हमारा AI context समझता है और ठीक वही निकालकर देता है जो आप ढूँढ रहे हैं।',
     memoryItems: [
@@ -415,13 +415,13 @@ export const journalingHi: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Text या Call से लिखिए। App में मुड़कर देखिए।',
+    title: 'Message या Call से लिखिए। App में मुड़कर देखिए।',
     sub: 'न कोई setup, न कोई नई आदत बनानी है। जैसे दोस्तों से बात करते हैं, वैसे ही journal कीजिए।',
     stepLabel: 'Step',
     steps: [
       {
-        title: 'Text करें या Call',
-        desc: 'जब भी कोई ख़याल या feeling आए, Empath को text, WhatsApp या call कर दीजिए, जैसे किसी दोस्त को message करते हैं। न app, न साइन-अप, न खाली page।',
+        title: 'Message करें या Call',
+        desc: 'जब भी कोई ख़याल या feeling आए, Empath को WhatsApp, Telegram या call कर दीजिए, जैसे किसी दोस्त को message करते हैं। न app, न साइन-अप, न खाली page।',
       },
       {
         title: 'Empath उसे सँभाल लेता है',
@@ -437,7 +437,7 @@ export const journalingHi: JournalingCopy = {
   iosCallout: {
     kicker: 'iOS app उपलब्ध',
     title: 'पीछे मुड़कर देखना है? App ले लीजिए',
-    body: 'Journal आप text और call से करते हैं। App वो जगह है जहाँ आप सब कुछ पढ़ सकते हैं, पुरानी entries search कर सकते हैं और अपने mood patterns को खुलते देख सकते हैं।',
+    body: 'Journal आप message और call से करते हैं। App वो जगह है जहाँ आप सब कुछ पढ़ सकते हैं, पुरानी entries search कर सकते हैं और अपने mood patterns को खुलते देख सकते हैं।',
     button: 'App Store से Download करें',
   },
 
@@ -471,11 +471,11 @@ export const journalingHi: JournalingCopy = {
     items: [
       {
         q: 'क्या journal करने के लिए app download करना ज़रूरी है?',
-        a: 'बिल्कुल नहीं। आप पूरी तरह text, WhatsApp या phone call से journal कर सकते हैं। न app चाहिए, न साइन-अप। iOS app optional है: वहाँ आप अपनी entries पढ़ते हैं, पुराने पल search करते हैं और समय के साथ अपने mood patterns देखते हैं।',
+        a: 'बिल्कुल नहीं। आप पूरी तरह WhatsApp, Telegram या phone call से journal कर सकते हैं। न app चाहिए, न साइन-अप। iOS app optional है: वहाँ आप अपनी entries पढ़ते हैं, पुराने पल search करते हैं और समय के साथ अपने mood patterns देखते हैं।',
       },
       {
         q: 'क्या Empath सच में free है?',
-        a: 'हाँ! Empath पूरी तरह free है। Text, call या app से journaling, साथ में AI transcription, mood tracking और insights, सब कुछ बिना किसी क़ीमत के शामिल है।',
+        a: 'हाँ! Empath पूरी तरह free है। Message, call या app से journaling, साथ में AI transcription, mood tracking और insights, सब कुछ बिना किसी क़ीमत के शामिल है।',
       },
       {
         q: 'AI काम कैसे करता है?',
@@ -491,7 +491,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         q: 'और Android का क्या?',
-        a: 'फ़िलहाल app सिर्फ़ iOS पर है, पर आप किसी भी device से phone call या text message के ज़रिए journal कर ही सकते हैं! Android app पर काम चल रहा है।',
+        a: 'फ़िलहाल app सिर्फ़ iOS पर है, पर आप किसी भी device से phone call या WhatsApp के ज़रिए journal कर ही सकते हैं! Android app पर काम चल रहा है।',
       },
       {
         q: 'अपने therapist से कैसे जुड़ें?',
@@ -508,15 +508,15 @@ export const journalingHi: JournalingCopy = {
       },
       {
         q: 'क्या Empath journaling की आदत बनाने में मदद कर सकता है?',
-        a: 'हाँ। एक Journaling Plan set कीजिए: रोज़ाना या हफ़्ते के हिसाब से, ऐसी streaks जो एक दिन छूट जाने पर भी नहीं टूटतीं, और push, SMS या email से smart reminders जो उस दिन ख़ुद skip हो जाते हैं जब आप journal कर चुके होते हैं।',
+        a: 'हाँ। एक Journaling Plan set कीजिए: रोज़ाना या हफ़्ते के हिसाब से, ऐसी streaks जो एक दिन छूट जाने पर भी नहीं टूटतीं, और push या email से smart reminders जो उस दिन ख़ुद skip हो जाते हैं जब आप journal कर चुके होते हैं।',
         link: { text: 'देखिए टिकने वाला journaling plan कैसे बनता है', to: '/app/blog/journaling-plan' },
       },
     ],
   },
 
   finalCta: {
-    title: 'आपकी अगली Journal Entry बस एक Text दूर है',
-    sub: 'न कोई app सीखना, न खाली page को घूरना। जैसे दोस्त को करते हैं वैसे ही text या call कीजिए, और महीनों नहीं, कुछ ही दिनों में अपने patterns दिखने लगेंगे।',
+    title: 'आपकी अगली Journal Entry बस एक Message दूर है',
+    sub: 'न कोई app सीखना, न खाली page को घूरना। जैसे दोस्त को करते हैं वैसे ही message या call कीजिए, और महीनों नहीं, कुछ ही दिनों में अपने patterns दिखने लगेंगे।',
     downloadFree: 'App Store से Free Download करें',
     justSayHi: 'न app, न साइन-अप। बस hi बोल दीजिए',
     preferTyping: 'Type करना पसंद है? Web dashboard खोलें →',

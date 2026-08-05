@@ -7,7 +7,7 @@ export const journalingPt: JournalingCopy = {
   seo: {
     title: 'Empath - O diário que você não vai abandonar',
     description:
-      'Existe um número onde você simplesmente escreve seu diário. Mande um SMS, um WhatsApp, ligue. Ou peça para ele te ligar. Sem app, sem cadastro, sem página em branco. Suas entradas viram padrões de humor e insights que você consegue ver de verdade.',
+      'Existe um número onde você simplesmente escreve seu diário. Mande um WhatsApp, um Telegram, ligue. Ou peça para ele te ligar. Sem app, sem cadastro, sem página em branco. Suas entradas viram padrões de humor e insights que você consegue ver de verdade.',
     keywords:
       'diário por mensagem, diário por voz, diário sem aplicativo, diário por SMS, diário no WhatsApp, diário por ligação, monitoramento de humor, diário por chat, assistente de diário com IA, diário em conversa, plano de journaling, hábito de escrever diário',
   },
@@ -24,7 +24,7 @@ export const journalingPt: JournalingCopy = {
     h1Pre: 'O diário que você',
     h1Highlight: 'não vai abandonar.',
     sub: 'Porque ele vive onde você já está: é só mandar uma mensagem ou ligar quando algo estiver na sua cabeça. O Empath te ajuda a escrever seu diário e explorar sua mente, revelando seus padrões ao longo do tempo.',
-    mobileLead: 'Comece seu diário agora mesmo. É só ligar, mandar SMS ou mensagem.',
+    mobileLead: 'Comece seu diário agora mesmo. É só ligar ou mandar mensagem.',
     call: 'Ligar',
     text: 'Mensagem',
     orFavoriteApp: 'Ou escreva no seu app favorito',
@@ -53,7 +53,7 @@ export const journalingPt: JournalingCopy = {
     title: 'Como é na prática',
     sub: 'Aquele surto das 2 da manhã, um áudio que você está cansado demais para digitar, um dia difícil. Você manda como mandaria para um amigo. O Empath escuta, responde e salva tudo discretamente como uma entrada do seu diário.',
     cta: 'Escrever no WhatsApp',
-    phoneNote: 'Ou mande SMS para {phone}. Mensagem comum também funciona. Conversas de exemplo.',
+    phoneNote: 'Ou mande mensagem para {phone} no Telegram, Messenger ou Instagram. Conversas de exemplo.',
     examples: [
       {
         key: 'late-night',
@@ -204,7 +204,7 @@ export const journalingPt: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'SMS, WhatsApp ou ligação',
+    badge: 'WhatsApp, Telegram ou ligação',
     title: 'Use os apps que você já abre',
     body: 'Na hora em que um pensamento surgir, dispare uma mensagem ou um áudio, ou simplesmente ligue e desabafe. É a mesma coisa que você faria com um amigo, só que aqui vira discretamente o seu diário. Nenhum app novo para aprender, nenhuma página em branco para encarar.',
     items: [
@@ -419,7 +419,7 @@ export const journalingPt: JournalingCopy = {
     steps: [
       {
         title: 'Mande mensagem ou ligue',
-        desc: 'Sempre que um pensamento ou sentimento aparecer, mande SMS, WhatsApp ou ligue para o Empath, como faria com um amigo. Sem app, sem cadastro, sem página em branco.',
+        desc: 'Sempre que um pensamento ou sentimento aparecer, mande WhatsApp, Telegram ou ligue para o Empath, como faria com um amigo. Sem app, sem cadastro, sem página em branco.',
       },
       {
         title: 'O Empath registra',
@@ -469,7 +469,7 @@ export const journalingPt: JournalingCopy = {
     items: [
       {
         q: 'Preciso baixar o app para escrever meu diário?',
-        a: 'Não. Você pode escrever tudo por SMS, WhatsApp ou ligação, sem app e sem cadastro. O app para iOS é opcional: é onde você relê suas entradas, busca momentos passados e vê seus padrões de humor ao longo do tempo.',
+        a: 'Não. Você pode escrever tudo por WhatsApp, Telegram ou ligação, sem app e sem cadastro. O app para iOS é opcional: é onde você relê suas entradas, busca momentos passados e vê seus padrões de humor ao longo do tempo.',
       },
       {
         q: 'O Empath é grátis mesmo?',
@@ -506,7 +506,7 @@ export const journalingPt: JournalingCopy = {
       },
       {
         q: 'O Empath pode me ajudar a criar o hábito de escrever?',
-        a: 'Sim. Monte um Plano de Journaling com ritmo diário ou semanal, sequências tolerantes que sobrevivem a um dia perdido e lembretes adaptativos por push, SMS ou e-mail que se cancelam sozinhos quando você já escreveu.',
+        a: 'Sim. Monte um Plano de Journaling com ritmo diário ou semanal, sequências tolerantes que sobrevivem a um dia perdido e lembretes adaptativos por push ou e-mail que se cancelam sozinhos quando você já escreveu.',
         link: { text: 'Veja como montar um plano de journaling que dura', to: '/app/blog/journaling-plan' },
       },
     ],

@@ -47,6 +47,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 import { WhatsAppIcon } from '../components/ChannelIcons';
 import { useJournalingCopy } from '../i18n/copy';
 import { openSupportChat } from '../utils/supportChat';
+import { SMS_ENABLED } from '../utils/channels';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -218,7 +219,7 @@ export default function JournalingPage() {
                 <p className="text-stone-600 font-medium mb-5 text-center">
                   {c.hero.mobileLead}
                 </p>
-                <div className="grid grid-cols-2 gap-3 w-full mb-3">
+                <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full mb-3`}>
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
@@ -226,13 +227,15 @@ export default function JournalingPage() {
                   >
                     <Phone className="w-4 h-4" /> {c.hero.call}
                   </a>
-                  <a
-                    href={`sms:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_text_clicked')}
-                  >
-                    <MessageSquare className="w-4 h-4" /> {c.hero.text}
-                  </a>
+                  {SMS_ENABLED && (
+                    <a
+                      href={`sms:${PHONE_MAIN}`}
+                      className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                      onClick={() => posthog.capture('journaling_page_text_clicked')}
+                    >
+                      <MessageSquare className="w-4 h-4" /> {c.hero.text}
+                    </a>
+                  )}
                 </div>
                 <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">{c.hero.orFavoriteApp}</p>
                 <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3" />
@@ -270,16 +273,18 @@ export default function JournalingPage() {
                   {c.hero.desktopLead}
                 </p>
 
-                {/* Primary CTAs — call or text, the way you'd reach a friend */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
-                  <a
-                    href={`sms:${PHONE_MAIN}`}
-                    title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
-                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
-                    onClick={() => posthog.capture('journaling_page_text_clicked')}
-                  >
-                    <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
-                  </a>
+                {/* Primary CTAs — call or message, the way you'd reach a friend */}
+                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-2' : ''} gap-3 w-full`}>
+                  {SMS_ENABLED && (
+                    <a
+                      href={`sms:${PHONE_MAIN}`}
+                      title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
+                      className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                      onClick={() => posthog.capture('journaling_page_text_clicked')}
+                    >
+                      <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
+                    </a>
+                  )}
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
@@ -1115,15 +1120,17 @@ export default function JournalingPage() {
             ) : (
               <div className="inline-flex flex-col items-center gap-4 px-8 py-7 bg-white text-stone-900 rounded-xl border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
                 <p className="text-sm font-bold uppercase tracking-wider text-stone-500">{c.finalCta.justSayHi}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
-                  <a
-                    href={`sms:${PHONE_MAIN}`}
-                    title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
-                    className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
-                    onClick={() => posthog.capture('final_cta_text_clicked')}
-                  >
-                    <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
-                  </a>
+                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-2' : ''} gap-3 w-full`}>
+                  {SMS_ENABLED && (
+                    <a
+                      href={`sms:${PHONE_MAIN}`}
+                      title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
+                      className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                      onClick={() => posthog.capture('final_cta_text_clicked')}
+                    >
+                      <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
+                    </a>
+                  )}
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
@@ -1203,22 +1210,29 @@ export default function JournalingPage() {
             </Link>
             <div className="flex-grow"></div>
             <div className="flex items-center gap-3">
+              {/* With SMS paused, the call CTA is the primary action and stops being lg-only. */}
               <a
                 href={`tel:${PHONE_MAIN}`}
                 title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                className="px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition flex items-center gap-2 hidden lg:flex"
+                className={
+                  SMS_ENABLED
+                    ? 'px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition items-center gap-2 hidden lg:flex'
+                    : 'px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2'
+                }
                 onClick={() => posthog.capture('floating_cta_call_clicked')}
               >
                 <Phone className="w-4 h-4" /> {c.floating.call}
               </a>
-              <a
-                href={`sms:${PHONE_MAIN}`}
-                title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
-                className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
-                onClick={() => posthog.capture('floating_cta_text_clicked')}
-              >
-                <MessageSquare className="w-4 h-4" /> {c.floating.text}
-              </a>
+              {SMS_ENABLED && (
+                <a
+                  href={`sms:${PHONE_MAIN}`}
+                  title={`${c.hero.textUsAt} ${PHONE_DISPLAY}`}
+                  className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
+                  onClick={() => posthog.capture('floating_cta_text_clicked')}
+                >
+                  <MessageSquare className="w-4 h-4" /> {c.floating.text}
+                </a>
+              )}
               <button
                 onClick={() => {
                   posthog.capture('floating_cta_web_app_clicked');

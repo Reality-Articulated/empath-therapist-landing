@@ -49,7 +49,7 @@ export const callmeDe: CallMeCopy = {
   },
 
   dialYourself: {
-    pre: 'Du wählst lieber selbst? Ruf an oder schreib eine SMS an',
+    pre: 'Du wählst lieber selbst? Ruf an unter',
     post: 'und lande in demselben Journal, jederzeit.',
   },
 

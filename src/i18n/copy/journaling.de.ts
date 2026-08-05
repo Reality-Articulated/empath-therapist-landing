@@ -8,7 +8,7 @@ export const journalingDe: JournalingCopy = {
   seo: {
     title: 'Empath - Das Tagebuch, das du nicht aufgibst',
     description:
-      'Es gibt eine Nummer, an die du einfach dein Tagebuch schreibst. Schick eine SMS, eine WhatsApp, ruf an oder lass dich anrufen. Keine App, keine Registrierung, keine leere Seite. Aus deinen Einträgen werden Stimmungsmuster und Erkenntnisse, die du wirklich sehen kannst.',
+      'Es gibt eine Nummer, an die du einfach dein Tagebuch schreibst. Schick eine WhatsApp- oder Telegram-Nachricht, ruf an oder lass dich anrufen. Keine App, keine Registrierung, keine leere Seite. Aus deinen Einträgen werden Stimmungsmuster und Erkenntnisse, die du wirklich sehen kannst.',
     keywords:
       'Tagebuch per SMS, Sprachjournal, Journaling ohne App, Tagebuch schreiben per Handy, WhatsApp Tagebuch, Tagebuch per Anruf, Stimmungstracker, Chat Journaling, KI Journaling, Journaling Assistent, Journaling Plan, Journaling Gewohnheit aufbauen',
   },
@@ -25,7 +25,7 @@ export const journalingDe: JournalingCopy = {
     h1Pre: 'Das Tagebuch, das du',
     h1Highlight: 'nicht aufgibst.',
     sub: 'Weil es überall dabei ist: Schreib oder ruf einfach an, wenn dir etwas durch den Kopf geht. Empath hilft dir beim Journalen und beim Erkunden deiner Gedanken und zeigt dir mit der Zeit deine Muster.',
-    mobileLead: 'Fang jetzt sofort an. Einfach anrufen, texten oder eine Nachricht schicken.',
+    mobileLead: 'Fang jetzt sofort an. Einfach anrufen oder eine Nachricht schicken.',
     call: 'Anrufen',
     text: 'Schreiben',
     orFavoriteApp: 'Oder journale in deiner Lieblings-App',
@@ -33,7 +33,7 @@ export const journalingDe: JournalingCopy = {
     wantInsights: 'Lust auf Stimmungstrends & Erkenntnisse?',
     getApp: 'Hol dir die Gratis-App',
     appBenefits: 'Stimmungskurven, Mustererkennung, Apple-Health-Sync',
-    desktopLead: 'Fang jetzt an zu journalen, mit einem Anruf oder einer SMS. Keine App zum Runterladen, keine Registrierung.',
+    desktopLead: 'Fang jetzt an zu journalen, mit einem Anruf oder einer Nachricht. Keine App zum Runterladen, keine Registrierung.',
     textToJournal: 'Per SMS journalen',
     callAndTalk: 'Anrufen & einfach reden',
     textUsAt: 'Schreib uns unter',
@@ -54,7 +54,7 @@ export const journalingDe: JournalingCopy = {
     title: 'So sieht das wirklich aus',
     sub: 'Ein Gedankenkarussell um 2 Uhr nachts, eine Sprachnachricht, weil du zu müde zum Tippen bist, ein mieser Tag. Du schickst es ab wie an eine gute Freundin. Empath hört zu, antwortet und speichert es still als Tagebucheintrag.',
     cta: 'Auf WhatsApp journalen',
-    phoneNote: 'Oder schreib an {phone}, ganz normale SMS geht auch. Beispiel-Unterhaltungen.',
+    phoneNote: 'Oder schreib an {phone} über Telegram, Messenger oder Instagram. Beispiel-Unterhaltungen.',
     examples: [
       {
         key: 'late-night',
@@ -205,7 +205,7 @@ export const journalingDe: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'SMS, WhatsApp oder Anruf',
+    badge: 'WhatsApp, Telegram oder Anruf',
     title: 'Nutz die Apps, die du sowieso öffnest',
     body: 'Sobald dir ein Gedanke kommt, schick eine Nachricht oder Sprachnachricht, oder ruf einfach an und red dich frei. Genau das, was du beim Dampfablassen mit Freunden auch machst, nur dass hier ganz nebenbei dein Tagebuch daraus wird. Keine neue App zum Lernen, keine leere Seite.',
     items: [
@@ -414,13 +414,13 @@ export const journalingDe: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Festhalten per SMS oder Anruf. Reflektieren in der App.',
+    title: 'Festhalten per Nachricht oder Anruf. Reflektieren in der App.',
     sub: 'Kein Setup, keine neue Gewohnheit nötig. Journale so, wie du sowieso schon mit Freunden redest.',
     stepLabel: 'Schritt',
     steps: [
       {
         title: 'Schreiben oder anrufen',
-        desc: 'Wenn ein Gedanke oder Gefühl auftaucht, schick Empath eine SMS oder WhatsApp, oder ruf an, ganz wie bei Freunden. Keine App, keine Registrierung, keine leere Seite.',
+        desc: 'Wenn ein Gedanke oder Gefühl auftaucht, schick Empath eine WhatsApp- oder Telegram-Nachricht, oder ruf an, ganz wie bei Freunden. Keine App, keine Registrierung, keine leere Seite.',
       },
       {
         title: 'Empath hält es fest',
@@ -436,7 +436,7 @@ export const journalingDe: JournalingCopy = {
   iosCallout: {
     kicker: 'iOS-App verfügbar',
     title: 'Lust zurückzublicken? Hol dir die App',
-    body: 'Du journalst per SMS und Anruf. In der App liest du alles nach, durchsuchst alte Einträge und siehst, wie sich deine Stimmungsmuster entfalten.',
+    body: 'Du journalst per Nachricht und Anruf. In der App liest du alles nach, durchsuchst alte Einträge und siehst, wie sich deine Stimmungsmuster entfalten.',
     button: 'Im App Store laden',
   },
 
@@ -470,11 +470,11 @@ export const journalingDe: JournalingCopy = {
     items: [
       {
         q: 'Muss ich die App herunterladen, um zu journalen?',
-        a: 'Nein. Du kannst komplett per SMS, WhatsApp oder Anruf journalen, ganz ohne App und ohne Registrierung. Die iOS-App ist optional: Dort liest du deine Einträge nach, durchsuchst vergangene Momente und siehst deine Stimmungsmuster über die Zeit.',
+        a: 'Nein. Du kannst komplett per WhatsApp, Telegram oder Anruf journalen, ganz ohne App und ohne Registrierung. Die iOS-App ist optional: Dort liest du deine Einträge nach, durchsuchst vergangene Momente und siehst deine Stimmungsmuster über die Zeit.',
       },
       {
         q: 'Ist Empath wirklich kostenlos?',
-        a: 'Ja! Empath ist komplett kostenlos. Das gesamte Kern-Journaling per SMS, Anruf oder App ist gratis enthalten, plus KI-Transkription, Stimmungstracking und Erkenntnisse.',
+        a: 'Ja! Empath ist komplett kostenlos. Das gesamte Kern-Journaling per Nachricht, Anruf oder App ist gratis enthalten, plus KI-Transkription, Stimmungstracking und Erkenntnisse.',
       },
       {
         q: 'Wie funktioniert die KI?',
@@ -490,7 +490,7 @@ export const journalingDe: JournalingCopy = {
       },
       {
         q: 'Und was ist mit Android?',
-        a: 'Aktuell gibt es die App nur für iOS, aber journalen per Anruf oder SMS geht von jedem Gerät! Eine Android-App ist in Arbeit.',
+        a: 'Aktuell gibt es die App nur für iOS, aber journalen per Anruf oder WhatsApp geht von jedem Gerät! Eine Android-App ist in Arbeit.',
       },
       {
         q: 'Wie verbinde ich mich mit meiner Therapeut:in?',
@@ -507,7 +507,7 @@ export const journalingDe: JournalingCopy = {
       },
       {
         q: 'Kann Empath mir helfen, eine Journaling-Gewohnheit aufzubauen?',
-        a: 'Ja. Leg einen Journaling-Plan mit täglichem oder wöchentlichem Rhythmus fest: mit nachsichtigen Streaks, die einen verpassten Tag überleben, und smarten Erinnerungen per Push, SMS oder E-Mail, die sich von selbst überspringen, wenn du schon gejournalt hast.',
+        a: 'Ja. Leg einen Journaling-Plan mit täglichem oder wöchentlichem Rhythmus fest: mit nachsichtigen Streaks, die einen verpassten Tag überleben, und smarten Erinnerungen per Push oder E-Mail, die sich von selbst überspringen, wenn du schon gejournalt hast.',
         link: { text: 'So baust du einen Journaling-Plan, der hält', to: '/app/blog/journaling-plan' },
       },
     ],

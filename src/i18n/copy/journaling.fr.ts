@@ -8,7 +8,7 @@ export const journalingFr: JournalingCopy = {
   seo: {
     title: 'Empath - Le journal que tu ne lâcheras pas',
     description:
-      'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un SMS, un message WhatsApp, appelle, ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
+      'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un message WhatsApp ou Telegram, appelle, ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
     keywords:
       'journal par sms, journal vocal, journal intime sans application, tenir un journal par sms, journal WhatsApp, journal par téléphone, suivi de l’humeur, journal par chat, assistant de journal IA, journal conversationnel, plan de journaling, habitude d’écriture, application journal intime',
   },
@@ -25,7 +25,7 @@ export const journalingFr: JournalingCopy = {
     h1Pre: 'Le journal que tu',
     h1Highlight: 'ne lâcheras pas.',
     sub: 'Parce qu’il vit partout où tu vas : envoie un message ou appelle dès que quelque chose te trotte dans la tête. Empath t’aide à tenir ton journal et à explorer ton esprit, et révèle tes schémas au fil du temps.',
-    mobileLead: 'Commence ton journal maintenant. Appelle, envoie un SMS ou un message.',
+    mobileLead: 'Commence ton journal maintenant. Appelle ou envoie un message.',
     call: 'Appeler',
     text: 'SMS',
     orFavoriteApp: 'Ou tiens ton journal sur ton appli préférée',
@@ -33,7 +33,7 @@ export const journalingFr: JournalingCopy = {
     wantInsights: 'Envie de voir tes tendances d’humeur ?',
     getApp: 'Télécharge l’appli gratuite',
     appBenefits: 'Courbes d’humeur, détection de schémas, synchro Apple Health',
-    desktopLead: 'Commence ton journal tout de suite, par appel ou SMS. Aucune appli à télécharger, aucune inscription.',
+    desktopLead: 'Commence ton journal tout de suite, par appel ou message. Aucune appli à télécharger, aucune inscription.',
     textToJournal: 'Écris pour journaler',
     callAndTalk: 'Appelle et parle, c’est tout',
     textUsAt: 'Écris-nous au',
@@ -54,7 +54,7 @@ export const journalingFr: JournalingCopy = {
     title: 'À quoi ça ressemble vraiment',
     sub: 'Une spirale à 2h du matin, une note vocale parce que taper c’est trop d’effort, une sale journée. Tu envoies ça comme un texto à un ami. Empath écoute, répond, et l’enregistre discrètement comme une entrée de journal.',
     cta: 'Journaler sur WhatsApp',
-    phoneNote: 'Ou envoie un SMS au {phone} : le simple SMS marche aussi. Conversations données en exemple.',
+    phoneNote: 'Ou écris au {phone} sur Telegram, Messenger ou Instagram. Conversations données en exemple.',
     examples: [
       {
         key: 'late-night',
@@ -118,7 +118,7 @@ export const journalingFr: JournalingCopy = {
       {
         key: 'no-app',
         title: '« Attends, pas d’appli ? »',
-        caption: 'Pas d’appli. Sans inscription. Tu textes juste le numéro.',
+        caption: 'Pas d’appli. Sans inscription. Tu écris juste au numéro.',
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
@@ -205,9 +205,9 @@ export const journalingFr: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'SMS, WhatsApp ou appel',
+    badge: 'WhatsApp, Telegram ou appel',
     title: 'Utilise les applis que tu ouvres déjà',
-    body: 'Dès qu’une pensée surgit, envoie un texto ou une note vocale, ou appelle et vide ton sac. C’est exactement ce que tu fais quand tu te confies à un ami, sauf qu’ici ça devient discrètement ton journal. Aucune nouvelle appli à apprendre, aucune page blanche à affronter.',
+    body: 'Dès qu’une pensée surgit, envoie un message ou une note vocale, ou appelle et vide ton sac. C’est exactement ce que tu fais quand tu te confies à un ami, sauf qu’ici ça devient discrètement ton journal. Aucune nouvelle appli à apprendre, aucune page blanche à affronter.',
     items: [
       { title: 'Transcription IA', desc: 'Une précision parfaite. Tes mots, capturés exactement comme tu les dis.' },
       {
@@ -230,7 +230,7 @@ export const journalingFr: JournalingCopy = {
   feature2: {
     badge: 'Intelligence IA',
     title: '« Attends, depuis quand je me sens comme ça ? »',
-    sub: 'Ouvre l’appli et pose la question. Chaque SMS, appel et pensée que tu as envoyés est mémorisé et ressort en quelques secondes.',
+    sub: 'Ouvre l’appli et pose la question. Chaque message, appel et pensée que tu as envoyés est mémorisé et ressort en quelques secondes.',
     memoryTitle: 'Recherche intelligente dans tes souvenirs',
     memoryBody: 'Retrouve n’importe quel moment, n’importe quelle émotion, n’importe quel déclic. Notre IA comprend le contexte et fait remonter exactement ce que tu cherches.',
     memoryItems: [
@@ -414,13 +414,13 @@ export const journalingFr: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Capture par SMS ou appel. Réfléchis dans l’appli.',
+    title: 'Capture par message ou appel. Réfléchis dans l’appli.',
     sub: 'Aucune installation, aucune nouvelle habitude à créer. Tiens ton journal comme tu parles déjà à tes amis.',
     stepLabel: 'Étape',
     steps: [
       {
         title: 'Écris ou appelle',
-        desc: 'Dès qu’une pensée ou une émotion se pointe, écris à Empath par SMS ou WhatsApp, ou appelle, exactement comme tu écrirais à un ami. Pas d’appli, pas d’inscription, pas de page blanche.',
+        desc: 'Dès qu’une pensée ou une émotion se pointe, écris à Empath sur WhatsApp ou Telegram, ou appelle, exactement comme tu écrirais à un ami. Pas d’appli, pas d’inscription, pas de page blanche.',
       },
       {
         title: 'Empath capture tout',
@@ -436,7 +436,7 @@ export const journalingFr: JournalingCopy = {
   iosCallout: {
     kicker: 'Appli iOS disponible',
     title: 'Envie de regarder en arrière ? Prends l’appli',
-    body: 'Tu tiens ton journal par SMS et par appel. L’appli, c’est là où tu relis tout, cherches dans tes anciennes entrées et regardes tes tendances d’humeur se dessiner.',
+    body: 'Tu tiens ton journal par message et par appel. L’appli, c’est là où tu relis tout, cherches dans tes anciennes entrées et regardes tes tendances d’humeur se dessiner.',
     button: 'Télécharger sur l’App Store',
   },
 
@@ -470,11 +470,11 @@ export const journalingFr: JournalingCopy = {
     items: [
       {
         q: 'Est-ce que je dois télécharger l’appli pour tenir un journal ?',
-        a: 'Non. Tu peux tenir ton journal entièrement par SMS, WhatsApp ou appel téléphonique, sans appli et sans inscription. L’appli iOS est optionnelle : c’est là que tu relis tes entrées, retrouves des moments passés et vois tes tendances d’humeur au fil du temps.',
+        a: 'Non. Tu peux tenir ton journal entièrement par WhatsApp, Telegram ou appel téléphonique, sans appli et sans inscription. L’appli iOS est optionnelle : c’est là que tu relis tes entrées, retrouves des moments passés et vois tes tendances d’humeur au fil du temps.',
       },
       {
         q: 'Empath est vraiment gratuit ?',
-        a: 'Oui ! Empath est entièrement gratuit. Tout l’essentiel est inclus sans rien payer : le journal par SMS, appel ou appli, plus la transcription IA, le suivi d’humeur et les insights.',
+        a: 'Oui ! Empath est entièrement gratuit. Tout l’essentiel est inclus sans rien payer : le journal par message, appel ou appli, plus la transcription IA, le suivi d’humeur et les insights.',
       },
       {
         q: 'Comment fonctionne l’IA ?',
@@ -490,7 +490,7 @@ export const journalingFr: JournalingCopy = {
       },
       {
         q: 'Et sur Android ?',
-        a: 'Pour l’instant, l’appli n’existe que sur iOS, mais tu peux quand même tenir ton journal par appel ou SMS depuis n’importe quel téléphone ! Une appli Android est en développement.',
+        a: 'Pour l’instant, l’appli n’existe que sur iOS, mais tu peux quand même tenir ton journal par appel ou WhatsApp depuis n’importe quel téléphone ! Une appli Android est en développement.',
       },
       {
         q: 'Comment je me connecte à mon thérapeute ?',
@@ -507,14 +507,14 @@ export const journalingFr: JournalingCopy = {
       },
       {
         q: 'Empath peut m’aider à créer une habitude d’écriture ?',
-        a: 'Oui. Mets en place un plan de journal avec un rythme quotidien ou hebdomadaire, des séries indulgentes qui survivent à un jour manqué, et des rappels adaptatifs par notification, SMS ou email qui s’effacent d’eux-mêmes si tu as déjà écrit.',
+        a: 'Oui. Mets en place un plan de journal avec un rythme quotidien ou hebdomadaire, des séries indulgentes qui survivent à un jour manqué, et des rappels adaptatifs par notification ou email qui s’effacent d’eux-mêmes si tu as déjà écrit.',
         link: { text: 'Vois comment construire un plan de journal qui tient', to: '/app/blog/journaling-plan' },
       },
     ] as Array<{ q: string; a: string; link?: { text: string; to: string } }>,
   },
 
   finalCta: {
-    title: 'Ta prochaine entrée de journal est à un texto près',
+    title: 'Ta prochaine entrée de journal est à un message près',
     sub: 'Aucune appli à apprendre, aucune page blanche à fixer. Écris ou appelle comme tu le fais déjà avec un ami, et commence à voir tes schémas en quelques jours, pas en quelques mois.',
     downloadFree: 'Télécharger gratuitement sur l’App Store',
     justSayHi: 'Pas d’appli, sans inscription. Dis juste salut',

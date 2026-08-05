@@ -28,7 +28,7 @@ export const journalingEn = {
   seo: {
     title: "Empath - The Journal You Won't Quit",
     description:
-      "There's a number you can just journal at. Text it, WhatsApp it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
+      "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords:
       'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
   },
@@ -44,8 +44,8 @@ export const journalingEn = {
   hero: {
     h1Pre: 'The journal you',
     h1Highlight: "won't quit.",
-    sub: "Because it lives wherever you go: just text or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.",
-    mobileLead: 'Start journaling right now. Just call, text, or message.',
+    sub: "Because it lives wherever you go: just message or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.",
+    mobileLead: 'Start journaling right now. Just call or send a message.',
     call: 'Call',
     text: 'Text',
     orFavoriteApp: 'Or journal on your favorite app',
@@ -53,7 +53,7 @@ export const journalingEn = {
     wantInsights: 'Want mood trends & insights?',
     getApp: 'Get the Free App',
     appBenefits: 'Mood charts, pattern detection, Apple Health sync',
-    desktopLead: 'Start journaling right now with a call or text. No app to download, no account to create.',
+    desktopLead: 'Start journaling right now with a call or a message. No app to download, no account to create.',
     textToJournal: 'Text to journal',
     callAndTalk: 'Call & just talk',
     textUsAt: 'Text us at',
@@ -74,7 +74,7 @@ export const journalingEn = {
     title: 'What It Actually Looks Like',
     sub: "A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it like you'd text a friend. Empath listens, responds, and quietly saves it as a journal entry.",
     cta: 'Journal on WhatsApp',
-    phoneNote: 'Or text {phone}. Plain SMS works too. Example conversations shown.',
+    phoneNote: 'Or message {phone} on Telegram, Messenger, or Instagram. Example conversations shown.',
     examples: [
       {
         key: 'late-night',
@@ -138,7 +138,7 @@ export const journalingEn = {
       {
         key: 'no-app',
         title: '"Wait, no app?"',
-        caption: 'No app. No sign-up. You just text the number.',
+        caption: 'No app. No sign-up. You just message the number.',
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
@@ -225,9 +225,9 @@ export const journalingEn = {
   },
 
   feature1: {
-    badge: 'Text, WhatsApp, or Call',
+    badge: 'WhatsApp, Telegram, or Call',
     title: 'Use the Apps You Already Open',
-    body: "The moment a thought hits, fire off a text or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.",
+    body: "The moment a thought hits, fire off a message or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.",
     items: [
       { title: 'AI Transcription', desc: 'Perfect accuracy. Your words, captured exactly as you say them.' },
       {
@@ -250,7 +250,7 @@ export const journalingEn = {
   feature2: {
     badge: 'AI Intelligence',
     title: '"Wait, When Did I Start Feeling This Way?"',
-    sub: "Open the app and just ask. Every text, call, and thought you've sent is remembered and surfaced in seconds.",
+    sub: "Open the app and just ask. Every message, call, and thought you've sent is remembered and surfaced in seconds.",
     memoryTitle: 'Smart Memory Search',
     memoryBody: "Find any moment, any feeling, any insight. Our AI understands context and surfaces exactly what you're looking for.",
     memoryItems: [
@@ -437,13 +437,13 @@ export const journalingEn = {
   },
 
   howItWorks: {
-    title: 'Capture by Text or Call. Reflect in the App.',
+    title: 'Capture by Message or Call. Reflect in the App.',
     sub: 'No setup, no new habit to build. Journal the way you already talk to friends.',
     stepLabel: 'Step',
     steps: [
       {
-        title: 'Text or Call',
-        desc: "Whenever a thought or feeling shows up, text, WhatsApp, or call Empath, just like you'd message a friend. No app, no account, no blank page.",
+        title: 'Message or Call',
+        desc: "Whenever a thought or feeling shows up, WhatsApp, Telegram, or call Empath, just like you'd message a friend. No app, no account, no blank page.",
       },
       {
         title: 'Empath Captures It',
@@ -459,7 +459,7 @@ export const journalingEn = {
   iosCallout: {
     kicker: 'iOS app available',
     title: 'Want to Look Back? Get the App',
-    body: 'You journal by text and call. The app is where you read it all back, search past entries, and watch your mood patterns unfold.',
+    body: 'You journal by message and call. The app is where you read it all back, search past entries, and watch your mood patterns unfold.',
     button: 'Download on App Store',
   },
 
@@ -493,11 +493,11 @@ export const journalingEn = {
     items: [
       {
         q: 'Do I need to download the app to journal?',
-        a: "Nope. You can journal entirely by text, WhatsApp, or phone call, with no app and no account required. The iOS app is optional: it's where you read back your entries, search past moments, and see your mood patterns over time.",
+        a: "Nope. You can journal entirely by WhatsApp, Telegram, or phone call, with no app and no account required. The iOS app is optional: it's where you read back your entries, search past moments, and see your mood patterns over time.",
       },
       {
         q: 'Is Empath really free?',
-        a: 'Yes! Empath is completely free to use. All core journaling by text, call, or app, plus AI transcription, mood tracking, and insights, is included at no cost.',
+        a: 'Yes! Empath is completely free to use. All core journaling by message, call, or app, plus AI transcription, mood tracking, and insights, is included at no cost.',
       },
       {
         q: 'How does the AI work?',
@@ -513,7 +513,7 @@ export const journalingEn = {
       },
       {
         q: 'What about Android?',
-        a: "We're currently iOS-only, but you can still journal via phone call or text message from any device! An Android app is in development.",
+        a: "We're currently iOS-only, but you can still journal via phone call or WhatsApp from any device! An Android app is in development.",
       },
       {
         q: 'How do I connect with my therapist?',
@@ -530,15 +530,15 @@ export const journalingEn = {
       },
       {
         q: 'Can Empath help me build a journaling habit?',
-        a: "Yes. Set a Journaling Plan with a daily or weekly cadence, forgiving streaks that survive a missed day, and adaptive reminders by push, SMS, or email that skip themselves once you've already journaled.",
+        a: "Yes. Set a Journaling Plan with a daily or weekly cadence, forgiving streaks that survive a missed day, and adaptive reminders by push or email that skip themselves once you've already journaled.",
         link: { text: 'See how to build a journaling plan that sticks', to: '/app/blog/journaling-plan' },
       },
     ] as Array<{ q: string; a: string; link?: { text: string; to: string } }>,
   },
 
   finalCta: {
-    title: 'Your Next Journal Entry Is One Text Away',
-    sub: 'No app to learn, no blank page to stare at. Just text or call the way you already do with a friend, and start seeing your patterns in days, not months.',
+    title: 'Your Next Journal Entry Is One Message Away',
+    sub: 'No app to learn, no blank page to stare at. Just message or call the way you already do with a friend, and start seeing your patterns in days, not months.',
     downloadFree: 'Download Free on App Store',
     justSayHi: 'No app, no account. Just say hi',
     preferTyping: 'Prefer to type? Open the web dashboard →',

@@ -7,7 +7,7 @@ export const journalingIt: JournalingCopy = {
   seo: {
     title: 'Empath - Il diario che non mollerai',
     description:
-      "C'è un numero a cui puoi semplicemente tenere il tuo diario. Mandagli un SMS, scrivigli su WhatsApp, chiamalo, o fatti chiamare. Niente app, senza registrazione, niente pagina bianca. Le tue voci diventano andamenti dell'umore e insight che puoi davvero vedere.",
+      "C'è un numero a cui puoi semplicemente tenere il tuo diario. Scrivigli su WhatsApp o Telegram, chiamalo, o fatti chiamare. Niente app, senza registrazione, niente pagina bianca. Le tue voci diventano andamenti dell'umore e insight che puoi davvero vedere.",
     keywords:
       "diario via SMS, diario vocale, diario senza app, journaling via messaggio, diario su WhatsApp, diario per telefono, monitoraggio dell'umore, journaling in chat, assistente AI per il diario, journaling conversazionale, piano di journaling, abitudine del diario",
   },
@@ -32,7 +32,7 @@ export const journalingIt: JournalingCopy = {
     wantInsights: "Vuoi andamenti dell'umore e insight?",
     getApp: "Scarica l'app gratuita",
     appBenefits: "Grafici dell'umore, riconoscimento di schemi, sincronizzazione con Apple Health",
-    desktopLead: 'Inizia a tenere il diario adesso con una chiamata o un SMS. Nessuna app da scaricare, senza registrazione.',
+    desktopLead: 'Inizia a tenere il diario adesso con una chiamata o un messaggio. Nessuna app da scaricare, senza registrazione.',
     textToJournal: 'Scrivi per il tuo diario',
     callAndTalk: 'Chiama e parla',
     textUsAt: 'Scrivici al',
@@ -53,7 +53,7 @@ export const journalingIt: JournalingCopy = {
     title: "Ecco com'è davvero",
     sub: "Una spirale di pensieri alle 2 di notte, un vocale che sei troppo stanco per trascrivere, una giornata storta. Lo mandi come lo manderesti a un amico: Empath ascolta, risponde e lo salva in silenzio come voce del diario.",
     cta: 'Tieni il diario su WhatsApp',
-    phoneNote: 'Oppure scrivi al {phone}: funzionano anche i normali SMS. Conversazioni di esempio.',
+    phoneNote: 'Oppure scrivi al {phone} su Telegram, Messenger o Instagram. Conversazioni di esempio.',
     examples: [
       {
         key: 'late-night',
@@ -204,7 +204,7 @@ export const journalingIt: JournalingCopy = {
   },
 
   feature1: {
-    badge: 'SMS, WhatsApp o chiamata',
+    badge: 'WhatsApp, Telegram o chiamata',
     title: 'Usa le app che apri già',
     body: 'Appena arriva un pensiero, manda un messaggio o un vocale, oppure chiama e parlane. È la stessa cosa che faresti sfogandoti con un amico, solo che qui diventa in silenzio il tuo diario. Nessuna nuova app da imparare, nessuna pagina bianca da affrontare.',
     items: [
@@ -419,7 +419,7 @@ export const journalingIt: JournalingCopy = {
     steps: [
       {
         title: 'Scrivi o chiama',
-        desc: "Quando arriva un pensiero o un'emozione, manda un SMS, un WhatsApp o chiama Empath, proprio come scriveresti a un amico. Niente app, senza registrazione, niente pagina bianca.",
+        desc: "Quando arriva un pensiero o un'emozione, manda un WhatsApp, un Telegram o chiama Empath, proprio come scriveresti a un amico. Niente app, senza registrazione, niente pagina bianca.",
       },
       {
         title: 'Empath lo cattura',
@@ -469,7 +469,7 @@ export const journalingIt: JournalingCopy = {
     items: [
       {
         q: "Devo scaricare l'app per tenere il diario?",
-        a: "No. Puoi tenere il diario interamente via SMS, WhatsApp o telefonata, senza app e senza registrazione. L'app per iOS è facoltativa: è dove rileggi le tue voci, cerchi tra i momenti passati e vedi gli andamenti del tuo umore nel tempo.",
+        a: "No. Puoi tenere il diario interamente via WhatsApp, Telegram o telefonata, senza app e senza registrazione. L'app per iOS è facoltativa: è dove rileggi le tue voci, cerchi tra i momenti passati e vedi gli andamenti del tuo umore nel tempo.",
       },
       {
         q: 'Empath è davvero gratis?',
@@ -489,7 +489,7 @@ export const journalingIt: JournalingCopy = {
       },
       {
         q: 'E per Android?',
-        a: "Per ora siamo solo su iOS, ma puoi comunque tenere il diario con una telefonata o un SMS da qualsiasi dispositivo! Un'app per Android è in sviluppo.",
+        a: "Per ora siamo solo su iOS, ma puoi comunque tenere il diario con una telefonata o un WhatsApp da qualsiasi dispositivo! Un'app per Android è in sviluppo.",
       },
       {
         q: 'Come mi collego al mio terapeuta?',
@@ -506,7 +506,7 @@ export const journalingIt: JournalingCopy = {
       },
       {
         q: "Empath può aiutarmi a costruire l'abitudine del diario?",
-        a: 'Sì. Imposta un piano di journaling con cadenza giornaliera o settimanale, serie indulgenti che sopravvivono a un giorno saltato e promemoria adattivi via push, SMS o email che si saltano da soli se hai già scritto.',
+        a: 'Sì. Imposta un piano di journaling con cadenza giornaliera o settimanale, serie indulgenti che sopravvivono a un giorno saltato e promemoria adattivi via push o email che si saltano da soli se hai già scritto.',
         link: { text: 'Scopri come costruire un piano di journaling che regge', to: '/app/blog/journaling-plan' },
       },
     ],

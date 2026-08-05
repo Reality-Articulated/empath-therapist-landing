@@ -19,6 +19,7 @@ import posthog from 'posthog-js';
 import SEO from '../components/SEO';
 import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
 import { getCategoryColor } from '../utils/blogCategoryColors';
+import { SMS_ENABLED } from '../utils/channels';
 
 function toIsoDate(value: string) {
   const parsed = Date.parse(`${value} UTC`);
@@ -344,7 +345,7 @@ export default function JournalingBlogsPage() {
               <span className="font-semibold text-stone-900">
                 Written by the team behind Empath
               </span>{' '}
-              , the journal you can call, text, or message. Free to try.
+              , the journal you can call or message. Free to try.
             </p>
             <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
               <button
@@ -353,14 +354,16 @@ export default function JournalingBlogsPage() {
               >
                 Get the app <ArrowUpRight className="w-4 h-4" />
               </button>
-              <a
-                href={`sms:${PHONE_MAIN}`}
-                onClick={() => posthog.capture('journaling_blog_text_clicked')}
-                title="Text (888) 366-3082"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-stone-200 text-sm font-semibold text-stone-600 hover:border-[#1b8af1] hover:text-[#1b8af1] transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" /> Text
-              </a>
+              {SMS_ENABLED && (
+                <a
+                  href={`sms:${PHONE_MAIN}`}
+                  onClick={() => posthog.capture('journaling_blog_text_clicked')}
+                  title="Text (888) 366-3082"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-stone-200 text-sm font-semibold text-stone-600 hover:border-[#1b8af1] hover:text-[#1b8af1] transition-colors"
+                >
+                  <MessageSquare className="w-4 h-4" /> Text
+                </a>
+              )}
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"

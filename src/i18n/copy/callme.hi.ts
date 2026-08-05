@@ -53,7 +53,7 @@ export const callmeHi: CallMeCopy = {
 
   dialYourself: {
     pre: 'ख़ुद dial करना पसंद है?',
-    post: 'पर call या text कीजिए: वही journal, कभी भी।',
+    post: 'पर call कीजिए: वही journal, कभी भी।',
   },
 
   how: {

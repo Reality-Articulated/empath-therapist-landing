@@ -5,6 +5,7 @@ import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
+import { SMS_ENABLED } from '../utils/channels';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -220,12 +221,14 @@ export default function TherapyValueCalculator() {
                     >
                       Call to Try
                     </a>
-                    <a
-                      href="sms:+18883663082"
-                      className="flex-1 border border-gray-300 rounded-lg py-3 text-center font-semibold"
-                    >
-                      Text to Try
-                    </a>
+                    {SMS_ENABLED && (
+                      <a
+                        href="sms:+18883663082"
+                        className="flex-1 border border-gray-300 rounded-lg py-3 text-center font-semibold"
+                      >
+                        Text to Try
+                      </a>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -401,12 +404,14 @@ export default function TherapyValueCalculator() {
                       >
                         📞 Call
                       </a>
-                      <a
-                        href="sms:+18883663082"
-                        className="flex-1 border border-gray-300 rounded-lg py-2 text-center font-semibold hover:bg-gray-50"
-                      >
-                        💬 Text
-                      </a>
+                      {SMS_ENABLED && (
+                        <a
+                          href="sms:+18883663082"
+                          className="flex-1 border border-gray-300 rounded-lg py-2 text-center font-semibold hover:bg-gray-50"
+                        >
+                          💬 Text
+                        </a>
+                      )}
                     </div>
                   </div>
                 </>

@@ -38,6 +38,31 @@ The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `A
 
 `vercel.json` rewrites **all** paths to `/index.html` so deep links work on Vercel; without it, only `/` resolves on hard refresh.
 
+### SMS journaling is PAUSED — `src/utils/channels.ts`
+
+`SMS_ENABLED = false` (2026-08-04, Twilio cost). Every `sms:` CTA on the site is
+wrapped in it — consumer hero (mobile + desktop), final CTA, floating bar,
+blog index + post cards, both therapy calculators, ClientInfoPage — and the
+grid column counts flip with it so a removed button doesn't leave a gap. The
+messaging carousel (WhatsApp / Telegram / Messenger / Instagram) and every
+`tel:` CTA are untouched.
+
+Copy that named SMS as a channel was edited IN PLACE across all 7
+`src/i18n/copy/journaling.*.ts` + `callme.*.ts` catalogs (git is the restore
+path; the `hero.text` / `hero.textToJournal` / `hero.textUsAt` / `floating.text`
+LABEL keys were deliberately left in place so unpausing only needs prose
+reverted). `seo.keywords` was left alone on purpose — discovery terms cost
+nothing and stripping ranking terms is the one change here that's hard to undo.
+
+⚠️ The English `/` and `/app` `description` strings are DUPLICATED as literals in
+`scripts/prerender.mjs` `staticRoutes` (localized routes read the catalogs) — an
+SEO copy change has to be made in both places or the prerendered HTML keeps the
+old text while the SPA shows the new one.
+
+Server side: empath-heroku `backend/config/smsChannel.js` (`SMS_CHANNEL_ENABLED`)
+is the matching switch — inbound SMS journaling answers one redirect notice per
+sender per 24h and reminders fall back to push/email.
+
 ### Analytics + attribution
 
 PostHog is initialized in `src/main.tsx` (toolbar forcibly disabled in prod) and `App.tsx` is the central place where:

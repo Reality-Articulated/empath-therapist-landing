@@ -85,7 +85,9 @@ interface CompareRow {
 // Phone-channel rows first (this page's traffic source), then the iOS
 // paywall's rows verbatim.
 const COMPARE_ROWS: CompareRow[] = [
-  { id: 'phone_messages', icon: MessageSquare, title: 'Journaling by text', free: text('15/mo'), plus: UNLIMITED },
+  // The phone_messages gate meters WhatsApp / Telegram / Messenger / Instagram
+  // too — "by message", not "by text", now that SMS journaling is paused.
+  { id: 'phone_messages', icon: MessageSquare, title: 'Journaling by message', free: text('15/mo'), plus: UNLIMITED },
   { id: 'voice_calls', icon: Phone, title: 'AI voice calls', free: text('4/mo'), plus: UNLIMITED },
   { id: 'ai_chat', icon: MessageCircle, title: 'AI chat', free: text('10 total'), plus: UNLIMITED },
   { id: 'journal_assistant', icon: PenSquare, title: 'Journal assistant', free: text('5 total'), plus: UNLIMITED },

@@ -22,6 +22,7 @@ import SEO from '../components/SEO';
 import BlogChart from '../components/BlogChart';
 import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
 import { getCategoryColor } from '../utils/blogCategoryColors';
+import { SMS_ENABLED } from '../utils/channels';
 
 function toAnchorId(value: string) {
   return value
@@ -79,7 +80,7 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
       event: 'journaling_blog_post_telegram_clicked',
       external: true,
     },
-  ];
+  ].filter((channel) => channel.key !== 'text' || SMS_ENABLED);
 
   return (
     <div
@@ -94,7 +95,7 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
         Your AI Journaling Assistant
       </h3>
       <p className="text-stone-600 text-sm leading-relaxed mb-4 font-medium">
-        Call, text, or message your thoughts. Empath captures everything and helps you
+        Call or message your thoughts. Empath captures everything and helps you
         understand yourself better over time.
       </p>
       <div className="space-y-2.5">
@@ -107,7 +108,7 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
         >
           Download on App Store <ArrowUpRight className="w-4 h-4" />
         </a>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-3'} gap-2.5`}>
           {channels.map(({ key, label, href, Icon, hover, event, external }) => (
             <a
               key={key}

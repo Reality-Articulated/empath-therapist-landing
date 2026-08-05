@@ -13,6 +13,7 @@ import posthog from 'posthog-js';
 import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import { Link } from 'react-router-dom';
 import { openSupportChat } from '../utils/supportChat';
+import { SMS_ENABLED } from '../utils/channels';
 
 // Therapist type from marketplace API
 interface MarketplaceTherapist {
@@ -531,15 +532,17 @@ export default function ClientInfoPage() {
                   >
                     <Phone className="w-4 h-4" /> Call
                   </a>
-                  <a
-                    href={`sms:${PHONE_MAIN}`}
-                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
-                    onClick={() => {
-                      posthog.capture('hero_text_clicked', { variant });
-                    }}
-                  >
-                    <MessageSquare className="w-4 h-4" /> Text
-                  </a>
+                  {SMS_ENABLED && (
+                    <a
+                      href={`sms:${PHONE_MAIN}`}
+                      className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
+                      onClick={() => {
+                        posthog.capture('hero_text_clicked', { variant });
+                      }}
+                    >
+                      <MessageSquare className="w-4 h-4" /> Text
+                    </a>
+                  )}
                 </div>
                 
                 <p className="text-sm text-stone-500 text-center font-medium">
@@ -667,7 +670,7 @@ export default function ClientInfoPage() {
                 icon: <Smartphone className="w-8 h-8 text-stone-900" />,
                 step: "01",
                 title: "Capture The Moment",
-                desc: "Feeling anxious? Had a win? Just journal using the app or text/call Empath. It takes seconds."
+                desc: "Feeling anxious? Had a win? Just journal using the app, or call or message Empath. It takes seconds."
               },
               {
                 icon: <Zap className="w-8 h-8 text-stone-900" />,
@@ -755,7 +758,7 @@ export default function ClientInfoPage() {
                   </p>
                   <ul className="space-y-4 mb-8">
                     {[
-                      'View all journals from calls or texts',
+                      'View all journals from calls or messages',
                       'Analyze mood patterns & trends',
                       'Connect directly with your therapist',
                       'Track health data integration',
@@ -980,7 +983,7 @@ export default function ClientInfoPage() {
                     "Secure HIPAA-Compliant Vault",
                     "Personal Progress Tracking",
                     "Direct Integration with Your Therapist",
-                    "Mobile App (iOS) + SMS/Phone Access"
+                    "Mobile App (iOS) + Phone & Messaging Access"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-4 group">
                       <div className="w-6 h-6 rounded border-2 border-stone-900 bg-stone-900 flex items-center justify-center flex-shrink-0 group-hover:bg-[#1b8af1] group-hover:border-blue-500 transition-colors">
@@ -1478,7 +1481,7 @@ export default function ClientInfoPage() {
               <li className="relative">
                 <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">2</span>
                 <h4 className="font-bold text-stone-900 text-lg">Start journaling</h4>
-                <p className="text-sm text-stone-500 font-medium mt-1">Download the app or use SMS/Phone to capture moments.</p>
+                <p className="text-sm text-stone-500 font-medium mt-1">Download the app, or call or message us to capture moments.</p>
               </li>
             </ol>
 
@@ -1521,9 +1524,13 @@ export default function ClientInfoPage() {
             </div>
 
             <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Journal Instantly</h3>
-            <p className="text-stone-600 mb-8 font-medium">Call or text our secure line to capture your thoughts instantly.</p>
+            <p className="text-stone-600 mb-8 font-medium">
+              {SMS_ENABLED
+                ? 'Call or text our secure line to capture your thoughts instantly.'
+                : 'Call our secure line to capture your thoughts instantly.'}
+            </p>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-1'} gap-4`}>
                 <a
                   href={`tel:${PHONE_MAIN}`}
                   className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
@@ -1532,6 +1539,7 @@ export default function ClientInfoPage() {
                 <Phone className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
                 <span className="font-bold text-stone-900">Call Now</span>
                 </a>
+                {SMS_ENABLED && (
                 <a
                   href={`sms:${PHONE_MAIN}`}
                 className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
@@ -1540,6 +1548,7 @@ export default function ClientInfoPage() {
                 <MessageSquare className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
                 <span className="font-bold text-stone-900">Text Now</span>
               </a>
+                )}
             </div>
             
             <div className="mt-6 pt-6 border-t-2 border-stone-100">

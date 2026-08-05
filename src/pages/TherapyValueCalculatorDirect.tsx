@@ -4,6 +4,7 @@ import logo from '../../public/empath-logo.png';
 import toast, { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
+import { SMS_ENABLED } from '../utils/channels';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -195,19 +196,21 @@ export default function TherapyValueCalculatorDirect() {
                       >
                         Call to Journal
                       </a>
-                      <a
-                        href="sms:+18883663082"
-                        className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
-                        onClick={() => {
-                          posthog.capture('calculator_direct_text_to_journal_initiated');
-                        }}
-                      >
-                        Text to Journal
-                      </a>
+                      {SMS_ENABLED && (
+                        <a
+                          href="sms:+18883663082"
+                          className="flex-1 bg-white text-[#1281dd] border border-[#1281dd] rounded-full py-2 font-semibold text-center text-sm shadow hover:bg-blue-50 transition"
+                          onClick={() => {
+                            posthog.capture('calculator_direct_text_to_journal_initiated');
+                          }}
+                        >
+                          Text to Journal
+                        </a>
+                      )}
                     </div>
-                    
+
                     <p className="text-sm text-gray-700">
-                      Share your thoughts or emotions anytime. We'll save your voice notes or texts as timestamped journal entries. Once you've made an entry, download the app and log in with your phone number to see your insights.
+                      Share your thoughts or emotions anytime. We'll save your voice notes as timestamped journal entries. Once you've made an entry, download the app and log in with your phone number to see your insights.
                     </p>
                   </div>
                   

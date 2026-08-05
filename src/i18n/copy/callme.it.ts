@@ -50,7 +50,7 @@ export const callmeIt: CallMeCopy = {
   },
 
   dialYourself: {
-    pre: 'Preferisci chiamare tu? Chiama o scrivi al',
+    pre: 'Preferisci chiamare tu? Chiama il',
     post: 'per lo stesso diario, a qualsiasi ora.',
   },
 

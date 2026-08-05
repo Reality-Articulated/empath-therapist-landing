@@ -51,7 +51,7 @@ export const callmeEn = {
   },
 
   dialYourself: {
-    pre: 'Prefer to dial yourself? Call or text',
+    pre: 'Prefer to dial yourself? Call',
     post: 'whenever you like. It all lands in the same journal.',
   },
 

@@ -50,7 +50,7 @@ export const callmeEs: CallMeCopy = {
   },
 
   dialYourself: {
-    pre: '¿Prefieres marcar tú? Llama o envía un mensaje al',
+    pre: '¿Prefieres marcar tú? Llama al',
     post: '. El mismo diario, a cualquier hora.',
   },
 
