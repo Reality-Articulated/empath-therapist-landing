@@ -26,7 +26,7 @@ export interface ChatMessage {
 
 export const journalingEn = {
   seo: {
-    title: "Empath - The Journal You Won't Quit",
+    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
     description:
       "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords:
@@ -45,22 +45,31 @@ export const journalingEn = {
     h1Pre: 'The journal you',
     h1Highlight: "won't quit.",
     sub: "Because it lives wherever you go: just message or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.",
-    mobileLead: 'Start journaling right now. Just call or send a message.',
+    mobileLead: 'Something on your mind? Just call or send a message.',
     call: 'Call',
     text: 'Text',
-    orFavoriteApp: 'Or journal on your favorite app',
+    orFavoriteApp: "Or use the app you're already in",
     phoneMeta: 'Available 24/7 • No account needed',
     wantInsights: 'Want mood trends & insights?',
     getApp: 'Get the Free App',
     appBenefits: 'Mood charts, pattern detection, Apple Health sync',
-    desktopLead: 'Start journaling right now with a call or a message. No app to download, no account to create.',
-    textToJournal: 'Text to journal',
+    desktopLead: "Say what's on your mind with a call or a message. No app to download, no account to create.",
+    textToJournal: 'Text your thoughts',
     callAndTalk: 'Call & just talk',
     textUsAt: 'Text us at',
     callUsAt: 'Call us at',
     availability: 'Available 24/7 • Free • Works from any phone',
     preferTyping: 'Prefer typing at your desk?',
     openDashboard: 'Open the web dashboard',
+  },
+
+  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
+  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
+  // above. Remove once the experiment is decided.
+  heroExperiment: {
+    h1Pre: 'The app you never',
+    h1Highlight: 'have to open.',
+    sub: "Whatever's on your mind, text it on WhatsApp, call it, or let it call you. Empath listens, talks back, and remembers. Open the app when you want to see what's really going on with you.",
   },
 
   trust: {
@@ -70,10 +79,10 @@ export const journalingEn = {
   },
 
   whatsappSection: {
-    badge: 'Journaling in your DMs',
-    title: 'What It Actually Looks Like',
-    sub: "A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it like you'd text a friend. Empath listens, responds, and quietly saves it as a journal entry.",
-    cta: 'Journal on WhatsApp',
+    badge: 'Empath in your DMs',
+    title: 'More Than a Place to Vent',
+    sub: "A 2 AM spiral, a voice note you're too tired to type, a rough day. You send it like you'd text a friend. Empath listens, asks the follow-up a friend would, and remembers what you said last Tuesday: all of it saved privately, just for you.",
+    cta: 'Chat on WhatsApp',
     phoneNote: 'Or message {phone} on Telegram, Messenger, or Instagram. Example conversations shown.',
     examples: [
       {
@@ -117,7 +126,7 @@ export const journalingEn = {
       {
         key: 'mom',
         title: 'The everyday guilt',
-        caption: "A journal that remembers what you're trying to do better.",
+        caption: "It remembers what you're trying to do better.",
         contactName: 'Empath',
         unknownAvatar: false,
         messages: [
@@ -142,7 +151,7 @@ export const journalingEn = {
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
-          { from: 'user', text: 'wait so i can journal by just texting this number? no app?', time: '9:14 AM' },
+          { from: 'user', text: "wait so i can just text this number whatever's on my mind? no app?", time: '9:14 AM' },
           {
             from: 'empath',
             text: "That's it. No app, no sign-up, no blank page staring at you. Tell me about your day. One sentence is plenty.",
@@ -161,15 +170,15 @@ export const journalingEn = {
   },
 
   crossChannel: {
-    badge: 'One journal, every app',
+    badge: 'One memory, every app',
     title: 'Start Anywhere. Continue Everywhere.',
-    sub: 'Empath lives wherever you already are. Journal tonight, ask about it on WhatsApp over coffee, dig deeper on Telegram after work, close the loop from Instagram while you scroll. Every channel talks to the same journal, and the same memory.',
+    sub: 'Empath lives wherever you already are. Talk it out tonight, ask about it on WhatsApp over coffee, dig deeper on Telegram after work, close the loop from Instagram while you scroll. Every channel talks to the same Empath, with the same memory.',
     pickApp: "Pick whichever app you're already in",
     journalStep: {
       time: 'Tuesday 9:41 PM',
-      channel: 'Voice journal',
+      channel: 'Voice entry',
       cardTitle: 'Night before the presentation',
-      cardSub: 'Voice journal · 2 min',
+      cardSub: 'Voice entry · 2 min',
       quote:
         '"I keep rehearsing the intro. What if I just blank out in front of everyone tomorrow? I know this material better than anyone on the team, but my brain won\'t accept it..."',
     },
@@ -202,19 +211,32 @@ export const journalingEn = {
   },
 
   channelRow: {
-    /** aria-label prefix: "Journal on WhatsApp" */
-    journalOn: 'Journal on',
+    /** aria-label prefix: "Chat on WhatsApp" */
+    journalOn: 'Chat on',
+    /**
+     * Prefilled first message for chat deep links (wa.me ?text=). Written in
+     * the user's casual lowercase register — it appears in THEIR compose box.
+     * The session ref code is appended by code as " #CODE"; keep this short.
+     */
+    prefill: "hey, can i really just text you whatever's on my mind?",
+  },
+
+  // Desktop-only QR block under the hero CTAs (phones scan these).
+  qr: {
+    onPhone: 'On your phone?',
+    whatsapp: 'Scan to chat on WhatsApp',
+    appStore: 'Scan to get the app',
   },
 
   callsYou: {
     badge: 'New: Empath calls you',
     title: "Don't feel like dialing? We'll call you.",
-    sub: "Type your number and your phone rings within seconds. Talk about your day like you would with a friend, hang up, and it's already saved as a journal entry: transcribed, titled, and private. You can even schedule the call for later.",
+    sub: "Type your number and your phone rings within seconds. Talk about your day like you would with a friend, hang up, and it's already saved to your private journal: transcribed, titled, and only yours. You can even schedule the call for later.",
   },
 
   callMeForm: {
     ringingTitle: '📞 Calling you now. Pick up!',
-    ringingSub: "Talk about your day, hang up, and it's saved as your first journal entry.",
+    ringingSub: "Talk about your day, hang up, and it's saved as your first entry.",
     phoneAria: 'Your phone number (US)',
     dialing: 'Dialing…',
     callMeNow: 'Call me now',
@@ -227,7 +249,7 @@ export const journalingEn = {
   feature1: {
     badge: 'WhatsApp, Telegram, or Call',
     title: 'Use the Apps You Already Open',
-    body: "The moment a thought hits, fire off a message or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes your journal. No new app to learn, no blank page to face.",
+    body: "The moment a thought hits, fire off a message or voice note, or just call and talk it out. It's the same thing you'd do venting to a friend, except here it quietly becomes a private journal. No new app to learn, no blank page to face.",
     items: [
       { title: 'AI Transcription', desc: 'Perfect accuracy. Your words, captured exactly as you say them.' },
       {
@@ -293,7 +315,7 @@ export const journalingEn = {
     insightLabel: 'Insight',
     insightText: 'Your mood improves 40% on days you exercise. Consider morning walks!',
     items: [
-      { title: 'Daily Mood Tracking', desc: 'Automatic sentiment analysis from your journals' },
+      { title: 'Daily Mood Tracking', desc: 'Automatic sentiment analysis from your entries' },
       { title: 'Correlation Analysis', desc: 'Discover what activities boost your mood' },
       { title: 'Places & Weather', desc: 'See how you feel at home, at work, and on grey days' },
       { title: 'Long-term Trends', desc: 'See your progress over weeks and months' },
@@ -328,13 +350,13 @@ export const journalingEn = {
 
   feature5: {
     badge: 'AI Powered',
-    title: 'Talk to Your Journals',
+    title: 'An AI That Actually Knows You',
     sub: 'Your personal AI companion knows your entire history. Ask questions, gain insights, and get personalized guidance anytime.',
     companionTitle: 'Your AI Companion',
     exchanges: [
       {
         q: '"Why do I always feel anxious on Mondays?"',
-        a: 'Based on your journals, you tend to sleep less on Sunday nights and skip breakfast on Monday mornings. This pattern appears in 8 of your last 10 Monday entries.',
+        a: 'Based on your entries, you tend to sleep less on Sunday nights and skip breakfast on Monday mornings. This pattern appears in 8 of your last 10 Monday entries.',
       },
       {
         q: '"What helps me feel better when I\'m stressed?"',
@@ -438,7 +460,7 @@ export const journalingEn = {
 
   howItWorks: {
     title: 'Capture by Message or Call. Reflect in the App.',
-    sub: 'No setup, no new habit to build. Journal the way you already talk to friends.',
+    sub: 'No setup, no new habit to build. Just talk the way you already do with friends.',
     stepLabel: 'Step',
     steps: [
       {
@@ -447,7 +469,7 @@ export const journalingEn = {
       },
       {
         title: 'Empath Captures It',
-        desc: 'Every message and call becomes a journal entry: transcribed, organized, and saved automatically. You just keep living your life.',
+        desc: 'Every message and call lands in your private journal: transcribed, organized, and saved automatically. You just keep living your life.',
       },
       {
         title: 'Open the App to Reflect',
@@ -459,7 +481,7 @@ export const journalingEn = {
   iosCallout: {
     kicker: 'iOS app available',
     title: 'Want to Look Back? Get the App',
-    body: 'You journal by message and call. The app is where you read it all back, search past entries, and watch your mood patterns unfold.',
+    body: 'You talk by message and call. The app is where your private journal lives: read everything back, search past moments, and watch your mood patterns unfold.',
     button: 'Download on App Store',
   },
 
@@ -537,7 +559,7 @@ export const journalingEn = {
   },
 
   finalCta: {
-    title: 'Your Next Journal Entry Is One Message Away',
+    title: "Whatever's On Your Mind, It's One Message Away",
     sub: 'No app to learn, no blank page to stare at. Just message or call the way you already do with a friend, and start seeing your patterns in days, not months.',
     downloadFree: 'Download Free on App Store',
     justSayHi: 'No app, no account. Just say hi',
@@ -555,7 +577,7 @@ export const journalingEn = {
 
   floating: {
     downloadFree: 'Download Free',
-    text: 'Text to journal',
+    text: 'Text your thoughts',
     call: 'Call',
     webApp: 'Web app',
   },

@@ -37,6 +37,7 @@ import {
 import logo from '../../public/empath-logo.png';
 import { Toaster } from 'react-hot-toast';
 import posthog from 'posthog-js';
+import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
@@ -48,6 +49,8 @@ import { WhatsAppIcon } from '../components/ChannelIcons';
 import { useJournalingCopy } from '../i18n/copy';
 import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
+import { buildChannelHref, captureChannelLinkClick, getChannelRefCode } from '../utils/attribution';
+import DesktopQRCodes from '../components/DesktopQRCodes';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -90,11 +93,18 @@ const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNo
 
 export default function JournalingPage() {
   const c = useJournalingCopy();
+  // PostHog experiment `landing-hero-copy`: variant `never-open` swaps the
+  // hero H1 + subheadline. Anything else (control, flag missing, flags not
+  // yet loaded, bots) renders the default hero — which is also what the
+  // prerendered HTML contains, so SEO snapshots stay stable. Existing CTA
+  // click events carry the active flag, so they double as goal metrics.
+  const heroVariant = useFeatureFlagVariantKey('landing-hero-copy');
+  const heroHeadline = heroVariant === 'never-open' ? c.heroExperiment : c.hero;
+  const refCode = getChannelRefCode();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
-  const WHATSAPP_NUMBER = '18883663082'; // Empath WhatsApp number (same as SMS/voice)
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
   const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
 
@@ -201,15 +211,15 @@ export default function JournalingPage() {
       >
         <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
           <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-stone-900 mb-8 leading-[1.1] font-serif">
-            {c.hero.h1Pre}{' '}
+            {heroHeadline.h1Pre}{' '}
             <span className="relative inline-block px-3 whitespace-nowrap">
               <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
-              <span className="relative text-white">{c.hero.h1Highlight}</span>
+              <span className="relative text-white">{heroHeadline.h1Highlight}</span>
             </span>
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            {c.hero.sub}
+            {heroHeadline.sub}
           </motion.p>
 
           {isMobile ? (
@@ -302,6 +312,9 @@ export default function JournalingPage() {
                   <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> {c.hero.availability}
                 </p>
 
+                {/* Desktop can't tap tel:/wa.me — give the phone something to scan */}
+                <DesktopQRCodes className="mt-6" />
+
                 {/* Secondary: web dashboard for desktop typers */}
                 <div className="relative mt-7 mb-4">
                   <div className="absolute inset-0 flex items-center" aria-hidden="true">
@@ -377,10 +390,10 @@ export default function JournalingPage() {
 
               <motion.div variants={fadeIn} className="text-center mt-14">
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => posthog.capture('journaling_page_wa_examples_whatsapp_clicked')}
+                  onClick={() => captureChannelLinkClick('journaling_page_wa_examples', 'whatsapp', refCode)}
                   className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#25D366] text-white rounded-xl font-bold text-base border-2 border-[#25D366] shadow-[6px_6px_0px_0px_#1a9e4d] hover:shadow-[4px_4px_0px_0px_#1a9e4d] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                 >
                   <WhatsAppIcon className="w-5 h-5" /> {c.whatsappSection.cta}

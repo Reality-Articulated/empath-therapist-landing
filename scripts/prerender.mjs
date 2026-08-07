@@ -81,14 +81,14 @@ const staticRoutes = [
   {
     path: '/',
     canonicalPath: '/app',
-    title: "Empath - The Journal You Won't Quit",
+    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
     description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
     alternates: hreflangCluster('/app'),
   },
   {
     path: '/app',
-    title: "Empath - The Journal You Won't Quit",
+    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
     description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
     alternates: hreflangCluster('/app'),

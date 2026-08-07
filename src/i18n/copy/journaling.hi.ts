@@ -7,7 +7,7 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingHi: JournalingCopy = {
   seo: {
-    title: 'Empath - वो Journal जो आप छोड़ेंगे नहीं',
+    title: 'Empath - वो App जो आपको कभी खोलना नहीं पड़ता | अपने ख़याल Text, WhatsApp या Call कीजिए',
     description:
       'एक नंबर है जिस पर आप बस journal कर सकते हैं। WhatsApp करें, Telegram करें, call करें, या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
     keywords:
@@ -26,22 +26,31 @@ export const journalingHi: JournalingCopy = {
     h1Pre: 'वो journal जो आप',
     h1Highlight: 'कभी नहीं छोड़ेंगे.',
     sub: 'क्योंकि ये वहीं रहता है जहाँ आप हैं: जब भी मन में कुछ हो, बस message कर दीजिए या call कर लीजिए। Empath आपको journal करने और अपने मन को समझने में मदद करता है, और वक़्त के साथ आपके patterns सामने लाता है।',
-    mobileLead: 'अभी से journaling शुरू करें। बस call या message कीजिए।',
+    mobileLead: 'मन में कुछ चल रहा है? बस call कर लीजिए या message भेज दीजिए।',
     call: 'Call करें',
     text: 'Text करें',
-    orFavoriteApp: 'या अपने पसंदीदा app पर journal करें',
+    orFavoriteApp: 'या जो app पहले से खुला है, वही इस्तेमाल कीजिए',
     phoneMeta: '24/7 उपलब्ध • साइन-अप की ज़रूरत नहीं',
     wantInsights: 'Mood trends और insights चाहिए?',
     getApp: 'Free App डाउनलोड करें',
     appBenefits: 'Mood charts, pattern detection, Apple Health sync',
-    desktopLead: 'एक call या message से अभी journaling शुरू कीजिए। न कोई app download करना है, न कोई साइन-अप।',
-    textToJournal: 'Text करके journal करें',
+    desktopLead: 'जो मन में है, एक call या message से कह डालिए। न कोई app download करना है, न कोई साइन-अप।',
+    textToJournal: 'अपने ख़याल text करें',
     callAndTalk: 'Call करें और बस बोलें',
     textUsAt: 'हमें text करें',
     callUsAt: 'हमें call करें',
     availability: '24/7 उपलब्ध • Free • किसी भी फ़ोन से',
     preferTyping: 'डेस्क पर बैठकर type करना पसंद है?',
     openDashboard: 'Web dashboard खोलें',
+  },
+
+  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
+  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
+  // above. Remove once the experiment is decided.
+  heroExperiment: {
+    h1Pre: 'वो app जिसे खोलने की',
+    h1Highlight: 'ज़रूरत ही नहीं.',
+    sub: 'जो भी मन में हो, WhatsApp पर text कर दीजिए, call करके बोल दीजिए, या वो ख़ुद आपको call कर ले। Empath सुनता है, जवाब देता है, और याद रखता है। App तब खोलिए जब देखना हो कि आपके अंदर असल में चल क्या रहा है।',
   },
 
   trust: {
@@ -51,10 +60,10 @@ export const journalingHi: JournalingCopy = {
   },
 
   whatsappSection: {
-    badge: 'Journaling, सीधे आपके DMs में',
-    title: 'असल में ये दिखता कैसा है',
-    sub: 'रात 2 बजे की overthinking, वो voice note जो type करने की energy नहीं, एक बुरा दिन। आप वैसे ही भेजते हैं जैसे किसी दोस्त को text करते हैं। Empath सुनता है, जवाब देता है, और चुपचाप उसे journal entry बनाकर save कर लेता है।',
-    cta: 'WhatsApp पर journal करें',
+    badge: 'Empath, सीधे आपके DMs में',
+    title: 'सिर्फ़ भड़ास निकालने की जगह नहीं',
+    sub: 'रात 2 बजे की overthinking, वो voice note जो type करने की energy नहीं, एक बुरा दिन। आप वैसे ही भेजते हैं जैसे किसी दोस्त को text करते हैं। Empath सुनता है, वही सवाल पूछता है जो एक दोस्त पूछता, और याद रखता है कि आपने पिछले मंगलवार को क्या कहा था। और ये सब privately save रहता है, सिर्फ़ आपके लिए।',
+    cta: 'WhatsApp पर chat करें',
     phoneNote: 'या {phone} पर Telegram, Messenger या Instagram से message करें। नीचे example conversations हैं।',
     examples: [
       {
@@ -98,7 +107,7 @@ export const journalingHi: JournalingCopy = {
       {
         key: 'mom',
         title: 'रोज़-रोज़ की guilt',
-        caption: 'एक journal जिसे याद रहता है कि आप क्या बेहतर करना चाह रहे हैं।',
+        caption: 'इसे याद रहता है कि आप क्या बेहतर करना चाह रहे हैं।',
         contactName: 'Empath',
         unknownAvatar: false,
         messages: [
@@ -123,7 +132,7 @@ export const journalingHi: JournalingCopy = {
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
-          { from: 'user', text: 'रुको, मतलब बस इस नंबर पर text करके journal कर सकते हैं? कोई app नहीं?', time: '9:14 AM' },
+          { from: 'user', text: 'रुको, मतलब जो भी मन में हो बस इस नंबर पर text कर सकते हैं? कोई app नहीं?', time: '9:14 AM' },
           {
             from: 'empath',
             text: 'बस इतना ही। न app, न साइन-अप, न कोई खाली page तुम्हें घूरता हुआ। बताओ आज का दिन कैसा जा रहा है, एक लाइन भी काफ़ी है।',
@@ -142,15 +151,15 @@ export const journalingHi: JournalingCopy = {
   },
 
   crossChannel: {
-    badge: 'एक journal, हर app पर',
+    badge: 'एक memory, हर app पर',
     title: 'कहीं से भी शुरू करें। हर जगह जारी रखें।',
-    sub: 'Empath वहीं रहता है जहाँ आप पहले से हैं। रात को journal कीजिए, सुबह चाय के साथ WhatsApp पर उसी बारे में पूछिए, काम के बाद Telegram पर गहराई में जाइए, scroll करते-करते Instagram से बात पूरी कर लीजिए। हर channel उसी एक journal से जुड़ा है, और उसी एक memory से।',
+    sub: 'Empath वहीं रहता है जहाँ आप पहले से हैं। रात को बोलकर मन हल्का कीजिए, सुबह चाय के साथ WhatsApp पर उसी बारे में पूछिए, काम के बाद Telegram पर गहराई में जाइए, scroll करते-करते Instagram से बात पूरी कर लीजिए। हर channel उसी एक Empath से बात करता है, उसी एक memory के साथ।',
     pickApp: 'जो app पहले से खुला है, वही चुन लीजिए',
     journalStep: {
       time: 'मंगलवार 9:41 PM',
-      channel: 'Voice journal',
+      channel: 'Voice entry',
       cardTitle: 'Presentation से एक रात पहले',
-      cardSub: 'Voice journal · 2 min',
+      cardSub: 'Voice entry · 2 min',
       quote:
         '"बार-बार intro rehearse कर रहा हूँ। कल सबके सामने दिमाग़ blank हो गया तो? पता है कि team में ये material मुझसे बेहतर कोई नहीं जानता, पर दिमाग़ मानने को तैयार ही नहीं..."',
     },
@@ -183,19 +192,28 @@ export const journalingHi: JournalingCopy = {
   },
 
   channelRow: {
-    /** aria-label prefix: "Journal on WhatsApp" */
-    journalOn: 'Journal करें:',
+    /** aria-label prefix: "Chat on WhatsApp" */
+    journalOn: 'Chat करें:',
+    /** Prefilled first message for chat deep links; ref code appended as " #CODE". */
+    prefill: 'hey, मतलब जो भी मन में हो, सच में बस आपको text कर सकते हैं?',
+  },
+
+  // Desktop-only QR block under the hero CTAs (phones scan these).
+  qr: {
+    onPhone: 'Phone पास में है?',
+    whatsapp: 'Scan करें, WhatsApp पर chat शुरू',
+    appStore: 'Scan करें, app download करें',
   },
 
   callsYou: {
     badge: 'नया: Empath आपको call करता है',
     title: 'Dial करने का मन नहीं? हम आपको call कर देंगे.',
-    sub: 'अपना नंबर डालिए और कुछ ही सेकंड में आपका फ़ोन बजेगा। दोस्त से बात करने जैसे अपने दिन के बारे में बोलिए, call काटिए, और वो journal entry बनकर save भी हो चुकी होगी: transcribe की हुई, title के साथ, बिल्कुल private। चाहें तो call बाद के लिए schedule भी कर सकते हैं।',
+    sub: 'अपना नंबर डालिए और कुछ ही सेकंड में आपका फ़ोन बजेगा। दोस्त से बात करने जैसे अपने दिन के बारे में बोलिए, call काटिए, और वो आपके private journal में save भी हो चुकी होगी: transcribe की हुई, title के साथ, सिर्फ़ आपकी। चाहें तो call बाद के लिए schedule भी कर सकते हैं।',
   },
 
   callMeForm: {
     ringingTitle: '📞 आपको अभी call कर रहे हैं, उठाइए!',
-    ringingSub: 'अपने दिन के बारे में बात कीजिए, call काटिए, और वो आपकी पहली journal entry बनकर save हो जाएगी।',
+    ringingSub: 'अपने दिन के बारे में बात कीजिए, call काटिए, और वो आपकी पहली entry बनकर save हो जाएगी।',
     phoneAria: 'आपका फ़ोन नंबर (US)',
     dialing: 'Call लगा रहे हैं…',
     callMeNow: 'मुझे अभी call करें',
@@ -208,7 +226,7 @@ export const journalingHi: JournalingCopy = {
   feature1: {
     badge: 'WhatsApp, Telegram या Call',
     title: 'वही Apps इस्तेमाल कीजिए जो आप पहले से खोलते हैं',
-    body: 'जैसे ही कोई ख़याल आए, एक message या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
+    body: 'जैसे ही कोई ख़याल आए, एक message या voice note भेज दीजिए, या बस call करके बोल डालिए। ये वैसा ही है जैसे किसी दोस्त के सामने दिल हल्का करना, बस यहाँ वो चुपचाप आपका private journal बन जाता है। न कोई नया app सीखना, न किसी खाली page का सामना।',
     items: [
       { title: 'AI Transcription', desc: 'एकदम सटीक। आपके शब्द, ठीक वैसे ही जैसे आपने कहे।' },
       {
@@ -274,7 +292,7 @@ export const journalingHi: JournalingCopy = {
     insightLabel: 'Insight',
     insightText: 'Exercise वाले दिनों में आपका mood 40% बेहतर रहता है। सुबह की walk try कीजिए!',
     items: [
-      { title: 'Daily Mood Tracking', desc: 'आपके journals से अपने आप sentiment analysis' },
+      { title: 'Daily Mood Tracking', desc: 'आपकी entries से अपने आप sentiment analysis' },
       { title: 'Correlation Analysis', desc: 'जानिए कौन सी activities आपका mood बेहतर करती हैं' },
       { title: 'जगहें और मौसम', desc: 'देखिए घर पर, काम पर और बादल वाले दिनों में आप कैसा महसूस करते हैं' },
       { title: 'Long-term Trends', desc: 'हफ़्तों और महीनों में अपनी progress देखिए' },
@@ -309,13 +327,13 @@ export const journalingHi: JournalingCopy = {
 
   feature5: {
     badge: 'AI Powered',
-    title: 'अपने Journals से बात कीजिए',
+    title: 'एक AI जो आपको सच में जानता है',
     sub: 'आपका personal AI companion आपकी पूरी history जानता है। कभी भी सवाल पूछिए, insights पाइए और personalized guidance लीजिए।',
     companionTitle: 'आपका AI Companion',
     exchanges: [
       {
         q: '"मुझे हर Monday को anxiety क्यों होती है?"',
-        a: 'आपके journals के हिसाब से, आप Sunday रात को कम सोते हैं और Monday सुबह breakfast छोड़ देते हैं। ये pattern आपकी पिछली 10 में से 8 Monday entries में दिखता है।',
+        a: 'आपकी entries के हिसाब से, आप Sunday रात को कम सोते हैं और Monday सुबह breakfast छोड़ देते हैं। ये pattern आपकी पिछली 10 में से 8 Monday entries में दिखता है।',
       },
       {
         q: '"Stress में मुझे किस चीज़ से बेहतर महसूस होता है?"',
@@ -416,7 +434,7 @@ export const journalingHi: JournalingCopy = {
 
   howItWorks: {
     title: 'Message या Call से लिखिए। App में मुड़कर देखिए।',
-    sub: 'न कोई setup, न कोई नई आदत बनानी है। जैसे दोस्तों से बात करते हैं, वैसे ही journal कीजिए।',
+    sub: 'न कोई setup, न कोई नई आदत बनानी है। बस वैसे ही बात कीजिए जैसे दोस्तों से करते हैं।',
     stepLabel: 'Step',
     steps: [
       {
@@ -425,7 +443,7 @@ export const journalingHi: JournalingCopy = {
       },
       {
         title: 'Empath उसे सँभाल लेता है',
-        desc: 'हर message और call अपने आप journal entry बन जाती है: transcribed, organized और saved। आप बस अपनी ज़िंदगी जीते रहिए।',
+        desc: 'हर message और call आपके private journal में पहुँच जाती है: transcribed, organized और अपने आप saved। आप बस अपनी ज़िंदगी जीते रहिए।',
       },
       {
         title: 'मुड़कर देखने के लिए App खोलिए',
@@ -437,7 +455,7 @@ export const journalingHi: JournalingCopy = {
   iosCallout: {
     kicker: 'iOS app उपलब्ध',
     title: 'पीछे मुड़कर देखना है? App ले लीजिए',
-    body: 'Journal आप message और call से करते हैं। App वो जगह है जहाँ आप सब कुछ पढ़ सकते हैं, पुरानी entries search कर सकते हैं और अपने mood patterns को खुलते देख सकते हैं।',
+    body: 'बात आप message और call से करते हैं। App वो जगह है जहाँ आपका private journal रहता है: सब कुछ दोबारा पढ़िए, पुराने पल search कीजिए और अपने mood patterns को खुलते देखिए।',
     button: 'App Store से Download करें',
   },
 
@@ -515,7 +533,7 @@ export const journalingHi: JournalingCopy = {
   },
 
   finalCta: {
-    title: 'आपकी अगली Journal Entry बस एक Message दूर है',
+    title: 'जो भी मन में है, बस एक Message दूर है',
     sub: 'न कोई app सीखना, न खाली page को घूरना। जैसे दोस्त को करते हैं वैसे ही message या call कीजिए, और महीनों नहीं, कुछ ही दिनों में अपने patterns दिखने लगेंगे।',
     downloadFree: 'App Store से Free Download करें',
     justSayHi: 'न app, न साइन-अप। बस hi बोल दीजिए',
@@ -533,7 +551,7 @@ export const journalingHi: JournalingCopy = {
 
   floating: {
     downloadFree: 'Free Download करें',
-    text: 'Text से journal करें',
+    text: 'अपने ख़याल text करें',
     call: 'Call करें',
     webApp: 'Web app',
   },

@@ -6,7 +6,7 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingFr: JournalingCopy = {
   seo: {
-    title: 'Empath - Le journal que tu ne lâcheras pas',
+    title: 'Empath - L’appli que tu n’as jamais besoin d’ouvrir | Tes pensées par message, WhatsApp ou appel',
     description:
       'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un message WhatsApp ou Telegram, appelle, ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
     keywords:
@@ -25,22 +25,31 @@ export const journalingFr: JournalingCopy = {
     h1Pre: 'Le journal que tu',
     h1Highlight: 'ne lâcheras pas.',
     sub: 'Parce qu’il vit partout où tu vas : envoie un message ou appelle dès que quelque chose te trotte dans la tête. Empath t’aide à tenir ton journal et à explorer ton esprit, et révèle tes schémas au fil du temps.',
-    mobileLead: 'Commence ton journal maintenant. Appelle ou envoie un message.',
+    mobileLead: 'Quelque chose te trotte dans la tête ? Appelle ou envoie un message.',
     call: 'Appeler',
     text: 'SMS',
-    orFavoriteApp: 'Ou tiens ton journal sur ton appli préférée',
+    orFavoriteApp: 'Ou passe par l’appli où tu es déjà',
     phoneMeta: 'Dispo 24h/24 • Sans inscription',
     wantInsights: 'Envie de voir tes tendances d’humeur ?',
     getApp: 'Télécharge l’appli gratuite',
     appBenefits: 'Courbes d’humeur, détection de schémas, synchro Apple Health',
-    desktopLead: 'Commence ton journal tout de suite, par appel ou message. Aucune appli à télécharger, aucune inscription.',
-    textToJournal: 'Écris pour journaler',
+    desktopLead: 'Dis ce que tu as en tête, par appel ou par message. Aucune appli à télécharger, aucune inscription.',
+    textToJournal: 'Écris tes pensées',
     callAndTalk: 'Appelle et parle, c’est tout',
     textUsAt: 'Écris-nous au',
     callUsAt: 'Appelle-nous au',
     availability: 'Dispo 24h/24 • Gratuit • Depuis n’importe quel téléphone',
     preferTyping: 'Tu préfères taper au clavier ?',
     openDashboard: 'Ouvre le tableau de bord web',
+  },
+
+  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
+  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
+  // above. Remove once the experiment is decided.
+  heroExperiment: {
+    h1Pre: 'L’appli que tu n’as',
+    h1Highlight: 'jamais à ouvrir.',
+    sub: 'Quoi que tu aies en tête, envoie-le sur WhatsApp, appelle, ou laisse Empath t’appeler. Empath écoute, répond et se souvient. Ouvre l’appli quand tu veux voir ce qui se passe vraiment en toi.',
   },
 
   trust: {
@@ -50,10 +59,10 @@ export const journalingFr: JournalingCopy = {
   },
 
   whatsappSection: {
-    badge: 'Le journal dans tes DM',
-    title: 'À quoi ça ressemble vraiment',
-    sub: 'Une spirale à 2h du matin, une note vocale parce que taper c’est trop d’effort, une sale journée. Tu envoies ça comme un texto à un ami. Empath écoute, répond, et l’enregistre discrètement comme une entrée de journal.',
-    cta: 'Journaler sur WhatsApp',
+    badge: 'Empath dans tes DM',
+    title: 'Plus qu’un endroit où vider ton sac',
+    sub: 'Une spirale à 2h du matin, une note vocale parce que taper c’est trop d’effort, une sale journée. Tu envoies ça comme un texto à un ami. Empath écoute, pose la question qu’un ami poserait, et se souvient de ce que tu as dit mardi dernier : tout est enregistré en privé, rien que pour toi.',
+    cta: 'Discuter sur WhatsApp',
     phoneNote: 'Ou écris au {phone} sur Telegram, Messenger ou Instagram. Conversations données en exemple.',
     examples: [
       {
@@ -97,7 +106,7 @@ export const journalingFr: JournalingCopy = {
       {
         key: 'mom',
         title: 'La culpabilité du quotidien',
-        caption: 'Un journal qui se souvient de ce que tu essaies d’améliorer.',
+        caption: 'Il se souvient de ce que tu essaies d’améliorer.',
         contactName: 'Empath',
         unknownAvatar: false,
         messages: [
@@ -122,7 +131,7 @@ export const journalingFr: JournalingCopy = {
         contactName: '+1 (888) 366-3082',
         unknownAvatar: true,
         messages: [
-          { from: 'user', text: 'attends je peux vraiment tenir un journal juste en textant ce numéro ? sans appli ?', time: '09h14' },
+          { from: 'user', text: 'attends je peux vraiment écrire à ce numéro tout ce que j’ai en tête ? sans appli ?', time: '09h14' },
           {
             from: 'empath',
             text: 'C’est ça. Pas d’appli, pas d’inscription, pas de page blanche qui te fixe. Raconte-moi ta journée, une phrase suffit.',
@@ -141,15 +150,15 @@ export const journalingFr: JournalingCopy = {
   },
 
   crossChannel: {
-    badge: 'Un seul journal, toutes tes applis',
+    badge: 'Une seule mémoire, toutes tes applis',
     title: 'Commence n’importe où. Continue partout.',
-    sub: 'Empath vit là où tu es déjà. Écris dans ton journal ce soir, reviens dessus sur WhatsApp autour d’un café, creuse sur Telegram après le boulot, boucle la boucle sur Instagram en scrollant. Tous les canaux parlent au même journal, et à la même mémoire.',
+    sub: 'Empath vit là où tu es déjà. Vide ton sac ce soir, reviens dessus sur WhatsApp autour d’un café, creuse sur Telegram après le boulot, boucle la boucle sur Instagram en scrollant. Tous les canaux parlent au même Empath, avec la même mémoire.',
     pickApp: 'Choisis l’appli que tu utilises déjà',
     journalStep: {
       time: 'mardi 21h41',
-      channel: 'Journal vocal',
+      channel: 'Entrée vocale',
       cardTitle: 'La veille de la présentation',
-      cardSub: 'Journal vocal · 2 min',
+      cardSub: 'Entrée vocale · 2 min',
       quote:
         '« Je répète l’intro en boucle. Et si demain je perds tous mes moyens devant tout le monde ? Je connais ce sujet mieux que quiconque dans l’équipe, mais mon cerveau refuse de l’admettre… »',
     },
@@ -182,19 +191,28 @@ export const journalingFr: JournalingCopy = {
   },
 
   channelRow: {
-    /** aria-label prefix: "Journaler sur WhatsApp" */
-    journalOn: 'Journaler sur',
+    /** aria-label prefix: "Discuter sur WhatsApp" */
+    journalOn: 'Discuter sur',
+    /** Prefilled first message for chat deep links; ref code appended as " #CODE". */
+    prefill: 'hey, je peux vraiment t’écrire tout ce que j’ai en tête ?',
+  },
+
+  // Desktop-only QR block under the hero CTAs (phones scan these).
+  qr: {
+    onPhone: 'Ton téléphone est à côté ?',
+    whatsapp: 'Scanne pour discuter sur WhatsApp',
+    appStore: 'Scanne pour télécharger l’appli',
   },
 
   callsYou: {
     badge: 'Nouveau : Empath t’appelle',
     title: 'Pas envie de composer le numéro ? On t’appelle.',
-    sub: 'Tape ton numéro et ton téléphone sonne en quelques secondes. Raconte ta journée comme à un ami, raccroche, et c’est déjà enregistré comme entrée de journal : transcrite, titrée et privée. Tu peux même programmer l’appel pour plus tard.',
+    sub: 'Tape ton numéro et ton téléphone sonne en quelques secondes. Raconte ta journée comme à un ami, raccroche, et c’est déjà enregistré dans ton journal privé : transcrit, titré et rien qu’à toi. Tu peux même programmer l’appel pour plus tard.',
   },
 
   callMeForm: {
     ringingTitle: '📞 On t’appelle, décroche !',
-    ringingSub: 'Raconte ta journée, raccroche, et c’est enregistré comme ta première entrée de journal.',
+    ringingSub: 'Raconte ta journée, raccroche, et c’est enregistré comme ta première entrée.',
     phoneAria: 'Ton numéro de téléphone (États-Unis)',
     dialing: 'Appel en cours…',
     callMeNow: 'Appelle-moi maintenant',
@@ -207,7 +225,7 @@ export const journalingFr: JournalingCopy = {
   feature1: {
     badge: 'WhatsApp, Telegram ou appel',
     title: 'Utilise les applis que tu ouvres déjà',
-    body: 'Dès qu’une pensée surgit, envoie un message ou une note vocale, ou appelle et vide ton sac. C’est exactement ce que tu fais quand tu te confies à un ami, sauf qu’ici ça devient discrètement ton journal. Aucune nouvelle appli à apprendre, aucune page blanche à affronter.',
+    body: 'Dès qu’une pensée surgit, envoie un message ou une note vocale, ou appelle et vide ton sac. C’est exactement ce que tu fais quand tu te confies à un ami, sauf qu’ici ça devient discrètement un journal privé. Aucune nouvelle appli à apprendre, aucune page blanche à affronter.',
     items: [
       { title: 'Transcription IA', desc: 'Une précision parfaite. Tes mots, capturés exactement comme tu les dis.' },
       {
@@ -273,7 +291,7 @@ export const journalingFr: JournalingCopy = {
     insightLabel: 'Insight',
     insightText: 'Ton humeur s’améliore de 40 % les jours où tu bouges. Et si tu marchais le matin ?',
     items: [
-      { title: 'Suivi d’humeur quotidien', desc: 'Analyse automatique du ressenti dans tes journaux' },
+      { title: 'Suivi d’humeur quotidien', desc: 'Analyse automatique du ressenti dans tes entrées' },
       { title: 'Analyse des corrélations', desc: 'Découvre quelles activités boostent ton humeur' },
       { title: 'Lieux et météo', desc: 'Vois comment tu te sens chez toi, au boulot et les jours gris' },
       { title: 'Tendances long terme', desc: 'Vois tes progrès sur des semaines et des mois' },
@@ -308,13 +326,13 @@ export const journalingFr: JournalingCopy = {
 
   feature5: {
     badge: 'Propulsé par l’IA',
-    title: 'Parle à tes journaux',
+    title: 'Une IA qui te connaît vraiment',
     sub: 'Ton compagnon IA personnel connaît tout ton historique. Pose des questions, découvre des insights et reçois des conseils personnalisés à tout moment.',
     companionTitle: 'Ton compagnon IA',
     exchanges: [
       {
         q: '« Pourquoi je suis toujours anxieux le lundi ? »',
-        a: 'D’après tes journaux, tu as tendance à moins dormir le dimanche soir et à sauter le petit-déjeuner le lundi matin. Ce schéma apparaît dans 8 de tes 10 dernières entrées du lundi.',
+        a: 'D’après tes entrées, tu as tendance à moins dormir le dimanche soir et à sauter le petit-déjeuner le lundi matin. Ce schéma apparaît dans 8 de tes 10 dernières entrées du lundi.',
       },
       {
         q: '« Qu’est-ce qui m’aide à aller mieux quand je suis stressé ? »',
@@ -415,7 +433,7 @@ export const journalingFr: JournalingCopy = {
 
   howItWorks: {
     title: 'Capture par message ou appel. Réfléchis dans l’appli.',
-    sub: 'Aucune installation, aucune nouvelle habitude à créer. Tiens ton journal comme tu parles déjà à tes amis.',
+    sub: 'Aucune installation, aucune nouvelle habitude à créer. Parle comme tu le fais déjà avec tes amis.',
     stepLabel: 'Étape',
     steps: [
       {
@@ -424,7 +442,7 @@ export const journalingFr: JournalingCopy = {
       },
       {
         title: 'Empath capture tout',
-        desc: 'Chaque message et chaque appel devient une entrée de journal : transcrite, organisée et enregistrée automatiquement. Toi, tu continues juste à vivre ta vie.',
+        desc: 'Chaque message et chaque appel atterrit dans ton journal privé : transcrit, organisé et enregistré automatiquement. Toi, tu continues juste à vivre ta vie.',
       },
       {
         title: 'Ouvre l’appli pour réfléchir',
@@ -436,7 +454,7 @@ export const journalingFr: JournalingCopy = {
   iosCallout: {
     kicker: 'Appli iOS disponible',
     title: 'Envie de regarder en arrière ? Prends l’appli',
-    body: 'Tu tiens ton journal par message et par appel. L’appli, c’est là où tu relis tout, cherches dans tes anciennes entrées et regardes tes tendances d’humeur se dessiner.',
+    body: 'Tu parles par message et par appel. L’appli, c’est là où vit ton journal privé : relis tout, cherche dans tes moments passés et regarde tes tendances d’humeur se dessiner.',
     button: 'Télécharger sur l’App Store',
   },
 
@@ -514,7 +532,7 @@ export const journalingFr: JournalingCopy = {
   },
 
   finalCta: {
-    title: 'Ta prochaine entrée de journal est à un message près',
+    title: 'Quoi que tu aies en tête, c’est à un message près',
     sub: 'Aucune appli à apprendre, aucune page blanche à fixer. Écris ou appelle comme tu le fais déjà avec un ami, et commence à voir tes schémas en quelques jours, pas en quelques mois.',
     downloadFree: 'Télécharger gratuitement sur l’App Store',
     justSayHi: 'Pas d’appli, sans inscription. Dis juste salut',
@@ -532,7 +550,7 @@ export const journalingFr: JournalingCopy = {
 
   floating: {
     downloadFree: 'Télécharger gratuitement',
-    text: 'Journal par SMS',
+    text: 'Écris tes pensées',
     call: 'Appeler',
     webApp: 'Appli web',
   },

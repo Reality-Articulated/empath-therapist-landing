@@ -1,18 +1,18 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { Instagram } from 'lucide-react';
-import posthog from 'posthog-js';
 import { WhatsAppIcon, TelegramIcon, MessengerIcon } from './ChannelIcons';
 import { useJournalingCopy } from '../i18n/copy';
+import {
+  buildChannelHref,
+  captureChannelLinkClick,
+  getChannelRefCode,
+} from '../utils/attribution';
 
-const WHATSAPP_NUMBER = '18883663082';
-const TELEGRAM_USERNAME = 'MyEmpathBot';
-const MESSENGER_PAGE = '359987860540277'; // Empath: Private Journal
-const INSTAGRAM_USERNAME = 'myempath';
+type ChannelKey = 'whatsapp' | 'telegram' | 'messenger' | 'instagram';
 
 interface MessagingChannel {
-  key: string;
+  key: ChannelKey;
   label: string;
-  href: string;
   icon: ReactNode;
   /** Brand button color */
   bg: string;
@@ -20,13 +20,12 @@ interface MessagingChannel {
   shadow: string;
 }
 
-// The channel registry — adding a messaging service = one new entry here.
-// Order = display order.
+// The channel registry — adding a messaging service = one new entry here
+// plus a case in buildChannelHref. Order = display order.
 const CHANNELS: MessagingChannel[] = [
   {
     key: 'whatsapp',
     label: 'WhatsApp',
-    href: `https://wa.me/${WHATSAPP_NUMBER}`,
     icon: <WhatsAppIcon className="w-6 h-6 shrink-0" />,
     bg: '#25D366',
     shadow: '#1a9e4d',
@@ -34,7 +33,6 @@ const CHANNELS: MessagingChannel[] = [
   {
     key: 'telegram',
     label: 'Telegram',
-    href: `https://t.me/${TELEGRAM_USERNAME}`,
     icon: <TelegramIcon className="w-6 h-6 shrink-0" />,
     bg: '#229ED9',
     shadow: '#1a7eb0',
@@ -42,7 +40,6 @@ const CHANNELS: MessagingChannel[] = [
   {
     key: 'messenger',
     label: 'Messenger',
-    href: `https://m.me/${MESSENGER_PAGE}`,
     icon: <MessengerIcon className="w-6 h-6 shrink-0" />,
     bg: '#0084FF',
     shadow: '#0063bf',
@@ -50,7 +47,6 @@ const CHANNELS: MessagingChannel[] = [
   {
     key: 'instagram',
     label: 'Instagram',
-    href: `https://ig.me/m/${INSTAGRAM_USERNAME}`,
     icon: <Instagram className="w-6 h-6 shrink-0" />,
     bg: '#E4405F',
     shadow: '#b32945',
@@ -58,10 +54,14 @@ const CHANNELS: MessagingChannel[] = [
 ];
 
 /**
- * Branded messaging-service buttons ("journal on…"): a centered row of
+ * Branded messaging-service buttons ("chat on…"): a centered row of
  * icon-only brand tiles. The service name lives in the aria-label/tooltip —
  * the logos are recognizable on their own and the compact row fits every
  * viewport, so there's no marquee/static split anymore.
+ *
+ * Every link carries the session ref code (and WhatsApp a localized
+ * prefilled first message) so the blank compose box never greets the user
+ * and empath-heroku can attribute the conversation back to this session.
  */
 export default function MessagingChannelsCarousel({
   eventPrefix,
@@ -72,17 +72,18 @@ export default function MessagingChannelsCarousel({
   className?: string;
 }) {
   const { channelRow } = useJournalingCopy();
+  const refCode = useMemo(getChannelRefCode, []);
   return (
     <div className={`flex flex-wrap justify-center gap-4 py-1 ${className}`}>
       {CHANNELS.map((channel) => (
         <a
           key={channel.key}
-          href={channel.href}
+          href={buildChannelHref(channel.key, channelRow.prefill, refCode)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${channelRow.journalOn} ${channel.label}`}
           title={channel.label}
-          onClick={() => posthog.capture(`${eventPrefix}_${channel.key}_clicked`)}
+          onClick={() => captureChannelLinkClick(eventPrefix, channel.key, refCode)}
           className="w-12 h-12 text-white rounded-xl border-2 flex items-center justify-center transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px]"
           style={{
             backgroundColor: channel.bg,
