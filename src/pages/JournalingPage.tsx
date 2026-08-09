@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import {
   CheckCircle,
   Shield,
@@ -42,6 +43,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import MessagingChannelsCarousel from '../components/MessagingChannelsCarousel';
 import WhatsAppExamples from '../components/WhatsAppExamples';
+import TryEmpathDemo from '../components/TryEmpathDemo';
 import CrossChannelStory from '../components/CrossChannelStory';
 import CallMeForm from '../components/CallMeForm';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -104,6 +106,12 @@ export default function JournalingPage() {
   const refCode = getChannelRefCode();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // Scroll-depth signal for the objection-handling section (fires once).
+  const { ref: worriesViewRef } = useInView({
+    threshold: 0.25,
+    triggerOnce: true,
+    onChange: (inView) => inView && posthog.capture('worries_section_viewed'),
+  });
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
@@ -359,6 +367,66 @@ export default function JournalingPage() {
               <Star className="w-5 h-5 text-[#1b8af1]" />
               <span className="font-bold text-sm">{c.trust.loved}</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- INTERACTIVE DEMO --- */}
+      {/* Button-driven Empath-styled chat mock (no free text): visitor taps
+          openers, Empath replies with canned copy, then the CTA points at the
+          App Store. Real app screenshots flank the demo at xl (2 per side);
+          below xl they collapse into a horizontal snap strip so mobile sees
+          all six. Files live in public/app-screens (480px webp). */}
+      <section className="py-24 bg-[#FAF9F6] border-b-2 border-stone-200 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <div className="text-center mb-12">
+                <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-800 border-2 border-green-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#25D366]">
+                  <Sparkles className="w-4 h-4" /> {c.tryIt.badge}
+                </motion.div>
+                <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
+                  {c.tryIt.title}
+                </motion.h2>
+                <motion.p variants={fadeIn} className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+                  {c.tryIt.sub}
+                </motion.p>
+              </div>
+
+              <motion.div variants={fadeIn}>
+                <div className="xl:grid xl:grid-cols-[1fr_minmax(0,28rem)_1fr] xl:gap-10 xl:items-center">
+                  <div className="hidden xl:flex flex-col gap-10 items-center" aria-hidden="true">
+                    <img src="/app-screens/journals.webp" alt="" loading="lazy" className="w-52 rounded-2xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] -rotate-3" />
+                    <img src="/app-screens/express.webp" alt="" loading="lazy" className="w-52 rounded-2xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] rotate-2" />
+                  </div>
+
+                  <TryEmpathDemo />
+
+                  <div className="hidden xl:flex flex-col gap-10 items-center" aria-hidden="true">
+                    <img src="/app-screens/mood-map.webp" alt="" loading="lazy" className="w-52 rounded-2xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] rotate-3" />
+                    <img src="/app-screens/deeper-insights.webp" alt="" loading="lazy" className="w-52 rounded-2xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] -rotate-2" />
+                  </div>
+                </div>
+
+                {/* Below xl: all six screenshots as a swipeable strip */}
+                <div className="xl:hidden mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 pb-2 [scrollbar-width:none]">
+                  {['journals', 'express', 'mood-map', 'deeper-insights', 'insights-home', 'mood-patterns'].map((name) => (
+                    <img
+                      key={name}
+                      src={`/app-screens/${name}.webp`}
+                      alt={c.tryIt.screenshotAlt}
+                      loading="lazy"
+                      className="w-40 shrink-0 snap-center rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -1081,6 +1149,54 @@ export default function JournalingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- WORRIES / OBJECTION HANDLING --- */}
+      {/* The concerns that keep people from journaling with an AI, voiced the
+          way a visitor would think them (chat-bubble style), answered plainly.
+          Icons are index-matched to `worries.items` in the copy catalog. */}
+      <section ref={worriesViewRef} className="py-24 bg-white border-t-2 border-stone-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
+                <MessageCircle className="w-4 h-4" /> {c.worries.badge}
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">
+                {c.worries.title}
+              </h2>
+              <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">{c.worries.sub}</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                // Tailwind's JIT only sees literal class strings, so the chip
+                // colours can't be built from a `${color}` template.
+                { icon: <Lock className="w-5 h-5 text-[#1b8af1]" />, chip: 'bg-blue-100 border-blue-200' },
+                { icon: <Zap className="w-5 h-5 text-green-600" />, chip: 'bg-green-100 border-green-200' },
+                { icon: <PenSquare className="w-5 h-5 text-purple-600" />, chip: 'bg-purple-100 border-purple-200' },
+                { icon: <Heart className="w-5 h-5 text-pink-600" />, chip: 'bg-pink-100 border-pink-200' },
+              ].map((visual, i) => (
+                <div
+                  key={i}
+                  className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                >
+                  {/* the worry, styled like an incoming text */}
+                  <div className="inline-block bg-white border-2 border-stone-200 rounded-xl rounded-tl-sm px-4 py-3 mb-6">
+                    <p className="text-stone-700 font-medium italic">{c.worries.items[i].worry}</p>
+                  </div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 ${visual.chip} rounded-lg flex items-center justify-center border-2 flex-shrink-0`}>
+                      {visual.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-stone-900">{c.worries.items[i].title}</h3>
+                  </div>
+                  <p className="text-stone-600 font-medium leading-relaxed">{c.worries.items[i].body}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

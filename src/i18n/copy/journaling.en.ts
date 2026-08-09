@@ -78,6 +78,148 @@ export const journalingEn = {
     loved: 'Loved by Thousands',
   },
 
+  // Interactive "try it right here" demo (TryEmpathDemo): the visitor drives
+  // an Empath-styled chat mock with hardcoded buttons. Each branch = opener button →
+  // user message → Empath reply, then two follow-up buttons, then the CTA
+  // deep-links into WhatsApp with the branch's `userText` prefilled.
+  // `option` labels stay short (they're buttons); `userText` is the visitor's
+  // casual lowercase register; replies are warm but plain, never clinical.
+  tryIt: {
+    badge: 'Try it right here',
+    title: 'Go On, Send It Something',
+    sub: 'A small taste of Empath on this page. Tap a message, watch it reply. Nothing you tap here is saved or sent anywhere.',
+    greeting: "Hey, I'm Empath 👋 I'm the AI you text like a friend. Pick a message below and see what happens.",
+    pickPrompt: 'Send Empath a message:',
+    followUpPrompt: 'Keep it going:',
+    branches: [
+      {
+        key: 'rough-day',
+        option: 'I had a rough day',
+        userText: "today was a lot. i'm wiped and my brain won't switch off",
+        reply: "That sounds heavy. Wiped but wired is the worst combo. What's the one thing from today still taking up the most space?",
+        followUps: [
+          {
+            key: 'work',
+            option: 'Work stuff, mostly',
+            userText: 'work stuff mostly. too many things, not enough me',
+            reply: "So it's volume, not one disaster. That's worth knowing about yourself. If we talked for real, I'd remember this pattern and flag it next time work stacks up like this.",
+          },
+          {
+            key: 'person',
+            option: "It's a person, actually",
+            userText: "it's a person actually. someone got under my skin today",
+            reply: "People stuff lingers longer than task stuff. If you told me who, I'd remember them next time they come up, and you'd start seeing how they affect your days.",
+          },
+        ],
+      },
+      {
+        key: 'untangle',
+        option: 'Help me untangle something',
+        userText: "can i think out loud for a sec? something's been bugging me for days",
+        reply: "That's literally what I'm for. Out loud is how tangles loosen. Give me the messy version, it doesn't need to make sense.",
+        followUps: [
+          {
+            key: 'decision',
+            option: "It's a decision I keep avoiding",
+            userText: "it's a decision i keep putting off. both options feel wrong",
+            reply: "When both options feel wrong, there's usually a third thing you're protecting. In a real chat I'd ask about that, and save the whole thread so you could reread it when you're ready to decide.",
+          },
+          {
+            key: 'feeling',
+            option: "It's a feeling I can't name",
+            userText: "honestly it's more of a feeling. i can't even name it",
+            reply: "You don't have to name it. Describe where it shows up instead: mornings? after certain people? Naming comes later, and I'd keep track of the clues with you.",
+          },
+        ],
+      },
+      {
+        key: 'first-time',
+        option: "I've never journaled before",
+        userText: "i've never journaled before. i don't really know how this works",
+        reply: "You just did. That message? That's journaling, the way it works here. No rules, no format, no streaks to keep alive. Just say things when you feel them.",
+        followUps: [
+          {
+            key: 'what-happens',
+            option: 'What happens to what I send?',
+            userText: 'ok but what happens to what i send you?',
+            reply: 'It becomes a private journal entry: saved, encrypted, only yours. Over time I connect the dots between entries and show you patterns you can actually see.',
+          },
+          {
+            key: 'wont-stick',
+            option: "I doubt I'll stick with it",
+            userText: "honestly i doubt i'll stick with it. i never do",
+            reply: "You don't stick with apps. This lives in your texts, so there's nothing to stick with. Miss a week? Nothing breaks. I'll be here when something's on your mind.",
+          },
+        ],
+      },
+      {
+        key: 'cant-sleep',
+        option: "I can't sleep",
+        userText: "it's late and i can't sleep. my head keeps replaying today",
+        reply: "Late-night replays mean something from today still wants attention. Tell me the scene your head keeps going back to, and I'll hold onto it so you don't have to.",
+        followUps: [
+          {
+            key: 'conversation',
+            option: 'A conversation I had',
+            userText: "a conversation from earlier. i keep thinking of better things i could've said",
+            reply: "The perfect comeback always shows up after midnight. Writing it here gets it out of the loop, and in a real entry I'd remember it so you could reread it tomorrow with fresh eyes.",
+          },
+          {
+            key: 'tomorrow',
+            option: 'Tomorrow is stressing me out',
+            userText: "honestly it's tomorrow i'm worried about. big day",
+            reply: "Night-before nerves usually mean it matters, not that you're not ready. In a real chat I'd save this, and tomorrow night you could tell me how it actually went. Spoiler: usually better than the 2 AM version.",
+          },
+        ],
+      },
+      {
+        key: 'vent',
+        option: 'I just need to vent',
+        userText: "i don't want advice right now. i just need to let something out",
+        reply: "Then no advice. This space is yours: say it as loud and unfair and messy as you need. I'll just listen.",
+        followUps: [
+          {
+            key: 'really-listen',
+            option: "You'll really just listen?",
+            userText: "you'll really just listen? no fixing?",
+            reply: "Really. Venting works because saying it out loud takes the pressure off. If you ever want more than listening, you ask first. That's the deal.",
+          },
+          {
+            key: 'feels-petty',
+            option: 'It feels kind of petty',
+            userText: "it's kind of petty tbh. but it's been bugging me all day",
+            reply: "If it's been bugging you all day, it's not petty, it's data. The small stuff you never say out loud is usually where the patterns hide.",
+          },
+        ],
+      },
+      {
+        key: 'good-news',
+        option: 'Something good happened!',
+        userText: 'ok so something actually good happened today and i have nobody to tell',
+        reply: 'Tell me everything. Good moments deserve to be kept, not just survived-past. What happened?',
+        followUps: [
+          {
+            key: 'small-win',
+            option: "It's a small win but it's mine",
+            userText: "it's a small win but it's mine. i finally did the thing",
+            reply: "Small wins are the ones that compound. Saved, with today's date on it. On a rough day I'd remind you: you're someone who does the thing.",
+          },
+          {
+            key: 'why-record',
+            option: 'Why journal the good days?',
+            userText: 'is it even worth journaling when things are fine?',
+            reply: "The good entries are the ones future-you rereads most. They're also how I learn what actually lifts you, so the patterns aren't just about what goes wrong.",
+          },
+        ],
+      },
+    ],
+    ctaLead: 'That was the demo. The real Empath remembers you.',
+    cta: 'Get the Free App',
+    ctaNote: 'Free on the App Store. Your entries become the insights shown around this demo.',
+    restart: 'Try another opener',
+    screenshotAlt: 'Screenshot of the Empath app',
+  },
+
   whatsappSection: {
     badge: 'Empath in your DMs',
     title: 'More Than a Place to Vent',
@@ -165,6 +307,7 @@ export const journalingEn = {
     chatUi: {
       today: 'Today',
       online: 'online',
+      typing: 'typing…',
       inputPlaceholder: 'Message',
     },
   },
@@ -506,6 +649,39 @@ export const journalingEn = {
           'I love that I can just call and talk. It feels so natural, like journaling should have always been this easy.',
         author: 'Sam R.',
         role: 'User since 2024',
+      },
+    ],
+  },
+
+  // Objection-handling section: the worries that keep people from journaling
+  // (with an AI, over chat), each voiced the way a visitor would think it,
+  // answered plainly. Every claim here must stay consistent with the FAQ and
+  // privacy copy elsewhere on the page. NOT testimonials; nothing here is
+  // presented as a user quote.
+  worries: {
+    badge: 'You might be wondering',
+    title: 'Honest Answers to Fair Worries',
+    sub: "Sharing your inner world with an AI is a big ask. Here's what we'd want to know before typing a word.",
+    items: [
+      {
+        worry: '"Who else can read what I send?"',
+        title: 'Nobody. It stays yours.',
+        body: 'Every entry is encrypted, HIPAA compliant, and never used to train AI models. You can export everything or delete it all at any time. Your journal has exactly one reader: you.',
+      },
+      {
+        worry: '"I\'ve started five journals and quit them all."',
+        title: 'This one has no blank page.',
+        body: "You don't build a new habit, you borrow one you already have: texting. A one-line message or a voice note counts as a full entry, and Empath keeps the thread going so day two is easier than day one.",
+      },
+      {
+        worry: '"I never know what to actually write."',
+        title: "You don't have to know.",
+        body: "Start with one honest sentence and Empath asks the gentle follow-up a friend would. Answer it or don't. Either way it becomes a real entry, written in your own voice.",
+      },
+      {
+        worry: '"Talking to an AI about feelings seems… weird."',
+        title: 'It feels like texting, honestly.',
+        body: "No robot voice, no therapy script, no toxic positivity. It reads like a thoughtful friend who never gets tired of you at 2 AM. Weird for the first two messages, then surprisingly normal.",
       },
     ],
   },

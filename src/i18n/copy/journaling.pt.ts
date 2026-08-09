@@ -57,6 +57,142 @@ export const journalingPt: JournalingCopy = {
     loved: 'Amado por milhares',
   },
 
+  tryIt: {
+    badge: 'Experimente aqui mesmo',
+    title: 'Vai, manda alguma coisa',
+    sub: 'Uma pequena amostra do Empath nesta página. Toque em uma mensagem e veja a resposta. Nada do que você toca aqui é salvo ou enviado para lugar nenhum.',
+    greeting: 'Oi, eu sou o Empath 👋 Sou a IA para quem você manda mensagem como para um amigo. Escolha uma mensagem abaixo e veja o que acontece.',
+    pickPrompt: 'Mande uma mensagem para o Empath:',
+    followUpPrompt: 'Continue a conversa:',
+    branches: [
+      {
+        key: 'rough-day',
+        option: 'Tive um dia difícil',
+        userText: 'hoje foi demais. estou exausto e minha cabeça não desliga',
+        reply: 'Parece pesado. Exausto mas acelerado é a pior combinação. O que de hoje ainda está ocupando mais espaço?',
+        followUps: [
+          {
+            key: 'work',
+            option: 'Coisa de trabalho, principalmente',
+            userText: 'coisa de trabalho principalmente. coisas demais, eu de menos',
+            reply: 'Então é o volume, não um desastre só. Isso vale a pena saber sobre você. Se a gente conversasse de verdade, eu lembraria desse padrão e avisaria na próxima vez que o trabalho acumulasse assim.',
+          },
+          {
+            key: 'person',
+            option: 'É uma pessoa, na verdade',
+            userText: 'é uma pessoa na verdade. alguém me tirou do sério hoje',
+            reply: 'Coisa de gente dura mais que coisa de tarefa. Se você me dissesse quem, eu lembraria dela na próxima vez que aparecesse, e você começaria a ver como ela afeta os seus dias.',
+          },
+        ],
+      },
+      {
+        key: 'untangle',
+        option: 'Me ajuda a entender uma coisa',
+        userText: 'posso pensar em voz alta um segundo? tem uma coisa me incomodando há dias',
+        reply: 'É literalmente para isso que eu sirvo. Em voz alta é como os nós se soltam. Me dá a versão bagunçada, não precisa fazer sentido.',
+        followUps: [
+          {
+            key: 'decision',
+            option: 'É uma decisão que eu fico evitando',
+            userText: 'é uma decisão que eu fico adiando. as duas opções parecem erradas',
+            reply: 'Quando as duas opções parecem erradas, geralmente tem uma terceira coisa que você está protegendo. Numa conversa de verdade eu perguntaria sobre isso, e salvaria o fio inteiro para você reler quando estivesse pronto para decidir.',
+          },
+          {
+            key: 'feeling',
+            option: 'É um sentimento que não sei nomear',
+            userText: 'sinceramente é mais um sentimento. nem consigo dar nome',
+            reply: 'Você não precisa dar nome. Descreve onde ele aparece: de manhã? depois de certas pessoas? O nome vem depois, e eu iria juntando as pistas com você.',
+          },
+        ],
+      },
+      {
+        key: 'first-time',
+        option: 'Nunca escrevi um diário',
+        userText: 'nunca escrevi um diário. não sei direito como isso funciona',
+        reply: 'Você acabou de escrever. Essa mensagem? Isso é um diário, do jeito que funciona aqui. Sem regras, sem formato, sem sequências para manter vivas. É só dizer as coisas quando sentir.',
+        followUps: [
+          {
+            key: 'what-happens',
+            option: 'O que acontece com o que eu mando?',
+            userText: 'ok mas o que acontece com o que eu te mando?',
+            reply: 'Vira uma entrada privada do seu diário: salva, criptografada, só sua. Com o tempo eu ligo os pontos entre as entradas e mostro padrões que você consegue ver de verdade.',
+          },
+          {
+            key: 'wont-stick',
+            option: 'Duvido que eu mantenha o hábito',
+            userText: 'sinceramente duvido que eu mantenha. nunca mantenho',
+            reply: 'Você não mantém apps. Isso vive nas suas mensagens, então não tem o que manter. Sumiu uma semana? Nada quebra. Eu estarei aqui quando algo estiver na sua cabeça.',
+          },
+        ],
+      },
+      {
+        key: 'cant-sleep',
+        option: 'Não consigo dormir',
+        userText: 'é tarde e não consigo dormir. minha cabeça fica repetindo o dia de hoje',
+        reply: 'Quando a cabeça repete cenas de madrugada, algo de hoje ainda pede atenção. Me conta a cena para onde sua cabeça volta, que eu seguro ela para você não precisar carregar.',
+        followUps: [
+          {
+            key: 'conversation',
+            option: 'Uma conversa que eu tive',
+            userText: 'uma conversa de hoje. fico pensando em coisas melhores que eu podia ter dito',
+            reply: 'A resposta perfeita sempre chega depois da meia-noite. Escrever aqui tira ela do loop, e numa entrada de verdade eu lembraria disso para você reler amanhã com outros olhos.',
+          },
+          {
+            key: 'tomorrow',
+            option: 'Amanhã está me estressando',
+            userText: 'na real é o amanhã que me preocupa. dia importante',
+            reply: 'Nervosismo de véspera geralmente significa que importa, não que você não está pronto. Numa conversa de verdade eu salvaria isso, e amanhã à noite você me contaria como foi. Spoiler: quase sempre melhor que a versão das 2 da manhã.',
+          },
+        ],
+      },
+      {
+        key: 'vent',
+        option: 'Só preciso desabafar',
+        userText: 'não quero conselho agora. só preciso botar uma coisa para fora',
+        reply: 'Então nada de conselho. Este espaço é seu: fala alto, injusto e bagunçado do jeito que precisar. Eu só escuto.',
+        followUps: [
+          {
+            key: 'really-listen',
+            option: 'Você vai só escutar mesmo?',
+            userText: 'você vai só escutar mesmo? sem consertar nada?',
+            reply: 'Vou. Desabafar funciona porque dizer em voz alta alivia a pressão. Se um dia você quiser mais do que escuta, você pede primeiro. Esse é o combinado.',
+          },
+          {
+            key: 'feels-petty',
+            option: 'É meio bobagem, na real',
+            userText: 'é meio bobagem na real. mas me incomodou o dia inteiro',
+            reply: 'Se incomodou o dia inteiro, não é bobagem: é informação. As coisas pequenas que você nunca fala em voz alta são onde os padrões costumam se esconder.',
+          },
+        ],
+      },
+      {
+        key: 'good-news',
+        option: 'Aconteceu uma coisa boa!',
+        userText: 'ok, hoje aconteceu uma coisa muito boa e não tenho para quem contar',
+        reply: 'Me conta tudo. Momentos bons merecem ser guardados, não só atravessados. O que aconteceu?',
+        followUps: [
+          {
+            key: 'small-win',
+            option: 'É uma vitória pequena, mas é minha',
+            userText: 'é uma vitória pequena mas é minha. finalmente fiz aquilo',
+            reply: 'Vitórias pequenas são as que se acumulam. Salvo, com a data de hoje. Num dia ruim eu te lembraria: você é alguém que faz as coisas.',
+          },
+          {
+            key: 'why-record',
+            option: 'Por que registrar os dias bons?',
+            userText: 'vale a pena escrever quando está tudo bem?',
+            reply: 'As entradas boas são as que o seu eu do futuro mais relê. E é assim que eu aprendo o que realmente te levanta, para os padrões não serem só sobre o que dá errado.',
+          },
+        ],
+      },
+    ],
+    ctaLead: 'Essa foi a demo. O Empath de verdade lembra de você.',
+    cta: 'Baixe o app grátis',
+    ctaNote: 'Grátis na App Store. Suas entradas viram os insights que aparecem ao redor desta demo.',
+    restart: 'Tentar outro começo',
+    screenshotAlt: 'Captura de tela do app Empath',
+  },
+
   whatsappSection: {
     badge: 'O Empath nas suas DMs',
     title: 'Mais que um lugar para desabafar',
@@ -144,6 +280,7 @@ export const journalingPt: JournalingCopy = {
     chatUi: {
       today: 'Hoje',
       online: 'online',
+      typing: 'digitando…',
       inputPlaceholder: 'Mensagem',
     },
   },
@@ -478,6 +615,34 @@ export const journalingPt: JournalingCopy = {
           'Adoro poder simplesmente ligar e falar. É tão natural, como escrever um diário sempre deveria ter sido.',
         author: 'Sam R.',
         role: 'Usuário desde 2024',
+      },
+    ],
+  },
+
+  worries: {
+    badge: 'Você deve estar se perguntando',
+    title: 'Respostas honestas para dúvidas justas',
+    sub: 'Compartilhar seu mundo interior com uma IA não é pouca coisa. Isto é o que nós também gostaríamos de saber antes de digitar uma palavra.',
+    items: [
+      {
+        worry: '"Quem mais pode ler o que eu mando?"',
+        title: 'Ninguém. É só seu.',
+        body: 'Cada entrada é criptografada, segue o padrão HIPAA e nunca é usada para treinar modelos de IA. Você pode exportar tudo ou apagar tudo quando quiser. Seu diário tem exatamente um leitor: você.',
+      },
+      {
+        worry: '"Já comecei cinco diários e larguei todos."',
+        title: 'Este não tem página em branco.',
+        body: 'Você não cria um hábito novo: pega emprestado um que já tem, mandar mensagem. Uma mensagem de uma linha ou um áudio conta como entrada completa, e o Empath mantém a conversa viva para o dia dois ser mais fácil que o dia um.',
+      },
+      {
+        worry: '"Eu nunca sei o que escrever."',
+        title: 'Você não precisa saber.',
+        body: 'Comece com uma frase honesta e o Empath faz a pergunta gentil que um amigo faria. Responda ou não. De qualquer jeito vira uma entrada de verdade, escrita com a sua voz.',
+      },
+      {
+        worry: '"Falar de sentimentos com uma IA parece… estranho."',
+        title: 'Parece mandar mensagem, sério.',
+        body: 'Sem voz de robô, sem roteiro de terapia, sem positividade tóxica. Parece um amigo atencioso que nunca se cansa de você às 2 da manhã. Estranho nas duas primeiras mensagens, surpreendentemente normal depois.',
       },
     ],
   },

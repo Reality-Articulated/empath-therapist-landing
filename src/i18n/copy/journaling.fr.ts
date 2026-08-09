@@ -58,6 +58,142 @@ export const journalingFr: JournalingCopy = {
     loved: 'Adoré par des milliers de personnes',
   },
 
+  tryIt: {
+    badge: 'Essaie-le ici même',
+    title: 'Vas-y, envoie-lui quelque chose',
+    sub: 'Un petit aperçu d’Empath, directement sur cette page. Touche un message et regarde la réponse. Rien de ce que tu touches ici n’est enregistré ni envoyé nulle part.',
+    greeting: 'Salut, je suis Empath 👋 L’IA à qui tu écris comme à un ami. Choisis un message ci-dessous et regarde ce qui se passe.',
+    pickPrompt: 'Envoie un message à Empath :',
+    followUpPrompt: 'Continue :',
+    branches: [
+      {
+        key: 'rough-day',
+        option: 'J’ai eu une journée difficile',
+        userText: 'aujourd’hui c’était trop. je suis vidé et mon cerveau ne s’éteint pas',
+        reply: 'Ça a l’air lourd. Vidé mais à cran, c’est la pire combinaison. Qu’est-ce qui, d’aujourd’hui, prend encore le plus de place ?',
+        followUps: [
+          {
+            key: 'work',
+            option: 'Le boulot, surtout',
+            userText: 'le boulot surtout. trop de choses, pas assez de moi',
+            reply: 'Donc c’est le volume, pas une seule catastrophe. Ça vaut la peine de le savoir sur toi. Si on parlait pour de vrai, je retiendrais ce schéma et je te préviendrais la prochaine fois que le travail s’accumule comme ça.',
+          },
+          {
+            key: 'person',
+            option: 'C’est une personne, en fait',
+            userText: 'c’est une personne en fait. quelqu’un m’a énervé aujourd’hui',
+            reply: 'Les histoires de personnes durent plus longtemps que les histoires de tâches. Si tu me disais qui, je m’en souviendrais la prochaine fois, et tu commencerais à voir comment cette personne influence tes journées.',
+          },
+        ],
+      },
+      {
+        key: 'untangle',
+        option: 'Aide-moi à démêler un truc',
+        userText: 'je peux penser à voix haute une seconde ? un truc me travaille depuis des jours',
+        reply: 'C’est littéralement mon rôle. C’est en parlant que les nœuds se défont. Donne-moi la version en vrac, pas besoin que ça ait du sens.',
+        followUps: [
+          {
+            key: 'decision',
+            option: 'Une décision que j’évite',
+            userText: 'c’est une décision que je repousse. les deux options semblent mauvaises',
+            reply: 'Quand les deux options semblent mauvaises, il y a souvent une troisième chose que tu protèges. Dans une vraie conversation, je te poserais la question, et je garderais tout le fil pour que tu le relises quand tu seras prêt à décider.',
+          },
+          {
+            key: 'feeling',
+            option: 'Un sentiment que je n’arrive pas à nommer',
+            userText: 'honnêtement c’est plutôt un sentiment. je n’arrive même pas à le nommer',
+            reply: 'Tu n’as pas besoin de le nommer. Décris plutôt où il apparaît : le matin ? après certaines personnes ? Le nom vient plus tard, et je garderais les indices avec toi.',
+          },
+        ],
+      },
+      {
+        key: 'first-time',
+        option: 'Je n’ai jamais tenu de journal',
+        userText: 'je n’ai jamais tenu de journal. je ne sais pas trop comment ça marche',
+        reply: 'Tu viens de le faire. Ce message ? C’est ça, tenir un journal, tel que ça marche ici. Pas de règles, pas de format, pas de séries à entretenir. Dis juste les choses quand tu les ressens.',
+        followUps: [
+          {
+            key: 'what-happens',
+            option: 'Que devient ce que j’envoie ?',
+            userText: 'ok mais que devient ce que je t’envoie ?',
+            reply: 'Ça devient une entrée privée de ton journal : enregistrée, chiffrée, rien qu’à toi. Avec le temps, je relie les points entre les entrées et je te montre des schémas que tu peux vraiment voir.',
+          },
+          {
+            key: 'wont-stick',
+            option: 'Je doute de tenir sur la durée',
+            userText: 'honnêtement je doute de tenir. je ne tiens jamais',
+            reply: 'Personne ne tient avec les applis. Ici, ça vit dans tes messages, il n’y a rien à tenir. Une semaine sans écrire ? Rien ne casse. Je serai là quand quelque chose te trottera dans la tête.',
+          },
+        ],
+      },
+      {
+        key: 'cant-sleep',
+        option: 'Je n’arrive pas à dormir',
+        userText: 'il est tard et je n’arrive pas à dormir. ma tête rejoue la journée en boucle',
+        reply: 'Quand la tête rejoue des scènes la nuit, c’est qu’un truc d’aujourd’hui réclame encore de l’attention. Raconte-moi la scène qui revient en boucle, et je la garde pour que tu n’aies pas à la porter.',
+        followUps: [
+          {
+            key: 'conversation',
+            option: 'Une conversation que j’ai eue',
+            userText: 'une conversation de tout à l’heure. je pense sans arrêt à ce que j’aurais pu dire de mieux',
+            reply: 'La réplique parfaite arrive toujours après minuit. L’écrire ici la sort de la boucle, et dans une vraie entrée je m’en souviendrais pour que tu la relises demain avec un regard neuf.',
+          },
+          {
+            key: 'tomorrow',
+            option: 'C’est demain qui me stresse',
+            userText: 'honnêtement c’est demain qui m’inquiète. grosse journée',
+            reply: 'Le trac de la veille veut souvent dire que ça compte, pas que tu n’es pas prêt. Dans une vraie conversation, je garderais ça, et demain soir tu me raconterais comment ça s’est vraiment passé. Spoiler : souvent mieux que la version de 2 h du matin.',
+          },
+        ],
+      },
+      {
+        key: 'vent',
+        option: 'J’ai juste besoin de vider mon sac',
+        userText: 'je ne veux pas de conseils là. j’ai juste besoin de sortir un truc',
+        reply: 'Alors pas de conseils. Cet espace est à toi : dis-le aussi fort, aussi injuste et aussi désordonné que nécessaire. Moi, j’écoute.',
+        followUps: [
+          {
+            key: 'really-listen',
+            option: 'Tu vas vraiment juste écouter ?',
+            userText: 'tu vas vraiment juste écouter ? sans rien réparer ?',
+            reply: 'Vraiment. Vider son sac marche parce que le dire à voix haute suffit à relâcher la pression. Si un jour tu veux plus que de l’écoute, c’est toi qui demandes d’abord. C’est le deal.',
+          },
+          {
+            key: 'feels-petty',
+            option: 'C’est un peu ridicule, en vrai',
+            userText: 'c’est un peu ridicule en vrai. mais ça me travaille depuis ce matin',
+            reply: 'Si ça te travaille depuis ce matin, ce n’est pas ridicule : c’est une info. Les petites choses qu’on ne dit jamais à voix haute, c’est souvent là que se cachent les schémas.',
+          },
+        ],
+      },
+      {
+        key: 'good-news',
+        option: 'Il m’est arrivé un truc bien !',
+        userText: 'ok il m’est arrivé un truc vraiment bien aujourd’hui et je n’ai personne à qui le raconter',
+        reply: 'Raconte-moi tout. Les bons moments méritent d’être gardés, pas juste traversés. Qu’est-ce qui s’est passé ?',
+        followUps: [
+          {
+            key: 'small-win',
+            option: 'Une petite victoire, mais la mienne',
+            userText: 'c’est une petite victoire mais c’est la mienne. j’ai enfin fait le truc',
+            reply: 'Les petites victoires sont celles qui s’additionnent. Enregistré, avec la date d’aujourd’hui. Un jour de creux, je te rappellerais : tu es quelqu’un qui fait le truc.',
+          },
+          {
+            key: 'why-record',
+            option: 'Pourquoi noter les bons jours ?',
+            userText: 'ça vaut le coup d’écrire même quand ça va ?',
+            reply: 'Les bonnes entrées sont celles que ton futur toi relit le plus. C’est aussi comme ça que j’apprends ce qui te porte vraiment, pour que les schémas ne parlent pas que de ce qui va mal.',
+          },
+        ],
+      },
+    ],
+    ctaLead: 'Ça, c’était la démo. Le vrai Empath se souvient de toi.',
+    cta: 'Télécharge l’appli gratuite',
+    ctaNote: 'Gratuit sur l’App Store. Tes entrées deviennent les analyses que tu vois autour de cette démo.',
+    restart: 'Essayer un autre début',
+    screenshotAlt: 'Capture d’écran de l’appli Empath',
+  },
+
   whatsappSection: {
     badge: 'Empath dans tes DM',
     title: 'Plus qu’un endroit où vider ton sac',
@@ -145,6 +281,7 @@ export const journalingFr: JournalingCopy = {
     chatUi: {
       today: 'Aujourd’hui',
       online: 'en ligne',
+      typing: 'écrit…',
       inputPlaceholder: 'Message',
     },
   },
@@ -479,6 +616,34 @@ export const journalingFr: JournalingCopy = {
           'J’adore pouvoir juste appeler et parler. C’est tellement naturel. Tenir un journal aurait toujours dû être aussi simple.',
         author: 'Sam R.',
         role: 'Utilisateur depuis 2024',
+      },
+    ],
+  },
+
+  worries: {
+    badge: 'Tu te demandes peut-être',
+    title: 'Des réponses honnêtes à des doutes légitimes',
+    sub: 'Partager son monde intérieur avec une IA, ce n’est pas rien. Voilà ce qu’on voudrait savoir aussi avant de taper un mot.',
+    items: [
+      {
+        worry: '« Qui d’autre peut lire ce que j’envoie ? »',
+        title: 'Personne. Ça reste à toi.',
+        body: 'Chaque entrée est chiffrée, conforme HIPAA, et jamais utilisée pour entraîner des modèles d’IA. Tu peux tout exporter ou tout supprimer à tout moment. Ton journal a exactement un lecteur : toi.',
+      },
+      {
+        worry: '« J’ai commencé cinq journaux et j’ai tout laissé tomber. »',
+        title: 'Celui-ci n’a pas de page blanche.',
+        body: 'Tu ne construis pas une nouvelle habitude, tu en empruntes une que tu as déjà : envoyer des messages. Un message d’une ligne ou un vocal compte comme une vraie entrée, et Empath garde le fil pour que le jour deux soit plus facile que le jour un.',
+      },
+      {
+        worry: '« Je ne sais jamais quoi écrire. »',
+        title: 'Tu n’as pas besoin de savoir.',
+        body: 'Commence par une phrase honnête, et Empath pose la question douce qu’un ami poserait. Réponds-y ou non. Dans tous les cas, ça devient une vraie entrée, écrite avec ta propre voix.',
+      },
+      {
+        worry: '« Parler de mes émotions à une IA, ça semble… bizarre. »',
+        title: 'On dirait juste des textos, franchement.',
+        body: 'Pas de voix de robot, pas de script de thérapie, pas de positivité toxique. On dirait un ami attentif qui ne se lasse jamais de toi à 2 h du matin. Bizarre pendant deux messages, puis étonnamment normal.',
       },
     ],
   },

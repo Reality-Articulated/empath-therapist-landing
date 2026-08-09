@@ -68,8 +68,13 @@ export function buildChannelHref(
  * name (`<prefix>_<channel>_clicked`) that existing dashboards chart, and
  * adds a single `channel_link_clicked` event for cross-surface funnels.
  */
-export function captureChannelLinkClick(eventPrefix: string, channel: string, code: string) {
-  const props = { channel, ref_code: code };
+export function captureChannelLinkClick(
+  eventPrefix: string,
+  channel: string,
+  code: string,
+  extra: Record<string, string> = {}
+) {
+  const props = { channel, ref_code: code, ...extra };
   posthog.capture(`${eventPrefix}_${channel}_clicked`, props);
   posthog.capture('channel_link_clicked', { ...props, surface: eventPrefix });
 }

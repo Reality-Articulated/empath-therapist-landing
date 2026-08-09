@@ -58,6 +58,142 @@ export const journalingDe: JournalingCopy = {
     loved: 'Von Tausenden geliebt',
   },
 
+  tryIt: {
+    badge: 'Probier es direkt hier',
+    title: 'Na los, schreib ihm was',
+    sub: 'Eine kleine Kostprobe von Empath, direkt auf dieser Seite. Tipp eine Nachricht an und sieh, wie es antwortet. Nichts, was du hier antippst, wird gespeichert oder irgendwohin geschickt.',
+    greeting: 'Hey, ich bin Empath 👋 Die KI, der du schreibst wie einem Freund. Wähl unten eine Nachricht und schau, was passiert.',
+    pickPrompt: 'Schick Empath eine Nachricht:',
+    followUpPrompt: 'Bleib dran:',
+    branches: [
+      {
+        key: 'rough-day',
+        option: 'Ich hatte einen harten Tag',
+        userText: 'heute war einfach zu viel. ich bin durch und mein kopf schaltet nicht ab',
+        reply: 'Klingt schwer. Erschöpft, aber aufgedreht ist die schlimmste Kombination. Was von heute nimmt gerade noch am meisten Platz ein?',
+        followUps: [
+          {
+            key: 'work',
+            option: 'Hauptsächlich Arbeit',
+            userText: 'hauptsächlich arbeit. zu viele sachen, zu wenig ich',
+            reply: 'Also die Menge, nicht ein einzelnes Desaster. Das über sich zu wissen ist wertvoll. Wenn wir wirklich schreiben würden, würde ich mir dieses Muster merken und dich warnen, wenn sich die Arbeit wieder so stapelt.',
+          },
+          {
+            key: 'person',
+            option: 'Eigentlich ist es eine Person',
+            userText: 'eigentlich ist es eine person. jemand ist mir heute unter die haut gegangen',
+            reply: 'Menschen-Sachen bleiben länger hängen als Aufgaben-Sachen. Wenn du mir sagen würdest wer, würde ich mich beim nächsten Mal an sie erinnern, und du würdest langsam sehen, wie sie deine Tage beeinflussen.',
+          },
+        ],
+      },
+      {
+        key: 'untangle',
+        option: 'Hilf mir, etwas zu entwirren',
+        userText: 'kann ich kurz laut denken? etwas geht mir seit tagen nicht aus dem kopf',
+        reply: 'Genau dafür bin ich da. Laut denken ist, wie Knoten sich lösen. Gib mir die unsortierte Version, sie muss keinen Sinn ergeben.',
+        followUps: [
+          {
+            key: 'decision',
+            option: 'Eine Entscheidung, die ich aufschiebe',
+            userText: 'eine entscheidung, die ich ständig aufschiebe. beide optionen fühlen sich falsch an',
+            reply: 'Wenn sich beide Optionen falsch anfühlen, gibt es meistens ein drittes Ding, das du schützt. In einem echten Chat würde ich danach fragen und den ganzen Verlauf speichern, damit du ihn wieder liest, wenn du bereit bist zu entscheiden.',
+          },
+          {
+            key: 'feeling',
+            option: 'Ein Gefühl, das ich nicht benennen kann',
+            userText: 'ehrlich gesagt ist es eher ein gefühl. ich kann es nicht mal benennen',
+            reply: 'Du musst es nicht benennen. Beschreib lieber, wo es auftaucht: morgens? nach bestimmten Leuten? Der Name kommt später, und die Hinweise würde ich mit dir zusammen sammeln.',
+          },
+        ],
+      },
+      {
+        key: 'first-time',
+        option: 'Ich habe noch nie Tagebuch geschrieben',
+        userText: 'ich habe noch nie tagebuch geschrieben. ich weiß nicht genau, wie das funktioniert',
+        reply: 'Hast du gerade. Diese Nachricht? Das ist Tagebuchschreiben, so wie es hier funktioniert. Keine Regeln, kein Format, keine Serien, die man am Leben halten muss. Sag Dinge einfach, wenn du sie fühlst.',
+        followUps: [
+          {
+            key: 'what-happens',
+            option: 'Was passiert mit dem, was ich schicke?',
+            userText: 'ok, aber was passiert mit dem, was ich dir schicke?',
+            reply: 'Es wird ein privater Tagebucheintrag: gespeichert, verschlüsselt, nur deiner. Mit der Zeit verbinde ich die Punkte zwischen den Einträgen und zeige dir Muster, die du wirklich sehen kannst.',
+          },
+          {
+            key: 'wont-stick',
+            option: 'Ich bleibe eh nicht dran',
+            userText: 'ehrlich gesagt bezweifle ich, dass ich dranbleibe. tue ich nie',
+            reply: 'An Apps bleibt niemand dran. Das hier lebt in deinen Nachrichten, es gibt nichts zum Dranbleiben. Eine Woche Pause? Nichts geht kaputt. Ich bin da, wenn dir etwas durch den Kopf geht.',
+          },
+        ],
+      },
+      {
+        key: 'cant-sleep',
+        option: 'Ich kann nicht schlafen',
+        userText: 'es ist spät und ich kann nicht schlafen. mein kopf spielt den tag in dauerschleife',
+        reply: 'Wenn der Kopf nachts Szenen wiederholt, will etwas von heute noch Aufmerksamkeit. Erzähl mir die Szene, zu der er immer zurückkehrt, und ich bewahre sie auf, damit du sie nicht tragen musst.',
+        followUps: [
+          {
+            key: 'conversation',
+            option: 'Ein Gespräch von heute',
+            userText: 'ein gespräch von vorhin. mir fallen ständig bessere antworten ein',
+            reply: 'Die perfekte Antwort kommt immer erst nach Mitternacht. Sie hier aufzuschreiben holt sie aus der Schleife, und in einem echten Eintrag würde ich sie mir merken, damit du morgen mit frischen Augen draufschaust.',
+          },
+          {
+            key: 'tomorrow',
+            option: 'Morgen stresst mich',
+            userText: 'ehrlich gesagt macht mir morgen sorgen. großer tag',
+            reply: 'Nervosität am Vorabend heißt meistens, dass es dir wichtig ist, nicht, dass du nicht bereit bist. In einem echten Chat würde ich das speichern, und morgen Abend erzählst du mir, wie es wirklich war. Spoiler: meistens besser als die 2-Uhr-Version.',
+          },
+        ],
+      },
+      {
+        key: 'vent',
+        option: 'Ich muss einfach Dampf ablassen',
+        userText: 'ich will gerade keine ratschläge. ich muss nur etwas loswerden',
+        reply: 'Dann keine Ratschläge. Dieser Raum gehört dir: sag es so laut, so unfair und so unsortiert, wie du es brauchst. Ich höre einfach zu.',
+        followUps: [
+          {
+            key: 'really-listen',
+            option: 'Du hörst wirklich nur zu?',
+            userText: 'du hörst wirklich nur zu? ohne alles reparieren zu wollen?',
+            reply: 'Wirklich. Dampf ablassen funktioniert, weil das Aussprechen allein den Druck nimmt. Wenn du irgendwann mehr willst als Zuhören, fragst du zuerst. Das ist der Deal.',
+          },
+          {
+            key: 'feels-petty',
+            option: 'Es ist eigentlich eine Kleinigkeit',
+            userText: 'ist eigentlich eine kleinigkeit. aber es nervt mich schon den ganzen tag',
+            reply: 'Was dich den ganzen Tag nervt, ist keine Kleinigkeit, es sind Daten. In den kleinen Dingen, die du nie laut aussprichst, verstecken sich meistens die Muster.',
+          },
+        ],
+      },
+      {
+        key: 'good-news',
+        option: 'Etwas Gutes ist passiert!',
+        userText: 'ok, heute ist wirklich etwas gutes passiert und ich habe niemanden zum erzählen',
+        reply: 'Erzähl mir alles. Gute Momente verdienen es, aufgehoben zu werden, nicht nur vorbeizuziehen. Was ist passiert?',
+        followUps: [
+          {
+            key: 'small-win',
+            option: 'Ein kleiner Sieg, aber meiner',
+            userText: 'ist ein kleiner sieg, aber meiner. ich hab das ding endlich gemacht',
+            reply: 'Kleine Siege sind die, die sich summieren. Gespeichert, mit heutigem Datum. An einem schlechten Tag würde ich dich erinnern: Du bist jemand, der das Ding macht.',
+          },
+          {
+            key: 'why-record',
+            option: 'Warum die guten Tage festhalten?',
+            userText: 'lohnt sich tagebuch überhaupt, wenn alles okay ist?',
+            reply: 'Die guten Einträge sind die, die dein Zukunfts-Ich am häufigsten wieder liest. Und daran lerne ich, was dich wirklich trägt, damit die Muster nicht nur davon handeln, was schiefgeht.',
+          },
+        ],
+      },
+    ],
+    ctaLead: 'Das war die Demo. Der echte Empath erinnert sich an dich.',
+    cta: 'Hol dir die kostenlose App',
+    ctaNote: 'Kostenlos im App Store. Deine Einträge werden zu den Insights, die du rund um diese Demo siehst.',
+    restart: 'Anderen Anfang probieren',
+    screenshotAlt: 'Screenshot der Empath App',
+  },
+
   whatsappSection: {
     badge: 'Empath in deinen DMs',
     title: 'Mehr als ein Ort zum Dampfablassen',
@@ -145,6 +281,7 @@ export const journalingDe: JournalingCopy = {
     chatUi: {
       today: 'Heute',
       online: 'online',
+      typing: 'schreibt…',
       inputPlaceholder: 'Nachricht',
     },
   },
@@ -479,6 +616,34 @@ export const journalingDe: JournalingCopy = {
           'Ich liebe es, dass ich einfach anrufen und reden kann. Es fühlt sich so natürlich an, als hätte Journaling schon immer so einfach sein sollen.',
         author: 'Sam R.',
         role: 'Dabei seit 2024',
+      },
+    ],
+  },
+
+  worries: {
+    badge: 'Vielleicht fragst du dich',
+    title: 'Ehrliche Antworten auf faire Zweifel',
+    sub: 'Deine Innenwelt mit einer KI zu teilen ist keine Kleinigkeit. Das hier würden wir auch wissen wollen, bevor wir ein Wort tippen.',
+    items: [
+      {
+        worry: '"Wer kann sonst noch lesen, was ich schicke?"',
+        title: 'Niemand. Es bleibt deins.',
+        body: 'Jeder Eintrag ist verschlüsselt, HIPAA-konform und wird nie zum Trainieren von KI-Modellen verwendet. Du kannst jederzeit alles exportieren oder alles löschen. Dein Tagebuch hat genau einen Leser: dich.',
+      },
+      {
+        worry: '"Ich habe fünf Tagebücher angefangen und alle wieder aufgegeben."',
+        title: 'Dieses hat keine leere Seite.',
+        body: 'Du baust keine neue Gewohnheit auf, du leihst dir eine, die du schon hast: Texten. Eine Nachricht mit einer Zeile oder eine Sprachnachricht zählt als voller Eintrag, und Empath hält den Faden, damit Tag zwei leichter wird als Tag eins.',
+      },
+      {
+        worry: '"Ich weiß nie, was ich eigentlich schreiben soll."',
+        title: 'Musst du auch nicht.',
+        body: 'Fang mit einem ehrlichen Satz an, und Empath stellt die behutsame Nachfrage, die ein Freund stellen würde. Antworte darauf oder lass es. So oder so wird daraus ein echter Eintrag, geschrieben in deiner eigenen Stimme.',
+      },
+      {
+        worry: '"Mit einer KI über Gefühle reden fühlt sich… seltsam an."',
+        title: 'Es fühlt sich an wie Texten, ehrlich.',
+        body: 'Keine Roboterstimme, kein Therapie-Skript, keine toxische Positivität. Es liest sich wie ein aufmerksamer Freund, der auch um 2 Uhr nachts nicht müde von dir wird. Zwei Nachrichten lang seltsam, danach überraschend normal.',
       },
     ],
   },
