@@ -48,9 +48,9 @@ export const journalingHi: JournalingCopy = {
   // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
   // above. Remove once the experiment is decided.
   heroExperiment: {
-    h1Pre: 'वो app जिसे खोलने की',
-    h1Highlight: 'ज़रूरत ही नहीं.',
-    sub: 'जो भी मन में हो, WhatsApp पर text कर दीजिए, call करके बोल दीजिए, या वो ख़ुद आपको call कर ले। Empath सुनता है, जवाब देता है, और याद रखता है। App तब खोलिए जब देखना हो कि आपके अंदर असल में चल क्या रहा है।',
+    h1Pre: 'ChatGPT को हर बार सब कुछ',
+    h1Highlight: 'फिर से समझाना?',
+    sub: 'Empath आपको पहले से जानता है। वो WhatsApp, Telegram, Messenger और Instagram में रहता है, हर बातचीत याद रखता है, और वहीं से शुरू करता है जहाँ आपने छोड़ा था। जब भी मन में कुछ हो, बस message कर दीजिए या call कर लीजिए।',
   },
 
   trust: {

@@ -93,13 +93,14 @@ const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNo
 
 export default function JournalingPage() {
   const c = useJournalingCopy();
-  // PostHog experiment `landing-hero-copy`: variant `never-open` swaps the
-  // hero H1 + subheadline. Anything else (control, flag missing, flags not
+  // PostHog experiment `landing-hero-copy-2`: variant `chatgpt-context` swaps
+  // the hero H1 + subheadline. Anything else (control, flag missing, flags not
   // yet loaded, bots) renders the default hero — which is also what the
   // prerendered HTML contains, so SEO snapshots stay stable. Existing CTA
   // click events carry the active flag, so they double as goal metrics.
-  const heroVariant = useFeatureFlagVariantKey('landing-hero-copy');
-  const heroHeadline = heroVariant === 'never-open' ? c.heroExperiment : c.hero;
+  // (v1 flag `landing-hero-copy` / variant `never-open` was retired 2026-08-09.)
+  const heroVariant = useFeatureFlagVariantKey('landing-hero-copy-2');
+  const heroHeadline = heroVariant === 'chatgpt-context' ? c.heroExperiment : c.hero;
   const refCode = getChannelRefCode();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

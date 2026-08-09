@@ -63,13 +63,13 @@ export const journalingEn = {
     openDashboard: 'Open the web dashboard',
   },
 
-  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
-  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
-  // above. Remove once the experiment is decided.
+  // A/B test hero (PostHog experiment flag `landing-hero-copy-2`, variant
+  // `chatgpt-context`): swaps ONLY the H1 + subheadline. Control renders
+  // `hero` above. Remove once the experiment is decided.
   heroExperiment: {
-    h1Pre: 'The app you never',
-    h1Highlight: 'have to open.',
-    sub: "Whatever's on your mind, text it on WhatsApp, call it, or let it call you. Empath listens, talks back, and remembers. Open the app when you want to see what's really going on with you.",
+    h1Pre: 'Tired of re-explaining yourself',
+    h1Highlight: 'to ChatGPT?',
+    sub: 'Empath already knows you. It lives in WhatsApp, Telegram, Messenger, and Instagram, remembers every conversation, and picks up right where you left off. Just message or call whenever something is on your mind.',
   },
 
   trust: {
