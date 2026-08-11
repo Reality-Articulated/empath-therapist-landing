@@ -598,6 +598,15 @@ export const journalingEs: JournalingCopy = {
     button: 'Descargar en el App Store',
   },
 
+  androidInterest: {
+    kicker: 'App para Android en desarrollo',
+    title: '¿Usas Android? No te hemos olvidado',
+    body: 'Ya puedes escribir tu diario por llamada o WhatsApp desde cualquier teléfono. Déjanos tu correo y te avisaremos en cuanto la app para Android esté lista.',
+    placeholder: 'tu@correo.com',
+    button: 'Avisarme',
+    success: 'Listo, estás en la lista. Te escribiremos en cuanto la app para Android esté lista.',
+  },
+
   socialProof: {
     title: 'Lo que dice la gente',
     featured: 'Destacado en el App Store',

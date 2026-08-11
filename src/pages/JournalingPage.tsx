@@ -33,7 +33,8 @@ import {
   UserSquare,
   SquareStack,
   Upload,
-  WifiOff
+  WifiOff,
+  Smartphone
 } from 'lucide-react';
 import logo from '../../public/empath-logo.png';
 import { Toaster } from 'react-hot-toast';
@@ -106,6 +107,17 @@ export default function JournalingPage() {
   const refCode = getChannelRefCode();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // Android waitlist card. Emails live in PostHog only
+  // (`android_interest_submitted`) — there is no backend waitlist table.
+  const [androidEmail, setAndroidEmail] = useState('');
+  const [androidSubmitted, setAndroidSubmitted] = useState(false);
+  const handleAndroidInterest = (e: React.FormEvent) => {
+    e.preventDefault();
+    const email = androidEmail.trim();
+    if (!email) return;
+    posthog.capture('android_interest_submitted', { email });
+    setAndroidSubmitted(true);
+  };
   // Scroll-depth signal for the objection-handling section (fires once).
   const { ref: worriesViewRef } = useInView({
     threshold: 0.25,
@@ -1116,6 +1128,44 @@ export default function JournalingPage() {
               </svg>
               {c.iosCallout.button}
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* --- ANDROID INTEREST --- */}
+      {/* Deliberately compact: nothing shippable yet, so this only collects
+          intent. Android-green (#3DDC84) accents set it apart from the blue
+          iOS callout directly above. */}
+      <section className="py-12 bg-[#FAF9F6]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#3DDC84] p-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-wider text-green-700 mb-2 flex items-center justify-center gap-2">
+              <Smartphone className="w-4 h-4" /> {c.androidInterest.kicker}
+            </p>
+            <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">{c.androidInterest.title}</h3>
+            <p className="text-stone-600 font-medium mb-6 max-w-xl mx-auto">{c.androidInterest.body}</p>
+            {androidSubmitted ? (
+              <p className="flex items-center justify-center gap-2 font-bold text-green-700">
+                <CheckCircle className="w-5 h-5 flex-shrink-0" /> {c.androidInterest.success}
+              </p>
+            ) : (
+              <form onSubmit={handleAndroidInterest} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input
+                  type="email"
+                  required
+                  value={androidEmail}
+                  onChange={(e) => setAndroidEmail(e.target.value)}
+                  placeholder={c.androidInterest.placeholder}
+                  className="flex-grow min-w-0 px-4 py-3 rounded-xl border-2 border-stone-900 font-medium focus:outline-none focus:border-[#3DDC84]"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#3DDC84] hover:shadow-[2px_2px_0px_0px_#3DDC84] hover:translate-x-[2px] hover:translate-y-[2px] transition-all whitespace-nowrap"
+                >
+                  {c.androidInterest.button}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

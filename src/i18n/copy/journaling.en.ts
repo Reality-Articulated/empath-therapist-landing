@@ -628,6 +628,15 @@ export const journalingEn = {
     button: 'Download on App Store',
   },
 
+  androidInterest: {
+    kicker: 'Android app in development',
+    title: 'On Android? We Have Not Forgotten You',
+    body: 'You can already journal by call or WhatsApp from any phone. Leave your email and we will tell you the moment the Android app is ready.',
+    placeholder: 'you@email.com',
+    button: 'Keep me posted',
+    success: "You're on the list. We'll email you when the Android app is ready.",
+  },
+
   socialProof: {
     title: 'What People Are Saying',
     featured: 'Featured on the App Store',

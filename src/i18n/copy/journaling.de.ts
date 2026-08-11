@@ -595,6 +595,15 @@ export const journalingDe: JournalingCopy = {
     button: 'Im App Store laden',
   },
 
+  androidInterest: {
+    kicker: 'Android-App in Arbeit',
+    title: 'Auf Android? Wir haben dich nicht vergessen',
+    body: 'Journalen per Anruf oder WhatsApp geht schon jetzt von jedem Handy. Lass deine E-Mail da und wir melden uns, sobald die Android-App fertig ist.',
+    placeholder: 'du@mail.de',
+    button: 'Sag mir Bescheid',
+    success: 'Alles klar, du stehst auf der Liste. Wir schreiben dir, sobald die Android-App fertig ist.',
+  },
+
   socialProof: {
     title: 'Was andere sagen',
     featured: 'Vom App Store empfohlen',

@@ -596,6 +596,15 @@ export const journalingHi: JournalingCopy = {
     button: 'App Store से Download करें',
   },
 
+  androidInterest: {
+    kicker: 'Android app बन रहा है',
+    title: 'Android पर हैं? हम आपको भूले नहीं हैं',
+    body: 'Call या WhatsApp से journaling तो आप किसी भी phone से अभी कर सकते हैं। अपना email छोड़िए, Android app तैयार होते ही हम आपको बता देंगे।',
+    placeholder: 'aap@email.com',
+    button: 'मुझे बताएँ',
+    success: 'हो गया, आप list में हैं। Android app तैयार होते ही हम आपको email कर देंगे।',
+  },
+
   socialProof: {
     title: 'लोग क्या कह रहे हैं',
     featured: 'App Store पर Featured',
