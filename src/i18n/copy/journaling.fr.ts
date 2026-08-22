@@ -43,15 +43,6 @@ export const journalingFr: JournalingCopy = {
     openDashboard: 'Ouvre le tableau de bord web',
   },
 
-  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
-  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
-  // above. Remove once the experiment is decided.
-  heroExperiment: {
-    h1Pre: 'Encore en train de tout réexpliquer',
-    h1Highlight: 'à ChatGPT ?',
-    sub: 'Empath te connaît déjà. Il vit dans WhatsApp, Telegram, Messenger et Instagram, se souvient de chaque conversation et reprend exactement là où tu en étais. Envoie un message ou appelle dès que quelque chose te trotte dans la tête.',
-  },
-
   trust: {
     hipaa: 'Sécurisé HIPAA',
     ai: 'Insights par IA',

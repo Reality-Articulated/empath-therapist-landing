@@ -82,6 +82,15 @@ function toSitemapPost(post) {
   return { slug: post.slug, lastmod: post.date ? toIsoDate(post.date) : today };
 }
 
+// Phrase landing pages (English-only) — single source of truth shared with
+// src/App.tsx and scripts/prerender.mjs, see src/data/phrasePages.ts.
+const phrasePages = await loadTsExport(join(ROOT, 'src/data/phrasePages.ts'), 'phrasePages');
+const phrasePageRoutes = phrasePages.map(({ slug }) => ({
+  path: `/${slug}`,
+  changefreq: 'monthly',
+  priority: '0.7',
+}));
+
 const therapistBlogPosts = (await loadTsExport(join(ROOT, 'src/data/blogPosts.ts'), 'blogPosts')).map(toSitemapPost);
 const journalingBlogPosts = [
   ...(await loadTsExport(join(ROOT, 'src/data/kinzerJournalingBlogPosts.ts'), 'kinzerJournalingBlogPosts')),
@@ -123,7 +132,7 @@ const localizedStaticRoutes = LOCALE_CODES.flatMap((code) =>
   }))
 );
 
-const allRoutes = [...staticRoutes, ...localizedStaticRoutes, ...blogRoutes];
+const allRoutes = [...staticRoutes, ...phrasePageRoutes, ...localizedStaticRoutes, ...blogRoutes];
 
 const urls = allRoutes
   .map(
@@ -145,4 +154,4 @@ ${urls}
 const outPath = join(ROOT, 'public/sitemap.xml');
 writeFileSync(outPath, xml);
 console.log(`Wrote ${allRoutes.length} URLs to ${outPath}`);
-console.log(`  ${staticRoutes.length} static + ${therapistBlogPosts.length} therapist blogs + ${journalingBlogPosts.length} journaling blogs`);
+console.log(`  ${staticRoutes.length} static + ${phrasePageRoutes.length} phrase pages + ${therapistBlogPosts.length} therapist blogs + ${journalingBlogPosts.length} journaling blogs`);

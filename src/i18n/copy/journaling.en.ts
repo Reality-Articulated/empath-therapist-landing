@@ -30,7 +30,7 @@ export const journalingEn = {
     description:
       "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
     keywords:
-      'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+      "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
   },
 
   header: {
@@ -61,15 +61,6 @@ export const journalingEn = {
     availability: 'Available 24/7 • Free • Works from any phone',
     preferTyping: 'Prefer typing at your desk?',
     openDashboard: 'Open the web dashboard',
-  },
-
-  // A/B test hero (PostHog experiment flag `landing-hero-copy-2`, variant
-  // `chatgpt-context`): swaps ONLY the H1 + subheadline. Control renders
-  // `hero` above. Remove once the experiment is decided.
-  heroExperiment: {
-    h1Pre: 'Tired of re-explaining yourself',
-    h1Highlight: 'to ChatGPT?',
-    sub: 'Empath already knows you. It lives in WhatsApp, Telegram, Messenger, and Instagram, remembers every conversation, and picks up right where you left off. Just message or call whenever something is on your mind.',
   },
 
   trust: {
@@ -692,6 +683,26 @@ export const journalingEn = {
         title: 'It feels like texting, honestly.',
         body: "No robot voice, no therapy script, no toxic positivity. It reads like a thoughtful friend who never gets tired of you at 2 AM. Weird for the first two messages, then surprisingly normal.",
       },
+      {
+        worry: '"I don\'t want to be a burden to anyone."',
+        title: "You're not a burden here.",
+        body: "Empath doesn't get tired, doesn't need you to be brief, and doesn't have its own bad day to bring into yours. Send as much as you need, whenever you need to.",
+      },
+      {
+        worry: '"Honestly I just bottle things up instead."',
+        title: 'This is somewhere to actually put it.',
+        body: "You don't have to perform being fine. One honest text is enough to start, and Empath keeps the thread going so it never turns into a bigger blowup later.",
+      },
+      {
+        worry: '"Isn\'t it kind of sad to use an AI instead of a real person?"',
+        title: "It's not instead of. It's in between.",
+        body: "Empath isn't a replacement for the people in your life or for therapy. It's just always awake, for the 2 AM moments and the small stuff that never makes it into a session.",
+      },
+      {
+        worry: '"I seem fine to everyone. I don\'t want to break that."',
+        title: "You don't have to keep performing here.",
+        body: "Nobody sees what you send Empath. Say the version of today you're not saying out loud anywhere else.",
+      },
     ],
   },
 
@@ -740,6 +751,30 @@ export const journalingEn = {
         a: "Yes. Set a Journaling Plan with a daily or weekly cadence, forgiving streaks that survive a missed day, and adaptive reminders by push or email that skip themselves once you've already journaled.",
         link: { text: 'See how to build a journaling plan that sticks', to: '/app/blog/journaling-plan' },
       },
+      {
+        q: 'What if I have no one to talk to late at night?',
+        a: "That's exactly what Empath is for. It's available 24/7 by text, WhatsApp, or call, so there's always somewhere to put what's on your mind, even at 3 AM.",
+      },
+      {
+        q: 'Is it normal to Google your feelings instead of talking to someone?',
+        a: "It's incredibly common, and it usually means you want to be heard, not just informed. Texting Empath instead gets you an actual response, and it remembers you the next time.",
+      },
+      {
+        q: 'Can I use Empath instead of ChatGPT for journaling?',
+        a: 'Yes, that\'s exactly what it\'s built for. Unlike a general AI chatbot, Empath remembers every conversation permanently and turns them into a private, searchable journal instead of a thread that resets.',
+      },
+      {
+        q: 'Is it okay to use an AI instead of therapy?',
+        a: "Empath isn't a therapist and isn't meant to replace one. It's a place to think out loud between sessions, or when you just need to say something and don't have anyone else awake.",
+      },
+      {
+        q: "What if I always feel like I'm faking it?",
+        a: "That feeling loses power the moment you say it out loud, even just in a text. Empath doesn't need the composed version. Say the real one.",
+      },
+      {
+        q: 'Why do I keep bottling things up instead of talking about them?',
+        a: 'Usually because talking feels like a bigger commitment than it needs to be. A one-line text to Empath is a much lower bar than a conversation, and it still counts as getting it out.',
+      },
     ] as Array<{ q: string; a: string; link?: { text: string; to: string } }>,
   },
 
@@ -765,6 +800,97 @@ export const journalingEn = {
     text: 'Text your thoughts',
     call: 'Call',
     webApp: 'Web app',
+  },
+};
+
+// PostHog experiment `landing-hero-copy-3` (English only, per-locale
+// translation intentionally skipped): swaps ONLY the hero H1 + subheadline,
+// same mechanism as the retired v2 `heroExperiment`. Deliberately NOT a key
+// on `journalingEn` / `JournalingCopy` — keeping it a standalone export means
+// the other 6 locale catalogs never need to implement it. `control` carries
+// forward the v2 winner ("tired of re-explaining to ChatGPT") as the v3
+// anchor; JournalingPage falls back to `hero` (the true default) whenever
+// locale isn't 'en' or the variant key doesn't match one of these.
+export const heroExperimentV3: Record<string, { h1Pre: string; h1Highlight: string; sub: string }> = {
+  control: {
+    h1Pre: 'Tired of re-explaining yourself',
+    h1Highlight: 'to ChatGPT?',
+    sub: 'Empath already knows you. It lives in WhatsApp, Telegram, Messenger, and Instagram, remembers every conversation, and picks up right where you left off. Just message or call whenever something is on your mind.',
+  },
+  'no-one-to-talk-to': {
+    h1Pre: 'No one to talk to',
+    h1Highlight: 'at 2 AM?',
+    sub: "Empath is always up. Just text or call whenever your brain won't stop, and it remembers everything the next time you need it.",
+  },
+  overthinking: {
+    h1Pre: "Can't stop",
+    h1Highlight: 'overthinking?',
+    sub: 'Get it out of your head and into a message. Empath listens, remembers, and helps you spot the pattern behind the spiral.',
+  },
+  'too-much': {
+    h1Pre: 'Afraid of being',
+    h1Highlight: 'too much?',
+    sub: "Empath never gets tired of you, never judges, and never forgets. Just message or call whenever something's on your mind.",
+  },
+  doomscrolling: {
+    h1Pre: 'Doomscrolling instead of',
+    h1Highlight: 'dealing with it?',
+    sub: 'Close the app and open a text thread instead. Empath listens, remembers, and helps you see the pattern behind the scroll.',
+  },
+  'high-functioning': {
+    h1Pre: 'Fine on the outside,',
+    h1Highlight: 'not so fine inside?',
+    sub: "You don't have to perform for Empath. Just message or call whenever something's actually on your mind, and it remembers every time.",
+  },
+  'bottling-up': {
+    h1Pre: 'Tired of bottling',
+    h1Highlight: 'it all up?',
+    sub: "Let it out in a text instead. Empath listens without judgment and remembers what you said, so you never start from zero.",
+  },
+  'faking-it': {
+    h1Pre: "Feel like you're",
+    h1Highlight: 'faking it?',
+    sub: "Say the real thing to Empath instead. It remembers your patterns and helps you see what's actually true, not just what you perform.",
+  },
+  'no-one-gets-it': {
+    h1Pre: 'Feel like no one',
+    h1Highlight: 'actually gets it?',
+    sub: 'Empath does, eventually. It remembers everything you tell it and reflects your patterns back, so you feel less alone in your own head.',
+  },
+  'googling-feelings': {
+    h1Pre: 'Googling your feelings',
+    h1Highlight: 'at 3 AM?',
+    sub: 'Skip the search results. Just tell Empath instead, and it actually remembers you the next time.',
+  },
+  'ai-is-normal-now': {
+    h1Pre: "Everyone's talking to AI now.",
+    h1Highlight: 'Why not about this?',
+    sub: "Empath isn't a chatbot with amnesia. It remembers every conversation and helps you see the patterns in how you feel.",
+  },
+  'ai-forgets-you': {
+    h1Pre: 'Tired of AI',
+    h1Highlight: 'that forgets you?',
+    sub: 'Empath remembers every conversation, every mood, every person you mention. No more starting over.',
+  },
+  'ai-knows-you': {
+    h1Pre: 'Wish your AI',
+    h1Highlight: 'actually knew you?',
+    sub: 'Empath does. It remembers your history and helps you see yourself clearer over time.',
+  },
+  'chatgpt-therapist': {
+    h1Pre: 'Using ChatGPT as',
+    h1Highlight: 'your therapist?',
+    sub: 'Empath is built for exactly that. It remembers everything, never resets, and never judges what you tell it.',
+  },
+  'ai-chats-disappear': {
+    h1Pre: 'Your AI chats',
+    h1Highlight: "don't have to disappear",
+    sub: 'Empath remembers every conversation permanently, and turns them into a private journal you can actually look back on.',
+  },
+  'venting-chatbot': {
+    h1Pre: 'Venting into a chatbot',
+    h1Highlight: 'that forgets by tomorrow?',
+    sub: "Empath remembers. Every entry becomes part of your story, not just tokens it throws away.",
   },
 };
 

@@ -8,7 +8,6 @@ import {
   PhoneCall,
   MessageSquare,
   Zap,
-  ChevronDown,
   Star,
   TrendingUp,
   Camera,
@@ -48,8 +47,11 @@ import TryEmpathDemo from '../components/TryEmpathDemo';
 import CrossChannelStory from '../components/CrossChannelStory';
 import CallMeForm from '../components/CallMeForm';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import FAQItem from '../components/FAQItem';
 import { WhatsAppIcon } from '../components/ChannelIcons';
 import { useJournalingCopy } from '../i18n/copy';
+import { heroExperimentV3 } from '../i18n/copy/journaling.en';
+import { useLocale } from '../i18n/LocaleContext';
 import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
 import { buildChannelHref, captureChannelLinkClick, getChannelRefCode } from '../utils/attribution';
@@ -68,42 +70,23 @@ const staggerContainer = {
   }
 };
 
-// FAQ Accordion Item Component
-const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="border-b-2 border-stone-200 last:border-b-0">
-      <button
-        className="w-full py-5 flex justify-between items-center text-left text-lg font-bold text-stone-900 hover:text-[#1b8af1] transition-colors"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {question}
-        <ChevronDown className={`w-5 h-5 text-stone-900 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
-      </button>
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        className="overflow-hidden"
-      >
-        <div className="pb-6 text-stone-600 leading-relaxed font-medium">
-          {answer}
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 export default function JournalingPage() {
   const c = useJournalingCopy();
-  // PostHog experiment `landing-hero-copy-2`: variant `chatgpt-context` swaps
-  // the hero H1 + subheadline. Anything else (control, flag missing, flags not
-  // yet loaded, bots) renders the default hero — which is also what the
-  // prerendered HTML contains, so SEO snapshots stay stable. Existing CTA
-  // click events carry the active flag, so they double as goal metrics.
-  // (v1 flag `landing-hero-copy` / variant `never-open` was retired 2026-08-09.)
-  const heroVariant = useFeatureFlagVariantKey('landing-hero-copy-2');
-  const heroHeadline = heroVariant === 'chatgpt-context' ? c.heroExperiment : c.hero;
+  const locale = useLocale();
+  // PostHog experiment `landing-hero-copy-3`: 16-arm test (the v2 winner
+  // "chatgpt-context" carried forward as `control`, plus 15 new challengers)
+  // swapping the hero H1 + subheadline. English-only — translation was
+  // skipped, so `heroExperimentV3` isn't a member of the locale-typed copy
+  // catalog. Anything else (non-English locale, control, flag missing, flags
+  // not yet loaded, bots, unmatched variant key) renders the default hero —
+  // which is also what the prerendered HTML contains, so SEO snapshots stay
+  // stable. Existing CTA click events carry the active flag, so they double
+  // as goal metrics.
+  // (v1 flag `landing-hero-copy` retired 2026-08-09; v2 `landing-hero-copy-2`
+  // retired once `chatgpt-context` won and became v3's `control`.)
+  const heroVariant = useFeatureFlagVariantKey('landing-hero-copy-3');
+  const heroHeadline =
+    locale === 'en' && heroVariant && heroExperimentV3[heroVariant] ? heroExperimentV3[heroVariant] : c.hero;
   const refCode = getChannelRefCode();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

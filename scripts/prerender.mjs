@@ -56,6 +56,16 @@ for (const code of LOCALE_CODES) {
   );
 }
 
+// Phrase landing pages (English-only) — single source of truth shared with
+// src/App.tsx and scripts/generate-sitemap.mjs, see src/data/phrasePages.ts.
+const phrasePages = await loadTsExport(join(ROOT, 'src/data/phrasePages.ts'), 'phrasePages');
+const phrasePageRoutes = phrasePages.map((entry) => ({
+  path: `/${entry.slug}`,
+  title: entry.seoTitle,
+  description: entry.seoDescription,
+  keywords: entry.seoKeywords,
+}));
+
 /** hreflang link cluster for a locale-free path, e.g. "/app". x-default = English. */
 function hreflangCluster(path, localeCodes = LOCALE_CODES) {
   return [
@@ -83,14 +93,14 @@ const staticRoutes = [
     canonicalPath: '/app',
     title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
     description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
-    keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    keywords: "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
     alternates: hreflangCluster('/app'),
   },
   {
     path: '/app',
     title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
     description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
-    keywords: 'journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker',
+    keywords: "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
     alternates: hreflangCluster('/app'),
   },
   // Localized consumer landing: /<code> and /<code>/app per translated locale,
@@ -124,6 +134,7 @@ const staticRoutes = [
     htmlLang: TRANSLATED_LOCALES[code].htmlLang,
     alternates: hreflangCluster('/call-me'),
   })),
+  ...phrasePageRoutes,
   {
     path: '/therapist',
     title: 'Empath for Therapists | Between-Session AI Insights',

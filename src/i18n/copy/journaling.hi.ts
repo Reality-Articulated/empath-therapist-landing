@@ -44,15 +44,6 @@ export const journalingHi: JournalingCopy = {
     openDashboard: 'Web dashboard खोलें',
   },
 
-  // A/B test hero (PostHog experiment flag `landing-hero-copy`, variant
-  // `never-open`): swaps ONLY the H1 + subheadline. Control renders `hero`
-  // above. Remove once the experiment is decided.
-  heroExperiment: {
-    h1Pre: 'ChatGPT को हर बार सब कुछ',
-    h1Highlight: 'फिर से समझाना?',
-    sub: 'Empath आपको पहले से जानता है। वो WhatsApp, Telegram, Messenger और Instagram में रहता है, हर बातचीत याद रखता है, और वहीं से शुरू करता है जहाँ आपने छोड़ा था। जब भी मन में कुछ हो, बस message कर दीजिए या call कर लीजिए।',
-  },
-
   trust: {
     hipaa: 'HIPAA सुरक्षित',
     ai: 'AI-Powered Insights',

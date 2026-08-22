@@ -25,6 +25,8 @@ import SciencePage from './pages/SciencePage';
 import BlogPostPage from './pages/BlogPostPage';
 import JournalingBlogsPage from './pages/JournalingBlogsPage';
 import JournalingBlogPostPage from './pages/JournalingBlogPostPage';
+import PhraseLandingPage from './pages/PhraseLandingPage';
+import { phrasePages } from './data/phrasePages';
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
@@ -68,7 +70,11 @@ function App() {
   }, [location]);
   // Chrome visibility is locale-agnostic: /es/app hides the navbar like /app.
   const basePath = stripLocalePrefix(location.pathname).path;
-  const hideNavbar = basePath.startsWith('/atman') || basePath.startsWith('/app') || ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(basePath);
+  const hideNavbar =
+    basePath.startsWith('/atman') ||
+    basePath.startsWith('/app') ||
+    ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(basePath) ||
+    phrasePages.some((p) => basePath === `/${p.slug}`);
 
   // One shared route table, mounted at / (English) and under every locale
   // prefix (/es, /pt, …). Untranslated pages render English under a prefix;
@@ -99,6 +105,9 @@ function App() {
       <Route path="blog" element={<BlogsPage />} />
       <Route path="blogs" element={<BlogsPage />} />
       <Route path="blog/:slug" element={<BlogPostPage />} />
+      {phrasePages.map((entry) => (
+        <Route key={entry.slug} path={entry.slug} element={<PhraseLandingPage entry={entry} />} />
+      ))}
     </>
   );
 
