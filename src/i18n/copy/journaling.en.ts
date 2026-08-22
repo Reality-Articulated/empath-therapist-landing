@@ -59,8 +59,6 @@ export const journalingEn = {
     textUsAt: 'Text us at',
     callUsAt: 'Call us at',
     availability: 'Available 24/7 • Free • Works from any phone',
-    preferTyping: 'Prefer typing at your desk?',
-    openDashboard: 'Open the web dashboard',
   },
 
   trust: {
@@ -783,7 +781,6 @@ export const journalingEn = {
     sub: 'No app to learn, no blank page to stare at. Just message or call the way you already do with a friend, and start seeing your patterns in days, not months.',
     downloadFree: 'Download Free on App Store',
     justSayHi: 'No app, no account. Just say hi',
-    preferTyping: 'Prefer to type? Open the web dashboard →',
     noCreditCard: 'No credit card',
     freeForever: 'Free forever',
     fastSetup: '30 second setup',
@@ -799,7 +796,6 @@ export const journalingEn = {
     downloadFree: 'Download Free',
     text: 'Text your thoughts',
     call: 'Call',
-    webApp: 'Web app',
   },
 };
 

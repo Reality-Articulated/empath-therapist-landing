@@ -110,7 +110,6 @@ export default function JournalingPage() {
   const PHONE_MAIN = '+18883663082';
   const PHONE_DISPLAY = '+1 (888) 366-3082'; // Human-readable form for prominent display
   const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
-  const WEB_APP_URL = 'https://www.empathdash.com/atman/'; // Placeholder; desktop now promotes text/call instead
 
   useEffect(() => {
     posthog.capture('journaling_page_viewed');
@@ -233,13 +232,15 @@ export default function JournalingPage() {
                 <p className="text-stone-600 font-medium mb-5 text-center">
                   {c.hero.mobileLead}
                 </p>
-                <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full mb-3`}>
+                <div className={`grid ${SMS_ENABLED ? 'grid-cols-3' : 'grid-cols-2'} gap-3 w-full mb-3`}>
                   <a
-                    href={`tel:${PHONE_MAIN}`}
+                    href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                    onClick={() => captureChannelLinkClick('journaling_page_hero', 'whatsapp', refCode)}
                   >
-                    <Phone className="w-4 h-4" /> {c.hero.call}
+                    <WhatsAppIcon className="w-4 h-4" /> {c.whatsappSection.cta}
                   </a>
                   {SMS_ENABLED && (
                     <a
@@ -250,6 +251,13 @@ export default function JournalingPage() {
                       <MessageSquare className="w-4 h-4" /> {c.hero.text}
                     </a>
                   )}
+                  <a
+                    href={`tel:${PHONE_MAIN}`}
+                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                    onClick={() => posthog.capture('journaling_page_call_clicked')}
+                  >
+                    <Phone className="w-4 h-4" /> {c.hero.call}
+                  </a>
                 </div>
                 <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">{c.hero.orFavoriteApp}</p>
                 <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3" />
@@ -287,8 +295,18 @@ export default function JournalingPage() {
                   {c.hero.desktopLead}
                 </p>
 
-                {/* Primary CTAs — call or message, the way you'd reach a friend */}
-                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-2' : ''} gap-3 w-full`}>
+                {/* Primary CTAs — message-first: WhatsApp leads, call is the secondary option */}
+                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3 w-full`}>
+                  <a
+                    href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={c.whatsappSection.cta}
+                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                    onClick={() => captureChannelLinkClick('journaling_page_hero', 'whatsapp', refCode)}
+                  >
+                    <WhatsAppIcon className="w-5 h-5" /> {c.whatsappSection.cta}
+                  </a>
                   {SMS_ENABLED && (
                     <a
                       href={`sms:${PHONE_MAIN}`}
@@ -302,7 +320,7 @@ export default function JournalingPage() {
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                    className="px-6 py-5 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                    className="px-6 py-5 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
                     onClick={() => posthog.capture('journaling_page_call_clicked')}
                   >
                     <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
@@ -319,25 +337,25 @@ export default function JournalingPage() {
                 {/* Desktop can't tap tel:/wa.me — give the phone something to scan */}
                 <DesktopQRCodes className="mt-6" />
 
-                {/* Secondary: web dashboard for desktop typers */}
+                {/* Secondary: get the app — mirrors the mobile hero's app upsell */}
                 <div className="relative mt-7 mb-4">
                   <div className="absolute inset-0 flex items-center" aria-hidden="true">
                     <div className="w-full border-t-2 border-stone-200"></div>
                   </div>
                   <div className="relative flex justify-center">
-                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">{c.hero.preferTyping}</span>
+                    <span className="bg-white px-4 text-sm font-bold text-stone-400 uppercase tracking-wider">{c.hero.wantInsights}</span>
                   </div>
                 </div>
                 <button
-                  onClick={() => {
-                    posthog.capture('journaling_page_web_app_clicked');
-                    window.location.href = WEB_APP_URL;
-                  }}
-                  className="w-full px-6 py-3.5 bg-white text-stone-900 rounded-xl font-bold text-sm border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 flex items-center justify-center gap-2 group"
+                  onClick={handleAppStoreClick}
+                  className="w-full px-6 py-3.5 bg-white text-stone-900 rounded-xl font-bold text-sm border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 flex items-center justify-center gap-3"
                 >
-                  <Brain className="w-4 h-4" /> {c.hero.openDashboard}
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                  </svg>
+                  {c.hero.getApp}
                 </button>
+                <p className="text-xs text-stone-400 text-center mt-2 font-medium">{c.hero.appBenefits}</p>
               </motion.div>
             </>
           )}
@@ -1283,7 +1301,17 @@ export default function JournalingPage() {
             ) : (
               <div className="inline-flex flex-col items-center gap-4 px-8 py-7 bg-white text-stone-900 rounded-xl border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
                 <p className="text-sm font-bold uppercase tracking-wider text-stone-500">{c.finalCta.justSayHi}</p>
-                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-2' : ''} gap-3 w-full`}>
+                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3 w-full`}>
+                  <a
+                    href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={c.whatsappSection.cta}
+                    className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                    onClick={() => captureChannelLinkClick('final_cta', 'whatsapp', refCode)}
+                  >
+                    <WhatsAppIcon className="w-5 h-5" /> {c.whatsappSection.cta}
+                  </a>
                   {SMS_ENABLED && (
                     <a
                       href={`sms:${PHONE_MAIN}`}
@@ -1297,20 +1325,20 @@ export default function JournalingPage() {
                   <a
                     href={`tel:${PHONE_MAIN}`}
                     title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                    className="px-5 py-4 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                    className="px-5 py-4 bg-white text-stone-900 rounded-xl font-bold border-2 border-stone-200 hover:border-stone-900 transition-all flex items-center justify-center gap-2"
                     onClick={() => posthog.capture('final_cta_call_clicked')}
                   >
                     <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
                   </a>
                 </div>
                 <button
-                  onClick={() => {
-                    posthog.capture('final_cta_web_app_clicked');
-                    window.location.href = WEB_APP_URL;
-                  }}
+                  onClick={handleAppStoreClick}
                   className="text-sm font-bold text-stone-500 hover:text-stone-900 transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <Brain className="w-4 h-4" /> {c.finalCta.preferTyping}
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                  </svg>
+                  {c.finalCta.downloadFree}
                 </button>
               </div>
             )}
@@ -1373,18 +1401,16 @@ export default function JournalingPage() {
             </Link>
             <div className="flex-grow"></div>
             <div className="flex items-center gap-3">
-              {/* With SMS paused, the call CTA is the primary action and stops being lg-only. */}
+              {/* Message-first: WhatsApp is the always-visible primary action, call is secondary. */}
               <a
-                href={`tel:${PHONE_MAIN}`}
-                title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                className={
-                  SMS_ENABLED
-                    ? 'px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition items-center gap-2 hidden lg:flex'
-                    : 'px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2'
-                }
-                onClick={() => posthog.capture('floating_cta_call_clicked')}
+                href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={c.whatsappSection.cta}
+                className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900 flex items-center gap-2"
+                onClick={() => captureChannelLinkClick('floating_cta', 'whatsapp', refCode)}
               >
-                <Phone className="w-4 h-4" /> {c.floating.call}
+                <WhatsAppIcon className="w-4 h-4" /> {c.whatsappSection.cta}
               </a>
               {SMS_ENABLED && (
                 <a
@@ -1396,14 +1422,22 @@ export default function JournalingPage() {
                   <MessageSquare className="w-4 h-4" /> {c.floating.text}
                 </a>
               )}
+              <a
+                href={`tel:${PHONE_MAIN}`}
+                title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
+                className="px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition items-center gap-2 hidden lg:flex"
+                onClick={() => posthog.capture('floating_cta_call_clicked')}
+              >
+                <Phone className="w-4 h-4" /> {c.floating.call}
+              </a>
               <button
-                onClick={() => {
-                  posthog.capture('floating_cta_web_app_clicked');
-                  window.location.href = WEB_APP_URL;
-                }}
+                onClick={handleAppStoreClick}
                 className="px-4 py-2 text-stone-500 hover:text-stone-900 font-bold transition-colors hidden md:flex items-center gap-1.5 text-sm"
               >
-                <Brain className="w-4 h-4" /> {c.floating.webApp}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                </svg>
+                {c.header.download}
               </button>
             </div>
           </div>

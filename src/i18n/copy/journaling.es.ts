@@ -42,8 +42,6 @@ export const journalingEs: JournalingCopy = {
     textUsAt: 'Escríbenos al',
     callUsAt: 'Llámanos al',
     availability: 'Disponible 24/7 • Gratis • Funciona desde cualquier teléfono',
-    preferTyping: '¿Prefieres teclear desde tu escritorio?',
-    openDashboard: 'Abre el panel web',
   },
 
   trust: {
@@ -704,7 +702,6 @@ export const journalingEs: JournalingCopy = {
     sub: 'Sin app que aprender, sin página en blanco que mirar. Solo escribe o llama como ya lo haces con un amigo, y empieza a ver tus patrones en días, no en meses.',
     downloadFree: 'Descarga gratis en el App Store',
     justSayHi: 'Sin app, sin registro. Solo di hola',
-    preferTyping: '¿Prefieres teclear? Abre el panel web →',
     noCreditCard: 'Sin tarjeta de crédito',
     freeForever: 'Gratis para siempre',
     fastSetup: 'Listo en 30 segundos',
@@ -720,6 +717,5 @@ export const journalingEs: JournalingCopy = {
     downloadFree: 'Descarga gratis',
     text: 'Textea tus pensamientos',
     call: 'Llamar',
-    webApp: 'App web',
   },
 };

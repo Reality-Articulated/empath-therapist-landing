@@ -38,8 +38,6 @@ export const journalingIt: JournalingCopy = {
     textUsAt: 'Scrivici al',
     callUsAt: 'Chiamaci al',
     availability: 'Disponibile 24 ore su 24 • Gratis • Funziona da qualsiasi telefono',
-    preferTyping: 'Preferisci scrivere dal computer?',
-    openDashboard: 'Apri la dashboard web',
   },
 
   trust: {
@@ -700,7 +698,6 @@ export const journalingIt: JournalingCopy = {
     sub: 'Nessuna app da imparare, nessuna pagina bianca da fissare. Scrivi o chiama come già fai con un amico, e inizia a vedere i tuoi schemi in giorni, non in mesi.',
     downloadFree: "Scarica gratis dall'App Store",
     justSayHi: 'Niente app, senza registrazione. Basta un ciao',
-    preferTyping: 'Preferisci scrivere? Apri la dashboard web →',
     noCreditCard: 'Nessuna carta di credito',
     freeForever: 'Gratis per sempre',
     fastSetup: 'Pronto in 30 secondi',
@@ -716,6 +713,5 @@ export const journalingIt: JournalingCopy = {
     downloadFree: 'Scarica gratis',
     text: 'Scrivi i tuoi pensieri',
     call: 'Chiama',
-    webApp: 'App web',
   },
 };

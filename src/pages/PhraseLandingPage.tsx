@@ -121,7 +121,16 @@ export default function PhraseLandingPage({ entry }: { entry: PhrasePageEntry })
           </motion.p>
 
           <motion.div variants={fadeIn} className="mb-4 max-w-lg mx-auto">
-            <div className={`grid ${SMS_ENABLED ? 'sm:grid-cols-2' : ''} grid-cols-1 gap-3 w-full mb-3`}>
+            <div className={`grid ${SMS_ENABLED ? 'grid-cols-3' : 'grid-cols-2'} gap-3 w-full mb-3`}>
+              <a
+                href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                onClick={() => captureChannelLinkClick(`phrase_page_${entry.slug}`, 'whatsapp', refCode)}
+              >
+                <WhatsAppIcon className="w-4 h-4" /> {c.whatsappSection.cta}
+              </a>
               {SMS_ENABLED && (
                 <a
                   href={`sms:${PHONE_MAIN}`}
@@ -133,7 +142,7 @@ export default function PhraseLandingPage({ entry }: { entry: PhrasePageEntry })
               )}
               <a
                 href={`tel:${PHONE_MAIN}`}
-                className="px-4 py-4 bg-stone-900 text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
                 onClick={() => posthog.capture('journaling_page_call_clicked', { source: `phrase_page_${entry.slug}` })}
               >
                 <Phone className="w-4 h-4" /> {c.hero.call}

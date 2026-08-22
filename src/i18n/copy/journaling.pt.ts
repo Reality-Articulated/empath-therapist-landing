@@ -38,8 +38,6 @@ export const journalingPt: JournalingCopy = {
     textUsAt: 'Mande mensagem para',
     callUsAt: 'Ligue para',
     availability: 'Disponível 24h • Grátis • Funciona de qualquer telefone',
-    preferTyping: 'Prefere digitar no computador?',
-    openDashboard: 'Abra o painel web',
   },
 
   trust: {
@@ -700,7 +698,6 @@ export const journalingPt: JournalingCopy = {
     sub: 'Nenhum app para aprender, nenhuma página em branco para encarar. É só mandar mensagem ou ligar como você já faz com um amigo, e começar a ver seus padrões em dias, não meses.',
     downloadFree: 'Baixar grátis na App Store',
     justSayHi: 'Sem app, sem cadastro. É só dar um oi',
-    preferTyping: 'Prefere digitar? Abra o painel web →',
     noCreditCard: 'Sem cartão de crédito',
     freeForever: 'Grátis para sempre',
     fastSetup: 'Pronto em 30 segundos',
@@ -716,6 +713,5 @@ export const journalingPt: JournalingCopy = {
     downloadFree: 'Baixar grátis',
     text: 'Mande seus pensamentos',
     call: 'Ligar',
-    webApp: 'App web',
   },
 };

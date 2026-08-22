@@ -39,8 +39,6 @@ export const journalingFr: JournalingCopy = {
     textUsAt: 'Écris-nous au',
     callUsAt: 'Appelle-nous au',
     availability: 'Dispo 24h/24 • Gratuit • Depuis n’importe quel téléphone',
-    preferTyping: 'Tu préfères taper au clavier ?',
-    openDashboard: 'Ouvre le tableau de bord web',
   },
 
   trust: {
@@ -701,7 +699,6 @@ export const journalingFr: JournalingCopy = {
     sub: 'Aucune appli à apprendre, aucune page blanche à fixer. Écris ou appelle comme tu le fais déjà avec un ami, et commence à voir tes schémas en quelques jours, pas en quelques mois.',
     downloadFree: 'Télécharger gratuitement sur l’App Store',
     justSayHi: 'Pas d’appli, sans inscription. Dis juste salut',
-    preferTyping: 'Tu préfères écrire ? Ouvre le tableau de bord web →',
     noCreditCard: 'Sans carte bancaire',
     freeForever: 'Gratuit pour toujours',
     fastSetup: 'Prêt en 30 secondes',
@@ -717,6 +714,5 @@ export const journalingFr: JournalingCopy = {
     downloadFree: 'Télécharger gratuitement',
     text: 'Écris tes pensées',
     call: 'Appeler',
-    webApp: 'Appli web',
   },
 };

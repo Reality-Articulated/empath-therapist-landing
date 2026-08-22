@@ -40,8 +40,6 @@ export const journalingHi: JournalingCopy = {
     textUsAt: 'हमें text करें',
     callUsAt: 'हमें call करें',
     availability: '24/7 उपलब्ध • Free • किसी भी फ़ोन से',
-    preferTyping: 'डेस्क पर बैठकर type करना पसंद है?',
-    openDashboard: 'Web dashboard खोलें',
   },
 
   trust: {
@@ -702,7 +700,6 @@ export const journalingHi: JournalingCopy = {
     sub: 'न कोई app सीखना, न खाली page को घूरना। जैसे दोस्त को करते हैं वैसे ही message या call कीजिए, और महीनों नहीं, कुछ ही दिनों में अपने patterns दिखने लगेंगे।',
     downloadFree: 'App Store से Free Download करें',
     justSayHi: 'न app, न साइन-अप। बस hi बोल दीजिए',
-    preferTyping: 'Type करना पसंद है? Web dashboard खोलें →',
     noCreditCard: 'कोई credit card नहीं',
     freeForever: 'हमेशा के लिए free',
     fastSetup: '30 सेकंड का setup',
@@ -718,6 +715,5 @@ export const journalingHi: JournalingCopy = {
     downloadFree: 'Free Download करें',
     text: 'अपने ख़याल text करें',
     call: 'Call करें',
-    webApp: 'Web app',
   },
 };

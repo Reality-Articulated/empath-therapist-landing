@@ -39,8 +39,6 @@ export const journalingDe: JournalingCopy = {
     textUsAt: 'Schreib uns unter',
     callUsAt: 'Ruf uns an unter',
     availability: 'Rund um die Uhr • Kostenlos • Funktioniert mit jedem Handy',
-    preferTyping: 'Tippst du lieber am Rechner?',
-    openDashboard: 'Web-Dashboard öffnen',
   },
 
   trust: {
@@ -701,7 +699,6 @@ export const journalingDe: JournalingCopy = {
     sub: 'Keine App zum Lernen, keine leere Seite zum Anstarren. Schreib oder ruf an, wie du es mit Freunden sowieso machst, und sieh deine Muster in Tagen statt Monaten.',
     downloadFree: 'Gratis im App Store laden',
     justSayHi: 'Keine App, keine Registrierung. Sag einfach hi',
-    preferTyping: 'Lieber tippen? Öffne das Web-Dashboard →',
     noCreditCard: 'Keine Kreditkarte',
     freeForever: 'Für immer kostenlos',
     fastSetup: 'Startklar in 30 Sekunden',
@@ -717,6 +714,5 @@ export const journalingDe: JournalingCopy = {
     downloadFree: 'Gratis laden',
     text: 'Schreib deine Gedanken',
     call: 'Anrufen',
-    webApp: 'Web-App',
   },
 };
