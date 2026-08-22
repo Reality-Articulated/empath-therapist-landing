@@ -54,6 +54,7 @@ import { heroExperimentV3 } from '../i18n/copy/journaling.en';
 import { useLocale } from '../i18n/LocaleContext';
 import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
+import { useIsUSVisitor } from '../utils/geo';
 import { buildChannelHref, captureChannelLinkClick, getChannelRefCode } from '../utils/attribution';
 import DesktopQRCodes from '../components/DesktopQRCodes';
 
@@ -88,6 +89,10 @@ export default function JournalingPage() {
   const heroHeadline =
     locale === 'en' && heroVariant && heroExperimentV3[heroVariant] ? heroExperimentV3[heroVariant] : c.hero;
   const refCode = getChannelRefCode();
+  // The phone number only takes US calls — hide the call CTA entirely for
+  // everyone else rather than showing a button that won't work. Defaults to
+  // hidden until confirmed, so it never flashes for a non-US visitor.
+  const isUS = useIsUSVisitor();
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   // Android waitlist card. Emails live in PostHog only
@@ -232,7 +237,11 @@ export default function JournalingPage() {
                 <p className="text-stone-600 font-medium mb-5 text-center">
                   {c.hero.mobileLead}
                 </p>
-                <div className={`grid ${SMS_ENABLED ? 'grid-cols-3' : 'grid-cols-2'} gap-3 w-full mb-3`}>
+                <div
+                  className={`grid ${
+                    SMS_ENABLED ? (isUS ? 'grid-cols-3' : 'grid-cols-2') : isUS ? 'grid-cols-2' : 'grid-cols-1'
+                  } gap-3 w-full mb-3`}
+                >
                   <a
                     href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
                     target="_blank"
@@ -251,13 +260,15 @@ export default function JournalingPage() {
                       <MessageSquare className="w-4 h-4" /> {c.hero.text}
                     </a>
                   )}
-                  <a
-                    href={`tel:${PHONE_MAIN}`}
-                    className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                    onClick={() => posthog.capture('journaling_page_call_clicked')}
-                  >
-                    <Phone className="w-4 h-4" /> {c.hero.call}
-                  </a>
+                  {isUS && (
+                    <a
+                      href={`tel:${PHONE_MAIN}`}
+                      className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                      onClick={() => posthog.capture('journaling_page_call_clicked')}
+                    >
+                      <Phone className="w-4 h-4" /> {c.hero.call}
+                    </a>
+                  )}
                 </div>
                 <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">{c.hero.orFavoriteApp}</p>
                 <MessagingChannelsCarousel eventPrefix="journaling_page" className="mb-3" />
@@ -296,7 +307,17 @@ export default function JournalingPage() {
                 </p>
 
                 {/* Primary CTAs — message-first: WhatsApp leads, call is the secondary option */}
-                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3 w-full`}>
+                <div
+                  className={`grid grid-cols-1 ${
+                    SMS_ENABLED
+                      ? isUS
+                        ? 'sm:grid-cols-3'
+                        : 'sm:grid-cols-2'
+                      : isUS
+                        ? 'sm:grid-cols-2'
+                        : 'sm:grid-cols-1'
+                  } gap-3 w-full`}
+                >
                   <a
                     href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
                     target="_blank"
@@ -317,14 +338,16 @@ export default function JournalingPage() {
                       <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
                     </a>
                   )}
-                  <a
-                    href={`tel:${PHONE_MAIN}`}
-                    title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                    className="px-6 py-5 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
-                    onClick={() => posthog.capture('journaling_page_call_clicked')}
-                  >
-                    <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
-                  </a>
+                  {isUS && (
+                    <a
+                      href={`tel:${PHONE_MAIN}`}
+                      title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
+                      className="px-6 py-5 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2.5 text-base"
+                      onClick={() => posthog.capture('journaling_page_call_clicked')}
+                    >
+                      <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
+                    </a>
+                  )}
                 </div>
 
                 {/* Secondary channels */}
@@ -333,9 +356,6 @@ export default function JournalingPage() {
                 <p className="text-xs text-stone-400 text-center mt-3 font-medium flex items-center justify-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#1b8af1]" /> {c.hero.availability}
                 </p>
-
-                {/* Desktop can't tap tel:/wa.me — give the phone something to scan */}
-                <DesktopQRCodes className="mt-6" />
 
                 {/* Secondary: get the app — mirrors the mobile hero's app upsell */}
                 <div className="relative mt-7 mb-4">
@@ -483,6 +503,9 @@ export default function JournalingPage() {
                 <p className="text-sm text-stone-500 font-medium mt-4">
                   {c.whatsappSection.phoneNote.replace('{phone}', PHONE_DISPLAY)}
                 </p>
+
+                {/* Desktop can't tap the wa.me link above — give the phone something to scan */}
+                <DesktopQRCodes className="mt-8" />
               </motion.div>
             </motion.div>
           </div>
@@ -1301,7 +1324,17 @@ export default function JournalingPage() {
             ) : (
               <div className="inline-flex flex-col items-center gap-4 px-8 py-7 bg-white text-stone-900 rounded-xl border-2 border-white shadow-[6px_6px_0px_0px_#1b8af1] mb-6 w-full max-w-xl">
                 <p className="text-sm font-bold uppercase tracking-wider text-stone-500">{c.finalCta.justSayHi}</p>
-                <div className={`grid grid-cols-1 ${SMS_ENABLED ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3 w-full`}>
+                <div
+                  className={`grid grid-cols-1 ${
+                    SMS_ENABLED
+                      ? isUS
+                        ? 'sm:grid-cols-3'
+                        : 'sm:grid-cols-2'
+                      : isUS
+                        ? 'sm:grid-cols-2'
+                        : 'sm:grid-cols-1'
+                  } gap-3 w-full`}
+                >
                   <a
                     href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
                     target="_blank"
@@ -1322,14 +1355,16 @@ export default function JournalingPage() {
                       <MessageSquare className="w-5 h-5" /> {c.hero.textToJournal}
                     </a>
                   )}
-                  <a
-                    href={`tel:${PHONE_MAIN}`}
-                    title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                    className="px-5 py-4 bg-white text-stone-900 rounded-xl font-bold border-2 border-stone-200 hover:border-stone-900 transition-all flex items-center justify-center gap-2"
-                    onClick={() => posthog.capture('final_cta_call_clicked')}
-                  >
-                    <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
-                  </a>
+                  {isUS && (
+                    <a
+                      href={`tel:${PHONE_MAIN}`}
+                      title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
+                      className="px-5 py-4 bg-white text-stone-900 rounded-xl font-bold border-2 border-stone-200 hover:border-stone-900 transition-all flex items-center justify-center gap-2"
+                      onClick={() => posthog.capture('final_cta_call_clicked')}
+                    >
+                      <Phone className="w-5 h-5" /> {c.hero.callAndTalk}
+                    </a>
+                  )}
                 </div>
                 <button
                   onClick={handleAppStoreClick}
@@ -1422,14 +1457,16 @@ export default function JournalingPage() {
                   <MessageSquare className="w-4 h-4" /> {c.floating.text}
                 </a>
               )}
-              <a
-                href={`tel:${PHONE_MAIN}`}
-                title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
-                className="px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition items-center gap-2 hidden lg:flex"
-                onClick={() => posthog.capture('floating_cta_call_clicked')}
-              >
-                <Phone className="w-4 h-4" /> {c.floating.call}
-              </a>
+              {isUS && (
+                <a
+                  href={`tel:${PHONE_MAIN}`}
+                  title={`${c.hero.callUsAt} ${PHONE_DISPLAY}`}
+                  className="px-5 py-2 bg-white text-stone-900 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-100 transition items-center gap-2 hidden lg:flex"
+                  onClick={() => posthog.capture('floating_cta_call_clicked')}
+                >
+                  <Phone className="w-4 h-4" /> {c.floating.call}
+                </a>
+              )}
               <button
                 onClick={handleAppStoreClick}
                 className="px-4 py-2 text-stone-500 hover:text-stone-900 font-bold transition-colors hidden md:flex items-center gap-1.5 text-sm"

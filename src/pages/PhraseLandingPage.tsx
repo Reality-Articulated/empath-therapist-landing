@@ -25,6 +25,7 @@ import { WhatsAppIcon } from '../components/ChannelIcons';
 import logo from '../../public/empath-logo.png';
 import { useJournalingCopy } from '../i18n/copy';
 import { SMS_ENABLED } from '../utils/channels';
+import { useIsUSVisitor } from '../utils/geo';
 import { buildChannelHref, captureChannelLinkClick, getChannelRefCode } from '../utils/attribution';
 import type { PhrasePageEntry } from '../data/phrasePages';
 
@@ -56,6 +57,7 @@ const WORRY_VISUALS = [
 export default function PhraseLandingPage({ entry }: { entry: PhrasePageEntry }) {
   const c = useJournalingCopy();
   const refCode = getChannelRefCode();
+  const isUS = useIsUSVisitor();
 
   useEffect(() => {
     posthog.capture('phrase_page_viewed', { slug: entry.slug });
@@ -121,7 +123,11 @@ export default function PhraseLandingPage({ entry }: { entry: PhrasePageEntry })
           </motion.p>
 
           <motion.div variants={fadeIn} className="mb-4 max-w-lg mx-auto">
-            <div className={`grid ${SMS_ENABLED ? 'grid-cols-3' : 'grid-cols-2'} gap-3 w-full mb-3`}>
+            <div
+              className={`grid ${
+                SMS_ENABLED ? (isUS ? 'grid-cols-3' : 'grid-cols-2') : isUS ? 'grid-cols-2' : 'grid-cols-1'
+              } gap-3 w-full mb-3`}
+            >
               <a
                 href={buildChannelHref('whatsapp', c.channelRow.prefill, refCode)}
                 target="_blank"
@@ -140,13 +146,15 @@ export default function PhraseLandingPage({ entry }: { entry: PhrasePageEntry })
                   <MessageSquare className="w-4 h-4" /> {c.hero.text}
                 </a>
               )}
-              <a
-                href={`tel:${PHONE_MAIN}`}
-                className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
-                onClick={() => posthog.capture('journaling_page_call_clicked', { source: `phrase_page_${entry.slug}` })}
-              >
-                <Phone className="w-4 h-4" /> {c.hero.call}
-              </a>
+              {isUS && (
+                <a
+                  href={`tel:${PHONE_MAIN}`}
+                  className="px-4 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-stone-900 transition-all duration-200 font-bold flex items-center justify-center gap-2 text-sm"
+                  onClick={() => posthog.capture('journaling_page_call_clicked', { source: `phrase_page_${entry.slug}` })}
+                >
+                  <Phone className="w-4 h-4" /> {c.hero.call}
+                </a>
+              )}
             </div>
             <p className="text-sm text-stone-500 font-medium text-center mt-4 mb-2">{c.hero.orFavoriteApp}</p>
             <MessagingChannelsCarousel eventPrefix={`phrase_page_${entry.slug}`} className="mb-3" />
