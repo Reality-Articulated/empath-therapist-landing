@@ -5,13 +5,22 @@ import { useInView } from 'react-intersection-observer';
 import howitworksPng from '../../public/howitworks.png';
 import howitworksWebp from '../../public/optimized/howitworks.webp';
 import SEO from '../components/SEO';
+import FAQItem from '../components/FAQItem';
 
-import { 
-  Brain, 
-  Clock, 
-  TrendingUp, 
-  Smartphone, 
+import {
+  Brain,
+  Clock,
+  TrendingUp,
   Heart,
+  Users,
+  HeartPulse,
+  Building2,
+  Activity,
+  MessageCircle,
+  Sparkles,
+  ShieldCheck,
+  FileCheck,
+  Ban,
   ChevronRight,
   X
 } from 'lucide-react';
@@ -19,8 +28,8 @@ import {
 // Animation variants
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.8 }
   }
@@ -54,7 +63,6 @@ const scaleIn = {
   }
 };
 
-// Add new animation variants
 const slideInLeft = {
   hidden: { opacity: 0, x: -50 },
   visible: {
@@ -112,74 +120,76 @@ const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProp
   );
 };
 
+const features = [
+  {
+    icon: Clock,
+    title: "Pre-Session Catch-Up Summaries",
+    description: "Save the 15 minutes you'd otherwise spend re-orienting. Every brief opens with what changed since the last session, not a blank page."
+  },
+  {
+    icon: Users,
+    title: "People & Relationship Insights",
+    description: "See which relationships track with a client's emotional volatility over time, so you can raise it before they do."
+  },
+  {
+    icon: HeartPulse,
+    title: "Biometric & Mood Synthesis",
+    description: "When a client opts into Apple Health, Empath lines up sleep, activity, and heart-rate variability against mood, so a rough week reads as data, not a mystery."
+  },
+  {
+    icon: Building2,
+    title: "White-Label Practice Extension",
+    description: "Offer Empath under your own practice's name and branding, a premium touch that extends your care between sessions instead of ending at the door."
+  }
+];
+
+const faqs = [
+  {
+    q: "Will this add to my administrative workload?",
+    a: "No. It's built to shrink admin time, not add to it. Your dashboard turns a week of client activity into one short brief, so pre-session prep and note-writing take less time, not more."
+  },
+  {
+    q: "How do clients respond to messaging Empath?",
+    a: "Very well, because there's nothing new to learn. Clients text or send a voice note on WhatsApp or Telegram, apps already open on their phone, so engagement holds up in ways a dedicated homework app never did."
+  },
+  {
+    q: "Is Empath HIPAA compliant?",
+    a: "Yes. Client data is encrypted at rest and in transit, we sign a Business Associate Agreement (BAA) with every practice, and none of it is used to train AI models. Access is limited to the therapist and the client."
+  },
+  {
+    q: "Does Empath try to replace the therapist?",
+    a: "No, and it isn't built to. Empath is an administrative and reflective co-pilot: it handles memory, pattern recognition, and data synthesis between sessions, while your clinical judgment, attunement, and the therapeutic relationship stay entirely yours."
+  },
+  {
+    q: "What do I actually see before a session?",
+    a: "A short, plain-language brief: mood trends, notable events, people who came up, and a couple of signals worth raising, built from what your client shared since you last met. No raw transcripts unless you want them."
+  },
+  {
+    q: "Can I offer this under my own practice's brand?",
+    a: "Yes. Group practices and private clinicians can offer Empath as a white-labeled extension of their care, so it reads as your practice's tool, not a third-party app."
+  }
+];
+
+const therapistFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+
 export default function HomePage() {
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showSampleBrief, setShowSampleBrief] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const features = [
-    {
-      icon: Brain,
-      title: "AI-Powered Memory",
-      description: "Never forget a detail. Get comprehensive summaries of everything that happened between sessions in 3 minutes."
-    },
-    {
-      icon: TrendingUp,
-      title: "Instant Pattern Recognition",
-      description: "Process data like AI does. Automatically identify mood patterns, triggers, and correlations across sleep, activity, and emotions."
-    },
-    {
-      icon: Smartphone,
-      title: "Continuous Data Collection",
-      description: "Match ChatGPT's always-on advantage. Clients log experiences in real-time through an easy mobile app."
-    },
-    {
-      icon: Heart,
-      title: "Your Human Edge",
-      description: "With computational parity achieved, your empathy, attunement, and presence become the clear competitive advantage."
-    }
-  ];
-
-  const therapistFaqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'How does Empath protect client privacy?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'All data is encrypted, HIPAA-compliant, and only accessible to the therapist and client. Clients have full control over what they share.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Will this add to my workload?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'No, Empath is designed to save you time. The dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How do clients respond to using the app?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Early feedback suggests clients appreciate the opportunity to reflect between sessions and feel more engaged in their therapy journey.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What makes Empath different from other therapy tools?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Empath gives therapists computational parity with AI (instant data processing and recall) so the human qualities of the clinician become the deciding factor rather than an afterthought.',
-        },
-      },
-    ],
-  };
 
   return (
   <div className="flex-grow overflow-x-hidden">
@@ -193,12 +203,12 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(therapistFaqSchema) }}
       />
-      {/* Hero Section */}
+
+      {/* ============ 1. HERO SECTION ============ */}
       <AnimatedSection className="bg-gradient-to-b from-slate-50 via-gray-50 to-white py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="w-96 h-96 bg-slate-200/20 rounded-full absolute -top-20 -left-20 blur-3xl"></div>
           <div className="w-96 h-96 bg-indigo-100/20 rounded-full absolute top-40 -right-20 blur-3xl"></div>
-          {/* Add subtle grid pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
@@ -208,81 +218,97 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {/* Problem statement - smaller, setup */}
-              <motion.p 
-                className="text-lg md:text-xl text-slate-500 font-light mb-6 tracking-wide uppercase"
+              <motion.p
+                className="text-sm md:text-base text-slate-500 font-medium mb-6 tracking-widest uppercase"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-
-
-
-
-
-
+                For Private Practice Therapists & Group Practices
               </motion.p>
-              
+
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight">
-                {/* Main headline - big and bold */}
-                <motion.div 
+                <motion.div
                   className="relative mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
                   <span className="text-slate-900 font-bold tracking-tight">
-                    Your clients are comparing you to ChatGPT
+                    Stop spending the first 15 minutes
                   </span>
                 </motion.div>
-                
-                {/* Secondary line - lighter, problem */}
-                <motion.div 
+
+                <motion.div
                   className="mt-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
                   <span className="text-slate-600 font-light tracking-tight text-3xl sm:text-4xl md:text-5xl">
-                    And the comparison isn't fair.
+                    of every session playing catch-up.
                   </span>
                 </motion.div>
               </h1>
-              
-              {/* Solution hint - compelling subhead */}
-              <motion.p 
+
+              <motion.p
                 className="text-xl sm:text-2xl md:text-3xl mb-12 leading-relaxed max-w-4xl mx-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
-                <span className="text-slate-700 font-light">Empath gives you memory and pattern-recognition to match AI so your </span>
+                <span className="text-slate-700 font-light">Empath turns your client's life between sessions into a 3-minute brief, captured with zero friction over WhatsApp, Telegram, or a quick voice call, so your </span>
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent font-semibold">
-                  human value
+                  human judgment
                 </span>
-                <span className="text-slate-700 font-light"> becomes the clear advantage.</span>
+                <span className="text-slate-700 font-light"> does the rest.</span>
               </motion.p>
+
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <motion.button 
+                <motion.button
                   onClick={() => setShowCalendar(true)}
                   className="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center group cursor-pointer font-light tracking-wide"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  aria-label="Book a demo call with our team"
+                  aria-label="Book a 15-minute clinical demo with our team"
                 >
-                  Book a 15-Min Demo
+                  Book a 15-Minute Clinical Demo
                   <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </motion.button>
-                <motion.div
+                <motion.button
+                  onClick={() => setShowSampleBrief(true)}
+                  className="px-8 py-4 bg-white text-slate-900 rounded-lg border-2 border-slate-900 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center group cursor-pointer font-medium tracking-wide"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  aria-label="See a sample pre-session brief"
                 >
-                  <Link to="/advisory" className="px-8 py-4 bg-white text-slate-900 rounded-lg border-2 border-slate-900 hover:bg-slate-50 transition-all duration-300 flex items-center justify-center group cursor-pointer font-medium tracking-wide" aria-label="Learn about joining our advisory board">
-                    Advisory Program
-                    <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                  </Link>
-                </motion.div>
+                  See a Sample Pre-Session Brief
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </motion.button>
               </div>
+
+              {/* Trust banner */}
+              <motion.div
+                className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-12 text-sm text-slate-500 font-medium"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                <span className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-indigo-600" aria-hidden="true" />
+                  HIPAA Compliant
+                </span>
+                <span className="hidden sm:inline text-slate-300">•</span>
+                <span className="flex items-center gap-2">
+                  <FileCheck className="w-4 h-4 text-indigo-600" aria-hidden="true" />
+                  BAA Included
+                </span>
+                <span className="hidden sm:inline text-slate-300">•</span>
+                <span className="flex items-center gap-2">
+                  <Ban className="w-4 h-4 text-indigo-600" aria-hidden="true" />
+                  Zero Data Used for AI Training
+                </span>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -290,7 +316,7 @@ export default function HomePage() {
 
       {/* Calendar Modal */}
       {showCalendar && (
-        <motion.div 
+        <motion.div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -299,15 +325,15 @@ export default function HomePage() {
           aria-modal="true"
           aria-labelledby="calendar-modal-title"
         >
-          <motion.div 
+          <motion.div
             className="bg-white rounded-xl p-8 w-full max-w-4xl shadow-2xl"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 25 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Schedule a Demo</h2>
-              <motion.button 
+              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Schedule Your Clinical Demo</h2>
+              <motion.button
                 onClick={() => setShowCalendar(false)}
                 className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
                 whileHover={{ rotate: 90 }}
@@ -317,11 +343,11 @@ export default function HomePage() {
                 <X size={20} aria-hidden="true" />
               </motion.button>
             </div>
-            <iframe 
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true" 
-              style={{ border: 0 }} 
-              width="100%" 
-              height="600" 
+            <iframe
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true"
+              style={{ border: 0 }}
+              width="100%"
+              height="600"
               frameBorder="0"
               className="rounded-lg"
             />
@@ -329,7 +355,99 @@ export default function HomePage() {
         </motion.div>
       )}
 
-      {/* The Problem Section */}
+      {/* Sample Pre-Session Brief Modal */}
+      {showSampleBrief && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="sample-brief-modal-title"
+          onClick={() => setShowSampleBrief(false)}
+        >
+          <motion.div
+            className="bg-white rounded-xl p-6 md:p-8 w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", damping: 25 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h2 id="sample-brief-modal-title" className="text-2xl font-light text-slate-900">Sample Pre-Session Brief</h2>
+                <p className="text-sm text-slate-500 mt-1">Client: J.M. &middot; Session 12 &middot; Illustrative example, not a real client</p>
+              </div>
+              <motion.button
+                onClick={() => setShowSampleBrief(false)}
+                className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer flex-shrink-0"
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.2 }}
+                aria-label="Close sample brief"
+              >
+                <X size={20} aria-hidden="true" />
+              </motion.button>
+            </div>
+
+            <div className="mt-6 space-y-5">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-blue-600" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">Mood trend</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mt-0.5">Steadier this week overall, with two rough days midweek that lined up with a poor night's sleep on Wednesday.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-green-50 flex items-center justify-center">
+                  <Activity className="w-5 h-5 text-green-600" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">Sleep & activity</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mt-0.5">Average sleep dropped to 5.4 hrs from a 7.1 hr baseline; step count down about 40% since last session.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-purple-50 flex items-center justify-center">
+                  <Users className="w-5 h-5 text-purple-600" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">People mentioned</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mt-0.5">Older sibling came up three times this week, with a noticeably different tone each time.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-amber-600" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">Notable quote</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mt-0.5 italic">"I keep replaying the conversation with my brother and I don't know why it's bothering me this much."</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-indigo-600" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-medium text-slate-900">Suggested focus</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mt-0.5">Consider opening with the sibling dynamic before returning to sleep hygiene.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-5 border-t border-slate-100">
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Generated from your client's WhatsApp and Telegram check-ins and voice notes between sessions. You decide what surfaces before every appointment.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {/* ============ 2. THE VS. CHATGPT COMPARISON (JUDO FLIP) ============ */}
       <AnimatedSection className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
@@ -337,15 +455,17 @@ export default function HomePage() {
               variants={fadeIn}
               className="text-center mb-16"
             >
+              <p className="text-sm md:text-base text-slate-500 font-medium mb-4 tracking-widest uppercase">
+                The Comparison Clients Are Already Making
+              </p>
               <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-6">
-                The Comparison People Are Making Right Now
+                Your clients compare you to ChatGPT on memory.<br className="hidden md:block" /> Flip the comparison instead.
               </h2>
             </motion.div>
-            
-            {/* Comparison Table - Redesigned */}
+
             <div className="grid md:grid-cols-2 gap-6 md:gap-10 mb-16 max-w-4xl mx-auto">
-              {/* ChatGPT Column - Stronger presence */}
-              <motion.div 
+              {/* Column A: ChatGPT Alone */}
+              <motion.div
                 className="relative"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -353,53 +473,49 @@ export default function HomePage() {
                 viewport={{ once: true }}
               >
                 <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-8 h-full shadow-xl border border-slate-700 relative overflow-hidden">
-                  {/* Subtle glow effect */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 rounded-full blur-3xl"></div>
-                  
                   <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <div className="flex items-center">
-                        <div className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center mr-3">
-                          <Brain className="w-6 h-6 text-green-400" />
-                  </div>
-                        <h3 className="text-3xl font-semibold text-white">ChatGPT</h3>
+                    <div className="flex items-center mb-8">
+                      <div className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center mr-3">
+                        <Brain className="w-6 h-6 text-green-400" />
                       </div>
+                      <h3 className="text-2xl md:text-3xl font-semibold text-white">ChatGPT Alone</h3>
                     </div>
-                    
+
                     <div className="space-y-5">
-                      <div className="flex items-start group">
+                      <div className="flex items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-0.5">
                           <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                      <div>
-                          <p className="text-lg font-medium text-white">Perfect Memory</p>
-                          <p className="text-sm text-slate-400 mt-1">Never forgets a single detail</p>
+                        <div>
+                          <p className="text-lg font-medium text-white">Instant Memory</p>
+                          <p className="text-sm text-slate-400 mt-1">Recalls everything a client has ever typed, instantly</p>
+                        </div>
                       </div>
-                    </div>
-                      
-                      <div className="flex items-start group">
+
+                      <div className="flex items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-0.5">
                           <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                      <div>
-                          <p className="text-lg font-medium text-white">Sees Every Pattern</p>
-                          <p className="text-sm text-slate-400 mt-1">Spots connections you'd miss across thousands of data points</p>
+                        <div>
+                          <p className="text-lg font-medium text-white">24/7 Access</p>
+                          <p className="text-sm text-slate-400 mt-1">Answers a 3 a.m. spiral the moment it happens</p>
+                        </div>
                       </div>
-                    </div>
-                      
-                      <div className="flex items-start group">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-0.5">
-                          <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center mr-4 mt-0.5">
+                          <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                           </svg>
                         </div>
-                      <div>
-                          <p className="text-lg font-medium text-white">$20/month</p>
-                          <p className="text-sm text-slate-400 mt-1">Unlimited conversations</p>
+                        <div>
+                          <p className="text-lg font-medium text-white">Zero Clinical Judgment</p>
+                          <p className="text-sm text-slate-400 mt-1">No license, no attunement, no duty of care</p>
                         </div>
                       </div>
                     </div>
@@ -407,62 +523,46 @@ export default function HomePage() {
                 </div>
               </motion.div>
 
-              {/* Traditional Therapist Column - Pain point emphasis */}
-              <motion.div 
+              {/* Column B: YOU + Empath */}
+              <motion.div
                 className="relative"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-white rounded-xl p-8 h-full shadow-lg border-2 border-red-200 relative overflow-hidden">
-                  {/* Subtle warning glow */}
-                  <div className="absolute top-0 left-0 w-40 h-40 bg-red-500/5 rounded-full blur-3xl"></div>
-                  
+                <div className="bg-white rounded-xl p-8 h-full shadow-xl border-2 border-slate-900 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-purple-400/10 via-pink-400/10 to-blue-400/10 rounded-full blur-3xl"></div>
                   <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <div className="flex items-center">
-                        <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mr-3">
-                          <Heart className="w-6 h-6 text-red-500" />
-                  </div>
-                        <h3 className="text-3xl font-semibold text-slate-900">Human Therapist</h3>
+                    <div className="flex items-center mb-8">
+                      <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mr-3">
+                        <Heart className="w-6 h-6 text-slate-900" />
                       </div>
+                      <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">You + Empath</h3>
                     </div>
-                    
+
                     <div className="space-y-5">
-                      <div className="flex items-start group">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-0.5">
-                          <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-4 mt-0.5">
+                          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                      <div>
-                          <p className="text-lg font-medium text-slate-900">Imperfect Memory</p>
-                          <p className="text-sm text-slate-600 mt-1">30+ clients, details blur together</p>
+                        <div>
+                          <p className="text-lg font-medium text-slate-900">AI-Level Memory & Pattern Recognition</p>
+                          <p className="text-sm text-slate-600 mt-1">A 3-minute brief instead of guesswork at the start of session</p>
+                        </div>
                       </div>
-                    </div>
-                      
-                      <div className="flex items-start group">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-0.5">
-                          <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-4 mt-0.5">
+                          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                      <div>
-                          <p className="text-lg font-medium text-slate-900">Patterns Hide in Plain Sight</p>
-                          <p className="text-sm text-slate-600 mt-1">Hard to connect dots across weeks of fragmented sessions</p>
-                      </div>
-                    </div>
-                      
-                      <div className="flex items-start group">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-0.5">
-                          <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </div>
-                      <div>
-                          <p className="text-lg font-medium text-slate-900">400$/month</p>
-                          <p className="text-sm text-slate-600 mt-1">Two 60 minute sessions</p>
+                        <div>
+                          <p className="text-lg font-medium text-slate-900">Irreplaceable Human Judgment & Connection</p>
+                          <p className="text-sm text-slate-600 mt-1">Clinical training, attunement, and a real therapeutic alliance</p>
                         </div>
                       </div>
                     </div>
@@ -471,8 +571,7 @@ export default function HomePage() {
               </motion.div>
             </div>
 
-            {/* The Core Problem */}
-            <motion.div 
+            <motion.div
               className="bg-slate-50 border-2 border-slate-200 rounded-lg p-8 text-left"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -480,11 +579,8 @@ export default function HomePage() {
               viewport={{ once: true }}
             >
               <div className="max-w-3xl mx-auto">
-                <p className="text-lg text-slate-700 font-light leading-relaxed mb-4">
-                  You know this comparison is flawed. You only get limted data during catchups in sesssion. And therapy is about <span className="font-medium text-slate-900">human connection, attunement, and clinical judgment</span>, things AI will never replicate.
-                </p>
                 <p className="text-lg text-slate-700 font-light leading-relaxed">
-                  But here's the problem: You're trying to win a <span className="font-medium text-slate-900">qualitative argument against quantitative metrics.</span> And you can't win that fight on their terms.
+                  You can't win a memory contest against something that never forgets. But you were never competing on memory alone, and once Empath closes that gap, <span className="font-medium text-slate-900">the comparison stops being about who remembers more and starts being about who understands better.</span> That's the fight you already win.
                 </p>
               </div>
             </motion.div>
@@ -492,327 +588,94 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* The Solution */}
-      <AnimatedSection className="py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          {/* Section Header */}
-          <motion.div
-            variants={fadeIn}
-            className="text-center mb-20"
-          >
-            <motion.p 
-              className="text-lg md:text-xl text-slate-500 font-light mb-6 tracking-wide uppercase"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              The Solution
-            </motion.p>
-            
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-slate-900 leading-tight">
-              Capture Client's Life Between Sessions
-            </h2>
-            
-            <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto font-light leading-relaxed">
-              Empath captures your client's life experience between sessions, giving you the complete context to build 
-              <span className="text-slate-900 font-medium"> stronger therapeutic alliances and make breakthrough insights that were previously impossible.</span>
-            </p>
-          </motion.div>
-          
-          {/* Benefits Grid - Redesigned */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-              {/* Benefit 1 - Complete Context */}
-            <motion.div 
-                className="bg-white rounded-xl p-8 shadow-lg border border-slate-200 relative overflow-hidden group hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100/50 to-transparent rounded-full blur-2xl"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 shadow-lg">
-                    <Brain className="w-7 h-7 text-white" />
-                      </div>
-                  
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-3">See the Whole Picture</h3>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    Clients share their daily experiences, moods, and moments between sessions. You finally see what happens in the 167 hours you're not together.
-                  </p>
-                  <div className="flex items-center text-sm text-blue-600 font-medium">
-                    <span className="mr-2">→</span>
-                    <span>Continuous life context, not just session snapshots</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-              {/* Benefit 2 - Pattern Recognition */}
-                  <motion.div 
-                className="bg-white rounded-xl p-8 shadow-lg border border-slate-200 relative overflow-hidden group hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-100/50 to-transparent rounded-full blur-2xl"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-6 shadow-lg">
-                    <TrendingUp className="w-7 h-7 text-white" />
-                      </div>
-                  
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-3">Spot Hidden Patterns</h3>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    AI analyzes their daily data to reveal connections between sleep, mood, and life events. You see patterns they can't, and make insights that transform treatment.
-                  </p>
-                  <div className="flex items-center text-sm text-purple-600 font-medium">
-                    <span className="mr-2">→</span>
-                    <span>Data-driven insights, human-delivered breakthroughs</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-              {/* Benefit 3 - Deeper Understanding */}
-                  <motion.div 
-                className="bg-white rounded-xl p-8 shadow-lg border border-slate-200 relative overflow-hidden group hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-100/50 to-transparent rounded-full blur-2xl"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6 shadow-lg">
-                    <Clock className="w-7 h-7 text-white" />
-                      </div>
-                  
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-3">Start Every Session Prepared</h3>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    Review a 3-minute AI summary of their week before you meet. Walk in already understanding their struggles, wins, and emotional state.
-                  </p>
-                  <div className="flex items-center text-sm text-green-600 font-medium">
-                    <span className="mr-2">→</span>
-                    <span>Zero catch-up time, maximum therapeutic impact</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-              {/* Benefit 4 - Your Human Edge */}
-                  <motion.div 
-                className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-8 shadow-xl border border-slate-700 relative overflow-hidden group hover:shadow-2xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4, scale: 1.02 }}
-              >
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center mb-6 shadow-lg">
-                    <Heart className="w-7 h-7 text-white" />
-                      </div>
-                  
-                  <h3 className="text-2xl font-semibold text-white mb-3">
-                    <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                      Build Stronger Alliances
-                    </span>
-                  </h3>
-                  <p className="text-slate-300 leading-relaxed mb-4">
-                    When clients feel deeply understood from complete context, trust deepens. Your empathy and attunement, powered by comprehensive data, create therapeutic bonds AI never could.
-                  </p>
-                  <div className="flex items-center text-sm font-medium">
-                    <span className="mr-2 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">→</span>
-                    <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Human connection, data-enhanced</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-          </div>
-
-          {/* The Transformation */}
-          <motion.div 
-            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-lg p-12 md:p-16 border border-slate-700 max-w-5xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            {/* Hook - smallest */}
-            <h3 className="text-lg md:text-xl font-light text-slate-400 mb-10">Now the comparison becomes:</h3>
-            
-            {/* ChatGPT - medium, muted */}
-            <motion.p 
-              className="text-2xl md:text-3xl font-light text-slate-300 leading-tight mb-8"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              ChatGPT Alone
-            </motion.p>
-            
-            {/* VS - tiny, very muted */}
-            <p className="text-sm text-slate-500 mb-10 tracking-widest uppercase">vs.</p>
-            
-            {/* YOU+ - HERO MOMENT - biggest */}
-            <motion.div
-              className="mb-12"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-5xl md:text-7xl font-bold text-white leading-tight mb-5 relative inline-block">
-                YOU
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent" style={{ textShadow: '0 0 60px rgba(192, 132, 252, 0.8)' }}>+</span>
-                {/* Subtle glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-blue-400/20 blur-3xl -z-10"></div>
-              </p>
-              
-              {/* Equation breakdown - showing components as inputs */}
-              <div className="flex flex-col items-center gap-1.5 text-xl md:text-2xl max-w-lg mx-auto">
-                {/* Primary component - Your Human Touch */}
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent font-semibold text-2xl md:text-3xl">
-                  Your Human Touch
-                </span>
-                
-                {/* Plus operator - smaller, connecting */}
-                <span className="text-slate-500 font-light text-base my-0.5">+</span>
-                
-                {/* Secondary component - What AI does */}
-                <span className="text-slate-300 font-normal text-lg md:text-xl">
-                  What AI is good at
-              </span>
-              </div>
-            </motion.div>
-            
-            {/* Benefit sentence - secondary body with better spacing */}
-            <motion.div
-              className="max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-lg md:text-xl text-slate-300 font-light leading-relaxed">
-                They experience what only a human therapist can provide
-              </p>
-              <p className="text-lg md:text-xl font-medium text-white mt-2 leading-relaxed">
-                now amplified by technology to incorporate what AI is better at.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </AnimatedSection>
-
-      {/* The Data Visualization Comparison */}
+      {/* ============ 3. THE 167-HOUR BLACK HOLE ============ */}
       <section className="py-24 relative bg-gradient-to-b from-white via-slate-50 to-white">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
-              {/* Eyebrow */}
               <p className="text-sm md:text-base text-slate-500 font-medium mb-4 tracking-wider uppercase">
                 The Missing Data Problem
               </p>
-              
-              {/* Main headline */}
+
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900 leading-tight">
-                99% of the Client's Life stays <span className="text-slate-400 font-semibold">Hidden</span>
+                The 167-Hour <span className="text-slate-400 font-semibold">Black Hole</span>
               </h2>
-              
-              {/* Subheading */}
+
               <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto font-light leading-relaxed">
-              There are  <span className="text-slate-900 font-semibold">168 Hours in a Week</span>, and <br />
-              Traditional therapy captures just <span className="text-slate-900 font-semibold">1 of those</span>
+                A weekly session gives you <span className="text-slate-900 font-semibold">1 hour</span> of direct observation, and<br />
+                the other <span className="text-slate-900 font-semibold">167 hours</span> happen where you can't see them.
               </p>
             </div>
-            
-            {/* Visual Comparison - Clean & Simple */}
+
             <div className="max-w-4xl mx-auto space-y-6">
-              
-              {/* Traditional Therapy */}
               <div className="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-slate-200">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900">Traditional Therapy</h3>
-                    <p className="text-sm text-slate-600 mt-1">Weekly sessions</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900">Session Recall Alone</h3>
+                    <p className="text-sm text-slate-600 mt-1">Whatever a client remembers to mention, filtered by however they feel in the room that day</p>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl md:text-3xl font-bold text-red-600">1 hr</div>
-                    <div className="text-xs text-slate-500">per week</div>
+                    <div className="text-xs text-slate-500">of the week</div>
                   </div>
                 </div>
-                
-                {/* Simple bar visualization */}
+
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-slate-500 w-16">Week</span>
                     <div className="flex-1 h-12 bg-slate-100 rounded-lg relative overflow-hidden">
-                      {/* 168 hours represented as a bar */}
                       <div className="absolute inset-0 flex items-center px-3">
                         <div className="w-[0.6%] h-8 bg-slate-900 rounded"></div>
-                        <span className="ml-3 text-xs text-slate-400">1 hour of data</span>
+                        <span className="ml-3 text-xs text-slate-400">1 hour of direct observation</span>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="bg-red-50 rounded-lg p-4 border border-red-100">
                     <p className="text-sm text-red-800">
-                      <span className="font-semibold">167 hours invisible.</span> The avoidant patterns, hidden triggers, and breakthrough moments happen outside your office.
+                      <span className="font-semibold">Recall bias does the rest.</span> Clients report on a rough week through the lens of however they feel that hour, so triggers, avoidant patterns, and small breakthroughs get smoothed over or forgotten entirely.
                     </p>
                   </div>
                 </div>
               </div>
-              
-              {/* With Empath */}
+
               <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 shadow-xl border border-slate-700 text-white">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-white">With Empath</h3>
-                    <p className="text-sm text-slate-300 mt-1">Continuous capture</p>
+                    <p className="text-sm text-slate-300 mt-1">Captured in the moment, no extra effort from your client</p>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl md:text-3xl font-bold text-green-400">168 hrs</div>
-                    <div className="text-xs text-slate-300">captured</div>
+                    <div className="text-xs text-slate-300">in view</div>
                   </div>
                 </div>
-                
-                {/* Full bar visualization */}
+
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-slate-400 w-16">Week</span>
                     <div className="flex-1 h-12 bg-slate-700/50 rounded-lg relative overflow-hidden">
-                      {/* Full week of data */}
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-80"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xs text-white font-medium">Complete life context</span>
+                        <span className="text-xs text-white font-medium">Sleep, mood, relationships, and triggers, as they happen</span>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/30">
                     <p className="text-sm text-green-100">
-                      <span className="font-semibold text-green-300">Full visibility.</span> See patterns, triggers, and progress across mood, sleep, activity, and journal entries - all week long.
+                      <span className="font-semibold text-green-300">No homework required.</span> Clients text or voice-note through a channel they already have open, so the data shows up without them having to try harder.
                     </p>
                   </div>
                 </div>
               </div>
-              
-              {/* Impact Statement */}
+
               <div className="bg-slate-50 rounded-xl p-6 md:p-8 border border-slate-200 text-center">
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
-                  From snapshots to continuous understanding
+                  From a single snapshot to the full week
                 </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  Empath gives you the complete picture, so your empathy and clinical judgment work with <span className="font-semibold text-slate-900">full context, not fragments.</span>
+                  Empath closes most of that 167-hour gap, so your clinical judgment works with <span className="font-semibold text-slate-900">real context, not a client's best guess at recall.</span>
                 </p>
               </div>
             </div>
@@ -820,32 +683,105 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* ============ 4. THE CLINICAL WORKFLOW ============ */}
       <AnimatedSection className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <motion.div 
-            variants={fadeIn}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-light text-center mb-4 text-slate-900">
-              Designed for Therapists, by Therapists
+          <motion.div variants={fadeIn} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-light text-slate-900 mb-4">
+              How It Works, in Three Steps
             </h2>
-            <p className="text-center text-slate-600 mt-8 text-xl max-w-3xl mx-auto leading-relaxed font-light">
-              We've collaborated with practicing therapists to create tools that enhance your clinical work without disrupting your workflow.
+            <p className="text-center text-slate-600 mt-4 text-xl max-w-3xl mx-auto leading-relaxed font-light">
+              No new workflow for you. No new app for your client to remember to open.
             </p>
           </motion.div>
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            animate="visible"
+            className="grid md:grid-cols-2 gap-16 items-center"
           >
+            <motion.div variants={slideInLeft} className="relative">
+              <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.5 }}>
+                <picture>
+                  <source srcSet={howitworksWebp} type="image/webp" />
+                  <img
+                    src={howitworksPng}
+                    alt="Client activity flowing into an Empath pre-session brief"
+                    className="rounded-lg shadow-md relative z-10"
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                  />
+                </picture>
+              </motion.div>
+            </motion.div>
+            <motion.div variants={fadeIn} className="relative">
+              <div className="relative">
+                <div className="absolute left-[20px] md:left-[20px] top-[10px] h-[calc(100%-20px)] w-[1px] bg-gradient-to-b from-green-400 via-blue-400 to-indigo-400 hidden md:block"></div>
+
+                <div className="space-y-16">
+                  <motion.div variants={slideInRight} className="flex items-start">
+                    <div className="flex-shrink-0 relative w-10 h-10 bg-green-50 rounded-full flex items-center justify-center border border-green-200 z-10">
+                      <span className="text-green-600 font-light">1</span>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                      <h3 className="text-xl font-light mb-3 text-slate-900">Zero-Friction Client Capture</h3>
+                      <p className="text-slate-600 leading-relaxed font-light">
+                        Clients log life as it happens over WhatsApp, Telegram, or a quick voice call, no new app to download, nothing extra to remember. That's why homework compliance actually holds.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div variants={slideInRight} className="flex items-start">
+                    <div className="flex-shrink-0 relative w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center border border-blue-200 z-10">
+                      <span className="text-blue-600 font-light">2</span>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                      <h3 className="text-xl font-light mb-3 text-slate-900">Continuous Pattern Synthesis</h3>
+                      <p className="text-slate-600 leading-relaxed font-light">
+                        Empath synthesizes mood, voice tonality, and, when a client opts in, Apple Health data into a short list of clinically relevant signals, not a raw data dump.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div variants={slideInRight} className="flex items-start">
+                    <div className="flex-shrink-0 relative w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center border border-indigo-200 z-10">
+                      <span className="text-indigo-600 font-light">3</span>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
+                      <h3 className="text-xl font-light mb-3 text-slate-900">Your 3-Minute Pre-Session Brief</h3>
+                      <p className="text-slate-600 leading-relaxed font-light">
+                        Review a concise brief before your client sits down. Walk in already knowing what shifted this week, not guessing.
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </AnimatedSection>
+
+      {/* ============ 5. CLINICAL FEATURES ============ */}
+      <AnimatedSection className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div variants={fadeIn} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-light text-center mb-4 text-slate-900">
+              Clinical Superpowers, Not Gimmicks
+            </h2>
+            <p className="text-center text-slate-600 mt-8 text-xl max-w-3xl mx-auto leading-relaxed font-light">
+              Built with practicing therapists, each feature earns its place by giving back time or context, never both at the client's expense.
+            </p>
+          </motion.div>
+          <motion.div variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 variants={fadeInUp}
-                className="p-8 rounded-lg bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 group relative overflow-hidden"
+                className="p-8 rounded-lg bg-slate-50 shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 group relative overflow-hidden"
                 whileHover={{ y: -4, transition: { duration: 0.3 } }}
               >
-                <div className="mb-6 p-4 bg-slate-50 rounded-lg inline-block group-hover:bg-slate-100 transition-colors duration-300 relative z-10">
+                <div className="mb-6 p-4 bg-white rounded-lg inline-block group-hover:bg-slate-100 transition-colors duration-300 relative z-10 shadow-sm">
                   <feature.icon className="w-8 h-8 text-slate-600" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-light mb-3 text-slate-900 relative z-10">{feature.title}</h3>
@@ -856,21 +792,18 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* Testimonial/Quote Section */}
-      <AnimatedSection className="py-24 bg-white">
+      {/* ============ 6. CLINICAL TESTIMONIALS & ADVISORY BOARD ============ */}
+      <AnimatedSection className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <motion.h2 
+          <motion.h2
             variants={fadeIn}
             className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
           >
             What Therapists Are Saying
           </motion.h2>
-          
-          <motion.div 
-            variants={staggerContainer}
-            className="grid md:grid-cols-2 gap-8"
-          >
-            <motion.div 
+
+          <motion.div variants={staggerContainer} className="grid md:grid-cols-2 gap-8 mb-12">
+            <motion.div
               variants={scaleIn}
               className="relative"
               whileHover={{ y: -4, transition: { duration: 0.3 } }}
@@ -883,12 +816,12 @@ export default function HomePage() {
                 <div className="text-2xl text-slate-300 mt-2 text-right">"</div>
                 <div className="mt-4 border-t border-slate-100 pt-4">
                   <p className="font-medium text-slate-900">Arjun Nanda</p>
-                  <p className="text-slate-500 font-light">Psychiatrist  |  Host of The Mental Health Forecast</p>
+                  <p className="text-slate-500 font-light">Psychiatrist &nbsp;|&nbsp; Host of The Mental Health Forecast</p>
                 </div>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               variants={scaleIn}
               className="relative"
               whileHover={{ y: -4, transition: { duration: 0.3 } }}
@@ -901,256 +834,89 @@ export default function HomePage() {
                 <div className="text-2xl text-slate-300 mt-2 text-right">"</div>
                 <div className="mt-4 border-t border-slate-100 pt-4">
                   <p className="font-medium text-slate-900">Mabel Yiu, LMFT</p>
-                  <p className="text-slate-500 font-light"> Marriage and Family Therapist  |  Advisory Board Member</p>
+                  <p className="text-slate-500 font-light">Marriage and Family Therapist &nbsp;|&nbsp; Advisory Board Member</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
-        </div>
-      </AnimatedSection>
 
-      {/* How It Works */}
-      <AnimatedSection className="py-24 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            variants={fadeIn}
-            className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
-          >
-            How Empath Works
-          </motion.h2>
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="grid md:grid-cols-2 gap-16 items-center"
-          >
-            <motion.div 
-              variants={slideInLeft}
-              className="relative"
+          <motion.div variants={fadeIn} className="text-center">
+            <Link
+              to="/advisory"
+              className="inline-flex items-center text-slate-900 font-medium hover:text-blue-700 transition-colors group"
             >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5 }}
-              >
-                <picture>
-                  <source srcSet={howitworksWebp} type="image/webp" />
-                  <img 
-                    src={howitworksPng} 
-                    alt="Empath Dashboard Flow Diagram"
-                    className="rounded-lg shadow-md relative z-10"
-                    width="1200"
-                    height="675"
-                    loading="lazy"
-                  />
-                </picture>
-              </motion.div>
-            </motion.div>
-            <motion.div 
-              variants={fadeIn}
-              className="relative"
-            >
-              {/* New timeline implementation with exact positioning */}
-              <div className="relative">
-                {/* Single continuous vertical line */}
-                <div 
-                  className="absolute left-[20px] md:left-[20px] top-[10px] h-[calc(100%-20px)] w-[1px] bg-gradient-to-b from-green-400 via-blue-400 to-indigo-400 hidden md:block"
-                ></div>
-                
-                {/* Process steps */}
-                <div className="space-y-16">
-                  <motion.div 
-                    variants={slideInRight} 
-                    className="flex items-start"
-                  >
-                    {/* Circle indicator */}
-                    <div className="flex-shrink-0 relative w-10 h-10 bg-green-50 rounded-full flex items-center justify-center border border-green-200 z-10">
-                      <span className="text-green-600 font-light">1</span>
-                    </div>
-                    
-                    {/* Content card */}
-                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
-                      <h3 className="text-xl font-light mb-3 text-slate-900">Client Data Collection</h3>
-                      <p className="text-slate-600 leading-relaxed font-light">
-                        Clients use our mobile app to log daily experiences, moods, and activities.
-                        Wearable integration provides additional health insights.
-                      </p>
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div 
-                    variants={slideInRight} 
-                    className="flex items-start"
-                  >
-                    {/* Circle indicator */}
-                    <div className="flex-shrink-0 relative w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center border border-blue-200 z-10">
-                      <span className="text-blue-600 font-light">2</span>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
-                      <h3 className="text-xl font-light mb-3 text-slate-900">Highligh key Signals</h3>
-                      <p className="text-slate-600 leading-relaxed font-light">
-                        Our system analyzes patterns and trends, generating meaningful insights
-                        about client well-being and progress.
-                      </p>
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div 
-                    variants={slideInRight} 
-                    className="flex items-start"
-                  >
-                    {/* Circle indicator */}
-                    <div className="flex-shrink-0 relative w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center border border-indigo-200 z-10">
-                      <span className="text-indigo-600 font-light">3</span>
-                    </div>
-                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 ml-4 w-full group hover:-translate-y-1 border border-slate-100">
-                      <h3 className="text-xl font-light mb-3 text-slate-900">Therapist Dashboard</h3>
-                      <p className="text-slate-600 leading-relaxed font-light">
-                        Access organized summaries and visualizations of client data,
-                        enabling more informed and effective therapy sessions.
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+              Interested in shaping the product as a clinical advisor? Learn about our Advisory Program
+              <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Link>
           </motion.div>
         </div>
       </AnimatedSection>
 
-      {/* FAQ Section */}
+      {/* ============ 7. FREQUENTLY ASKED QUESTIONS ============ */}
       <AnimatedSection className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <motion.h2 
+          <motion.h2
             variants={fadeIn}
             className="text-3xl md:text-4xl font-light text-center mb-16 text-slate-900"
           >
-            Common Questions
+            Questions Therapists Ask Us
           </motion.h2>
-          
-          <div className="relative max-w-3xl mx-auto">
-            
-            <motion.div 
-              variants={staggerContainer}
-              className="max-w-3xl mx-auto space-y-4 relative z-10"
-            >
-              {/* FAQ Item 1 */}
-              <motion.div 
-                variants={fadeInUp}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 overflow-hidden"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-              >
-                <div className="p-6">
-                  <h3 className="text-xl font-light mb-3 text-slate-900 flex items-center">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mr-3">
-                      <span className="text-slate-600 font-light text-sm">Q</span>
-                    </span>
-                    How does Empath protect client privacy?
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    We take privacy seriously. All data is encrypted, HIPAA-compliant, and only accessible to the therapist and client. Clients have full control over what they share.
-                  </p>
-                </div>
-              </motion.div>
-              
-              {/* FAQ Item 2 */}
-              <motion.div 
-                variants={fadeInUp}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 overflow-hidden"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-              >
-                <div className="p-6">
-                  <h3 className="text-xl font-light mb-3 text-slate-900 flex items-center">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mr-3">
-                      <span className="text-slate-600 font-light text-sm">Q</span>
-                    </span>
-                    Will this add to my workload?
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    No, Empath is designed to save you time. Our dashboard provides quick, actionable insights that help you prepare for sessions more efficiently.
-                  </p>
-                </div>
-              </motion.div>
-              
-              {/* FAQ Item 3 */}
-              <motion.div 
-                variants={fadeInUp}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 overflow-hidden"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-              >
-                <div className="p-6">
-                  <h3 className="text-xl font-light mb-3 text-slate-900 flex items-center">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mr-3">
-                      <span className="text-slate-600 font-light text-sm">Q</span>
-                    </span>
-                    How do clients respond to using the app?
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    Early feedback suggests clients appreciate the opportunity to reflect between sessions and feel more engaged in their therapy journey.
-                  </p>
-                </div>
-              </motion.div>
-              
-              {/* FAQ Item 4 - New Item */}
-              <motion.div 
-                variants={fadeInUp}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 overflow-hidden"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-              >
-                <div className="p-6">
-                  <h3 className="text-xl font-light mb-3 text-slate-900 flex items-center">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center mr-3">
-                      <span className="text-slate-600 font-light text-sm">Q</span>
-                    </span>
-                    What makes Empath different from other therapy tools?
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed pl-11 font-light">
-                    Empath gives you computational parity with AI-level memory and instant data processing so your human qualities become the deciding factor, not an afterthought in the comparison.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
+
+          <motion.div
+            variants={fadeInUp}
+            className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm border border-slate-200 px-6 md:px-8"
+          >
+            {faqs.map((item) => (
+              <FAQItem key={item.q} question={item.q} answer={item.a} />
+            ))}
+          </motion.div>
         </div>
       </AnimatedSection>
 
-      {/* CTA Section */}
+      {/* ============ 8. FINAL CALL TO ACTION ============ */}
       <AnimatedSection className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800"></div>
-        
+
         <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.h2 
+          <motion.h2
             variants={fadeIn}
             className="text-3xl md:text-5xl font-light mb-6 text-white"
           >
-            Stop Losing the Comparison to ChatGPT
+            Level the playing field on data.<br className="hidden md:block" /> Let your human empathy do the rest.
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={fadeIn}
             className="text-xl mb-12 text-slate-300 max-w-2xl mx-auto leading-relaxed font-light"
           >
-            Level the playing field on memory and computation. Then let your irreplaceable human value do the rest.
+            See how a 3-minute brief changes the way you walk into session, or try the client experience yourself first.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             variants={staggerContainer}
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
           >
-            <motion.button 
+            <motion.button
               onClick={() => setShowCalendar(true)}
               className="px-10 py-5 bg-white text-slate-900 rounded-lg shadow-2xl hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center group cursor-pointer font-semibold text-lg"
               variants={fadeIn}
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              Personal Onboarding by Founder
+              Schedule a 15-Min Demo
               <ChevronRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </motion.button>
-          </motion.div>
-          
-          <motion.div
-            variants={fadeIn}
-            className="mt-8"
-          >
+            <motion.a
+              href="https://app.empathdash.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-5 bg-transparent text-white rounded-lg border-2 border-white/40 hover:border-white transition-all duration-300 inline-flex items-center justify-center group cursor-pointer font-medium text-lg"
+              variants={fadeIn}
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              aria-label="Get started with Empath for free"
+            >
+              Get Started Free
+            </motion.a>
           </motion.div>
         </div>
       </AnimatedSection>

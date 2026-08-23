@@ -19,6 +19,7 @@ export const journalingHi: JournalingCopy = {
     howItWorks: 'कैसे काम करता है',
     faq: 'FAQ',
     blog: 'Blog',
+    therapists: 'थेरेपिस्ट के लिए',
     download: 'Download',
   },
 

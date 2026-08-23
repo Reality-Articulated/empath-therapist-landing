@@ -46,25 +46,25 @@ export default function Navbar() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/therapist"
               className={`text-sm font-medium transition-all duration-300 relative ${
-                location.pathname === '/' 
-                  ? 'text-blue-700' 
+                location.pathname === '/therapist'
+                  ? 'text-blue-700'
                   : 'text-gray-700 hover:text-blue-700'
               }`}
-              aria-current={location.pathname === '/' ? 'page' : undefined}
+              aria-current={location.pathname === '/therapist' ? 'page' : undefined}
             >
               <span>For Therapists</span>
-              {location.pathname === '/' && (
-                <motion.div 
+              {location.pathname === '/therapist' && (
+                <motion.div
                   className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
                   layoutId="navIndicator"
                 />
               )}
             </Link>
-            <Link 
-              to="/whyempath" 
+            <Link
+              to="/whyempath"
               className={`text-sm font-medium transition-all duration-300 relative ${
                 location.pathname === '/whyempath' 
                   ? 'text-blue-700' 
@@ -166,10 +166,10 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <div className="flex flex-col space-y-4 px-4">
-              <Link 
-                to="/" 
+              <Link
+                to="/therapist"
                 className={`text-sm font-medium py-2 ${
-                  location.pathname === '/' ? 'text-blue-600' : 'text-gray-600'
+                  location.pathname === '/therapist' ? 'text-blue-600' : 'text-gray-600'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

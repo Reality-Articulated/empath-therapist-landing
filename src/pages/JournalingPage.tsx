@@ -199,6 +199,7 @@ export default function JournalingPage() {
             <a href="#how-it-works" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">{c.header.howItWorks}</a>
             <a href="#faq" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">{c.header.faq}</a>
             <Link to="/app/blog" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">{c.header.blog}</Link>
+            <Link to="/therapist" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">{c.header.therapists}</Link>
             <LanguageSwitcher className="hidden sm:inline-flex" />
             <button
               onClick={handleAppStoreClick}

@@ -21,6 +21,7 @@ export const journalingEs: JournalingCopy = {
     howItWorks: 'Cómo funciona',
     faq: 'Preguntas',
     blog: 'Blog',
+    therapists: 'Para Terapeutas',
     download: 'Descargar',
   },
 

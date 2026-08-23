@@ -17,6 +17,7 @@ export const journalingPt: JournalingCopy = {
     howItWorks: 'Como funciona',
     faq: 'Perguntas frequentes',
     blog: 'Blog',
+    therapists: 'Para Terapeutas',
     download: 'Baixar',
   },
 

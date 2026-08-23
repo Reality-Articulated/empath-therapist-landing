@@ -38,6 +38,7 @@ export const journalingEn = {
     howItWorks: 'How It Works',
     faq: 'FAQ',
     blog: 'Blog',
+    therapists: 'For Therapists',
     download: 'Download',
   },
 
