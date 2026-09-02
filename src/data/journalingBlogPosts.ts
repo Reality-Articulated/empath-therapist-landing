@@ -92,6 +92,170 @@ export interface JournalingBlogPost {
 
 export const journalingBlogPosts: JournalingBlogPost[] = [
 ...kinzerJournalingBlogPosts,
+// Article 43
+{
+  id: 'j43',
+  title: 'The Lindsay Clancy Case Is Forcing a National Reckoning on Postpartum Mental Health',
+  seoTitle: 'Lindsay Clancy Case: Postpartum Depression, Psychosis & Journaling | Empath',
+  metaDescription:
+    'The Lindsay Clancy case put postpartum psychosis in the national spotlight. What postpartum depression and psychosis actually look like, why silence is the most dangerous symptom, and how journaling helps new parents get heard sooner.',
+  excerpt:
+    'A Massachusetts mother tried to tell more than a dozen different providers she was drowning. Almost none of them were talking to each other. Her case is forcing the country to ask why new parents suffer in silence, and what actually helps before it gets that far.',
+  author: 'Empath Team',
+  date: 'September 2, 2026',
+  readTime: '11 min read',
+  category: 'Mental Wellness',
+  slug: 'lindsay-clancy-postpartum-mental-health',
+  keyword: 'lindsay clancy postpartum psychosis',
+  featuredRank: 6,
+  relatedSlugs: ['how-to-journal-intrusive-thoughts-without-rumination', 'journaling-for-anxiety', 'science-behind-journaling'],
+  answerSummary:
+    'The Lindsay Clancy case put postpartum psychosis in the national spotlight and reignited a conversation about how often new parents suffer in silence. Roughly 1 in 5 experience postpartum depression or anxiety, and psychosis, though rare, is a medical emergency. Journaling will not treat either one, but a habit of naming what you feel, in Empath or anywhere else, makes the pattern visible before it becomes a crisis.',
+  keyTakeaways: [
+    'About 1 in 5 new parents experience postpartum depression or anxiety. Postpartum psychosis is rare, roughly 1 in 1,000 births, and a genuine psychiatric emergency, not just a scarier version of the intrusive thoughts most new parents have.',
+    'The pattern the Clancy case kept surfacing was fragmented care: more than a dozen medications, several providers who rarely spoke to one another, and a family who says she seemed fine right up until the day she was not.',
+    'Naming a feeling in words, even privately, measurably lowers the brain’s stress response. A dated, ongoing record turns a slide that is invisible day to day into something you, a partner, or a clinician can actually see.',
+    'Journaling helps you notice sooner and say it sooner. It does not diagnose or treat psychosis. Know the warning signs that mean call for help immediately, not write about it later.',
+  ],
+  intro:
+    'In January 2023, a Massachusetts mother named Lindsay Clancy killed her three young children, five-year-old Cora, three-year-old Dawson, and eight-month-old Callan. Her defense has argued she was in the grip of severe postpartum psychosis at the time. In the months before that day, she had cycled through more than a dozen psychiatric medications prescribed by different providers who rarely coordinated with one another, gone to the emergency room multiple times for suicidal thoughts, and spent several days in a psychiatric hospital that discharged her once she stabilized. Her trial played out across the summer of 2026, and it turned into something bigger than one family’s catastrophe. NPR, PBS NewsHour, and the Boston public radio station WBUR all used it to ask a harder question than guilt or innocence: how does a mother who sought help this many times still end up here, and what does that say about everyone else who is struggling quietly right now, one town over, telling no one? This is not an article about the trial or its outcome. It is about the two things the case keeps surfacing regardless of what a jury eventually decides: postpartum mental illness is far more common, and far more serious, than most people realize, and the most reliable warning sign, in Clancy’s case and in the far more ordinary cases that never make the news, is silence that looks like everything is fine.',
+  sections: [
+    {
+      heading: 'What Postpartum Psychosis Actually Is, and What It Isn’t',
+      body: [
+        'Postpartum mood and anxiety disorders sit on a spectrum that gets flattened in headlines. The “baby blues,” tearfulness, mood swings, and overwhelm in the first two weeks after birth, affects most new mothers and resolves on its own. Postpartum depression and postpartum anxiety are different: they can start any time in the first year, they do not resolve on their own, and according to Postpartum Support International, they affect roughly 1 in 5 new mothers and fathers. They are also highly treatable with therapy, medication, or both.',
+        'Postpartum psychosis is different again, and rare: recent reporting on the Clancy case puts it at roughly 1 in 1,000 births. It involves a genuine break from reality, delusions, hallucinations, confusion about what is real, and it is a psychiatric emergency that typically develops within the first two weeks after delivery. It is not simply a scarier version of the unwanted thoughts most new parents have.',
+        'That distinction matters, because nearly every exhausted new parent has had an intrusive thought: an unbidden flash of the baby falling, of something going wrong in traffic, of a harm they would never actually cause. Having that thought is not a sign of psychosis. It is one of the most common, most misunderstood symptoms of ordinary postpartum anxiety, and it responds to the same things anxiety generally responds to: naming it, not fighting it, and getting support.',
+      ],
+      callout: {
+        text: 'If a frightening thought keeps circling back and you are not sure whether writing about it is helping or feeding it, we have a method for that.',
+        linkText: 'Read: How to journal intrusive thoughts without rumination',
+        slug: 'how-to-journal-intrusive-thoughts-without-rumination',
+      },
+    },
+    {
+      heading: 'Thirteen Prescriptions, and No One Holding the Whole Picture',
+      body: [
+        'What makes the Clancy case land differently than a story about one family’s tragedy is the paper trail. According to court testimony and reporting, she was not silent. She told an online postpartum support group she was worried about becoming dependent on one of her medications. She went to the emergency room more than once for suicidal thoughts. She was admitted to a psychiatric hospital and discharged days later. Her mother, sister, and mother-in-law each separately described watching her get worse. Every one of those was a person speaking up, in a system that treated each moment as its own isolated event.',
+        'That is the gap advocates and clinicians keep pointing to in the aftermath: not a lack of willingness to ask for help, but a lack of anything built to see the pattern across thirteen prescriptions, several providers, and months of decline. One appointment saw a woman managing anxiety. Another saw a woman in crisis. None of them saw the whole timeline at once, because nothing was holding it.',
+        'That gap is exactly what a continuous personal record is built to close, and it is worth being precise about what it can and cannot do. It cannot replace coordinated psychiatric care, which is a systemic failure that needs a systemic fix. What it can do is make sure that at least one place, yours, has the full timeline: not thirteen fragments held by thirteen different people, but one thread you can hand to a partner or a new provider that says, plainly, here is how the last six weeks actually went.',
+      ],
+    },
+    {
+      heading: 'The Symptom That Hides Behind “She Seemed Fine”',
+      body: [
+        'One detail recurs in case after severe postpartum illness case, this one included: the people closest to her say she seemed okay, right up until she was not. Family members described a wonderful, attentive mother. On the day itself, by her husband’s account, there was no sign anything was wrong. That is not a contradiction. It is one of the most consistent features of severe postpartum illness, and of mental illness generally: the people suffering most are frequently the ones working hardest to look fine.',
+        'The reasons are not mysterious. Fear of being judged as an unfit mother, fear of a provider or a family member deciding the baby is not safe with her, plain exhaustion that makes self-assessment nearly impossible, and a culture that still treats “I am struggling” as a confession rather than a symptom, all push new parents toward performing wellness instead of reporting how they actually feel. Clinicians and advocates covering the Clancy trial have repeatedly pointed to the same barriers: stigma, and providers themselves not recognizing what they are looking at.',
+        'None of that is unique to one case. It is the reason “I’m fine” from a new parent, especially one who is also not sleeping, not eating, or withdrawing from people she used to talk to, deserves a second question rather than relief.',
+      ],
+    },
+    {
+      heading: 'Why Putting It Into Words, Even Just for Yourself, Changes Something Real',
+      body: [
+        'There is a physical reason silence is the wrong default, and it has nothing to do with willpower. In a widely cited UCLA study, Matthew Lieberman and colleagues found that putting a feeling into words, simply attaching the word “angry” or “scared” to what a person was looking at, measurably reduced activity in the amygdala, the brain’s alarm system. Naming a feeling does not make it disappear. It changes how the brain is holding it.',
+        'For a new parent, that effect is available in the two free minutes between feeds, and it does not require telling another person yet. Writing “I am scared, I have not slept properly in four days, I had a thought today that frightened me” is not a confession. It is the same mechanism the Lieberman study measured, done privately, at the moment the feeling is loudest.',
+        'The second benefit is quieter but just as important: a dated record turns a slow slide into a visible line. Day to day, through the fog of newborn sleep deprivation, it is nearly impossible to notice that this week looks worse than three weeks ago. A record that exists outside your memory does not have that problem, and it is exactly the throughline that was missing across Clancy’s thirteen prescriptions: nobody, including her, had one place that showed the whole trend at once.',
+      ],
+      callout: {
+        text: 'The fuller research case for why writing changes what your brain does with a feeling.',
+        linkText: 'Read: The science behind journaling',
+        slug: 'science-behind-journaling',
+      },
+    },
+    {
+      heading: 'Where the Line Is: This Helps. It Does Not Treat a Psychiatric Emergency.',
+      body: [
+        'This has to be said plainly, because getting it wrong would be irresponsible. Journaling, and Empath, are for processing a feeling and for surfacing a pattern early enough to act on it. They are not therapy, not medication management, and not equipped to treat psychosis, active suicidal intent, or a break from reality. If any of the following is happening to you or someone you love right now, the right move is not to write about it later. It is to call for help immediately: hearing or seeing things that are not there, believing things that everyone around you says are not true, confusion about what is real, thoughts of harming yourself or your baby that come with any urge to act on them, or a sense of losing touch with reality itself.',
+        'Call or text the Postpartum Support International Helpline at 1-800-944-4773 for support and referrals specific to perinatal mental health. Call or text 988 to reach the Suicide and Crisis Lifeline. In an immediate emergency, call 911 or go to the nearest emergency room. None of these require you to be certain something is wrong first. Suspecting it is enough.',
+        'If none of that describes what you are feeling, and what you are carrying is closer to the ordinary, exhausting, lonely weight of a hard postpartum stretch, that is exactly where writing it down starts to help, and exactly where the rest of this article is aimed.',
+      ],
+    },
+    {
+      heading: 'What Actually Helps Before It Gets That Far',
+      body: [
+        'Say the true sentence out loud to one person today. Not “I’m tired,” which everyone expects, but the specific thing underneath it: “I’m scared of what I’m feeling,” or “I don’t think I’m okay.” Bring it to your OB or midwife appointment and ask directly for a depression and anxiety screening rather than waiting to be asked, since a rushed six-week visit will not always get to it on its own. Tell your partner, specifically, what a bad hour actually looks like from the inside, because “fine” is the version they can see from outside.',
+        'And build a plain, low-effort habit of naming how you actually felt that day, not how the day looked to anyone watching. This is the one piece a new parent rarely has the hands, the time, or some days the words for, which is the actual design problem Empath is built around. You do not open an app or face a blank page. You text, voice-note, or message Empath on WhatsApp, and it becomes a dated, titled, emotion-tagged entry, capturable one-handed while you are holding a baby. If typing is too much, the “Empath calls you” feature will call your phone so you can just talk. Do that three weeks running and “still not sleeping, still scared” stops being a feeling you have and forget by lunch, and becomes a pattern you can actually show your partner or your doctor.',
+        'Said as directly as the section above: this is a tool for noticing sooner and saying it sooner, not a substitute for psychiatric or medical care. The most useful thing a running record can do, especially for postpartum mental health, is make the pattern visible to the people who can actually treat it, before thirteen fragmented moments are the only record anyone has.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What is postpartum psychosis, and how is it different from postpartum depression?',
+      answer:
+        'Postpartum depression and anxiety involve persistent low mood, worry, or overwhelm, affect roughly 1 in 5 new parents, and are treatable with therapy or medication. Postpartum psychosis is rare, roughly 1 in 1,000 births, and involves a genuine break from reality, delusions, hallucinations, or severe confusion. It is a psychiatric emergency requiring immediate treatment, not a more intense version of ordinary postpartum worry.',
+    },
+    {
+      question: 'Is it normal to have scary or intrusive thoughts after having a baby?',
+      answer:
+        'Yes. Unwanted, distressing thoughts about the baby being harmed are extremely common with postpartum anxiety and do not mean you are dangerous or developing psychosis. What matters is how you respond to them. Fighting or hiding them tends to make them louder; naming them and getting support tends to help. If they come with an urge to act, that is different, and needs immediate professional help.',
+    },
+    {
+      question: 'What did the Lindsay Clancy case reveal about postpartum mental health care?',
+      answer:
+        'Coverage of her trial, from NPR to PBS NewsHour to WBUR, has focused on how fragmented postpartum psychiatric care can be: more than a dozen medications from providers who rarely coordinated, multiple emergency room visits, and a brief hospitalization, with no single system holding the full picture of her decline. It has renewed national attention on stigma, provider awareness, and gaps in perinatal mental health care.',
+    },
+    {
+      question: 'Can journaling actually help with postpartum depression or anxiety?',
+      answer:
+        'It can help as one part of care. Putting feelings into words measurably lowers activity in the brain’s stress response, and a dated record makes a slow decline visible to you, a partner, or a clinician in a way day-to-day memory cannot. It works alongside therapy and medical care, especially when sleep deprivation makes it hard to notice your own patterns in the moment.',
+    },
+    {
+      question: 'What warning signs during the postpartum period need immediate professional help, not journaling?',
+      answer:
+        'Hearing or seeing things that are not there, believing things others say are not true, confusion about what is real, any thoughts of harming yourself or your baby paired with an urge to act, or a sense of losing touch with reality. Call or text the Postpartum Support International Helpline at 1-800-944-4773, call or text 988, or call 911 or go to the nearest ER.',
+    },
+    {
+      question: 'Is Empath a substitute for therapy or psychiatric care after having a baby?',
+      answer:
+        'No, and it is not designed to be. Empath is a low-effort way to capture how you are actually feeling, by text, voice note, or phone call, so a pattern becomes visible over days and weeks instead of disappearing into sleep-deprived memory. It is a companion to psychiatric and medical care, not a replacement, and it is not built to diagnose or treat postpartum psychosis or a mental health emergency.',
+    },
+  ],
+  sources: [
+    {
+      title: 'About Perinatal Mental Health',
+      authors: 'Postpartum Support International',
+      publication: 'postpartum.net',
+      year: 2026,
+      url: 'https://postpartum.net/perinatal-mental-health/',
+    },
+    {
+      title: 'Timing of Postpartum Depressive Symptoms',
+      authors: 'Bauman, B.L., et al.',
+      publication: 'Preventing Chronic Disease, CDC',
+      year: 2023,
+      url: 'https://www.cdc.gov/pcd/issues/2023/23_0107.htm',
+    },
+    {
+      title: 'Putting Feelings Into Words: Affect Labeling Disrupts Amygdala Activity in Response to Affective Stimuli',
+      authors: 'Lieberman, M.D., Eisenberger, N.I., Crockett, M.J., Tom, S.M., Pfeifer, J.H., Way, B.M.',
+      publication: 'Psychological Science',
+      year: 2007,
+      url: 'https://journals.sagepub.com/doi/10.1111/j.1467-9280.2007.01916.x',
+    },
+    {
+      title: 'Lindsay Clancy’s Trial Highlights Gaps in Understanding, Treating Postpartum Psychosis',
+      authors: 'NPR',
+      publication: 'NPR',
+      year: 2026,
+      url: 'https://www.npr.org/2026/08/16/nx-s1-5931964/lindsay-clancy-trial-postpartum-psychosis-diagnosis',
+    },
+    {
+      title: 'What the Lindsay Clancy Trial Reveals About a Broken Postpartum Mental Health System',
+      authors: 'PBS NewsHour',
+      publication: 'PBS NewsHour',
+      year: 2026,
+      url: 'https://www.pbs.org/newshour/nation/what-the-lindsay-clancy-trial-reveals-about-a-broken-postpartum-mental-health-system',
+    },
+    {
+      title: 'Clancy Trial Highlights Postpartum Psychosis and Barriers to Care for Mothers',
+      authors: 'WBUR News',
+      publication: 'WBUR',
+      year: 2026,
+      url: 'https://www.wbur.org/news/2026/08/12/massachusetts-lindsay-clancy-murder-children-delusions-maternal-care',
+    },
+  ],
+},
 // Article 42
 {
   id: 'j42',
@@ -717,7 +881,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'empath-vs-day-one',
   keyword: 'empath vs day one',
-  featuredRank: 6,
+  featuredRank: 9,
   relatedSlugs: ['empath-vs-apple-journal', 'empath-vs-rosebud', 'best-journaling-apps'],
   answerSummary:
     'Choose Day One if you love writing, want a beautiful long-term archive of entries, photos, and memories, and do not need AI feedback. Choose Empath if the blank page is what stops you: you journal by phone call, text message, or typing, and the AI organizes entries and surfaces emotional patterns over time.',
