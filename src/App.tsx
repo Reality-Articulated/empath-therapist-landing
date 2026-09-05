@@ -28,6 +28,7 @@ import JournalingBlogPostPage from './pages/JournalingBlogPostPage';
 import PhraseLandingPage from './pages/PhraseLandingPage';
 import { phrasePages } from './data/phrasePages';
 import { Analytics } from '@vercel/analytics/react';
+import { GOOGLE_CLICK_ID_PARAMS } from './utils/googleAds';
 
 function App() {
   const location = useLocation();
@@ -42,12 +43,15 @@ function App() {
     // Get URL search parameters
     const searchParams = new URLSearchParams(location.search);
     
-    // Capture UTM parameters and Reddit ad parameters
+    // Capture UTM parameters, Reddit ad parameters and Google click IDs
+    // (gclid/gbraid/wbraid — kept as super properties so a channel
+    // conversation started from this session can later be uploaded to
+    // Google Ads as an offline conversion).
     const adParams: Record<string, string> = {};
     const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     const redditParams = ['reddit_ad_id', 'reddit_campaign_id', 'reddit_adgroup_id'];
-    
-    [...utmParams, ...redditParams].forEach(param => {
+
+    [...utmParams, ...redditParams, ...GOOGLE_CLICK_ID_PARAMS].forEach(param => {
       const value = searchParams.get(param);
       if (value) {
         adParams[param] = value;

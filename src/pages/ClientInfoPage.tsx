@@ -14,6 +14,7 @@ import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import { Link } from 'react-router-dom';
 import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
+import { trackGoogleAdsConversion } from '../utils/googleAds';
 
 // Therapist type from marketplace API
 interface MarketplaceTherapist {
@@ -371,7 +372,8 @@ export default function ClientInfoPage() {
             variant
           });
         }
-        
+        trackGoogleAdsConversion('therapist_lead');
+
         posthog.capture('marketplace_connection_request_sent', {
           therapist_id: selectedTherapist.id,
           therapist_name: selectedTherapist.name,
@@ -411,7 +413,8 @@ export default function ClientInfoPage() {
             variant
           });
         }
-        
+        trackGoogleAdsConversion('therapist_lead');
+
         setInviteSubmitted(true);
         setUserName('');
         setUserEmail('');

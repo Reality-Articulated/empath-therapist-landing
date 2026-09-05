@@ -6,11 +6,14 @@ import App from './App';
 import './index.css';
 import { PostHogProvider } from 'posthog-js/react';
 import type { PostHog } from 'posthog-js';
+import { googleAdsBeforeSend } from './utils/googleAds';
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   disable_toolbar: import.meta.env.PROD, // Disable toolbar in production
   opt_out_capture_by_default: false,
+  // Mirrors CTA events to Google Ads conversions — see src/utils/googleAds.ts.
+  before_send: [googleAdsBeforeSend],
   loaded: function(posthog: PostHog) {
     // Force disable toolbar in production
     if (import.meta.env.PROD) {

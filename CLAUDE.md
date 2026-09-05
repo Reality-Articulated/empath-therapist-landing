@@ -73,6 +73,19 @@ PostHog is initialized in `src/main.tsx` (toolbar forcibly disabled in prod) and
 
 Add new ad-network params to the arrays in `App.tsx` so they flow into super properties consistently. See `REDDIT_TRACKING.md` for the full Reddit pixel setup.
 
+**Google Ads conversions** (`src/utils/googleAds.ts`, see `GOOGLE_ADS_TRACKING.md`):
+the base `gtag.js` tag lives in `index.html`; conversions are NOT fired per
+button. `googleAdsBeforeSend` is a PostHog `before_send` hook (registered in
+`main.tsx`) that maps PostHog event names → Google Ads conversion actions
+(`*_app_store_clicked`, `channel_link_clicked`, `*_call_clicked`,
+`call_me_*placed`, `upgrade_checkout_clicked`), so a new CTA that follows the
+existing naming is tracked automatically and ANALYTICS_EVENTS.md doubles as the
+conversion inventory. Conversions with no PostHog event call
+`trackGoogleAdsConversion` directly (therapist lead in ClientInfoPage). Labels
+in `CONVERSION_LABELS` are empty until the actions exist in Google Ads; an
+unlabeled conversion is a silent no-op. `gclid`/`gbraid`/`wbraid` are captured
+alongside the UTM params in `App.tsx` for a future offline-conversion join.
+
 ### Campaign survey page (`/survey`)
 
 `src/pages/SurveyPage.tsx` — chrome-less (in the `hideNavbar` list), noindex,
