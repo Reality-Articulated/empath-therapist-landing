@@ -5,11 +5,9 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingPt: JournalingCopy = {
   seo: {
-    title: 'Empath - O app que você nunca precisa abrir | Mande seus pensamentos por mensagem, WhatsApp ou ligação',
-    description:
-      'Existe um número onde você simplesmente escreve seu diário. Mande um WhatsApp, um Telegram, ligue. Ou peça para ele te ligar. Sem app, sem cadastro, sem página em branco. Suas entradas viram padrões de humor e insights que você consegue ver de verdade.',
-    keywords:
-      'diário por mensagem, diário por voz, diário sem aplicativo, diário por SMS, diário no WhatsApp, diário por ligação, monitoramento de humor, diário por chat, assistente de diário com IA, diário em conversa, plano de journaling, hábito de escrever diário',
+    title: 'Empath: diário com IA e rastreador de humor com Insights mais profundos e um companheiro de IA',
+    description: 'O Empath é um diário com IA e um rastreador de humor. Escreva pelo WhatsApp, Telegram, ligação ou no app. Insights mais profundos, análise de humor, menções de pessoas, mapa do diário, cores dos dias, o clima de cada entrada e um companheiro de IA para conversar a qualquer hora.',
+    keywords: 'app de diário com IA, diário com inteligência artificial, app rastreador de humor, análise de humor, insights mais profundos, mapa do diário, cores dos dias, diário com clima, humor por localização, menções de pessoas, companheiro de IA, diário pelo WhatsApp, diário pelo Telegram, diário por ligação, diário de voz, IA que lembra de você',
   },
 
   header: {
@@ -29,10 +27,10 @@ export const journalingPt: JournalingCopy = {
     call: 'Ligar',
     text: 'Mensagem',
     orFavoriteApp: 'Ou use o app em que você já está',
-    phoneMeta: 'Disponível 24h • Sem cadastro',
-    wantInsights: 'Quer tendências de humor e insights?',
+    phoneMeta: 'Disponível 24h • Cada mensagem cai no seu app',
+    wantInsights: 'O app é onde tudo se junta',
     getApp: 'Baixe o app grátis',
-    appBenefits: 'Gráficos de humor, detecção de padrões, sincronização com o Apple Health',
+    appBenefits: 'Insights mais profundos, análise de humor, menções de pessoas, um mapa do diário, cores dos dias, o clima de cada entrada e um companheiro de IA que conhece tudo',
     desktopLead: 'Comece sua primeira entrada agora mesmo. Mande mensagem ou ligue para o Empath como faria com um amigo.',
     textToJournal: 'Mande seus pensamentos',
     callAndTalk: 'Ligue e só converse',
@@ -178,7 +176,7 @@ export const journalingPt: JournalingCopy = {
     ],
     ctaLead: 'Essa foi a demo. O Empath de verdade lembra de você.',
     cta: 'Baixe o app grátis',
-    ctaNote: 'Grátis na App Store. Suas entradas viram os insights que aparecem ao redor desta demo.',
+    ctaNote: 'Grátis na App Store. Cada entrada alimenta os Insights mais profundos, a análise de humor e as menções de pessoas que aparecem ao redor desta demo.',
     restart: 'Tentar outro começo',
     screenshotAlt: 'Captura de tela do app Empath',
   },
@@ -372,7 +370,7 @@ export const journalingPt: JournalingCopy = {
   },
 
   feature2: {
-    badge: 'Inteligência com IA',
+    badge: 'Dentro do app',
     title: '"Pera, quando foi que comecei a me sentir assim?"',
     sub: 'Abra o app e simplesmente pergunte. Cada mensagem, ligação e pensamento que você enviou fica guardado e aparece em segundos.',
     memoryTitle: 'Busca inteligente na memória',
@@ -383,8 +381,8 @@ export const journalingPt: JournalingCopy = {
       'Resgate instantâneo de momentos importantes',
       'Linha do tempo da sua jornada',
     ],
-    patternsTitle: 'Reconhecimento de padrões',
-    patternsBody: 'Descubra padrões que você nunca tinha notado. Nossa IA identifica gatilhos, ciclos e conexões nas suas experiências.',
+    patternsTitle: 'Insights mais profundos',
+    patternsBody: 'O Empath lê tudo o que você escreveu e conta o que encontrou: gatilhos, ciclos e as conexões entre como você se sentia e o que estava acontecendo.',
     patternsItems: [
       'Identifique gatilhos emocionais',
       'Reconheça padrões de comportamento',
@@ -403,7 +401,7 @@ export const journalingPt: JournalingCopy = {
   },
 
   feature3: {
-    badge: 'Análises',
+    badge: 'Análise de humor',
     title: 'Veja o que afeta seu humor de verdade',
     body: 'Você vai notar coisas como "sou mais feliz nos dias em que caminho" ou "prazos do trabalho disparam minha ansiedade toda quinta". São os seus dados, mostrados de um jeito simples.',
     mockTitle: 'Tendências de humor',
@@ -419,8 +417,10 @@ export const journalingPt: JournalingCopy = {
     items: [
       { title: 'Registro diário de humor', desc: 'Análise automática de sentimento a partir das suas entradas' },
       { title: 'Análise de correlações', desc: 'Descubra quais atividades melhoram seu humor' },
-      { title: 'Lugares e clima', desc: 'Veja como você se sente em casa, no trabalho e nos dias nublados' },
+      { title: 'Análise de localização e clima', desc: 'Veja como você se sente em casa, no trabalho e nos dias nublados' },
       { title: 'Tendências de longo prazo', desc: 'Veja seu progresso ao longo de semanas e meses' },
+      { title: 'Mapa do diário', desc: 'Cada entrada marcada no lugar onde você escreveu' },
+      { title: 'Cores dos dias', desc: 'Seus últimos 30 dias separados em dias bons e dias difíceis, com o que apareceu em cada um' },
     ],
   },
 
@@ -558,7 +558,7 @@ export const journalingPt: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Registre por mensagem ou ligação. Reflita no app.',
+    title: 'Registre em qualquer lugar. Veja tudo no app.',
     sub: 'Sem configuração, sem hábito novo para criar. É só falar do jeito que você já fala com os amigos.',
     stepLabel: 'Passo',
     steps: [
@@ -571,16 +571,16 @@ export const journalingPt: JournalingCopy = {
         desc: 'Cada mensagem e ligação cai no seu diário privado: transcrita, organizada e salva automaticamente. Você só continua vivendo sua vida.',
       },
       {
-        title: 'Abra o app para refletir',
-        desc: 'Quando quiser olhar para trás, revisitar uma memória ou ver seus padrões e tendências de humor, está tudo esperando por você no app.',
+        title: 'Abra o app para a melhor parte',
+        desc: 'Insights mais profundos sobre suas entradas, análise de humor ao longo de semanas e meses, um mapa de onde você escreveu, seus dias coloridos por como foram, o clima daquele dia, as pessoas que mais aparecem e um companheiro de IA que leu tudo.',
       },
     ],
   },
 
   iosCallout: {
-    kicker: 'App para iOS disponível',
-    title: 'Quer olhar para trás? Baixe o app',
-    body: 'Você fala por mensagem e ligação. O app é onde vive o seu diário privado: releia tudo, busque momentos passados e acompanhe seus padrões de humor se revelando.',
+    kicker: 'O app do Empath',
+    title: 'A mensagem captura. O app é a experiência.',
+    body: 'Tudo o que você registra chega aqui. Os Insights mais profundos ligam os pontos entre suas entradas, a análise de humor mostra o que realmente mexe com você, as menções de pessoas mostram quem marca seus dias e seu companheiro de IA leu cada palavra. Um mapa do diário marca cada entrada onde você escreveu, as cores dos dias separam seu mês em dias bons e difíceis, e o clima daquele dia fica ao lado de cada entrada. Grátis no iPhone.',
     button: 'Baixar na App Store',
   },
 
@@ -696,9 +696,9 @@ export const journalingPt: JournalingCopy = {
 
   finalCta: {
     title: 'Seja o que for que está na sua cabeça, está a uma mensagem de distância',
-    sub: 'Nenhum app para aprender, nenhuma página em branco para encarar. É só mandar mensagem ou ligar como você já faz com um amigo, e começar a ver seus padrões em dias, não meses.',
+    sub: 'Registre por mensagem ou ligação e depois abra o app para a parte que faz o Empath ser único: Insights mais profundos, análise de humor e as pessoas que marcam seus dias.',
     downloadFree: 'Baixar grátis na App Store',
-    justSayHi: 'Sem app, sem cadastro. É só dar um oi',
+    justSayHi: 'É só dar um oi',
     noCreditCard: 'Sem cartão de crédito',
     freeForever: 'Grátis para sempre',
     fastSetup: 'Pronto em 30 segundos',

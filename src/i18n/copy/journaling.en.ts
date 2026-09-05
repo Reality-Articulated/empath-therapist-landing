@@ -26,11 +26,9 @@ export interface ChatMessage {
 
 export const journalingEn = {
   seo: {
-    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
-    description:
-      "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
-    keywords:
-      "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
+    title: 'Empath: AI Journal & Mood Tracker with Deeper Insights and an AI Companion',
+    description: 'Empath is an AI-powered journal and mood tracker. Journal by WhatsApp, Telegram, phone call, or in the app. Get Deeper Insights, mood analysis, people mentions, a journal map, day colors, weather on every entry, and an AI companion you can chat with any time.',
+    keywords: 'AI journal app, AI diary, mood tracker app, mood analysis, deeper insights, journal map, day colors, mood journal with weather, location mood tracking, people mentions journal, AI companion, AI chat journal, voice journaling, WhatsApp journal, Telegram journal, journaling by phone call, journaling habit tracker, AI that remembers you, using chatgpt as a therapist',
   },
 
   header: {
@@ -50,10 +48,10 @@ export const journalingEn = {
     call: 'Call',
     text: 'Text',
     orFavoriteApp: "Or use the app you're already in",
-    phoneMeta: 'Available 24/7 • No account needed',
-    wantInsights: 'Want mood trends & insights?',
+    phoneMeta: 'Available 24/7 • Every message lands in your app',
+    wantInsights: 'The app is where it all comes together',
     getApp: 'Get the Free App',
-    appBenefits: 'Mood charts, pattern detection, Apple Health sync',
+    appBenefits: 'Deeper Insights, mood analysis, people mentions, a journal map, day colors, weather on every entry, and an AI companion that knows it all',
     desktopLead: 'Start your first entry right now. Message or call Empath like you\'d text a friend.',
     textToJournal: 'Text your thoughts',
     callAndTalk: 'Call & just talk',
@@ -205,7 +203,7 @@ export const journalingEn = {
     ],
     ctaLead: 'That was the demo. The real Empath remembers you.',
     cta: 'Get the Free App',
-    ctaNote: 'Free on the App Store. Your entries become the insights shown around this demo.',
+    ctaNote: 'Free on the App Store. Every entry feeds the Deeper Insights, mood analysis, and people mentions shown around this demo.',
     restart: 'Try another opener',
     screenshotAlt: 'Screenshot of the Empath app',
   },
@@ -403,7 +401,7 @@ export const journalingEn = {
   },
 
   feature2: {
-    badge: 'AI Intelligence',
+    badge: 'Inside the app',
     title: '"Wait, When Did I Start Feeling This Way?"',
     sub: "Open the app and just ask. Every message, call, and thought you've sent is remembered and surfaced in seconds.",
     memoryTitle: 'Smart Memory Search',
@@ -414,8 +412,8 @@ export const journalingEn = {
       'Instant recall of important moments',
       'Timeline view of your journey',
     ],
-    patternsTitle: 'Pattern Recognition',
-    patternsBody: 'Discover patterns you never noticed. Our AI identifies triggers, cycles, and connections in your experiences.',
+    patternsTitle: 'Deeper Insights',
+    patternsBody: 'Empath reads across everything you\'ve written and writes up what it finds: triggers, cycles, and the connections between how you felt and what was going on.',
     patternsItems: [
       'Identify emotional triggers',
       'Recognize behavioral patterns',
@@ -434,7 +432,7 @@ export const journalingEn = {
   },
 
   feature3: {
-    badge: 'Analytics',
+    badge: 'Mood analysis',
     title: 'See What Actually Affects Your Mood',
     body: 'You\'ll notice things like "I\'m happier on days I walk" or "work deadlines spike my anxiety every Thursday." It\'s your data, shown simply.',
     mockTitle: 'Mood Trends',
@@ -450,8 +448,10 @@ export const journalingEn = {
     items: [
       { title: 'Daily Mood Tracking', desc: 'Automatic sentiment analysis from your entries' },
       { title: 'Correlation Analysis', desc: 'Discover what activities boost your mood' },
-      { title: 'Places & Weather', desc: 'See how you feel at home, at work, and on grey days' },
+      { title: 'Location Analysis & Weather', desc: 'See how you feel at home, at work, and on grey days' },
       { title: 'Long-term Trends', desc: 'See your progress over weeks and months' },
+      { title: 'Journal Map', desc: 'Every entry pinned to the place you wrote it' },
+      { title: 'Day Colors', desc: 'Your last 30 days sorted into good days and hard days, with what showed up on each' },
     ],
   },
 
@@ -592,7 +592,7 @@ export const journalingEn = {
   },
 
   howItWorks: {
-    title: 'Capture by Message or Call. Reflect in the App.',
+    title: 'Capture Anywhere. See It All in the App.',
     sub: 'No setup, no new habit to build. Just talk the way you already do with friends.',
     stepLabel: 'Step',
     steps: [
@@ -605,16 +605,16 @@ export const journalingEn = {
         desc: 'Every message and call lands in your private journal: transcribed, organized, and saved automatically. You just keep living your life.',
       },
       {
-        title: 'Open the App to Reflect',
-        desc: 'When you want to look back, revisit a memory, or see your mood patterns and trends, it’s all waiting for you in the app.',
+        title: 'Open the App for the Good Part',
+        desc: 'Deeper Insights across your entries, mood analysis over weeks and months, a map of where you wrote, your days colored by how they went, the weather that day, the people who keep showing up, and an AI companion that has read all of it.',
       },
     ],
   },
 
   iosCallout: {
-    kicker: 'iOS app available',
-    title: 'Want to Look Back? Get the App',
-    body: 'You talk by message and call. The app is where your private journal lives: read everything back, search past moments, and watch your mood patterns unfold.',
+    kicker: 'The Empath app',
+    title: 'Messaging Gets It In. The App Is the Experience.',
+    body: 'Everything you capture lands here. Deeper Insights connect the dots across your entries, mood analysis shows what actually moves you, people mentions show who shapes your days, and your AI companion has read every word. A journal map pins each entry where you wrote it, day colors sort your month into good days and hard days, and the weather from that day sits beside every entry. Free on iPhone.',
     button: 'Download on App Store',
   },
 
@@ -779,9 +779,9 @@ export const journalingEn = {
 
   finalCta: {
     title: "Whatever's On Your Mind, It's One Message Away",
-    sub: 'No app to learn, no blank page to stare at. Just message or call the way you already do with a friend, and start seeing your patterns in days, not months.',
+    sub: 'Capture it by message or call, then open the app for the part that makes it Empath: Deeper Insights, mood analysis, and the people who shape your days.',
     downloadFree: 'Download Free on App Store',
-    justSayHi: 'No app, no account. Just say hi',
+    justSayHi: 'Just say hi',
     noCreditCard: 'No credit card',
     freeForever: 'Free forever',
     fastSetup: '30 second setup',

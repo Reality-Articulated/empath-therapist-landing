@@ -6,11 +6,9 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingFr: JournalingCopy = {
   seo: {
-    title: 'Empath - L’appli que tu n’as jamais besoin d’ouvrir | Tes pensées par message, WhatsApp ou appel',
-    description:
-      'Il existe un numéro auquel tu peux simplement tenir ton journal. Envoie un message WhatsApp ou Telegram, appelle, ou laisse Empath t’appeler. Pas d’appli, sans inscription, pas de page blanche. Tes entrées deviennent des tendances d’humeur et des insights que tu peux vraiment voir.',
-    keywords:
-      'journal par sms, journal vocal, journal intime sans application, tenir un journal par sms, journal WhatsApp, journal par téléphone, suivi de l’humeur, journal par chat, assistant de journal IA, journal conversationnel, plan de journaling, habitude d’écriture, application journal intime',
+    title: 'Empath : journal IA et suivi d’humeur avec Insights plus profonds et compagnon IA',
+    description: 'Empath est un journal intime dopé à l’IA et un suivi d’humeur. Écris par WhatsApp, Telegram, appel ou dans l’appli. Insights plus profonds, analyse d’humeur, mentions de personnes, carte du journal, couleurs des jours, la météo de chaque entrée et un compagnon IA avec qui discuter à tout moment.',
+    keywords: 'appli journal IA, journal intime IA, appli suivi d’humeur, analyse d’humeur, insights plus profonds, carte du journal, couleurs des jours, journal avec météo, humeur par lieu, mentions de personnes, compagnon IA, journal par WhatsApp, journal par Telegram, journal par appel, journal vocal, IA qui se souvient de toi',
   },
 
   header: {
@@ -30,10 +28,10 @@ export const journalingFr: JournalingCopy = {
     call: 'Appeler',
     text: 'SMS',
     orFavoriteApp: 'Ou passe par l’appli où tu es déjà',
-    phoneMeta: 'Dispo 24h/24 • Sans inscription',
-    wantInsights: 'Envie de voir tes tendances d’humeur ?',
+    phoneMeta: 'Dispo 24h/24 • Chaque message arrive dans ton appli',
+    wantInsights: 'L’appli, c’est là où tout se rejoint',
     getApp: 'Télécharge l’appli gratuite',
-    appBenefits: 'Courbes d’humeur, détection de schémas, synchro Apple Health',
+    appBenefits: 'Insights plus profonds, analyse d’humeur, mentions de personnes, une carte du journal, les couleurs des jours, la météo de chaque entrée et un compagnon IA qui connaît tout',
     desktopLead: 'Commence ta première entrée tout de suite. Écris à Empath ou appelle, comme tu le ferais avec un ami.',
     textToJournal: 'Écris tes pensées',
     callAndTalk: 'Appelle et parle, c’est tout',
@@ -179,7 +177,7 @@ export const journalingFr: JournalingCopy = {
     ],
     ctaLead: 'Ça, c’était la démo. Le vrai Empath se souvient de toi.',
     cta: 'Télécharge l’appli gratuite',
-    ctaNote: 'Gratuit sur l’App Store. Tes entrées deviennent les analyses que tu vois autour de cette démo.',
+    ctaNote: 'Gratuit sur l’App Store. Chaque entrée alimente les Insights plus profonds, l’analyse d’humeur et les mentions de personnes que tu vois autour de cette démo.',
     restart: 'Essayer un autre début',
     screenshotAlt: 'Capture d’écran de l’appli Empath',
   },
@@ -373,7 +371,7 @@ export const journalingFr: JournalingCopy = {
   },
 
   feature2: {
-    badge: 'Intelligence IA',
+    badge: 'Dans l’appli',
     title: '« Attends, depuis quand je me sens comme ça ? »',
     sub: 'Ouvre l’appli et pose la question. Chaque message, appel et pensée que tu as envoyés est mémorisé et ressort en quelques secondes.',
     memoryTitle: 'Recherche intelligente dans tes souvenirs',
@@ -384,8 +382,8 @@ export const journalingFr: JournalingCopy = {
       'Rappel instantané des moments importants',
       'Vue chronologique de ton parcours',
     ],
-    patternsTitle: 'Détection de schémas',
-    patternsBody: 'Découvre des schémas que tu n’avais jamais remarqués. Notre IA repère les déclencheurs, les cycles et les liens dans ce que tu vis.',
+    patternsTitle: 'Insights plus profonds',
+    patternsBody: 'Empath lit tout ce que tu as écrit et te raconte ce qu’il y trouve : déclencheurs, cycles et les liens entre ce que tu ressentais et ce qui se passait.',
     patternsItems: [
       'Identifie tes déclencheurs émotionnels',
       'Repère tes schémas de comportement',
@@ -404,7 +402,7 @@ export const journalingFr: JournalingCopy = {
   },
 
   feature3: {
-    badge: 'Analyses',
+    badge: 'Analyse d’humeur',
     title: 'Vois ce qui influence vraiment ton humeur',
     body: 'Tu remarqueras des choses comme « je suis plus heureux les jours où je marche » ou « les deadlines du boulot font grimper mon anxiété tous les jeudis ». Ce sont tes données, présentées simplement.',
     mockTitle: 'Tendances d’humeur',
@@ -420,8 +418,10 @@ export const journalingFr: JournalingCopy = {
     items: [
       { title: 'Suivi d’humeur quotidien', desc: 'Analyse automatique du ressenti dans tes entrées' },
       { title: 'Analyse des corrélations', desc: 'Découvre quelles activités boostent ton humeur' },
-      { title: 'Lieux et météo', desc: 'Vois comment tu te sens chez toi, au boulot et les jours gris' },
+      { title: 'Analyse de localisation et météo', desc: 'Vois comment tu te sens chez toi, au boulot et les jours gris' },
       { title: 'Tendances long terme', desc: 'Vois tes progrès sur des semaines et des mois' },
+      { title: 'Carte du journal', desc: 'Chaque entrée épinglée à l’endroit où tu l’as écrite' },
+      { title: 'Couleurs des jours', desc: 'Tes 30 derniers jours triés en bons jours et jours difficiles, avec ce qui est revenu dans chacun' },
     ],
   },
 
@@ -559,7 +559,7 @@ export const journalingFr: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Capture par message ou appel. Réfléchis dans l’appli.',
+    title: 'Capture partout. Vois tout dans l’appli.',
     sub: 'Aucune installation, aucune nouvelle habitude à créer. Parle comme tu le fais déjà avec tes amis.',
     stepLabel: 'Étape',
     steps: [
@@ -572,16 +572,16 @@ export const journalingFr: JournalingCopy = {
         desc: 'Chaque message et chaque appel atterrit dans ton journal privé : transcrit, organisé et enregistré automatiquement. Toi, tu continues juste à vivre ta vie.',
       },
       {
-        title: 'Ouvre l’appli pour réfléchir',
-        desc: 'Quand tu veux regarder en arrière, revisiter un souvenir ou voir tes tendances d’humeur, tout t’attend dans l’appli.',
+        title: 'Ouvre l’appli pour le meilleur',
+        desc: 'Des Insights plus profonds sur tes entrées, une analyse d’humeur sur des semaines et des mois, une carte des endroits où tu as écrit, tes journées colorées selon comment elles se sont passées, la météo ce jour-là, les personnes qui reviennent le plus et un compagnon IA qui a tout lu.',
       },
     ],
   },
 
   iosCallout: {
-    kicker: 'Appli iOS disponible',
-    title: 'Envie de regarder en arrière ? Prends l’appli',
-    body: 'Tu parles par message et par appel. L’appli, c’est là où vit ton journal privé : relis tout, cherche dans tes moments passés et regarde tes tendances d’humeur se dessiner.',
+    kicker: 'L’appli Empath',
+    title: 'Les messages font entrer. L’appli, c’est l’expérience.',
+    body: 'Tout ce que tu captures arrive ici. Les Insights plus profonds relient les points entre tes entrées, l’analyse d’humeur montre ce qui te touche vraiment, les mentions de personnes montrent qui façonne tes journées, et ton compagnon IA a lu chaque mot. Une carte du journal épingle chaque entrée là où tu l’as écrite, les couleurs des jours trient ton mois en bons jours et jours difficiles, et la météo du jour accompagne chaque entrée. Gratuit sur iPhone.',
     button: 'Télécharger sur l’App Store',
   },
 
@@ -697,9 +697,9 @@ export const journalingFr: JournalingCopy = {
 
   finalCta: {
     title: 'Quoi que tu aies en tête, c’est à un message près',
-    sub: 'Aucune appli à apprendre, aucune page blanche à fixer. Écris ou appelle comme tu le fais déjà avec un ami, et commence à voir tes schémas en quelques jours, pas en quelques mois.',
+    sub: 'Capture-le par message ou par appel, puis ouvre l’appli pour ce qui fait Empath : des Insights plus profonds, une analyse d’humeur et les personnes qui façonnent tes journées.',
     downloadFree: 'Télécharger gratuitement sur l’App Store',
-    justSayHi: 'Pas d’appli, sans inscription. Dis juste salut',
+    justSayHi: 'Dis juste salut',
     noCreditCard: 'Sans carte bancaire',
     freeForever: 'Gratuit pour toujours',
     fastSetup: 'Prêt en 30 secondes',

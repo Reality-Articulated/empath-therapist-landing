@@ -6,11 +6,9 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingDe: JournalingCopy = {
   seo: {
-    title: 'Empath - Die App, die du nie öffnen musst | Deine Gedanken per Nachricht, WhatsApp oder Anruf',
-    description:
-      'Es gibt eine Nummer, an die du einfach dein Tagebuch schreibst. Schick eine WhatsApp- oder Telegram-Nachricht, ruf an oder lass dich anrufen. Keine App, keine Registrierung, keine leere Seite. Aus deinen Einträgen werden Stimmungsmuster und Erkenntnisse, die du wirklich sehen kannst.',
-    keywords:
-      'Tagebuch per SMS, Sprachjournal, Journaling ohne App, Tagebuch schreiben per Handy, WhatsApp Tagebuch, Tagebuch per Anruf, Stimmungstracker, Chat Journaling, KI Journaling, Journaling Assistent, Journaling Plan, Journaling Gewohnheit aufbauen',
+    title: 'Empath: KI-Tagebuch & Stimmungstracker mit Tieferen Einblicken und KI-Begleiter',
+    description: 'Empath ist ein KI-gestütztes Tagebuch und Stimmungstracker. Schreib per WhatsApp, Telegram, Anruf oder in der App. Tiefere Einblicke, Stimmungsanalyse, Erwähnungen, Tagebuchkarte, Tagesfarben, das Wetter zu jedem Eintrag und ein KI-Begleiter, mit dem du jederzeit chatten kannst.',
+    keywords: 'KI Tagebuch App, KI Journal, Stimmungstracker App, Stimmungsanalyse, tiefere Einblicke, Tagebuchkarte, Tagesfarben, Tagebuch mit Wetter, Stimmung nach Ort, Erwähnungen von Menschen, KI-Begleiter, Tagebuch per WhatsApp, Tagebuch per Telegram, Tagebuch per Anruf, Sprachtagebuch, KI die sich an dich erinnert',
   },
 
   header: {
@@ -30,10 +28,10 @@ export const journalingDe: JournalingCopy = {
     call: 'Anrufen',
     text: 'Schreiben',
     orFavoriteApp: 'Oder nimm die App, in der du eh gerade bist',
-    phoneMeta: 'Rund um die Uhr erreichbar • Ohne Registrierung',
-    wantInsights: 'Lust auf Stimmungstrends & Erkenntnisse?',
+    phoneMeta: 'Rund um die Uhr erreichbar • Jede Nachricht landet in deiner App',
+    wantInsights: 'In der App kommt alles zusammen',
     getApp: 'Hol dir die Gratis-App',
-    appBenefits: 'Stimmungskurven, Mustererkennung, Apple-Health-Sync',
+    appBenefits: 'Tiefere Einblicke, Stimmungsanalyse, Erwähnungen, eine Tagebuchkarte, Tagesfarben, das Wetter zu jedem Eintrag und ein KI-Begleiter, der alles kennt',
     desktopLead: 'Fang jetzt deinen ersten Eintrag an. Schreib Empath oder ruf an, ganz wie bei Freunden.',
     textToJournal: 'Schreib deine Gedanken',
     callAndTalk: 'Anrufen & einfach reden',
@@ -179,7 +177,7 @@ export const journalingDe: JournalingCopy = {
     ],
     ctaLead: 'Das war die Demo. Der echte Empath erinnert sich an dich.',
     cta: 'Hol dir die kostenlose App',
-    ctaNote: 'Kostenlos im App Store. Deine Einträge werden zu den Insights, die du rund um diese Demo siehst.',
+    ctaNote: 'Kostenlos im App Store. Jeder Eintrag speist die Tieferen Einblicke, die Stimmungsanalyse und die Erwähnungen von Menschen, die du rund um diese Demo siehst.',
     restart: 'Anderen Anfang probieren',
     screenshotAlt: 'Screenshot der Empath App',
   },
@@ -373,7 +371,7 @@ export const journalingDe: JournalingCopy = {
   },
 
   feature2: {
-    badge: 'KI-Intelligenz',
+    badge: 'In der App',
     title: '„Moment, seit wann fühle ich mich eigentlich so?"',
     sub: 'Öffne die App und frag einfach. Jede Nachricht, jeder Anruf, jeder Gedanke wird erinnert und in Sekunden wiedergefunden.',
     memoryTitle: 'Smarte Erinnerungssuche',
@@ -384,8 +382,8 @@ export const journalingDe: JournalingCopy = {
       'Wichtige Momente sofort wiederfinden',
       'Dein Weg als Zeitleiste',
     ],
-    patternsTitle: 'Mustererkennung',
-    patternsBody: 'Entdecke Muster, die dir nie aufgefallen sind. Unsere KI erkennt Auslöser, Zyklen und Zusammenhänge in deinen Erlebnissen.',
+    patternsTitle: 'Tiefere Einblicke',
+    patternsBody: 'Empath liest quer durch alles, was du geschrieben hast, und fasst zusammen, was es findet: Auslöser, Zyklen und die Zusammenhänge zwischen dem, wie du dich gefühlt hast, und dem, was gerade los war.',
     patternsItems: [
       'Emotionale Auslöser erkennen',
       'Verhaltensmuster verstehen',
@@ -404,7 +402,7 @@ export const journalingDe: JournalingCopy = {
   },
 
   feature3: {
-    badge: 'Analysen',
+    badge: 'Stimmungsanalyse',
     title: 'Sieh, was deine Stimmung wirklich beeinflusst',
     body: 'Dir fallen Dinge auf wie „an Tagen mit Spaziergang bin ich glücklicher" oder „Deadlines auf der Arbeit treiben jeden Donnerstag meine Anspannung hoch". Deine Daten, einfach dargestellt.',
     mockTitle: 'Stimmungstrends',
@@ -420,8 +418,10 @@ export const journalingDe: JournalingCopy = {
     items: [
       { title: 'Tägliches Stimmungstracking', desc: 'Automatische Stimmungsanalyse aus deinen Einträgen' },
       { title: 'Zusammenhänge erkennen', desc: 'Finde heraus, welche Aktivitäten deine Stimmung heben' },
-      { title: 'Orte & Wetter', desc: 'Sieh, wie du dich zu Hause, auf der Arbeit und an grauen Tagen fühlst' },
+      { title: 'Standortanalyse & Wetter', desc: 'Sieh, wie du dich zu Hause, auf der Arbeit und an grauen Tagen fühlst' },
       { title: 'Langfristige Trends', desc: 'Sieh deinen Fortschritt über Wochen und Monate' },
+      { title: 'Tagebuchkarte', desc: 'Jeder Eintrag an dem Ort markiert, an dem du ihn geschrieben hast' },
+      { title: 'Tagesfarben', desc: 'Deine letzten 30 Tage sortiert in gute und schwere Tage, mit dem, was an jedem vorkam' },
     ],
   },
 
@@ -559,7 +559,7 @@ export const journalingDe: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Festhalten per Nachricht oder Anruf. Reflektieren in der App.',
+    title: 'Überall festhalten. Alles in der App sehen.',
     sub: 'Kein Setup, keine neue Gewohnheit nötig. Red einfach so, wie du sowieso schon mit Freunden redest.',
     stepLabel: 'Schritt',
     steps: [
@@ -572,16 +572,16 @@ export const journalingDe: JournalingCopy = {
         desc: 'Jede Nachricht und jeder Anruf landet in deinem privaten Tagebuch: automatisch transkribiert, sortiert und gespeichert. Du lebst einfach dein Leben weiter.',
       },
       {
-        title: 'Öffne die App zum Reflektieren',
-        desc: 'Wenn du zurückblicken, eine Erinnerung hervorholen oder deine Stimmungsmuster und Trends sehen willst, wartet in der App alles auf dich.',
+        title: 'Öffne die App für den besten Teil',
+        desc: 'Tiefere Einblicke über deine Einträge hinweg, Stimmungsanalyse über Wochen und Monate, eine Karte, wo du geschrieben hast, deine Tage eingefärbt danach, wie sie liefen, das Wetter an dem Tag, die Menschen, die immer wieder auftauchen, und ein KI-Begleiter, der alles gelesen hat.',
       },
     ],
   },
 
   iosCallout: {
-    kicker: 'iOS-App verfügbar',
-    title: 'Lust zurückzublicken? Hol dir die App',
-    body: 'Du redest per Nachricht und Anruf. In der App lebt dein privates Tagebuch: Lies alles nach, durchsuch vergangene Momente und sieh, wie sich deine Stimmungsmuster entfalten.',
+    kicker: 'Die Empath-App',
+    title: 'Nachrichten bringen es rein. Die App ist das Erlebnis.',
+    body: 'Alles, was du festhältst, landet hier. Tiefere Einblicke verbinden die Punkte zwischen deinen Einträgen, die Stimmungsanalyse zeigt, was dich wirklich bewegt, Erwähnungen zeigen, wer deine Tage prägt, und dein KI-Begleiter hat jedes Wort gelesen. Eine Tagebuchkarte markiert jeden Eintrag dort, wo du ihn geschrieben hast, Tagesfarben sortieren deinen Monat in gute und schwere Tage, und das Wetter von dem Tag steht neben jedem Eintrag. Kostenlos fürs iPhone.',
     button: 'Im App Store laden',
   },
 
@@ -697,9 +697,9 @@ export const journalingDe: JournalingCopy = {
 
   finalCta: {
     title: 'Was auch immer dir durch den Kopf geht: Es ist nur eine Nachricht entfernt',
-    sub: 'Keine App zum Lernen, keine leere Seite zum Anstarren. Schreib oder ruf an, wie du es mit Freunden sowieso machst, und sieh deine Muster in Tagen statt Monaten.',
+    sub: 'Halt es per Nachricht oder Anruf fest und öffne dann die App für den Teil, der Empath ausmacht: Tiefere Einblicke, Stimmungsanalyse und die Menschen, die deine Tage prägen.',
     downloadFree: 'Gratis im App Store laden',
-    justSayHi: 'Keine App, keine Registrierung. Sag einfach hi',
+    justSayHi: 'Sag einfach hi',
     noCreditCard: 'Keine Kreditkarte',
     freeForever: 'Für immer kostenlos',
     fastSetup: 'Startklar in 30 Sekunden',

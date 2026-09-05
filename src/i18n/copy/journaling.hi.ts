@@ -7,11 +7,9 @@ import type { JournalingCopy } from './journaling.en';
 
 export const journalingHi: JournalingCopy = {
   seo: {
-    title: 'Empath - वो App जो आपको कभी खोलना नहीं पड़ता | अपने ख़याल Text, WhatsApp या Call कीजिए',
-    description:
-      'एक नंबर है जिस पर आप बस journal कर सकते हैं। WhatsApp करें, Telegram करें, call करें, या वो ख़ुद आपको call कर ले। न app, न साइन-अप, न खाली page। आपकी entries mood patterns और insights बन जाती हैं जो आपको सच में दिखते हैं।',
-    keywords:
-      'text से journaling, voice journaling, बिना app के journal, WhatsApp journal, phone call से journaling, mood tracking, mood tracker, डायरी app, डायरी लिखना, journal कैसे लिखें, AI journaling assistant, chat journaling, journaling habit, journaling plan',
+    title: 'Empath: AI Journal और Mood Tracker, Deeper Insights और AI Companion के साथ',
+    description: 'Empath एक AI-powered journal और mood tracker है। WhatsApp, Telegram, call या app में journal लिखिए। Deeper Insights, mood analysis, people mentions, journal map, day colors, हर entry का मौसम, और एक AI companion जिससे आप कभी भी chat कर सकते हैं।',
+    keywords: 'AI journal app, AI diary app, mood tracker app, mood analysis, deeper insights, journal map, day colors, mausam ke saath diary, location mood tracking, people mentions, AI companion, WhatsApp journal, Telegram journal, call se journaling, voice journaling, AI jo aapko yaad rakhe, hindi journal app',
   },
 
   header: {
@@ -31,10 +29,10 @@ export const journalingHi: JournalingCopy = {
     call: 'Call करें',
     text: 'Text करें',
     orFavoriteApp: 'या जो app पहले से खुला है, वही इस्तेमाल कीजिए',
-    phoneMeta: '24/7 उपलब्ध • साइन-अप की ज़रूरत नहीं',
-    wantInsights: 'Mood trends और insights चाहिए?',
+    phoneMeta: '24/7 उपलब्ध • हर message आपके app में पहुँचता है',
+    wantInsights: 'App में ही सब कुछ एक साथ आता है',
     getApp: 'Free App डाउनलोड करें',
-    appBenefits: 'Mood charts, pattern detection, Apple Health sync',
+    appBenefits: 'Deeper Insights, mood analysis, people mentions, journal map, day colors, हर entry का मौसम, और एक AI companion जो सब जानता है',
     desktopLead: 'अभी अपनी पहली entry शुरू करें। Empath को message या call करें, जैसे किसी दोस्त को करते हैं।',
     textToJournal: 'अपने ख़याल text करें',
     callAndTalk: 'Call करें और बस बोलें',
@@ -180,7 +178,7 @@ export const journalingHi: JournalingCopy = {
     ],
     ctaLead: 'ये तो demo था। असली Empath आपको याद रखता है।',
     cta: 'Free app पाइए',
-    ctaNote: 'App Store पर free। आपकी entries वही insights बन जाती हैं जो इस demo के आसपास दिख रहे हैं।',
+    ctaNote: 'App Store पर free। हर entry उन Deeper Insights, mood analysis और people mentions को बनाती है जो इस demo के आसपास दिख रहे हैं।',
     restart: 'कोई और शुरुआत आज़माएँ',
     screenshotAlt: 'Empath app का screenshot',
   },
@@ -374,7 +372,7 @@ export const journalingHi: JournalingCopy = {
   },
 
   feature2: {
-    badge: 'AI Intelligence',
+    badge: 'App के अंदर',
     title: '"रुको, ये feeling शुरू कब हुई थी?"',
     sub: 'App खोलिए और बस पूछ लीजिए। आपका भेजा हर message, call और ख़याल याद रखा जाता है और सेकंडों में सामने आ जाता है।',
     memoryTitle: 'Smart Memory Search',
@@ -385,8 +383,8 @@ export const journalingHi: JournalingCopy = {
       'ज़रूरी पलों की instant recall',
       'अपने सफ़र का timeline view',
     ],
-    patternsTitle: 'Pattern Recognition',
-    patternsBody: 'वो patterns देखिए जिन पर कभी ध्यान ही नहीं गया। हमारा AI आपके अनुभवों में triggers, cycles और connections पहचानता है।',
+    patternsTitle: 'Deeper Insights',
+    patternsBody: 'Empath आपकी सारी entries पढ़ता है और जो मिलता है वो लिखकर बताता है: triggers, cycles, और आप कैसा महसूस कर रहे थे और उस वक़्त क्या चल रहा था, उनके बीच के connections।',
     patternsItems: [
       'Emotional triggers पहचानें',
       'व्यवहार के patterns समझें',
@@ -405,7 +403,7 @@ export const journalingHi: JournalingCopy = {
   },
 
   feature3: {
-    badge: 'Analytics',
+    badge: 'Mood analysis',
     title: 'देखिए, आपके Mood पर असल में असर क्या डालता है',
     body: 'आपको ऐसी चीज़ें दिखने लगेंगी जैसे "जिस दिन walk होती है, mood बेहतर रहता है" या "हर गुरुवार को work deadlines मेरी anxiety बढ़ा देती हैं।" ये आपका ही data है, बस सीधे-सादे तरीक़े से दिखाया हुआ।',
     mockTitle: 'Mood Trends',
@@ -421,8 +419,10 @@ export const journalingHi: JournalingCopy = {
     items: [
       { title: 'Daily Mood Tracking', desc: 'आपकी entries से अपने आप sentiment analysis' },
       { title: 'Correlation Analysis', desc: 'जानिए कौन सी activities आपका mood बेहतर करती हैं' },
-      { title: 'जगहें और मौसम', desc: 'देखिए घर पर, काम पर और बादल वाले दिनों में आप कैसा महसूस करते हैं' },
+      { title: 'Location analysis और मौसम', desc: 'देखिए घर पर, काम पर और बादल वाले दिनों में आप कैसा महसूस करते हैं' },
       { title: 'Long-term Trends', desc: 'हफ़्तों और महीनों में अपनी progress देखिए' },
+      { title: 'Journal Map', desc: 'हर entry उसी जगह pin, जहाँ आपने उसे लिखा' },
+      { title: 'Day Colors', desc: 'आपके पिछले 30 दिन अच्छे और मुश्किल दिनों में बँटे, और हर दिन में क्या-क्या आया' },
     ],
   },
 
@@ -560,7 +560,7 @@ export const journalingHi: JournalingCopy = {
   },
 
   howItWorks: {
-    title: 'Message या Call से लिखिए। App में मुड़कर देखिए।',
+    title: 'कहीं भी लिखिए। App में सब देखिए।',
     sub: 'न कोई setup, न कोई नई आदत बनानी है। बस वैसे ही बात कीजिए जैसे दोस्तों से करते हैं।',
     stepLabel: 'Step',
     steps: [
@@ -573,16 +573,16 @@ export const journalingHi: JournalingCopy = {
         desc: 'हर message और call आपके private journal में पहुँच जाती है: transcribed, organized और अपने आप saved। आप बस अपनी ज़िंदगी जीते रहिए।',
       },
       {
-        title: 'मुड़कर देखने के लिए App खोलिए',
-        desc: 'जब पीछे मुड़कर देखना हो, कोई memory दोबारा जीनी हो, या अपने mood patterns और trends देखने हों, तो सब app में आपका इंतज़ार कर रहा है।',
+        title: 'असली मज़े के लिए App खोलिए',
+        desc: 'आपकी entries पर Deeper Insights, हफ़्तों और महीनों की mood analysis, आपने कहाँ लिखा उसका map, आपके दिन उनके रंगों में, उस दिन का मौसम, वो लोग जो बार-बार आते हैं, और एक AI companion जिसने सब पढ़ा है।',
       },
     ],
   },
 
   iosCallout: {
-    kicker: 'iOS app उपलब्ध',
-    title: 'पीछे मुड़कर देखना है? App ले लीजिए',
-    body: 'बात आप message और call से करते हैं। App वो जगह है जहाँ आपका private journal रहता है: सब कुछ दोबारा पढ़िए, पुराने पल search कीजिए और अपने mood patterns को खुलते देखिए।',
+    kicker: 'Empath app',
+    title: 'Message से बात अंदर जाती है। App ही असली experience है।',
+    body: 'जो भी आप लिखते हैं, यहाँ पहुँचता है। Deeper Insights आपकी entries के बीच के dots जोड़ते हैं, mood analysis दिखाती है कि सच में क्या आपको हिलाता है, people mentions बताते हैं कि आपके दिन कौन बनाता है, और आपके AI companion ने हर शब्द पढ़ा है। Journal map हर entry को उसी जगह pin करता है जहाँ आपने लिखा, day colors आपके महीने को अच्छे और मुश्किल दिनों में बाँटते हैं, और उस दिन का मौसम हर entry के साथ रहता है। iPhone पर free।',
     button: 'App Store से Download करें',
   },
 
@@ -698,9 +698,9 @@ export const journalingHi: JournalingCopy = {
 
   finalCta: {
     title: 'जो भी मन में है, बस एक Message दूर है',
-    sub: 'न कोई app सीखना, न खाली page को घूरना। जैसे दोस्त को करते हैं वैसे ही message या call कीजिए, और महीनों नहीं, कुछ ही दिनों में अपने patterns दिखने लगेंगे।',
+    sub: 'Message या call से लिखिए, फिर app खोलिए उस हिस्से के लिए जो Empath को Empath बनाता है: Deeper Insights, mood analysis, और वो लोग जो आपके दिन बनाते हैं।',
     downloadFree: 'App Store से Free Download करें',
-    justSayHi: 'न app, न साइन-अप। बस hi बोल दीजिए',
+    justSayHi: 'बस hi बोल दीजिए',
     noCreditCard: 'कोई credit card नहीं',
     freeForever: 'हमेशा के लिए free',
     fastSetup: '30 सेकंड का setup',

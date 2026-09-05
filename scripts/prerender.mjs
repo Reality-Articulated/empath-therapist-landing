@@ -45,6 +45,9 @@ const LOCALE_CODES = Object.keys(TRANSLATED_LOCALES);
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 const landingCopy = {};
 const callmeCopy = {};
+// English is the master catalog and is not a member of TRANSLATED_LOCALES, so
+// load it explicitly: the `/` and `/app` routes read their SEO from it.
+landingCopy.en = await loadTsExport(join(ROOT, 'src/i18n/copy/journaling.en.ts'), 'journalingEn');
 for (const code of LOCALE_CODES) {
   landingCopy[code] = await loadTsExport(
     join(ROOT, `src/i18n/copy/journaling.${code}.ts`),
@@ -88,19 +91,24 @@ if (!existsSync(join(DIST, 'index.html'))) {
 // whose <SEO /> passes a different canonical (e.g. `/` renders JournalingPage
 // with path="/app" to consolidate to /app).
 const staticRoutes = [
+  // English consumer landing: title/description/keywords come straight from
+  // the catalog (same source React's <SEO /> reads) so they can't drift.
+  // `landing` marks routes that get the prerendered FAQPage schema.
   {
     path: '/',
     canonicalPath: '/app',
-    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
-    description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
-    keywords: "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
+    title: landingCopy.en.seo.title,
+    description: landingCopy.en.seo.description,
+    keywords: landingCopy.en.seo.keywords,
+    landing: 'en',
     alternates: hreflangCluster('/app'),
   },
   {
     path: '/app',
-    title: 'Empath - The App You Never Have to Open | Text, WhatsApp, or Call Your Thoughts',
-    description: "There's a number you can just journal at. WhatsApp it, Telegram it, call it, or have it call you. No app, no sign-up, no blank page. Your entries become mood patterns and insights you can actually see.",
-    keywords: "journal by text, voice journaling, journal without an app, text journaling, WhatsApp journal, journaling by phone call, mood tracking, chat journaling, AI journaling assistant, conversational journaling, journaling plan, journaling habit tracker, can't stop overthinking, no one to talk to, vent without judgment, AI that remembers you, using chatgpt as a therapist, bottling up feelings",
+    title: landingCopy.en.seo.title,
+    description: landingCopy.en.seo.description,
+    keywords: landingCopy.en.seo.keywords,
+    landing: 'en',
     alternates: hreflangCluster('/app'),
   },
   // Localized consumer landing: /<code> and /<code>/app per translated locale,
@@ -112,6 +120,7 @@ const staticRoutes = [
       description: seo.description,
       keywords: seo.keywords,
       htmlLang: TRANSLATED_LOCALES[code].htmlLang,
+      landing: code,
       alternates: hreflangCluster('/app'),
     };
     return [
@@ -428,6 +437,23 @@ function buildHeadMeta(route) {
 
   let articleLd = '';
   let faqLd = '';
+  // Consumer landing (every locale): prerender the same FAQ schema the page
+  // renders so non-JS crawlers index it. main.tsx removes
+  // [data-prerendered-schema] nodes on hydration, so JS crawlers never see it
+  // twice. (The MobileApplication schema lives in index.html, site-wide.)
+  if (route.landing) {
+    const copy = landingCopy[route.landing];
+    const faqSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: copy.faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.link ? `${item.a} ${item.link.text}.` : item.a },
+      })),
+    };
+    faqLd = `\n    <script type="application/ld+json" data-prerendered-schema>${JSON.stringify(faqSchema)}</script>`;
+  }
   if (route.article && route.article.author && route.article.date) {
     const post = route.article.content;
     const articleSchema = {
