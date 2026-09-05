@@ -45,8 +45,8 @@ export const journalingEn = {
   hero: {
     h1Pre: 'The journal you',
     h1Highlight: "won't quit.",
-    sub: "Because it lives wherever you go: just message or call whenever something's on your mind. Empath helps you journal and explore your mind, revealing your patterns over time.",
-    mobileLead: 'Something on your mind? Just call or send a message.',
+    sub: 'Empath is an AI-powered journal and mood tracker. Type, talk, or message your entries. Empath remembers every one, shows you the patterns in your moods, and doubles as an AI companion you can chat with any time.',
+    mobileLead: 'Start your first entry. Just call or send a message.',
     call: 'Call',
     text: 'Text',
     orFavoriteApp: "Or use the app you're already in",
@@ -54,7 +54,7 @@ export const journalingEn = {
     wantInsights: 'Want mood trends & insights?',
     getApp: 'Get the Free App',
     appBenefits: 'Mood charts, pattern detection, Apple Health sync',
-    desktopLead: "Say what's on your mind with a call or a message. No app to download, no account to create.",
+    desktopLead: 'Start your first entry right now. Message or call Empath like you\'d text a friend.',
     textToJournal: 'Text your thoughts',
     callAndTalk: 'Call & just talk',
     textUsAt: 'Text us at',
@@ -801,93 +801,77 @@ export const journalingEn = {
 };
 
 // PostHog experiment `landing-hero-copy-3` (English only, per-locale
-// translation intentionally skipped): swaps ONLY the hero H1 + subheadline,
+// translation intentionally skipped): swaps ONLY the hero H1,
 // same mechanism as the retired v2 `heroExperiment`. Deliberately NOT a key
 // on `journalingEn` / `JournalingCopy` — keeping it a standalone export means
 // the other 6 locale catalogs never need to implement it. `control` carries
 // forward the v2 winner ("tired of re-explaining to ChatGPT") as the v3
 // anchor; JournalingPage falls back to `hero` (the true default) whenever
 // locale isn't 'en' or the variant key doesn't match one of these.
-export const heroExperimentV3: Record<string, { h1Pre: string; h1Highlight: string; sub: string }> = {
+export const heroExperimentV3: Record<string, { h1Pre: string; h1Highlight: string }> = {
   control: {
     h1Pre: 'Tired of re-explaining yourself',
     h1Highlight: 'to ChatGPT?',
-    sub: 'Empath already knows you. It lives in WhatsApp, Telegram, Messenger, and Instagram, remembers every conversation, and picks up right where you left off. Just message or call whenever something is on your mind.',
   },
   'no-one-to-talk-to': {
     h1Pre: 'No one to talk to',
     h1Highlight: 'at 2 AM?',
-    sub: "Empath is always up. Just text or call whenever your brain won't stop, and it remembers everything the next time you need it.",
   },
   overthinking: {
     h1Pre: "Can't stop",
     h1Highlight: 'overthinking?',
-    sub: 'Get it out of your head and into a message. Empath listens, remembers, and helps you spot the pattern behind the spiral.',
   },
   'too-much': {
     h1Pre: 'Afraid of being',
     h1Highlight: 'too much?',
-    sub: "Empath never gets tired of you, never judges, and never forgets. Just message or call whenever something's on your mind.",
   },
   doomscrolling: {
     h1Pre: 'Doomscrolling instead of',
     h1Highlight: 'dealing with it?',
-    sub: 'Close the app and open a text thread instead. Empath listens, remembers, and helps you see the pattern behind the scroll.',
   },
   'high-functioning': {
     h1Pre: 'Fine on the outside,',
     h1Highlight: 'not so fine inside?',
-    sub: "You don't have to perform for Empath. Just message or call whenever something's actually on your mind, and it remembers every time.",
   },
   'bottling-up': {
     h1Pre: 'Tired of bottling',
     h1Highlight: 'it all up?',
-    sub: "Let it out in a text instead. Empath listens without judgment and remembers what you said, so you never start from zero.",
   },
   'faking-it': {
     h1Pre: "Feel like you're",
     h1Highlight: 'faking it?',
-    sub: "Say the real thing to Empath instead. It remembers your patterns and helps you see what's actually true, not just what you perform.",
   },
   'no-one-gets-it': {
     h1Pre: 'Feel like no one',
     h1Highlight: 'actually gets it?',
-    sub: 'Empath does, eventually. It remembers everything you tell it and reflects your patterns back, so you feel less alone in your own head.',
   },
   'googling-feelings': {
     h1Pre: 'Googling your feelings',
     h1Highlight: 'at 3 AM?',
-    sub: 'Skip the search results. Just tell Empath instead, and it actually remembers you the next time.',
   },
   'ai-is-normal-now': {
     h1Pre: "Everyone's talking to AI now.",
     h1Highlight: 'Why not about this?',
-    sub: "Empath isn't a chatbot with amnesia. It remembers every conversation and helps you see the patterns in how you feel.",
   },
   'ai-forgets-you': {
     h1Pre: 'Tired of AI',
     h1Highlight: 'that forgets you?',
-    sub: 'Empath remembers every conversation, every mood, every person you mention. No more starting over.',
   },
   'ai-knows-you': {
     h1Pre: 'Wish your AI',
     h1Highlight: 'actually knew you?',
-    sub: 'Empath does. It remembers your history and helps you see yourself clearer over time.',
   },
   'chatgpt-therapist': {
     h1Pre: 'Using ChatGPT as',
     h1Highlight: 'your therapist?',
-    sub: 'Empath is built for exactly that. It remembers everything, never resets, and never judges what you tell it.',
   },
   'ai-chats-disappear': {
     h1Pre: 'Your AI chats',
     h1Highlight: "don't have to disappear",
-    sub: 'Empath remembers every conversation permanently, and turns them into a private journal you can actually look back on.',
   },
   'venting-chatbot': {
     h1Pre: 'Venting into a chatbot',
     h1Highlight: 'that forgets by tomorrow?',
-    sub: "Empath remembers. Every entry becomes part of your story, not just tokens it throws away.",
   },
 };
 

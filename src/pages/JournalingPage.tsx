@@ -76,7 +76,8 @@ export default function JournalingPage() {
   const locale = useLocale();
   // PostHog experiment `landing-hero-copy-3`: 16-arm test (the v2 winner
   // "chatgpt-context" carried forward as `control`, plus 15 new challengers)
-  // swapping the hero H1 + subheadline. English-only — translation was
+  // swapping the hero H1 only (the subheadline that says what Empath is
+  // is shared by every arm). English-only — translation was
   // skipped, so `heroExperimentV3` isn't a member of the locale-typed copy
   // catalog. Anything else (non-English locale, control, flag missing, flags
   // not yet loaded, bots, unmatched variant key) renders the default hero —
@@ -87,7 +88,7 @@ export default function JournalingPage() {
   // retired once `chatgpt-context` won and became v3's `control`.)
   const heroVariant = useFeatureFlagVariantKey('landing-hero-copy-3');
   const heroHeadline =
-    locale === 'en' && heroVariant && heroExperimentV3[heroVariant] ? heroExperimentV3[heroVariant] : c.hero;
+    locale === 'en' && typeof heroVariant === 'string' && heroExperimentV3[heroVariant] ? heroExperimentV3[heroVariant] : c.hero;
   const refCode = getChannelRefCode();
   // The phone number only takes US calls — hide the call CTA entirely for
   // everyone else rather than showing a button that won't work. Defaults to
@@ -228,7 +229,7 @@ export default function JournalingPage() {
           </motion.h1>
 
           <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            {heroHeadline.sub}
+            {c.hero.sub}
           </motion.p>
 
           {isMobile ? (
