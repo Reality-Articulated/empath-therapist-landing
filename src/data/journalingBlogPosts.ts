@@ -92,6 +92,193 @@ export interface JournalingBlogPost {
 
 export const journalingBlogPosts: JournalingBlogPost[] = [
 ...kinzerJournalingBlogPosts,
+// Article 44
+{
+  id: 'j44',
+  title: 'What to Talk About in Therapy When Your Mind Goes Blank',
+  seoTitle: 'What to Talk About in Therapy (When You Draw a Blank) | Empath',
+  metaDescription:
+    'Running out of things to say in therapy is the most common problem in the room. Why your mind goes blank in the chair, what to bring if you are new, what to bring if you have been going for years, and how to never arrive empty again.',
+  excerpt:
+    '“So, what would you like to talk about today?” is the hardest question in therapy, and most people answer it badly. Not because nothing happened, but because the week is genuinely hard to recall from the calm of that chair. Here is what to bring, and how to stop arriving empty.',
+  author: 'Empath Team',
+  date: 'October 1, 2026',
+  readTime: '9 min read',
+  category: 'Mental Wellness',
+  slug: 'what-to-talk-about-in-therapy',
+  keyword: 'what to talk about in therapy',
+  featuredRank: 6,
+  relatedSlugs: ['best-journaling-apps-therapy', 'science-behind-journaling', 'journaling-for-anxiety'],
+  answerSummary:
+    'Most people run out of things to say in therapy, and it is rarely because nothing happened. It is because the week’s material is hard to recall from the calm of the chair, a known effect called state-dependent memory. The fix is a record kept between sessions: a handful of dated notes turns a blank mind into a short, specific agenda.',
+  keyTakeaways: [
+    'Drawing a blank is not a sign therapy is not working. Memory is state-dependent: you recall a feeling best when you are back in the state you felt it, and a therapist’s office is deliberately calm, which is exactly the wrong state for retrieving a bad Tuesday.',
+    'If you are new to therapy, you do not need a topic. You need a direction. The useful thing to bring is the recurring thing, not the dramatic thing.',
+    'If you have been going a while, the risk is different: sessions drift into status updates. “Work was busy, I slept badly” uses the hour without spending it.',
+    'The fix is not a better memory, it is a record. Entries written during the week, in the state you were actually in, hold the detail the chair cannot reach.',
+  ],
+  intro:
+    'There is a specific silence that happens about ninety seconds into a therapy session. Your therapist asks what you would like to talk about. You pay real money for this hour, you have been looking forward to it, and your mind is completely, humiliatingly empty.\n\nAlmost everyone assumes this means something is wrong with them, or that they have run out of problems, or that therapy has stopped working. It usually means none of those things. The blankness has a mechanism, it is extremely common, and it is fixable without becoming a more disciplined or insightful person. This piece covers why it happens, what to bring if you are two sessions in, what to bring if you are two years in, and how to arrive with something real every time.',
+  sections: [
+    {
+      heading: 'Why Your Mind Goes Blank the Moment You Sit Down',
+      body: [
+        'Memory is not a filing cabinet you can open at will. It is heavily cued by state and context. The classic demonstration came from Godden and Baddeley in 1975, who had deep-sea divers learn word lists either on dry land or twenty feet underwater, then tested them in both places. Divers recalled far more when they were tested in the same environment where they had learned, and lost a significant chunk when the setting changed. Your brain files things with the context attached.',
+        'A therapist’s office is engineered to be the opposite of the context where your week happened. It is quiet, warm, slightly too comfortable, and nobody is asking you for anything. That is good for the work and terrible for recall. The 11pm spiral on Tuesday, the thing your sister said that you replayed for an hour, the flat grey Sunday that you could not explain, all of it was encoded in a state you are not currently in. You are not forgetting because you do not care. You are being asked to retrieve underwater words on dry land.',
+        'There is a second, sneakier version of this problem: the good week. You walk in feeling genuinely fine, so nothing feels urgent enough to raise, and you end up reporting that things have been okay. Two days later the same old pattern shows up again and you realise you had a perfect chance to look at it and spent it saying things were fine. Feeling calm in the chair is not evidence that the week was calm. It is just evidence about the chair.',
+      ],
+    },
+    {
+      heading: 'If You Are Just Starting Therapy',
+      body: [
+        'The most common mistake in early sessions is treating the question as a request for a topic. It is not. Your therapist is not asking you to produce a well-formed issue with a beginning and an end. They are asking where to point the hour.',
+        'So bring a direction instead. “I want to understand why I get so defensive with my mother” is a direction. “I keep taking jobs I do not want and I do not know what that is about” is a direction. Neither requires you to have an insight ready. Both give an experienced clinician somewhere to start, and both will survive several sessions, which means you are not starting from zero every week.',
+        'The other early-session instinct worth resisting is saving the big thing for when you trust them more. People routinely spend six sessions on context they think is required groundwork and then mention the actual reason they came in session seven. You do not owe your therapist a chronological account of your life. You are allowed to start in the middle, with the thing that is loudest.',
+        'And it is completely fine to open with the blankness itself. “I could not think of anything to bring today” is real information about your week, your mood, or how much you are avoiding. Good therapists find that genuinely useful rather than disappointing.',
+      ],
+    },
+    {
+      heading: 'If You Have Been Going for a While',
+      body: [
+        'Long-running therapy fails differently. It rarely collapses. It flattens. The session becomes a weekly debrief: what happened, who annoyed you, how work is going. Pleasant, mildly useful, and not what the hour is for.',
+        'The signal that this is happening is the shape of what you bring. Events are a status update. Patterns are therapy. “My partner and I argued on Thursday” is an event. “I notice I go completely silent in arguments instead of saying the thing, and I did it again Thursday” is a pattern, and it is a pattern a therapist can actually work with.',
+        'Patterns are much harder to notice in your own life than events are, for an obvious reason: an event happens once and is memorable, while a pattern is spread across weeks and each instance feels unremarkable on its own. The third time you cancel plans at the last minute does not feel like data. It feels like being tired on a Friday. Nobody holds six weeks of small moments in working memory well enough to see the line through them.',
+        'This is the part worth being honest about: the main reason people plateau in therapy is not a bad therapist or a lack of effort. It is that the raw material lives in a week that nobody wrote down.',
+      ],
+      callout: {
+        text: 'The flip side of this problem: when writing about the same thing stops helping and starts keeping you there.',
+        linkText: 'Read: Why journaling can keep you stuck',
+        slug: 'why-journaling-can-keep-you-stuck',
+      },
+    },
+    {
+      heading: 'The Fix Is Not a Better Memory. It Is a Record.',
+      body: [
+        'If the problem is that the chair cannot reach Tuesday, the solution is to capture Tuesday on Tuesday. This is unglamorous and it works, for two separate reasons.',
+        'The first is that writing in the moment catches the state along with the content. You are not reconstructing how the argument felt from a calm Thursday; you wrote it while your hands were still shaking. That version is specific, and specificity is what a therapist can use. The second is that naming a feeling in words does something measurable on its own. In a UCLA study, Matthew Lieberman and colleagues found that attaching a word to an emotion reduced activity in the amygdala, the brain’s threat-detection system. James Pennebaker’s expressive-writing research, running since the mid-1980s, found repeated physical and psychological benefits from writing about difficult experiences for a few minutes at a time.',
+        'So the between-sessions record does double duty. It helps during the week, and it is the agenda when you sit down. The only real obstacle is that keeping it is work, and the weeks when you most need the record are exactly the weeks you have least capacity to maintain one.',
+      ],
+      callout: {
+        text: 'The fuller research case for what writing actually does to a feeling.',
+        linkText: 'Read: The science behind journaling',
+        slug: 'science-behind-journaling',
+      },
+    },
+    {
+      heading: 'What a Week of Notes Actually Has to Do',
+      body: [
+        'Most people who try to keep therapy notes do it in the notes app on their phone, which almost works. The notes get written. What never happens is the part at the end, where someone reads six scattered notes back and works out what the throughline was. You arrive at the session with a wall of text and still no agenda.',
+        'A record that is actually useful before a session has to do four things: be capturable in the moment you are in, keep the date and the feeling attached, survive the weeks you write nothing, and hand you something short and specific at the end. That last one is the step everyone skips.',
+      ],
+      table: {
+        title: 'Keeping therapy notes: a notes app vs. Empath',
+        competitorName: 'Notes app',
+        rows: [
+          {
+            feature: 'Capturing a bad moment at 11pm',
+            empath: 'Text, voice note, or message it on WhatsApp or Telegram. No app to open, no blank page.',
+            competitor: 'Open app, new note, type it, name it, remember where you put it.',
+          },
+          {
+            feature: 'Knowing how you felt, not just what happened',
+            empath: 'Every entry is tagged with an emotion and an intensity automatically.',
+            competitor: 'Only if you remember to write the feeling down too.',
+          },
+          {
+            feature: 'Seeing a pattern across six weeks',
+            empath: 'Recurring themes, people, and places are surfaced for you.',
+            competitor: 'You scroll and try to remember.',
+          },
+          {
+            feature: 'Arriving with an agenda',
+            empath: 'Talking points are ready the evening before the day you picked.',
+            competitor: 'You re-read everything in the waiting room.',
+          },
+          {
+            feature: 'Privacy',
+            empath: 'Entries are encrypted. Nothing is sent to your therapist unless you choose to show them.',
+            competitor: 'Depends on your cloud settings.',
+          },
+        ],
+        caption:
+          'Talking points are a Premium feature in Empath. Capturing entries by text, voice, or message is not.',
+      },
+    },
+    {
+      heading: 'Why Empath Is the Best App to Use Alongside Therapy',
+      body: [
+        'Most journaling apps are built for the journaling. Empath is built for the gap between sessions, which is a different problem with different requirements, and it is the reason we think it is the best app to use alongside therapy rather than just the best place to write.',
+        'The first requirement is that capture has to be nearly free. On a bad week you will not open an app and face a blank page. You will, however, send a voice note. Empath takes entries by text, by voice, by WhatsApp, Telegram, Instagram or Messenger, or by picking up the phone when it calls you, and turns whatever you send into a dated, titled, emotion-tagged entry. The entries you make on the worst days are the ones therapy most needs, and they are the ones a blank page reliably loses.',
+        'The second is that something has to read the week back for you. This is what Talking Points does. You tell Empath how often you want them and which day, bounded to once a week at most, and the evening before that day a short set is ready: the themes that kept returning, the people who show up in most of your hard entries, the question you meant to ask and forgot, the thing that went better than you expected. Each one cites the entries it came from, so you can tap straight through and read your own words rather than taking the summary on trust. You can reorder them into the order you actually want to raise them.',
+        'If you wrote nothing at all since the last time, it widens the window and brings patterns from the last couple of months instead, and says so plainly. A quiet week is not the same as nothing to talk about.',
+        'The third requirement is privacy, and it is non-negotiable. Talking points are notes for you. They are never sent to your therapist, never shared, and the entries behind them are encrypted. What you bring into the room, and how you say it, stays your decision.',
+      ],
+    },
+    {
+      heading: 'What to Bring If You Have Nothing Written Down Yet',
+      body: [
+        'If your session is in an hour and there is no record to draw on, these tend to produce real sessions rather than status updates. Pick one, not five.',
+        'The thing you have thought about more than once this week and dismissed each time. The conversation you are still replaying. The feeling you could not name when it happened. Something you are avoiding talking about, which you can raise as exactly that, without explaining it yet. A pattern you have noticed and never said out loud. Something that went better than you expected, which is worth as much session time as something that went badly and gets a fraction of it. Something you are afraid your therapist will think is petty. A reaction that felt disproportionate at the time.',
+        'And if the honest answer is still nothing, say that. “I could not find anything to bring and I am not sure whether that is a good week or avoidance” is a better opening than fifteen minutes of weather. It is also, in our experience, the sentence that most often turns into the real session.',
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: 'What should I talk about in my first therapy session?',
+      answer:
+        'You do not need a prepared topic. Bring a direction instead: the thing that made you book the appointment, said as plainly as you can manage. “I want to understand why I keep doing X” is enough for an experienced therapist to work with. You also do not need to give your life story in order first. Starting in the middle, with whatever is loudest, is normal and useful.',
+    },
+    {
+      question: 'Is it normal to have nothing to say in therapy?',
+      answer:
+        'Very. Memory is state-dependent, meaning you recall a feeling best when you are back in the state you felt it, and a therapist’s office is deliberately calm. That is the wrong state for retrieving a hard Tuesday. Drawing a blank usually reflects the setting rather than an absence of material, and saying so out loud is a legitimate way to open a session.',
+    },
+    {
+      question: 'How do I stop running out of things to talk about in therapy?',
+      answer:
+        'Keep a short record between sessions rather than trying to remember on the day. A few dated notes written in the moment hold detail that the calm of the chair cannot reach, and reading them back before you go turns a blank mind into a specific agenda. Apps like Empath will do the reading-back part for you and hand you a short set of talking points.',
+    },
+    {
+      question: 'Should I write things down before a therapy session?',
+      answer:
+        'Yes, and it is one of the highest-return habits in therapy. Writing during the week captures the feeling at full strength instead of a reconstruction, and it means the hour starts on the real material rather than on remembering. Patterns in particular are almost impossible to spot without a record, because each instance feels unremarkable on its own.',
+    },
+    {
+      question: 'Can I show my therapist my journal?',
+      answer:
+        'You can, and some people find it useful to read one entry aloud rather than summarise it. It should always be a choice. In Empath, entries are encrypted and talking points are private notes for you. Nothing is shared with a therapist unless you decide to show them.',
+    },
+    {
+      question: 'Is Empath a replacement for therapy?',
+      answer:
+        'No. Empath is built to make therapy more useful, not to substitute for it. It captures how you were actually feeling during the week, by text, voice, or message, and surfaces the patterns worth raising. The work still happens in the room with a trained human.',
+    },
+  ],
+  sources: [
+    {
+      title: 'Context-dependent memory in two natural environments: On land and underwater',
+      authors: 'Godden, D. R., & Baddeley, A. D.',
+      publication: 'British Journal of Psychology',
+      year: 1975,
+      url: 'https://doi.org/10.1111/j.2044-8295.1975.tb01468.x',
+    },
+    {
+      title: 'Putting feelings into words: Affect labeling disrupts amygdala activity in response to affective stimuli',
+      authors: 'Lieberman, M. D., Eisenberger, N. I., Crockett, M. J., Tom, S. M., Pfeifer, J. H., & Way, B. M.',
+      publication: 'Psychological Science',
+      year: 2007,
+      url: 'https://doi.org/10.1111/j.1467-9280.2007.01916.x',
+    },
+    {
+      title: 'Confronting a traumatic event: Toward an understanding of inhibition and disease',
+      authors: 'Pennebaker, J. W., & Beall, S. K.',
+      publication: 'Journal of Abnormal Psychology',
+      year: 1986,
+      url: 'https://doi.org/10.1037/0021-843X.95.3.274',
+    },
+  ],
+},
 // Article 43
 {
   id: 'j43',
@@ -107,7 +294,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'Mental Wellness',
   slug: 'lindsay-clancy-postpartum-mental-health',
   keyword: 'lindsay clancy postpartum psychosis',
-  featuredRank: 6,
+  featuredRank: 7,
   relatedSlugs: ['how-to-journal-intrusive-thoughts-without-rumination', 'journaling-for-anxiety', 'science-behind-journaling'],
   answerSummary:
     'The Lindsay Clancy case put postpartum psychosis in the national spotlight and reignited a conversation about how often new parents suffer in silence. Roughly 1 in 5 experience postpartum depression or anxiety, and psychosis, though rare, is a medical emergency. Journaling will not treat either one, but a habit of naming what you feel, in Empath or anywhere else, makes the pattern visible before it becomes a crisis.',
@@ -881,7 +1068,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'empath-vs-day-one',
   keyword: 'empath vs day one',
-  featuredRank: 9,
+  featuredRank: 10,
   relatedSlugs: ['empath-vs-apple-journal', 'empath-vs-rosebud', 'best-journaling-apps'],
   answerSummary:
     'Choose Day One if you love writing, want a beautiful long-term archive of entries, photos, and memories, and do not need AI feedback. Choose Empath if the blank page is what stops you: you journal by phone call, text message, or typing, and the AI organizes entries and surfaces emotional patterns over time.',
@@ -1053,7 +1240,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'empath-vs-rosebud',
   keyword: 'empath vs rosebud',
-  featuredRank: 7,
+  featuredRank: 8,
   relatedSlugs: ['best-chat-journaling-apps', 'empath-vs-day-one', 'best-journaling-apps'],
   answerSummary:
     'Rosebud and Empath are both AI journals with different centers of gravity. Rosebud is an interactive coach: you type, and it asks thoughtful follow-up questions in the moment. Empath is capture-first: you journal by phone call, text, or typing, and the AI transcribes, tracks mood, and surfaces patterns afterward. Pick Rosebud for guided sessions, Empath for frictionless capture and longitudinal insight.',
@@ -3223,7 +3410,7 @@ export const journalingBlogPosts: JournalingBlogPost[] = [
   category: 'App Reviews',
   slug: 'best-ai-journaling-apps',
   keyword: 'best AI journaling apps',
-  featuredRank: 8,
+  featuredRank: 9,
   relatedSlugs: ['best-journaling-apps', 'best-chat-journaling-apps', 'empath-vs-rosebud'],
   answerSummary:
     'The best AI journaling app depends on how you reflect: Empath leads for multimodal voice-and-text journaling with HIPAA-compliant privacy and longitudinal pattern detection, Rosebud is the strongest chat-first reflection partner, and Mindsera suits users who want coaching frameworks. Match the interaction model to your style, verify the privacy policy, and trial free tiers before paying.',
