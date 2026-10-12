@@ -563,7 +563,7 @@ export default function ClientInfoPage() {
           <div className="flex items-center justify-center gap-8 flex-wrap">
             <div className="flex items-center gap-2 text-stone-700">
               <Shield className="w-5 h-5 text-[#1b8af1]" />
-              <span className="font-bold text-sm">HIPAA Secure</span>
+              <span className="font-bold text-sm">Encrypted &amp; Private</span>
             </div>
             <span className="text-stone-300">•</span>
             <div className="flex items-center gap-2 text-stone-700">
@@ -927,7 +927,7 @@ export default function ClientInfoPage() {
                     'Choose what to share',
                     'Unlink anytime with no penalty',
                     'Data remains yours forever',
-                    'HIPAA-compliant security',
+                    'Encrypted at rest and in transit',
                     'Switch therapists easily'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -949,7 +949,7 @@ export default function ClientInfoPage() {
                 <span className="text-stone-400">•</span>
                 <div className="flex items-center gap-2">
                   <Shield className="w-6 h-6 text-green-400" />
-                  <span className="font-bold">HIPAA Compliant</span>
+                  <span className="font-bold">Encrypted &amp; Private</span>
                 </div>
                 <span className="text-stone-400">•</span>
                 <div className="flex items-center gap-2">
@@ -983,7 +983,7 @@ export default function ClientInfoPage() {
                 <ul className="space-y-5">
                   {[
                     "Unlimited Voice & Text Journaling",
-                    "Secure HIPAA-Compliant Vault",
+                    "Secure Encrypted Vault",
                     "Personal Progress Tracking",
                     "Direct Integration with Your Therapist",
                     "Mobile App (iOS) + Phone & Messaging Access"
@@ -1077,7 +1077,7 @@ export default function ClientInfoPage() {
           <div className="space-y-4">
             <FAQItem 
               question="Is my data safe?" 
-              answer="Yes. Empath is fully HIPAA compliant, which means we meet the strictest standards for data protection in healthcare. Your data is encrypted and only accessible to you and your therapist." 
+              answer="Your data is encrypted at rest and in transit and is never used to train AI models. Only you and the therapist you choose to link can see it, and you decide what is shared. Empath is not currently HIPAA certified, so it works alongside your therapist's records rather than replacing them." 
             />
             <FAQItem 
               question="Does this replace my therapy sessions?" 

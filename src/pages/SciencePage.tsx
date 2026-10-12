@@ -218,7 +218,7 @@ const principles = [
     icon: Shield,
     title: 'Privacy by Default',
     description:
-      'Client data is encrypted at rest and in transit, HIPAA-compliant, and never used for model training. Clients control what is shared with their therapist versus kept private. Therapists see only their own clients\' data.',
+      'Client data is encrypted at rest and in transit and never used for model training. Clients control what is shared with their therapist versus kept private. Therapists see only their own clients\' data.',
   },
 ];
 

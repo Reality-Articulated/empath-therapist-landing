@@ -41,7 +41,7 @@ export const journalingDe: JournalingCopy = {
   },
 
   trust: {
-    hipaa: 'HIPAA-sicher',
+    privacy: 'Verschlüsselt & privat',
     ai: 'KI-gestützte Erkenntnisse',
     loved: 'Von Tausenden geliebt',
   },

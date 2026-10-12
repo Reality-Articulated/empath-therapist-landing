@@ -42,7 +42,7 @@ export const journalingHi: JournalingCopy = {
   },
 
   trust: {
-    hipaa: 'HIPAA सुरक्षित',
+    privacy: 'एन्क्रिप्टेड और निजी',
     ai: 'AI-Powered Insights',
     loved: 'हज़ारों लोगों का भरोसा',
   },

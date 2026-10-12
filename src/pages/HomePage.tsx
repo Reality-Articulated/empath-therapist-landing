@@ -4,8 +4,11 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import howitworksPng from '../../public/howitworks.png';
 import howitworksWebp from '../../public/optimized/howitworks.webp';
+import posthog from 'posthog-js';
 import SEO from '../components/SEO';
 import FAQItem from '../components/FAQItem';
+import TherapyLoopDiagram from '../components/TherapyLoopDiagram';
+import { openSupportChat } from '../utils/supportChat';
 
 import {
   Brain,
@@ -22,8 +25,24 @@ import {
   FileCheck,
   Ban,
   ChevronRight,
+  Mail,
+  MessageSquare,
+  CalendarDays,
   X
 } from 'lucide-react';
+
+// Google Calendar appointment schedule for the 15-minute demo. The previous
+// schedule lived on a retired account and now returns Google's "not found"
+// page, so this stays null until a new schedule exists under div@myempath.co:
+// create it in Google Calendar → Appointment schedules → Share → "Website
+// embed", then paste the `...?gv=true` URL here. While null, the modal falls
+// back to an email + live-chat request flow that reaches the same inbox.
+const DEMO_BOOKING_URL: string | null = null;
+const DEMO_CONTACT_EMAIL = 'div@myempath.co';
+const DEMO_MAILTO = `mailto:${DEMO_CONTACT_EMAIL}?subject=${encodeURIComponent('15-minute Empath demo')}&body=${encodeURIComponent(
+  "Hi Div,\n\nI'd like to book a 15-minute Empath demo.\n\nName:\nPractice:\nA few times that work for me (with time zone):\n"
+)}`;
+const DEMO_CHAT_PREFILL = "Hi! I'd like to book a 15-minute Empath demo. A few times that work for me: ";
 
 // Animation variants
 const fadeIn = {
@@ -153,8 +172,8 @@ const faqs = [
     a: "Very well, because there's nothing new to learn. Clients text or send a voice note on WhatsApp or Telegram, apps already open on their phone, so engagement holds up in ways a dedicated homework app never did."
   },
   {
-    q: "Is Empath HIPAA compliant?",
-    a: "Yes. Client data is encrypted at rest and in transit, we sign a Business Associate Agreement (BAA) with every practice, and none of it is used to train AI models. Access is limited to the therapist and the client."
+    q: "How is client data protected?",
+    a: "Client data is encrypted at rest and in transit, none of it is used to train AI models, and access is limited to the client and their therapist. Clients choose what is shared with you. Empath is not currently HIPAA certified, so treat it as a supplementary reflection tool alongside your clinical records, not as a system of record."
   },
   {
     q: "Does Empath try to replace the therapist?",
@@ -195,7 +214,7 @@ export default function HomePage() {
   <div className="flex-grow overflow-x-hidden">
       <SEO
         title="Empath for Therapists | Between-Session AI Insights"
-        description="Empath captures what happens between sessions so therapists can see how clients are doing in real life, not just what they remember to share. AI-powered insights, secure and HIPAA-aligned."
+        description="Empath captures what happens between sessions so therapists can see how clients are doing in real life, not just what they remember to share. AI-powered insights, secure and private by design."
         path="/therapist"
         keywords="therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management"
       />
@@ -296,12 +315,12 @@ export default function HomePage() {
               >
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-indigo-600" aria-hidden="true" />
-                  HIPAA Compliant
+                  Encrypted at Rest &amp; in Transit
                 </span>
                 <span className="hidden sm:inline text-slate-300">•</span>
                 <span className="flex items-center gap-2">
                   <FileCheck className="w-4 h-4 text-indigo-600" aria-hidden="true" />
-                  BAA Included
+                  Clients Control What's Shared
                 </span>
                 <span className="hidden sm:inline text-slate-300">•</span>
                 <span className="flex items-center gap-2">
@@ -332,7 +351,7 @@ export default function HomePage() {
             transition={{ type: "spring", damping: 25 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Schedule Your Clinical Demo</h2>
+              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Book Your 15-Minute Demo</h2>
               <motion.button
                 onClick={() => setShowCalendar(false)}
                 className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
@@ -343,14 +362,53 @@ export default function HomePage() {
                 <X size={20} aria-hidden="true" />
               </motion.button>
             </div>
-            <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true"
-              style={{ border: 0 }}
-              width="100%"
-              height="600"
-              frameBorder="0"
-              className="rounded-lg"
-            />
+            {DEMO_BOOKING_URL ? (
+              <iframe
+                src={DEMO_BOOKING_URL}
+                title="Pick a time for your Empath demo"
+                style={{ border: 0 }}
+                width="100%"
+                height="600"
+                className="rounded-lg"
+              />
+            ) : (
+              <div className="grid md:grid-cols-2 gap-4">
+                <p className="md:col-span-2 text-slate-600 font-light leading-relaxed">
+                  Fifteen minutes with Div, Empath's founder: a walk through the client experience and your dashboard, then your questions.
+                  Tell us a few times that work and we'll confirm within a day.
+                </p>
+                <a
+                  href={DEMO_MAILTO}
+                  onClick={() => posthog.capture('therapist_demo_email_clicked')}
+                  className="flex items-start gap-4 rounded-xl border-2 border-slate-900 bg-slate-900 text-white p-5 hover:bg-slate-800 transition-colors"
+                >
+                  <Mail className="w-6 h-6 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>
+                    <span className="block font-medium">Email a few times that work</span>
+                    <span className="block text-sm text-slate-300 mt-1">Opens a pre-filled note to {DEMO_CONTACT_EMAIL}</span>
+                  </span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    posthog.capture('therapist_demo_chat_clicked');
+                    setShowCalendar(false);
+                    openSupportChat(DEMO_CHAT_PREFILL);
+                  }}
+                  className="flex items-start gap-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 p-5 hover:border-slate-900 transition-colors text-left cursor-pointer"
+                >
+                  <MessageSquare className="w-6 h-6 flex-shrink-0 mt-0.5 text-indigo-600" aria-hidden="true" />
+                  <span>
+                    <span className="block font-medium">Chat with us now</span>
+                    <span className="block text-sm text-slate-500 mt-1">Ask anything first, or book the demo right in the chat</span>
+                  </span>
+                </button>
+                <p className="md:col-span-2 flex items-center gap-2 text-xs text-slate-400 mt-2">
+                  <CalendarDays className="w-4 h-4" aria-hidden="true" />
+                  Prefer to write directly? <a href={`mailto:${DEMO_CONTACT_EMAIL}`} className="underline hover:text-slate-600">{DEMO_CONTACT_EMAIL}</a>
+                </p>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}
@@ -762,6 +820,11 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
+      {/* ============ 4b. HOW IT ALL FITS TOGETHER (STATIC FLOW) ============ */}
+      <AnimatedSection className="py-24 bg-white border-y border-slate-100">
+        <TherapyLoopDiagram />
+      </AnimatedSection>
+
       {/* ============ 5. CLINICAL FEATURES ============ */}
       <AnimatedSection className="py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -870,6 +933,18 @@ export default function HomePage() {
               <FAQItem key={item.q} question={item.q} answer={item.a} />
             ))}
           </motion.div>
+
+          <motion.div variants={fadeIn} className="text-center mt-10">
+            <p className="text-slate-600 font-light mb-4">Something we didn't cover?</p>
+            <button
+              type="button"
+              onClick={() => openSupportChat('Question about Empath for my practice: ')}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer font-medium"
+            >
+              <MessageSquare className="w-5 h-5" aria-hidden="true" />
+              Ask us in chat
+            </button>
+          </motion.div>
         </div>
       </AnimatedSection>
 
@@ -920,6 +995,22 @@ export default function HomePage() {
           </motion.div>
         </div>
       </AnimatedSection>
+
+      {/* Floating live-chat entry point (Crisp loads lazily on first click) */}
+      <motion.button
+        type="button"
+        onClick={() => openSupportChat('Question about Empath for my practice: ')}
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 pl-4 pr-5 py-3 rounded-full bg-slate-900 text-white shadow-2xl hover:bg-slate-800 transition-colors cursor-pointer text-sm font-medium"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        aria-label="Chat with us about Empath for your practice"
+      >
+        <MessageSquare className="w-5 h-5" aria-hidden="true" />
+        Questions? Chat with us
+      </motion.button>
     </div>
   );
 }

@@ -390,7 +390,7 @@ export default function JournalingPage() {
           <div className="flex items-center justify-center gap-8 flex-wrap">
             <div className="flex items-center gap-2 text-stone-700">
               <Shield className="w-5 h-5 text-[#1b8af1]" />
-              <span className="font-bold text-sm">{c.trust.hipaa}</span>
+              <span className="font-bold text-sm">{c.trust.privacy}</span>
             </div>
             <span className="text-stone-300">•</span>
             <div className="flex items-center gap-2 text-stone-700">

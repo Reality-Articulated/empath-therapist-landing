@@ -451,7 +451,7 @@ export default function TherapyValueCalculator() {
           <div className="mt-12 text-center">
             <div className="inline-flex items-center gap-2 text-gray-600">
               <Shield className="w-5 h-5" />
-              <span className="text-sm">HIPAA-compliant and secure</span>
+              <span className="text-sm">Encrypted and private by design</span>
             </div>
           </div>
         </motion.div>

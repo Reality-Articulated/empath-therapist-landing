@@ -40,7 +40,7 @@ export const journalingIt: JournalingCopy = {
   },
 
   trust: {
-    hipaa: 'Sicurezza HIPAA',
+    privacy: 'Crittografato e privato',
     ai: 'Insight basati su AI',
     loved: 'Amato da migliaia di persone',
   },

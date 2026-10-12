@@ -30,7 +30,7 @@ The core insight: most journaling apps fail because they require opening another
 - **Journaling plans**: Set a daily or weekly cadence with forgiving streaks (grace days), track progress, and get adaptive reminders by push, SMS, or email that skip themselves on days you've already journaled.
 - **Memories**: Entries accumulate into a searchable, queryable memory of your patterns, themes, and history.
 - **Insights**: AI surfaces mood trends, recurring topics, and reflections over time.
-- **Privacy**: End-to-end encryption, HIPAA-compliant, never used to train third-party AI models.
+- **Privacy**: Encrypted at rest and in transit, never used to train AI models.
 - **Free**: Core journaling, transcription, mood tracking, and insights are free.
 
 ## Empath for therapists (additional offering)

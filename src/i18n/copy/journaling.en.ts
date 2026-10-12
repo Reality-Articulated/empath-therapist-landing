@@ -61,7 +61,7 @@ export const journalingEn = {
   },
 
   trust: {
-    hipaa: 'HIPAA Secure',
+    privacy: 'Encrypted & Private',
     ai: 'AI-Powered Insights',
     loved: 'Loved by Thousands',
   },

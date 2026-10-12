@@ -33,7 +33,7 @@
         "En Empath, la función es un chat guiado con un compañero de journaling cálido y atento. Comienza con una sola pregunta invitadora sobre tu día o lo que tienes en mente, luego hace una pregunta corta y abierta a la vez —nunca una avalancha— manteniendo sus propios mensajes breves para que la reflexión siga siendo tuya. Respondes con tus propias palabras, en la longitud que te parezca natural, y el asistente sigue el hilo de lo que realmente dices en lugar de llevarte a través de un guion fijo.",
         "Cuando sientes que has dicho lo suficiente, un toque convierte la conversación en una entrada de diario. Detrás de escena, un modelo más capaz compone la transcripción en una entrada en primera persona en tu voz —no un resumen del chat ni las palabras del asistente, sino la reflexión que acabas de discutir, escrita como tú lo habrías hecho. La entrada terminada se guarda en tu diario junto a todo lo demás, donde recibe el mismo seguimiento de estado de ánimo, detección de patrones y memoria a largo plazo que una entrada que escribiste o hablaste.",
         "El asistente trabaja solo a partir de la conversación en vivo por diseño. No está extrayendo de tus entradas pasadas ni empujándote hacia un tema; simplemente está ayudándote a articular lo que está presente en este momento. Eso mantiene la experiencia honesta y en el momento, y mantiene clara la frontera entre esta función y la herramienta separada de Empath \"charlar con tus diarios\", que es para hacer preguntas sobre tu historia existente.",
-        "Tampoco es explícitamente un terapeuta. El compañero es una guía de journaling reflexiva, útil ya sea que veas a un profesional o no, y Empath lo diseña para señalar hacia un apoyo real en lugar de sustituirlo. Como todo en Empath, las entradas que produce están encriptadas de extremo a extremo, son compatibles con HIPAA y nunca se utilizan para entrenar modelos de IA de terceros."
+        "Tampoco es explícitamente un terapeuta. El compañero es una guía de journaling reflexiva, útil ya sea que veas a un profesional o no, y Empath lo diseña para señalar hacia un apoyo real en lugar de sustituirlo. Como todo en Empath, las entradas que produce están cifradas en reposo y en tránsito y nunca se utilizan para entrenar modelos de IA de terceros."
       ]
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "question": "¿Son privadas mis conversaciones de diario por chat?",
-      "answer": "Sí. En Empath, las entradas creadas a través del asistente de chat reciben las mismas protecciones que cualquier otra entrada: están encriptadas de extremo a extremo, son compatibles con HIPAA y nunca se utilizan para entrenar modelos de IA de terceros. El asistente también trabaja solo a partir de la conversación en vivo en lugar de extraer de tu historia más amplia."
+      "answer": "Sí. En Empath, las entradas creadas a través del asistente de chat reciben las mismas protecciones que cualquier otra entrada: están cifradas en reposo y en tránsito y nunca se utilizan para entrenar modelos de IA de terceros. El asistente también trabaja solo a partir de la conversación en vivo en lugar de extraer de tu historia más amplia."
     },
     {
       "question": "¿Puedo editar la entrada que crea el asistente de chat?",

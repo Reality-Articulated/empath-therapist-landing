@@ -566,7 +566,7 @@ const TransparencyPage: React.FC = () => {
                   <path d="M52 35 L52 43" stroke="url(#storeGradient)" strokeWidth="1"/>
                   
                   <text x="40" y="-10" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Encrypted Store</text>
-                  <text x="40" y="95" textAnchor="middle" fill="#C4B5FD" fontSize="10" fontWeight="500">AWS KMS + HIPAA</text>
+                  <text x="40" y="95" textAnchor="middle" fill="#C4B5FD" fontSize="10" fontWeight="500">AWS KMS Encryption</text>
                   <text x="40" y="108" textAnchor="middle" fill="#C4B5FD" fontSize="10">Military-Grade Security</text>
                 </g>
 
@@ -583,8 +583,8 @@ const TransparencyPage: React.FC = () => {
                   <circle cx="45" cy="43" r="1.5" fill="url(#aiGradient)"/>
                   
                   <text x="40" y="-10" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">AI Processing</text>
-                  <text x="40" y="95" textAnchor="middle" fill="#FCD34D" fontSize="10" fontWeight="500">All Providers + BAA</text>
-                  <text x="40" y="108" textAnchor="middle" fill="#FCD34D" fontSize="10">HIPAA Compliant</text>
+                  <text x="40" y="95" textAnchor="middle" fill="#FCD34D" fontSize="10" fontWeight="500">Zero-Retention Providers</text>
+                  <text x="40" y="108" textAnchor="middle" fill="#FCD34D" fontSize="10">No Training on Your Data</text>
                 </g>
 
                 {/* Step 5: Secure Insights */}
@@ -893,9 +893,9 @@ const TransparencyPage: React.FC = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                           </svg>
                         </div>
-                        <h5 className="font-semibold text-white mb-2">HIPAA Compliant</h5>
-                        <p className="text-emerald-400 font-semibold text-sm">✓ FULLY COMPLIANT</p>
-                        <p className="text-gray-400 text-xs mt-2">All infrastructure meets healthcare standards</p>
+                        <h5 className="font-semibold text-white mb-2">Encrypted Everywhere</h5>
+                        <p className="text-emerald-400 font-semibold text-sm">✓ AT REST + IN TRANSIT</p>
+                        <p className="text-gray-400 text-xs mt-2">AES-256 at rest, TLS in transit, per-user keys</p>
                       </div>
                       
                       <div className="bg-white/5 rounded-xl p-6 border border-white/10 text-center">

@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
     <div className="relative min-h-screen bg-gradient-to-b from-slate-50 to-white pt-16 pb-24">
       <SEO
         title="Privacy Policy | Empath"
-        description="How Empath collects, uses, and protects your data. HIPAA-aligned practices, encryption, and user-controlled privacy settings."
+        description="How Empath collects, uses, and protects your data. Encryption at rest and in transit, no AI training on your data, and user-controlled privacy settings."
         path="/privacy"
       />
       {/* Background decorative elements */}

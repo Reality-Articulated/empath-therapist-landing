@@ -147,7 +147,7 @@ const staticRoutes = [
   {
     path: '/therapist',
     title: 'Empath for Therapists | Between-Session AI Insights',
-    description: 'Empath captures what happens between sessions so therapists can see how clients are doing in real life, not just what they remember to share. AI-powered insights, secure and HIPAA-aligned.',
+    description: 'Empath captures what happens between sessions so therapists can see how clients are doing in real life, not just what they remember to share. AI-powered insights, secure and private by design.',
     keywords: 'therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management',
   },
   {
@@ -198,7 +198,7 @@ const staticRoutes = [
   {
     path: '/privacy',
     title: 'Privacy Policy | Empath',
-    description: 'How Empath collects, uses, and protects your data. HIPAA-aligned practices, encryption, and user-controlled privacy settings.',
+    description: 'How Empath collects, uses, and protects your data. Encryption at rest and in transit, no AI training on your data, and user-controlled privacy settings.',
   },
   {
     path: '/terms',
