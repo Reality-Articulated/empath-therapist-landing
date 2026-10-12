@@ -27,22 +27,125 @@ import {
   ChevronRight,
   Mail,
   MessageSquare,
-  CalendarDays,
+  Check,
   X
 } from 'lucide-react';
 
-// Google Calendar appointment schedule for the 15-minute demo. The previous
-// schedule lived on a retired account and now returns Google's "not found"
-// page, so this stays null until a new schedule exists under div@myempath.co:
-// create it in Google Calendar → Appointment schedules → Share → "Website
-// embed", then paste the `...?gv=true` URL here. While null, the modal falls
-// back to an email + live-chat request flow that reaches the same inbox.
-const DEMO_BOOKING_URL: string | null = null;
-const DEMO_CONTACT_EMAIL = 'div@myempath.co';
-const DEMO_MAILTO = `mailto:${DEMO_CONTACT_EMAIL}?subject=${encodeURIComponent('15-minute Empath demo')}&body=${encodeURIComponent(
-  "Hi Div,\n\nI'd like to book a 15-minute Empath demo.\n\nName:\nPractice:\nA few times that work for me (with time zone):\n"
-)}`;
+// "Get a demo" request form. Google Calendar appointment schedules need a paid
+// Workspace plan, so the modal posts to empath-heroku, which emails the request
+// to Div (routes/demoRequest/demoRequest.js) for a manual follow-up.
+const DEMO_REQUEST_ENDPOINT = 'https://app.empathdash.com/api/demo-request';
 const DEMO_CHAT_PREFILL = "Hi! I'd like to book a 15-minute Empath demo. A few times that work for me: ";
+
+type DemoFormState = 'idle' | 'sending' | 'sent' | 'error';
+
+function DemoRequestForm({ onChat }: { onChat: () => void }) {
+  const [state, setState] = useState<DemoFormState>('idle');
+  const [errorText, setErrorText] = useState<string | null>(null);
+  const [form, setForm] = useState({ name: '', email: '', practice: '', times: '', message: '', website: '' });
+
+  const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (state === 'sending') return;
+    setState('sending');
+    setErrorText(null);
+    posthog.capture('therapist_demo_requested', { has_times: !!form.times.trim(), has_practice: !!form.practice.trim() });
+    try {
+      const res = await fetch(DEMO_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'therapist_page' }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data?.error || "We couldn't send your request. Please try the chat instead.");
+      }
+      posthog.capture('therapist_demo_sent');
+      setState('sent');
+    } catch (err) {
+      posthog.capture('therapist_demo_failed', { message: err instanceof Error ? err.message : String(err) });
+      setErrorText(err instanceof Error ? err.message : "We couldn't send your request. Please try the chat instead.");
+      setState('error');
+    }
+  };
+
+  if (state === 'sent') {
+    return (
+      <div className="text-center py-6">
+        <div className="mx-auto w-14 h-14 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-4">
+          <Check className="w-7 h-7 text-green-600" aria-hidden="true" />
+        </div>
+        <h3 className="text-xl font-light text-slate-900 mb-2">Request received</h3>
+        <p className="text-slate-600 font-light max-w-md mx-auto">
+          Thanks, {form.name.trim() || 'there'}. Div will email you at {form.email.trim()} within a day to confirm a time.
+        </p>
+      </div>
+    );
+  }
+
+  const inputClass =
+    'w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900';
+
+  return (
+    <form onSubmit={submit} className="grid md:grid-cols-2 gap-4" noValidate>
+      <p className="md:col-span-2 text-slate-600 font-light leading-relaxed">
+        Fifteen minutes with Div, Empath's founder: a walk through the client experience and your dashboard, then your questions.
+        Leave your details and a few times that work, and you'll hear back within a day.
+      </p>
+      <label className="block">
+        <span className="block text-sm font-medium text-slate-700 mb-1.5">Name <span aria-hidden="true" className="text-rose-500">*</span></span>
+        <input className={inputClass} name="name" autoComplete="name" required value={form.name} onChange={update('name')} />
+      </label>
+      <label className="block">
+        <span className="block text-sm font-medium text-slate-700 mb-1.5">Email <span aria-hidden="true" className="text-rose-500">*</span></span>
+        <input className={inputClass} type="email" name="email" autoComplete="email" required value={form.email} onChange={update('email')} />
+      </label>
+      <label className="block">
+        <span className="block text-sm font-medium text-slate-700 mb-1.5">Practice <span className="text-slate-400 font-normal">(optional)</span></span>
+        <input className={inputClass} name="practice" autoComplete="organization" value={form.practice} onChange={update('practice')} />
+      </label>
+      <label className="block">
+        <span className="block text-sm font-medium text-slate-700 mb-1.5">Times that work <span className="text-slate-400 font-normal">(with time zone)</span></span>
+        <input className={inputClass} name="times" placeholder="e.g. Tue or Thu after 2pm ET" value={form.times} onChange={update('times')} />
+      </label>
+      <label className="block md:col-span-2">
+        <span className="block text-sm font-medium text-slate-700 mb-1.5">Anything you want covered <span className="text-slate-400 font-normal">(optional)</span></span>
+        <textarea className={`${inputClass} min-h-[88px]`} name="message" value={form.message} onChange={update('message')} />
+      </label>
+      {/* Honeypot: hidden from people, filled by bots */}
+      <div className="hidden" aria-hidden="true">
+        <label>
+          Website
+          <input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={update('website')} />
+        </label>
+      </div>
+      {state === 'error' && errorText && (
+        <p role="alert" className="md:col-span-2 text-sm text-rose-600">{errorText}</p>
+      )}
+      <div className="md:col-span-2 flex flex-col sm:flex-row gap-3 sm:items-center mt-1">
+        <button
+          type="submit"
+          disabled={state === 'sending'}
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors disabled:opacity-60 disabled:cursor-wait cursor-pointer font-medium"
+        >
+          <Mail className="w-5 h-5" aria-hidden="true" />
+          {state === 'sending' ? 'Sending…' : 'Request my demo'}
+        </button>
+        <button
+          type="button"
+          onClick={onChat}
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-slate-200 text-slate-900 hover:border-slate-900 transition-colors cursor-pointer font-medium"
+        >
+          <MessageSquare className="w-5 h-5 text-indigo-600" aria-hidden="true" />
+          Chat with us instead
+        </button>
+      </div>
+    </form>
+  );
+}
 
 // Animation variants
 const fadeIn = {
@@ -345,13 +448,13 @@ export default function HomePage() {
           aria-labelledby="calendar-modal-title"
         >
           <motion.div
-            className="bg-white rounded-xl p-8 w-full max-w-4xl shadow-2xl"
+            className="bg-white rounded-xl p-6 md:p-8 w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", damping: 25 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Book Your 15-Minute Demo</h2>
+              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">Get a 15-Minute Demo</h2>
               <motion.button
                 onClick={() => setShowCalendar(false)}
                 className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
@@ -362,53 +465,13 @@ export default function HomePage() {
                 <X size={20} aria-hidden="true" />
               </motion.button>
             </div>
-            {DEMO_BOOKING_URL ? (
-              <iframe
-                src={DEMO_BOOKING_URL}
-                title="Pick a time for your Empath demo"
-                style={{ border: 0 }}
-                width="100%"
-                height="600"
-                className="rounded-lg"
-              />
-            ) : (
-              <div className="grid md:grid-cols-2 gap-4">
-                <p className="md:col-span-2 text-slate-600 font-light leading-relaxed">
-                  Fifteen minutes with Div, Empath's founder: a walk through the client experience and your dashboard, then your questions.
-                  Tell us a few times that work and we'll confirm within a day.
-                </p>
-                <a
-                  href={DEMO_MAILTO}
-                  onClick={() => posthog.capture('therapist_demo_email_clicked')}
-                  className="flex items-start gap-4 rounded-xl border-2 border-slate-900 bg-slate-900 text-white p-5 hover:bg-slate-800 transition-colors"
-                >
-                  <Mail className="w-6 h-6 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <span>
-                    <span className="block font-medium">Email a few times that work</span>
-                    <span className="block text-sm text-slate-300 mt-1">Opens a pre-filled note to {DEMO_CONTACT_EMAIL}</span>
-                  </span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => {
-                    posthog.capture('therapist_demo_chat_clicked');
-                    setShowCalendar(false);
-                    openSupportChat(DEMO_CHAT_PREFILL);
-                  }}
-                  className="flex items-start gap-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 p-5 hover:border-slate-900 transition-colors text-left cursor-pointer"
-                >
-                  <MessageSquare className="w-6 h-6 flex-shrink-0 mt-0.5 text-indigo-600" aria-hidden="true" />
-                  <span>
-                    <span className="block font-medium">Chat with us now</span>
-                    <span className="block text-sm text-slate-500 mt-1">Ask anything first, or book the demo right in the chat</span>
-                  </span>
-                </button>
-                <p className="md:col-span-2 flex items-center gap-2 text-xs text-slate-400 mt-2">
-                  <CalendarDays className="w-4 h-4" aria-hidden="true" />
-                  Prefer to write directly? <a href={`mailto:${DEMO_CONTACT_EMAIL}`} className="underline hover:text-slate-600">{DEMO_CONTACT_EMAIL}</a>
-                </p>
-              </div>
-            )}
+            <DemoRequestForm
+              onChat={() => {
+                posthog.capture('therapist_demo_chat_clicked');
+                setShowCalendar(false);
+                openSupportChat(DEMO_CHAT_PREFILL);
+              }}
+            />
           </motion.div>
         </motion.div>
       )}
