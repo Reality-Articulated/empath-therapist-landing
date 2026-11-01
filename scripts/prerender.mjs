@@ -59,6 +59,14 @@ for (const code of LOCALE_CODES) {
   );
 }
 
+// Therapist-facing routes: shared with src/App.tsx so build-time stripping and
+// runtime toggling of the iOS Smart App Banner agree on which pages count.
+const isTherapistPath = await loadTsExport(join(ROOT, 'src/utils/therapistRoutes.ts'), 'isTherapistPath');
+const stripLocale = (path) => {
+  const match = /^\/([a-z]{2})(\/.*)?$/.exec(path);
+  return match && LOCALE_CODES.includes(match[1]) ? match[2] || '/' : path;
+};
+
 // Phrase landing pages (English-only) — single source of truth shared with
 // src/App.tsx and scripts/generate-sitemap.mjs, see src/data/phrasePages.ts.
 const phrasePages = await loadTsExport(join(ROOT, 'src/data/phrasePages.ts'), 'phrasePages');
@@ -524,6 +532,13 @@ function rewriteHtml(html, route) {
   out = out.replace(/<meta\s+property="twitter:title"[^>]*\/?>/, `<meta property="twitter:title" content="${title}" />`);
   out = out.replace(/<meta\s+property="twitter:description"[^>]*\/?>/, `<meta property="twitter:description" content="${description}" />`);
   out = out.replace(/<meta\s+property="twitter:image"[^>]*\/?>/, `<meta property="twitter:image" content="${ogImage}" />`);
+
+  // Therapists use the web dashboard on a laptop; the consumer iOS app banner
+  // only takes the top of their phone screen. Safari reads this tag at page
+  // load, so stripping it here (not at runtime) is what actually hides it.
+  if (isTherapistPath(stripLocale(route.path))) {
+    out = out.replace(/\n?[ \t]*<meta\s+name="apple-itunes-app"[^>]*\/?>/, '');
+  }
 
   // Inject canonical, hreflang alternates, and structured data before </head>.
   const canonicalTag = `<link rel="canonical" href="${canonical}" />`;

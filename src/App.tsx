@@ -29,6 +29,7 @@ import PhraseLandingPage from './pages/PhraseLandingPage';
 import { phrasePages } from './data/phrasePages';
 import { Analytics } from '@vercel/analytics/react';
 import { GOOGLE_CLICK_ID_PARAMS } from './utils/googleAds';
+import { syncSmartAppBanner } from './utils/smartAppBanner';
 
 function App() {
   const location = useLocation();
@@ -74,6 +75,12 @@ function App() {
   }, [location]);
   // Chrome visibility is locale-agnostic: /es/app hides the navbar like /app.
   const basePath = stripLocalePrefix(location.pathname).path;
+
+  // Therapist pages never advertise the consumer iOS app (Smart App Banner).
+  useEffect(() => {
+    syncSmartAppBanner(basePath);
+  }, [basePath]);
+
   const hideNavbar =
     basePath.startsWith('/atman') ||
     basePath.startsWith('/app') ||

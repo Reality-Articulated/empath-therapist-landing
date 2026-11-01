@@ -20,7 +20,9 @@
     <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"WmdPEhqBLHAdJ4GCXpwLyN",debug:true});</script>
     <!-- End OpenAI Pixel setup code -->
 
-    <!-- iOS Safari native install banner (dismissible, zero page real estate) -->
+    <!-- iOS Safari native install banner (dismissible, zero page real estate).
+         Consumer routes only: scripts/prerender.mjs strips it from therapist
+         routes and src/utils/smartAppBanner.ts keeps it in sync at runtime. -->
     <meta name="apple-itunes-app" content="app-id=6472873287" />
 
     <!-- Primary Meta Tags -->

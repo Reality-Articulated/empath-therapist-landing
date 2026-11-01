@@ -38,6 +38,17 @@ The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `A
 
 `vercel.json` rewrites **all** paths to `/index.html` so deep links work on Vercel; without it, only `/` resolves on hard refresh.
 
+### iOS Smart App Banner is consumer-only
+
+`index.html` carries `<meta name="apple-itunes-app">`. Therapist routes
+(`src/utils/therapistRoutes.ts`: `/therapist`, `/advisory`, `/science`,
+`/calculator*`, `/quiz`, `/blog*`) must not show it: therapists work in the
+web dashboard and complained about the banner on their phones. Safari reads
+the tag at page load, so `scripts/prerender.mjs` strips it from those routes'
+prerendered HTML (the only reliable off switch); `src/utils/smartAppBanner.ts`
+mirrors the toggle at runtime for SPA navigation and unprerendered paths.
+Add new therapist pages to `THERAPIST_PATHS`, not to the prerender script.
+
 ### SMS journaling is PAUSED — `src/utils/channels.ts`
 
 `SMS_ENABLED = false` (2026-08-04, Twilio cost). Every `sms:` CTA on the site is
