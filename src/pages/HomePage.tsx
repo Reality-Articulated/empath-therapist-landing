@@ -208,9 +208,10 @@ interface AnimatedSectionProps {
   children: React.ReactNode;
   className: string;
   delay?: number;
+  id?: string;
 }
 
-const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProps) => {
+const AnimatedSection = ({ children, className, delay = 0, id }: AnimatedSectionProps) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -225,6 +226,7 @@ const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProp
 
   return (
     <motion.section
+      id={id}
       ref={ref}
       initial="hidden"
       animate={controls}
@@ -266,6 +268,10 @@ const features = [
 ];
 
 const faqs = [
+  {
+    q: "How much does it cost?",
+    a: "Your first two client seats are free forever, with everything included. Each additional client seat is $9.99 a month, billed monthly, and you can add or remove seats any time from your dashboard. A seat is one client; pending invitations count, and removing a client frees their seat right away."
+  },
   {
     q: "Will this add to my administrative workload?",
     a: "No. It's built to shrink admin time, not add to it. Your dashboard turns a week of client activity into one short brief, so pre-session prep and note-writing take less time, not more."
@@ -975,6 +981,98 @@ export default function HomePage() {
               <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </Link>
           </motion.div>
+        </div>
+      </AnimatedSection>
+
+      {/* ============ 6b. PRICING — per client seat ============ */}
+      <AnimatedSection className="py-24 bg-slate-50" id="pricing">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            variants={fadeIn}
+            className="text-3xl md:text-4xl font-light text-center mb-4 text-slate-900"
+          >
+            Simple pricing, per client
+          </motion.h2>
+          <motion.p
+            variants={fadeIn}
+            className="text-lg text-slate-600 text-center max-w-2xl mx-auto mb-14 font-light"
+          >
+            Start free with two client seats. Add a seat whenever a new client connects. No contracts, no per-practice fee.
+          </motion.p>
+
+          <motion.div variants={staggerContainer} className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <motion.div
+              variants={fadeInUp}
+              className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm flex flex-col"
+            >
+              <div className="text-sm font-medium uppercase tracking-wider text-slate-500 mb-3">Free, forever</div>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="text-5xl font-light text-slate-900">$0</span>
+                <span className="text-slate-500">/ month</span>
+              </div>
+              <p className="text-slate-600 font-light mb-6">Two client seats with everything included.</p>
+              <ul className="space-y-3 text-slate-700 mb-8 flex-1">
+                {[
+                  'Weekly brief and What Stands Out for each client',
+                  'Mood, journal and health timelines',
+                  'Ask-your-data chat and Case Compass',
+                  'Connect code, email invites and your practice branding',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-slate-900 shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="font-light">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://app.empathdash.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-colors font-medium"
+                aria-label="Create your free Empath therapist account"
+              >
+                Start free
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="rounded-2xl border-2 border-slate-900 bg-slate-900 text-white p-8 shadow-xl flex flex-col"
+            >
+              <div className="text-sm font-medium uppercase tracking-wider text-slate-300 mb-3">Additional seats</div>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="text-5xl font-light">$9.99</span>
+                <span className="text-slate-300">/ client / month</span>
+              </div>
+              <p className="text-slate-300 font-light mb-6">Add a seat the moment a third client connects. Remove it when they finish.</p>
+              <ul className="space-y-3 mb-8 flex-1">
+                {[
+                  'Everything in free, for every client',
+                  'Add or remove seats any time from your dashboard',
+                  'Prorated: pay only for the days a seat is active',
+                  'Invoices and card managed through Stripe',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-white shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="font-light text-slate-100">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://app.empathdash.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white text-slate-900 hover:bg-slate-100 transition-colors font-medium"
+                aria-label="Sign in to add client seats"
+              >
+                Add seats in your dashboard
+              </a>
+            </motion.div>
+          </motion.div>
+
+          <motion.p variants={fadeIn} className="text-center text-sm text-slate-500 mt-8 font-light">
+            A seat is one client. Pending invitations count toward your seats; removing a client frees theirs immediately.
+          </motion.p>
         </div>
       </AnimatedSection>
 
