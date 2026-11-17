@@ -34,7 +34,7 @@ There is no test runner configured.
 - `/therapist` → `HomePage` (therapist landing)
 - `/atman/*` → iframe of the external Atman app
 
-The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/about-atman`, `/whyempath`, `/quiz`). When adding a page that doesn't want the shared chrome, update that predicate.
+The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/therapist`, `/about-atman`, `/whyempath`, `/quiz`). When adding a page that doesn't want the shared chrome, update that predicate.
 
 `vercel.json` rewrites **all** paths to `/index.html` so deep links work on Vercel; without it, only `/` resolves on hard refresh.
 

@@ -84,7 +84,7 @@ function App() {
   const hideNavbar =
     basePath.startsWith('/atman') ||
     basePath.startsWith('/app') ||
-    ['/', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(basePath) ||
+    ['/', '/therapist', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me'].includes(basePath) ||
     phrasePages.some((p) => basePath === `/${p.slug}`);
 
   // One shared route table, mounted at / (English) and under every locale
