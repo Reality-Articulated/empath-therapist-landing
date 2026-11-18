@@ -901,6 +901,26 @@ export const journalingEn = {
       ],
       shot: 'Empath voice journal screen recording and transcribing an entry',
     },
+    people: {
+      eyebrow: 'People',
+      title: 'See who shapes your days.',
+      body: 'Empath notices the people you write about and maps them around you. The ones you mention most sit closest, and each ring shows how those entries tend to feel.',
+      points: [
+        {
+          title: 'Your people, mapped',
+          desc: 'Family, friends, coworkers, even the dog. Closer and larger means you write about them more.',
+        },
+        {
+          title: 'How each connection feels',
+          desc: 'See at a glance whether your entries about someone are mostly warm, mixed, or often heavy.',
+        },
+        {
+          title: 'A mirror, not a verdict',
+          desc: 'These are patterns in how you happened to write, not facts about anyone. They are there for your own reflection.',
+        },
+      ],
+      shot: 'Empath People screen with the people you write about arranged around you, each ringed by how those entries tend to feel',
+    },
     therapist: {
       eyebrow: 'Therapist connection',
       title: 'Make every session count.',

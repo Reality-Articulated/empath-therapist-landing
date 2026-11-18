@@ -306,7 +306,7 @@ export default function JournalingPage() {
                 points={h.companion.points}
               />
             </motion.div>
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="min-w-0">
               <TryEmpathDemo />
               <p className="mx-auto mt-5 max-w-md text-center text-sm text-stone-500">{h.companion.demoNote}</p>
             </motion.div>
@@ -384,6 +384,31 @@ export default function JournalingPage() {
                 body={h.capture.body}
                 points={h.capture.points}
               />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- SPOTLIGHT: PEOPLE --- */}
+      <section className="border-t border-stone-200 bg-white py-24 md:py-32">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2 md:gap-20"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp}>
+              <SpotlightText
+                eyebrow={h.people.eyebrow}
+                title={h.people.title}
+                body={h.people.body}
+                points={h.people.points}
+              />
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <PhoneScreenshot src="/app-screens/home-people.webp" alt={h.people.shot} className="mx-auto w-64 md:w-72" />
             </motion.div>
           </motion.div>
         </div>
