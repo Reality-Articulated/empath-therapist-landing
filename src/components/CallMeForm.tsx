@@ -106,7 +106,7 @@ export function useCallMeRequest(
 
 /**
  * Compact inline "type your number, Empath calls you" form styled for the
- * homepage hero (neo-brutalist, matches the hero CTAs). The full-page
+ * homepage channels section. The full-page
  * experience with FAQ etc. lives at /call-me (CallMePage).
  */
 export default function CallMeForm({ eventPrefix, source }: { eventPrefix: string; source: string }) {
@@ -123,9 +123,9 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
 
   if (state === 'ringing') {
     return (
-      <div className="bg-white rounded-xl border-2 border-[#1b8af1] p-4 text-center shadow-[4px_4px_0px_0px_#1b8af1]">
-        <p className="font-bold text-stone-900 mb-1">{callMeForm.ringingTitle}</p>
-        <p className="text-sm text-stone-600 font-medium">
+      <div className="bg-blue-50 rounded-2xl border border-blue-200 p-4 text-center">
+        <p className="font-semibold text-stone-900 mb-1">{callMeForm.ringingTitle}</p>
+        <p className="text-sm text-stone-600">
           {callMeForm.ringingSub}
         </p>
       </div>
@@ -144,12 +144,12 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
           value={formatAsYouType(digits)}
           onChange={(e) => handleInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') requestCall(); }}
-          className="flex-1 min-w-0 text-base font-semibold bg-white border-2 border-stone-900 rounded-xl px-4 py-3 focus:border-[#1b8af1] focus:outline-none placeholder:text-stone-400"
+          className="flex-1 min-w-0 text-base font-medium bg-white border border-stone-300 rounded-full px-5 py-3 focus:border-[#1b8af1] focus:outline-none placeholder:text-stone-400"
         />
         <button
           onClick={() => requestCall()}
           disabled={digits.length !== 10 || state === 'requesting'}
-          className="px-5 py-3 bg-[#1b8af1] text-white rounded-xl border-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] disabled:bg-stone-300 disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed transition-all duration-200 font-bold flex items-center justify-center gap-2 whitespace-nowrap"
+          className="px-6 py-3 bg-[#1b8af1] text-white rounded-full hover:bg-[#1479d8] disabled:bg-stone-300 disabled:cursor-not-allowed transition-colors duration-200 font-semibold flex items-center justify-center gap-2 whitespace-nowrap"
         >
           {state === 'requesting'
             ? (<><Loader2 className="w-4 h-4 animate-spin" /> {callMeForm.dialing}</>)
@@ -157,11 +157,11 @@ export default function CallMeForm({ eventPrefix, source }: { eventPrefix: strin
         </button>
       </div>
       {state === 'error' && (
-        <p className="text-sm text-red-600 font-medium mt-2 text-left" role="alert">{errorMessage}</p>
+        <p className="text-sm text-red-600 mt-2 text-left" role="alert">{errorMessage}</p>
       )}
-      <p className="text-xs text-stone-400 font-medium mt-2">
+      <p className="text-xs text-stone-400 mt-3">
         {callMeForm.disclaimer}{' '}
-        <Link to="/call-me" className="text-[#1b8af1] hover:underline font-semibold">{callMeForm.scheduleLink}</Link>
+        <Link to="/call-me" className="text-[#1b8af1] hover:underline font-medium">{callMeForm.scheduleLink}</Link>
       </p>
     </div>
   );

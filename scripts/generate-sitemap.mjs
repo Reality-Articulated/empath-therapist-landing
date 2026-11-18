@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import ts from 'typescript';
@@ -6,14 +6,6 @@ import ts from 'typescript';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SITE_URL = 'https://www.empathdash.com';
-
-// Keep in sync with src/i18n/locales.ts (this script stays dependency-free).
-const LOCALE_CODES = ['es', 'pt', 'hi', 'de', 'fr', 'it'];
-// Locale-prefixed variants exist for the consumer funnel…
-const LOCALIZED_STATIC = ['/', '/app', '/call-me'];
-// …and for any blog post with a generated translation JSON.
-const translationExists = (code, kind, slug) =>
-  existsSync(join(ROOT, 'src/data/i18n', code, kind, `${slug}.json`));
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -104,35 +96,21 @@ const journalingBlogPosts = [
 ].map(toSitemapPost);
 
 const blogRoutes = [
-  ...therapistBlogPosts.flatMap(({ slug, lastmod }) => [
-    { path: `/blog/${slug}`, changefreq: 'monthly', priority: '0.7', lastmod },
-    ...LOCALE_CODES.filter((code) => translationExists(code, 'therapist', slug)).map((code) => ({
-      path: `/${code}/blog/${slug}`,
-      changefreq: 'monthly',
-      priority: '0.6',
-      lastmod,
-    })),
-  ]),
-  ...journalingBlogPosts.flatMap(({ slug, lastmod }) => [
-    { path: `/app/blog/${slug}`, changefreq: 'monthly', priority: '0.7', lastmod },
-    ...LOCALE_CODES.filter((code) => translationExists(code, 'journaling', slug)).map((code) => ({
-      path: `/${code}/app/blog/${slug}`,
-      changefreq: 'monthly',
-      priority: '0.6',
-      lastmod,
-    })),
-  ]),
+  ...therapistBlogPosts.map(({ slug, lastmod }) => ({
+    path: `/blog/${slug}`,
+    changefreq: 'monthly',
+    priority: '0.7',
+    lastmod,
+  })),
+  ...journalingBlogPosts.map(({ slug, lastmod }) => ({
+    path: `/app/blog/${slug}`,
+    changefreq: 'monthly',
+    priority: '0.7',
+    lastmod,
+  })),
 ];
 
-const localizedStaticRoutes = LOCALE_CODES.flatMap((code) =>
-  LOCALIZED_STATIC.map((path) => ({
-    path: path === '/' ? `/${code}` : `/${code}${path}`,
-    changefreq: 'weekly',
-    priority: '0.9',
-  }))
-);
-
-const allRoutes = [...staticRoutes, ...phrasePageRoutes, ...localizedStaticRoutes, ...blogRoutes];
+const allRoutes = [...staticRoutes, ...phrasePageRoutes, ...blogRoutes];
 
 const urls = allRoutes
   .map(

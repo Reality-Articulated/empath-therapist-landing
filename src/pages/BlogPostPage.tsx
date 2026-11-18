@@ -1,20 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  ArrowLeft,
-  CalendarDays,
-  CheckCircle2,
-  ChevronRight,
-  Clock3,
-  Copy,
-  ExternalLink,
-  Sparkles,
-  X,
-} from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, X } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
-import { useTranslatedPost } from '../data/i18n/useTranslatedPost';
 import SEO from '../components/SEO';
+import TherapistHeader from '../components/therapist/TherapistHeader';
+import TherapistFooter from '../components/therapist/TherapistFooter';
+import DemoRequestForm, { DEMO_CHAT_PREFILL } from '../components/therapist/DemoRequestForm';
+import { openSupportChat } from '../utils/supportChat';
+import posthog from 'posthog-js';
 
 function toAnchorId(value: string) {
   return value
@@ -24,71 +17,15 @@ function toAnchorId(value: string) {
     .replace(/\s+/g, '-');
 }
 
-function getCategoryBadgeColor(category: string) {
-  const styles: Record<string, string> = {
-    'Journal Prompts': 'bg-blue-50 text-blue-700 border-blue-200',
-    'How-To Guides': 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    Templates: 'bg-violet-50 text-violet-700 border-violet-200',
-    'Mental Health Skills': 'bg-amber-50 text-amber-700 border-amber-200',
-    'AI + Mental Health': 'bg-indigo-50 text-indigo-700 border-indigo-200',
-  };
-  return styles[category] ?? 'bg-slate-50 text-slate-700 border-slate-200';
-}
-
-interface MarketingCardProps {
-  compact?: boolean;
-  onBookDemo?: () => void;
-}
-
-function MarketingCard({ compact = false, onBookDemo }: MarketingCardProps) {
-  return (
-    <div
-      className={`rounded-lg border border-blue-200 bg-blue-50/50 ${
-        compact ? 'p-4' : 'p-5'
-      }`}
-    >
-      <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-blue-700 mb-1.5">
-        <Sparkles className="w-3.5 h-3.5" />
-        Empath for Therapists
-      </p>
-      <h3
-        className={`${compact ? 'text-base' : 'text-lg'} font-semibold text-slate-900 mb-1.5`}
-      >
-        Bring AI memory and pattern insight into every session
-      </h3>
-      <p className="text-slate-600 text-sm leading-relaxed mb-3">
-        Empath surfaces client trends between sessions so you can spend less time catching up and
-        more time delivering high-impact care.
-      </p>
-      <div className="flex flex-wrap gap-2">
-        <button
-          type="button"
-          onClick={onBookDemo}
-          className="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-colors"
-        >
-          Book a 15-Min Demo <ChevronRight className="w-3.5 h-3.5 ml-1.5" />
-        </button>
-        <a
-          href="https://app.empathdash.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-slate-300 text-slate-700 text-sm hover:bg-white transition-colors"
-        >
-          Sign in
-        </a>
-      </div>
-    </div>
-  );
-}
+// Shared type styles, matching the home page and /therapist.
+const EYEBROW = 'text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]';
+const RAIL_LABEL = 'text-xs font-semibold uppercase tracking-[0.18em] text-stone-400';
 
 export default function BlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const basePost = blogPosts.find((entry) => entry.slug === slug);
-  // Swaps in the machine-translated text fields when the route has a locale
-  // prefix and a translation JSON exists; English otherwise.
-  const post = useTranslatedPost(basePost, 'therapist');
+  const post = blogPosts.find((entry) => entry.slug === slug);
 
   const articleUrl =
     typeof window !== 'undefined'
@@ -162,32 +99,34 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <div className="flex-grow bg-white pt-24 pb-20">
+      <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans">
         <SEO
           title="Article Not Found | Empath Blog"
           description="This article may have moved or is still being prepared."
           path={`/blog/${slug ?? ''}`}
           noIndex
         />
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <h1 className="text-2xl font-bold text-slate-900 mb-3">Article not found</h1>
-          <p className="text-slate-600 mb-6">
+        <TherapistHeader />
+        <div className="container mx-auto px-4 max-w-2xl text-center py-28">
+          <h1 className="font-serif text-3xl font-medium tracking-tight text-stone-900 mb-3">Article not found</h1>
+          <p className="text-stone-600 mb-8">
             This article may have moved or is still being prepared.
           </p>
           <Link
             to="/blog"
-            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors text-sm font-medium"
+            className="inline-flex items-center px-6 py-3 rounded-full bg-stone-900 text-white hover:bg-[#1b8af1] transition-colors text-sm font-semibold"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to blog
           </Link>
         </div>
+        <TherapistFooter />
       </div>
     );
   }
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <SEO
         title={post.seoTitle}
         description={post.metaDescription}
@@ -207,250 +146,235 @@ export default function BlogPostPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
         />
       )}
+      {/* Demo request modal: same form as /therapist */}
       {showCalendar && (
-        <motion.div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
+          className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           role="dialog"
           aria-modal="true"
           aria-labelledby="calendar-modal-title"
         >
-          <motion.div
-            className="bg-white rounded-xl p-8 w-full max-w-4xl shadow-2xl"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', damping: 25 }}
-          >
+          <div className="bg-white rounded-3xl border border-stone-200 shadow-lift p-6 md:p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 id="calendar-modal-title" className="text-2xl font-light text-slate-900">
-                Schedule a Demo
-              </h2>
-              <motion.button
+              <h2 id="calendar-modal-title" className="text-2xl font-medium text-stone-900 font-serif">Get a 15-minute demo</h2>
+              <button
+                type="button"
                 onClick={() => setShowCalendar(false)}
-                className="text-slate-400 hover:text-slate-600 rounded-full p-2 transition-colors cursor-pointer"
-                whileHover={{ rotate: 90 }}
-                transition={{ duration: 0.2 }}
-                aria-label="Close calendar"
+                className="text-stone-400 hover:text-stone-900 rounded-full p-2 transition-colors cursor-pointer"
+                aria-label="Close demo request"
               >
                 <X size={20} aria-hidden="true" />
-              </motion.button>
+              </button>
             </div>
-            <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ciL9GVqgrLt07RkxMMYq-0szLXts_yaQ6M7oa0l6Egx-c1gM_1ayZa6kBmPgtXZZgZDs69oxz?gv=true"
-              style={{ border: 0 }}
-              width="100%"
-              height="600"
-              frameBorder="0"
-              className="rounded-lg"
-              title="Schedule a Demo"
+            <DemoRequestForm
+              source="therapist_blog"
+              onChat={() => {
+                posthog.capture('therapist_demo_chat_clicked');
+                setShowCalendar(false);
+                openSupportChat(DEMO_CHAT_PREFILL);
+              }}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
 
-      {/* Article Header */}
-      <div className="border-b border-slate-200 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl pt-8 pb-10">
-          <Link
-            to="/blog"
-            className="inline-flex items-center text-sm text-slate-500 hover:text-blue-600 font-medium mb-6 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5 mr-1.5" />
-            All articles
-          </Link>
+      <TherapistHeader />
 
-          <div>
-            <span
-              className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold border mb-4 ${getCategoryBadgeColor(
-                post.category
-              )}`}
+      <div className="container mx-auto px-4 pt-12 pb-24 md:pt-16">
+        <div className="relative">
+          {/* One reading column: back link, title, intro and body share a left edge. */}
+          <article className="mx-auto max-w-2xl">
+            <Link
+              to="/blog"
+              className="inline-flex items-center text-sm text-stone-500 hover:text-stone-900 font-medium mb-10 transition-colors"
             >
-              {post.category}
-            </span>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-              {post.title}
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed mb-5">
-              {post.excerpt}
-            </p>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-              <span className="font-medium text-slate-700">{post.author}</span>
-              <span className="flex items-center gap-1.5">
-                <CalendarDays className="w-3.5 h-3.5" />
-                {post.date}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock3 className="w-3.5 h-3.5" />
-                {post.readTime}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+              <ArrowLeft className="w-3.5 h-3.5 mr-1.5" />
+              All articles
+            </Link>
 
-      {/* Article Body */}
-      <div className="bg-slate-50">
-        <div className="container mx-auto px-4 max-w-6xl py-10">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr),260px]">
-            {/* Main Content */}
-            <article className="order-1 bg-white rounded-lg border border-slate-200 p-6 md:p-10">
-              <div className="space-y-8">
-                {/* Intro */}
-                <p className="text-slate-700 leading-8 text-lg">{post.intro}</p>
-
-                {/* Key Takeaways */}
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
-                  <h2 className="text-base font-semibold text-slate-900 mb-3">
-                    What you'll learn
-                  </h2>
-                  <ul className="space-y-2.5">
-                    {keyTakeaways.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Sections */}
-                {sectionsWithId.map((section, index) => (
-                  <section key={section.id} id={section.id} className="scroll-mt-28">
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
-                      {section.heading}
-                    </h2>
-                    <div className="space-y-4 text-slate-700 leading-7">
-                      {section.body.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                    {index === 1 && (
-                      <div className="mt-6">
-                        <MarketingCard onBookDemo={() => setShowCalendar(true)} />
-                      </div>
-                    )}
-                  </section>
-                ))}
-
-                {/* FAQ */}
-                <section id="faq" className="pt-6 border-t border-slate-200 scroll-mt-28">
-                  <h2 className="text-xl font-bold text-slate-900 mb-5">
-                    Frequently asked questions
-                  </h2>
-                  <div className="space-y-4">
-                    {post.faq.map((item) => (
-                      <div
-                        key={item.question}
-                        className="rounded-lg border border-slate-200 bg-slate-50/50 p-4"
-                      >
-                        <h3 className="text-base font-semibold text-slate-900 mb-1.5">
-                          {item.question}
-                        </h3>
-                        <p className="text-slate-700 text-sm leading-relaxed">{item.answer}</p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* Bottom CTA */}
-                <section className="pt-6 border-t border-slate-200">
-                  <MarketingCard onBookDemo={() => setShowCalendar(true)} />
-                </section>
-
-                {/* Footer */}
-                <section className="pt-6 border-t border-slate-200">
-                  <p className="text-xs text-slate-500 mb-5">
-                    Medical note: This article is educational and not a substitute for
-                    professional diagnosis or treatment.
-                  </p>
-                  <div className="flex flex-wrap gap-2.5">
-                    <Link
-                      to="/blog"
-                      className="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors text-sm font-medium"
-                    >
-                      Browse more articles
-                    </Link>
-                    <Link
-                      to="/science"
-                      className="inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors text-sm font-medium group"
-                    >
-                      Visit science page
-                      <ChevronRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
-                </section>
+            <header>
+              <p className={EYEBROW}>{post.category}</p>
+              <h1 className="mt-4 font-serif text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-stone-900">
+                {post.title}
+              </h1>
+              <p className="mt-6 text-xl text-stone-600 leading-relaxed">{post.excerpt}</p>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-stone-500">
+                <span className="font-medium text-stone-700">{post.author}</span>
+                <span className="flex items-center gap-1.5">
+                  <CalendarDays className="w-3.5 h-3.5" />
+                  {post.date}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock3 className="w-3.5 h-3.5" />
+                  {post.readTime}
+                </span>
               </div>
-            </article>
+            </header>
 
-            {/* Sidebar */}
-            <aside className="order-2 space-y-4 lg:sticky lg:top-28 lg:self-start">
-              <MarketingCard compact onBookDemo={() => setShowCalendar(true)} />
+            {/* Intro */}
+            <p className="mt-12 border-t border-stone-200 pt-10 text-[1.125rem] leading-[1.8] text-stone-700">
+              {post.intro}
+            </p>
 
-              {/* Table of Contents */}
-              <div className="rounded-lg border border-slate-200 bg-white p-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
-                  In this article
-                </p>
-                <ul className="space-y-2 text-sm text-slate-600">
-                  {sectionsWithId.map((section) => (
-                    <li key={section.id}>
-                      <a
-                        href={`#${section.id}`}
-                        className="hover:text-blue-600 transition-colors block py-0.5 leading-snug"
-                      >
-                        {section.heading}
-                      </a>
-                    </li>
-                  ))}
-                  <li>
-                    <a
-                      href="#faq"
-                      className="hover:text-blue-600 transition-colors block py-0.5"
-                    >
-                      FAQ
+            {/* Table of contents below xl; the sticky rail takes over on wide screens */}
+            <nav className="mt-10 border-t border-stone-200 pt-6 xl:hidden" aria-label="In this article">
+              <p className={RAIL_LABEL}>In this article</p>
+              <ul className="mt-4 space-y-2.5 text-stone-600">
+                {sectionsWithId.map((section) => (
+                  <li key={section.id}>
+                    <a href={`#${section.id}`} className="hover:text-[#1b8af1] transition-colors leading-snug">
+                      {section.heading}
                     </a>
                   </li>
-                </ul>
+                ))}
+                <li>
+                  <a href="#faq" className="hover:text-[#1b8af1] transition-colors">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            {/* Key takeaways: between hairlines, no card */}
+            <section className="mt-10 border-y border-stone-200 py-8">
+              <h2 className={RAIL_LABEL}>What you'll learn</h2>
+              <ul className="mt-5 space-y-3.5">
+                {keyTakeaways.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-stone-700 leading-relaxed">
+                    <Check className="w-4 h-4 text-[#1b8af1] mt-1.5 flex-shrink-0" strokeWidth={2.5} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Sections */}
+            {sectionsWithId.map((section) => (
+              <section key={section.id} id={section.id} className="scroll-mt-28">
+                <h2 className="font-serif text-3xl font-medium tracking-tight mt-14 mb-5 text-stone-900">
+                  {section.heading}
+                </h2>
+                <div className="space-y-6 text-[1.125rem] leading-[1.8] text-stone-700">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            {/* FAQ: divided list */}
+            <section id="faq" className="mt-16 border-t border-stone-200 pt-12 scroll-mt-28">
+              <h2 className="font-serif text-3xl font-medium tracking-tight text-stone-900">
+                Frequently asked questions
+              </h2>
+              <div className="mt-6 divide-y divide-stone-200">
+                {post.faq.map((item) => (
+                  <div key={item.question} className="py-6">
+                    <h3 className="font-serif text-xl font-medium text-stone-900">{item.question}</h3>
+                    <p className="mt-3 text-stone-700 leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* The one CTA on the page */}
+            <section className="mt-14 rounded-3xl bg-stone-900 px-8 py-12 text-center text-white md:px-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">Empath for Therapists</p>
+              <h2 className="mt-4 font-serif text-3xl font-medium tracking-tight leading-[1.15]">
+                Bring AI memory and pattern insight into every session
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-stone-300 leading-relaxed">
+                Empath surfaces client trends between sessions so you can spend less time catching up and
+                more time delivering high-impact care.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+                <button
+                  type="button"
+                  onClick={() => setShowCalendar(true)}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-stone-900 transition-colors hover:bg-stone-100"
+                >
+                  Book a 15-Min Demo <ArrowRight className="w-4 h-4" />
+                </button>
+                <a
+                  href="https://app.empathdash.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-stone-300 transition-colors hover:text-white"
+                >
+                  Sign in
+                </a>
+              </div>
+            </section>
+
+            {/* Share + onward links */}
+            <footer className="mt-12 border-t border-stone-200 pt-8">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                <span className={RAIL_LABEL}>Share</span>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="font-medium text-stone-600 transition-colors hover:text-stone-900"
+                >
+                  {copied ? 'Copied!' : 'Copy link'}
+                </button>
+                <a
+                  href={twitterShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-stone-600 transition-colors hover:text-stone-900"
+                >
+                  X
+                </a>
+                <a
+                  href={linkedInShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-stone-600 transition-colors hover:text-stone-900"
+                >
+                  LinkedIn
+                </a>
               </div>
 
-              {/* Share */}
-              <div className="rounded-lg border border-slate-200 bg-white p-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
-                  Share
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={handleCopyLink}
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600 hover:bg-slate-50 transition-colors"
-                  >
-                    <Copy className="w-3 h-3 mr-1.5" />
-                    {copied ? 'Copied!' : 'Copy link'}
-                  </button>
-                  <a
-                    href={twitterShare}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600 hover:bg-slate-50 transition-colors"
-                  >
-                    X <ExternalLink className="w-3 h-3 ml-1.5" />
-                  </a>
-                  <a
-                    href={linkedInShare}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-600 hover:bg-slate-50 transition-colors"
-                  >
-                    LinkedIn <ExternalLink className="w-3 h-3 ml-1.5" />
-                  </a>
-                </div>
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium">
+                <Link to="/blog" className="inline-flex items-center gap-1.5 text-stone-700 transition-colors hover:text-[#1b8af1]">
+                  Browse more articles <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link to="/science" className="inline-flex items-center gap-1.5 text-stone-700 transition-colors hover:text-[#1b8af1]">
+                  Visit science page <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-            </aside>
-          </div>
+
+              <p className="mt-8 text-xs text-stone-500 leading-relaxed">
+                Medical note: This article is educational and not a substitute for
+                professional diagnosis or treatment.
+              </p>
+            </footer>
+          </article>
+
+          {/* Sticky contents rail in the right margin (xl and up). Plain text, no card. */}
+          <aside className="absolute inset-y-0 left-[calc(50%+24rem)] hidden w-56 xl:block" aria-label="In this article">
+            <nav className="sticky top-28 border-l border-stone-200 pl-5">
+              <p className={RAIL_LABEL}>In this article</p>
+              <ul className="mt-4 space-y-2.5 text-sm text-stone-500">
+                {sectionsWithId.map((section) => (
+                  <li key={section.id}>
+                    <a href={`#${section.id}`} className="block leading-snug hover:text-stone-900 transition-colors">
+                      {section.heading}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href="#faq" className="block hover:text-stone-900 transition-colors">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
         </div>
       </div>
+
+      <TherapistFooter />
     </div>
   );
 }

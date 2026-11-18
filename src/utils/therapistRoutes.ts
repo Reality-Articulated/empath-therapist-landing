@@ -1,5 +1,5 @@
 /**
- * Locale-free paths that belong to the therapist-facing side of the site.
+ * Paths that belong to the therapist-facing side of the site.
  *
  * Single source of truth shared by `src/App.tsx` (runtime: iOS Smart App
  * Banner on/off per route) and `scripts/prerender.mjs` (build: strips the
@@ -21,7 +21,6 @@ export const THERAPIST_PATHS = [
   '/blogs',
 ] as const;
 
-/** `basePath` must already have its locale prefix stripped ("/therapist", not "/es/therapist"). */
 export function isTherapistPath(basePath: string): boolean {
   const path = basePath.replace(/\/+$/, '') || '/';
   return (THERAPIST_PATHS as readonly string[]).includes(path) || path.startsWith('/blog/');

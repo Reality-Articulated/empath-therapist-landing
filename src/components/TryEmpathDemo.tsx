@@ -5,7 +5,7 @@
 // then the CTA sends the visitor to the App Store.
 //
 // The chat chrome deliberately matches the site's Empath brand (light card,
-// stone borders, #1b8af1 accents, hard shadows), NOT WhatsApp — the WhatsApp
+// hairline stone borders, #1b8af1 accents, soft shadows), NOT WhatsApp — the WhatsApp
 // look belongs to the examples section below this one. Every string lives in
 // the i18n catalog (`tryIt`); nothing tapped here leaves the page.
 import { useEffect, useRef, useState } from 'react';
@@ -34,17 +34,17 @@ const bubbleIn = {
 
 const EmpathBubble = ({ children }: { children: React.ReactNode }) => (
   <div className="flex items-end gap-2 max-w-[85%] self-start">
-    <div className="w-7 h-7 bg-[#1b8af1] rounded-full flex items-center justify-center shrink-0 border-2 border-stone-900">
+    <div className="w-7 h-7 bg-[#1b8af1] rounded-full flex items-center justify-center shrink-0">
       <Brain className="w-3.5 h-3.5 text-white" />
     </div>
-    <div className="bg-white border-2 border-stone-200 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm text-stone-700 font-medium leading-relaxed">
+    <div className="bg-white border border-stone-200 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm text-stone-700 leading-relaxed">
       {children}
     </div>
   </div>
 );
 
 const UserBubble = ({ text }: { text: string }) => (
-  <div className="self-end max-w-[85%] bg-[#1b8af1] text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm font-medium leading-relaxed border-2 border-stone-900 shadow-[2px_2px_0px_0px_rgba(28,25,23,1)]">
+  <div className="self-end max-w-[85%] bg-[#1b8af1] text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm leading-relaxed">
     {text}
   </div>
 );
@@ -158,7 +158,7 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
       type="button"
       onClick={onClick}
       disabled={typing}
-      className="shrink-0 snap-start whitespace-nowrap px-4 py-2.5 bg-white rounded-full border-2 border-stone-900 text-sm font-bold text-stone-900 shadow-[3px_3px_0px_0px_#1b8af1] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_#1b8af1] transition-all disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[3px_3px_0px_0px_#1b8af1]"
+      className="shrink-0 snap-start whitespace-nowrap px-4 py-2 bg-white rounded-full border border-[#1b8af1]/40 text-sm font-medium text-[#1b8af1] hover:bg-blue-50 hover:border-[#1b8af1] transition-colors disabled:opacity-50 disabled:hover:bg-white"
     >
       {label}
     </button>
@@ -166,13 +166,13 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
 
   return (
     <div ref={viewRef} className={`flex flex-col items-center ${className}`}>
-      <div className="w-full max-w-md bg-white rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] overflow-hidden">
+      <div className="w-full max-w-md bg-white rounded-3xl border border-stone-200 shadow-lift overflow-hidden">
         {/* Header */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b-2 border-stone-200">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-stone-200">
           <img src={logo} alt="" className="w-9 h-9 object-contain" />
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-stone-900 text-sm leading-tight">Empath</p>
-            <p className="text-xs text-stone-500 font-medium leading-tight flex items-center gap-1.5">
+            <p className="font-semibold text-stone-900 text-sm leading-tight">Empath</p>
+            <p className="text-xs text-stone-500 leading-tight flex items-center gap-1.5">
               <span className={`w-1.5 h-1.5 rounded-full ${typing ? 'bg-[#1b8af1] animate-pulse' : 'bg-green-500'}`} />
               {typing ? ui.typing : ui.online}
             </p>
@@ -208,10 +208,10 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
         {/* Quick replies: the only way to "type" in this demo. Rendered as a
             snap carousel — arrows and edge fades appear only when the strip
             actually overflows (six openers do; two follow-ups don't). */}
-        <div className="border-t-2 border-stone-200 py-3 min-h-[96px] flex flex-col justify-center">
+        <div className="border-t border-stone-200 py-3 min-h-[96px] flex flex-col justify-center">
           {stage !== 'done' ? (
             <>
-              <p className="text-xs text-stone-400 font-bold uppercase tracking-wider mb-2 text-center px-4">
+              <p className="text-xs text-stone-400 font-semibold uppercase tracking-[0.14em] mb-2 text-center px-4">
                 {stage === 'start' ? tryIt.pickPrompt : tryIt.followUpPrompt}
               </p>
               <div className="relative">
@@ -225,9 +225,9 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
                       tabIndex={-1}
                       aria-hidden="true"
                       onClick={() => scrollStrip(-1)}
-                      className="absolute left-1.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 bg-white border-2 border-stone-900 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:bg-stone-100 transition-colors"
+                      className="absolute left-1.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 bg-white border border-stone-200 rounded-full flex items-center justify-center shadow-soft hover:bg-stone-100 transition-colors"
                     >
-                      <ChevronLeft className="w-4 h-4 text-stone-900" />
+                      <ChevronLeft className="w-4 h-4 text-stone-600" />
                     </button>
                   </>
                 )}
@@ -239,9 +239,9 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
                       tabIndex={-1}
                       aria-hidden="true"
                       onClick={() => scrollStrip(1)}
-                      className="absolute right-1.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 bg-white border-2 border-stone-900 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:bg-stone-100 transition-colors"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 bg-white border border-stone-200 rounded-full flex items-center justify-center shadow-soft hover:bg-stone-100 transition-colors"
                     >
-                      <ChevronRight className="w-4 h-4 text-stone-900" />
+                      <ChevronRight className="w-4 h-4 text-stone-600" />
                     </button>
                   </>
                 )}
@@ -268,7 +268,7 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
             <button
               type="button"
               onClick={restart}
-              className="text-sm font-bold text-stone-500 hover:text-stone-900 transition-colors mx-auto"
+              className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors mx-auto"
             >
               {tryIt.restart}
             </button>
@@ -277,10 +277,10 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
 
         {/* Disabled input mock: signals "the real thing types free-form" */}
         <div className="flex items-center gap-2 px-4 pb-4">
-          <div className="flex-1 bg-stone-100 rounded-full px-4 py-2.5 text-sm text-stone-400 font-medium select-none">
+          <div className="flex-1 bg-stone-100 rounded-full px-4 py-2.5 text-sm text-stone-400 select-none">
             {ui.inputPlaceholder}
           </div>
-          <div className="w-9 h-9 bg-[#1b8af1] rounded-full flex items-center justify-center border-2 border-stone-900 opacity-60" aria-hidden="true">
+          <div className="w-9 h-9 bg-[#1b8af1] rounded-full flex items-center justify-center opacity-60" aria-hidden="true">
             <ArrowUp className="w-4 h-4 text-white" />
           </div>
         </div>
@@ -294,20 +294,20 @@ export default function TryEmpathDemo({ className = '' }: { className?: string }
           transition={{ duration: 0.3 }}
           className="flex flex-col items-center mt-8"
         >
-          <p className="text-stone-700 font-bold text-center mb-4">{tryIt.ctaLead}</p>
+          <p className="text-stone-700 font-medium text-center mb-4">{tryIt.ctaLead}</p>
           <a
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => posthog.capture('tryit_app_store_clicked', { opener: ctaOpener })}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-stone-900 text-white rounded-xl font-bold text-base border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+            className="inline-flex items-center gap-3 px-7 py-3.5 bg-stone-900 text-white rounded-full font-semibold text-base hover:bg-[#1b8af1] transition-colors"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" />
             </svg>
             {tryIt.cta}
           </a>
-          <p className="text-xs text-stone-400 font-medium mt-3 text-center">{tryIt.ctaNote}</p>
+          <p className="text-xs text-stone-400 mt-3 text-center max-w-sm">{tryIt.ctaNote}</p>
         </motion.div>
       )}
     </div>

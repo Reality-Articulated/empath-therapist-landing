@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
 import SEO from '../components/SEO';
+import TherapistHeader from '../components/therapist/TherapistHeader';
+import TherapistFooter from '../components/therapist/TherapistFooter';
 
-function getCategoryBadgeColor(category: string) {
-  const styles: Record<string, string> = {
-    'Clinical Practice': 'bg-blue-50 text-blue-700 border-blue-200',
-    'Research Insights': 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    'AI + Clinical Practice': 'bg-violet-50 text-violet-700 border-violet-200',
-    'Practice Management': 'bg-amber-50 text-amber-700 border-amber-200',
-  };
-  return styles[category] ?? 'bg-slate-50 text-slate-700 border-slate-200';
-}
+// Shared type styles, matching the home page and /therapist.
+const EYEBROW = 'text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]';
 
 export default function BlogsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,7 +74,7 @@ export default function BlogsPage() {
   }, []);
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <SEO
         title="Empath Blog | Research & Practice Insights for Therapists"
         description="Evidence-based articles on between-session data, therapeutic alliance, AI in clinical practice, and the science of therapy outcomes."
@@ -90,142 +85,115 @@ export default function BlogsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
 
+      <TherapistHeader />
+
       {/* Header */}
-      <div className="border-b border-slate-200 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl py-12 md:py-16">
-          <p className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-3">
-            Empath Blog
-          </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
-            Clinical Insights for Therapists
-          </h1>
-          <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mb-8">
-            Evidence-based articles on between-session data, measurement-based care, AI in clinical practice,
-            and strategies to improve outcomes, written by clinicians, for clinicians.
-          </p>
+      <div className="container mx-auto px-4 max-w-5xl pt-16 pb-12 md:pt-24">
+        <p className={EYEBROW}>Empath Blog</p>
+        <h1 className="mt-4 font-serif text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-stone-900">
+          Clinical Insights for Therapists
+        </h1>
+        <p className="mt-6 text-lg text-stone-600 leading-relaxed max-w-2xl">
+          Evidence-based articles on between-session data, measurement-based care, AI in clinical practice,
+          and strategies to improve outcomes, written by clinicians, for clinicians.
+        </p>
 
-          {/* Search */}
-          <div className="max-w-md relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white transition-colors"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
-          </div>
+        {/* Search */}
+        <div className="mt-10 max-w-md relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+          <input
+            type="text"
+            placeholder="Search articles..."
+            className="w-full pl-11 pr-5 py-3 bg-white border border-stone-200 rounded-full text-sm text-stone-800 placeholder:text-stone-400 focus:border-[#1b8af1] focus:outline-none transition-colors"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
 
-          {/* Category Pills */}
-          <div className="flex flex-wrap gap-2 mt-6">
-            {categories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setSelectedCategory(category)}
-                className={`px-3.5 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-                  selectedCategory === category
-                    ? 'bg-slate-900 text-white border-slate-900'
-                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+        {/* Category Pills */}
+        <div className="flex flex-wrap gap-2 mt-6">
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+                selectedCategory === category
+                  ? 'bg-stone-900 text-white border-stone-900'
+                  : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400 hover:text-stone-900'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Featured Post */}
       {isDefaultView && (
-        <div className="border-b border-slate-200 bg-slate-50">
-          <div className="container mx-auto px-4 max-w-5xl py-10">
-            <Link
-              to={`/blog/${featuredPost.slug}`}
-              className="block group"
-            >
-              <div className="grid md:grid-cols-[1fr,1.2fr] gap-6 items-center">
-                <div>
-                  <span
-                    className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold border mb-3 ${getCategoryBadgeColor(
-                      featuredPost.category
-                    )}`}
-                  >
-                    {featuredPost.category}
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight mb-3 group-hover:text-blue-700 transition-colors">
-                    {featuredPost.title}
-                  </h2>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    {featuredPost.excerpt}
-                  </p>
-                  <div className="flex items-center gap-3 text-sm text-slate-500">
-                    <span className="font-medium text-slate-700">{featuredPost.author}</span>
-                    <span>·</span>
-                    <span>{featuredPost.date}</span>
-                    <span>·</span>
-                    <span>{featuredPost.readTime}</span>
-                  </div>
-                </div>
-                <div className="hidden md:flex justify-end">
-                  <div className="w-full max-w-sm aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg border border-slate-200 flex items-center justify-center">
-                    <span className="text-sm text-slate-400 font-medium">Featured</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
+        <div className="container mx-auto px-4 max-w-5xl pb-6">
+          <Link
+            to={`/blog/${featuredPost.slug}`}
+            className="block group rounded-3xl border border-stone-200 bg-white p-8 md:p-12 shadow-soft"
+          >
+            <p className={EYEBROW}>{featuredPost.category}</p>
+            <h2 className="mt-4 max-w-3xl font-serif text-3xl md:text-4xl font-medium tracking-tight leading-[1.15] text-stone-900 group-hover:text-[#1b8af1] transition-colors">
+              {featuredPost.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg text-stone-600 leading-relaxed">
+              {featuredPost.excerpt}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-stone-500">
+              <span className="font-medium text-stone-700">{featuredPost.author}</span>
+              <span>·</span>
+              <span>{featuredPost.date}</span>
+              <span>·</span>
+              <span>{featuredPost.readTime}</span>
+            </div>
+          </Link>
         </div>
       )}
 
       {/* Articles Grid */}
-      <div className="bg-white">
-        <div className="container mx-auto px-4 max-w-5xl py-10 md:py-12">
-          {gridPosts.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-slate-300 p-12 text-center">
-              <p className="text-slate-500">
-                No posts matched your filter. Try another category or keyword.
-              </p>
-            </div>
-          ) : (
-            <div className="divide-y divide-slate-200">
-              {gridPosts.map((post) => (
-                <article key={post.id} className="py-6 first:pt-0 last:pb-0">
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="block group"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span
-                            className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium border ${getCategoryBadgeColor(
-                              post.category
-                            )}`}
-                          >
-                            {post.category}
-                          </span>
-                          <span className="text-xs text-slate-400">{post.readTime}</span>
-                        </div>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-1.5 group-hover:text-blue-700 transition-colors leading-snug">
-                          {post.title}
-                        </h3>
-                        <p className="text-slate-600 text-sm leading-relaxed line-clamp-2 mb-2">
-                          {post.excerpt}
-                        </p>
-                        <div className="text-xs text-slate-400">
-                          {post.author} · {post.date}
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-2" />
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className="container mx-auto px-4 max-w-5xl pt-6 pb-24">
+        {gridPosts.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-stone-300 p-12 text-center">
+            <p className="text-stone-500">
+              No posts matched your filter. Try another category or keyword.
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2">
+            {gridPosts.map((post) => (
+              <article key={post.id}>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="group flex h-full flex-col rounded-3xl border border-stone-200 bg-white p-7 transition-shadow hover:shadow-soft"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <p className={EYEBROW}>{post.category}</p>
+                    <span className="text-xs text-stone-400 whitespace-nowrap">{post.readTime}</span>
+                  </div>
+                  <h3 className="mt-4 font-serif text-xl font-medium tracking-tight leading-snug text-stone-900 group-hover:text-[#1b8af1] transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-3 text-stone-600 text-sm leading-relaxed line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-auto flex items-center justify-between gap-4 pt-6 text-xs text-stone-400">
+                    <span>
+                      {post.author} · {post.date}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-[#1b8af1] transition-colors flex-shrink-0" />
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
+
+      <TherapistFooter />
     </div>
   );
 }

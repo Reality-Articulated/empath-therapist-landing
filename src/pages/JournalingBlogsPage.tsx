@@ -1,41 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  CalendarCheck,
-  Compass,
-  Cpu,
-  FlaskConical,
-  HeartPulse,
-  MessageSquare,
-  Search,
-  Star,
-} from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import { journalingBlogPosts } from '../data/journalingBlogPosts';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
-import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
-import { getCategoryColor } from '../utils/blogCategoryColors';
+import { AppleIcon } from '../components/ChannelIcons';
+import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
 
 function toIsoDate(value: string) {
   const parsed = Date.parse(`${value} UTC`);
   return Number.isNaN(parsed) ? value : new Date(parsed).toISOString().split('T')[0];
-}
-
-function getCategoryIcon(category: string) {
-  const icons: Record<string, typeof BookOpen> = {
-    'App Reviews': Star,
-    'Getting Started': Compass,
-    'Science & Research': FlaskConical,
-    'Habits & Routines': CalendarCheck,
-    'AI & Technology': Cpu,
-    'Mental Wellness': HeartPulse,
-  };
-  return icons[category] ?? BookOpen;
 }
 
 export default function JournalingBlogsPage() {
@@ -180,9 +156,6 @@ export default function JournalingBlogsPage() {
     if (newWindow) newWindow.opener = null;
   };
 
-  const leadColors = leadPost ? getCategoryColor(leadPost.category) : null;
-  const LeadIcon = leadPost ? getCategoryIcon(leadPost.category) : BookOpen;
-
   return (
     <div className="flex-grow bg-[#FAF9F6] text-stone-900">
       <SEO
@@ -200,55 +173,49 @@ export default function JournalingBlogsPage() {
       />
 
       {/* Header / Navbar */}
-      <div className="bg-[#FAF9F6]/90 backdrop-blur-sm border-b border-stone-200 py-4 sticky top-0 z-40">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+      <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-[#FAF9F6]/85 backdrop-blur-md">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3.5">
           <Link to="/app" className="flex items-center gap-0">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
+            <div className="flex h-10 w-10 items-center justify-center">
+              <img src={logo} alt="Empath Logo" className="h-full w-full object-contain" />
             </div>
-            <span className="text-stone-900 tracking-tight hidden sm:block text-lg">Empath</span>
+            <span className="text-lg tracking-tight text-stone-900">Empath</span>
           </Link>
           <nav className="flex items-center gap-8">
             <Link
               to="/app#features"
-              className="text-sm font-semibold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 md:block"
             >
               Features
             </Link>
             <Link
-              to="/app#how-it-works"
-              className="text-sm font-semibold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
-            >
-              How It Works
-            </Link>
-            <Link
               to="/app#faq"
-              className="text-sm font-semibold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 md:block"
             >
               FAQ
             </Link>
             <Link
               to="/app/blog"
-              className="text-sm font-semibold text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-900 transition-colors md:block"
             >
               Blog
             </Link>
             <button
               onClick={handleAppStoreClick}
-              className="px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold text-sm hover:bg-[#1b8af1] transition-colors"
+              className="rounded-full bg-stone-900 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1b8af1]"
             >
               Download
             </button>
           </nav>
         </div>
-      </div>
+      </header>
 
       {/* Page Header */}
-      <div className="container mx-auto px-4 max-w-6xl pt-14 md:pt-20 pb-10">
+      <div className="container mx-auto px-4 max-w-6xl pt-16 md:pt-24 pb-12">
         <p className="text-xs font-semibold text-[#1b8af1] uppercase tracking-[0.18em] mb-4">
           The Empath Journal
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold text-stone-900 tracking-tight mb-4 font-serif">
+        <h1 className="font-serif text-5xl md:text-6xl font-medium leading-[1.05] tracking-tight text-stone-900 mb-5">
           Journaling, understood.
         </h1>
         <p className="text-lg text-stone-600 leading-relaxed max-w-2xl">
@@ -258,10 +225,10 @@ export default function JournalingBlogsPage() {
       </div>
 
       {/* The Top 7 */}
-      {isDefaultView && leadPost && leadColors && (
+      {isDefaultView && leadPost && (
         <div className="container mx-auto px-4 max-w-6xl pb-14">
           <div className="flex items-baseline justify-between border-b border-stone-200 pb-4 mb-8">
-            <h2 className="text-xl md:text-2xl font-bold text-stone-900 font-serif">
+            <h2 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-stone-900">
               The Top 7
             </h2>
             <p className="text-sm text-stone-500 hidden sm:block">
@@ -276,27 +243,20 @@ export default function JournalingBlogsPage() {
               className="lg:col-span-7 group"
               onClick={() => handleArticleClick(leadPost.slug, 'featured', leadPost.category, 1)}
             >
-              <article className="h-full flex flex-col">
-                <div
-                  className={`bg-gradient-to-br ${leadColors.gradient} rounded-2xl h-52 md:h-72 mb-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.01]`}
-                >
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-white/90 rounded-2xl shadow-sm flex items-center justify-center">
-                    <LeadIcon
-                      className="w-8 h-8 md:w-10 md:h-10"
-                      style={{ color: leadColors.shadow }}
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 mb-3 text-xs font-semibold uppercase tracking-wider">
+              <article className="flex h-full flex-col">
+                <div className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em]">
                   <span className="text-[#1b8af1]">№ 1</span>
                   <span className="text-stone-300">·</span>
-                  <span className={leadColors.text}>{leadPost.category}</span>
+                  <span className="text-stone-500">{leadPost.category}</span>
                 </div>
-                <h3 className="text-2xl md:text-[2rem] md:leading-tight font-bold text-stone-900 mb-3 font-serif group-hover:text-[#1b8af1] transition-colors">
+                <h3 className="mb-5 font-serif text-4xl font-medium leading-[1.1] tracking-tight text-stone-900 transition-colors group-hover:text-[#1b8af1] md:text-5xl">
                   {leadPost.title}
                 </h3>
-                <p className="text-stone-600 leading-relaxed mb-4 max-w-xl">
+                <p className="mb-6 max-w-xl text-lg leading-relaxed text-stone-600">
                   {leadPost.excerpt}
+                </p>
+                <p className="mb-6 inline-flex items-center gap-1.5 font-semibold text-[#1b8af1]">
+                  Read the guide <ArrowRight className="h-4 w-4" />
                 </p>
                 <p className="mt-auto text-sm text-stone-500">
                   {leadPost.date} · {leadPost.readTime}
@@ -321,7 +281,7 @@ export default function JournalingBlogsPage() {
                         {String(rank).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-serif text-lg font-bold leading-snug text-stone-900 group-hover:text-[#1b8af1] transition-colors">
+                        <span className="block font-serif text-lg font-medium leading-snug text-stone-900 group-hover:text-[#1b8af1] transition-colors">
                           {post.title}
                         </span>
                         <span className="block text-sm text-stone-500 mt-1.5">
@@ -337,31 +297,31 @@ export default function JournalingBlogsPage() {
         </div>
       )}
 
-      {/* Quiet CTA strip */}
+      {/* Quiet CTA strip: one line, one button, text links */}
       {isDefaultView && (
         <div className="container mx-auto px-4 max-w-6xl pb-14">
-          <div className="rounded-2xl border border-stone-200 bg-white px-6 py-5 md:px-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-            <p className="text-stone-700 leading-relaxed md:flex-1">
+          <div className="flex flex-col gap-4 border-y border-stone-200 py-5 md:flex-row md:items-center md:gap-8">
+            <p className="leading-relaxed text-stone-600 md:flex-1">
               <span className="font-semibold text-stone-900">
                 Written by the team behind Empath
-              </span>{' '}
+              </span>
               , the journal you can call or message. Free to try.
             </p>
-            <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+            <div className="flex flex-shrink-0 flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
               <button
                 onClick={handleAppStoreClick}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-stone-900 text-white rounded-lg font-semibold text-sm hover:bg-[#1b8af1] transition-colors"
+                className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2 font-semibold text-white transition-colors hover:bg-[#1b8af1]"
               >
-                Get the app <ArrowUpRight className="w-4 h-4" />
+                <AppleIcon className="h-4 w-4" /> Get the app
               </button>
               {SMS_ENABLED && (
                 <a
                   href={`sms:${PHONE_MAIN}`}
                   onClick={() => posthog.capture('journaling_blog_text_clicked')}
                   title="Text (888) 366-3082"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-stone-200 text-sm font-semibold text-stone-600 hover:border-[#1b8af1] hover:text-[#1b8af1] transition-colors"
+                  className="text-stone-600 transition-colors hover:text-stone-900"
                 >
-                  <MessageSquare className="w-4 h-4" /> Text
+                  Text
                 </a>
               )}
               <a
@@ -370,9 +330,9 @@ export default function JournalingBlogsPage() {
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture('journaling_blog_whatsapp_clicked')}
                 title="Message Empath on WhatsApp"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-stone-200 text-sm font-semibold text-stone-600 hover:border-[#25D366] hover:text-[#1a9e4d] transition-colors"
+                className="text-stone-600 transition-colors hover:text-stone-900"
               >
-                <WhatsAppIcon className="w-4 h-4" /> WhatsApp
+                WhatsApp
               </a>
               <a
                 href={`https://t.me/${TELEGRAM_USERNAME}`}
@@ -380,9 +340,9 @@ export default function JournalingBlogsPage() {
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture('journaling_blog_telegram_clicked')}
                 title="Message Empath on Telegram"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-stone-200 text-sm font-semibold text-stone-600 hover:border-[#229ED9] hover:text-[#1a7eb0] transition-colors"
+                className="text-stone-600 transition-colors hover:text-stone-900"
               >
-                <TelegramIcon className="w-4 h-4" /> Telegram
+                Telegram
               </a>
             </div>
           </div>
@@ -392,7 +352,7 @@ export default function JournalingBlogsPage() {
       {/* All Articles */}
       <div className="container mx-auto px-4 max-w-6xl pb-20">
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4 border-b border-stone-200 pb-4 mb-6">
-          <h2 className="text-xl md:text-2xl font-bold text-stone-900 font-serif">
+          <h2 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-stone-900">
             All articles
           </h2>
           <div className="relative sm:w-72">
@@ -414,7 +374,7 @@ export default function JournalingBlogsPage() {
               key={category}
               type="button"
               onClick={() => handleCategorySelect(category)}
-              className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 selectedCategory === category
                   ? 'bg-stone-900 text-white'
                   : 'bg-white text-stone-600 border border-stone-200 hover:border-stone-400'
@@ -426,7 +386,7 @@ export default function JournalingBlogsPage() {
         </div>
 
         {gridPosts.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-stone-300 p-12 text-center">
+          <div className="rounded-3xl border border-dashed border-stone-300 p-12 text-center">
             <p className="text-stone-500">
               No posts matched your filter. Try another category or keyword.
             </p>
@@ -434,23 +394,20 @@ export default function JournalingBlogsPage() {
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {gridPosts.map((post) => {
-              const colors = getCategoryColor(post.category);
               return (
                 <article key={post.id}>
                   <Link
                     to={`/app/blog/${post.slug}`}
-                    className="flex flex-col h-full bg-white rounded-2xl border border-stone-200 p-6 hover:border-stone-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                    className="flex flex-col h-full bg-white rounded-3xl border border-stone-200 p-6 hover:shadow-soft transition-shadow duration-200 group"
                     onClick={() => handleArticleClick(post.slug, 'grid', post.category)}
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <span
-                        className={`text-[11px] font-semibold uppercase tracking-wider ${colors.text}`}
-                      >
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1b8af1]">
                         {post.category}
                       </span>
                       <span className="text-xs text-stone-400">{post.readTime}</span>
                     </div>
-                    <h3 className="text-lg font-bold text-stone-900 mb-2 group-hover:text-[#1b8af1] transition-colors leading-snug font-serif">
+                    <h3 className="text-lg font-medium text-stone-900 mb-2 group-hover:text-[#1b8af1] transition-colors leading-snug font-serif">
                       {post.title}
                     </h3>
                     <p className="text-stone-600 text-sm leading-relaxed line-clamp-2 mb-5">
@@ -458,7 +415,7 @@ export default function JournalingBlogsPage() {
                     </p>
                     <div className="mt-auto flex items-center justify-between">
                       <span className="text-xs text-stone-400">{post.date}</span>
-                      <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-[#1b8af1] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                      <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-[#1b8af1] transition-colors flex-shrink-0" />
                     </div>
                   </Link>
                 </article>
@@ -467,6 +424,30 @@ export default function JournalingBlogsPage() {
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-stone-200 bg-[#FAF9F6] py-14">
+        <div className="container mx-auto flex flex-col items-center gap-8 px-4 md:flex-row md:justify-between">
+          <Link to="/" className="flex items-center gap-0">
+            <img src={logo} alt="Empath" className="h-9 w-9 object-contain" />
+            <span className="text-lg tracking-tight text-stone-900">Empath</span>
+          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-stone-500">
+            <Link to="/app/blog" className="transition-colors hover:text-stone-900">Blog</Link>
+            <Link to="/therapist" className="transition-colors hover:text-stone-900">For Therapists</Link>
+            <Link to="/privacy" className="transition-colors hover:text-stone-900">Privacy Policy</Link>
+            <Link to="/terms" className="transition-colors hover:text-stone-900">Terms of Service</Link>
+            <button
+              type="button"
+              onClick={() => openSupportChat()}
+              className="font-medium transition-colors hover:text-stone-900"
+            >
+              Support
+            </button>
+          </div>
+          <p className="text-xs text-stone-400">© {new Date().getFullYear()} Reality Articulated Inc.</p>
+        </div>
+      </footer>
     </div>
   );
 }

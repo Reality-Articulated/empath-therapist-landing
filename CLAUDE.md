@@ -34,7 +34,7 @@ There is no test runner configured.
 - `/therapist` → `HomePage` (therapist landing)
 - `/atman/*` → iframe of the external Atman app
 
-The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/therapist`, `/about-atman`, `/whyempath`, `/quiz`). When adding a page that doesn't want the shared chrome, update that predicate.
+The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/therapist`, `/about-atman`, `/whyempath`, `/quiz`, and the therapist blog `/blog*`, which renders `TherapistHeader` / `TherapistFooter`). When adding a page that doesn't want the shared chrome, update that predicate.
 
 `vercel.json` rewrites **all** paths to `/index.html` so deep links work on Vercel; without it, only `/` resolves on hard refresh.
 
@@ -52,27 +52,36 @@ Add new therapist pages to `THERAPIST_PATHS`, not to the prerender script.
 ### SMS journaling is PAUSED — `src/utils/channels.ts`
 
 `SMS_ENABLED = false` (2026-08-04, Twilio cost). Every `sms:` CTA on the site is
-wrapped in it — consumer hero (mobile + desktop), final CTA, floating bar,
+wrapped in it — the home page Channels section (the only `sms:` link left on `/` since the 2026-11 redesign),
 blog index + post cards, both therapy calculators, ClientInfoPage — and the
 grid column counts flip with it so a removed button doesn't leave a gap. The
 messaging carousel (WhatsApp / Telegram / Messenger / Instagram) and every
 `tel:` CTA are untouched.
 
-Copy that named SMS as a channel was edited IN PLACE across all 7
-`src/i18n/copy/journaling.*.ts` + `callme.*.ts` catalogs (git is the restore
+Copy that named SMS as a channel was edited IN PLACE in the
+`src/i18n/copy/journaling.en.ts` + `callme.en.ts` catalogs (git is the restore
 path; the `hero.text` / `hero.textToJournal` / `hero.textUsAt` / `floating.text`
 LABEL keys were deliberately left in place so unpausing only needs prose
 reverted). `seo.keywords` was left alone on purpose — discovery terms cost
 nothing and stripping ranking terms is the one change here that's hard to undo.
 
-⚠️ The English `/` and `/app` `description` strings are DUPLICATED as literals in
-`scripts/prerender.mjs` `staticRoutes` (localized routes read the catalogs) — an
-SEO copy change has to be made in both places or the prerendered HTML keeps the
-old text while the SPA shows the new one.
+The `/` and `/app` prerendered title/description/keywords are read from the
+catalog by `scripts/prerender.mjs`; the `/call-me` strings there are literals
+and must be kept in sync with `callme.en.ts` by hand.
 
 Server side: empath-heroku `backend/config/smsChannel.js` (`SMS_CHANNEL_ENABLED`)
 is the matching switch — inbound SMS journaling answers one redirect notice per
 sender per 24h and reminders fall back to push/email.
+
+### English only (localization removed)
+
+The site used to serve es/pt/hi/de/fr/it under path prefixes (`/es/app`, ...).
+That system is gone: no locale routes, no language switcher, no hreflang, no
+translated catalogs or blog JSON. `src/i18n/copy/` holds only the English
+catalogs (`useJournalingCopy()` / `useCallMeCopy()` return them directly).
+`vercel.json` permanently redirects the old `/<locale>` and `/<locale>/*` URLs
+to the same path without the prefix so indexed and shared links keep working;
+keep those redirects.
 
 ### Analytics + attribution
 
@@ -124,7 +133,7 @@ Contact (name/email) is optional; there is no login. **A new campaign survey
 needs only this file**: edit the questions, bump `SURVEY_ID`, point the
 campaign URL at `/survey` — backend and admin need no changes.
 
-### "Empath calls you" (`/call-me` + homepage hero form)
+### "Empath calls you" (`/call-me` + homepage Channels section)
 
 `src/pages/CallMePage.tsx` — chrome-less (in the `hideNavbar` list), indexed
 (in BOTH `scripts/generate-sitemap.mjs` `staticRoutes` AND
@@ -138,9 +147,9 @@ maps `{error, code}` responses to inline copy. PostHog: `call_me_page_viewed`,
 
 The request state machine lives in `src/components/CallMeForm.tsx`
 (`useCallMeRequest` hook) shared by two surfaces: the full `/call-me` page and
-a compact `CallMeForm` in JournalingPage's dedicated "Empath calls you"
-section (between the trust badges and Feature 1 — deliberately NOT in the
-hero, which was too crammed). PostHog events there are
+a compact `CallMeForm` in JournalingPage's Channels section (right-hand
+card, beside the messaging card; deliberately NOT in the hero, which is
+app-download first). PostHog events there are
 `journaling_page_call_me_requested` / `_placed` / `_failed`, `source:
 'homepage_section'`.
 

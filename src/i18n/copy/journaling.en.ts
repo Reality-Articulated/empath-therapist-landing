@@ -1,19 +1,23 @@
 // Master (English) copy catalog for the consumer landing page (JournalingPage
 // + WhatsAppExamples + CrossChannelStory + CallMeForm + channel row).
-// Every locale file in this directory must export the same shape: the
-// `JournalingCopy` type is derived from this object, so a missing key in a
-// translation is a compile error.
+// The site is English only; the `JournalingCopy` type is derived from this
+// object.
 //
 // PURE DATA ONLY (no JSX): this module is also transpile-loaded by
 // scripts/prerender.mjs and scripts/generate-sitemap.mjs at build time.
 //
-// Translation notes:
-// - Keep product/brand names (Empath, WhatsApp, Telegram, Instagram, Apple
-//   Health, App Store) untranslated.
+// Copy notes:
 // - Chat messages: user texts are deliberately lowercase/casual; keep that
 //   register. Empath replies are warm but plain; never clinical.
-// - Say the local equivalent of "no sign-up", NOT "no account" (an account
-//   is auto-created server-side; "no sign-up" is the claim that holds).
+// - Say "no sign-up", NOT "no account" (an account is auto-created
+//   server-side; "no sign-up" is the claim that holds).
+// - Never claim HIPAA compliance or end-to-end encryption. The claims that
+//   hold: "encrypted at rest and in transit" and "never used to train AI".
+// - The redesigned home page reads `home` plus tryIt, whatsappSection,
+//   callsYou, callMeForm, feature6, featureGrid, socialProof, faq,
+//   androidInterest, finalCta. These blocks are no longer rendered there:
+//   trust, crossChannel (still used by PhraseLandingPage), feature1-5,
+//   howItWorks, iosCallout, worries, floating.
 
 export interface ChatMessage {
   from: 'user' | 'empath';
@@ -203,7 +207,7 @@ export const journalingEn = {
     ],
     ctaLead: 'That was the demo. The real Empath remembers you.',
     cta: 'Get the Free App',
-    ctaNote: 'Free on the App Store. Every entry feeds the Deeper Insights, mood analysis, and people mentions shown around this demo.',
+    ctaNote: 'Free on the App Store. Every entry feeds your Deeper Insights, mood analysis, and people mentions.',
     restart: 'Try another opener',
     screenshotAlt: 'Screenshot of the Empath app',
   },
@@ -588,7 +592,7 @@ export const journalingEn = {
     privacyTitle: 'Your Privacy, Your Control',
     privacyBody:
       'You choose what to share and when. Connect or disconnect from your therapist at any time. Your data always remains yours.',
-    privacyBadges: ['HIPAA Compliant', 'End-to-end Encrypted', 'You Control Access', 'Disconnect Anytime'],
+    privacyBadges: ['Encrypted at rest and in transit', 'Never used to train AI', 'You Control Access', 'Disconnect Anytime'],
   },
 
   howItWorks: {
@@ -665,7 +669,7 @@ export const journalingEn = {
       {
         worry: '"Who else can read what I send?"',
         title: 'Nobody. It stays yours.',
-        body: 'Every entry is encrypted, HIPAA compliant, and never used to train AI models. You can export everything or delete it all at any time. Your journal has exactly one reader: you.',
+        body: 'Every entry is encrypted at rest and in transit, and never used to train AI models. You can export everything or delete it all at any time. Your journal has exactly one reader: you.',
       },
       {
         worry: '"I\'ve started five journals and quit them all."',
@@ -718,7 +722,7 @@ export const journalingEn = {
       },
       {
         q: 'How does the AI work?',
-        a: 'Our AI uses advanced natural language processing to transcribe your voice, analyze sentiment, identify patterns, and generate insights. All processing is secure and HIPAA compliant.',
+        a: 'Our AI uses advanced natural language processing to transcribe your voice, analyze sentiment, identify patterns, and generate insights. Your data is encrypted at rest and in transit, and never used to train AI models.',
       },
       {
         q: 'Can I use it without a therapist?',
@@ -726,7 +730,7 @@ export const journalingEn = {
       },
       {
         q: 'Is my data private and secure?',
-        a: 'Yes. All your data is encrypted end-to-end, HIPAA compliant, and never used to train AI models. You control who has access and can delete everything at any time.',
+        a: 'Yes. All your data is encrypted at rest and in transit, and never used to train AI models. You control who has access and can delete everything at any time.',
       },
       {
         q: 'What about Android?',
@@ -797,6 +801,172 @@ export const journalingEn = {
     downloadFree: 'Download Free',
     text: 'Text your thoughts',
     call: 'Call',
+  },
+
+  // Redesigned home page (2026-11): section eyebrows, sentence-case
+  // headings, and spotlight copy. Blocks above are still read for the demo
+  // (`tryIt`), WhatsApp examples, call-me form, therapist summary mock,
+  // feature grid items, testimonials, FAQ, and the Android waitlist.
+  home: {
+    nav: {
+      privacy: 'Privacy',
+    },
+    hero: {
+      orWhatsapp: 'or start on WhatsApp',
+      proof: ['Free on iPhone', 'Encrypted and private', 'Never used to train AI'],
+      // Alt text for the three hero screenshots, left to right.
+      shots: [
+        'Empath journal list with entries colored by how each one felt',
+        'Empath insights screen with the latest reflection, journal map, and Deeper Insights',
+        'Empath Day Colors screen showing the good days of the last 30 as green bubbles',
+      ],
+    },
+    companion: {
+      eyebrow: 'AI companion',
+      title: 'An AI that actually knows you.',
+      body: 'Your companion has read every entry, so you never start from zero. Ask why Mondays feel heavy, what helped last time, or just think out loud.',
+      points: [
+        {
+          title: 'Remembers what matters',
+          desc: 'Your history, your bio, and the people you write about carry into every conversation.',
+        },
+        {
+          title: 'Answers from your own journal',
+          desc: 'Ask about a pattern or a memory and get an answer grounded in what you actually wrote.',
+        },
+        {
+          title: 'There at 2 AM',
+          desc: 'No waiting for a good time to talk. Say it when it is on your mind.',
+        },
+      ],
+      demoNote: 'Try it: tap a message and watch Empath reply. Nothing you tap here is saved or sent anywhere.',
+    },
+    insights: {
+      eyebrow: 'Deeper Insights',
+      title: 'See the patterns you are too close to notice.',
+      body: 'Empath reads across everything you have written and writes up what it finds: triggers, cycles, and the connections between how you felt and what was going on.',
+      points: [
+        {
+          title: 'Deeper Insights',
+          desc: 'Plain-language write-ups of your emotional triggers and recurring patterns, updated as you journal.',
+        },
+        {
+          title: 'People Insights',
+          desc: 'Everyone you write about in one place, with the feelings that come up around each of them.',
+        },
+        {
+          title: 'Search by feeling',
+          desc: 'Find any moment by emotion, topic, or date. Ask "when did I start feeling this way?" and get the entries.',
+        },
+      ],
+      shot: 'Empath Deeper Insights screen explaining a recurring pattern with the entries it came from',
+    },
+    mood: {
+      eyebrow: 'Mood analysis',
+      title: 'See what actually affects your mood.',
+      body: 'You will notice things like "I\'m happier on days I walk" or "deadlines spike my anxiety every Thursday." It is your data, shown simply.',
+      points: [
+        {
+          title: 'Automatic mood tracking',
+          desc: 'Every entry is read for how you felt, so trends build over weeks and months without check-in chores.',
+        },
+        {
+          title: 'Places, weather, and day colors',
+          desc: 'See how you feel at home, at work, and on grey days, with your month sorted into good days and hard days.',
+        },
+        {
+          title: 'Apple Health connections',
+          desc: 'Sleep, workouts, steps, and daily habits sit beside your journal, so you can see what is dragging a mood down.',
+        },
+      ],
+      shot: 'Empath mood screen with a mood check-in, mood insights, and a mood calendar',
+    },
+    capture: {
+      eyebrow: 'Voice, photos, and text',
+      title: 'Say it, type it, or snap it.',
+      body: 'A thought does not wait for a blank page. Talk for two minutes, type one line, or photograph a handwritten page. It all becomes a private journal entry.',
+      points: [
+        {
+          title: 'Voice journaling',
+          desc: 'Talk instead of typing. Your words are transcribed into the entry, in your own voice.',
+        },
+        {
+          title: 'Voice analysis',
+          desc: 'Hear how you really sounded. Tone, energy, and pace, read back from spoken entries.',
+        },
+        {
+          title: 'Photos and scans',
+          desc: 'Send a photo and Empath reads it, handwritten pages included, straight into your journal.',
+        },
+      ],
+      shot: 'Empath voice journal screen recording and transcribing an entry',
+    },
+    therapist: {
+      eyebrow: 'Therapist connection',
+      title: 'Make every session count.',
+      linkLead: 'Are you a therapist?',
+      link: 'See Empath for therapists',
+    },
+    grid: {
+      eyebrow: 'And the rest',
+      title: 'Everything else in the app.',
+      extra: [
+        {
+          title: 'Journal Map',
+          desc: 'Every entry pinned to the place you wrote it.',
+        },
+        {
+          title: 'Day Colors',
+          desc: 'Your last 30 days sorted into good days and hard days.',
+        },
+        {
+          title: 'Weather on Every Entry',
+          desc: 'See what the sky was doing the day you wrote it.',
+        },
+        {
+          title: 'Journaling Plan',
+          desc: 'A daily or weekly cadence with forgiving streaks and reminders that skip themselves.',
+        },
+      ],
+    },
+    channels: {
+      eyebrow: 'Journal from anywhere',
+      title: 'Use the apps you already open.',
+      body: 'Send it like you would text a friend: a late-night spiral, a voice note, a rough day. Empath listens, asks the follow-up a friend would, and saves it privately to your journal.',
+      examplesNote: 'Example conversations shown.',
+      messageTitle: 'Message Empath',
+      messageBody: 'Every channel talks to the same Empath, with the same memory. Start on WhatsApp tonight, pick it up in the app tomorrow.',
+      callTitle: 'Or have Empath call you',
+    },
+    privacy: {
+      eyebrow: 'Private by design',
+      title: 'Your journal has one reader: you.',
+      sub: 'Sharing your inner world is a big ask. Here is what we would want to know before typing a word.',
+      cards: [
+        {
+          title: 'Encrypted',
+          desc: 'Every entry is encrypted at rest and in transit.',
+        },
+        {
+          title: 'Never used to train AI',
+          desc: 'Your entries and conversations are never used to train AI models.',
+        },
+        {
+          title: 'Yours to take or delete',
+          desc: 'Export everything or delete it all, at any time. Your data belongs to you.',
+        },
+        {
+          title: 'You control access',
+          desc: 'Lock entries behind Face ID. If you connect a therapist, you choose what to share and can disconnect at any time.',
+        },
+      ],
+    },
+    reviews: {
+      eyebrow: 'Reviews',
+    },
+    faq: {
+      eyebrow: 'FAQ',
+    },
   },
 };
 

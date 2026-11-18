@@ -97,7 +97,7 @@ const TextBubble = ({ msg }: { msg: ChatMessage }) => {
 
 const ChatCard = ({ example, ui }: { example: ChatExample; ui: ChatUi }) => (
   <div className="snap-center shrink-0 w-[280px] md:w-auto md:shrink">
-    <div className="rounded-2xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] overflow-hidden bg-[#0b141a]">
+    <div className="rounded-3xl shadow-lift overflow-hidden bg-[#0b141a]">
       {/* Header */}
       <div className="flex items-center gap-2.5 bg-[#1f2c34] pl-3 pr-3.5 py-2.5">
         <svg className="w-2 h-3.5 shrink-0" viewBox="0 0 12 20" aria-hidden="true">
@@ -181,8 +181,8 @@ const ChatCard = ({ example, ui }: { example: ChatExample; ui: ChatUi }) => (
     </div>
 
     <div className="text-center mt-5 px-2">
-      <p className="font-bold text-stone-900">{example.title}</p>
-      <p className="text-sm text-stone-500 font-medium mt-1">{example.caption}</p>
+      <p className="font-semibold text-stone-900">{example.title}</p>
+      <p className="text-sm text-stone-500 mt-1">{example.caption}</p>
     </div>
   </div>
 );

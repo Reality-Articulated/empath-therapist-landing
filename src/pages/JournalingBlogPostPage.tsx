@@ -4,24 +4,18 @@ import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
   CalendarDays,
   CheckCircle,
   Clock3,
-  Copy,
   ExternalLink,
-  Sparkles,
-  Phone,
-  MessageSquare,
 } from 'lucide-react';
 import { journalingBlogPosts, JournalingBlogPost } from '../data/journalingBlogPosts';
-import { useTranslatedPost } from '../data/i18n/useTranslatedPost';
 import logo from '../../public/empath-logo.png';
 import posthog from 'posthog-js';
 import SEO from '../components/SEO';
 import BlogChart from '../components/BlogChart';
-import { WhatsAppIcon, TelegramIcon } from '../components/ChannelIcons';
-import { getCategoryColor } from '../utils/blogCategoryColors';
+import { WhatsAppIcon, AppleIcon } from '../components/ChannelIcons';
+import { openSupportChat } from '../utils/supportChat';
 import { SMS_ENABLED } from '../utils/channels';
 
 function toAnchorId(value: string) {
@@ -37,19 +31,21 @@ function toIsoDate(value: string) {
   return Number.isNaN(parsed) ? value : new Date(parsed).toISOString().split('T')[0];
 }
 
-function MarketingCard({ compact = false }: { compact?: boolean }) {
+/**
+ * The article's single promotion: one dark card at the end of the reading
+ * column. App Store is the button; every channel is a quiet text link.
+ */
+function EndCta() {
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
   const PHONE_MAIN = '+18883663082';
   const WHATSAPP_NUMBER = '18883663082';
   const TELEGRAM_USERNAME = 'MyEmpathBot';
 
-  const channels = [
+  const quietLinks = [
     {
       key: 'call',
       label: 'Call',
       href: `tel:${PHONE_MAIN}`,
-      Icon: Phone,
-      hover: 'hover:border-[#1b8af1] hover:text-[#1b8af1]',
       event: 'journaling_blog_post_call_clicked',
       external: false,
     },
@@ -57,74 +53,67 @@ function MarketingCard({ compact = false }: { compact?: boolean }) {
       key: 'text',
       label: 'Text',
       href: `sms:${PHONE_MAIN}`,
-      Icon: MessageSquare,
-      hover: 'hover:border-[#1b8af1] hover:text-[#1b8af1]',
       event: 'journaling_blog_post_text_clicked',
       external: false,
-    },
-    {
-      key: 'whatsapp',
-      label: 'WhatsApp',
-      href: `https://wa.me/${WHATSAPP_NUMBER}`,
-      Icon: WhatsAppIcon,
-      hover: 'hover:border-[#25D366] hover:text-[#1a9e4d]',
-      event: 'journaling_blog_post_whatsapp_clicked',
-      external: true,
     },
     {
       key: 'telegram',
       label: 'Telegram',
       href: `https://t.me/${TELEGRAM_USERNAME}`,
-      Icon: TelegramIcon,
-      hover: 'hover:border-[#229ED9] hover:text-[#1a7eb0]',
       event: 'journaling_blog_post_telegram_clicked',
       external: true,
     },
   ].filter((channel) => channel.key !== 'text' || SMS_ENABLED);
 
   return (
-    <div
-      className={`bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] ${
-        compact ? 'p-5' : 'p-6 md:p-8'
-      }`}
-    >
-      <div className="inline-flex items-center gap-2 text-[#1b8af1] text-xs font-bold uppercase tracking-wider mb-3">
-        <Sparkles className="w-4 h-4" /> Try Empath Free
-      </div>
-      <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-black text-stone-900 mb-2 font-serif`}>
+    <div className="rounded-3xl bg-stone-900 px-7 py-10 text-center text-white md:px-10 md:py-12">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]">Try Empath Free</p>
+      <h2 className="mt-4 font-serif text-3xl font-medium leading-[1.15] tracking-tight">
         Your AI Journaling Assistant
-      </h3>
-      <p className="text-stone-600 text-sm leading-relaxed mb-4 font-medium">
+      </h2>
+      <p className="mx-auto mt-4 max-w-md leading-relaxed text-stone-300">
         Call or message your thoughts. Empath captures everything and helps you
         understand yourself better over time.
       </p>
-      <div className="space-y-2.5">
+      <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
         <a
           href={APP_STORE_URL}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => posthog.capture('journaling_blog_post_app_store_clicked')}
-          className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-stone-900 text-white text-sm font-bold border-2 border-stone-900 hover:bg-[#1b8af1] transition-all shadow-[3px_3px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] gap-1.5"
+          className="inline-flex items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3.5 font-semibold text-stone-900 transition-colors hover:bg-stone-100"
         >
-          Download on App Store <ArrowUpRight className="w-4 h-4" />
+          <AppleIcon className="h-5 w-5" />
+          Download on App Store
         </a>
-        <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-3'} gap-2.5`}>
-          {channels.map(({ key, label, href, Icon, hover, event, external }) => (
-            <a
-              key={key}
-              href={href}
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              onClick={() => posthog.capture(event)}
-              className={`inline-flex items-center justify-center px-3 py-2.5 rounded-lg border-2 border-stone-200 text-stone-700 text-sm font-bold transition-colors gap-1.5 ${hover}`}
-            >
-              <Icon className="w-4 h-4" /> {label}
-            </a>
-          ))}
-        </div>
-        <p className="text-xs text-stone-500 font-medium">
-          One number for everything: +1 (888) 366-3082. No app required.
-        </p>
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => posthog.capture('journaling_blog_post_whatsapp_clicked')}
+          className="inline-flex items-center gap-2 font-medium text-stone-300 transition-colors hover:text-white"
+        >
+          <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+          WhatsApp
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-stone-400">
+        {quietLinks.map(({ key, label, href, event, external }) => (
+          <a
+            key={key}
+            href={href}
+            {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            onClick={() => posthog.capture(event)}
+            className="underline decoration-stone-600 underline-offset-4 transition-colors hover:text-white"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+      <p className="mt-5 text-xs text-stone-500">
+        One number for everything: +1 (888) 366-3082. No app required.
+      </p>
     </div>
   );
 }
@@ -133,10 +122,7 @@ export default function JournalingBlogPostPage() {
   const { slug } = useParams();
   const [copied, setCopied] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
-  const basePost = journalingBlogPosts.find((entry) => entry.slug === slug);
-  // Swaps in the machine-translated text fields when the route has a locale
-  // prefix and a translation JSON exists; English otherwise.
-  const post = useTranslatedPost(basePost, 'journaling');
+  const post = journalingBlogPosts.find((entry) => entry.slug === slug);
   const APP_STORE_URL = 'https://apps.apple.com/us/app/myempath/id6472873287';
 
   const articleUrl =
@@ -338,16 +324,16 @@ export default function JournalingBlogPostPage() {
           noIndex
         />
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-white rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-12 text-center">
-            <h1 className="text-3xl font-black text-stone-900 mb-4 font-serif">
+          <div className="max-w-2xl mx-auto text-center">
+            <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-stone-900 mb-4 font-serif">
               Article not found
             </h1>
-            <p className="text-stone-600 mb-8 text-lg font-medium">
+            <p className="text-stone-600 mb-8 text-lg">
               This article may have moved or is still being prepared.
             </p>
             <Link
               to="/app/blog"
-              className="inline-flex items-center px-6 py-3 bg-stone-900 text-white rounded-xl font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:bg-[#1b8af1] transition-all gap-2"
+              className="inline-flex items-center px-7 py-3.5 bg-stone-900 text-white rounded-full font-semibold hover:bg-[#1b8af1] transition-colors gap-2"
             >
               <ArrowLeft className="w-4 h-4" /> Back to blog
             </Link>
@@ -357,10 +343,8 @@ export default function JournalingBlogPostPage() {
     );
   }
 
-  const colors = getCategoryColor(post.category);
-
   return (
-    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <SEO
         title={post.seoTitle}
         description={post.metaDescription}
@@ -368,14 +352,6 @@ export default function JournalingBlogPostPage() {
         ogType="article"
         keywords={[post.keyword, post.category, 'journaling'].join(', ')}
       />
-      {/* Noise Texture */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-multiply"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
       {schemas.article && (
         <script
           type="application/ld+json"
@@ -396,62 +372,58 @@ export default function JournalingBlogPostPage() {
       )}
 
       {/* Header */}
-      <div className="relative bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
+      <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-[#FAF9F6]/85 backdrop-blur-md">
         <div
-          className="absolute bottom-[-2px] left-0 h-[3px] bg-[#1b8af1] transition-[width] duration-150 ease-out"
+          className="absolute bottom-[-1px] left-0 h-[2px] bg-[#1b8af1] transition-[width] duration-150 ease-out"
           style={{ width: `${readingProgress}%` }}
           aria-hidden="true"
         />
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3.5">
           <Link to="/app" className="flex items-center gap-0">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <img src={logo} alt="Empath Logo" className="w-full h-full object-contain" />
+            <div className="flex h-10 w-10 items-center justify-center">
+              <img src={logo} alt="Empath Logo" className="h-full w-full object-contain" />
             </div>
-            <span className="text-stone-900 tracking-tight hidden sm:block text-lg">Empath</span>
+            <span className="text-lg tracking-tight text-stone-900">Empath</span>
           </Link>
           <nav className="flex items-center gap-8">
             <Link
               to="/app#features"
-              className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 md:block"
             >
               Features
             </Link>
             <Link
-              to="/app#how-it-works"
-              className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
-            >
-              How It Works
-            </Link>
-            <Link
               to="/app#faq"
-              className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 md:block"
             >
               FAQ
             </Link>
             <Link
               to="/app/blog"
-              className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block"
+              className="hidden text-sm font-medium text-stone-600 transition-colors hover:text-stone-900 md:block"
             >
               Blog
             </Link>
             <button
               onClick={handleAppStoreClick}
-              className="px-4 py-2 bg-stone-900 text-white rounded-lg font-bold text-sm hover:bg-[#1b8af1] transition-colors border-2 border-stone-900"
+              className="rounded-full bg-stone-900 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1b8af1]"
             >
               Download
             </button>
           </nav>
         </div>
-      </div>
+      </header>
 
-      {/* Article Header */}
-      <div className="pt-12 pb-8">
-        <div className="container mx-auto px-4 max-w-4xl">
+      {/* Article: one centered reading column. Title, intro, and body share
+          the same left edge; the table of contents sits in the right margin
+          on xl screens and inline (after the intro) below that. */}
+      <div className="container mx-auto px-4 pb-20 pt-14">
+        <div className="mx-auto max-w-2xl">
           <Link
             to="/app/blog"
-            className="inline-flex items-center text-[#1b8af1] hover:text-stone-900 font-bold mb-8 transition-colors gap-1.5"
+            className="mb-10 inline-flex items-center gap-1.5 text-sm font-medium text-stone-500 transition-colors hover:text-stone-900"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to all articles
+            <ArrowLeft className="h-4 w-4" /> Back to all articles
           </Link>
 
           <motion.header
@@ -459,433 +431,389 @@ export default function JournalingBlogPostPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span
-              className={`inline-flex px-3 py-1 rounded-lg text-xs font-bold border-2 mb-5 ${colors.bg} ${colors.text} ${colors.border}`}
-              style={{ boxShadow: `3px 3px 0px 0px ${colors.shadow}` }}
-            >
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]">
               {post.category}
-            </span>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-stone-900 mb-5 leading-tight font-serif">
+            </p>
+            <h1 className="mb-6 font-serif text-4xl font-medium leading-[1.1] tracking-tight text-stone-900 md:text-5xl">
               {post.title}
             </h1>
-            <p className="text-lg md:text-xl text-stone-600 leading-relaxed mb-6 font-medium">
+            <p className="mb-7 text-lg leading-relaxed text-stone-600 md:text-xl">
               {post.excerpt}
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-stone-500 font-medium">
-              <span className="font-bold text-stone-700">{post.author}</span>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-stone-500">
+              <span className="font-semibold text-stone-700">{post.author}</span>
               <span className="flex items-center gap-1.5">
-                <CalendarDays className="w-4 h-4" /> {post.date}
+                <CalendarDays className="h-4 w-4" /> {post.date}
               </span>
               <span className="flex items-center gap-1.5">
-                <Clock3 className="w-4 h-4" /> {post.readTime}
+                <Clock3 className="h-4 w-4" /> {post.readTime}
               </span>
             </div>
           </motion.header>
         </div>
-      </div>
 
-      {/* Article Body */}
-      <div className="pb-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr),280px]">
-            {/* Main Content */}
-            <article className="order-1">
-              <div className="space-y-10">
-                {/* Mobile TOC — the sidebar stacks below the article on small screens */}
-                <details className="lg:hidden bg-white rounded-xl border-2 border-stone-200 p-5">
-                  <summary className="text-xs font-bold uppercase tracking-wider text-stone-500 cursor-pointer select-none list-none flex items-center justify-between">
-                    In this article
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </summary>
-                  <ul className="mt-4 space-y-2.5 text-sm text-stone-600 font-medium">
-                    {sectionsWithId.map((section) => (
-                      <li key={section.id}>
-                        <a
-                          href={`#${section.id}`}
-                          onClick={() => handleTocClick(section.heading, 'mobile')}
-                          className="hover:text-[#1b8af1] transition-colors block py-0.5"
-                        >
-                          {section.heading}
-                        </a>
-                      </li>
-                    ))}
-                    {post.sources && post.sources.length > 0 && (
-                      <li>
-                        <a
-                          href="#sources"
-                          onClick={() => handleTocClick('Sources', 'mobile')}
-                          className="hover:text-[#1b8af1] transition-colors block py-0.5"
-                        >
-                          Sources and further reading
-                        </a>
-                      </li>
-                    )}
-                    <li>
-                      <a
-                        href="#faq"
-                        onClick={() => handleTocClick('FAQ', 'mobile')}
-                        className="hover:text-[#1b8af1] transition-colors block py-0.5"
-                      >
-                        Frequently asked questions
-                      </a>
-                    </li>
-                  </ul>
-                </details>
-
-                {post.answerSummary && (
-                  <section
-                    id="quick-answer"
-                    className="relative overflow-hidden bg-[#EAF5FF] rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] p-6 md:p-8"
-                  >
-                    <div
-                      className="absolute -right-10 -top-10 h-32 w-32 rounded-full border-[18px] border-white/50"
-                      aria-hidden="true"
-                    />
-                    <p className="relative text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-3">
-                      Quick answer
-                    </p>
-                    <p className="relative text-lg md:text-xl leading-8 text-stone-900 font-bold">
-                      {post.answerSummary}
-                    </p>
-                  </section>
-                )}
-
-                <section className="bg-white rounded-xl border-2 border-stone-200 p-6 md:p-8">
-                  <p className="text-stone-700 leading-8 text-lg font-medium">{post.intro}</p>
-                </section>
-
-                {/* Key Takeaways */}
-                <section className="bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] p-6">
-                  <h2 className="text-lg font-black text-stone-900 mb-4 font-serif">
-                    {post.keyTakeaways ? 'Key takeaways' : "What you'll learn"}
-                  </h2>
-                  <ul className="space-y-3">
-                    {(
-                      post.keyTakeaways ??
-                      post.sections.slice(0, 3).map((section) => section.heading)
-                    ).map((takeaway) => (
-                      <li
-                        key={takeaway}
-                        className="flex items-start gap-3 text-stone-700 font-medium"
-                      >
-                        <CheckCircle className="w-5 h-5 text-[#1b8af1] mt-0.5 flex-shrink-0" />
-                        <span>{takeaway}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
+        <div className="relative mt-12">
+          {/* Table of contents rail (xl and up): plain text in the right margin */}
+          <aside className="absolute left-[calc(50%+24rem)] top-0 hidden h-full w-56 xl:block">
+            <nav className="sticky top-28 border-l border-stone-200 pl-5" aria-label="In this article">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">
+                In this article
+              </p>
+              <ul className="space-y-2.5 text-sm text-stone-500">
                 {sectionsWithId.map((section) => (
-                  <section key={section.id} id={section.id} className="scroll-mt-28">
-                    <h2 className="text-2xl md:text-3xl font-black text-stone-900 mb-4 font-serif">
-                      {section.heading}
-                    </h2>
-                    <div className="space-y-4 text-stone-700 leading-8 text-lg font-medium">
-                      {section.body.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-
-                    {section.chart && <BlogChart chart={section.chart} />}
-
-                    {section.table && (
-                      <div className="mt-8 overflow-hidden rounded-xl border-2 border-stone-900 bg-white shadow-[6px_6px_0px_0px_#1b8af1]">
-                        <div className="border-b-2 border-stone-900 bg-[#EAF5FF] px-5 py-4">
-                          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-1">
-                            Side by side
-                          </p>
-                          <h3 className="font-serif text-lg font-black text-stone-900">
-                            {section.table.title}
-                          </h3>
-                        </div>
-                        <div className="overflow-x-auto">
-                          <table className="w-full min-w-[560px] border-collapse text-left">
-                            <thead>
-                              <tr className="border-b-2 border-stone-200">
-                                <th className="w-[26%] px-5 py-3" aria-label="Feature" />
-                                <th className="w-[37%] bg-[#EAF5FF]/70 px-5 py-3 text-xs font-black uppercase tracking-wider text-[#1166b8]">
-                                  Empath
-                                </th>
-                                <th className="w-[37%] px-5 py-3 text-xs font-black uppercase tracking-wider text-stone-500">
-                                  {section.table.competitorName}
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {section.table.rows.map((row, rowIndex) => (
-                                <tr
-                                  key={row.feature}
-                                  className={`border-b border-stone-100 last:border-b-0 ${
-                                    rowIndex % 2 === 1 ? 'bg-stone-50/70' : ''
-                                  }`}
-                                >
-                                  <th
-                                    scope="row"
-                                    className="px-5 py-4 align-top text-sm font-black text-stone-900"
-                                  >
-                                    {row.feature}
-                                  </th>
-                                  <td className="bg-[#EAF5FF]/40 px-5 py-4 align-top text-sm font-medium leading-6 text-stone-800">
-                                    {row.empath}
-                                  </td>
-                                  <td className="px-5 py-4 align-top text-sm font-medium leading-6 text-stone-700">
-                                    {row.competitor}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                        {section.table.caption && (
-                          <p className="border-t-2 border-stone-200 bg-stone-50 px-5 py-3 text-xs font-medium leading-5 text-stone-500">
-                            {section.table.caption}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    {section.callout && (
-                      <Link
-                        to={`/app/blog/${section.callout.slug}`}
-                        onClick={() =>
-                          posthog.capture('journaling_blog_callout_clicked', {
-                            from_slug: post.slug,
-                            to_slug: section.callout?.slug,
-                          })
-                        }
-                        className="group mt-8 flex items-start gap-4 rounded-xl border-2 border-stone-900 bg-[#FFF9EC] p-5 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#1b8af1] md:p-6"
-                      >
-                        <span className="mt-0.5 flex h-9 w-9 flex-none items-center justify-center rounded-lg border-2 border-stone-900 bg-white">
-                          <Sparkles className="h-4 w-4 text-[#1b8af1]" />
-                        </span>
-                        <span>
-                          <span className="mb-1 block text-xs font-black uppercase tracking-[0.16em] text-stone-500">
-                            Related reading
-                          </span>
-                          <span className="block font-medium leading-7 text-stone-700">
-                            {section.callout.text}
-                          </span>
-                          <span className="mt-1.5 inline-flex items-center gap-1.5 font-bold text-[#1166b8] underline decoration-[#1b8af1]/40 underline-offset-4 transition-colors group-hover:text-stone-900 group-hover:decoration-stone-900">
-                            {section.callout.linkText}
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                          </span>
-                        </span>
-                      </Link>
-                    )}
-                  </section>
-                ))}
-
-                {post.sources && post.sources.length > 0 && (
-                  <section
-                    id="sources"
-                    className="scroll-mt-28 rounded-xl border-2 border-stone-200 bg-white p-6 md:p-8"
-                  >
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1166b8] mb-2">
-                      Research notes
-                    </p>
-                    <h2 className="text-2xl font-black text-stone-900 mb-3 font-serif">
-                      Sources and further reading
-                    </h2>
-                    <p className="text-stone-600 leading-7 font-medium mb-6">
-                      These references support the distinctions between reflective and repetitive
-                      thought, if-then planning, and action-oriented approaches discussed above.
-                    </p>
-                    <ol className="space-y-4">
-                      {post.sources.map((source, index) => (
-                        <li key={source.url} className="flex gap-4">
-                          <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-stone-900 text-xs font-black text-white">
-                            {index + 1}
-                          </span>
-                          <div>
-                            <a
-                              href={source.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-start gap-1.5 font-bold leading-6 text-stone-900 underline decoration-stone-300 underline-offset-4 hover:text-[#1b8af1] hover:decoration-[#1b8af1]"
-                            >
-                              {source.title}
-                              <ExternalLink className="mt-1 h-3.5 w-3.5 flex-none" />
-                            </a>
-                            <p className="mt-1 text-sm leading-6 text-stone-600 font-medium">
-                              {source.authors}. <em>{source.publication}</em> ({source.year}).
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </section>
-                )}
-
-                {/* FAQ */}
-                <section id="faq" className="pt-8 border-t-2 border-stone-200 scroll-mt-28">
-                  <h2 className="text-2xl font-black text-stone-900 mb-6 font-serif">
-                    Frequently asked questions
-                  </h2>
-                  <div className="space-y-4">
-                    {post.faq.map((item) => (
-                      <div
-                        key={item.question}
-                        className="bg-white rounded-xl border-2 border-stone-200 p-5 hover:border-stone-900 hover:shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all"
-                      >
-                        <h3 className="text-lg font-bold text-stone-900 mb-2">{item.question}</h3>
-                        <p className="text-stone-700 leading-7 font-medium">{item.answer}</p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* Bottom CTA */}
-                <section className="pt-8 border-t-2 border-stone-200">
-                  <MarketingCard />
-                </section>
-
-                {/* Related Posts */}
-                {relatedPosts.length > 0 && (
-                  <section className="pt-8 border-t-2 border-stone-200">
-                    <h2 className="text-2xl font-black text-stone-900 mb-6 font-serif">
-                      Keep reading
-                    </h2>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {relatedPosts.map((related) => {
-                        const relatedColors = getCategoryColor(related.category);
-                        return (
-                          <Link
-                            key={related.id}
-                            to={`/app/blog/${related.slug}`}
-                            onClick={() => handleRelatedClick(related.slug)}
-                            className="bg-white rounded-xl border-2 border-stone-200 p-5 hover:border-stone-900 hover:shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all group"
-                          >
-                            <span
-                              className={`inline-flex px-2.5 py-0.5 rounded-lg text-xs font-bold border-2 mb-3 ${relatedColors.bg} ${relatedColors.text} ${relatedColors.border}`}
-                            >
-                              {related.category}
-                            </span>
-                            <h3 className="text-base font-bold text-stone-900 leading-snug mb-2 group-hover:text-[#1b8af1] transition-colors font-serif">
-                              {related.title}
-                            </h3>
-                            <p className="text-sm text-stone-500 font-medium">{related.readTime}</p>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                {/* Footer Links */}
-                <section className="pt-8 border-t-2 border-stone-200">
-                  <p className="text-sm text-stone-500 mb-6 font-medium">
-                    Disclaimer: This article is for educational purposes and is not a substitute for
-                    professional mental health advice.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      to="/app/blog"
-                      className="inline-flex items-center px-5 py-2.5 rounded-lg border-2 border-stone-200 text-stone-800 hover:border-stone-900 hover:shadow-[3px_3px_0px_0px_rgba(28,25,23,1)] transition-all font-bold"
-                    >
-                      Browse more articles
-                    </Link>
-                    <Link
-                      to="/app"
-                      onClick={() =>
-                        posthog.capture('journaling_blog_post_learn_more_clicked', {
-                          slug: post.slug,
-                        })
-                      }
-                      className="inline-flex items-center px-5 py-2.5 rounded-lg bg-stone-900 text-white border-2 border-stone-900 hover:bg-[#1b8af1] transition-all font-bold gap-1.5"
-                    >
-                      Learn about Empath <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </section>
-              </div>
-            </article>
-
-            {/* Sidebar */}
-            <aside className="order-2 space-y-5 lg:sticky lg:top-28 lg:self-start">
-              {/* Hidden on mobile: the aside stacks below the article there, which
-                  would put this right next to the bottom-CTA MarketingCard. */}
-              <div className="hidden lg:block">
-                <MarketingCard compact />
-              </div>
-
-              {/* Table of Contents (desktop; mobile gets the collapsible one above the article) */}
-              <div className="hidden lg:block bg-white rounded-xl border-2 border-stone-200 p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-4">
-                  In this article
-                </p>
-                <ul className="space-y-2.5 text-sm text-stone-600 font-medium">
-                  {sectionsWithId.map((section) => (
-                    <li key={section.id}>
-                      <a
-                        href={`#${section.id}`}
-                        onClick={() => handleTocClick(section.heading, 'sidebar')}
-                        className="hover:text-[#1b8af1] transition-colors block py-0.5"
-                      >
-                        {section.heading}
-                      </a>
-                    </li>
-                  ))}
-                  {post.sources && post.sources.length > 0 && (
-                    <li>
-                      <a
-                        href="#sources"
-                        onClick={() => handleTocClick('Sources', 'sidebar')}
-                        className="hover:text-[#1b8af1] transition-colors block py-0.5"
-                      >
-                        Sources and further reading
-                      </a>
-                    </li>
-                  )}
-                  <li>
+                  <li key={section.id}>
                     <a
-                      href="#faq"
-                      onClick={() => handleTocClick('FAQ', 'sidebar')}
-                      className="hover:text-[#1b8af1] transition-colors block py-0.5"
+                      href={`#${section.id}`}
+                      onClick={() => handleTocClick(section.heading, 'sidebar')}
+                      className="block py-0.5 transition-colors hover:text-[#1b8af1]"
                     >
-                      Frequently asked questions
+                      {section.heading}
                     </a>
                   </li>
-                </ul>
-              </div>
+                ))}
+                {post.sources && post.sources.length > 0 && (
+                  <li>
+                    <a
+                      href="#sources"
+                      onClick={() => handleTocClick('Sources', 'sidebar')}
+                      className="block py-0.5 transition-colors hover:text-[#1b8af1]"
+                    >
+                      Sources and further reading
+                    </a>
+                  </li>
+                )}
+                <li>
+                  <a
+                    href="#faq"
+                    onClick={() => handleTocClick('FAQ', 'sidebar')}
+                    className="block py-0.5 transition-colors hover:text-[#1b8af1]"
+                  >
+                    Frequently asked questions
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
 
-              {/* Share */}
-              <div className="bg-white rounded-xl border-2 border-stone-200 p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-4">
-                  Share
+          <article className="mx-auto max-w-2xl">
+            {post.answerSummary && (
+              <section id="quick-answer" className="border-l-2 border-[#1b8af1] pl-6">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]">
+                  Quick answer
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={handleCopyLink}
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border-2 border-stone-200 text-xs text-stone-700 font-bold hover:border-stone-900 hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all"
-                  >
-                    <Copy className="w-3.5 h-3.5 mr-1.5" />
-                    {copied ? 'Copied!' : 'Copy link'}
-                  </button>
+                <p className="font-serif text-xl leading-9 text-stone-900 md:text-2xl md:leading-10">
+                  {post.answerSummary}
+                </p>
+              </section>
+            )}
+
+            <section className="mt-10">
+              <p className="text-[1.125rem] leading-[1.8] text-stone-700">{post.intro}</p>
+            </section>
+
+            {/* Inline table of contents (below xl) */}
+            <nav className="mt-10 border-t border-stone-200 pt-6 xl:hidden" aria-label="In this article">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">
+                In this article
+              </p>
+              <ul className="space-y-2.5 text-sm text-stone-600">
+                {sectionsWithId.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
+                      onClick={() => handleTocClick(section.heading, 'mobile')}
+                      className="block py-0.5 transition-colors hover:text-[#1b8af1]"
+                    >
+                      {section.heading}
+                    </a>
+                  </li>
+                ))}
+                {post.sources && post.sources.length > 0 && (
+                  <li>
+                    <a
+                      href="#sources"
+                      onClick={() => handleTocClick('Sources', 'mobile')}
+                      className="block py-0.5 transition-colors hover:text-[#1b8af1]"
+                    >
+                      Sources and further reading
+                    </a>
+                  </li>
+                )}
+                <li>
                   <a
-                    href={twitterShare}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleShare('x')}
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border-2 border-stone-200 text-xs text-stone-700 font-bold hover:border-stone-900 hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all"
+                    href="#faq"
+                    onClick={() => handleTocClick('FAQ', 'mobile')}
+                    className="block py-0.5 transition-colors hover:text-[#1b8af1]"
                   >
-                    X <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+                    Frequently asked questions
                   </a>
-                  <a
-                    href={linkedInShare}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleShare('linkedin')}
-                    className="inline-flex items-center px-3 py-1.5 rounded-lg border-2 border-stone-200 text-xs text-stone-700 font-bold hover:border-stone-900 hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] transition-all"
-                  >
-                    LinkedIn <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
-                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            {/* Key takeaways: between two hairlines, no card */}
+            <section className="mt-10 border-y border-stone-200 py-8">
+              <h2 className="mb-5 font-serif text-xl font-medium tracking-tight text-stone-900">
+                {post.keyTakeaways ? 'Key takeaways' : "What you'll learn"}
+              </h2>
+              <ul className="space-y-3.5">
+                {(
+                  post.keyTakeaways ??
+                  post.sections.slice(0, 3).map((section) => section.heading)
+                ).map((takeaway) => (
+                  <li key={takeaway} className="flex items-start gap-3 leading-7 text-stone-700">
+                    <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-[#1b8af1]" />
+                    <span>{takeaway}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {sectionsWithId.map((section) => (
+              <section key={section.id} id={section.id} className="scroll-mt-28">
+                <h2 className="mb-5 mt-14 font-serif text-3xl font-medium tracking-tight text-stone-900">
+                  {section.heading}
+                </h2>
+                <div className="space-y-6 text-[1.125rem] leading-[1.8] text-stone-700">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
                 </div>
+
+                {section.chart && <BlogChart chart={section.chart} />}
+
+                {section.table && (
+                  <div className="mt-10">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]">
+                      Side by side
+                    </p>
+                    <h3 className="mb-4 font-serif text-xl font-medium tracking-tight text-stone-900">
+                      {section.table.title}
+                    </h3>
+                    <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
+                      <div className="overflow-x-auto">
+                        <table className="w-full min-w-[560px] border-collapse text-left">
+                          <thead>
+                            <tr className="border-b border-stone-200">
+                              <th className="w-[26%] px-5 py-3" aria-label="Feature" />
+                              <th className="w-[37%] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#1b8af1]">
+                                Empath
+                              </th>
+                              <th className="w-[37%] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">
+                                {section.table.competitorName}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {section.table.rows.map((row) => (
+                              <tr key={row.feature} className="border-b border-stone-100 last:border-b-0">
+                                <th
+                                  scope="row"
+                                  className="px-5 py-4 align-top text-sm font-semibold text-stone-900"
+                                >
+                                  {row.feature}
+                                </th>
+                                <td className="px-5 py-4 align-top text-sm leading-6 text-stone-800">
+                                  {row.empath}
+                                </td>
+                                <td className="px-5 py-4 align-top text-sm leading-6 text-stone-600">
+                                  {row.competitor}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    {section.table.caption && (
+                      <p className="mt-3 text-xs leading-5 text-stone-500">{section.table.caption}</p>
+                    )}
+                  </div>
+                )}
+
+                {section.callout && (
+                  <Link
+                    to={`/app/blog/${section.callout.slug}`}
+                    onClick={() =>
+                      posthog.capture('journaling_blog_callout_clicked', {
+                        from_slug: post.slug,
+                        to_slug: section.callout?.slug,
+                      })
+                    }
+                    className="group mt-8 block border-l-2 border-stone-300 pl-6 transition-colors hover:border-[#1b8af1]"
+                  >
+                    <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
+                      Related reading
+                    </span>
+                    <span className="block leading-7 text-stone-700">{section.callout.text}</span>
+                    <span className="mt-1.5 inline-flex items-center gap-1.5 font-semibold text-[#1b8af1] underline-offset-4 group-hover:underline">
+                      {section.callout.linkText}
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </Link>
+                )}
+              </section>
+            ))}
+
+            {post.sources && post.sources.length > 0 && (
+              <section id="sources" className="mt-14 scroll-mt-28 border-t border-stone-200 pt-10">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]">
+                  Research notes
+                </p>
+                <h2 className="mb-3 font-serif text-2xl font-medium tracking-tight text-stone-900">
+                  Sources and further reading
+                </h2>
+                <p className="mb-6 leading-7 text-stone-600">
+                  These references support the distinctions between reflective and repetitive
+                  thought, if-then planning, and action-oriented approaches discussed above.
+                </p>
+                <ol className="list-decimal space-y-4 pl-5 marker:text-sm marker:text-stone-400">
+                  {post.sources.map((source) => (
+                    <li key={source.url} className="pl-1.5">
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-start gap-1.5 font-medium leading-6 text-stone-900 underline decoration-stone-300 underline-offset-4 hover:text-[#1b8af1] hover:decoration-[#1b8af1]"
+                      >
+                        {source.title}
+                        <ExternalLink className="mt-1 h-3.5 w-3.5 flex-none" />
+                      </a>
+                      <p className="mt-1 text-sm leading-6 text-stone-600">
+                        {source.authors}. <em>{source.publication}</em> ({source.year}).
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
+
+            {/* FAQ */}
+            <section id="faq" className="mt-14 scroll-mt-28 border-t border-stone-200 pt-10">
+              <h2 className="mb-2 font-serif text-3xl font-medium tracking-tight text-stone-900">
+                Frequently asked questions
+              </h2>
+              <div className="divide-y divide-stone-200">
+                {post.faq.map((item) => (
+                  <div key={item.question} className="py-6">
+                    <h3 className="mb-2 text-lg font-medium text-stone-900">{item.question}</h3>
+                    <p className="leading-7 text-stone-600">{item.answer}</p>
+                  </div>
+                ))}
               </div>
-            </aside>
-          </div>
+            </section>
+
+            {/* Share: a plain row of text links */}
+            <section className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-stone-200 pt-6 text-sm">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500">Share</span>
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="font-medium text-stone-600 transition-colors hover:text-[#1b8af1]"
+              >
+                {copied ? 'Copied!' : 'Copy link'}
+              </button>
+              <a
+                href={twitterShare}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleShare('x')}
+                className="font-medium text-stone-600 transition-colors hover:text-[#1b8af1]"
+              >
+                X
+              </a>
+              <a
+                href={linkedInShare}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleShare('linkedin')}
+                className="font-medium text-stone-600 transition-colors hover:text-[#1b8af1]"
+              >
+                LinkedIn
+              </a>
+            </section>
+
+            {/* The article's one CTA */}
+            <section className="mt-12">
+              <EndCta />
+            </section>
+
+            <section className="mt-10">
+              <p className="text-sm leading-6 text-stone-500">
+                Disclaimer: This article is for educational purposes and is not a substitute for
+                professional mental health advice.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+                <Link to="/app/blog" className="text-stone-600 transition-colors hover:text-stone-900">
+                  Browse more articles
+                </Link>
+                <Link
+                  to="/app"
+                  onClick={() =>
+                    posthog.capture('journaling_blog_post_learn_more_clicked', {
+                      slug: post.slug,
+                    })
+                  }
+                  className="inline-flex items-center gap-1.5 text-[#1b8af1] hover:underline"
+                >
+                  Learn about Empath <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </section>
+          </article>
         </div>
+
+        {/* Related posts */}
+        {relatedPosts.length > 0 && (
+          <section className="mx-auto mt-20 max-w-5xl border-t border-stone-200 pt-12">
+            <h2 className="mb-6 font-serif text-3xl font-medium tracking-tight text-stone-900">
+              Keep reading
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((related) => (
+                <Link
+                  key={related.id}
+                  to={`/app/blog/${related.slug}`}
+                  onClick={() => handleRelatedClick(related.slug)}
+                  className="group rounded-3xl border border-stone-200 bg-white p-6 transition-shadow hover:shadow-soft"
+                >
+                  <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1b8af1]">
+                    {related.category}
+                  </span>
+                  <h3 className="mb-2 font-serif text-lg font-medium leading-snug text-stone-900 transition-colors group-hover:text-[#1b8af1]">
+                    {related.title}
+                  </h3>
+                  <p className="text-sm text-stone-500">{related.readTime}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-stone-200 bg-[#FAF9F6] py-14">
+        <div className="container mx-auto flex flex-col items-center gap-8 px-4 md:flex-row md:justify-between">
+          <Link to="/" className="flex items-center gap-0">
+            <img src={logo} alt="Empath" className="h-9 w-9 object-contain" />
+            <span className="text-lg tracking-tight text-stone-900">Empath</span>
+          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-stone-500">
+            <Link to="/app/blog" className="transition-colors hover:text-stone-900">Blog</Link>
+            <Link to="/therapist" className="transition-colors hover:text-stone-900">For Therapists</Link>
+            <Link to="/privacy" className="transition-colors hover:text-stone-900">Privacy Policy</Link>
+            <Link to="/terms" className="transition-colors hover:text-stone-900">Terms of Service</Link>
+            <button
+              type="button"
+              onClick={() => openSupportChat()}
+              className="font-medium transition-colors hover:text-stone-900"
+            >
+              Support
+            </button>
+          </div>
+          <p className="text-xs text-stone-400">© {new Date().getFullYear()} Reality Articulated Inc.</p>
+        </div>
+      </footer>
     </div>
   );
 }

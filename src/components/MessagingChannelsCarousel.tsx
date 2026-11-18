@@ -16,8 +16,6 @@ interface MessagingChannel {
   icon: ReactNode;
   /** Brand button color */
   bg: string;
-  /** Hard-shadow color (darker shade of bg) */
-  shadow: string;
 }
 
 // The channel registry — adding a messaging service = one new entry here
@@ -28,28 +26,24 @@ const CHANNELS: MessagingChannel[] = [
     label: 'WhatsApp',
     icon: <WhatsAppIcon className="w-6 h-6 shrink-0" />,
     bg: '#25D366',
-    shadow: '#1a9e4d',
   },
   {
     key: 'telegram',
     label: 'Telegram',
     icon: <TelegramIcon className="w-6 h-6 shrink-0" />,
     bg: '#229ED9',
-    shadow: '#1a7eb0',
   },
   {
     key: 'messenger',
     label: 'Messenger',
     icon: <MessengerIcon className="w-6 h-6 shrink-0" />,
     bg: '#0084FF',
-    shadow: '#0063bf',
   },
   {
     key: 'instagram',
     label: 'Instagram',
     icon: <Instagram className="w-6 h-6 shrink-0" />,
     bg: '#E4405F',
-    shadow: '#b32945',
   },
 ];
 
@@ -84,18 +78,8 @@ export default function MessagingChannelsCarousel({
           aria-label={`${channelRow.journalOn} ${channel.label}`}
           title={channel.label}
           onClick={() => captureChannelLinkClick(eventPrefix, channel.key, refCode)}
-          className="w-12 h-12 text-white rounded-xl border-2 flex items-center justify-center transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px]"
-          style={{
-            backgroundColor: channel.bg,
-            borderColor: channel.bg,
-            boxShadow: `4px 4px 0px 0px ${channel.shadow}`,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = `2px 2px 0px 0px ${channel.shadow}`;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${channel.shadow}`;
-          }}
+          className="w-12 h-12 text-white rounded-full flex items-center justify-center shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
+          style={{ backgroundColor: channel.bg }}
         >
           {channel.icon}
         </a>

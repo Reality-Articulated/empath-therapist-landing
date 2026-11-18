@@ -68,20 +68,20 @@ const FAQItem = ({ question, answer }: { question: string; answer: React.ReactNo
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b-2 border-stone-200 last:border-b-0">
+    <div className="border-b border-stone-200 last:border-b-0">
       <button
-        className="w-full py-5 flex justify-between items-center text-left text-lg font-bold text-stone-900 hover:text-[#1b8af1] transition-colors"
+        className="w-full py-5 flex justify-between items-center gap-6 text-left text-lg font-medium text-stone-900 hover:text-[#1b8af1] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         {question}
-        <ChevronDown className={`w-5 h-5 text-stone-900 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 shrink-0 text-stone-400 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
       </button>
       <motion.div
         initial={false}
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         className="overflow-hidden"
       >
-        <div className="pb-6 text-stone-600 leading-relaxed font-medium">
+        <div className="pb-6 text-stone-600 leading-relaxed">
         {answer}
       </div>
       </motion.div>
@@ -96,21 +96,21 @@ const ValueCalculator = () => {
   const recoveredPerYear = Math.round(recoveredPerSession * 48); // 48 weeks
 
   return (
-    <section className="py-24 bg-[#F5F4F1]">
+    <section className="py-24 md:py-32 bg-[#FAF9F6] border-t border-stone-200">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
+             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1] mb-5">
                 <DollarSign className="w-4 h-4" /> Therapy ROI
              </div>
-             <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">Get More Out of Every Dollar</h2>
-             <p className="text-lg text-stone-600 mb-12 font-medium max-w-2xl mx-auto">
+             <h2 className="text-3xl md:text-5xl font-medium text-stone-900 mb-6 tracking-tight font-serif">Get More Out of Every Dollar</h2>
+             <p className="text-lg text-stone-600 mb-12 max-w-2xl mx-auto">
                 Don't spend valuable session time on "recaps." Empath helps you start deep work from minute one.
              </p>
 
-             <div className="bg-[#FAF9F6] border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-8 md:p-10 rounded-xl relative">
+             <div className="bg-white border border-stone-200 shadow-lift p-8 md:p-10 rounded-3xl relative">
                 <div className="mb-10">
-                    <label className="block text-xs font-bold text-stone-500 uppercase tracking-widest mb-4">Your Cost Per Session</label>
+                    <label className="block text-xs font-semibold text-stone-500 uppercase tracking-widest mb-4">Your Cost Per Session</label>
                     <div className="flex items-center justify-center gap-4 mb-6">
-                        <span className="text-xl font-bold text-stone-400">$50</span>
+                        <span className="text-xl font-semibold text-stone-400">$50</span>
                         <input 
                             type="range" 
                             min="50" 
@@ -118,33 +118,33 @@ const ValueCalculator = () => {
                             step="5" 
                             value={sessionCost} 
                             onChange={(e) => setSessionCost(Number(e.target.value))}
-                            className="w-full h-2 bg-stone-200 rounded-none appearance-none cursor-pointer accent-[#1b8af1] border border-stone-300"
+                            className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-[#1b8af1]"
                         />
-                        <span className="text-xl font-bold text-stone-400">$350+</span>
+                        <span className="text-xl font-semibold text-stone-400">$350+</span>
                     </div>
-                    <div className="text-6xl font-black text-stone-900 tracking-tighter">${sessionCost}</div>
+                    <div className="text-6xl font-serif font-medium text-stone-900 tracking-tight">${sessionCost}</div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-white p-6 border-2 border-stone-200 rounded-lg">
-                        <div className="flex items-center justify-center gap-2 text-stone-800 font-bold mb-2 uppercase text-xs tracking-wider">
+                    <div className="bg-[#FAF9F6] p-6 border border-stone-200 rounded-2xl">
+                        <div className="flex items-center justify-center gap-2 text-stone-800 font-semibold mb-2 uppercase text-xs tracking-wider">
                              <Clock className="w-4 h-4 text-[#1b8af1]" /> Productive Time
                         </div>
-                        <div className="text-4xl font-black text-stone-900">+${recoveredPerSession}</div>
-                        <p className="text-xs text-stone-500 mt-2 font-medium">Value added per session</p>
+                        <div className="text-4xl font-serif font-medium text-stone-900">+${recoveredPerSession}</div>
+                        <p className="text-xs text-stone-500 mt-2">Value added per session</p>
                     </div>
-                    <div className="bg-stone-900 p-6 border-2 border-stone-900 rounded-lg text-white relative overflow-hidden">
+                    <div className="bg-stone-900 p-6 rounded-2xl text-white relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 w-16 h-16 bg-[#1b8af1] rounded-full blur-2xl opacity-20"></div>
-                        <div className="flex items-center justify-center gap-2 text-stone-300 font-bold mb-2 uppercase text-xs tracking-wider relative z-10">
+                        <div className="flex items-center justify-center gap-2 text-stone-300 font-semibold mb-2 uppercase text-xs tracking-wider relative z-10">
                              <TrendingUp className="w-4 h-4 text-[#1b8af1]" /> Yearly Impact
                         </div>
-                         <div className="text-4xl font-black text-white relative z-10">${recoveredPerYear.toLocaleString()}</div>
-                         <p className="text-xs text-stone-400 mt-2 font-medium relative z-10">Worth of extra deep work/year</p>
+                         <div className="text-4xl font-serif font-medium text-white relative z-10">${recoveredPerYear.toLocaleString()}</div>
+                         <p className="text-xs text-stone-400 mt-2 relative z-10">Worth of extra deep work/year</p>
                     </div>
                 </div>
                 
-                <div className="mt-8 pt-8 border-t-2 border-stone-100">
-                     <p className="text-stone-400 text-xs font-medium italic">
+                <div className="mt-8 pt-8 border-t border-stone-100">
+                     <p className="text-stone-400 text-xs italic">
                         *Estimates based on reclaiming the typical 15-20 minutes spent updating your therapist on "what happened this week."
                      </p>
                 </div>
@@ -435,7 +435,7 @@ export default function ClientInfoPage() {
   const variant = typeof variantRaw === 'string' ? variantRaw : 'control';
 
   return (
-    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+    <div className="flex-grow bg-[#FAF9F6] text-stone-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <SEO
         title="Why Empath? | Get More From Your Therapy"
         description="Empath helps therapy clients capture insights between sessions so their therapist sees the full picture. Better context, better sessions, better outcomes."
@@ -443,13 +443,8 @@ export default function ClientInfoPage() {
       />
       <Toaster position="top-center" />
 
-      {/* Noise Texture Overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-multiply" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
-      </div>
-
       {/* --- HEADER / TRUST BAR --- */}
-      <div className="bg-[#FAF9F6]/90 backdrop-blur-sm border-b-2 border-stone-200 py-4 sticky top-0 z-40">
+      <div className="bg-[#FAF9F6]/85 backdrop-blur-md border-b border-stone-200/70 py-3.5 sticky top-0 z-40">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-0">
             {/* Logo restored to original colors, removed grayscale/brightness filters */}
@@ -461,37 +456,34 @@ export default function ClientInfoPage() {
           
           {/* Navigation Menu */}
           <nav className="flex items-center gap-8">
-            <a href="#how-it-works" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">How It Works</a>
-            <a href="#access" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Access</a>
-            <a href="#security" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">Security</a>
-            <a href="#faq" className="text-sm font-bold text-stone-600 hover:text-[#1b8af1] transition-colors hidden md:block">FAQ</a>
+            <a href="#how-it-works" className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hidden md:block">How It Works</a>
+            <a href="#access" className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hidden md:block">Access</a>
+            <a href="#security" className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hidden md:block">Security</a>
+            <a href="#faq" className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hidden md:block">FAQ</a>
           </nav>
               </div>
                   </div>
                   
       {/* --- HERO SECTION --- */}
       <motion.section 
-        className="relative pt-24 pb-32 overflow-hidden"
+        className="relative pt-20 md:pt-28 pb-24 overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
         <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
           {isInvited && therapistName && (
-            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white text-stone-900 rounded-lg text-sm font-bold border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1]">
+            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white text-stone-900 rounded-full text-sm font-medium border border-stone-200 shadow-soft">
               👋 {therapistName} invited you to Empath
             </motion.div>
           )}
 
-          <motion.h1 variants={fadeIn} className="text-6xl md:text-8xl font-black tracking-tighter text-stone-900 mb-8 leading-[0.95] font-serif">
+          <motion.h1 variants={fadeIn} className="text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight text-stone-900 mb-7 leading-[1.05] font-serif">
             Make Every <br/>
-            <span className="relative inline-block px-4">
-                <span className="absolute inset-0 bg-[#1b8af1] -rotate-1 rounded-sm shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]"></span>
-                <span className="relative text-white">Session Count.</span>
-            </span>
+            <span className="italic text-[#1b8af1]">Session Count.</span>
           </motion.h1>
 
-          <motion.p variants={fadeIn} className="text-xl md:text-2xl text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+          <motion.p variants={fadeIn} className="text-lg md:text-xl text-stone-600 mb-10 max-w-2xl mx-auto leading-relaxed">
             Capture your thoughts, feelings, and moments between sessions. Give your therapist the full picture so you can grow faster.
           </motion.p>
 
@@ -499,36 +491,36 @@ export default function ClientInfoPage() {
             {isInvited ? (
               <>
                 <button
-                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-2 group"
+                  className="w-full px-8 py-4 bg-stone-900 text-white rounded-full font-semibold text-lg hover:bg-[#1b8af1] transition-colors duration-200 flex items-center justify-center gap-2 group"
                   onClick={() => {
                     setShowFlowModal(true);
                     posthog.capture('hero_primary_cta_clicked', { variant, isInvited: true });
                   }}
                 >
                   {therapistName ? `Accept Invite from ${therapistName}` : 'Connect With Therapist'} 
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span>→</span>
                 </button>
-                <p className="text-sm text-stone-500 text-center flex items-center gap-2 font-medium">
+                <p className="text-sm text-stone-500 text-center flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-[#1b8af1]" /> Free for you (covered by your therapist)
                 </p>
               </>
             ) : (
               <>
                 <button
-                  className="w-full px-8 py-5 bg-stone-900 text-white rounded-xl font-bold text-lg border-2 border-stone-900 shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1b8af1] transition-all duration-200 flex items-center justify-center gap-2 group"
+                  className="w-full px-8 py-4 bg-stone-900 text-white rounded-full font-semibold text-lg hover:bg-[#1b8af1] transition-colors duration-200 flex items-center justify-center gap-2 group"
                   onClick={() => {
                     setShowInviteModal(true);
                     posthog.capture('hero_primary_cta_clicked', { variant, isInvited: false });
                   }}
                 >
                   Use with My Therapist 
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span>→</span>
                 </button>
                 
                 <div className="flex items-center gap-4 w-full">
                   <a
                     href={`tel:${PHONE_MAIN}`}
-                    className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
+                    className="flex-1 px-6 py-3.5 bg-white text-stone-900 rounded-full border border-stone-200 hover:border-stone-400 transition-colors duration-200 font-semibold flex items-center justify-center gap-2"
                     onClick={() => {
                       posthog.capture('hero_call_clicked', { variant });
                     }}
@@ -538,7 +530,7 @@ export default function ClientInfoPage() {
                   {SMS_ENABLED && (
                     <a
                       href={`sms:${PHONE_MAIN}`}
-                      className="flex-1 px-6 py-4 bg-white text-stone-900 rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:text-[#1b8af1] hover:bg-blue-50 transition-all duration-200 font-bold flex items-center justify-center shadow-sm gap-2"
+                      className="flex-1 px-6 py-3.5 bg-white text-stone-900 rounded-full border border-stone-200 hover:border-stone-400 transition-colors duration-200 font-semibold flex items-center justify-center gap-2"
                       onClick={() => {
                         posthog.capture('hero_text_clicked', { variant });
                       }}
@@ -548,7 +540,7 @@ export default function ClientInfoPage() {
                   )}
                 </div>
                 
-                <p className="text-sm text-stone-500 text-center font-medium">
+                <p className="text-sm text-stone-500 text-center">
                   Start capturing moments that matter.
                 </p>
               </>
@@ -558,51 +550,51 @@ export default function ClientInfoPage() {
       </motion.section>
 
       {/* --- TRUST BADGES --- */}
-      <section className="py-8 bg-white border-b-2 border-stone-200">
+      <section className="py-8 bg-white border-b border-stone-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-8 flex-wrap">
             <div className="flex items-center gap-2 text-stone-700">
               <Shield className="w-5 h-5 text-[#1b8af1]" />
-              <span className="font-bold text-sm">Encrypted &amp; Private</span>
+              <span className="font-semibold text-sm">Encrypted &amp; Private</span>
             </div>
             <span className="text-stone-300">•</span>
             <div className="flex items-center gap-2 text-stone-700">
               <Star className="w-5 h-5 text-[#1b8af1]" />
-              <span className="font-bold text-sm">Trusted by Therapists</span>
+              <span className="font-semibold text-sm">Trusted by Therapists</span>
             </div>
             <span className="text-stone-300">•</span>
             <div className="flex items-center gap-2 text-stone-700">
               <UserCheck className="w-5 h-5 text-[#1b8af1]" />
-              <span className="font-bold text-sm">Used by Real Practices</span>
+              <span className="font-semibold text-sm">Used by Real Practices</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- THE PROBLEM (Visual) --- */}
-      <section className="py-24 bg-white border-y-2 border-stone-200">
+      <section className="py-24 bg-white border-y border-stone-200">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 font-serif tracking-tight">Don't Let Moments Fade</h2>
-                <p className="text-lg text-stone-600 font-medium">Life happens between sessions. Ensure nothing gets lost.</p>
+                <h2 className="text-3xl md:text-5xl font-medium text-stone-900 mb-6 font-serif tracking-tight">Don't Let Moments Fade</h2>
+                <p className="text-lg text-stone-600">Life happens between sessions. Ensure nothing gets lost.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 items-stretch">
               {/* The Old Way */}
-              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-200 relative overflow-hidden flex flex-col grayscale opacity-80 hover:opacity-100 transition-opacity">
+              <div className="bg-[#FAF9F6] p-8 rounded-3xl border border-stone-200 relative overflow-hidden flex flex-col grayscale opacity-80 hover:opacity-100 transition-opacity">
                   <div className="mb-8">
-                    <span className="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-xs font-bold uppercase tracking-wider rounded mb-4">
+                    <span className="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-[0.14em] rounded-full mb-4">
                         Without Empath
                     </span>
-                    <h3 className="text-2xl font-bold text-stone-900 mb-2">The "Recap" Trap</h3>
-                    <p className="text-stone-600 font-medium leading-relaxed">
+                    <h3 className="text-2xl font-serif font-medium text-stone-900 mb-2">The "Recap" Trap</h3>
+                    <p className="text-stone-600 leading-relaxed">
                         You spend the first 20 minutes just trying to remember and explain what happened last week.
                     </p>
                   </div>
                   
                   <div className="flex-grow space-y-4">
-                    <div className="p-4 bg-white rounded border-2 border-stone-100 border-dashed">
+                    <div className="p-4 bg-white rounded-2xl border border-stone-200 border-dashed">
                         <div className="flex gap-3">
                             <div className="w-8 h-8 rounded bg-stone-200 flex-shrink-0"></div>
                             <div className="space-y-2 w-full">
@@ -611,8 +603,8 @@ export default function ClientInfoPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-4 bg-stone-100 rounded border-l-4 border-stone-400">
-                        <p className="text-stone-600 font-medium italic text-sm">
+                    <div className="p-4 bg-stone-100 rounded-2xl">
+                        <p className="text-stone-600 italic text-sm">
                             "I know I felt terrible on Tuesday, but I can't remember exactly what triggered it..."
                         </p>
                     </div>
@@ -620,39 +612,39 @@ export default function ClientInfoPage() {
               </div>
               
               {/* The New Way */}
-              <div className="bg-white p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] relative overflow-hidden flex flex-col transform md:-translate-y-4">
+              <div className="bg-white p-8 rounded-3xl border border-stone-200 shadow-lift relative overflow-hidden flex flex-col transform md:-translate-y-4">
                    <div className="mb-8">
-                    <span className="inline-block px-3 py-1 bg-[#1b8af1] text-white text-xs font-bold uppercase tracking-wider rounded mb-4">
+                    <span className="inline-block px-3 py-1 bg-[#1b8af1] text-white text-xs font-semibold uppercase tracking-[0.14em] rounded-full mb-4">
                         With Empath
                     </span>
-                    <h3 className="text-2xl font-bold text-stone-900 mb-2">Continuous Growth</h3>
-                    <p className="text-stone-600 font-medium leading-relaxed">
+                    <h3 className="text-2xl font-serif font-medium text-stone-900 mb-2">Continuous Growth</h3>
+                    <p className="text-stone-600 leading-relaxed">
                         Your therapist already knows the context. You dive straight into the deep work that drives change.
                     </p>
                    </div>
 
                    <div className="flex-grow space-y-4">
-                        <div className="p-5 bg-[#FAF9F6] rounded border-2 border-blue-200">
+                        <div className="p-5 bg-blue-50 rounded-2xl border border-blue-100">
                              <div className="flex gap-3 mb-2">
                                 <Zap className="w-5 h-5 text-[#1b8af1] fill-[#1b8af1]" />
-                                <span className="font-bold text-stone-900 text-sm uppercase tracking-wide">Insight Unlocked</span>
+                                <span className="font-semibold text-stone-900 text-sm uppercase tracking-wide">Insight Unlocked</span>
                              </div>
-                             <p className="text-stone-800 font-medium text-sm leading-relaxed border-l-2 border-blue-500 pl-3">
+                             <p className="text-stone-800 text-sm leading-relaxed">
                                 "I saw your note about the anxiety spike on Tuesday. Let's explore that specific trigger."
                              </p>
                         </div>
                         <div className="grid grid-cols-3 gap-2">
-                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
-                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Mood</span>
-                                <span className="block text-xl font-black text-stone-800">📈</span>
+                             <div className="bg-[#FAF9F6] p-3 rounded-2xl border border-stone-200 text-center">
+                                <span className="block text-[10px] font-semibold uppercase text-stone-400 mb-1">Mood</span>
+                                <span className="block text-xl font-semibold text-stone-800">📈</span>
                              </div>
-                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
-                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Sleep</span>
-                                <span className="block text-xl font-black text-stone-800">😴</span>
+                             <div className="bg-[#FAF9F6] p-3 rounded-2xl border border-stone-200 text-center">
+                                <span className="block text-[10px] font-semibold uppercase text-stone-400 mb-1">Sleep</span>
+                                <span className="block text-xl font-semibold text-stone-800">😴</span>
                              </div>
-                             <div className="bg-stone-50 p-3 rounded border border-stone-200 text-center">
-                                <span className="block text-[10px] font-bold uppercase text-stone-400 mb-1">Focus</span>
-                                <span className="block text-xl font-black text-stone-800">🎯</span>
+                             <div className="bg-[#FAF9F6] p-3 rounded-2xl border border-stone-200 text-center">
+                                <span className="block text-[10px] font-semibold uppercase text-stone-400 mb-1">Focus</span>
+                                <span className="block text-xl font-semibold text-stone-800">🎯</span>
                              </div>
                         </div>
                    </div>
@@ -665,7 +657,7 @@ export default function ClientInfoPage() {
       {/* --- HOW IT WORKS (3 Steps) --- */}
       <section id="how-it-works" className="py-24 bg-stone-900 text-[#FAF9F6] scroll-mt-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-black mb-20 font-serif tracking-tight">How It Works</h2>
+          <h2 className="text-3xl md:text-5xl font-medium mb-20 font-serif tracking-tight">How It Works</h2>
           
           <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {[
@@ -689,20 +681,20 @@ export default function ClientInfoPage() {
               }
             ].map((step, i) => (
               <div key={i} className="relative group text-left">
-                <div className="w-16 h-16 bg-[#FAF9F6] rounded-xl flex items-center justify-center mb-8 border-2 border-stone-500 shadow-[4px_4px_0px_0px_#1b8af1]">
+                <div className="w-16 h-16 bg-[#FAF9F6] rounded-2xl flex items-center justify-center mb-8">
                     {step.icon}
                 </div>
-                <div className="pl-2 border-l-2 border-stone-700">
-                    <span className="text-stone-500 font-bold text-sm tracking-widest uppercase mb-2 block">Step {step.step}</span>
-                    <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
-                    <p className="text-stone-400 leading-relaxed font-medium">{step.desc}</p>
+                <div>
+                    <span className="text-[#1b8af1] font-semibold text-xs tracking-[0.18em] uppercase mb-2 block">Step {step.step}</span>
+                    <h3 className="text-2xl font-serif font-medium text-white mb-3">{step.title}</h3>
+                    <p className="text-stone-400 leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
             </div>
           
           {/* Video Embed */}
-          <div className="mt-24 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_#1b8af1] bg-black aspect-video relative border-2 border-stone-700 group">
+          <div className="mt-24 max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-lift bg-black aspect-video relative border border-stone-700 group">
              {!isPlaying ? (
                 <div className="absolute inset-0 bg-black/60 hover:bg-black/50 transition-colors flex flex-col items-center justify-center cursor-pointer z-10"
                   onClick={() => {
@@ -713,10 +705,10 @@ export default function ClientInfoPage() {
                       posthog.capture('explainer_video_played');
                     }
                      }}>
-                   <div className="w-24 h-24 bg-[#FAF9F6] rounded-full flex items-center justify-center group-hover:scale-105 transition-all duration-300 border-4 border-blue-500 shadow-[0_0_20px_rgba(27,138,241,0.5)]">
-                     <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[22px] border-l-orange-600 border-b-[12px] border-b-transparent ml-2"></div>
+                   <div className="w-20 h-20 bg-[#FAF9F6] rounded-full flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-lift">
+                     <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[22px] border-l-stone-900 border-b-[12px] border-b-transparent ml-2"></div>
                   </div>
-                   <p className="text-[#FAF9F6] mt-6 font-bold text-xl tracking-wide uppercase">Watch Demo</p>
+                   <p className="text-[#FAF9F6] mt-5 font-semibold text-sm tracking-[0.18em] uppercase">Watch Demo</p>
                 </div>
              ) : null}
              <iframe 
@@ -737,26 +729,26 @@ export default function ClientInfoPage() {
       <section id="access" className="py-24 bg-[#FAF9F6] scroll-mt-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-800 border-2 border-blue-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#1b8af1]">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1] mb-5">
               📱 Access Anywhere
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">View Your Journey</h2>
-            <p className="text-lg text-stone-600 font-medium">
+            <h2 className="text-3xl md:text-5xl font-medium text-stone-900 mb-6 tracking-tight font-serif">View Your Journey</h2>
+            <p className="text-lg text-stone-600">
               Your journals, insights, and progress, accessible wherever you need them.
             </p>
           </div>
 
           {/* Mobile App Section with Screenshots */}
           <div className="mb-16">
-            <div className="bg-white p-8 md:p-12 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] max-w-6xl mx-auto">
+            <div className="bg-white p-8 md:p-12 rounded-3xl border border-stone-200 shadow-lift max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Content */}
                 <div>
-                  <div className="w-14 h-14 bg-stone-900 rounded-xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_#1b8af1]">
-                    <Smartphone className="w-7 h-7 text-white" />
+                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                    <Smartphone className="w-6 h-6 text-[#1b8af1]" />
                   </div>
-                  <h3 className="text-3xl font-bold text-stone-900 mb-4">Mobile App</h3>
-                  <p className="text-stone-600 mb-8 leading-relaxed font-medium text-lg">
+                  <h3 className="text-3xl font-serif font-medium tracking-tight text-stone-900 mb-4">Mobile App</h3>
+                  <p className="text-stone-600 mb-8 leading-relaxed text-lg">
                     Download the iOS app for the full experience:
                   </p>
                   <ul className="space-y-4 mb-8">
@@ -769,7 +761,7 @@ export default function ClientInfoPage() {
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
-                        <span className="text-stone-700 font-medium">{item}</span>
+                        <span className="text-stone-700">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -778,7 +770,7 @@ export default function ClientInfoPage() {
                       href="https://apps.apple.com/us/app/myempath/id6472873287"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 px-6 py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-[#1b8af1] transition-colors shadow-[4px_4px_0px_0px_rgba(27,138,241,1)] hover:shadow-[2px_2px_0px_0px_rgba(27,138,241,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+                      className="inline-flex items-center gap-3 px-7 py-3.5 bg-stone-900 text-white rounded-full font-semibold hover:bg-[#1b8af1] transition-colors"
                       onClick={() => posthog.capture('ios_app_store_clicked')}
                     >
                       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -786,7 +778,7 @@ export default function ClientInfoPage() {
                       </svg>
                       Download on App Store
                     </a>
-                    <p className="text-xs text-stone-500 font-medium">Free for clients</p>
+                    <p className="text-xs text-stone-500">Free for clients</p>
                   </div>
                 </div>
 
@@ -798,7 +790,7 @@ export default function ClientInfoPage() {
                       img2,
                       img3
                     ].map((img, i) => (
-                      <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
+                      <div key={i} className="rounded-2xl overflow-hidden border border-stone-200 shadow-soft">
                         <img src={img} alt={`App screenshot ${i + 1}`} className="w-full h-auto object-cover" />
                       </div>
                     ))}
@@ -810,17 +802,17 @@ export default function ClientInfoPage() {
 
           {/* Web Platform Section */}
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white p-8 md:p-12 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_#1b8af1] hover:shadow-[6px_6px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+            <div className="bg-white p-8 md:p-12 rounded-3xl border border-stone-200 shadow-lift transition-all">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Content */}
                 <div>
-              <div className="w-14 h-14 bg-[#1b8af1] rounded-xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-[#1b8af1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold text-stone-900 mb-4">Web Platform</h3>
-              <p className="text-stone-600 mb-8 leading-relaxed font-medium text-lg">
+              <h3 className="text-3xl font-serif font-medium tracking-tight text-stone-900 mb-4">Web Platform</h3>
+              <p className="text-stone-600 mb-8 leading-relaxed text-lg">
                 Access your dashboard from any browser:
               </p>
               <ul className="space-y-4 mb-8">
@@ -833,7 +825,7 @@ export default function ClientInfoPage() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
-                    <span className="text-stone-700 font-medium">{item}</span>
+                    <span className="text-stone-700">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -842,12 +834,12 @@ export default function ClientInfoPage() {
                   href="https://www.empathdash.com/atman/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-6 py-3 bg-[#1b8af1] text-white rounded-xl font-bold hover:bg-stone-900 transition-colors shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+                  className="inline-flex items-center gap-3 px-7 py-3.5 bg-stone-900 text-white rounded-full font-semibold hover:bg-[#1b8af1] transition-colors"
                   onClick={() => posthog.capture('web_platform_link_clicked')}
                 >
                   Visit Web Platform <span className="text-lg">→</span>
                 </a>
-                <p className="text-xs text-stone-500 font-medium">Works on desktop, tablet & mobile</p>
+                <p className="text-xs text-stone-500">Works on desktop, tablet & mobile</p>
               </div>
             </div>
 
@@ -858,7 +850,7 @@ export default function ClientInfoPage() {
                   webImg1,
                   webImg2
                 ].map((img, i) => (
-                  <div key={i} className="rounded-xl overflow-hidden border-2 border-stone-900 hover:border-[#1b8af1] transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:shadow-[4px_4px_0px_0px_#1b8af1] hover:scale-105">
+                  <div key={i} className="rounded-2xl overflow-hidden border border-stone-200 shadow-soft">
                     <img src={img} alt={`Web platform screenshot ${i + 1}`} className="w-full h-auto object-cover" />
                   </div>
                 ))}
@@ -874,52 +866,52 @@ export default function ClientInfoPage() {
       <ValueCalculator />
 
       {/* --- PRIVACY & SECURITY --- */}
-      <section id="security" className="py-24 bg-white border-y-2 border-stone-200 scroll-mt-20">
+      <section id="security" className="py-24 bg-white border-y border-stone-200 scroll-mt-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-100 text-green-800 border-2 border-green-900 rounded-lg text-xs font-bold uppercase tracking-wider mb-8 shadow-[4px_4px_0px_0px_#10b981]">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1] mb-5">
                 <Shield className="w-4 h-4" /> Your Data, Your Control
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-6 tracking-tight font-serif">Use It Your Way</h2>
-              <p className="text-lg text-stone-600 font-medium max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-medium text-stone-900 mb-6 tracking-tight font-serif">Use It Your Way</h2>
+              <p className="text-lg text-stone-600 max-w-2xl mx-auto">
                 Empath works as a standalone journaling app or with your therapist. You're always in control.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Standalone Journaling */}
-              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
-                <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 border-2 border-green-500">
-                  <Shield className="w-7 h-7 text-green-700" />
+              <div className="bg-[#FAF9F6] p-8 rounded-3xl border border-stone-200">
+                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                  <Shield className="w-6 h-6 text-[#1b8af1]" />
                 </div>
-                <h3 className="text-2xl font-bold text-stone-900 mb-4">Private Journaling</h3>
-                <p className="text-stone-600 mb-6 leading-relaxed font-medium">
+                <h3 className="text-2xl font-serif font-medium text-stone-900 mb-4">Private Journaling</h3>
+                <p className="text-stone-600 mb-6 leading-relaxed">
                   Use Empath as your personal journal. Your entries are encrypted and never shared unless you choose to connect with a therapist.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    'End-to-end encrypted storage',
+                    'Encrypted at rest and in transit',
                     'No one can access your entries',
                     'Link & unlink therapists anytime',
                     'Your data stays with you',
                     'Export or delete at any time'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-stone-700 font-medium">{item}</span>
+                      <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
+                      <span className="text-stone-700">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* With Therapist */}
-              <div className="bg-[#FAF9F6] p-8 rounded-xl border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
-                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 border-2 border-blue-500">
-                  <UserCheck className="w-7 h-7 text-blue-700" />
+              <div className="bg-[#FAF9F6] p-8 rounded-3xl border border-stone-200">
+                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                  <UserCheck className="w-6 h-6 text-[#1b8af1]" />
                 </div>
-                <h3 className="text-2xl font-bold text-stone-900 mb-4">With Your Therapist</h3>
-                <p className="text-stone-600 mb-6 leading-relaxed font-medium">
+                <h3 className="text-2xl font-serif font-medium text-stone-900 mb-4">With Your Therapist</h3>
+                <p className="text-stone-600 mb-6 leading-relaxed">
                   When you're ready, connect with a therapist to enhance your care. You control what's shared and when.
                 </p>
                 <ul className="space-y-3">
@@ -932,7 +924,7 @@ export default function ClientInfoPage() {
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" />
-                      <span className="text-stone-700 font-medium">{item}</span>
+                      <span className="text-stone-700">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -940,24 +932,24 @@ export default function ClientInfoPage() {
             </div>
 
             {/* Security Badge */}
-            <div className="mt-12 text-center bg-stone-900 text-white p-8 rounded-xl border-2 border-stone-900">
+            <div className="mt-12 text-center bg-stone-900 text-white p-8 rounded-3xl">
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-6 h-6 text-green-400" />
-                  <span className="font-bold">256-bit Encryption</span>
+                  <Shield className="w-5 h-5 text-[#1b8af1]" />
+                  <span className="font-semibold">256-bit Encryption</span>
                 </div>
                 <span className="text-stone-400">•</span>
                 <div className="flex items-center gap-2">
-                  <Shield className="w-6 h-6 text-green-400" />
-                  <span className="font-bold">Encrypted &amp; Private</span>
+                  <Shield className="w-5 h-5 text-[#1b8af1]" />
+                  <span className="font-semibold">Encrypted &amp; Private</span>
                 </div>
                 <span className="text-stone-400">•</span>
                 <div className="flex items-center gap-2">
-                  <Shield className="w-6 h-6 text-green-400" />
-                  <span className="font-bold">SOC 2 Certified</span>
+                  <Shield className="w-5 h-5 text-[#1b8af1]" />
+                  <span className="font-semibold">SOC 2 Certified</span>
                 </div>
               </div>
-              <p className="text-stone-400 text-sm mt-4 font-medium">
+              <p className="text-stone-400 text-sm mt-4">
                 Your data is protected with enterprise-grade security, whether you journal alone or with a therapist.
               </p>
             </div>
@@ -966,19 +958,19 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- THE OFFER STACK (Grand Slam) --- */}
-      <section className="py-24 bg-white border-y-2 border-stone-200">
+      <section className="py-24 bg-white border-y border-stone-200">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 text-stone-900 font-serif">Premium Care, Included.</h2>
-            <p className="text-xl text-stone-600 font-medium">
+            <h2 className="text-3xl md:text-5xl font-medium mb-6 text-stone-900 font-serif">Premium Care, Included.</h2>
+            <p className="text-xl text-stone-600">
               Your therapist has invested in Empath to provide you with the best possible care.
             </p>
                 </div>
                 
-          <div className="max-w-5xl mx-auto bg-[#FAF9F6] border-2 border-stone-900 rounded-xl p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
+          <div className="max-w-5xl mx-auto bg-[#FAF9F6] border border-stone-200 rounded-3xl p-8 md:p-12 shadow-lift">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
-                <h3 className="text-2xl font-black text-stone-900 mb-8 pb-4 border-b-2 border-stone-200 uppercase tracking-tight">What's Included:</h3>
+                <h3 className="text-sm font-semibold text-stone-500 mb-8 pb-4 border-b border-stone-200 uppercase tracking-[0.18em]">What's Included:</h3>
                 
                 <ul className="space-y-5">
                   {[
@@ -989,27 +981,27 @@ export default function ClientInfoPage() {
                     "Mobile App (iOS) + Phone & Messaging Access"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-4 group">
-                      <div className="w-6 h-6 rounded border-2 border-stone-900 bg-stone-900 flex items-center justify-center flex-shrink-0 group-hover:bg-[#1b8af1] group-hover:border-blue-500 transition-colors">
-                        <CheckCircle className="w-4 h-4 text-[#FAF9F6]" />
+                      <div className="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="w-4 h-4 text-[#1b8af1]" />
                 </div>
-                      <span className="text-lg font-bold text-stone-700">{item}</span>
+                      <span className="text-lg text-stone-700">{item}</span>
                     </li>
                   ))}
                 </ul>
             </div>
 
-              <div className="bg-white rounded-xl p-8 text-center border-2 border-stone-200">
-                <p className="text-stone-400 uppercase tracking-widest text-xs font-bold mb-4">YOUR PRICE</p>
+              <div className="bg-white rounded-3xl p-8 text-center border border-stone-200">
+                <p className="text-stone-400 uppercase tracking-widest text-xs font-semibold mb-4">YOUR PRICE</p>
                 <div className="flex justify-center items-baseline gap-2 mb-2">
-                    <span className="text-6xl font-black text-stone-900">$0</span>
-                    <span className="text-stone-400 text-xl font-bold">/mo</span>
+                    <span className="text-6xl font-serif font-medium text-stone-900">$0</span>
+                    <span className="text-stone-400 text-xl font-semibold">/mo</span>
                 </div>
-                <p className="text-blue-700 text-xs font-bold mb-8 bg-blue-100 inline-block px-4 py-2 rounded-full border border-blue-200">
+                <p className="text-blue-700 text-xs font-semibold mb-8 bg-blue-100 inline-block px-4 py-2 rounded-full border border-blue-200">
                     PAID BY YOUR THERAPIST
                 </p>
                 
               <button
-                  className="w-full py-4 bg-stone-900 text-white rounded-xl font-bold text-lg hover:bg-[#1b8af1] transition-colors shadow-lg"
+                  className="w-full py-4 bg-stone-900 text-white rounded-full font-semibold text-lg hover:bg-[#1b8af1] transition-colors"
                 onClick={() => {
                   if (isInvited) {
                     setShowFlowModal(true);
@@ -1022,7 +1014,7 @@ export default function ClientInfoPage() {
               >
                   {isInvited ? 'Accept Invitation' : 'Get Access Now'}
               </button>
-                <p className="mt-4 text-xs text-stone-400 font-medium">Secure setup takes 30 seconds.</p>
+                <p className="mt-4 text-xs text-stone-400">Secure setup takes 30 seconds.</p>
         </div>
                       </div>
                     </div>
@@ -1033,11 +1025,11 @@ export default function ClientInfoPage() {
       <section className="py-24 bg-[#FAF9F6]">
         <div className="container mx-auto px-4">
            <div className="text-center mb-16">
-                <h2 className="text-3xl font-black text-stone-900 mb-4 font-serif">Real Stories</h2>
+                <h2 className="text-3xl font-medium text-stone-900 mb-4 font-serif">Real Stories</h2>
                 <div className="flex justify-center gap-1 text-[#1b8af1] mb-2">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
                 </div>
-                <p className="text-stone-500 font-medium uppercase tracking-wide text-sm">Trusted by thousands of clients</p>
+                <p className="text-stone-500 uppercase tracking-wide text-sm">Trusted by thousands of clients</p>
            </div>
            
            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1058,11 +1050,11 @@ export default function ClientInfoPage() {
                   role: "Client"
                 }
               ].map((t, i) => (
-                <div key={i} className="bg-white p-8 rounded-none border-l-4 border-stone-900 shadow-sm flex flex-col hover:bg-blue-50 hover:border-blue-500 transition-colors">
-                  <p className="text-stone-700 mb-6 leading-relaxed font-serif text-lg italic flex-grow">"{t.quote}"</p>
+                <div key={i} className="bg-white p-8 rounded-3xl border border-stone-200 shadow-soft flex flex-col">
+                  <p className="text-stone-800 mb-6 leading-relaxed font-serif text-lg flex-grow">"{t.quote}"</p>
                   <div>
-                    <p className="font-bold text-stone-900">{t.author}</p>
-                    <p className="text-[10px] text-stone-400 uppercase tracking-widest font-bold">{t.role}</p>
+                    <p className="font-semibold text-stone-900">{t.author}</p>
+                    <p className="text-sm text-stone-500">{t.role}</p>
                     </div>
                     </div>
               ))}
@@ -1071,9 +1063,9 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- FAQ / OBJECTIONS --- */}
-      <section id="faq" className="py-24 bg-white border-t-2 border-stone-200 scroll-mt-20">
+      <section id="faq" className="py-24 bg-white border-t border-stone-200 scroll-mt-20">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-black text-center text-stone-900 mb-12 font-serif">Questions?</h2>
+          <h2 className="text-3xl font-medium text-center text-stone-900 mb-12 font-serif">Questions?</h2>
           <div className="space-y-4">
             <FAQItem 
               question="Is my data safe?" 
@@ -1085,7 +1077,7 @@ export default function ClientInfoPage() {
             />
             <FAQItem 
               question="How do I access my journals?" 
-              answer={<>You can access your journals through our iOS mobile app or web platform at <a href="https://www.empathdash.com/atman/" target="_blank" rel="noopener noreferrer" className="text-[#1b8af1] hover:underline font-bold">empathdash.com/atman</a>. You can journal via text, phone, or the app, and view everything from either platform.</>} 
+              answer={<>You can access your journals through our iOS mobile app or web platform at <a href="https://www.empathdash.com/atman/" target="_blank" rel="noopener noreferrer" className="text-[#1b8af1] hover:underline font-semibold">empathdash.com/atman</a>. You can journal via text, phone, or the app, and view everything from either platform.</>} 
             />
             <FAQItem 
               question="Who pays for this?" 
@@ -1112,12 +1104,13 @@ export default function ClientInfoPage() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-[#FAF9F6] border-t-2 border-stone-200 py-16">
-        <div className="container mx-auto px-4 text-center">
-            <div className="inline-block p-4 rounded-lg mb-8">
-                <img src={logo} alt="Empath" className="w-8 h-8 object-contain" />
+      <footer className="bg-[#FAF9F6] border-t border-stone-200 py-14">
+        <div className="container mx-auto px-4 flex flex-col items-center gap-8 md:flex-row md:justify-between">
+            <div className="flex items-center gap-0">
+                <img src={logo} alt="Empath" className="w-9 h-9 object-contain" />
+                <span className="text-lg tracking-tight text-stone-900">Empath</span>
             </div>
-          <div className="flex justify-center gap-8 text-stone-500 font-bold text-sm mb-8 uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-stone-500">
             <Link to="/privacy" className="hover:text-stone-900 transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-stone-900 transition-colors">Terms of Service</Link>
             <button
@@ -1128,7 +1121,7 @@ export default function ClientInfoPage() {
               Support
             </button>
                       </div>
-          <p className="text-stone-400 text-xs font-medium">© {new Date().getFullYear()} Reality Articulated Inc.</p>
+          <p className="text-stone-400 text-xs">© {new Date().getFullYear()} Reality Articulated Inc.</p>
                     </div>
       </footer>
 
@@ -1140,7 +1133,7 @@ export default function ClientInfoPage() {
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-[#FAF9F6] rounded-xl shadow-2xl w-full max-w-lg relative border-2 border-stone-900 max-h-[90vh] overflow-y-auto"
+            className="bg-[#FAF9F6] rounded-3xl shadow-lift w-full max-w-lg relative border border-stone-200 max-h-[90vh] overflow-y-auto"
           >
             {/* Header */}
             <div className="sticky top-0 bg-[#FAF9F6] px-6 pt-6 pb-4 border-b border-stone-100 z-10">
@@ -1160,7 +1153,7 @@ export default function ClientInfoPage() {
               >
                 ✕
               </button>
-              <h3 className="text-2xl font-black text-stone-900 font-serif">Connect with Your Therapist</h3>
+              <h3 className="text-2xl font-medium text-stone-900 font-serif">Connect with Your Therapist</h3>
               <p className="text-stone-500 text-sm mt-1">Get started with Empath in just a few steps</p>
             </div>
 
@@ -1171,18 +1164,18 @@ export default function ClientInfoPage() {
                   animate={{ scale: 1, opacity: 1 }}
                   className="text-center py-6"
                 >
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-green-200">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
                     <CheckCircle className="w-8 h-8 text-green-600" />
                   </div>
-                  <h4 className="font-black text-xl text-stone-900 mb-2">Request Sent!</h4>
+                  <h4 className="font-semibold text-xl text-stone-900 mb-2">Request Sent!</h4>
                   <p className="text-stone-600 text-sm mb-6 max-w-xs mx-auto">
                     {inviteMode === 'select' 
                       ? "Your therapist will receive your connection request. Once they approve, you'll get an email to complete your account setup."
                       : "We'll reach out to your therapist and get you connected soon."
                     }
                   </p>
-                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <p className="text-xs text-blue-700 font-medium">
+                  <div className="bg-blue-50 rounded-2xl p-4 border border-blue-100">
+                    <p className="text-xs text-blue-700">
                       ⏳ Most therapists respond within 24-48 hours.
                     </p>
                   </div>
@@ -1192,7 +1185,7 @@ export default function ClientInfoPage() {
                       setShowInviteModal(false);
                       setInviteSubmitted(false);
                     }}
-                    className="mt-6 px-6 py-2 text-stone-600 font-bold text-sm hover:text-stone-900 transition-colors"
+                    className="mt-6 px-6 py-2 text-stone-600 font-semibold text-sm hover:text-stone-900 transition-colors"
                   >
                     Close
                   </button>
@@ -1204,8 +1197,8 @@ export default function ClientInfoPage() {
                   {!noTherapist && (
                     <div className="space-y-4">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold flex items-center justify-center">1</span>
-                        <span className="text-sm font-bold text-stone-900">Find your therapist</span>
+                        <span className="w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-semibold flex items-center justify-center">1</span>
+                        <span className="text-sm font-semibold text-stone-900">Find your therapist</span>
                       </div>
 
                       {/* Mode Toggle - More subtle */}
@@ -1216,11 +1209,11 @@ export default function ClientInfoPage() {
                             setInviteMode('select');
                             setTherapistEmail('');
                           }}
-                          className={`flex-1 px-3 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-                            inviteMode === 'select'
-                              ? 'bg-stone-900 text-white shadow-md'
-                              : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
-                          }`}
+                          className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all flex items-center justify-center gap-1.5 ${
+ inviteMode === 'select'
+ ? 'bg-stone-900 text-white'
+ : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+ }`}
                         >
                           <Search className="w-3.5 h-3.5" />
                           Search Directory
@@ -1231,11 +1224,11 @@ export default function ClientInfoPage() {
                             setInviteMode('email');
                             setSelectedTherapist(null);
                           }}
-                          className={`flex-1 px-3 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-                            inviteMode === 'email'
-                              ? 'bg-stone-900 text-white shadow-md'
-                              : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
-                          }`}
+                          className={`flex-1 px-3 py-2 text-xs font-semibold rounded-full transition-all flex items-center justify-center gap-1.5 ${
+ inviteMode === 'email'
+ ? 'bg-stone-900 text-white'
+ : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+ }`}
                         >
                           <MessageSquare className="w-3.5 h-3.5" />
                           Enter Email
@@ -1251,7 +1244,7 @@ export default function ClientInfoPage() {
                             <input
                               type="text"
                               placeholder="Search by name..."
-                              className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                              className="w-full pl-9 pr-4 py-2.5 rounded-full bg-white border border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm transition-all"
                               value={therapistSearch}
                               onChange={e => setTherapistSearch(e.target.value)}
                             />
@@ -1262,13 +1255,13 @@ export default function ClientInfoPage() {
                             <motion.div 
                               initial={{ scale: 0.95 }}
                               animate={{ scale: 1 }}
-                              className="p-3 bg-green-50 border-2 border-green-300 rounded-lg flex items-center gap-3"
+                              className="p-3 bg-green-50 border border-green-300 rounded-2xl flex items-center gap-3"
                             >
                               <div className="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center flex-shrink-0">
                                 <CheckCircle className="w-5 h-5 text-green-600" />
                               </div>
                               <div className="flex-grow min-w-0">
-                                <p className="font-bold text-stone-900 truncate">{selectedTherapist.name}</p>
+                                <p className="font-semibold text-stone-900 truncate">{selectedTherapist.name}</p>
                                 {selectedTherapist.title && (
                                   <p className="text-xs text-stone-500 truncate">{selectedTherapist.title}</p>
                                 )}
@@ -1285,19 +1278,19 @@ export default function ClientInfoPage() {
 
                           {/* Therapist List */}
                           {!selectedTherapist && (
-                            <div className="bg-white border-2 border-stone-200 rounded-lg max-h-40 overflow-y-auto">
+                            <div className="bg-white border border-stone-200 rounded-2xl max-h-40 overflow-y-auto">
                               {loadingTherapists ? (
                                 <div className="p-8 text-center">
                                   <Loader2 className="w-6 h-6 text-blue-500 animate-spin mx-auto mb-2" />
-                                  <p className="text-xs text-stone-500 font-medium">Finding therapists...</p>
+                                  <p className="text-xs text-stone-500">Finding therapists...</p>
                                 </div>
                               ) : therapistListError ? (
                                 <div className="p-4 text-center">
-                                  <p className="text-xs text-stone-500 font-medium">{therapistListError}</p>
+                                  <p className="text-xs text-stone-500">{therapistListError}</p>
                                   <button 
                                     type="button" 
                                     onClick={() => setInviteMode('email')} 
-                                    className="text-xs text-blue-600 hover:underline mt-2 font-bold"
+                                    className="text-xs text-blue-600 hover:underline mt-2 font-semibold"
                                   >
                                     Enter email instead →
                                   </button>
@@ -1307,7 +1300,7 @@ export default function ClientInfoPage() {
                                   <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-2">
                                     <Search className="w-5 h-5 text-stone-300" />
                                   </div>
-                                  <p className="text-xs text-stone-500 font-medium">
+                                  <p className="text-xs text-stone-500">
                                     {therapistSearch 
                                       ? 'No matches found' 
                                       : 'Start typing to search'}
@@ -1316,7 +1309,7 @@ export default function ClientInfoPage() {
                                     <button 
                                       type="button" 
                                       onClick={() => setInviteMode('email')} 
-                                      className="text-xs text-blue-600 hover:underline mt-2 font-bold"
+                                      className="text-xs text-blue-600 hover:underline mt-2 font-semibold"
                                     >
                                       Enter their email instead →
                                     </button>
@@ -1335,13 +1328,13 @@ export default function ClientInfoPage() {
                                         <User className="w-4 h-4 text-stone-400 group-hover:text-blue-500 transition-colors" />
                                       </div>
                                       <div className="flex-grow min-w-0">
-                                        <p className="font-bold text-stone-900 truncate text-sm">{therapist.name}</p>
+                                        <p className="font-semibold text-stone-900 truncate text-sm">{therapist.name}</p>
                                         {therapist.title && (
                                           <p className="text-xs text-stone-400 truncate">{therapist.title}</p>
                                         )}
                                       </div>
                                       {therapist.acceptingClients && (
-                                        <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded flex-shrink-0">
+                                        <span className="text-[9px] font-semibold text-green-700 bg-green-100 px-1.5 py-0.5 rounded flex-shrink-0">
                                           Available
                                         </span>
                                       )}
@@ -1360,7 +1353,7 @@ export default function ClientInfoPage() {
                           <input
                             type="email"
                             required={inviteMode === 'email' && !noTherapist}
-                            className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                            className="w-full px-4 py-2.5 rounded-full bg-white border border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm transition-all"
                             placeholder="therapist@example.com"
                             value={therapistEmail}
                             onChange={e => setTherapistEmail(e.target.value)}
@@ -1373,19 +1366,19 @@ export default function ClientInfoPage() {
                   {/* Step 2: Your Info */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
-                      <span className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
-                        noTherapist ? 'bg-stone-900 text-white' : 'bg-stone-200 text-stone-600'
-                      }`}>
+                      <span className={`w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center ${
+ noTherapist ? 'bg-stone-900 text-white' : 'bg-stone-200 text-stone-600'
+ }`}>
                         {noTherapist ? '1' : '2'}
                       </span>
-                      <span className="text-sm font-bold text-stone-900">Your information</span>
+                      <span className="text-sm font-semibold text-stone-900">Your information</span>
                     </div>
 
                     {/* Name & Email in grid on larger screens */}
                     <div className="grid gap-3">
                       <input
                         type="text"
-                        className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                        className="w-full px-4 py-2.5 rounded-full bg-white border border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm transition-all"
                         placeholder="Your name"
                         value={userName}
                         onChange={e => setUserName(e.target.value)}
@@ -1393,7 +1386,7 @@ export default function ClientInfoPage() {
                       <input
                         type="email"
                         required
-                        className="w-full px-4 py-2.5 rounded-lg bg-white border-2 border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm font-medium transition-all"
+                        className="w-full px-4 py-2.5 rounded-full bg-white border border-stone-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm transition-all"
                         placeholder="Your email"
                         value={userEmail}
                         onChange={e => setUserEmail(e.target.value)}
@@ -1405,7 +1398,7 @@ export default function ClientInfoPage() {
                     <motion.p 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-red-600 font-bold text-sm bg-red-50 p-3 rounded-lg border border-red-200"
+                      className="text-red-600 font-semibold text-sm bg-red-50 p-3 rounded-2xl border border-red-200"
                     >
                       {inviteError}
                     </motion.p>
@@ -1415,7 +1408,7 @@ export default function ClientInfoPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-stone-900 text-white rounded-xl font-bold transition-all border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-[2px_2px_0px_0px_#1b8af1] hover:translate-x-[2px] hover:translate-y-[2px] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:shadow-[4px_4px_0px_0px_#1b8af1] disabled:hover:translate-x-0 disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                    className="w-full py-3.5 bg-stone-900 text-white rounded-full font-semibold transition-colors hover:bg-[#1b8af1] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:bg-stone-900 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -1464,7 +1457,7 @@ export default function ClientInfoPage() {
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative border-2 border-stone-900"
+            className="bg-[#FAF9F6] rounded-3xl shadow-lift p-8 w-full max-w-md relative border border-stone-200"
           >
             <button 
               onClick={() => setShowFlowModal(false)}
@@ -1473,18 +1466,18 @@ export default function ClientInfoPage() {
               ✕
             </button>
 
-            <h3 className="text-2xl font-black text-stone-900 mb-6 font-serif">One Last Step</h3>
+            <h3 className="text-2xl font-medium text-stone-900 mb-6 font-serif">One Last Step</h3>
             
-            <ol className="space-y-6 mb-8 relative border-l-2 border-stone-200 ml-3 pl-8">
+            <ol className="space-y-6 mb-8 relative border-l border-stone-200 ml-3 pl-8">
               <li className="relative">
-                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">1</span>
-                <h4 className="font-bold text-stone-900 text-lg">Create your secure account</h4>
-                <p className="text-sm text-stone-500 font-medium mt-1">We'll link you to {therapistName || 'your therapist'}.</p>
+                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center text-sm font-semibold border-4 border-[#FAF9F6]">1</span>
+                <h4 className="font-semibold text-stone-900 text-lg">Create your secure account</h4>
+                <p className="text-sm text-stone-500 mt-1">We'll link you to {therapistName || 'your therapist'}.</p>
               </li>
               <li className="relative">
-                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center text-sm font-bold border-4 border-[#FAF9F6]">2</span>
-                <h4 className="font-bold text-stone-900 text-lg">Start journaling</h4>
-                <p className="text-sm text-stone-500 font-medium mt-1">Download the app, or call or message us to capture moments.</p>
+                <span className="absolute -left-[41px] w-8 h-8 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center text-sm font-semibold border-4 border-[#FAF9F6]">2</span>
+                <h4 className="font-semibold text-stone-900 text-lg">Start journaling</h4>
+                <p className="text-sm text-stone-500 mt-1">Download the app, or call or message us to capture moments.</p>
               </li>
             </ol>
 
@@ -1499,7 +1492,7 @@ export default function ClientInfoPage() {
                   setShowFlowModal(false);
                 }
               }}
-              className="w-full py-4 bg-stone-900 text-white rounded-xl font-bold text-lg hover:bg-[#1b8af1] transition-colors shadow-lg border-2 border-stone-900 shadow-[4px_4px_0px_0px_#1b8af1] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+              className="w-full py-4 bg-stone-900 text-white rounded-full font-semibold text-lg hover:bg-[#1b8af1] transition-colors"
             >
               Continue to Secure Sign Up →
             </button>
@@ -1513,7 +1506,7 @@ export default function ClientInfoPage() {
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-[#FAF9F6] rounded-xl shadow-2xl p-8 w-full max-w-md relative text-center border-2 border-stone-900"
+            className="bg-[#FAF9F6] rounded-3xl shadow-lift p-8 w-full max-w-md relative text-center border border-stone-200"
           >
             <button
               onClick={() => setShowCallModal(false)}
@@ -1522,12 +1515,12 @@ export default function ClientInfoPage() {
               ✕
             </button>
             
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-blue-200">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 border border-blue-200">
               <Phone className="w-8 h-8 text-[#1b8af1]" />
             </div>
 
-            <h3 className="text-2xl font-black text-stone-900 mb-2 font-serif">Journal Instantly</h3>
-            <p className="text-stone-600 mb-8 font-medium">
+            <h3 className="text-2xl font-medium text-stone-900 mb-2 font-serif">Journal Instantly</h3>
+            <p className="text-stone-600 mb-8">
               {SMS_ENABLED
                 ? 'Call or text our secure line to capture your thoughts instantly.'
                 : 'Call our secure line to capture your thoughts instantly.'}
@@ -1536,26 +1529,26 @@ export default function ClientInfoPage() {
             <div className={`grid ${SMS_ENABLED ? 'grid-cols-2' : 'grid-cols-1'} gap-4`}>
                 <a
                   href={`tel:${PHONE_MAIN}`}
-                  className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
+                  className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl border border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
                   onClick={() => posthog.capture('call_modal_call_clicked')}
               >
                 <Phone className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
-                <span className="font-bold text-stone-900">Call Now</span>
+                <span className="font-semibold text-stone-900">Call Now</span>
                 </a>
                 {SMS_ENABLED && (
                 <a
                   href={`sms:${PHONE_MAIN}`}
-                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border-2 border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
+                className="flex flex-col items-center justify-center p-6 bg-white rounded-3xl border border-stone-200 hover:border-blue-500 hover:bg-blue-50 transition-all group shadow-sm"
                 onClick={() => posthog.capture('call_modal_text_clicked')}
               >
                 <MessageSquare className="w-8 h-8 text-stone-700 group-hover:text-[#1b8af1] mb-3" />
-                <span className="font-bold text-stone-900">Text Now</span>
+                <span className="font-semibold text-stone-900">Text Now</span>
               </a>
                 )}
             </div>
             
-            <div className="mt-6 pt-6 border-t-2 border-stone-100">
-                <p className="text-xs text-stone-400 font-medium">
+            <div className="mt-6 pt-6 border-t border-stone-100">
+                <p className="text-xs text-stone-400">
                     If you don't have an account, we'll create one for you automatically using your phone number.
                 </p>
         </div>
@@ -1568,10 +1561,10 @@ export default function ClientInfoPage() {
         <motion.div
             initial={{ y: 100 }} 
             animate={{ y: 0 }}
-            className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t-2 border-stone-200 p-4 z-40 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
+            className="fixed bottom-0 left-0 right-0 bg-[#FAF9F6] border-t border-stone-200 p-4 z-40 md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.1)]"
         >
                 <button
-                className="w-full py-3 bg-stone-900 text-white rounded-lg font-bold shadow-lg border-2 border-stone-900"
+                className="w-full py-3 bg-stone-900 text-white rounded-full font-semibold"
                   onClick={() => {
                     if (isInvited) {
                         setShowFlowModal(true);
@@ -1590,7 +1583,7 @@ export default function ClientInfoPage() {
         <motion.div
             initial={{ y: -100 }} 
             animate={{ y: 0 }}
-            className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b-2 border-stone-200 p-4 z-50 hidden md:flex justify-between items-center shadow-sm"
+            className="fixed top-0 left-0 right-0 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-stone-200 px-4 py-3.5 z-50 hidden md:flex justify-between items-center"
         >
             <div className="flex items-center gap-0 container mx-auto px-4">
               <div className="w-10 h-10 flex items-center justify-center">
@@ -1599,7 +1592,7 @@ export default function ClientInfoPage() {
                 <span className="text-stone-900 text-lg">Empath</span>
                 <div className="flex-grow"></div>
               <button
-                    className="px-6 py-2 bg-stone-900 text-white rounded-lg font-bold shadow hover:bg-[#1b8af1] transition border-2 border-stone-900"
+                    className="px-5 py-2 bg-stone-900 text-white rounded-full text-sm font-semibold hover:bg-[#1b8af1] transition-colors"
                 onClick={() => {
                         if (isInvited) {
                   setShowFlowModal(true);

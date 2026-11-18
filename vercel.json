@@ -1,8 +1,20 @@
 {
+  "redirects": [
+    {
+      "source": "/:locale(es|pt|hi|de|fr|it)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(es|pt|hi|de|fr|it)/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
-} 
+}

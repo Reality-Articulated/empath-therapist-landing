@@ -1,6 +1,6 @@
-// Master (English) copy catalog for the /call-me funnel page. Same contract
-// as journaling.en.ts: locale files mirror this shape (compile-checked via
-// CallMeCopy), PURE DATA ONLY (transpile-loaded by the build scripts).
+// English copy catalog for the /call-me funnel page (the site is English
+// only). Same contract as journaling.en.ts: PURE DATA ONLY (transpile-loaded
+// by the build scripts).
 // Strings with a phone-number link in the middle are split into pre/post
 // halves around the anchor. Same register rules as the landing catalog
 // (warm consumer voice; "no sign-up", never "no account").

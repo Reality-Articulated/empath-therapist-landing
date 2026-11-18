@@ -26,10 +26,9 @@ const DIST = join(ROOT, 'dist');
 const SITE_URL = 'https://www.empathdash.com';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/empath-logo.png`;
 
-// ------------------------------------------------------------------ i18n
-// Locale registry + landing copy catalogs are TS data modules — transpile-
-// loaded so the prerendered titles/descriptions can never drift from what
-// React renders (same source of truth).
+// The landing copy catalog is a TS data module, transpile-loaded so the
+// prerendered titles/descriptions can never drift from what React renders
+// (same source of truth).
 async function loadTsExport(filePath, exportName, transformSource = (source) => source) {
   const source = transformSource(readFileSync(filePath, 'utf-8'));
   const { outputText } = ts.transpileModule(source, {
@@ -40,32 +39,11 @@ async function loadTsExport(filePath, exportName, transformSource = (source) => 
   return (await import(moduleUrl))[exportName];
 }
 
-const TRANSLATED_LOCALES = await loadTsExport(join(ROOT, 'src/i18n/locales.ts'), 'TRANSLATED_LOCALES');
-const LOCALE_CODES = Object.keys(TRANSLATED_LOCALES);
-const cap = (s) => s[0].toUpperCase() + s.slice(1);
-const landingCopy = {};
-const callmeCopy = {};
-// English is the master catalog and is not a member of TRANSLATED_LOCALES, so
-// load it explicitly: the `/` and `/app` routes read their SEO from it.
-landingCopy.en = await loadTsExport(join(ROOT, 'src/i18n/copy/journaling.en.ts'), 'journalingEn');
-for (const code of LOCALE_CODES) {
-  landingCopy[code] = await loadTsExport(
-    join(ROOT, `src/i18n/copy/journaling.${code}.ts`),
-    `journaling${cap(code)}`
-  );
-  callmeCopy[code] = await loadTsExport(
-    join(ROOT, `src/i18n/copy/callme.${code}.ts`),
-    `callme${cap(code)}`
-  );
-}
+const landingCopy = await loadTsExport(join(ROOT, 'src/i18n/copy/journaling.en.ts'), 'journalingEn');
 
 // Therapist-facing routes: shared with src/App.tsx so build-time stripping and
 // runtime toggling of the iOS Smart App Banner agree on which pages count.
 const isTherapistPath = await loadTsExport(join(ROOT, 'src/utils/therapistRoutes.ts'), 'isTherapistPath');
-const stripLocale = (path) => {
-  const match = /^\/([a-z]{2})(\/.*)?$/.exec(path);
-  return match && LOCALE_CODES.includes(match[1]) ? match[2] || '/' : path;
-};
 
 // Phrase landing pages (English-only) — single source of truth shared with
 // src/App.tsx and scripts/generate-sitemap.mjs, see src/data/phrasePages.ts.
@@ -77,18 +55,6 @@ const phrasePageRoutes = phrasePages.map((entry) => ({
   keywords: entry.seoKeywords,
 }));
 
-/** hreflang link cluster for a locale-free path, e.g. "/app". x-default = English. */
-function hreflangCluster(path, localeCodes = LOCALE_CODES) {
-  return [
-    { hreflang: 'en', href: `${SITE_URL}${path}` },
-    ...localeCodes.map((code) => ({
-      hreflang: TRANSLATED_LOCALES[code].hreflang,
-      href: `${SITE_URL}/${code}${path}`,
-    })),
-    { hreflang: 'x-default', href: `${SITE_URL}${path}` },
-  ];
-}
-
 if (!existsSync(join(DIST, 'index.html'))) {
   console.error('[prerender] dist/index.html not found — run `vite build` first.');
   process.exit(1);
@@ -99,58 +65,30 @@ if (!existsSync(join(DIST, 'index.html'))) {
 // whose <SEO /> passes a different canonical (e.g. `/` renders JournalingPage
 // with path="/app" to consolidate to /app).
 const staticRoutes = [
-  // English consumer landing: title/description/keywords come straight from
+  // Consumer landing: title/description/keywords come straight from
   // the catalog (same source React's <SEO /> reads) so they can't drift.
   // `landing` marks routes that get the prerendered FAQPage schema.
   {
     path: '/',
     canonicalPath: '/app',
-    title: landingCopy.en.seo.title,
-    description: landingCopy.en.seo.description,
-    keywords: landingCopy.en.seo.keywords,
-    landing: 'en',
-    alternates: hreflangCluster('/app'),
+    title: landingCopy.seo.title,
+    description: landingCopy.seo.description,
+    keywords: landingCopy.seo.keywords,
+    landing: true,
   },
   {
     path: '/app',
-    title: landingCopy.en.seo.title,
-    description: landingCopy.en.seo.description,
-    keywords: landingCopy.en.seo.keywords,
-    landing: 'en',
-    alternates: hreflangCluster('/app'),
+    title: landingCopy.seo.title,
+    description: landingCopy.seo.description,
+    keywords: landingCopy.seo.keywords,
+    landing: true,
   },
-  // Localized consumer landing: /<code> and /<code>/app per translated locale,
-  // titled/described from the same catalogs the React page renders.
-  ...LOCALE_CODES.flatMap((code) => {
-    const seo = landingCopy[code].seo;
-    const shared = {
-      title: seo.title,
-      description: seo.description,
-      keywords: seo.keywords,
-      htmlLang: TRANSLATED_LOCALES[code].htmlLang,
-      landing: code,
-      alternates: hreflangCluster('/app'),
-    };
-    return [
-      { path: `/${code}`, canonicalPath: `/${code}/app`, ...shared },
-      { path: `/${code}/app`, ...shared },
-    ];
-  }),
   {
     path: '/call-me',
     title: 'Empath Calls You: Journal by Phone, No App Needed',
     description: "Enter your number and Empath calls you for your first voice journal entry. Talk it out, hang up, and it's saved. No app, no account, no typing.",
     keywords: 'journal by phone, voice journaling, phone journaling, journaling without an app, audio diary',
-    alternates: hreflangCluster('/call-me'),
   },
-  ...LOCALE_CODES.map((code) => ({
-    path: `/${code}/call-me`,
-    title: callmeCopy[code].seo.title,
-    description: callmeCopy[code].seo.description,
-    keywords: callmeCopy[code].seo.keywords,
-    htmlLang: TRANSLATED_LOCALES[code].htmlLang,
-    alternates: hreflangCluster('/call-me'),
-  })),
   ...phrasePageRoutes,
   {
     path: '/therapist',
@@ -285,23 +223,13 @@ const journalingBlogs = [...kinzerJournalingBlogs, ...legacyJournalingBlogs].map
   keywords: [p.keyword, p.category, 'journaling'].filter(Boolean).join(', '),
 }));
 
-// Machine translations produced by scripts/translate-content.mjs. An English
-// post gets an hreflang cluster (and localized sibling routes) only for the
-// locales whose JSON actually exists — never a link to an untranslated URL.
-const I18N_DATA = join(ROOT, 'src/data/i18n');
-const translationPath = (code, kind, slug) => join(I18N_DATA, code, kind, `${slug}.json`);
-const translatedLocalesFor = (kind, slug) =>
-  LOCALE_CODES.filter((code) => existsSync(translationPath(code, kind, slug)));
-
-function blogRoute(post, { locale, alternates } = {}) {
+function blogRoute(post) {
   return {
-    path: locale ? `/${locale}${post.path}` : post.path,
+    path: post.path,
     title: post.seoTitle || `${post.title} | Empath`,
     description: post.metaDescription || '',
     keywords: post.keywords,
     ogType: 'article',
-    ...(locale ? { htmlLang: TRANSLATED_LOCALES[locale].htmlLang } : {}),
-    ...(alternates ? { alternates } : {}),
     article: {
       author: post.author,
       date: post.date,
@@ -313,22 +241,7 @@ function blogRoute(post, { locale, alternates } = {}) {
   };
 }
 
-const blogRoutes = [];
-for (const { kind, posts } of [
-  { kind: 'therapist', posts: therapistBlogs },
-  { kind: 'journaling', posts: journalingBlogs },
-]) {
-  for (const post of posts) {
-    const codes = translatedLocalesFor(kind, post.slug);
-    const alternates = codes.length ? hreflangCluster(post.path, codes) : undefined;
-    blogRoutes.push(blogRoute(post, { alternates }));
-    for (const code of codes) {
-      const translation = JSON.parse(readFileSync(translationPath(code, kind, post.slug), 'utf-8'));
-      const merged = { ...post, ...translation, slug: post.slug, path: post.path };
-      blogRoutes.push(blogRoute(merged, { locale: code, alternates }));
-    }
-  }
-}
+const blogRoutes = [...therapistBlogs, ...journalingBlogs].map((post) => blogRoute(post));
 
 const allRoutes = [...staticRoutes, ...blogRoutes];
 
@@ -445,12 +358,12 @@ function buildHeadMeta(route) {
 
   let articleLd = '';
   let faqLd = '';
-  // Consumer landing (every locale): prerender the same FAQ schema the page
+  // Consumer landing: prerender the same FAQ schema the page
   // renders so non-JS crawlers index it. main.tsx removes
   // [data-prerendered-schema] nodes on hydration, so JS crawlers never see it
   // twice. (The MobileApplication schema lives in index.html, site-wide.)
   if (route.landing) {
-    const copy = landingCopy[route.landing];
+    const copy = landingCopy;
     const faqSchema = {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -511,7 +424,7 @@ function rewriteHtml(html, route) {
   const { canonical, title, description, ogType, ogImage, keywordsTag, articleLd, faqLd } = buildHeadMeta(route);
 
   let out = html;
-  out = out.replace(/<html lang="[^"]*"/, `<html lang="${route.htmlLang ?? 'en'}"`);
+  out = out.replace(/<html lang="[^"]*"/, `<html lang="en"`);
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
   out = out.replace(/<meta\s+name="title"[^>]*\/?>/, `<meta name="title" content="${title}" />`);
   out = out.replace(/<meta\s+name="description"[^>]*\/?>/, `<meta name="description" content="${description}" />`);
@@ -536,16 +449,13 @@ function rewriteHtml(html, route) {
   // Therapists use the web dashboard on a laptop; the consumer iOS app banner
   // only takes the top of their phone screen. Safari reads this tag at page
   // load, so stripping it here (not at runtime) is what actually hides it.
-  if (isTherapistPath(stripLocale(route.path))) {
+  if (isTherapistPath(route.path)) {
     out = out.replace(/\n?[ \t]*<meta\s+name="apple-itunes-app"[^>]*\/?>/, '');
   }
 
-  // Inject canonical, hreflang alternates, and structured data before </head>.
+  // Inject canonical and structured data before </head>.
   const canonicalTag = `<link rel="canonical" href="${canonical}" />`;
-  const alternateTags = (route.alternates ?? [])
-    .map((alt) => `\n    <link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}" />`)
-    .join('');
-  out = out.replace(/<\/head>/, `    ${canonicalTag}${alternateTags}${articleLd}${faqLd}\n  </head>`);
+  out = out.replace(/<\/head>/, `    ${canonicalTag}${articleLd}${faqLd}\n  </head>`);
 
   const staticArticle = renderStaticArticle(route, canonical);
   if (staticArticle) {

@@ -24,6 +24,7 @@ interface ChannelVisual {
   icon: ReactNode;
   /** Rail node tile */
   bg: string;
+  /** Darker shade of bg, used for the channel name in the step label */
   shadow: string;
   platform: Platform;
 }
@@ -60,10 +61,10 @@ const CHANNEL_VISUALS: Record<string, ChannelVisual> = {
 const MiniChat = ({ visual, userMsg, empathMsg }: { visual: ChannelVisual; userMsg: string; empathMsg: string }) => {
   const p = visual.platform;
   return (
-    <div className="rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] overflow-hidden max-w-md">
+    <div className="rounded-2xl shadow-lift overflow-hidden max-w-md">
       <div className="flex items-center gap-2 px-3 py-2" style={{ background: p.header }}>
         <span className="text-white/80">{visual.icon}</span>
-        <span className="text-white/90 text-xs font-bold">{p.name}</span>
+        <span className="text-white/90 text-xs font-semibold">{p.name}</span>
       </div>
       <div className="flex flex-col gap-2 p-3" style={{ background: p.frame }}>
         <div
@@ -94,28 +95,28 @@ export default function CrossChannelStory({ className = '' }: { className?: stri
   return (
     <div className={`relative max-w-2xl mx-auto ${className}`}>
       {/* rail connecting the channel nodes */}
-      <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-stone-300" aria-hidden="true" />
+      <div className="absolute left-5 top-5 bottom-5 w-px bg-stone-200" aria-hidden="true" />
       <div className="space-y-10">
         {/* Journal entry — where the memory starts */}
         <div className="relative flex gap-5">
           <div
-            className="relative z-10 w-10 h-10 rounded-xl border-2 flex items-center justify-center text-white shrink-0"
-            style={{ backgroundColor: '#1c1917', borderColor: '#1c1917', boxShadow: '4px 4px 0px 0px #1b8af1' }}
+            className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-soft"
+            style={{ backgroundColor: '#1c1917' }}
             aria-hidden="true"
           >
             <Mic className="w-5 h-5" />
           </div>
           <div className="flex-1 min-w-0 pt-0.5">
-            <p className="text-xs font-bold uppercase tracking-wider text-stone-400 mb-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-400 mb-3">
               {journal.time} · <span style={{ color: '#1b8af1' }}>{journal.channel}</span>
             </p>
-            <div className="bg-white rounded-xl border-2 border-stone-900 shadow-[6px_6px_0px_0px_rgba(28,25,23,1)] p-5 max-w-md">
+            <div className="bg-white rounded-2xl border border-stone-200 shadow-soft p-5 max-w-md">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 bg-[#1b8af1] rounded-full flex items-center justify-center shrink-0">
                   <Mic className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-bold text-stone-900 text-sm">{journal.cardTitle}</p>
+                  <p className="font-semibold text-stone-900 text-sm">{journal.cardTitle}</p>
                   <p className="text-xs text-stone-500">{journal.cardSub}</p>
                 </div>
               </div>
@@ -131,18 +132,14 @@ export default function CrossChannelStory({ className = '' }: { className?: stri
           return (
             <div key={step.key} className="relative flex gap-5">
               <div
-                className="relative z-10 w-10 h-10 rounded-xl border-2 flex items-center justify-center text-white shrink-0"
-                style={{
-                  backgroundColor: visual.bg,
-                  borderColor: visual.bg,
-                  boxShadow: `4px 4px 0px 0px ${visual.shadow}`,
-                }}
+                className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-soft"
+                style={{ backgroundColor: visual.bg }}
                 aria-hidden="true"
               >
                 {visual.icon}
               </div>
               <div className="flex-1 min-w-0 pt-0.5">
-                <p className="text-xs font-bold uppercase tracking-wider text-stone-400 mb-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-400 mb-3">
                   {step.time} · <span style={{ color: visual.shadow }}>{step.channel}</span>
                 </p>
                 <MiniChat visual={visual} userMsg={step.userMsg} empathMsg={step.empathMsg} />
