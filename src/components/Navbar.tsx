@@ -63,23 +63,6 @@ export default function Navbar() {
                 />
               )}
             </Link>
-            <Link
-              to="/whyempath"
-              className={`text-sm font-medium transition-all duration-300 relative ${
-                location.pathname === '/whyempath' 
-                  ? 'text-blue-700' 
-                  : 'text-gray-700 hover:text-blue-700'
-              }`}
-              aria-current={location.pathname === '/whyempath' ? 'page' : undefined}
-            >
-              <span>For Therapy Clients</span>
-              {location.pathname === '/whyempath' && (
-                <motion.div 
-                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 rounded-full"
-                  layoutId="navIndicator"
-                />
-              )}
-            </Link>
             <Link 
               to="/advisory" 
               className={`text-sm font-medium transition-all duration-300 relative ${
@@ -174,15 +157,6 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 For Therapists
-              </Link>
-              <Link 
-                to="/whyempath" 
-                className={`text-sm font-medium py-2 ${
-                  location.pathname === '/whyempath' ? 'text-blue-600' : 'text-gray-600'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                For Therapy Clients
               </Link>
               <Link 
                 to="/advisory" 

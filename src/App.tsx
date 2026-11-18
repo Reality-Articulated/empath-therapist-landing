@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AdvisoryPage from './pages/AdvisoryPage';
 import AtmanPage from './pages/AtmanPage';
-import ClientInfoPage from './pages/ClientInfoPage';
 import JournalingPage from './pages/JournalingPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
@@ -81,7 +80,7 @@ function App() {
     basePath.startsWith('/atman') ||
     basePath.startsWith('/app') ||
     basePath.startsWith('/blog/') ||
-    ['/', '/therapist', '/about-atman', '/whyempath', '/quiz', '/survey', '/upgrade', '/call-me', '/blog', '/blogs'].includes(basePath) ||
+    ['/', '/therapist', '/about-atman', '/quiz', '/survey', '/upgrade', '/call-me', '/blog', '/blogs'].includes(basePath) ||
     phrasePages.some((p) => basePath === `/${p.slug}`);
 
   return (
@@ -93,7 +92,6 @@ function App() {
         <Route path="advisory" element={<AdvisoryPage />} />
         <Route path="atman/*" element={<AtmanPage src="https://atman-gamma.vercel.app/" />} />
         <Route path="about-atman" element={<AtmanPage src="https://atman-gamma.vercel.app/about-atman" />} />
-        <Route path="whyempath" element={<ClientInfoPage />} />
         <Route path="app" element={<JournalingPage />} />
         <Route path="app/blog" element={<JournalingBlogsPage />} />
         <Route path="app/blog/:slug" element={<JournalingBlogPostPage />} />

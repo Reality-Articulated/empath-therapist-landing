@@ -16,7 +16,7 @@ import {
   CaseCompassMock,
 } from '../components/therapist/DashboardMocks';
 import { openSupportChat } from '../utils/supportChat';
-import DemoRequestForm, { DEMO_CHAT_PREFILL } from '../components/therapist/DemoRequestForm';
+import { THERAPIST_BOOKING_URL } from '../utils/therapistBooking';
 
 import {
   Clock,
@@ -185,7 +185,6 @@ const therapistFaqSchema = {
 type CtaLocation = 'hero' | 'pricing' | 'final';
 
 export default function HomePage() {
-  const [showCalendar, setShowCalendar] = useState(false);
   const [showSampleBrief, setShowSampleBrief] = useState(false);
   const [pricingRef, pricingInView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
@@ -199,19 +198,14 @@ export default function HomePage() {
     }
   }, [pricingInView]);
 
-  const trackStartFree = (location: CtaLocation) => {
-    posthog.capture('therapist_cta_clicked', { cta: 'start_free', location });
+  const trackEarlyAccess = (location: CtaLocation) => {
+    posthog.capture('therapist_cta_clicked', { cta: 'early_access', location });
   };
 
   const openSampleBrief = (location: CtaLocation) => {
     posthog.capture('therapist_cta_clicked', { cta: 'sample_brief', location });
     posthog.capture('therapist_sample_brief_opened', { location });
     setShowSampleBrief(true);
-  };
-
-  const openDemo = (location: CtaLocation) => {
-    posthog.capture('therapist_cta_clicked', { cta: 'demo', location });
-    setShowCalendar(true);
   };
 
   return (
@@ -235,8 +229,8 @@ export default function HomePage() {
           <p className={EYEBROW}>For private practice therapists and group practices</p>
 
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-stone-900 mb-7 leading-[1.08]">
-            Stop spending the first 15 minutes of every session{' '}
-            <span className="italic text-[#1b8af1]">playing catch-up.</span>
+            Walk into every session{' '}
+            <span className="italic text-[#1b8af1]">already caught up.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-stone-600 mb-9 max-w-3xl mx-auto leading-relaxed">
@@ -246,14 +240,14 @@ export default function HomePage() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto">
             <a
-              href={DASHBOARD_URL}
+              href={THERAPIST_BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackStartFree('hero')}
+              onClick={() => trackEarlyAccess('hero')}
               className={`${PRIMARY_BTN} flex-1`}
-              aria-label="Start free with two client seats, no card needed"
+              aria-label="Get early access: book a call"
             >
-              Start free
+              Get early access
               <ChevronRight className="w-5 h-5" aria-hidden="true" />
             </a>
             <button type="button" onClick={() => openSampleBrief('hero')} className={`${SECONDARY_BTN} flex-1`}>
@@ -261,14 +255,7 @@ export default function HomePage() {
             </button>
           </div>
           <p className="text-sm text-stone-500 mt-4">
-            2 client seats free forever. No card.{' '}
-            <button
-              type="button"
-              onClick={() => openDemo('hero')}
-              className="text-[#1b8af1] font-semibold hover:underline cursor-pointer"
-            >
-              Prefer a walkthrough? Book a 15-minute demo
-            </button>
+            2 client seats free forever. No card.
           </p>
         </div>
 
@@ -794,14 +781,14 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <a
-                  href={DASHBOARD_URL}
+                  href={THERAPIST_BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackStartFree('pricing')}
+                  onClick={() => trackEarlyAccess('pricing')}
                   className={PRIMARY_BTN}
-                  aria-label="Create your free Empath therapist account"
+                  aria-label="Get early access: book a call"
                 >
-                  Start free
+                  Get early access
                 </a>
               </div>
 
@@ -892,14 +879,14 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto">
               <a
-                href={DASHBOARD_URL}
+                href={THERAPIST_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackStartFree('final')}
+                onClick={() => trackEarlyAccess('final')}
                 className="flex-1 px-7 py-3.5 bg-white text-stone-900 rounded-full font-semibold text-lg hover:bg-stone-100 transition-colors inline-flex items-center justify-center gap-2"
-                aria-label="Get started with Empath for free"
+                aria-label="Get early access: book a call"
               >
-                Get started free
+                Get early access
                 <ChevronRight className="w-5 h-5" aria-hidden="true" />
               </a>
               <button
@@ -910,52 +897,11 @@ export default function HomePage() {
                 See a sample brief
               </button>
             </div>
-            <p className="text-sm text-stone-400 mt-6">
-              <button
-                type="button"
-                onClick={() => openDemo('final')}
-                className="text-white font-semibold underline underline-offset-4 hover:text-[#1b8af1] cursor-pointer"
-              >
-                Prefer a walkthrough? Book a 15-minute demo
-              </button>
-            </p>
           </div>
         </div>
       </section>
 
       <TherapistFooter />
-
-      {/* Demo request modal */}
-      {showCalendar && (
-        <div
-          className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="calendar-modal-title"
-        >
-          <div className="bg-white rounded-3xl border border-stone-200 shadow-lift p-6 md:p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 id="calendar-modal-title" className="text-2xl font-medium text-stone-900 font-serif">Get a 15-minute demo</h2>
-              <button
-                type="button"
-                onClick={() => setShowCalendar(false)}
-                className="text-stone-400 hover:text-stone-900 rounded-full p-2 transition-colors cursor-pointer"
-                aria-label="Close demo request"
-              >
-                <X size={20} aria-hidden="true" />
-              </button>
-            </div>
-            <DemoRequestForm
-              source="therapist_page"
-              onChat={() => {
-                posthog.capture('therapist_demo_chat_clicked');
-                setShowCalendar(false);
-                openSupportChat(DEMO_CHAT_PREFILL);
-              }}
-            />
-          </div>
-        </div>
-      )}
 
       {/* Sample pre-session brief modal */}
       {showSampleBrief && (
@@ -1038,13 +984,13 @@ export default function HomePage() {
                 Generated from your client's WhatsApp and Telegram check-ins and voice notes between sessions. You decide what surfaces before every appointment.
               </p>
               <a
-                href={DASHBOARD_URL}
+                href={THERAPIST_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'start_free', location: 'sample_brief' })}
+                onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'sample_brief' })}
                 className="px-6 py-3 bg-stone-900 text-white rounded-full hover:bg-[#1b8af1] transition-colors font-semibold text-sm whitespace-nowrap text-center"
               >
-                Start free
+                Get early access
               </a>
             </div>
           </div>

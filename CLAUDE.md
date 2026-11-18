@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Marketing site for Empath, deployed on Vercel as `https://www.empathdash.com`. A single Vite + React 18 + TypeScript SPA serves two audiences from one codebase:
 
-- **Consumer / journaling app funnel** — `/`, `/app`, `/whyempath`, `/about-atman`, `/quiz`, `/app/blog/*`
+- **Consumer / journaling app funnel** — `/`, `/app`, `/about-atman`, `/quiz`, `/app/blog/*`
 - **Therapist-facing marketing** — `/therapist`, `/advisory`, `/science`, `/calculator`, `/blog/*`
 
 `/atman/*` and `/about-atman` proxy a separate app (`https://atman-gamma.vercel.app/`) via an iframe wrapper (`AtmanPage`).
@@ -34,7 +34,7 @@ There is no test runner configured.
 - `/therapist` → `HomePage` (therapist landing)
 - `/atman/*` → iframe of the external Atman app
 
-The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/therapist`, `/about-atman`, `/whyempath`, `/quiz`, and the therapist blog `/blog*`, which renders `TherapistHeader` / `TherapistFooter`). When adding a page that doesn't want the shared chrome, update that predicate.
+The Navbar and Footer are conditionally hidden by a `hideNavbar` predicate in `App.tsx` for routes that render their own chrome (`/atman*`, `/app*`, `/`, `/therapist`, `/about-atman`, `/quiz`, and the therapist blog `/blog*`, which renders `TherapistHeader` / `TherapistFooter`). When adding a page that doesn't want the shared chrome, update that predicate.
 
 `vercel.json` rewrites **all** paths to `/index.html` so deep links work on Vercel; without it, only `/` resolves on hard refresh.
 
@@ -53,7 +53,7 @@ Add new therapist pages to `THERAPIST_PATHS`, not to the prerender script.
 
 `SMS_ENABLED = false` (2026-08-04, Twilio cost). Every `sms:` CTA on the site is
 wrapped in it — the home page Channels section (the only `sms:` link left on `/` since the 2026-11 redesign),
-blog index + post cards, both therapy calculators, ClientInfoPage — and the
+blog index + post cards, both therapy calculators — and the
 grid column counts flip with it so a removed button doesn't leave a gap. The
 messaging carousel (WhatsApp / Telegram / Messenger / Instagram) and every
 `tel:` CTA are untouched.
@@ -101,7 +101,7 @@ button. `googleAdsBeforeSend` is a PostHog `before_send` hook (registered in
 `call_me_*placed`, `upgrade_checkout_clicked`), so a new CTA that follows the
 existing naming is tracked automatically and ANALYTICS_EVENTS.md doubles as the
 conversion inventory. Conversions with no PostHog event call
-`trackGoogleAdsConversion` directly (therapist lead in ClientInfoPage). Labels
+`trackGoogleAdsConversion` directly (none at present: the `/whyempath` therapist-lead form was removed 2026-11, the old URL redirects to `/`). Labels
 in `CONVERSION_LABELS` are empty until the actions exist in Google Ads; an
 unlabeled conversion is a silent no-op. `gclid`/`gbraid`/`wbraid` are captured
 alongside the UTM params in `App.tsx` for a future offline-conversion join.

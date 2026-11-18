@@ -28,7 +28,7 @@ export default function TherapistFooter() {
           <Link to="/science" className={linkClass}>Science</Link>
           <Link to="/advisory" className={linkClass}>Advisory</Link>
           <Link to="/blog" className={linkClass}>Blog</Link>
-          <Link to="/whyempath" className={linkClass}>For clients</Link>
+          <Link to="/" className={linkClass}>For clients</Link>
           <Link to="/transparency" className={linkClass}>Transparency Pledge</Link>
           <Link to="/pledge" className={linkClass}>Privacy</Link>
           <Link to="/terms" className={linkClass}>Terms</Link>

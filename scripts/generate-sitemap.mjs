@@ -41,7 +41,6 @@ const staticRoutes = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/app', changefreq: 'weekly', priority: '1.0' },
   { path: '/therapist', changefreq: 'weekly', priority: '0.9' },
-  { path: '/whyempath', changefreq: 'monthly', priority: '0.8' },
   { path: '/call-me', changefreq: 'monthly', priority: '0.9' },
   { path: '/science', changefreq: 'monthly', priority: '0.8' },
   { path: '/advisory', changefreq: 'monthly', priority: '0.7' },

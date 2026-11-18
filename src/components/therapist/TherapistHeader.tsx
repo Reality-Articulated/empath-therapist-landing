@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import posthog from 'posthog-js';
 import logo from '../../../public/empath-logo.png';
+import { THERAPIST_BOOKING_URL } from '../../utils/therapistBooking';
 
 const DASHBOARD_URL = 'https://app.empathdash.com/';
 
@@ -9,7 +10,7 @@ const DASHBOARD_URL = 'https://app.empathdash.com/';
  * Sticky header for the therapist landing page (/therapist) and the therapist
  * blog (/blog, /blog/:slug). Those pages render their own chrome (they are in
  * App.tsx's `hideNavbar` list) so they can share the consumer homepage's
- * design language instead of the shared slate Navbar, and so "Start free"
+ * design language instead of the shared slate Navbar, and so "Get early access"
  * stays one tap away at every scroll position.
  *
  * The section links are absolute (`/therapist#pricing`) so they also work
@@ -60,13 +61,13 @@ export default function TherapistHeader() {
             Sign in
           </a>
           <a
-            href={DASHBOARD_URL}
+            href={THERAPIST_BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'start_free', location: 'header' })}
+            onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'header' })}
             className="px-5 py-2 bg-stone-900 text-white rounded-full font-semibold text-sm hover:bg-[#1b8af1] transition-colors whitespace-nowrap"
           >
-            Start free
+            Get early access
           </a>
         </nav>
       </div>

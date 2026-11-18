@@ -9,6 +9,11 @@
       "source": "/:locale(es|pt|hi|de|fr|it)/:path*",
       "destination": "/:path*",
       "permanent": true
+    },
+    {
+      "source": "/whyempath",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [

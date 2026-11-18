@@ -24,12 +24,12 @@ mapping lives in one place, `src/utils/googleAds.ts`:
 
 | Google Ads conversion | PostHog trigger | Surfaces today |
 | --- | --- | --- |
-| `app_store_click` | any event ending in `app_store_clicked` | `/`, `/app`, try-it demo, blog index + posts, `/call-me`, `/whyempath` |
+| `app_store_click` | any event ending in `app_store_clicked` | `/`, `/app`, try-it demo, blog index + posts, `/call-me` |
 | `channel_link_click` | `channel_link_clicked` (the cross-surface event from `captureChannelLinkClick`) | WhatsApp / Telegram / Messenger / Instagram buttons everywhere |
 | `call_click` | any event ending in `_call_clicked` | every `tel:` CTA |
 | `call_me_placed` | `call_me_call_placed`, `journaling_page_call_me_placed` | "Empath calls you" form once the server accepted the request |
 | `upgrade_checkout` | `upgrade_checkout_clicked` | `/upgrade` |
-| `therapist_lead` | explicit `trackGoogleAdsConversion('therapist_lead')` call | `/whyempath` invite form, both submit branches (next to the Twitter pixel) |
+| `therapist_lead` | explicit `trackGoogleAdsConversion('therapist_lead')` call | currently unused: the `/whyempath` invite form that fired it was removed 2026-11 |
 
 A new CTA that follows the existing PostHog naming is tracked automatically.
 Anything that should convert but has no PostHog event (or whose PostHog

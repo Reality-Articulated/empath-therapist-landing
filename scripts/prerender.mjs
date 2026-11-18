@@ -97,11 +97,6 @@ const staticRoutes = [
     keywords: 'therapist software, between-session insights, AI for therapists, therapy outcomes, clinical decision support, therapy practice management',
   },
   {
-    path: '/whyempath',
-    title: 'Why Empath? | Get More From Your Therapy',
-    description: 'Empath helps therapy clients capture insights between sessions so their therapist sees the full picture. Better context, better sessions, better outcomes.',
-  },
-  {
     path: '/advisory',
     title: 'Clinical Advisory Board | Empath for Therapists',
     description: "Join Empath's clinical advisory board. Help shape the future of between-session data capture and AI-driven clinical insights alongside leading therapists and researchers.",

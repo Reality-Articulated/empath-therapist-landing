@@ -28,6 +28,7 @@ import {
   Bell,
   Calendar,
   Link as LinkIcon,
+  Plus,
 } from 'lucide-react';
 
 /**
@@ -151,7 +152,7 @@ export function DashboardPreview() {
   return (
     <Frame
       className="max-w-5xl mx-auto"
-      label="Example of the Empath therapist dashboard for a fictional client, Jordan M. A sidebar lists clients and a connect code. The main view shows the client header with Ask about client, Notes, and Documents buttons, an Insights card with two patterns that cite journal entries, and a What Stands Out mood chart with two findings."
+      label="Example of the Empath therapist dashboard for a fictional client, Jordan M. A sidebar lists clients, a Couples section in beta with a Link Couple button, and a connect code. The main view shows the client header with Ask about client, Notes, and Documents buttons, an Insights card with two patterns that cite journal entries, and a What Stands Out mood chart with two findings."
     >
       <BrowserBar title="app.empathdash.com" />
       <div className="flex bg-[#FAF9F6]">
@@ -187,6 +188,22 @@ export function DashboardPreview() {
                 </span>
               </div>
             ))}
+          </div>
+          {/* Couples (CoupleSelector): header with the Beta badge and the Link Couple button */}
+          <div className="mt-3 border-t border-stone-200">
+            <div className="flex items-center gap-2 px-3 py-3">
+              <Heart className="w-3.5 h-3.5 text-stone-400" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-500">Couples</span>
+              <span className="inline-flex items-center rounded-full bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-700 ring-1 ring-inset ring-amber-200">
+                Beta
+              </span>
+            </div>
+            <div className="px-3 pb-3">
+              <div className="flex items-center justify-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm font-medium text-stone-700">
+                <Plus className="w-4 h-4" />
+                Link Couple
+              </div>
+            </div>
           </div>
           <div className="mt-auto border-t border-stone-200 px-3 pt-3 pb-3">
             <div className="flex items-center gap-2 mb-2">
