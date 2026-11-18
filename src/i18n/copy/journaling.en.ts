@@ -901,6 +901,31 @@ export const journalingEn = {
       ],
       shot: 'Empath voice journal screen recording and transcribing an entry',
     },
+    views: {
+      eyebrow: 'Three journals in one',
+      title: 'One journal, three ways to look back.',
+      body: 'Every entry lives in one place. Switch views to read it like a diary, flip through it like a photo album, or listen back to your own voice.',
+      items: [
+        {
+          label: 'Text',
+          title: 'A written diary',
+          desc: 'Every entry with a title and tags, colored by the emotion you felt when you wrote it.',
+          shot: 'Empath Journals list with titled entries, tags, and colors that reflect the emotion of each entry',
+        },
+        {
+          label: 'Photos',
+          title: 'A photo journal',
+          desc: 'The pictures you added, laid out as a grid by date. Tap one to open the entry it belongs to.',
+          shot: 'Empath Journals in Photos view, a grid of journal photos labeled by date',
+        },
+        {
+          label: 'Voice',
+          title: 'A voice diary',
+          desc: 'Your spoken entries in one list. Press play and hear how you sounded that day.',
+          shot: 'Empath Journals in Voice view, a list of spoken entries with play buttons',
+        },
+      ],
+    },
     people: {
       eyebrow: 'People',
       title: 'See who shapes your days.',

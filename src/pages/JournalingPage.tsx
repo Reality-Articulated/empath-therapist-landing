@@ -57,6 +57,14 @@ const stagger = {
 
 // Shared type styles for the calm editorial look: one accent colour, small
 // tracked eyebrows, serif headings at medium weight, hairline borders.
+// Screenshots for the three-views section, in the same order as
+// home.views.items in the copy catalog: text, photos, voice.
+const viewShots = [
+  '/app-screens/home-journals.webp',
+  '/app-screens/home-view-photos.webp',
+  '/app-screens/home-view-voice.webp',
+];
+
 const EYEBROW = 'text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1]';
 const H2 = 'font-serif text-3xl md:text-[2.75rem] font-medium tracking-tight leading-[1.12] text-stone-900';
 const LEAD = 'text-lg text-stone-600 leading-relaxed';
@@ -389,8 +397,34 @@ export default function JournalingPage() {
         </div>
       </section>
 
+      {/* --- THREE VIEWS: TEXT, PHOTOS, VOICE --- */}
+      {/* The Journals tab's All / Photos / Voice switch, one phone per view.
+          Side-scrolls with snap on phones, three across from sm up. */}
+      <section className="border-y border-stone-200 bg-white py-24 md:py-32">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            <div className="mx-auto mb-14 max-w-2xl text-center">
+              <p className={EYEBROW}>{h.views.eyebrow}</p>
+              <h2 className={`${H2} mt-4`}>{h.views.title}</h2>
+              <p className={`${LEAD} mt-5`}>{h.views.body}</p>
+            </div>
+
+            <div className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-12">
+              {h.views.items.map((view, i) => (
+                <div key={view.label} className="w-60 shrink-0 snap-center text-center sm:w-auto">
+                  <PhoneScreenshot src={viewShots[i]} alt={view.shot} className="mx-auto w-full max-w-[16rem]" />
+                  <p className={`${EYEBROW} mt-7`}>{view.label}</p>
+                  <h3 className="mt-2 font-serif text-xl font-medium text-stone-900">{view.title}</h3>
+                  <p className="mx-auto mt-2 max-w-[16rem] text-sm leading-relaxed text-stone-600">{view.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- SPOTLIGHT: PEOPLE --- */}
-      <section className="border-t border-stone-200 bg-white py-24 md:py-32">
+      <section className="py-24 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
             className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2 md:gap-20"
