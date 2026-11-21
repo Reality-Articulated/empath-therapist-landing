@@ -80,7 +80,7 @@ function App() {
     basePath.startsWith('/atman') ||
     basePath.startsWith('/app') ||
     basePath.startsWith('/blog/') ||
-    ['/', '/therapist', '/about-atman', '/quiz', '/survey', '/upgrade', '/call-me', '/blog', '/blogs'].includes(basePath) ||
+    ['/', '/therapist', '/advisory', '/about-atman', '/quiz', '/survey', '/upgrade', '/call-me', '/blog', '/blogs'].includes(basePath) ||
     phrasePages.some((p) => basePath === `/${p.slug}`);
 
   return (
