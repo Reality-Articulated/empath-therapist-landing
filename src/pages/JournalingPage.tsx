@@ -348,25 +348,50 @@ export default function JournalingPage() {
       </section>
 
       {/* --- 4. SPOTLIGHT: MOOD ANALYSIS (includes Apple Health) --- */}
+      {/* Centered text, then three phones in a row: calendar, weekly balance,
+          mood grid. Side-scrolls with snap on phones, three across from sm up. */}
       <section className="border-y border-stone-200 bg-white py-24 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
-            className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2 md:gap-20"
+            className="mx-auto max-w-5xl"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={stagger}
           >
-            <motion.div variants={fadeUp}>
-              <SpotlightText
-                eyebrow={h.mood.eyebrow}
-                title={h.mood.title}
-                body={h.mood.body}
-                points={h.mood.points}
-              />
+            <motion.div variants={fadeUp} className="mx-auto max-w-2xl text-center">
+              <p className={EYEBROW}>{h.mood.eyebrow}</p>
+              <h2 className={`${H2} mt-4`}>{h.mood.title}</h2>
+              <p className={`${LEAD} mt-5`}>{h.mood.body}</p>
             </motion.div>
-            <motion.div variants={fadeUp}>
-              <PhoneScreenshot src="/app-screens/home-mood.webp" alt={h.mood.shot} className="mx-auto w-64 md:w-72" />
+
+            <motion.ul variants={fadeUp} className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
+              {h.mood.points.map((point) => (
+                <li key={point.title} className="flex items-start gap-3.5">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50">
+                    <Check className="h-3.5 w-3.5 text-[#1b8af1]" strokeWidth={3} />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-stone-900">{point.title}</p>
+                    <p className="mt-0.5 text-stone-600 leading-relaxed">{point.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </motion.ul>
+
+            <motion.div
+              variants={fadeUp}
+              className="-mx-4 mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-12"
+            >
+              <div className="w-60 shrink-0 snap-center sm:w-auto">
+                <PhoneScreenshot src="/app-screens/home-mood.webp" alt={h.mood.shot} className="mx-auto w-full max-w-[16rem]" />
+              </div>
+              <div className="w-60 shrink-0 snap-center sm:w-auto">
+                <PhoneScreenshot src="/app-screens/home-mood-balance.webp" alt={h.mood.shotBalance} className="mx-auto w-full max-w-[16rem]" />
+              </div>
+              <div className="w-60 shrink-0 snap-center sm:w-auto">
+                <PhoneScreenshot src="/app-screens/home-mood-grid.webp" alt={h.mood.shotGrid} className="mx-auto w-full max-w-[16rem]" />
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -442,7 +467,11 @@ export default function JournalingPage() {
               />
             </motion.div>
             <motion.div variants={fadeUp}>
-              <PhoneScreenshot src="/app-screens/home-people.webp" alt={h.people.shot} className="mx-auto w-64 md:w-72" />
+              {/* Two phones side by side: the people map, then one person's detail. */}
+              <div className="flex justify-center gap-4 lg:gap-6">
+                <PhoneScreenshot src="/app-screens/home-people.webp" alt={h.people.shot} className="w-1/2 max-w-[16rem]" />
+                <PhoneScreenshot src="/app-screens/home-people-detail.webp" alt={h.people.shotDetail} className="w-1/2 max-w-[16rem]" />
+              </div>
             </motion.div>
           </motion.div>
         </div>

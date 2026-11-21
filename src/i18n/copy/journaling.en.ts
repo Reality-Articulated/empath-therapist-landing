@@ -880,6 +880,8 @@ export const journalingEn = {
         },
       ],
       shot: 'Empath mood screen with a mood check-in, mood insights, and a mood calendar',
+      shotBalance: 'Empath mood screen with a weekly balance chart of check-ins across four mood zones, a mood stability score, and mood compared with Apple Health sleep and steps',
+      shotGrid: 'Empath mood picker, a grid of named moods with emoji such as Calm, Grateful, Nostalgic, and Euphoric',
     },
     capture: {
       eyebrow: 'Voice, photos, and text',
@@ -945,6 +947,7 @@ export const journalingEn = {
         },
       ],
       shot: 'Empath People screen with the people you write about arranged around you, each ringed by how those entries tend to feel',
+      shotDetail: 'Empath person screen for Emily, showing how often she is mentioned, how those entries tend to feel, and the most common emotions in them',
     },
     therapist: {
       eyebrow: 'Therapist connection',
