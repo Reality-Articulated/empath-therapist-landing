@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import FAQItem from '../components/FAQItem';
 import TherapistHeader from '../components/therapist/TherapistHeader';
 import TherapistFooter from '../components/therapist/TherapistFooter';
+import PhoneScreenshot from '../components/PhoneScreenshot';
 import {
   DashboardPreview,
   CapturePhoneMock,
@@ -43,6 +44,11 @@ import {
   Languages,
   BookOpen,
   UserRound,
+  Send,
+  Phone,
+  Mic,
+  Camera,
+  Smartphone,
 } from 'lucide-react';
 
 const DASHBOARD_URL = 'https://app.empathdash.com/';
@@ -60,6 +66,17 @@ const SECTION_SUB = 'text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto';
 const EYEBROW = 'text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1] mb-5';
 const CARD = 'p-8 rounded-3xl border border-stone-200 shadow-soft';
 const STEP_LABEL = 'inline-block text-xs font-semibold uppercase tracking-[0.18em] text-[#1b8af1] mb-4';
+
+// Step 1 of "How it works": every way a client can capture an entry.
+const captureWays = [
+  { icon: MessageCircle, label: 'WhatsApp' },
+  { icon: Send, label: 'Telegram' },
+  { icon: Phone, label: 'Phone call' },
+  { icon: Sparkles, label: 'AI chat' },
+  { icon: Mic, label: 'Voice notes' },
+  { icon: Camera, label: 'Photos' },
+  { icon: Smartphone, label: 'Empath app' },
+];
 
 const proofStats = [
   { value: '650+', label: 'people journaling on Empath' },
@@ -415,9 +432,48 @@ export default function HomePage() {
                     <Languages className="w-5 h-5 text-[#1b8af1] flex-shrink-0 mt-0.5" aria-hidden="true" />
                     Clients journal in their own language, with 45 supported.
                   </p>
+                  <Link
+                    to="/"
+                    onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'client_side', location: 'how_it_works' })}
+                    className="mt-5 inline-flex items-center gap-1 text-[#1b8af1] font-semibold hover:underline"
+                  >
+                    See what your client sees
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
                 </div>
                 <div>
-                  <CapturePhoneMock />
+                  {/* Both ways a client captures: the chat mock, and the real
+                      iOS app, which links to the client landing page. */}
+                  <div className="flex flex-wrap items-start justify-center gap-x-5 gap-y-8">
+                    <div>
+                      <CapturePhoneMock />
+                      <p className="text-center text-xs text-stone-500 mt-3">In the chat apps they already use</p>
+                    </div>
+                    <Link
+                      to="/"
+                      onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'client_side', location: 'how_it_works_screenshot' })}
+                      className="group block"
+                      aria-label="See the client side of Empath"
+                    >
+                      <PhoneScreenshot
+                        src="/app-screens/home-journals.webp"
+                        alt="Empath iOS app Journals list with titled entries, tags, and colors that reflect the emotion of each entry"
+                        className="w-[220px]"
+                      />
+                      <p className="text-center text-xs text-stone-500 mt-3 group-hover:text-[#1b8af1] transition-colors">Or in the Empath app</p>
+                    </Link>
+                  </div>
+                  <ul className="mt-7 flex flex-wrap justify-center gap-2" aria-label="Ways a client can capture an entry">
+                    {captureWays.map((way) => (
+                      <li
+                        key={way.label}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white px-3 py-1.5 text-sm font-medium text-stone-700"
+                      >
+                        <way.icon className="w-4 h-4 text-[#1b8af1]" aria-hidden="true" />
+                        {way.label}
+                      </li>
+                    ))}
+                  </ul>
                   <p className="text-center text-sm text-stone-500 font-semibold mt-5">
                     Empath captures and organizes. It doesn't counsel.
                   </p>

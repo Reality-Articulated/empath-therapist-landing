@@ -382,15 +382,16 @@ export function CapturePhoneMock() {
     >
       <div
         aria-hidden="true"
-        className="relative mx-auto w-[260px] h-[430px] rounded-[2.25rem] border border-stone-200 bg-white shadow-lift overflow-hidden"
+        className="mx-auto w-[220px] rounded-[2.25rem] border border-stone-200 bg-white p-2 shadow-lift"
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-stone-200 rounded-b-2xl" />
-        <div className="absolute inset-x-0 top-8 bottom-0 px-4 pt-3 pb-4 flex flex-col gap-3 text-[13px] leading-snug text-left">
+        {/* Same frame as PhoneScreenshot (white bezel, 1290x2796 screen) so
+            the mock and the real app screenshot beside it read as a pair. */}
+        <div className="aspect-[1290/2796] rounded-[1.75rem] bg-stone-100 px-3 pt-5 pb-3 flex flex-col gap-2.5 text-[12px] leading-snug text-left overflow-hidden">
           <div className="text-center text-[11px] text-stone-400">Tue 10:42 PM</div>
           <div className="self-end max-w-[85%] rounded-2xl rounded-br-sm bg-green-500 text-white px-3 py-2">
             Barely slept again. Mom called and it turned into the same fight.
           </div>
-          <div className="self-start max-w-[85%] rounded-2xl rounded-bl-sm bg-stone-100 text-stone-800 px-3 py-2">
+          <div className="self-start max-w-[85%] rounded-2xl rounded-bl-sm bg-white text-stone-800 px-3 py-2">
             Got it. Saved to your journal.
           </div>
           <div className="self-end w-[75%] rounded-2xl rounded-br-sm bg-green-500 text-white px-3 py-2.5 flex items-center gap-2">
@@ -402,10 +403,10 @@ export function CapturePhoneMock() {
             </span>
             <span className="text-[11px]">0:48</span>
           </div>
-          <div className="self-start max-w-[85%] rounded-2xl rounded-bl-sm bg-stone-100 text-stone-800 px-3 py-2">
+          <div className="self-start max-w-[85%] rounded-2xl rounded-bl-sm bg-white text-stone-800 px-3 py-2">
             Noted. I'll keep this for your session Thursday if you want to bring it up.
           </div>
-          <div className="mt-auto flex items-center gap-2 rounded-full border border-stone-200 px-3 py-2 text-stone-400">
+          <div className="mt-auto flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 py-2 text-stone-400">
             <MessageCircle className="w-4 h-4" />
             <span>Message</span>
           </div>
