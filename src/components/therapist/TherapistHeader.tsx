@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import posthog from 'posthog-js';
 import logo from '../../../public/empath-logo.png';
-import { THERAPIST_BOOKING_URL } from '../../utils/therapistBooking';
+import EarlyAccessModal from './EarlyAccessModal';
 
 const DASHBOARD_URL = 'https://app.empathdash.com/';
 
@@ -21,6 +21,7 @@ const DASHBOARD_URL = 'https://app.empathdash.com/';
  */
 export default function TherapistHeader() {
   const linkClass = 'text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors hidden lg:block';
+  const [showEarlyAccess, setShowEarlyAccess] = useState(false);
 
   useEffect(() => {
     const id = window.location.hash.slice(1);
@@ -31,7 +32,10 @@ export default function TherapistHeader() {
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  // The modal is a sibling of the header bar, not a child: the bar's
+  // backdrop-blur would otherwise confine a fixed-position overlay to the bar.
   return (
+    <>
     <div className="bg-[#FAF9F6]/85 backdrop-blur-md border-b border-stone-200/70 py-3.5 sticky top-0 z-40">
       <div className="container mx-auto px-4 flex justify-between items-center gap-4">
         <Link to="/" className="flex items-center gap-0" aria-label="Empath home">
@@ -60,17 +64,20 @@ export default function TherapistHeader() {
           >
             Sign in
           </a>
-          <a
-            href={THERAPIST_BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'header' })}
-            className="px-5 py-2 bg-stone-900 text-white rounded-full font-semibold text-sm hover:bg-[#1b8af1] transition-colors whitespace-nowrap"
+          <button
+            type="button"
+            onClick={() => {
+              posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'header' });
+              setShowEarlyAccess(true);
+            }}
+            className="px-5 py-2 bg-stone-900 text-white rounded-full font-semibold text-sm hover:bg-[#1b8af1] transition-colors whitespace-nowrap cursor-pointer"
           >
             Get early access
-          </a>
+          </button>
         </nav>
       </div>
     </div>
+    <EarlyAccessModal open={showEarlyAccess} onClose={() => setShowEarlyAccess(false)} location="header" />
+    </>
   );
 }

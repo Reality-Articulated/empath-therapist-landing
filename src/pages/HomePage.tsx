@@ -7,6 +7,7 @@ import FAQItem from '../components/FAQItem';
 import TherapistHeader from '../components/therapist/TherapistHeader';
 import TherapistFooter from '../components/therapist/TherapistFooter';
 import PhoneScreenshot from '../components/PhoneScreenshot';
+import EarlyAccessModal from '../components/therapist/EarlyAccessModal';
 import {
   DashboardPreview,
   CapturePhoneMock,
@@ -17,7 +18,6 @@ import {
   CaseCompassMock,
 } from '../components/therapist/DashboardMocks';
 import { openSupportChat } from '../utils/supportChat';
-import { THERAPIST_BOOKING_URL } from '../utils/therapistBooking';
 
 import {
   Clock,
@@ -52,6 +52,7 @@ import {
 } from 'lucide-react';
 
 const DASHBOARD_URL = 'https://app.empathdash.com/';
+const ENTERPRISE_MAILTO = `mailto:div@myempath.co?subject=${encodeURIComponent('Empath enterprise pricing')}`;
 const APP_STORE_URL = 'https://apps.apple.com/us/app/empath-ai-diary-for-your-mind/id6472873287';
 
 // Shared class strings: the consumer homepage's calm design language (cream
@@ -154,7 +155,7 @@ const offerItems = [
 const faqs = [
   {
     q: 'How much does it cost?',
-    a: 'Your first two client seats are free forever, with everything included. Each additional client seat is $9.99 a month, billed monthly, and you can add or remove seats any time from your dashboard. A seat is one client; pending invitations count, and removing a client frees their seat right away.',
+    a: 'Your first two client seats are free forever, with everything included. Each additional client seat is $3.99 a month, billed monthly, and you can add or remove seats any time from your dashboard. Group practices and organizations that need seats in bulk can email div@myempath.co for enterprise pricing. A seat is one client; pending invitations count, and removing a client frees their seat right away.',
   },
   {
     q: 'Do my clients pay anything?',
@@ -203,6 +204,8 @@ type CtaLocation = 'hero' | 'pricing' | 'final';
 
 export default function HomePage() {
   const [showSampleBrief, setShowSampleBrief] = useState(false);
+  // Which "Get early access" button opened the contact options, or null when closed.
+  const [earlyAccessFrom, setEarlyAccessFrom] = useState<string | null>(null);
   const [pricingRef, pricingInView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
@@ -215,8 +218,9 @@ export default function HomePage() {
     }
   }, [pricingInView]);
 
-  const trackEarlyAccess = (location: CtaLocation) => {
+  const openEarlyAccess = (location: CtaLocation) => {
     posthog.capture('therapist_cta_clicked', { cta: 'early_access', location });
+    setEarlyAccessFrom(location);
   };
 
   const openSampleBrief = (location: CtaLocation) => {
@@ -256,17 +260,10 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto">
-            <a
-              href={THERAPIST_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEarlyAccess('hero')}
-              className={`${PRIMARY_BTN} flex-1`}
-              aria-label="Get early access: book a call"
-            >
+            <button type="button" onClick={() => openEarlyAccess('hero')} className={`${PRIMARY_BTN} flex-1`}>
               Get early access
               <ChevronRight className="w-5 h-5" aria-hidden="true" />
-            </a>
+            </button>
             <button type="button" onClick={() => openSampleBrief('hero')} className={`${SECONDARY_BTN} flex-1`}>
               See a sample brief
             </button>
@@ -836,22 +833,15 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={THERAPIST_BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEarlyAccess('pricing')}
-                  className={PRIMARY_BTN}
-                  aria-label="Get early access: book a call"
-                >
+                <button type="button" onClick={() => openEarlyAccess('pricing')} className={PRIMARY_BTN}>
                   Get early access
-                </a>
+                </button>
               </div>
 
               <div className="rounded-3xl bg-stone-900 text-white p-8 shadow-lift flex flex-col">
                 <div className="text-xs font-semibold uppercase tracking-wider text-stone-300 mb-3">Additional seats</div>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-medium font-serif">$9.99</span>
+                  <span className="text-5xl font-medium font-serif">$3.99</span>
                   <span className="text-stone-300">/ client / month</span>
                 </div>
                 <p className="text-stone-300 mb-6">Add a seat the moment a third client connects. Remove it when they finish.</p>
@@ -876,6 +866,24 @@ export default function HomePage() {
                   aria-label="Sign in to add client seats"
                 >
                   Add seats in your dashboard
+                </a>
+              </div>
+
+              <div className="md:col-span-2 rounded-3xl border border-stone-200 bg-white p-8 shadow-soft flex flex-col md:flex-row md:items-center gap-6">
+                <div className="flex-1">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-3">Enterprise</div>
+                  <h3 className="text-2xl font-medium text-stone-900 font-serif mb-2">Bulk pricing for larger teams</h3>
+                  <p className="text-stone-600">
+                    For group practices, clinics, and organizations that need many seats. Tell us how many clients
+                    you support and we will put together volume pricing.
+                  </p>
+                </div>
+                <a
+                  href={ENTERPRISE_MAILTO}
+                  onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'enterprise_contact', location: 'pricing' })}
+                  className={`${SECONDARY_BTN} flex-shrink-0`}
+                >
+                  Contact us
                 </a>
               </div>
             </div>
@@ -934,17 +942,14 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto">
-              <a
-                href={THERAPIST_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEarlyAccess('final')}
-                className="flex-1 px-7 py-3.5 bg-white text-stone-900 rounded-full font-semibold text-lg hover:bg-stone-100 transition-colors inline-flex items-center justify-center gap-2"
-                aria-label="Get early access: book a call"
+              <button
+                type="button"
+                onClick={() => openEarlyAccess('final')}
+                className="flex-1 px-7 py-3.5 bg-white text-stone-900 rounded-full font-semibold text-lg hover:bg-stone-100 transition-colors inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 Get early access
                 <ChevronRight className="w-5 h-5" aria-hidden="true" />
-              </a>
+              </button>
               <button
                 type="button"
                 onClick={() => openSampleBrief('final')}
@@ -1039,19 +1044,28 @@ export default function HomePage() {
               <p className="text-xs text-stone-500 leading-relaxed">
                 Generated from your client's WhatsApp and Telegram check-ins and voice notes between sessions. You decide what surfaces before every appointment.
               </p>
-              <a
-                href={THERAPIST_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'sample_brief' })}
-                className="px-6 py-3 bg-stone-900 text-white rounded-full hover:bg-[#1b8af1] transition-colors font-semibold text-sm whitespace-nowrap text-center"
+              <button
+                type="button"
+                onClick={() => {
+                  posthog.capture('therapist_cta_clicked', { cta: 'early_access', location: 'sample_brief' });
+                  setShowSampleBrief(false);
+                  setEarlyAccessFrom('sample_brief');
+                }}
+                className="px-6 py-3 bg-stone-900 text-white rounded-full hover:bg-[#1b8af1] transition-colors font-semibold text-sm whitespace-nowrap text-center cursor-pointer"
               >
                 Get early access
-              </a>
+              </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Ways to reach Div, opened by every "Get early access" button on the page */}
+      <EarlyAccessModal
+        open={earlyAccessFrom !== null}
+        onClose={() => setEarlyAccessFrom(null)}
+        location={earlyAccessFrom ?? ''}
+      />
 
       {/* Floating live-chat entry point (Crisp loads lazily on first click) */}
       <button
